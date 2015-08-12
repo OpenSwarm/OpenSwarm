@@ -6,6 +6,7 @@
  */
 
 #include "definitions.h"
+#include "system_Process_Management_HDI.h"
 
 void Sys_Init_Kernel();   //initialises the hardware
 void Sys_Start_Kernel(void);    //starts all needed functions

@@ -15,6 +15,7 @@
  */
 
 #include "system_Scheduler.h"
+#include "system_Process_Management_HDI.h"
 
 #include "HDI_epuck_ports.h"
 

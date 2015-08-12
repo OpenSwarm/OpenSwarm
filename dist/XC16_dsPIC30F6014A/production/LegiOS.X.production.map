@@ -32,6 +32,7 @@ Command:
   build/XC16_dsPIC30F6014A/production/HDI_init_port.o \
   build/XC16_dsPIC30F6014A/production/main.o \
   build/XC16_dsPIC30F6014A/production/system_Events.o \
+  build/XC16_dsPIC30F6014A/production/system_IO.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp30F6014A.gld.00 \
   --heap=1024 \
@@ -92,39 +93,39 @@ Program Memory  [Origin = 0x100, Length = 0x17f00]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100               0x2dc           0x44a  (1098)
-.text                        0x3dc               0xad0          0x1038  (4152)
-.dinit                       0xeac                0x40            0x60  (96)
-.text                        0xeec                0x44            0x66  (102)
+.text                        0x100               0x2e0           0x450  (1104)
+.text                        0x3e0              0x113e          0x19dd  (6621)
+.dinit                      0x151e                0x40            0x60  (96)
+.text                       0x155e                0x48            0x6c  (108)
 
-                     Total program memory used (bytes):         0x1548  (5448) 3%
+                     Total program memory used (bytes):         0x1ef9  (7929) 5%
 
 
 Data Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0xa  (10)
-.ndata                       0x80a                   0             0x2  (2)
-.nbss                        0x80c                   0             0x2  (2)
-.bss.__allocs                0x80e                   0             0x8  (8)
-.bss.__allocx                0x816                   0             0x4  (4)
-.bss.__allocp                0x81a                   0             0x2  (2)
-.bss.__alloct                0x81c                   0             0x2  (2)
-.bss.__curbrk                0x81e                   0             0x2  (2)
-.heap                        0x820                   0           0x400  (1024)
+.nbss                        0x800                   0             0xe  (14)
+.ndata                       0x80e                   0             0x2  (2)
+.nbss                        0x810                   0             0x2  (2)
+.bss.__allocs                0x812                   0             0x8  (8)
+.bss.__allocx                0x81a                   0             0x4  (4)
+.bss.__allocp                0x81e                   0             0x2  (2)
+.bss.__alloct                0x820                   0             0x2  (2)
+.bss.__curbrk                0x822                   0             0x2  (2)
+.heap                        0x824                   0           0x400  (1024)
 
-                        Total data memory used (bytes):          0x420  (1056) 12%
+                        Total data memory used (bytes):          0x424  (1060) 12%
 
 
 Dynamic Memory Usage
 
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
-heap                         0x820                               0x400  (1024)
-stack                        0xc20                              0x1be0  (7136)
+heap                         0x824                               0x400  (1024)
+stack                        0xc24                              0x1bdc  (7132)
 
-                        Maximum dynamic memory (bytes):         0x1fe0  (8160)
+                        Maximum dynamic memory (bytes):         0x1fdc  (8156)
 
 
 External Symbols in Data Memory (by address):
@@ -132,24 +133,28 @@ External Symbols in Data Memory (by address):
                     0x0800                  _sys_ready_processes
                     0x0802                  _sys_running_process
                     0x0804                  _sys_blocked_processes
-                    0x080c                  _registered_events
-                    0x080e                  ___allocs
-                    0x0816                  ___allocx
-                    0x081a                  ___allocp
-                    0x081c                  ___alloct
-                    0x081e                  ___curbrk
+                    0x0806                  _sys_zombies
+                    0x0808                  _sys_occured_events
+                    0x0810                  _registered_events
+                    0x0812                  ___allocs
+                    0x081a                  ___allocx
+                    0x081e                  ___allocp
+                    0x0820                  ___alloct
+                    0x0822                  ___curbrk
 
 External Symbols in Data Memory (by name):
 
-                    0x081a                  ___allocp
-                    0x080e                  ___allocs
-                    0x081c                  ___alloct
-                    0x0816                  ___allocx
-                    0x081e                  ___curbrk
-                    0x080c                  _registered_events
+                    0x081e                  ___allocp
+                    0x0812                  ___allocs
+                    0x0820                  ___alloct
+                    0x081a                  ___allocx
+                    0x0822                  ___curbrk
+                    0x0810                  _registered_events
                     0x0804                  _sys_blocked_processes
+                    0x0808                  _sys_occured_events
                     0x0800                  _sys_ready_processes
                     0x0802                  _sys_running_process
+                    0x0806                  _sys_zombies
 
 External Symbols in Program Memory (by address):
 
@@ -157,121 +162,189 @@ External Symbols in Program Memory (by address):
                   0x00012c                  __psv_init
                   0x00013c                  __data_init
                   0x00013c                  __data_init_standard
-                  0x0001a6                  __OscillatorFail
-                  0x0001ac                  __AddressError
-                  0x0001b2                  __StackError
-                  0x0001b8                  __MathError
-                  0x0001be                  __AltOscillatorFail
-                  0x0001c4                  __AltAddressError
-                  0x0001ca                  __AltStackError
-                  0x0001d0                  __AltMathError
-                  0x0001d6                  __DefaultInterrupt
-                  0x00021e                  _malloc
-                  0x00033a                  _free
-                  0x000350                  _realloc
-                  0x0003ce                  _memcpy
-                  0x0003dc                  _Sys_Init_Process_Management_HDI
-                  0x000440                  _Sys_Save_Running_Process_HDI
-                  0x00049e                  _Sys_Switch_Process
-                  0x0004c8                  _Sys_Switch_to_next_Process
-                  0x0004e6                  _Sys_Delete_Process
-                  0x0004fa                  _Sys_Set_Defaults_PCB
-                  0x000564                  _Sys_Start_Process_HDI
-                  0x00061c                  _Sys_Kill_Process
-                  0x0006e6                  _Sys_Get_Number_Processes
-                  0x00071c                  _Sys_Change_Stack_HDI
-                  0x000744                  _Sys_Add_Event_Subscription
-                  0x000870                  _Sys_Add_Event
-                  0x00091a                  _Sys_Remove_Event_from_EventRegister
-                  0x000992                  _Sys_Remove_Event_Subscription
-                  0x0009ba                  _Sys_Find_Process
-                  0x000a0a                  _Sys_Find_EventHandler
-                  0x000a38                  _Sys_Remove_All_Event_Subscriptions
-                  0x000a5c                  _Sys_Switch_Process_HDI
-                  0x000aee                  _Sys_Send_Event
-                  0x000afe                  _Sys_Register_Event
-                  0x000b5a                  _Sys_Subscribe_to_Event
-                  0x000bea                  _Sys_Unregister_Event
-                  0x000c78                  _Sys_Unsubscribe_from_Event
-                  0x000cea                  _Sys_Find_Event
-                  0x000d16                  _Sys_Init_SystemTimer_HDI
-                  0x000d36                  _Sys_Start_SystemTimer_HDI
-                  0x000d48                  _Sys_Deactivate_SystemTimer_Interrupt_HDI
-                  0x000d52                  _Sys_Activate_SystemTimer_Interrupt_HDI
-                  0x000d5c                  __T1Interrupt
-                  0x000d84                  __AltT1Interrupt
-                  0x000daa                  _Sys_Init_MCU_HDI
-                  0x000e34                  _main
-                  0x000e58                  _task1
-                  0x000e7c                  _task2
-                  0x000eec                  _Sys_Scheduler_RoundRobin
-                  0x000efa                  _Sys_Set_Defaults_Info
-                  0x000f0e                  _Sys_Init_Kernel
-                  0x000f1c                  _ConfigureOscillator
-                  0x000f22                  _Sys_Start_Kernel
-                  0x000f2a                  _InitApp
+                  0x0001aa                  __OscillatorFail
+                  0x0001b0                  __AddressError
+                  0x0001b6                  __StackError
+                  0x0001bc                  __MathError
+                  0x0001c2                  __AltOscillatorFail
+                  0x0001c8                  __AltAddressError
+                  0x0001ce                  __AltStackError
+                  0x0001d4                  __AltMathError
+                  0x0001da                  __DefaultInterrupt
+                  0x000222                  _malloc
+                  0x00033e                  _free
+                  0x000354                  _realloc
+                  0x0003d2                  _memcpy
+                  0x0003e0                  _Sys_Init_Process_Management_HDI
+                  0x00046a                  _Sys_Get_Number_Processes
+                  0x0004a0                  _Sys_Set_Defaults_PCB
+                  0x000506                  _Sys_Start_Process_HDI
+                  0x000598                  _Sys_Kill_Process
+                  0x0005f0                  _Sys_Set_Running_Process_to_Zombie
+                  0x00064c                  _Sys_Kill_Zombies
+                  0x00066c                  _Sys_Delete_Process
+                  0x00068e                  _Sys_Save_Running_Process_HDI
+                  0x0006ec                  _Sys_Change_Stack_HDI
+                  0x000714                  _Sys_Switch_Process_HDI
+                  0x0007a6                  _Sys_Switch_Process
+                  0x0007d0                  _Sys_Switch_to_next_Process
+                  0x0007ee                  _Sys_Remove_Process_from_List
+                  0x000886                  _Sys_Insert_Process_to_List
+                  0x00094a                  _Sys_Find_Process
+                  0x000996                  _Sys_Start_CriticalSection
+                  0x00099e                  _Sys_End_CriticalSection
+                  0x0009a6                  _Sys_Block_Process
+                  0x0009f6                  _Sys_Continue_Pocess
+                  0x000a64                  _Sys_Add_Event_Subscription
+                  0x000af8                  _Sys_Next_EventHandler
+                  0x000b26                  _Sys_Add_Event_to_Process
+                  0x000c74                  _Sys_Execute_Events_in_ProcessList
+                  0x000cca                  _Sys_Execute_All_EventHandler
+                  0x000d06                  _Sys_Interprocess_EventHandling
+                  0x000d10                  _Sys_Remove_All_Event_Subscriptions
+                  0x000d36                  _Sys_Remove_Event_Subscription
+                  0x000d5c                  _Sys_Remove_Event_from_EventRegister
+                  0x000e0c                  _Sys_Clear_EventData
+                  0x000e3c                  _Sys_Clear_EventRegister
+                  0x000e76                  _Sys_Wait_For_Condition
+                  0x000eec                  _Sys_Wait_For_Event
+                  0x000efe                  _Sys_Send_Event
+                  0x000f46                  _Sys_Register_Event
+                  0x000fb6                  _Sys_Subscribe_to_Event
+                  0x00105e                  _Sys_Unregister_Event
+                  0x0010ec                  _Sys_Unsubscribe_from_Event
+                  0x001162                  _Sys_Unsubscribe_Handler_from_Event
+                  0x0011da                  _Sys_Find_Event
+                  0x001206                  _Sys_IsEventRegistered
+                  0x001232                  _Sys_Unsubscribe_Process
+                  0x0012b0                  _Sys_Init_SystemTimer_HDI
+                  0x0012d0                  _Sys_Start_SystemTimer_HDI
+                  0x0012e2                  _Sys_Stop_SystemTimer_HDI
+                  0x0012ee                  _Sys_Continue_SystemTimer_HDI
+                  0x0012fa                  _Sys_Reset_SystemTimer_HDI
+                  0x001304                  __T1Interrupt
+                  0x001332                  __AltT1Interrupt
+                  0x00135c                  _Sys_Disable_TimerInterrupt_HDI
+                  0x001366                  _Sys_Enable_TimerInterrupt_HDI
+                  0x00136e                  _Sys_Force_TimerInterrupt_HDI
+                  0x001376                  _main
+                  0x0013ac                  _task1
+                  0x0013d0                  _task2
+                  0x001416                  _Sys_Init_MCU_HDI
+                  0x0014a0                  _Sys_Init_IOManagement_HDI
+                  0x0014a6                  _Sys_Start_IOManagement_HDI
+                  0x0014ac                  _Sys_Init_IOTimer
+                  0x0014c6                  _Sys_Start_IOTimer_HDI
+                  0x0014d6                  _Sys_Stop_IOTimer_HDI
+                  0x0014e2                  _Sys_Continue_IOTimer_HDI
+                  0x0014ee                  _Sys_Reset_IOTimer_HDI
+                  0x0014f8                  __T2Interrupt
+                  0x0014fe                  __AltT2Interrupt
+                  0x001504                  _Sys_Disable_IOTimerInterrupt_HDI
+                  0x00150e                  _Sys_Enable_IOTimerInterrupt_HDI
+                  0x001516                  _Sys_Force_IOTimerInterrupt_HDI
+                  0x00155e                  _Sys_Scheduler_RoundRobin
+                  0x00156c                  _Sys_Set_Defaults_Info
+                  0x001580                  _Sys_Init_Kernel
+                  0x001592                  _ConfigureOscillator
+                  0x001598                  _Sys_Start_Kernel
+                  0x0015a0                  _InitApp
                   0xf8000a                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000f1c                  _ConfigureOscillator
-                  0x000f2a                  _InitApp
-                  0x000d52                  _Sys_Activate_SystemTimer_Interrupt_HDI
-                  0x000870                  _Sys_Add_Event
-                  0x000744                  _Sys_Add_Event_Subscription
-                  0x00071c                  _Sys_Change_Stack_HDI
-                  0x000d48                  _Sys_Deactivate_SystemTimer_Interrupt_HDI
-                  0x0004e6                  _Sys_Delete_Process
-                  0x000cea                  _Sys_Find_Event
-                  0x000a0a                  _Sys_Find_EventHandler
-                  0x0009ba                  _Sys_Find_Process
-                  0x0006e6                  _Sys_Get_Number_Processes
-                  0x000f0e                  _Sys_Init_Kernel
-                  0x000daa                  _Sys_Init_MCU_HDI
-                  0x0003dc                  _Sys_Init_Process_Management_HDI
-                  0x000d16                  _Sys_Init_SystemTimer_HDI
-                  0x00061c                  _Sys_Kill_Process
-                  0x000afe                  _Sys_Register_Event
-                  0x000a38                  _Sys_Remove_All_Event_Subscriptions
-                  0x000992                  _Sys_Remove_Event_Subscription
-                  0x00091a                  _Sys_Remove_Event_from_EventRegister
-                  0x000440                  _Sys_Save_Running_Process_HDI
-                  0x000eec                  _Sys_Scheduler_RoundRobin
-                  0x000aee                  _Sys_Send_Event
-                  0x000efa                  _Sys_Set_Defaults_Info
-                  0x0004fa                  _Sys_Set_Defaults_PCB
-                  0x000f22                  _Sys_Start_Kernel
-                  0x000564                  _Sys_Start_Process_HDI
-                  0x000d36                  _Sys_Start_SystemTimer_HDI
-                  0x000b5a                  _Sys_Subscribe_to_Event
-                  0x00049e                  _Sys_Switch_Process
-                  0x000a5c                  _Sys_Switch_Process_HDI
-                  0x0004c8                  _Sys_Switch_to_next_Process
-                  0x000bea                  _Sys_Unregister_Event
-                  0x000c78                  _Sys_Unsubscribe_from_Event
-                  0x0001ac                  __AddressError
-                  0x0001c4                  __AltAddressError
-                  0x0001d0                  __AltMathError
-                  0x0001be                  __AltOscillatorFail
-                  0x0001ca                  __AltStackError
-                  0x000d84                  __AltT1Interrupt
-                  0x0001d6                  __DefaultInterrupt
+                  0x001592                  _ConfigureOscillator
+                  0x0015a0                  _InitApp
+                  0x000a64                  _Sys_Add_Event_Subscription
+                  0x000b26                  _Sys_Add_Event_to_Process
+                  0x0009a6                  _Sys_Block_Process
+                  0x0006ec                  _Sys_Change_Stack_HDI
+                  0x000e0c                  _Sys_Clear_EventData
+                  0x000e3c                  _Sys_Clear_EventRegister
+                  0x0014e2                  _Sys_Continue_IOTimer_HDI
+                  0x0009f6                  _Sys_Continue_Pocess
+                  0x0012ee                  _Sys_Continue_SystemTimer_HDI
+                  0x00066c                  _Sys_Delete_Process
+                  0x001504                  _Sys_Disable_IOTimerInterrupt_HDI
+                  0x00135c                  _Sys_Disable_TimerInterrupt_HDI
+                  0x00150e                  _Sys_Enable_IOTimerInterrupt_HDI
+                  0x001366                  _Sys_Enable_TimerInterrupt_HDI
+                  0x00099e                  _Sys_End_CriticalSection
+                  0x000cca                  _Sys_Execute_All_EventHandler
+                  0x000c74                  _Sys_Execute_Events_in_ProcessList
+                  0x0011da                  _Sys_Find_Event
+                  0x00094a                  _Sys_Find_Process
+                  0x001516                  _Sys_Force_IOTimerInterrupt_HDI
+                  0x00136e                  _Sys_Force_TimerInterrupt_HDI
+                  0x00046a                  _Sys_Get_Number_Processes
+                  0x0014a0                  _Sys_Init_IOManagement_HDI
+                  0x0014ac                  _Sys_Init_IOTimer
+                  0x001580                  _Sys_Init_Kernel
+                  0x001416                  _Sys_Init_MCU_HDI
+                  0x0003e0                  _Sys_Init_Process_Management_HDI
+                  0x0012b0                  _Sys_Init_SystemTimer_HDI
+                  0x000886                  _Sys_Insert_Process_to_List
+                  0x000d06                  _Sys_Interprocess_EventHandling
+                  0x001206                  _Sys_IsEventRegistered
+                  0x000598                  _Sys_Kill_Process
+                  0x00064c                  _Sys_Kill_Zombies
+                  0x000af8                  _Sys_Next_EventHandler
+                  0x000f46                  _Sys_Register_Event
+                  0x000d10                  _Sys_Remove_All_Event_Subscriptions
+                  0x000d36                  _Sys_Remove_Event_Subscription
+                  0x000d5c                  _Sys_Remove_Event_from_EventRegister
+                  0x0007ee                  _Sys_Remove_Process_from_List
+                  0x0014ee                  _Sys_Reset_IOTimer_HDI
+                  0x0012fa                  _Sys_Reset_SystemTimer_HDI
+                  0x00068e                  _Sys_Save_Running_Process_HDI
+                  0x00155e                  _Sys_Scheduler_RoundRobin
+                  0x000efe                  _Sys_Send_Event
+                  0x00156c                  _Sys_Set_Defaults_Info
+                  0x0004a0                  _Sys_Set_Defaults_PCB
+                  0x0005f0                  _Sys_Set_Running_Process_to_Zombie
+                  0x000996                  _Sys_Start_CriticalSection
+                  0x0014a6                  _Sys_Start_IOManagement_HDI
+                  0x0014c6                  _Sys_Start_IOTimer_HDI
+                  0x001598                  _Sys_Start_Kernel
+                  0x000506                  _Sys_Start_Process_HDI
+                  0x0012d0                  _Sys_Start_SystemTimer_HDI
+                  0x0014d6                  _Sys_Stop_IOTimer_HDI
+                  0x0012e2                  _Sys_Stop_SystemTimer_HDI
+                  0x000fb6                  _Sys_Subscribe_to_Event
+                  0x0007a6                  _Sys_Switch_Process
+                  0x000714                  _Sys_Switch_Process_HDI
+                  0x0007d0                  _Sys_Switch_to_next_Process
+                  0x00105e                  _Sys_Unregister_Event
+                  0x001162                  _Sys_Unsubscribe_Handler_from_Event
+                  0x001232                  _Sys_Unsubscribe_Process
+                  0x0010ec                  _Sys_Unsubscribe_from_Event
+                  0x000e76                  _Sys_Wait_For_Condition
+                  0x000eec                  _Sys_Wait_For_Event
+                  0x0001b0                  __AddressError
+                  0x0001c8                  __AltAddressError
+                  0x0001d4                  __AltMathError
+                  0x0001c2                  __AltOscillatorFail
+                  0x0001ce                  __AltStackError
+                  0x001332                  __AltT1Interrupt
+                  0x0014fe                  __AltT2Interrupt
+                  0x0001da                  __DefaultInterrupt
                   0xf8000a                  __FGS.sec
-                  0x0001b8                  __MathError
-                  0x0001a6                  __OscillatorFail
-                  0x0001b2                  __StackError
-                  0x000d5c                  __T1Interrupt
+                  0x0001bc                  __MathError
+                  0x0001aa                  __OscillatorFail
+                  0x0001b6                  __StackError
+                  0x001304                  __T1Interrupt
+                  0x0014f8                  __T2Interrupt
                   0x00013c                  __data_init
                   0x00013c                  __data_init_standard
                   0x00012c                  __psv_init
                   0x000100                  __resetPRI
-                  0x00033a                  _free
-                  0x000e34                  _main
-                  0x00021e                  _malloc
-                  0x0003ce                  _memcpy
-                  0x000350                  _realloc
-                  0x000e58                  _task1
-                  0x000e7c                  _task2
+                  0x00033e                  _free
+                  0x001376                  _main
+                  0x000222                  _malloc
+                  0x0003d2                  _memcpy
+                  0x000354                  _realloc
+                  0x0013ac                  _task1
+                  0x0013d0                  _task2
 
 Memory Configuration
 
@@ -309,6 +382,7 @@ LOAD build/XC16_dsPIC30F6014A/production/configuration_bits.o
 LOAD build/XC16_dsPIC30F6014A/production/HDI_init_port.o
 LOAD build/XC16_dsPIC30F6014A/production/main.o
 LOAD build/XC16_dsPIC30F6014A/production/system_Events.o
+LOAD build/XC16_dsPIC30F6014A/production/system_IO.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD /opt/microchip/xc16/v1.24/bin/bin/../../lib/dsPIC30F/libp30F6014A-elf.a
 LOAD /opt/microchip/xc16/v1.24/bin/bin/../../lib/libfx-elf.a
@@ -337,7 +411,7 @@ LOAD /opt/microchip/xc16/v1.24/bin/bin/../../lib/libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100        0x2dc
+.text             0x000100        0x2e0
  *(.init)
  .init            0x000100         0x3c /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
                   0x000100                  __reset
@@ -348,34 +422,34 @@ LOAD /opt/microchip/xc16/v1.24/bin/bin/../../lib/libfx-elf.a
                   0x00013c                  __data_init_standard
  *(.user_init)
  *(.handle)
- .handle          0x00019a          0xc jump_table
+ .handle          0x00019a         0x10 jump_table
  *(.isr*)
- .isr.text        0x0001a6         0x34 build/XC16_dsPIC30F6014A/production/traps.o
-                  0x0001a6                  __OscillatorFail
-                  0x0001ac                  __AddressError
-                  0x0001b2                  __StackError
-                  0x0001b8                  __MathError
-                  0x0001be                  __AltOscillatorFail
-                  0x0001c4                  __AltAddressError
-                  0x0001ca                  __AltStackError
-                  0x0001d0                  __AltMathError
-                  0x0001d6                  __DefaultInterrupt
+ .isr.text        0x0001aa         0x34 build/XC16_dsPIC30F6014A/production/traps.o
+                  0x0001aa                  __OscillatorFail
+                  0x0001b0                  __AddressError
+                  0x0001b6                  __StackError
+                  0x0001bc                  __MathError
+                  0x0001c2                  __AltOscillatorFail
+                  0x0001c8                  __AltAddressError
+                  0x0001ce                  __AltStackError
+                  0x0001d4                  __AltMathError
+                  0x0001da                  __DefaultInterrupt
  *(.libc)
- .libc            0x0001da         0x28 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(sbrk.eo)
-                  0x0001da                  _sbrk
- .libc            0x000202         0x1c /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(brk.elo)
-                  0x000202                  _brk
+ .libc            0x0001de         0x28 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(sbrk.eo)
+                  0x0001de                  _sbrk
+ .libc            0x000206         0x1c /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(brk.elo)
+                  0x000206                  _brk
  *(.libm)
  *(.libdsp)
  *(.lib*)
- .libc.malloc     0x00021e        0x11c /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
-                  0x00021e                  _malloc
- .libc.free       0x00033a         0x16 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
-                  0x00033a                  _free
- .libc.realloc    0x000350         0x7e /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
-                  0x000350                  _realloc
- .libc.memcpy     0x0003ce          0xe /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(memcpy.eo)
-                  0x0003ce                  _memcpy
+ .libc.malloc     0x000222        0x11c /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                  0x000222                  _malloc
+ .libc.free       0x00033e         0x16 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                  0x00033e                  _free
+ .libc.realloc    0x000354         0x7e /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                  0x000354                  _realloc
+ .libc.memcpy     0x0003d2          0xe /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(memcpy.eo)
+                  0x0003d2                  _memcpy
 
 usercode
  *(usercode)
@@ -427,68 +501,73 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x31e7
+.debug_info       0x000000       0x42d6
  *(.debug_info)
  .debug_info      0x000000        0x13d build/XC16_dsPIC30F6014A/production/user.o
  .debug_info      0x00013d        0x32c build/XC16_dsPIC30F6014A/production/traps.o
- .debug_info      0x000469        0x6ff build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
- .debug_info      0x000b68        0x1f7 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
- .debug_info      0x000d5f        0xca2 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
- .debug_info      0x001a01        0x1dc build/XC16_dsPIC30F6014A/production/system.o
- .debug_info      0x001bdd        0x12c build/XC16_dsPIC30F6014A/production/interrupts.o
- .debug_info      0x001d09         0xd2 build/XC16_dsPIC30F6014A/production/configuration_bits.o
- .debug_info      0x001ddb        0xc95 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
- .debug_info      0x002a70        0x21c build/XC16_dsPIC30F6014A/production/main.o
- .debug_info      0x002c8c        0x55b build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_info      0x000469        0x7e9 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+ .debug_info      0x000c52        0x23d build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+ .debug_info      0x000e8f       0x128e build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+ .debug_info      0x00211d        0x1b5 build/XC16_dsPIC30F6014A/production/system.o
+ .debug_info      0x0022d2        0x12c build/XC16_dsPIC30F6014A/production/interrupts.o
+ .debug_info      0x0023fe         0xd2 build/XC16_dsPIC30F6014A/production/configuration_bits.o
+ .debug_info      0x0024d0        0xc95 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+ .debug_info      0x003165        0x298 build/XC16_dsPIC30F6014A/production/main.o
+ .debug_info      0x0033fd        0x79d build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_info      0x003b9a        0x73c build/XC16_dsPIC30F6014A/production/system_IO.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x6e3
+.debug_abbrev     0x000000        0x7f2
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0x34 build/XC16_dsPIC30F6014A/production/user.o
  .debug_abbrev    0x000034         0x7d build/XC16_dsPIC30F6014A/production/traps.o
- .debug_abbrev    0x0000b1        0x10a build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
- .debug_abbrev    0x0001bb         0x9e build/XC16_dsPIC30F6014A/production/system_Scheduler.o
- .debug_abbrev    0x000259        0x1bf build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
- .debug_abbrev    0x000418         0x5f build/XC16_dsPIC30F6014A/production/system.o
- .debug_abbrev    0x000477         0x1f build/XC16_dsPIC30F6014A/production/interrupts.o
- .debug_abbrev    0x000496         0x1f build/XC16_dsPIC30F6014A/production/configuration_bits.o
- .debug_abbrev    0x0004b5         0x8e build/XC16_dsPIC30F6014A/production/HDI_init_port.o
- .debug_abbrev    0x000543         0x94 build/XC16_dsPIC30F6014A/production/main.o
- .debug_abbrev    0x0005d7        0x10c build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_abbrev    0x0000b1        0x11d build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+ .debug_abbrev    0x0001ce         0x9d build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+ .debug_abbrev    0x00026b        0x1e2 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+ .debug_abbrev    0x00044d         0x47 build/XC16_dsPIC30F6014A/production/system.o
+ .debug_abbrev    0x000494         0x1f build/XC16_dsPIC30F6014A/production/interrupts.o
+ .debug_abbrev    0x0004b3         0x1f build/XC16_dsPIC30F6014A/production/configuration_bits.o
+ .debug_abbrev    0x0004d2         0x8e build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+ .debug_abbrev    0x000560         0xaa build/XC16_dsPIC30F6014A/production/main.o
+ .debug_abbrev    0x00060a        0x11d build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_abbrev    0x000727         0xcb build/XC16_dsPIC30F6014A/production/system_IO.o
 
-.debug_line       0x000000       0x1819
+.debug_line       0x000000       0x23ff
  *(.debug_line)
  .debug_line      0x000000         0x48 build/XC16_dsPIC30F6014A/production/user.o
  .debug_line      0x000048        0x1a3 build/XC16_dsPIC30F6014A/production/traps.o
- .debug_line      0x0001eb        0x1c9 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
- .debug_line      0x0003b4         0xa4 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
- .debug_line      0x000458        0xb1b build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
- .debug_line      0x000f73         0x9e build/XC16_dsPIC30F6014A/production/system.o
- .debug_line      0x001011         0x24 build/XC16_dsPIC30F6014A/production/interrupts.o
- .debug_line      0x001035         0x24 build/XC16_dsPIC30F6014A/production/configuration_bits.o
- .debug_line      0x001059        0x2ab build/XC16_dsPIC30F6014A/production/HDI_init_port.o
- .debug_line      0x001304        0x140 build/XC16_dsPIC30F6014A/production/main.o
- .debug_line      0x001444        0x3d5 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_line      0x0001eb        0x291 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+ .debug_line      0x00047c         0xa4 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+ .debug_line      0x000520       0x1175 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+ .debug_line      0x001695         0xa6 build/XC16_dsPIC30F6014A/production/system.o
+ .debug_line      0x00173b         0x24 build/XC16_dsPIC30F6014A/production/interrupts.o
+ .debug_line      0x00175f         0x24 build/XC16_dsPIC30F6014A/production/configuration_bits.o
+ .debug_line      0x001783        0x2ab build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+ .debug_line      0x001a2e        0x194 build/XC16_dsPIC30F6014A/production/main.o
+ .debug_line      0x001bc2        0x600 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_line      0x0021c2        0x23d build/XC16_dsPIC30F6014A/production/system_IO.o
 
-.debug_frame      0x000000        0x3c4
+.debug_frame      0x000000        0x5f8
  *(.debug_frame)
  .debug_frame     0x000000         0x24 build/XC16_dsPIC30F6014A/production/user.o
  .debug_frame     0x000024         0xa4 build/XC16_dsPIC30F6014A/production/traps.o
- .debug_frame     0x0000c8         0x74 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
- .debug_frame     0x00013c         0x34 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
- .debug_frame     0x000170        0x134 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
- .debug_frame     0x0002a4         0x44 build/XC16_dsPIC30F6014A/production/system.o
- .debug_frame     0x0002e8         0x24 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
- .debug_frame     0x00030c         0x44 build/XC16_dsPIC30F6014A/production/main.o
- .debug_frame     0x000350         0x74 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_frame     0x0000c8         0xb4 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+ .debug_frame     0x00017c         0x34 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+ .debug_frame     0x0001b0        0x224 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+ .debug_frame     0x0003d4         0x44 build/XC16_dsPIC30F6014A/production/system.o
+ .debug_frame     0x000418         0x24 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+ .debug_frame     0x00043c         0x44 build/XC16_dsPIC30F6014A/production/main.o
+ .debug_frame     0x000480         0xa4 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_frame     0x000524         0xd4 build/XC16_dsPIC30F6014A/production/system_IO.o
 
-.debug_str        0x000000        0x12f
+.debug_str        0x000000        0x177
  *(.debug_str)
  .debug_str       0x000000          0xc build/XC16_dsPIC30F6014A/production/traps.o
  .debug_str       0x00000c         0x1c build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
- .debug_str       0x000028         0x78 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
- .debug_str       0x0000a0         0x5f build/XC16_dsPIC30F6014A/production/HDI_init_port.o
- .debug_str       0x0000ff         0x30 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_str       0x000028         0x8e build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+ .debug_str       0x0000b6         0x5f build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+ .debug_str       0x000115         0x46 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_str       0x00015b         0x1c build/XC16_dsPIC30F6014A/production/system_IO.o
 
 .debug_loc
  *(.debug_loc)
@@ -497,31 +576,33 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x5d2
+                  0x000000        0x9dd
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1e build/XC16_dsPIC30F6014A/production/user.o
  .debug_pubnames
                   0x00001e         0xbe build/XC16_dsPIC30F6014A/production/traps.o
  .debug_pubnames
-                  0x0000dc         0xca build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+                  0x0000dc        0x134 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
  .debug_pubnames
-                  0x0001a6         0x49 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+                  0x000210         0x49 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
  .debug_pubnames
-                  0x0001ef        0x258 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+                  0x000259        0x43d build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
  .debug_pubnames
-                  0x000447         0x53 build/XC16_dsPIC30F6014A/production/system.o
+                  0x000696         0x53 build/XC16_dsPIC30F6014A/production/system.o
  .debug_pubnames
-                  0x00049a         0x51 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+                  0x0006e9         0x51 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
  .debug_pubnames
-                  0x0004eb         0x2f build/XC16_dsPIC30F6014A/production/main.o
+                  0x00073a         0x2f build/XC16_dsPIC30F6014A/production/main.o
  .debug_pubnames
-                  0x00051a         0xb8 build/XC16_dsPIC30F6014A/production/system_Events.o
+                  0x000769        0x115 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_pubnames
+                  0x00087e        0x15f build/XC16_dsPIC30F6014A/production/system_IO.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0xd8
+.debug_aranges    0x000000         0xf0
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/XC16_dsPIC30F6014A/production/user.o
@@ -541,134 +622,136 @@ userdata
                   0x0000a8         0x18 build/XC16_dsPIC30F6014A/production/main.o
  .debug_aranges
                   0x0000c0         0x18 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_aranges
+                  0x0000d8         0x18 build/XC16_dsPIC30F6014A/production/system_IO.o
 
 .ivt              0x000004         0x7c
-                  0x000004          0x4 LONG 0x1d6 DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000006          0x4 LONG 0x1a6 DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000008          0x4 LONG 0x1ac DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000a          0x4 LONG 0x1b2 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000c          0x4 LONG 0x1b8 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000e          0x4 LONG 0x1d6 DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
-                  0x000010          0x4 LONG 0x1d6 DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
-                  0x000012          0x4 LONG 0x1d6 DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000014          0x4 LONG 0x1d6 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000016          0x4 LONG 0x1d6 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000018          0x4 LONG 0x1d6 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0xd5c DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001c          0x4 LONG 0x1d6 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001e          0x4 LONG 0x1d6 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000020          0x4 LONG 0x1d6 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000022          0x4 LONG 0x1d6 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000024          0x4 LONG 0x1d6 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000026          0x4 LONG 0x1d6 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000028          0x4 LONG 0x1d6 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002a          0x4 LONG 0x1d6 DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002c          0x4 LONG 0x1d6 DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002e          0x4 LONG 0x1d6 DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000030          0x4 LONG 0x1d6 DEFINED (__MI2CInterrupt)?ABSOLUTE (__MI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000032          0x4 LONG 0x1d6 DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000034          0x4 LONG 0x1d6 DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000036          0x4 LONG 0x1d6 DEFINED (__IC7Interrupt)?ABSOLUTE (__IC7Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000038          0x4 LONG 0x1d6 DEFINED (__IC8Interrupt)?ABSOLUTE (__IC8Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00003a          0x4 LONG 0x1d6 DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00003c          0x4 LONG 0x1d6 DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00003e          0x4 LONG 0x1d6 DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000040          0x4 LONG 0x1d6 DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000042          0x4 LONG 0x1d6 DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000044          0x4 LONG 0x1d6 DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000046          0x4 LONG 0x1d6 DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000048          0x4 LONG 0x1d6 DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004a          0x4 LONG 0x1d6 DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004c          0x4 LONG 0x1d6 DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004e          0x4 LONG 0x1d6 DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000050          0x4 LONG 0x1d6 DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000052          0x4 LONG 0x1d6 DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000054          0x4 LONG 0x1d6 DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000056          0x4 LONG 0x1d6 DEFINED (__OC6Interrupt)?ABSOLUTE (__OC6Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000058          0x4 LONG 0x1d6 DEFINED (__OC7Interrupt)?ABSOLUTE (__OC7Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00005a          0x4 LONG 0x1d6 DEFINED (__OC8Interrupt)?ABSOLUTE (__OC8Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00005c          0x4 LONG 0x1d6 DEFINED (__INT3Interrupt)?ABSOLUTE (__INT3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00005e          0x4 LONG 0x1d6 DEFINED (__INT4Interrupt)?ABSOLUTE (__INT4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000060          0x4 LONG 0x1d6 DEFINED (__C2Interrupt)?ABSOLUTE (__C2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000062          0x4 LONG 0x1d6 DEFINED (__PWMInterrupt)?ABSOLUTE (__PWMInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000064          0x4 LONG 0x1d6 DEFINED (__QEIInterrupt)?ABSOLUTE (__QEIInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000066          0x4 LONG 0x1d6 DEFINED (__DCIInterrupt)?ABSOLUTE (__DCIInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000068          0x4 LONG 0x1d6 DEFINED (__LVDInterrupt)?ABSOLUTE (__LVDInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00006a          0x4 LONG 0x1d6 DEFINED (__FLTAInterrupt)?ABSOLUTE (__FLTAInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00006c          0x4 LONG 0x1d6 DEFINED (__FLTBInterrupt)?ABSOLUTE (__FLTBInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00006e          0x4 LONG 0x1d6 DEFINED (__Interrupt45)?ABSOLUTE (__Interrupt45):ABSOLUTE (__DefaultInterrupt)
-                  0x000070          0x4 LONG 0x1d6 DEFINED (__Interrupt46)?ABSOLUTE (__Interrupt46):ABSOLUTE (__DefaultInterrupt)
-                  0x000072          0x4 LONG 0x1d6 DEFINED (__Interrupt47)?ABSOLUTE (__Interrupt47):ABSOLUTE (__DefaultInterrupt)
-                  0x000074          0x4 LONG 0x1d6 DEFINED (__Interrupt48)?ABSOLUTE (__Interrupt48):ABSOLUTE (__DefaultInterrupt)
-                  0x000076          0x4 LONG 0x1d6 DEFINED (__Interrupt49)?ABSOLUTE (__Interrupt49):ABSOLUTE (__DefaultInterrupt)
-                  0x000078          0x4 LONG 0x1d6 DEFINED (__Interrupt50)?ABSOLUTE (__Interrupt50):ABSOLUTE (__DefaultInterrupt)
-                  0x00007a          0x4 LONG 0x1d6 DEFINED (__Interrupt51)?ABSOLUTE (__Interrupt51):ABSOLUTE (__DefaultInterrupt)
-                  0x00007c          0x4 LONG 0x1d6 DEFINED (__Interrupt52)?ABSOLUTE (__Interrupt52):ABSOLUTE (__DefaultInterrupt)
-                  0x00007e          0x4 LONG 0x1d6 DEFINED (__Interrupt53)?ABSOLUTE (__Interrupt53):ABSOLUTE (__DefaultInterrupt)
+                  0x000004          0x4 LONG 0x1da DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
+                  0x000006          0x4 LONG 0x1aa DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000008          0x4 LONG 0x1b0 DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000a          0x4 LONG 0x1b6 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000c          0x4 LONG 0x1bc DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000e          0x4 LONG 0x1da DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
+                  0x000010          0x4 LONG 0x1da DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
+                  0x000012          0x4 LONG 0x1da DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
+                  0x000014          0x4 LONG 0x1da DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000016          0x4 LONG 0x1da DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000018          0x4 LONG 0x1da DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x1304 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001c          0x4 LONG 0x1da DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001e          0x4 LONG 0x1da DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000020          0x4 LONG 0x14f8 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000022          0x4 LONG 0x1da DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000024          0x4 LONG 0x1da DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000026          0x4 LONG 0x1da DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000028          0x4 LONG 0x1da DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002a          0x4 LONG 0x1da DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002c          0x4 LONG 0x1da DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002e          0x4 LONG 0x1da DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000030          0x4 LONG 0x1da DEFINED (__MI2CInterrupt)?ABSOLUTE (__MI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000032          0x4 LONG 0x1da DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000034          0x4 LONG 0x1da DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000036          0x4 LONG 0x1da DEFINED (__IC7Interrupt)?ABSOLUTE (__IC7Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000038          0x4 LONG 0x1da DEFINED (__IC8Interrupt)?ABSOLUTE (__IC8Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00003a          0x4 LONG 0x1da DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00003c          0x4 LONG 0x1da DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00003e          0x4 LONG 0x1da DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000040          0x4 LONG 0x1da DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000042          0x4 LONG 0x1da DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000044          0x4 LONG 0x1da DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000046          0x4 LONG 0x1da DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000048          0x4 LONG 0x1da DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004a          0x4 LONG 0x1da DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004c          0x4 LONG 0x1da DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004e          0x4 LONG 0x1da DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000050          0x4 LONG 0x1da DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000052          0x4 LONG 0x1da DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000054          0x4 LONG 0x1da DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000056          0x4 LONG 0x1da DEFINED (__OC6Interrupt)?ABSOLUTE (__OC6Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000058          0x4 LONG 0x1da DEFINED (__OC7Interrupt)?ABSOLUTE (__OC7Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00005a          0x4 LONG 0x1da DEFINED (__OC8Interrupt)?ABSOLUTE (__OC8Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00005c          0x4 LONG 0x1da DEFINED (__INT3Interrupt)?ABSOLUTE (__INT3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00005e          0x4 LONG 0x1da DEFINED (__INT4Interrupt)?ABSOLUTE (__INT4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000060          0x4 LONG 0x1da DEFINED (__C2Interrupt)?ABSOLUTE (__C2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000062          0x4 LONG 0x1da DEFINED (__PWMInterrupt)?ABSOLUTE (__PWMInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000064          0x4 LONG 0x1da DEFINED (__QEIInterrupt)?ABSOLUTE (__QEIInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000066          0x4 LONG 0x1da DEFINED (__DCIInterrupt)?ABSOLUTE (__DCIInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000068          0x4 LONG 0x1da DEFINED (__LVDInterrupt)?ABSOLUTE (__LVDInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00006a          0x4 LONG 0x1da DEFINED (__FLTAInterrupt)?ABSOLUTE (__FLTAInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00006c          0x4 LONG 0x1da DEFINED (__FLTBInterrupt)?ABSOLUTE (__FLTBInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00006e          0x4 LONG 0x1da DEFINED (__Interrupt45)?ABSOLUTE (__Interrupt45):ABSOLUTE (__DefaultInterrupt)
+                  0x000070          0x4 LONG 0x1da DEFINED (__Interrupt46)?ABSOLUTE (__Interrupt46):ABSOLUTE (__DefaultInterrupt)
+                  0x000072          0x4 LONG 0x1da DEFINED (__Interrupt47)?ABSOLUTE (__Interrupt47):ABSOLUTE (__DefaultInterrupt)
+                  0x000074          0x4 LONG 0x1da DEFINED (__Interrupt48)?ABSOLUTE (__Interrupt48):ABSOLUTE (__DefaultInterrupt)
+                  0x000076          0x4 LONG 0x1da DEFINED (__Interrupt49)?ABSOLUTE (__Interrupt49):ABSOLUTE (__DefaultInterrupt)
+                  0x000078          0x4 LONG 0x1da DEFINED (__Interrupt50)?ABSOLUTE (__Interrupt50):ABSOLUTE (__DefaultInterrupt)
+                  0x00007a          0x4 LONG 0x1da DEFINED (__Interrupt51)?ABSOLUTE (__Interrupt51):ABSOLUTE (__DefaultInterrupt)
+                  0x00007c          0x4 LONG 0x1da DEFINED (__Interrupt52)?ABSOLUTE (__Interrupt52):ABSOLUTE (__DefaultInterrupt)
+                  0x00007e          0x4 LONG 0x1da DEFINED (__Interrupt53)?ABSOLUTE (__Interrupt53):ABSOLUTE (__DefaultInterrupt)
 
 .aivt             0x000084         0x7c
-                  0x000084          0x4 LONG 0x1d6 DEFINED (__AltReservedTrap0)?ABSOLUTE (__AltReservedTrap0):DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000086          0x4 LONG 0x1be DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000088          0x4 LONG 0x1c4 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008a          0x4 LONG 0x1ca DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008c          0x4 LONG 0x1d0 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008e          0x4 LONG 0x1d6 DEFINED (__AltReservedTrap5)?ABSOLUTE (__AltReservedTrap5):DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
-                  0x000090          0x4 LONG 0x1d6 DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
-                  0x000092          0x4 LONG 0x1d6 DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000094          0x4 LONG 0x1d6 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000096          0x4 LONG 0x1d6 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000098          0x4 LONG 0x1d6 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00009a          0x4 LONG 0xd84 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00009c          0x4 LONG 0x1d6 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00009e          0x4 LONG 0x1d6 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a0          0x4 LONG 0x1d6 DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a2          0x4 LONG 0x1d6 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a4          0x4 LONG 0x1d6 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a6          0x4 LONG 0x1d6 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a8          0x4 LONG 0x1d6 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000aa          0x4 LONG 0x1d6 DEFINED (__AltADCInterrupt)?ABSOLUTE (__AltADCInterrupt):DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ac          0x4 LONG 0x1d6 DEFINED (__AltNVMInterrupt)?ABSOLUTE (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ae          0x4 LONG 0x1d6 DEFINED (__AltSI2CInterrupt)?ABSOLUTE (__AltSI2CInterrupt):DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000b0          0x4 LONG 0x1d6 DEFINED (__AltMI2CInterrupt)?ABSOLUTE (__AltMI2CInterrupt):DEFINED (__MI2CInterrupt)?ABSOLUTE (__MI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000b2          0x4 LONG 0x1d6 DEFINED (__AltCNInterrupt)?ABSOLUTE (__AltCNInterrupt):DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000b4          0x4 LONG 0x1d6 DEFINED (__AltINT1Interrupt)?ABSOLUTE (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000b6          0x4 LONG 0x1d6 DEFINED (__AltIC7Interrupt)?ABSOLUTE (__AltIC7Interrupt):DEFINED (__IC7Interrupt)?ABSOLUTE (__IC7Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000b8          0x4 LONG 0x1d6 DEFINED (__AltIC8Interrupt)?ABSOLUTE (__AltIC8Interrupt):DEFINED (__IC8Interrupt)?ABSOLUTE (__IC8Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ba          0x4 LONG 0x1d6 DEFINED (__AltOC3Interrupt)?ABSOLUTE (__AltOC3Interrupt):DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000bc          0x4 LONG 0x1d6 DEFINED (__AltOC4Interrupt)?ABSOLUTE (__AltOC4Interrupt):DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000be          0x4 LONG 0x1d6 DEFINED (__AltT4Interrupt)?ABSOLUTE (__AltT4Interrupt):DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000c0          0x4 LONG 0x1d6 DEFINED (__AltT5Interrupt)?ABSOLUTE (__AltT5Interrupt):DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000c2          0x4 LONG 0x1d6 DEFINED (__AltINT2Interrupt)?ABSOLUTE (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000c4          0x4 LONG 0x1d6 DEFINED (__AltU2RXInterrupt)?ABSOLUTE (__AltU2RXInterrupt):DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000c6          0x4 LONG 0x1d6 DEFINED (__AltU2TXInterrupt)?ABSOLUTE (__AltU2TXInterrupt):DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000c8          0x4 LONG 0x1d6 DEFINED (__AltSPI2Interrupt)?ABSOLUTE (__AltSPI2Interrupt):DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ca          0x4 LONG 0x1d6 DEFINED (__AltC1Interrupt)?ABSOLUTE (__AltC1Interrupt):DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000cc          0x4 LONG 0x1d6 DEFINED (__AltIC3Interrupt)?ABSOLUTE (__AltIC3Interrupt):DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ce          0x4 LONG 0x1d6 DEFINED (__AltIC4Interrupt)?ABSOLUTE (__AltIC4Interrupt):DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000d0          0x4 LONG 0x1d6 DEFINED (__AltIC5Interrupt)?ABSOLUTE (__AltIC5Interrupt):DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000d2          0x4 LONG 0x1d6 DEFINED (__AltIC6Interrupt)?ABSOLUTE (__AltIC6Interrupt):DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000d4          0x4 LONG 0x1d6 DEFINED (__AltOC5Interrupt)?ABSOLUTE (__AltOC5Interrupt):DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000d6          0x4 LONG 0x1d6 DEFINED (__AltOC6Interrupt)?ABSOLUTE (__AltOC6Interrupt):DEFINED (__OC6Interrupt)?ABSOLUTE (__OC6Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000d8          0x4 LONG 0x1d6 DEFINED (__AltOC7Interrupt)?ABSOLUTE (__AltOC7Interrupt):DEFINED (__OC7Interrupt)?ABSOLUTE (__OC7Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000da          0x4 LONG 0x1d6 DEFINED (__AltOC8Interrupt)?ABSOLUTE (__AltOC8Interrupt):DEFINED (__OC8Interrupt)?ABSOLUTE (__OC8Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000dc          0x4 LONG 0x1d6 DEFINED (__AltINT3Interrupt)?ABSOLUTE (__AltINT3Interrupt):DEFINED (__INT3Interrupt)?ABSOLUTE (__INT3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000de          0x4 LONG 0x1d6 DEFINED (__AltINT4Interrupt)?ABSOLUTE (__AltINT4Interrupt):DEFINED (__INT4Interrupt)?ABSOLUTE (__INT4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000e0          0x4 LONG 0x1d6 DEFINED (__AltC2Interrupt)?ABSOLUTE (__AltC2Interrupt):DEFINED (__C2Interrupt)?ABSOLUTE (__C2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000e2          0x4 LONG 0x1d6 DEFINED (__AltPWMInterrupt)?ABSOLUTE (__AltPWMInterrupt):DEFINED (__PWMInterrupt)?ABSOLUTE (__PWMInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000e4          0x4 LONG 0x1d6 DEFINED (__AltQEIInterrupt)?ABSOLUTE (__AltQEIInterrupt):DEFINED (__QEIInterrupt)?ABSOLUTE (__QEIInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000e6          0x4 LONG 0x1d6 DEFINED (__AltDCIInterrupt)?ABSOLUTE (__AltDCIInterrupt):DEFINED (__DCIInterrupt)?ABSOLUTE (__DCIInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000e8          0x4 LONG 0x1d6 DEFINED (__AltLVDInterrupt)?ABSOLUTE (__AltLVDInterrupt):DEFINED (__LVDInterrupt)?ABSOLUTE (__LVDInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ea          0x4 LONG 0x1d6 DEFINED (__AltFLTAInterrupt)?ABSOLUTE (__AltFLTAInterrupt):DEFINED (__FLTAInterrupt)?ABSOLUTE (__FLTAInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ec          0x4 LONG 0x1d6 DEFINED (__AltFLTBInterrupt)?ABSOLUTE (__AltFLTBInterrupt):DEFINED (__FLTBInterrupt)?ABSOLUTE (__FLTBInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ee          0x4 LONG 0x1d6 DEFINED (__AltInterrupt45)?ABSOLUTE (__AltInterrupt45):DEFINED (__Interrupt45)?ABSOLUTE (__Interrupt45):ABSOLUTE (__DefaultInterrupt)
-                  0x0000f0          0x4 LONG 0x1d6 DEFINED (__AltInterrupt46)?ABSOLUTE (__AltInterrupt46):DEFINED (__Interrupt46)?ABSOLUTE (__Interrupt46):ABSOLUTE (__DefaultInterrupt)
-                  0x0000f2          0x4 LONG 0x1d6 DEFINED (__AltInterrupt47)?ABSOLUTE (__AltInterrupt47):DEFINED (__Interrupt47)?ABSOLUTE (__Interrupt47):ABSOLUTE (__DefaultInterrupt)
-                  0x0000f4          0x4 LONG 0x1d6 DEFINED (__AltInterrupt48)?ABSOLUTE (__AltInterrupt48):DEFINED (__Interrupt48)?ABSOLUTE (__Interrupt48):ABSOLUTE (__DefaultInterrupt)
-                  0x0000f6          0x4 LONG 0x1d6 DEFINED (__AltInterrupt49)?ABSOLUTE (__AltInterrupt49):DEFINED (__Interrupt49)?ABSOLUTE (__Interrupt49):ABSOLUTE (__DefaultInterrupt)
-                  0x0000f8          0x4 LONG 0x1d6 DEFINED (__AltInterrupt50)?ABSOLUTE (__AltInterrupt50):DEFINED (__Interrupt50)?ABSOLUTE (__Interrupt50):ABSOLUTE (__DefaultInterrupt)
-                  0x0000fa          0x4 LONG 0x1d6 DEFINED (__AltInterrupt51)?ABSOLUTE (__AltInterrupt51):DEFINED (__Interrupt51)?ABSOLUTE (__Interrupt51):ABSOLUTE (__DefaultInterrupt)
-                  0x0000fc          0x4 LONG 0x1d6 DEFINED (__AltInterrupt52)?ABSOLUTE (__AltInterrupt52):DEFINED (__Interrupt52)?ABSOLUTE (__Interrupt52):ABSOLUTE (__DefaultInterrupt)
-                  0x0000fe          0x4 LONG 0x1d6 DEFINED (__AltInterrupt53)?ABSOLUTE (__AltInterrupt53):DEFINED (__Interrupt53)?ABSOLUTE (__Interrupt53):ABSOLUTE (__DefaultInterrupt)
+                  0x000084          0x4 LONG 0x1da DEFINED (__AltReservedTrap0)?ABSOLUTE (__AltReservedTrap0):DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
+                  0x000086          0x4 LONG 0x1c2 DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000088          0x4 LONG 0x1c8 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008a          0x4 LONG 0x1ce DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008c          0x4 LONG 0x1d4 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008e          0x4 LONG 0x1da DEFINED (__AltReservedTrap5)?ABSOLUTE (__AltReservedTrap5):DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
+                  0x000090          0x4 LONG 0x1da DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
+                  0x000092          0x4 LONG 0x1da DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
+                  0x000094          0x4 LONG 0x1da DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000096          0x4 LONG 0x1da DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000098          0x4 LONG 0x1da DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00009a          0x4 LONG 0x1332 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00009c          0x4 LONG 0x1da DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00009e          0x4 LONG 0x1da DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a0          0x4 LONG 0x14fe DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a2          0x4 LONG 0x1da DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a4          0x4 LONG 0x1da DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a6          0x4 LONG 0x1da DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a8          0x4 LONG 0x1da DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000aa          0x4 LONG 0x1da DEFINED (__AltADCInterrupt)?ABSOLUTE (__AltADCInterrupt):DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ac          0x4 LONG 0x1da DEFINED (__AltNVMInterrupt)?ABSOLUTE (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ae          0x4 LONG 0x1da DEFINED (__AltSI2CInterrupt)?ABSOLUTE (__AltSI2CInterrupt):DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000b0          0x4 LONG 0x1da DEFINED (__AltMI2CInterrupt)?ABSOLUTE (__AltMI2CInterrupt):DEFINED (__MI2CInterrupt)?ABSOLUTE (__MI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000b2          0x4 LONG 0x1da DEFINED (__AltCNInterrupt)?ABSOLUTE (__AltCNInterrupt):DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000b4          0x4 LONG 0x1da DEFINED (__AltINT1Interrupt)?ABSOLUTE (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000b6          0x4 LONG 0x1da DEFINED (__AltIC7Interrupt)?ABSOLUTE (__AltIC7Interrupt):DEFINED (__IC7Interrupt)?ABSOLUTE (__IC7Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000b8          0x4 LONG 0x1da DEFINED (__AltIC8Interrupt)?ABSOLUTE (__AltIC8Interrupt):DEFINED (__IC8Interrupt)?ABSOLUTE (__IC8Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ba          0x4 LONG 0x1da DEFINED (__AltOC3Interrupt)?ABSOLUTE (__AltOC3Interrupt):DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000bc          0x4 LONG 0x1da DEFINED (__AltOC4Interrupt)?ABSOLUTE (__AltOC4Interrupt):DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000be          0x4 LONG 0x1da DEFINED (__AltT4Interrupt)?ABSOLUTE (__AltT4Interrupt):DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000c0          0x4 LONG 0x1da DEFINED (__AltT5Interrupt)?ABSOLUTE (__AltT5Interrupt):DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000c2          0x4 LONG 0x1da DEFINED (__AltINT2Interrupt)?ABSOLUTE (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000c4          0x4 LONG 0x1da DEFINED (__AltU2RXInterrupt)?ABSOLUTE (__AltU2RXInterrupt):DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000c6          0x4 LONG 0x1da DEFINED (__AltU2TXInterrupt)?ABSOLUTE (__AltU2TXInterrupt):DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000c8          0x4 LONG 0x1da DEFINED (__AltSPI2Interrupt)?ABSOLUTE (__AltSPI2Interrupt):DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ca          0x4 LONG 0x1da DEFINED (__AltC1Interrupt)?ABSOLUTE (__AltC1Interrupt):DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000cc          0x4 LONG 0x1da DEFINED (__AltIC3Interrupt)?ABSOLUTE (__AltIC3Interrupt):DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ce          0x4 LONG 0x1da DEFINED (__AltIC4Interrupt)?ABSOLUTE (__AltIC4Interrupt):DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000d0          0x4 LONG 0x1da DEFINED (__AltIC5Interrupt)?ABSOLUTE (__AltIC5Interrupt):DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000d2          0x4 LONG 0x1da DEFINED (__AltIC6Interrupt)?ABSOLUTE (__AltIC6Interrupt):DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000d4          0x4 LONG 0x1da DEFINED (__AltOC5Interrupt)?ABSOLUTE (__AltOC5Interrupt):DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000d6          0x4 LONG 0x1da DEFINED (__AltOC6Interrupt)?ABSOLUTE (__AltOC6Interrupt):DEFINED (__OC6Interrupt)?ABSOLUTE (__OC6Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000d8          0x4 LONG 0x1da DEFINED (__AltOC7Interrupt)?ABSOLUTE (__AltOC7Interrupt):DEFINED (__OC7Interrupt)?ABSOLUTE (__OC7Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000da          0x4 LONG 0x1da DEFINED (__AltOC8Interrupt)?ABSOLUTE (__AltOC8Interrupt):DEFINED (__OC8Interrupt)?ABSOLUTE (__OC8Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000dc          0x4 LONG 0x1da DEFINED (__AltINT3Interrupt)?ABSOLUTE (__AltINT3Interrupt):DEFINED (__INT3Interrupt)?ABSOLUTE (__INT3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000de          0x4 LONG 0x1da DEFINED (__AltINT4Interrupt)?ABSOLUTE (__AltINT4Interrupt):DEFINED (__INT4Interrupt)?ABSOLUTE (__INT4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000e0          0x4 LONG 0x1da DEFINED (__AltC2Interrupt)?ABSOLUTE (__AltC2Interrupt):DEFINED (__C2Interrupt)?ABSOLUTE (__C2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000e2          0x4 LONG 0x1da DEFINED (__AltPWMInterrupt)?ABSOLUTE (__AltPWMInterrupt):DEFINED (__PWMInterrupt)?ABSOLUTE (__PWMInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000e4          0x4 LONG 0x1da DEFINED (__AltQEIInterrupt)?ABSOLUTE (__AltQEIInterrupt):DEFINED (__QEIInterrupt)?ABSOLUTE (__QEIInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000e6          0x4 LONG 0x1da DEFINED (__AltDCIInterrupt)?ABSOLUTE (__AltDCIInterrupt):DEFINED (__DCIInterrupt)?ABSOLUTE (__DCIInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000e8          0x4 LONG 0x1da DEFINED (__AltLVDInterrupt)?ABSOLUTE (__AltLVDInterrupt):DEFINED (__LVDInterrupt)?ABSOLUTE (__LVDInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ea          0x4 LONG 0x1da DEFINED (__AltFLTAInterrupt)?ABSOLUTE (__AltFLTAInterrupt):DEFINED (__FLTAInterrupt)?ABSOLUTE (__FLTAInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ec          0x4 LONG 0x1da DEFINED (__AltFLTBInterrupt)?ABSOLUTE (__AltFLTBInterrupt):DEFINED (__FLTBInterrupt)?ABSOLUTE (__FLTBInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ee          0x4 LONG 0x1da DEFINED (__AltInterrupt45)?ABSOLUTE (__AltInterrupt45):DEFINED (__Interrupt45)?ABSOLUTE (__Interrupt45):ABSOLUTE (__DefaultInterrupt)
+                  0x0000f0          0x4 LONG 0x1da DEFINED (__AltInterrupt46)?ABSOLUTE (__AltInterrupt46):DEFINED (__Interrupt46)?ABSOLUTE (__Interrupt46):ABSOLUTE (__DefaultInterrupt)
+                  0x0000f2          0x4 LONG 0x1da DEFINED (__AltInterrupt47)?ABSOLUTE (__AltInterrupt47):DEFINED (__Interrupt47)?ABSOLUTE (__Interrupt47):ABSOLUTE (__DefaultInterrupt)
+                  0x0000f4          0x4 LONG 0x1da DEFINED (__AltInterrupt48)?ABSOLUTE (__AltInterrupt48):DEFINED (__Interrupt48)?ABSOLUTE (__Interrupt48):ABSOLUTE (__DefaultInterrupt)
+                  0x0000f6          0x4 LONG 0x1da DEFINED (__AltInterrupt49)?ABSOLUTE (__AltInterrupt49):DEFINED (__Interrupt49)?ABSOLUTE (__Interrupt49):ABSOLUTE (__DefaultInterrupt)
+                  0x0000f8          0x4 LONG 0x1da DEFINED (__AltInterrupt50)?ABSOLUTE (__AltInterrupt50):DEFINED (__Interrupt50)?ABSOLUTE (__Interrupt50):ABSOLUTE (__DefaultInterrupt)
+                  0x0000fa          0x4 LONG 0x1da DEFINED (__AltInterrupt51)?ABSOLUTE (__AltInterrupt51):DEFINED (__Interrupt51)?ABSOLUTE (__Interrupt51):ABSOLUTE (__DefaultInterrupt)
+                  0x0000fc          0x4 LONG 0x1da DEFINED (__AltInterrupt52)?ABSOLUTE (__AltInterrupt52):DEFINED (__Interrupt52)?ABSOLUTE (__Interrupt52):ABSOLUTE (__DefaultInterrupt)
+                  0x0000fe          0x4 LONG 0x1da DEFINED (__AltInterrupt53)?ABSOLUTE (__AltInterrupt53):DEFINED (__Interrupt53)?ABSOLUTE (__Interrupt53):ABSOLUTE (__DefaultInterrupt)
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1688,156 +1771,197 @@ LOAD heap
 LOAD data_init
 
 .debug_pubtypes
-                  0x0000d8        0x4f9
+                  0x0000f0        0x5ef
  .debug_pubtypes
-                  0x0000d8         0x12 build/XC16_dsPIC30F6014A/production/user.o
+                  0x0000f0         0x12 build/XC16_dsPIC30F6014A/production/user.o
  .debug_pubtypes
-                  0x0000ea         0x35 build/XC16_dsPIC30F6014A/production/traps.o
+                  0x000102         0x35 build/XC16_dsPIC30F6014A/production/traps.o
  .debug_pubtypes
-                  0x00011f         0x79 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+                  0x000137         0x79 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
  .debug_pubtypes
-                  0x000198         0x42 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+                  0x0001b0         0x42 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
  .debug_pubtypes
-                  0x0001da        0x1ca build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+                  0x0001f2        0x1db build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
  .debug_pubtypes
-                  0x0003a4         0x12 build/XC16_dsPIC30F6014A/production/system.o
+                  0x0003cd         0x12 build/XC16_dsPIC30F6014A/production/system.o
  .debug_pubtypes
-                  0x0003b6         0x12 build/XC16_dsPIC30F6014A/production/interrupts.o
+                  0x0003df         0x12 build/XC16_dsPIC30F6014A/production/interrupts.o
  .debug_pubtypes
-                  0x0003c8         0x12 build/XC16_dsPIC30F6014A/production/configuration_bits.o
+                  0x0003f1         0x12 build/XC16_dsPIC30F6014A/production/configuration_bits.o
  .debug_pubtypes
-                  0x0003da        0x13e build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+                  0x000403        0x13e build/XC16_dsPIC30F6014A/production/HDI_init_port.o
  .debug_pubtypes
-                  0x000518         0x1e build/XC16_dsPIC30F6014A/production/main.o
+                  0x000541         0x51 build/XC16_dsPIC30F6014A/production/main.o
  .debug_pubtypes
-                  0x000536         0x9b build/XC16_dsPIC30F6014A/production/system_Events.o
+                  0x000592         0xe2 build/XC16_dsPIC30F6014A/production/system_Events.o
+ .debug_pubtypes
+                  0x000674         0x6b build/XC16_dsPIC30F6014A/production/system_IO.o
 
 __c30_signature
-                  0x0005d1         0x66
+                  0x0006df         0x6c
  __c30_signature
-                  0x0005d1          0x6 build/XC16_dsPIC30F6014A/production/user.o
+                  0x0006df          0x6 build/XC16_dsPIC30F6014A/production/user.o
  __c30_signature
-                  0x0005d7          0x6 build/XC16_dsPIC30F6014A/production/traps.o
+                  0x0006e5          0x6 build/XC16_dsPIC30F6014A/production/traps.o
  __c30_signature
-                  0x0005dd          0x6 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+                  0x0006eb          0x6 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
  __c30_signature
-                  0x0005e3          0x6 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+                  0x0006f1          0x6 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
  __c30_signature
-                  0x0005e9          0x6 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+                  0x0006f7          0x6 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
  __c30_signature
-                  0x0005ef          0x6 build/XC16_dsPIC30F6014A/production/system.o
+                  0x0006fd          0x6 build/XC16_dsPIC30F6014A/production/system.o
  __c30_signature
-                  0x0005f5          0x6 build/XC16_dsPIC30F6014A/production/interrupts.o
+                  0x000703          0x6 build/XC16_dsPIC30F6014A/production/interrupts.o
  __c30_signature
-                  0x0005fb          0x6 build/XC16_dsPIC30F6014A/production/configuration_bits.o
+                  0x000709          0x6 build/XC16_dsPIC30F6014A/production/configuration_bits.o
  __c30_signature
-                  0x000601          0x6 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+                  0x00070f          0x6 build/XC16_dsPIC30F6014A/production/HDI_init_port.o
  __c30_signature
-                  0x000607          0x6 build/XC16_dsPIC30F6014A/production/main.o
+                  0x000715          0x6 build/XC16_dsPIC30F6014A/production/main.o
  __c30_signature
-                  0x00060d          0x6 build/XC16_dsPIC30F6014A/production/system_Events.o
+                  0x00071b          0x6 build/XC16_dsPIC30F6014A/production/system_Events.o
  __c30_signature
-                  0x000613          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
+                  0x000721          0x6 build/XC16_dsPIC30F6014A/production/system_IO.o
  __c30_signature
-                  0x000619          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(data_init_standard.o)
+                  0x000727          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x00061f          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                  0x00072d          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x000625          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(memcpy.eo)
+                  0x000733          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
  __c30_signature
-                  0x00062b          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(sbrk.eo)
+                  0x000739          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(memcpy.eo)
  __c30_signature
-                  0x000631          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(brk.elo)
+                  0x00073f          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(sbrk.eo)
+ __c30_signature
+                  0x000745          0x6 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(brk.elo)
 
-.nbss               0x0800          0xa
- .nbss              0x0800          0x6 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+.nbss               0x0800          0xe
+ .nbss              0x0800          0xa build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
                     0x0800                  _sys_ready_processes
                     0x0802                  _sys_running_process
                     0x0804                  _sys_blocked_processes
- .nbss              0x0806          0x2 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
- .nbss              0x0808          0x2 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+                    0x0806                  _sys_zombies
+                    0x0808                  _sys_occured_events
+ .nbss              0x080a          0x2 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+ .nbss              0x080c          0x2 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
 
-.ndata              0x080a          0x2
- .ndata             0x080a          0x2 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+.ndata              0x080e          0x2
+ .ndata             0x080e          0x2 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
 
-.nbss               0x080c          0x2
- .nbss              0x080c          0x2 build/XC16_dsPIC30F6014A/production/system_Events.o
-                    0x080c                  _registered_events
+.nbss               0x0810          0x2
+ .nbss              0x0810          0x2 build/XC16_dsPIC30F6014A/production/system_Events.o
+                    0x0810                  _registered_events
 
-.bss.__allocs       0x080e          0x8
- .bss.__allocs      0x080e          0x8 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
-                    0x080e                  ___allocs
+.bss.__allocs       0x0812          0x8
+ .bss.__allocs      0x0812          0x8 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                    0x0812                  ___allocs
 
-.bss.__allocx       0x0816          0x4
- .bss.__allocx      0x0816          0x4 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
-                    0x0816                  ___allocx
+.bss.__allocx       0x081a          0x4
+ .bss.__allocx      0x081a          0x4 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                    0x081a                  ___allocx
 
-.bss.__allocp       0x081a          0x2
- .bss.__allocp      0x081a          0x2 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
-                    0x081a                  ___allocp
+.bss.__allocp       0x081e          0x2
+ .bss.__allocp      0x081e          0x2 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                    0x081e                  ___allocp
 
-.bss.__alloct       0x081c          0x2
- .bss.__alloct      0x081c          0x2 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
-                    0x081c                  ___alloct
+.bss.__alloct       0x0820          0x2
+ .bss.__alloct      0x0820          0x2 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libc-elf.a(malloc.eo)
+                    0x0820                  ___alloct
 
-.bss.__curbrk       0x081e          0x2
- .bss.__curbrk      0x081e          0x2 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(brk.elo)
-                    0x081e                  ___curbrk
+.bss.__curbrk       0x0822          0x2
+ .bss.__curbrk      0x0822          0x2 /opt/microchip/xc16/v1.24/bin/bin/../../lib/libpic30-elf.a(brk.elo)
+                    0x0822                  ___curbrk
 
-.heap               0x0820        0x400
- .heap              0x0820        0x400 heap
+.heap               0x0824        0x400
+ .heap              0x0824        0x400 heap
 
-.text             0x0003dc        0xad0
- .text            0x0003dc        0x712 build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
-                  0x0003dc                  _Sys_Init_Process_Management_HDI
-                  0x000440                  _Sys_Save_Running_Process_HDI
-                  0x00049e                  _Sys_Switch_Process
-                  0x0004c8                  _Sys_Switch_to_next_Process
-                  0x0004e6                  _Sys_Delete_Process
-                  0x0004fa                  _Sys_Set_Defaults_PCB
-                  0x000564                  _Sys_Start_Process_HDI
-                  0x00061c                  _Sys_Kill_Process
-                  0x0006e6                  _Sys_Get_Number_Processes
-                  0x00071c                  _Sys_Change_Stack_HDI
-                  0x000744                  _Sys_Add_Event_Subscription
-                  0x000870                  _Sys_Add_Event
-                  0x00091a                  _Sys_Remove_Event_from_EventRegister
-                  0x000992                  _Sys_Remove_Event_Subscription
-                  0x0009ba                  _Sys_Find_Process
-                  0x000a0a                  _Sys_Find_EventHandler
-                  0x000a38                  _Sys_Remove_All_Event_Subscriptions
-                  0x000a5c                  _Sys_Switch_Process_HDI
- .text            0x000aee        0x228 build/XC16_dsPIC30F6014A/production/system_Events.o
-                  0x000aee                  _Sys_Send_Event
-                  0x000afe                  _Sys_Register_Event
-                  0x000b5a                  _Sys_Subscribe_to_Event
-                  0x000bea                  _Sys_Unregister_Event
-                  0x000c78                  _Sys_Unsubscribe_from_Event
-                  0x000cea                  _Sys_Find_Event
- .text            0x000d16         0x94 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
-                  0x000d16                  _Sys_Init_SystemTimer_HDI
-                  0x000d36                  _Sys_Start_SystemTimer_HDI
-                  0x000d48                  _Sys_Deactivate_SystemTimer_Interrupt_HDI
-                  0x000d52                  _Sys_Activate_SystemTimer_Interrupt_HDI
-                  0x000d5c                  __T1Interrupt
-                  0x000d84                  __AltT1Interrupt
- .text            0x000daa         0x8a build/XC16_dsPIC30F6014A/production/HDI_init_port.o
-                  0x000daa                  _Sys_Init_MCU_HDI
- .text            0x000e34         0x78 build/XC16_dsPIC30F6014A/production/main.o
-                  0x000e34                  _main
-                  0x000e58                  _task1
-                  0x000e7c                  _task2
+.text             0x0003e0       0x113e
+ .text            0x0003e0        0xb1e build/XC16_dsPIC30F6014A/production/system_Process_Management_HDI.o
+                  0x0003e0                  _Sys_Init_Process_Management_HDI
+                  0x00046a                  _Sys_Get_Number_Processes
+                  0x0004a0                  _Sys_Set_Defaults_PCB
+                  0x000506                  _Sys_Start_Process_HDI
+                  0x000598                  _Sys_Kill_Process
+                  0x0005f0                  _Sys_Set_Running_Process_to_Zombie
+                  0x00064c                  _Sys_Kill_Zombies
+                  0x00066c                  _Sys_Delete_Process
+                  0x00068e                  _Sys_Save_Running_Process_HDI
+                  0x0006ec                  _Sys_Change_Stack_HDI
+                  0x000714                  _Sys_Switch_Process_HDI
+                  0x0007a6                  _Sys_Switch_Process
+                  0x0007d0                  _Sys_Switch_to_next_Process
+                  0x0007ee                  _Sys_Remove_Process_from_List
+                  0x000886                  _Sys_Insert_Process_to_List
+                  0x00094a                  _Sys_Find_Process
+                  0x000996                  _Sys_Start_CriticalSection
+                  0x00099e                  _Sys_End_CriticalSection
+                  0x0009a6                  _Sys_Block_Process
+                  0x0009f6                  _Sys_Continue_Pocess
+                  0x000a64                  _Sys_Add_Event_Subscription
+                  0x000af8                  _Sys_Next_EventHandler
+                  0x000b26                  _Sys_Add_Event_to_Process
+                  0x000c74                  _Sys_Execute_Events_in_ProcessList
+                  0x000cca                  _Sys_Execute_All_EventHandler
+                  0x000d06                  _Sys_Interprocess_EventHandling
+                  0x000d10                  _Sys_Remove_All_Event_Subscriptions
+                  0x000d36                  _Sys_Remove_Event_Subscription
+                  0x000d5c                  _Sys_Remove_Event_from_EventRegister
+                  0x000e0c                  _Sys_Clear_EventData
+                  0x000e3c                  _Sys_Clear_EventRegister
+                  0x000e76                  _Sys_Wait_For_Condition
+                  0x000eec                  _Sys_Wait_For_Event
+ .text            0x000efe        0x3b2 build/XC16_dsPIC30F6014A/production/system_Events.o
+                  0x000efe                  _Sys_Send_Event
+                  0x000f46                  _Sys_Register_Event
+                  0x000fb6                  _Sys_Subscribe_to_Event
+                  0x00105e                  _Sys_Unregister_Event
+                  0x0010ec                  _Sys_Unsubscribe_from_Event
+                  0x001162                  _Sys_Unsubscribe_Handler_from_Event
+                  0x0011da                  _Sys_Find_Event
+                  0x001206                  _Sys_IsEventRegistered
+                  0x001232                  _Sys_Unsubscribe_Process
+ .text            0x0012b0         0xc6 build/XC16_dsPIC30F6014A/production/system_Timer_HDI.o
+                  0x0012b0                  _Sys_Init_SystemTimer_HDI
+                  0x0012d0                  _Sys_Start_SystemTimer_HDI
+                  0x0012e2                  _Sys_Stop_SystemTimer_HDI
+                  0x0012ee                  _Sys_Continue_SystemTimer_HDI
+                  0x0012fa                  _Sys_Reset_SystemTimer_HDI
+                  0x001304                  __T1Interrupt
+                  0x001332                  __AltT1Interrupt
+                  0x00135c                  _Sys_Disable_TimerInterrupt_HDI
+                  0x001366                  _Sys_Enable_TimerInterrupt_HDI
+                  0x00136e                  _Sys_Force_TimerInterrupt_HDI
+ .text            0x001376         0xa0 build/XC16_dsPIC30F6014A/production/main.o
+                  0x001376                  _main
+                  0x0013ac                  _task1
+                  0x0013d0                  _task2
+ .text            0x001416         0x8a build/XC16_dsPIC30F6014A/production/HDI_init_port.o
+                  0x001416                  _Sys_Init_MCU_HDI
+ .text            0x0014a0         0x7e build/XC16_dsPIC30F6014A/production/system_IO.o
+                  0x0014a0                  _Sys_Init_IOManagement_HDI
+                  0x0014a6                  _Sys_Start_IOManagement_HDI
+                  0x0014ac                  _Sys_Init_IOTimer
+                  0x0014c6                  _Sys_Start_IOTimer_HDI
+                  0x0014d6                  _Sys_Stop_IOTimer_HDI
+                  0x0014e2                  _Sys_Continue_IOTimer_HDI
+                  0x0014ee                  _Sys_Reset_IOTimer_HDI
+                  0x0014f8                  __T2Interrupt
+                  0x0014fe                  __AltT2Interrupt
+                  0x001504                  _Sys_Disable_IOTimerInterrupt_HDI
+                  0x00150e                  _Sys_Enable_IOTimerInterrupt_HDI
+                  0x001516                  _Sys_Force_IOTimerInterrupt_HDI
 
-.dinit            0x000eac         0x40
- .dinit           0x000eac         0x40 data_init
+.dinit            0x00151e         0x40
+ .dinit           0x00151e         0x40 data_init
 
-.text             0x000eec         0x44
- .text            0x000eec         0x22 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
-                  0x000eec                  _Sys_Scheduler_RoundRobin
-                  0x000efa                  _Sys_Set_Defaults_Info
- .text            0x000f0e         0x1c build/XC16_dsPIC30F6014A/production/system.o
-                  0x000f0e                  _Sys_Init_Kernel
-                  0x000f1c                  _ConfigureOscillator
-                  0x000f22                  _Sys_Start_Kernel
- .text            0x000f2a          0x6 build/XC16_dsPIC30F6014A/production/user.o
-                  0x000f2a                  _InitApp
+.text             0x00155e         0x48
+ .text            0x00155e         0x22 build/XC16_dsPIC30F6014A/production/system_Scheduler.o
+                  0x00155e                  _Sys_Scheduler_RoundRobin
+                  0x00156c                  _Sys_Set_Defaults_Info
+ .text            0x001580         0x20 build/XC16_dsPIC30F6014A/production/system.o
+                  0x001580                  _Sys_Init_Kernel
+                  0x001592                  _ConfigureOscillator
+                  0x001598                  _Sys_Start_Kernel
+ .text            0x0015a0          0x6 build/XC16_dsPIC30F6014A/production/user.o
+                  0x0015a0                  _InitApp

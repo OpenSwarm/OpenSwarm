@@ -15,8 +15,14 @@
  */
 
 #include "system_Timer_HDI.h"
+#include "system_Process_Management_HDI.h"
 
 #include "HDI_DSPIC30F6014A.h"
+
+inline void Sys_Stop_SystemTimer_HDI(void); //deactivate the periodic interrupts
+inline void Sys_Continue_SystemTimer_HDI(void);   //activates them again
+
+inline void Sys_todo_SystemTimer(); //this is only an inline functions to process the same in T1 interrupt and ALT-T1 interrupt
 
 static pFunction sys_process_scheduler = 0; //points to the task scheduling algorithm
 
@@ -33,7 +39,7 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     sys_process_scheduler = scheduler;
     
     TMR1 = 0; //sets countervalue to 0
-    PR1 = FCY/(100*8); // 16MIPS for 10ms -> (160 000 I)/(10 ms) -- PRESCALER 8 ->  20000
+    PR1 = FCY/(20*8); // 16MIPS for 50ms -> (160 000 I)/(10 ms) -- PRESCALER 8 ->  20000
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
@@ -62,7 +68,7 @@ void Sys_Start_SystemTimer_HDI(){
 
     IPC0 = IPC0 | 0x5000; //set Timer1 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled 
 
-    Sys_Activate_SystemTimer_Interrupt_HDI();
+    Sys_Continue_SystemTimer_HDI();
     T1CONbits.TON = 1;//enable timer -> TON = 1
 }
 
@@ -74,9 +80,11 @@ void Sys_Start_SystemTimer_HDI(){
  * @param void
  * @return void
  */
-inline void Sys_Deactivate_SystemTimer_Interrupt_HDI(){
+inline void Sys_Stop_SystemTimer_HDI(){
     IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
     IEC0bits.T1IE = 0; //disable Timer1 interrupt -> T1IE = 0
+
+    T1CONbits.TON = 0; //stops counting
 }
 
 /**
@@ -87,11 +95,40 @@ inline void Sys_Deactivate_SystemTimer_Interrupt_HDI(){
  * @param void
  * @return void
  */
-inline void Sys_Activate_SystemTimer_Interrupt_HDI(){
+inline void Sys_Continue_SystemTimer_HDI(){
     IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
     IEC0bits.T1IE = 1; //enable Timer1 interrupt -> T1IE = 1
+
+    T1CONbits.TON = 1; //starts counting
 }
 
+/**
+ * Resets the Timer1 value to the initial value
+ *
+ * This Function resets the Timer1 value
+ *
+ * @param void
+ * @return void
+ */
+inline void Sys_Reset_SystemTimer_HDI(){
+    TMR1 = 0; //sets countervalue to 0
+}
+
+inline void Sys_todo_SystemTimer(){
+
+    Sys_Stop_SystemTimer_HDI();
+
+    Sys_Kill_Zombies();
+
+    if(sys_process_scheduler != 0){
+        sys_process_scheduler();
+    }
+
+    Sys_Execute_All_EventHandler();
+
+    Sys_Reset_SystemTimer_HDI(); //to guarantee the same execution time
+    Sys_Continue_SystemTimer_HDI();
+}
 /**
  * Interrupt Service Rutine for the Timer1 HDI
  *
@@ -101,14 +138,7 @@ inline void Sys_Activate_SystemTimer_Interrupt_HDI(){
  * @return void
  */
 void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
-
-    Sys_Deactivate_SystemTimer_Interrupt_HDI();
-
-    if(sys_process_scheduler != 0){
-        sys_process_scheduler();
-    }
-
-    Sys_Activate_SystemTimer_Interrupt_HDI();
+    Sys_todo_SystemTimer();
 }
 
 /**
@@ -120,12 +150,42 @@ void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
  * @return void
  */
 void __attribute__((interrupt,no_auto_psv)) _AltT1Interrupt(void){
+    Sys_todo_SystemTimer();
+}
 
-    Sys_Deactivate_SystemTimer_Interrupt_HDI();
+/**
+ * Disables the Timer1 interrupt
+ *
+ * Disables the Timer1 interrupt and sets the interrupt flag to 0
+ *
+ * @param void
+ * @return void
+ */
+inline void Sys_Disable_TimerInterrupt_HDI(void){
+    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T1IE = 0; //enable Timer1 interrupt -> T1IE = 1
+}
 
-    if(sys_process_scheduler != 0){
-        sys_process_scheduler();
-    }
+/**
+ * Enables the Timer1 interrupt
+ *
+ * Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function.
+ *
+ * @param void
+ * @return void
+ */
+inline void Sys_Enable_TimerInterrupt_HDI(void){
+    IEC0bits.T1IE = 1; //enable Timer1 interrupt -> T1IE = 1
+}
 
-    Sys_Activate_SystemTimer_Interrupt_HDI();
+/**
+ * Enables the Timer1 interrupt
+ *
+ * Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function.
+ *
+ * @param void
+ * @return void
+ */
+inline void Sys_Force_TimerInterrupt_HDI(void){
+    IFS0bits.T1IF = 1; //enable Timer1 interrupt -> T1IE = 1
 }

@@ -14,6 +14,8 @@
       <itemPath>HDI_epuck_ports.h</itemPath>
       <itemPath>HDI_init_port.h</itemPath>
       <itemPath>system_Events.h</itemPath>
+      <itemPath>system_IO.h</itemPath>
+      <itemPath>system_IO_motors.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -33,6 +35,8 @@
       <itemPath>HDI_init_port.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>system_Events.c</itemPath>
+      <itemPath>system_IO.c</itemPath>
+      <itemPath>system_IO_motors.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -82,7 +86,7 @@
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
         <property key="data-model" value="default"/>
-        <property key="enable-all-warnings" value="false"/>
+        <property key="enable-all-warnings" value="true"/>
         <property key="enable-ansi-std" value="false"/>
         <property key="enable-ansi-warnings" value="false"/>
         <property key="enable-fatal-warnings" value="false"/>
@@ -205,7 +209,7 @@
         <property key="periphADC2.minTacq" value=""/>
         <property key="periphADC2.tacqunits" value="microseconds"/>
         <property key="tracecontrol.include.timestamp" value="false"/>
-        <property key="tracecontrol.select" value="0"/>
+        <property key="tracecontrol.select" value="1"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
         <property key="tracecontrol.timestamp" value="2"/>
         <property key="tracecontrol.tracebufmax" value="546000"/>
@@ -281,7 +285,7 @@
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
         <property key="data-model" value="default"/>
-        <property key="enable-all-warnings" value="false"/>
+        <property key="enable-all-warnings" value="true"/>
         <property key="enable-ansi-std" value="false"/>
         <property key="enable-ansi-warnings" value="false"/>
         <property key="enable-fatal-warnings" value="false"/>
@@ -315,6 +319,7 @@
         <property key="scalar-model" value="default"/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
+        <appendMe value="-fms-extensions"/>
       </C30>
       <C30-AR>
         <property key="additional-options-chop-files" value="false"/>
@@ -403,7 +408,7 @@
         <property key="periphADC2.minTacq" value=""/>
         <property key="periphADC2.tacqunits" value="microseconds"/>
         <property key="tracecontrol.include.timestamp" value="false"/>
-        <property key="tracecontrol.select" value="0"/>
+        <property key="tracecontrol.select" value="1"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
         <property key="tracecontrol.timestamp" value="2"/>
         <property key="tracecontrol.tracebufmax" value="546000"/>

@@ -19,21 +19,31 @@ extern "C" {
 /*! process default stack size */
 #define DEFAULT_PROCESS_STACK_SIZE 200
 
+//############# PROCESS MANAGEMENT ###############################
 void Sys_Switch_Process(uint16 pid); //loads all values into the registers to start the other programm
 void Sys_Switch_to_next_Process();
 
 bool Sys_Start_Process_HDI(pFunction function);//create a new process with function as template
 inline void Sys_Kill_Process(uint16 pid);//kills a process
-
+inline void Sys_Kill_Zombies();//kills any process makred as zomies
 
 void Sys_Init_Process_Management_HDI();// initialises the process management and creates a system process
 
 inline unsigned short Sys_Get_Number_Processes();//returns the number of processes
+inline void Sys_Start_CriticalSection(void); //no scheduling possible within a critical section
+inline void Sys_End_CriticalSection(void);
 
-bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandler func);
-void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID);
+//############# PROCESS EVENT MANAGEMENT ###############################
+bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func, pConditionFunction cond);
+void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func);
 void Sys_Remove_All_Event_Subscriptions(uint16 eventID);
-void Sys_Add_Event(uint16 pid, uint16 eventID, void *data, uint16 length);
+void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 length);
+void Sys_Execute_All_EventHandler();
+inline void Sys_Clear_EventData(sys_event_data **data);
+
+//############# PROCESS Synchronisation ###############################
+inline sys_event_data *Sys_Wait_For_Event(uint16 eventID); // blocks until eventID occurs (returns pointer to event data)
+sys_event_data *Sys_Wait_For_Condition(uint16 eventID, pConditionFunction function); //blocks until eventID meets the condition (function)
 
 
 #ifdef	__cplusplus

@@ -30,6 +30,7 @@
 #include "system.h"          /* variables/params used by system.c             */
 #include "system_Timer_HDI.h"    /* functions to start the periodic timer interval */
 #include "system_Scheduler.h"    /* the implementation of the scheduler */
+#include "system_Process_Management_HDI.h"
 
 #include "HDI_init_port.h"
 
@@ -47,6 +48,8 @@ void Sys_Init_Kernel(){
     Sys_Init_SystemTimer_HDI(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
 
     Sys_Init_Process_Management_HDI();
+
+    Sys_Register_Event(TERMINATION);
 }
 
 

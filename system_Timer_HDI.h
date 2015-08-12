@@ -20,8 +20,15 @@ extern "C" {
 void Sys_Init_SystemTimer_HDI(pFunction);   //initialises the system timer and sets a scheduling algorithm
 void Sys_Start_SystemTimer_HDI(void);       //starts the system timer (to do periodic scheduling
 
-inline void Sys_Deactivate_SystemTimer_Interrupt_HDI(void); //deactivate the periodic interrupts
-inline void Sys_Activate_SystemTimer_Interrupt_HDI(void);   //activates them again
+inline void Sys_Stop_SystemTimer_HDI();
+inline void Sys_Continue_SystemTimer_HDI();
+
+inline void Sys_Disable_TimerInterrupt_HDI(void); //no scheduling possible within a critical section
+inline void Sys_Enable_TimerInterrupt_HDI(void);   //
+
+inline void Sys_Force_TimerInterrupt_HDI(void); //forces an execution of the Timer1 Interrupt routine
+
+inline void Sys_Reset_SystemTimer_HDI();
 
 #ifdef	__cplusplus
 }

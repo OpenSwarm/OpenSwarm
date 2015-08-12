@@ -21,7 +21,6 @@
 /* Global Variable Declaration                                                */
 /******************************************************************************/
 
-/* i.e. uint16_t <variable_name>; */
 
 /******************************************************************************/
 /* Main Program                                                               */
@@ -44,12 +43,11 @@ int16_t main(void)
     /* Initialize IO ports and peripherals */
     InitApp();
 
-    /* TODO <INSERT USER APPLICATION CODE HERE> */
-//Sys_Save_Running_Process_HDI();
-//        Sys_Load_Process_HDI(1);
-   // signed short a = 0, b = 0, c = 0;
+    sys_event_data * data = Sys_Wait_For_Event(TERMINATION);
+    Sys_Clear_EventData(&data);
+    
     int i = 0;
-    while(1){
+    while(1){//DO Nothing (do yonly things for testing)
         i++;
         i %= 100;
     }
@@ -68,10 +66,16 @@ void task1(){
 
 void task2(){
     unsigned char a=0,b=0,c=0;
+    bool ohno = false;
     while(1){
+
         a--;
         c++;
         b = a*a;
         c=b*a;
+
+        if(ohno){
+            Sys_Send_Event(TERMINATION, 0, 0);
+        }
     }
 }

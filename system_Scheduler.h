@@ -36,7 +36,7 @@ typedef struct sys_scheduler_info_s{
 
 
 void Sys_Scheduler_RoundRobin(void); //the scheduling algorithm
-inline void Sys_Set_Default_Info(sys_scheduler_info *sct); //this function sets the default values for the struct
+inline void Sys_Set_Defaults_Info(sys_scheduler_info *sct); //this function sets the default values for the struct
 
 
 #ifdef	__cplusplus
