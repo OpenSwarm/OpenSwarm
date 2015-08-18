@@ -1,3 +1,5 @@
+
+#include "system_IO.h"
 #include "system_IO_motors.h"
 #include "system_Events.h"
 
@@ -14,8 +16,8 @@ typedef struct sys_motors_s{
 void Sys_LeftMotor_Controller();
 void Sys_RightMotor_Controller();
 
-void Sys_LeftMotor_EventHandler(uint16, uint16, sys_event_data *);
-void Sys_RightMotor_EventHandler(uint16, uint16, sys_event_data *);
+bool Sys_LeftMotor_EventHandler(uint16, uint16, sys_event_data *);
+bool Sys_RightMotor_EventHandler(uint16, uint16, sys_event_data *);
 
 sys_motors left_motor;
 sys_motors right_motor;
@@ -39,10 +41,10 @@ void Sys_Init_Motors(){
     if(occured_error || !Sys_Register_Event(SYS_EVENT_IO_MOTOR_RIGHT)){
         occured_error = true;
     }
-    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_LEFT, 0, Sys_LeftMotor_EventHandler, 0)){
+    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_LEFT, 0, &Sys_LeftMotor_EventHandler, 0)){
         occured_error = true;
     }
-    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0, Sys_RightMotor_EventHandler, 0)){
+    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0, &Sys_RightMotor_EventHandler, 0)){
         occured_error = true;
     }
 
@@ -123,7 +125,7 @@ void Sys_LeftMotor_Controller(){
 
 void Sys_RightMotor_Controller(){
 
-   static uint8 phase=0;		 // phase can be 0 to 3
+   static uint8 phase = 0;		 // phase can be 0 to 3
    static uint16 next_phase = 0;
 
 
@@ -138,7 +140,7 @@ void Sys_RightMotor_Controller(){
        }
    }else{
        if(--next_phase <= 0){
-            phase= (++phase) % 4;
+            phase = (++phase) % 4;
             next_phase = MAX_WHEEL_SPEED/left_motor.speed;
        }
    }
@@ -183,14 +185,18 @@ void Sys_RightMotor_Controller(){
   }
 }
 
-void Sys_LeftMotor_EventHandler(uint16/*PID*/, uint16/*EventID*/, sys_event_data *data/*mm/s*/){
+bool Sys_LeftMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data/*mm/s*/){
     sint16 *speed = (sint16 *) data;
 
     left_motor.speed = MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * (*speed);
+    return true;
 }
 
-void Sys_RightMotor_EventHandler(uint16/*PID*/, uint16/*EventID*/, sys_event_data *data /*mm/s*/){
+bool Sys_RightMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data /*mm/s*/){
     sint16 *speed = (sint16 *) data;
 
     right_motor.speed = MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * (*speed);
+
+    return true;
+
 }

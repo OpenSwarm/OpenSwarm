@@ -33,6 +33,7 @@
 #include "system_Process_Management_HDI.h"
 
 #include "HDI_init_port.h"
+#include "definitions.h"
 
 
 /**
@@ -49,7 +50,7 @@ void Sys_Init_Kernel(){
 
     Sys_Init_Process_Management_HDI();
 
-    Sys_Register_Event(TERMINATION);
+    Sys_Register_Event(SYS_EVENT_TERMINATION);
 }
 
 

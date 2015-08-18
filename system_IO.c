@@ -3,6 +3,7 @@
 #include "HDI_DSPIC30F6014A.h"
 
 #include "definitions.h"
+#include <stdlib.h>
 
 typedef struct sys_periodical_IOHandler_s {
     pFunction function;
@@ -192,7 +193,7 @@ inline void Sys_IOTimer_code_HDI(){
 bool Sys_Register_IOHandler(pFunction func){
 
     sys_pIOHandler *new_handler = malloc(sizeof(sys_periodical_IOHandler));
-    if(new_handler ==){//malloc failed
+    if(new_handler == 0){//malloc failed
         return false;
     }
 
@@ -208,10 +209,13 @@ bool Sys_Register_IOHandler(pFunction func){
     while(handler != 0){
         if(handler->next == 0){
             handler->next = new_handler;
+            return true;
         }
 
         handler = handler->next;
     }
+
+    return false;
 }
 
 

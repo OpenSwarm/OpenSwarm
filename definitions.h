@@ -30,6 +30,7 @@ typedef signed int   sint32;
 
 
 typedef void (*pFunction)(void);
+typedef void (*pByteFunction)(uint8);
 
 
 #ifdef	__cplusplus

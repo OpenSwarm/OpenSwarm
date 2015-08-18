@@ -16,6 +16,7 @@
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp              */
+#include "definitions.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -43,7 +44,7 @@ int16_t main(void)
     /* Initialize IO ports and peripherals */
     InitApp();
 
-    sys_event_data * data = Sys_Wait_For_Event(TERMINATION);
+    sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
     Sys_Clear_EventData(&data);
     
     int i = 0;
@@ -75,7 +76,7 @@ void task2(){
         c=b*a;
 
         if(ohno){
-            Sys_Send_Event(TERMINATION, 0, 0);
+            Sys_Send_Event(SYS_EVENT_TERMINATION, 0, 0);
         }
     }
 }

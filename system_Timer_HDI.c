@@ -39,7 +39,7 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     sys_process_scheduler = scheduler;
     
     TMR1 = 0; //sets countervalue to 0
-    PR1 = FCY/(20*8); // 16MIPS for 50ms -> (160 000 I)/(10 ms) -- PRESCALER 8 ->  20000
+    PR1 = 50*MILLISEC/256; // 16MIPS for 50ms
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
@@ -50,7 +50,7 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     // TSYNC        = enables the timer to be synchronised with external source (rising edge)
     // TCS          = sets clock source to external (1) or internal (0)
     T1CON = 0; //timer is turned off but set
-    T1CONbits.TCKPS = 1; //Prescaler 8
+    T1CONbits.TCKPS = 3; //Prescaler 256
 
 
 }

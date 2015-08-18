@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+#include "definitions.h"
+
 void Sys_Init_IOManagement(void);   //initialises the system timer and sets a scheduling algorithm
 void Sys_Start_IOManagement(void);
 
