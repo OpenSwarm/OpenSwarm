@@ -18,6 +18,7 @@
 #include "system_Process_Management_HDI.h"
 
 #include "HDI_DSPIC30F6014A.h"
+#include "system_IRQ_Priorities.h"
 
 inline void Sys_Stop_SystemTimer_HDI(void); //deactivate the periodic interrupts
 inline void Sys_Continue_SystemTimer_HDI(void);   //activates them again
@@ -38,8 +39,8 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
 
     sys_process_scheduler = scheduler;
     
-    TMR1 = 0; //sets countervalue to 0
-    PR1 = 50*MILLISEC/256; // 16MIPS for 50ms
+    TMR2 = 0; //sets countervalue to 0
+    PR2 = 50*MILLISEC/256; // 16MIPS for 50ms
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
@@ -49,10 +50,8 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     // TCKPS<0:1>   = sets timer prescaler [1, 8, 64, 256]
     // TSYNC        = enables the timer to be synchronised with external source (rising edge)
     // TCS          = sets clock source to external (1) or internal (0)
-    T1CON = 0; //timer is turned off but set
-    T1CONbits.TCKPS = 3; //Prescaler 256
-
-
+    T2CON = 0; //timer is turned off but set
+    T2CONbits.TCKPS = 3; //Prescaler 256
 }
 
 
@@ -66,10 +65,10 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
  */
 void Sys_Start_SystemTimer_HDI(){
 
-    IPC0 = IPC0 | 0x5000; //set Timer1 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled 
+    IPC1bits.T2IP = SYS_IRQP_SYSTEM_TIMER; //set Timer1 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled
 
     Sys_Continue_SystemTimer_HDI();
-    T1CONbits.TON = 1;//enable timer -> TON = 1
+    T2CONbits.TON = 1;//enable timer -> TON = 1
 }
 
 /**
@@ -81,10 +80,10 @@ void Sys_Start_SystemTimer_HDI(){
  * @return void
  */
 inline void Sys_Stop_SystemTimer_HDI(){
-    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
-    IEC0bits.T1IE = 0; //disable Timer1 interrupt -> T1IE = 0
+    IFS0bits.T2IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T2IE = 0; //disable Timer1 interrupt -> T1IE = 0
 
-    T1CONbits.TON = 0; //stops counting
+    T2CONbits.TON = 0; //stops counting
 }
 
 /**
@@ -96,10 +95,10 @@ inline void Sys_Stop_SystemTimer_HDI(){
  * @return void
  */
 inline void Sys_Continue_SystemTimer_HDI(){
-    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
-    IEC0bits.T1IE = 1; //enable Timer1 interrupt -> T1IE = 1
+    IFS0bits.T2IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T2IE = 1; //enable Timer1 interrupt -> T1IE = 1
 
-    T1CONbits.TON = 1; //starts counting
+    T2CONbits.TON = 1; //starts counting
 }
 
 /**
@@ -111,7 +110,7 @@ inline void Sys_Continue_SystemTimer_HDI(){
  * @return void
  */
 inline void Sys_Reset_SystemTimer_HDI(){
-    TMR1 = 0; //sets countervalue to 0
+    TMR2 = 0; //sets countervalue to 0
 }
 
 inline void Sys_todo_SystemTimer(){
@@ -137,7 +136,7 @@ inline void Sys_todo_SystemTimer(){
  * @param void
  * @return void
  */
-void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
+void __attribute__((interrupt,no_auto_psv)) _T2Interrupt(void){
     Sys_todo_SystemTimer();
 }
 
@@ -149,7 +148,7 @@ void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
  * @param void
  * @return void
  */
-void __attribute__((interrupt,no_auto_psv)) _AltT1Interrupt(void){
+void __attribute__((interrupt,no_auto_psv)) _AltT2Interrupt(void){
     Sys_todo_SystemTimer();
 }
 
@@ -162,8 +161,8 @@ void __attribute__((interrupt,no_auto_psv)) _AltT1Interrupt(void){
  * @return void
  */
 inline void Sys_Disable_TimerInterrupt_HDI(void){
-    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
-    IEC0bits.T1IE = 0; //enable Timer1 interrupt -> T1IE = 1
+    IFS0bits.T2IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T2IE = 0; //enable Timer1 interrupt -> T1IE = 1
 }
 
 /**
@@ -175,7 +174,7 @@ inline void Sys_Disable_TimerInterrupt_HDI(void){
  * @return void
  */
 inline void Sys_Enable_TimerInterrupt_HDI(void){
-    IEC0bits.T1IE = 1; //enable Timer1 interrupt -> T1IE = 1
+    IEC0bits.T2IE = 1; //enable Timer1 interrupt -> T1IE = 1
 }
 
 /**
@@ -187,5 +186,5 @@ inline void Sys_Enable_TimerInterrupt_HDI(void){
  * @return void
  */
 inline void Sys_Force_TimerInterrupt_HDI(void){
-    IFS0bits.T1IF = 1; //enable Timer1 interrupt -> T1IE = 1
+    IFS0bits.T2IF = 1; //enable Timer1 interrupt -> T1IE = 1
 }

@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c
+SOURCEFILES_QUOTED_IF_SPACED=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c system_IO_uart.c system_IO_camera.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/user.o.d ${OBJECTDIR}/traps.o.d ${OBJECTDIR}/system_Timer_HDI.o.d ${OBJECTDIR}/system_Scheduler.o.d ${OBJECTDIR}/system_Process_Management_HDI.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/interrupts.o.d ${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/HDI_init_port.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/system_Events.o.d ${OBJECTDIR}/system_IO.o.d ${OBJECTDIR}/system_IO_motors.o.d ${OBJECTDIR}/system_IO_i2c.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o ${OBJECTDIR}/system_IO_uart.o ${OBJECTDIR}/system_IO_camera.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/user.o.d ${OBJECTDIR}/traps.o.d ${OBJECTDIR}/system_Timer_HDI.o.d ${OBJECTDIR}/system_Scheduler.o.d ${OBJECTDIR}/system_Process_Management_HDI.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/interrupts.o.d ${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/HDI_init_port.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/system_Events.o.d ${OBJECTDIR}/system_IO.o.d ${OBJECTDIR}/system_IO_motors.o.d ${OBJECTDIR}/system_IO_i2c.o.d ${OBJECTDIR}/system_IO_uart.o.d ${OBJECTDIR}/system_IO_camera.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o
+OBJECTFILES=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o ${OBJECTDIR}/system_IO_uart.o ${OBJECTDIR}/system_IO_camera.o
 
 # Source Files
-SOURCEFILES=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c
+SOURCEFILES=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c system_IO_uart.c system_IO_camera.c
 
 
 CFLAGS=
@@ -180,6 +180,20 @@ ${OBJECTDIR}/system_IO_i2c.o: system_IO_i2c.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  system_IO_i2c.c  -o ${OBJECTDIR}/system_IO_i2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_IO_i2c.o.d"      -g -D__DEBUG     -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off -fms-extensions
 	@${FIXDEPS} "${OBJECTDIR}/system_IO_i2c.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/system_IO_uart.o: system_IO_uart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/system_IO_uart.o.d 
+	@${RM} ${OBJECTDIR}/system_IO_uart.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_IO_uart.c  -o ${OBJECTDIR}/system_IO_uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_IO_uart.o.d"      -g -D__DEBUG     -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off -fms-extensions
+	@${FIXDEPS} "${OBJECTDIR}/system_IO_uart.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/system_IO_camera.o: system_IO_camera.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/system_IO_camera.o.d 
+	@${RM} ${OBJECTDIR}/system_IO_camera.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_IO_camera.c  -o ${OBJECTDIR}/system_IO_camera.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_IO_camera.o.d"      -g -D__DEBUG     -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off -fms-extensions
+	@${FIXDEPS} "${OBJECTDIR}/system_IO_camera.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/user.o: user.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
@@ -278,6 +292,20 @@ ${OBJECTDIR}/system_IO_i2c.o: system_IO_i2c.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/system_IO_i2c.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  system_IO_i2c.c  -o ${OBJECTDIR}/system_IO_i2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_IO_i2c.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off -fms-extensions
 	@${FIXDEPS} "${OBJECTDIR}/system_IO_i2c.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/system_IO_uart.o: system_IO_uart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/system_IO_uart.o.d 
+	@${RM} ${OBJECTDIR}/system_IO_uart.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_IO_uart.c  -o ${OBJECTDIR}/system_IO_uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_IO_uart.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off -fms-extensions
+	@${FIXDEPS} "${OBJECTDIR}/system_IO_uart.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/system_IO_camera.o: system_IO_camera.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/system_IO_camera.o.d 
+	@${RM} ${OBJECTDIR}/system_IO_camera.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_IO_camera.c  -o ${OBJECTDIR}/system_IO_camera.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_IO_camera.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off -fms-extensions
+	@${FIXDEPS} "${OBJECTDIR}/system_IO_camera.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

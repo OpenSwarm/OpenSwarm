@@ -115,6 +115,7 @@ void Sys_Init_MCU_HDI(void)
 	
 	SIO_C_DIR= OUTPUT_PIN;
 	SIO_D_DIR= OUTPUT_PIN;
+
 	
 /********************** INPUTS **************************/
 	
@@ -138,5 +139,6 @@ void Sys_Init_MCU_HDI(void)
 	CAM_y4_DIR = INPUT_PIN;
 	CAM_y5_DIR = INPUT_PIN;
 	CAM_y6_DIR = INPUT_PIN;
-	CAM_y7_DIR = INPUT_PIN;	
+	CAM_y7_DIR = INPUT_PIN;
+
 }

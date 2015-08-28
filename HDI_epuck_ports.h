@@ -313,6 +313,17 @@ EPFL Ecole polytechnique federale de Lausanne http://www.epfl.ch
 #define CAM_HREF_DIR _TRISC3
 #define CAM_PCLK_DIR _TRISC14
 
+/*UART added by Stefan Trenkwalder*/
+#define UART1_RX _RF2
+#define UART1_TX _RF3
+#define UART2_RX _RF4
+#define UART2_TX _RF5
+
+#define UART1_RX_DIR _TRISF2
+#define UART1_TX_DIR _TRISF3
+#define UART2_RX_DIR _TRISF4
+#define UART2_TX_DIR _TRISF5
+
 /*********************** ASEMBLER SMALL FUNCTCION********************** */
 #define NOP() {__asm__ volatile ("nop");}
 #define CLRWDT() {__asm__ volatile ("clrwdt");}

@@ -4,6 +4,7 @@
 
 #include "definitions.h"
 #include <stdlib.h>
+#include "system_IRQ_Priorities.h"
 
 typedef struct sys_periodical_IOHandler_s {
     pFunction function;
@@ -52,7 +53,7 @@ inline void Sys_Init_IOTimer_HDI(){
  */
 inline void Sys_Start_IOTimer_HDI(){
     //this interrupt interrups the system timer
-    IPC1 = IPC1 | 0x6000; //set Timer1 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled
+    IPC1bits.T3IP = SYS_IRQP_IO_TIMER; //set Timer1 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled
 
     T3CONbits.TON = 1;//enable timer -> TON = 1
 }

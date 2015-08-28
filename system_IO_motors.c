@@ -10,7 +10,7 @@
 #define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/
 
 typedef struct sys_motors_s{
-    sint16 speed;;
+    sint16 speed;
 } sys_motors;
 
 void Sys_LeftMotor_Controller();
@@ -61,7 +61,7 @@ void Sys_Init_Motors(){
 
 void Sys_LeftMotor_Controller(){
     
-   static uint8 phase=0;		 // phase can be 0 to 3
+   static uint8 phase = 0;		 // phase can be 0 to 3
    static uint16 next_phase = 0;
 
 
