@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/system_Process_Management_HDI.h</file>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/main.c</file>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/system_Timer_HDI.c</file>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/traps.c</file>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/system_Process_Management_HDI.c</file>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/system_Events.h</file>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/system_Events.c</file>
-            <file>file:/home/strenkwalder/Cloud/Uni/UoSheffield/PhD-Work/LegiOS/LegiOS.X/system_Scheduler.c</file>
+            <file>file:/home/strenkwalder/code/os/main.c</file>
+            <file>file:/home/strenkwalder/code/os/system.c</file>
+            <file>file:/home/strenkwalder/code/os/system_Timer_HDI.c</file>
+            <file>file:/home/strenkwalder/code/os/HDI_init_port.c</file>
         </group>
     </open-files>
 </project-private>
