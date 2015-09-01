@@ -76,7 +76,7 @@
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
           <parseOnProdLoad>false</parseOnProdLoad>
-          <alternateLoadableFile></alternateLoadableFile>
+          <alternateLoadableFile>dist/XC16_dsPIC30F6014A/production/os.production.hex</alternateLoadableFile>
         </loading>
       </compileType>
       <makeCustomizationType>
