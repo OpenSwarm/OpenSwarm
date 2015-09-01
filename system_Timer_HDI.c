@@ -40,7 +40,7 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     sys_process_scheduler = scheduler;
     
     TMR2 = 0; //sets countervalue to 0
-    PR2 = 50*MILLISEC/256; // 16MIPS for 50ms
+    PR2 = 5*MILLISEC/256; // 16MIPS for 50ms
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]

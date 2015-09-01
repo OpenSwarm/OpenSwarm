@@ -39,6 +39,9 @@
 #include "user.h"          /* User funct/params, such as InitApp              */
 #include "definitions.h"
 
+#include "HDI_epuck_ports.h"
+#include "HDI_init_port.h"
+
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -50,54 +53,78 @@
 
 void task1();
 void task2();
+void task3();
 
 int16_t main(void)
 {
 
+    //Sys_Init_MCU_HDI();
     /* Configure the oscillator for the device */
     Sys_Init_Kernel();
 
     Sys_Start_Process_HDI(task1);
     Sys_Start_Process_HDI(task2);
+    Sys_Start_Process_HDI(task3);
 
     Sys_Start_Kernel();
 
-    /* Initialize IO ports and peripherals */
-    InitApp();
-
-    sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
-    Sys_Clear_EventData(&data);
     
-    int i = 0;
+    LED0 = 0;
+    LED1 = 0;
+    LED2 = 0;
+    LED4 = 1;
+    
+    /* Initialize IO ports and peripherals */
+    //InitApp();
+
+    //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
+    //Sys_Clear_EventData(&data);
+    
+    unsigned int i = 0;
+    
     while(1){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED0 = ~LED0;
+        }
         i++;
-        i %= 100;
     }
 }
 
 
 void task1(){
-    unsigned char x=0,y=0,z=0;
+    unsigned int z=0;
+    LED1 = 1;
     while(1){
-        x--;
         z++;
-        y=x*z;
+        if(z == 0xFFFE){
+            z = 0;
+            LED1 = ~LED1;
+        }
     }
 }
 
 
 void task2(){
-    unsigned char a=0,b=0,c=0;
-    bool ohno = false;
+    unsigned int a=0;
     while(1){
+        a++;
+        if(a == 0xFFFE){
+            a = 0;
+            LED2 = ~LED2;
+        }
+    }
+}
 
-        a--;
-        c++;
-        b = a*a;
-        c=b*a;
 
-        if(ohno){
-            Sys_Send_Event(SYS_EVENT_TERMINATION, 0, 0);
+void task3(){
+    unsigned int z=0;
+    LED1 = 1;
+    while(1){
+        z++;
+        if(z == 0xFFFE){
+            z = 0;
+            LED4 = ~LED4;
         }
     }
 }
