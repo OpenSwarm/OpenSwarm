@@ -1,3 +1,4 @@
+#include "system_IO.h"
 
 #include <p30F6014A.h>
 #include "HDI_DSPIC30F6014A.h"
@@ -5,6 +6,8 @@
 #include "definitions.h"
 #include <stdlib.h>
 #include "system_IRQ_Priorities.h"
+
+#include "system_IO_motors.h"
 
 typedef struct sys_periodical_IOHandler_s {
     pFunction function;
@@ -16,7 +19,7 @@ inline void Sys_Init_IOTimer_HDI();
 inline void Sys_Start_IOTimer_HDI();
 inline void Sys_IOTimer_code_HDI();
 
-sys_periodical_IOHandler *sys_iohandlers = 0;
+static sys_periodical_IOHandler *sys_iohandlers = 0;
 
 void Sys_Init_IOManagement(void){
     Sys_Init_IOTimer_HDI();
@@ -28,8 +31,11 @@ void Sys_Start_IOManagement(void){
 }
 
 inline void Sys_Init_IOTimer_HDI(){
+
+    Sys_Stop_IOTimer();
+
     TMR3 = 0; //sets countervalue to 0
-    PR3 = FCY/(1000); // 16MIPS for 1ms
+    PR3 = 100*MICROSEC/8; // 16MIPS for 1ms
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
@@ -55,7 +61,7 @@ inline void Sys_Start_IOTimer_HDI(){
     //this interrupt interrups the system timer
     IPC1bits.T3IP = SYS_IRQP_IO_TIMER; //set Timer1 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled
 
-    T3CONbits.TON = 1;//enable timer -> TON = 1
+    Sys_Continue_IOTimer();
 }
 
 /**
@@ -120,6 +126,7 @@ inline void Sys_Reset_IOTimer(){
  */
 void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(){
     Sys_IOTimer_code_HDI();
+    IFS0bits.T3IF = 0;
 }
 
 /**
@@ -132,6 +139,7 @@ void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(){
  */
 void __attribute__((interrupt,no_auto_psv)) _AltT3Interrupt(){
     Sys_IOTimer_code_HDI();
+    IFS0bits.T3IF = 0;
 }
 
 /**
@@ -202,6 +210,7 @@ bool Sys_Register_IOHandler(pFunction func){
     new_handler->next = 0;
 
     if(sys_iohandlers == 0){
+        LED1 = 1;
         sys_iohandlers = new_handler;
         return true;
     }
@@ -209,6 +218,7 @@ bool Sys_Register_IOHandler(pFunction func){
     sys_pIOHandler *handler = sys_iohandlers;
     while(handler != 0){
         if(handler->next == 0){
+            LED2 = 1;
             handler->next = new_handler;
             return true;
         }

@@ -19,8 +19,8 @@ void Sys_RightMotor_Controller();
 bool Sys_LeftMotor_EventHandler(uint16, uint16, sys_event_data *);
 bool Sys_RightMotor_EventHandler(uint16, uint16, sys_event_data *);
 
-sys_motors left_motor;
-sys_motors right_motor;
+static sys_motors left_motor;
+static sys_motors right_motor;
 
 void Sys_Init_Motors(){
     bool occured_error = false;
@@ -47,6 +47,7 @@ void Sys_Init_Motors(){
     if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0, &Sys_RightMotor_EventHandler, 0)){
         occured_error = true;
     }
+
 
     if(occured_error){
         Sys_Unregister_IOHandler(Sys_LeftMotor_Controller);

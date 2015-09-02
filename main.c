@@ -42,6 +42,8 @@
 #include "HDI_epuck_ports.h"
 #include "HDI_init_port.h"
 
+#include "system_IO_motors.h"
+
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -55,24 +57,30 @@ void task1();
 void task2();
 void task3();
 
+void fronLED();
+void bodyLED();
+
 int16_t main(void)
 {
 
     //Sys_Init_MCU_HDI();
     /* Configure the oscillator for the device */
+    LED0 = 1;
     Sys_Init_Kernel();
-
+    //Sys_Init_Motors();
+    LED1 = 1;
     Sys_Start_Process_HDI(task1);
-    Sys_Start_Process_HDI(task2);
-    Sys_Start_Process_HDI(task3);
-
+    LED2 = 1;
     Sys_Start_Kernel();
+    LED3 = 1;
+    Sys_Register_IOHandler(fronLED);
+    Sys_Register_IOHandler(bodyLED);
 
-    
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
-    LED4 = 1;
+    LED3 = 0;
+    LED4 = 0;
     
     /* Initialize IO ports and peripherals */
     //InitApp();
@@ -94,32 +102,6 @@ int16_t main(void)
 
 void task1(){
     unsigned int z=0;
-    LED1 = 1;
-    while(1){
-        z++;
-        if(z == 0xFFFE){
-            z = 0;
-            LED1 = ~LED1;
-        }
-    }
-}
-
-
-void task2(){
-    unsigned int a=0;
-    while(1){
-        a++;
-        if(a == 0xFFFE){
-            a = 0;
-            LED2 = ~LED2;
-        }
-    }
-}
-
-
-void task3(){
-    unsigned int z=0;
-    LED1 = 1;
     while(1){
         z++;
         if(z == 0xFFFE){
@@ -127,4 +109,47 @@ void task3(){
             LED4 = ~LED4;
         }
     }
+}
+
+inline void iotimer(){
+
+    T3CONbits.TON = 0; //stops counting
+    IEC0bits.T3IE = 0; //disable Timer1 interrupt -> T1IE = 0
+    IFS0bits.T3IF = 0; //unsets the Timer1 interrupt flag
+
+    T3CON = 0; //timer is turned off but set
+    TMR3 = 0; //sets countervalue to 0
+    PR3 = FCY/256; // 16MIPS for 1ms
+    T3CONbits.TCKPS = 3; //Prescaler 256
+
+    // T1CON
+    // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
+    // TON          = enables the Timer1
+    // TSIDL        = Timer3 goes to sleep/idle (when processor goes sleeping)
+    // TGATE        = Timer gets triggert from external source
+    // TCKPS<0:1>   = sets timer prescaler [1, 8, 64, 256]
+    // TSYNC        = enables the timer to be synchronised with external source (rising edge)
+    // TCS          = sets clock source to external (1) or internal (0)
+}
+
+void fronLED(){
+    static uint16 i = 0;
+
+    if(i == 10000){
+        FRONT_LED = ~FRONT_LED;
+        i = 0;
+        return;
+    }
+    i++;
+}
+
+void bodyLED(){
+    static uint16 i = 0;
+
+    if(i == 1000){
+        BODY_LED = ~BODY_LED;
+        i = 0;
+        return;
+    }
+    i++;
 }

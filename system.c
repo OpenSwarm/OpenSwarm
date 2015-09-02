@@ -32,6 +32,8 @@
 #include "system_Scheduler.h"    /* the implementation of the scheduler */
 #include "system_Process_Management_HDI.h"
 
+#include "system_IO.h"
+
 #include "HDI_init_port.h"
 #include "definitions.h"
 
@@ -51,6 +53,9 @@ void Sys_Init_Kernel(){
     Sys_Init_Process_Management_HDI();
 
     Sys_Register_Event(SYS_EVENT_TERMINATION);
+
+
+    Sys_Init_IOManagement();
 }
 
 
@@ -94,5 +99,6 @@ void ConfigureOscillator(void)
 void Sys_Start_Kernel(void){
 
     Sys_Start_SystemTimer_HDI();
+    Sys_Start_IOManagement();
 }
 
