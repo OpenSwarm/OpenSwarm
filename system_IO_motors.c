@@ -5,6 +5,7 @@
 
 #include "HDI_epuck_ports.h"
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define MAX_WHEEL_SPEED 1288
 #define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/
@@ -13,8 +14,8 @@ typedef struct sys_motors_s{
     sint16 speed;
 } sys_motors;
 
-void Sys_LeftMotor_Controller();
-void Sys_RightMotor_Controller();
+void Sys_LeftMotor_Controller(void);
+void Sys_RightMotor_Controller(void);
 
 bool Sys_LeftMotor_EventHandler(uint16, uint16, sys_event_data *);
 bool Sys_RightMotor_EventHandler(uint16, uint16, sys_event_data *);
@@ -29,10 +30,10 @@ void Sys_Init_Motors(){
     left_motor.speed = 0;
     right_motor.speed = 0;
 
-    if(!Sys_Register_IOHandler(Sys_LeftMotor_Controller)){
+    if(!Sys_Register_IOHandler(&Sys_LeftMotor_Controller)){
         occured_error = true;
     }
-    if(occured_error || !Sys_Register_IOHandler(Sys_RightMotor_Controller)){
+    if(occured_error || !Sys_Register_IOHandler(&Sys_RightMotor_Controller)){
         occured_error = true;
     }
     if(!Sys_Register_Event(SYS_EVENT_IO_MOTOR_LEFT)){
@@ -61,26 +62,27 @@ void Sys_Init_Motors(){
 }
 
 void Sys_LeftMotor_Controller(){
-    
+
    static uint8 phase = 0;		 // phase can be 0 to 3
    static uint16 next_phase = 0;
 
+   if(left_motor.speed == 0){
+       return;
+   }
 
    if(left_motor.speed < 0){
        if(--next_phase <= 0){
             phase--;
-            next_phase = MAX_WHEEL_SPEED/left_motor.speed;
-       }
-
-       if (phase < 0){
-           phase = 3;
+            next_phase = MAX_WHEEL_SPEED/abs(left_motor.speed);
        }
    }else{
        if(--next_phase <= 0){
-            phase= (++phase) % 4;
-            next_phase = MAX_WHEEL_SPEED/left_motor.speed;
+           phase++;
+           next_phase = MAX_WHEEL_SPEED/left_motor.speed;
        }
    }
+
+   phase %= 4;
   
   // set the phase on the port pins
 
@@ -129,23 +131,23 @@ void Sys_RightMotor_Controller(){
    static uint8 phase = 0;		 // phase can be 0 to 3
    static uint16 next_phase = 0;
 
+   if(right_motor.speed == 0){
+       return;
+   }
 
    if(right_motor.speed < 0){
        if(--next_phase <= 0){
             phase--;
-            next_phase = MAX_WHEEL_SPEED/left_motor.speed;
-       }
-
-       if (phase < 0){
-           phase = 3;
+            next_phase = MAX_WHEEL_SPEED/abs(right_motor.speed);
        }
    }else{
        if(--next_phase <= 0){
-            phase = (++phase) % 4;
-            next_phase = MAX_WHEEL_SPEED/left_motor.speed;
+           phase++;
+           next_phase = MAX_WHEEL_SPEED/right_motor.speed;
        }
    }
 
+   phase %= 4;
   // set the phase on the port pins
 
   switch (phase)
@@ -200,4 +202,11 @@ bool Sys_RightMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *dat
 
     return true;
 
+}
+
+void Sys_Set_LeftWheelSpeed(uint16 speed){
+    left_motor.speed = speed;
+}
+void Sys_Set_RightWheelSpeed(uint16 speed){
+    right_motor.speed = speed;
 }

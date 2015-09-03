@@ -20,6 +20,7 @@
 #include <string.h>
 #include "system_Scheduler.h"
 #include "system_Timer_HDI.h"
+#include "system_Interrupts.h"
 #include "definitions.h"
 
 #include <p30F6014A.h>
@@ -423,7 +424,6 @@ inline void Sys_Save_Running_Process_HDI(){
             "PUSH W11\n"
             "PUSH W12\n"
             "PUSH W13\n"
-            "PUSH W14\n"
             "PUSH ACCA\n"
             "PUSH ACCB\n"
             "PUSH TBLPAG\n"
@@ -443,6 +443,7 @@ inline void Sys_Save_Running_Process_HDI(){
             "PUSH W3\n"
             );
 
+    Sys_Start_UninterruptableSection();
             __asm__(
                 "MOV W14, %0\n\t"
                 "MOV W15, %1\n\t"
@@ -450,6 +451,8 @@ inline void Sys_Save_Running_Process_HDI(){
                 :
                 :
                 );
+
+    Sys_End_UninterruptableSection();
 }
 
 /**
@@ -464,6 +467,8 @@ inline void Sys_Save_Running_Process_HDI(){
  */
 void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsigned short lm/*W2*/){
 
+    Sys_Start_UninterruptableSection();
+    
     __asm__("MOV W0, [W1++]\n\t"   );//push frame pointer to the stack
     __asm__("MOV W1, W0\n\t"   );//set the framepointer to the TOS
     __asm__("ULNK\n\t"   );//remove waste from Sys_Change_Stack
@@ -480,6 +485,8 @@ void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsi
     __asm__("PUSH W0\n\t"   );//push all local variables into the stack
     __asm__("PUSH W1\n\t"   );
     __asm__("PUSH W2\n\t"   );
+    
+    Sys_End_UninterruptableSection();
     //__asm__("RETURN\n"   );
 
 }
@@ -487,7 +494,9 @@ void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsi
 void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
 
     Sys_Save_Running_Process_HDI();//save all registers
+
     Sys_Change_Stack_HDI(new_process->pcb.framePointer, new_process->pcb.stackPointer, new_process->pcb.stackPointerLimit);//change stack to the new stack
+
 
     sys_running_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_WAITING;
 
@@ -522,7 +531,6 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "POP TBLPAG\n"
             "POP ACCB\n"
             "POP ACCA\n"
-            "POP W14\n"
             "POP W13\n"
             "POP W12\n"
             "POP W11\n"

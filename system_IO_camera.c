@@ -30,7 +30,7 @@
 
 #include "system_Events.h"
 #include "system_IO.h"
-#include "system_IRQ_Priorities.h"
+#include "system_Interrupts.h"
 
 #define FRAME_WIDTH     10
 #define FRAME_HEIGHT    10

@@ -18,7 +18,7 @@
 #include "system_Process_Management_HDI.h"
 
 #include "HDI_DSPIC30F6014A.h"
-#include "system_IRQ_Priorities.h"
+#include "system_Interrupts.h"
 
 inline void Sys_Stop_SystemTimer_HDI(void); //deactivate the periodic interrupts
 inline void Sys_Continue_SystemTimer_HDI(void);   //activates them again

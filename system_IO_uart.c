@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "HDI_epuck_ports.h"
-#include "system_IRQ_Priorities.h"
+#include "system_Interrupts.h"
 
 #define SYS_UART1_BAUDRATE 115000
 #define SYS_UART2_BAUDRATE 115000

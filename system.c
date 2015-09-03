@@ -33,6 +33,7 @@
 #include "system_Process_Management_HDI.h"
 
 #include "system_IO.h"
+#include "system_IO_motors.h"
 
 #include "HDI_init_port.h"
 #include "definitions.h"
@@ -47,15 +48,20 @@
  * @return void
  */
 void Sys_Init_Kernel(){
-    Sys_Init_MCU_HDI();
-    Sys_Init_SystemTimer_HDI(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
 
+    //Set all pins and ports
+    Sys_Init_MCU_HDI();
+    
+    //Init Scheduling
+    Sys_Init_SystemTimer_HDI(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
     Sys_Init_Process_Management_HDI();
 
+    //Init Events
     Sys_Register_Event(SYS_EVENT_TERMINATION);
 
-
+    //init I/O Devices
     Sys_Init_IOManagement();
+    Sys_Init_Motors();
 }
 
 
@@ -99,6 +105,7 @@ void ConfigureOscillator(void)
 void Sys_Start_Kernel(void){
 
     Sys_Start_SystemTimer_HDI();
+
     Sys_Start_IOManagement();
 }
 

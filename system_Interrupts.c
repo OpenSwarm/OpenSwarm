@@ -1,11 +1,11 @@
-/* 
- * File:   system_IO_motors.h
- * Author: Stefan Trenkwalder
+/*
+ * File:   system_interrupts.c
+ * Author: strenkwalder
  *
- * Created on 30 July 2015, 16:35
+ * Created on 03 September 2015, 15:25
  *
  * LICENCE: adapted FreeBSD Licence
- * Copyright (c) 2015, Stefan Trenkwalder
+ * Copyright (c) %<%YEAR%>%, strenkwalder
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -14,30 +14,24 @@
  *
  * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
  *
- * 3. If this or parts of this source code or binary code in any form is used for a commercial product or service in any form, this product or service must provide a clear notice/message readable for any user or customer that this product or service uses OpenSwarm.
+ * 3. If this or parts of this source code or binary code in any form used for an commercial product or service in any form, this product or service must provide a clear notice/message readable for any user or customer that this product or service uses OpenSwarm.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "system_Interrupts.h"
+#include "definitions.h"
 
-#ifndef SYSTEM_IO_MOTORS_H
-#define	SYSTEM_IO_MOTORS_H
+#include <p30F6014A.h>
 
-#include "system_IO.h"
+static uint8 sys_IRQ_Priority = SYS_IRQP_SYSTEM_TIMER;
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-void Sys_Init_Motors(void);
-
-void Sys_Set_LeftWheelSpeed(uint16 speed);
-void Sys_Set_RightWheelSpeed(uint16 speed);
-
-
-#ifdef	__cplusplus
+inline void Sys_Start_UninterruptableSection(){
+    sys_IRQ_Priority = SRbits.IPL;
+    SRbits.IPL = SYS_IRQP_MAX;
 }
-#endif
 
-#endif	/* SYSTEM_IO_MOTORS_H */
+inline void Sys_End_UninterruptableSection(){
+    SRbits.IPL = sys_IRQ_Priority;
+}
 

@@ -57,7 +57,7 @@ void task1();
 void task2();
 void task3();
 
-void fronLED();
+void frontLED();
 void bodyLED();
 
 int16_t main(void)
@@ -73,15 +73,17 @@ int16_t main(void)
     LED2 = 1;
     Sys_Start_Kernel();
     LED3 = 1;
-    Sys_Register_IOHandler(fronLED);
-    Sys_Register_IOHandler(bodyLED);
+    Sys_Register_IOHandler(frontLED);
+    //Sys_Register_IOHandler(bodyLED);
 
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
     LED3 = 0;
     LED4 = 0;
-    
+
+    Sys_Set_LeftWheelSpeed(-128);
+    Sys_Set_RightWheelSpeed(10);
     /* Initialize IO ports and peripherals */
     //InitApp();
 
@@ -111,28 +113,7 @@ void task1(){
     }
 }
 
-inline void iotimer(){
-
-    T3CONbits.TON = 0; //stops counting
-    IEC0bits.T3IE = 0; //disable Timer1 interrupt -> T1IE = 0
-    IFS0bits.T3IF = 0; //unsets the Timer1 interrupt flag
-
-    T3CON = 0; //timer is turned off but set
-    TMR3 = 0; //sets countervalue to 0
-    PR3 = FCY/256; // 16MIPS for 1ms
-    T3CONbits.TCKPS = 3; //Prescaler 256
-
-    // T1CON
-    // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
-    // TON          = enables the Timer1
-    // TSIDL        = Timer3 goes to sleep/idle (when processor goes sleeping)
-    // TGATE        = Timer gets triggert from external source
-    // TCKPS<0:1>   = sets timer prescaler [1, 8, 64, 256]
-    // TSYNC        = enables the timer to be synchronised with external source (rising edge)
-    // TCS          = sets clock source to external (1) or internal (0)
-}
-
-void fronLED(){
+void frontLED(){
     static uint16 i = 0;
 
     if(i == 10000){

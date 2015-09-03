@@ -5,7 +5,7 @@
 
 #include "definitions.h"
 #include <stdlib.h>
-#include "system_IRQ_Priorities.h"
+#include "system_Interrupts.h"
 
 #include "system_IO_motors.h"
 

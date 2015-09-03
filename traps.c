@@ -13,6 +13,8 @@
 
 #include <stdint.h>        /* Includes uint16_t definition                    */
 #include <stdbool.h>       /* Includes true/false definition                  */
+#include "HDI_epuck_ports.h"
+#include "definitions.h"
 
 /******************************************************************************/
 /* Trap Function Prototypes                                                   */
@@ -48,50 +50,223 @@ void __attribute__((interrupt,no_auto_psv)) _DefaultInterrupt(void);
 /* Primary (non-alternate) address error trap function declarations */
 void __attribute__((interrupt,no_auto_psv)) _OscillatorFail(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 0;
+    LED2 = 0;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
+
         INTCON1bits.OSCFAIL = 0;        /* Clear the trap flag */
-        while(1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+            }
+        }
 }
 
 void __attribute__((interrupt,no_auto_psv)) _AddressError(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 0;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
+
         INTCON1bits.ADDRERR = 0;        /* Clear the trap flag */
-        while (1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+            }
+        }
 }
 void __attribute__((interrupt,no_auto_psv)) _StackError(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
+
         INTCON1bits.STKERR = 0;         /* Clear the trap flag */
-        while (1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+                LED2 = ~LED2;
+            }
+        }
 }
 
 void __attribute__((interrupt,no_auto_psv)) _MathError(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
         INTCON1bits.MATHERR = 0;        /* Clear the trap flag */
-        while (1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+                LED2 = ~LED2;
+                LED3 = ~LED3;
+            }
+        }
 }
 
 /* Alternate address error trap function declarations */
 void __attribute__((interrupt,no_auto_psv)) _AltOscillatorFail(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
         INTCON1bits.OSCFAIL = 0;        /* Clear the trap flag */
-        while (1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+                LED2 = ~LED2;
+                LED3 = ~LED3;
+                LED4 = ~LED4;
+                LED5 = 0;
+                LED6 = 0;
+                LED7 = 0;
+            }
+        }
 }
 
 void __attribute__((interrupt,no_auto_psv)) _AltAddressError(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    LED6 = 0;
+    LED7 = 0;
         INTCON1bits.ADDRERR = 0;        /* Clear the trap flag */
-        while (1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+                LED2 = ~LED2;
+                LED3 = ~LED3;
+                LED4 = ~LED4;
+                LED5 = ~LED5;
+                LED6 = 0;
+                LED7 = 0;
+            }
+        }
 }
 
 void __attribute__((interrupt,no_auto_psv)) _AltStackError(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    LED6 = 1;
+    LED7 = 0;
         INTCON1bits.STKERR = 0;         /* Clear the trap flag */
-        while (1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+                LED2 = ~LED2;
+                LED3 = ~LED3;
+                LED4 = ~LED4;
+                LED5 = ~LED5;
+                LED6 = ~LED6;
+                LED7 = 0;
+            }
+        }
 }
 
 void __attribute__((interrupt,no_auto_psv)) _AltMathError(void)
 {
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    LED6 = 1;
+    LED7 = 1;
         INTCON1bits.MATHERR = 0;        /* Clear the trap flag */
-        while (1);
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+                LED2 = ~LED2;
+                LED3 = ~LED3;
+                LED4 = ~LED4;
+                LED5 = ~LED5;
+                LED6 = ~LED6;
+                LED7 = ~LED7;
+            }
+        }
 }
 
 /******************************************************************************/
@@ -102,6 +277,30 @@ void __attribute__((interrupt,no_auto_psv)) _AltMathError(void)
 /******************************************************************************/
 void __attribute__((interrupt,no_auto_psv)) _DefaultInterrupt(void)
 {
-        while(1);
+    FRONT_LED = 1;
+    BODY_LED = 1;
+    LED0 = 0;
+    LED1 = 1;
+    LED2 = 0;
+    LED3 = 1;
+    LED4 = 0;
+    LED5 = 1;
+    LED6 = 0;
+    LED7 = 1;
+        while (1){
+            uint16 i = 0;
+            for(i = 0; i < 0xFFFF; i++){
+                FRONT_LED = ~FRONT_LED;
+                BODY_LED = ~BODY_LED;
+                LED0 = ~LED0;
+                LED1 = ~LED1;
+                LED2 = ~LED2;
+                LED3 = ~LED3;
+                LED4 = ~LED4;
+                LED5 = ~LED5;
+                LED6 = ~LED6;
+                LED7 = ~LED7;
+            }
+        }
 }
 
