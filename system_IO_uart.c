@@ -1,6 +1,7 @@
 #include "system_IO_uart.h"
 #include <p30F6014A.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "HDI_epuck_ports.h"
 #include "system_Interrupts.h"
@@ -97,11 +98,16 @@ void Sys_Writeto_UART1(uint8 *data, uint16 length){
 
     sys_uart_txdata *element = malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
-        free(data);
         return;
     }
 
-    element->data = data;
+    element->data = malloc(length);
+    if(element->data == 0){//not enough memory
+        free(element);
+        return;
+    }
+    memcpy(data,element->data,length);
+    
     element->length = length;
     element->next = 0;
 

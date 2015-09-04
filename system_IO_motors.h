@@ -31,8 +31,8 @@ extern "C" {
 
 void Sys_Init_Motors(void);
 
-void Sys_Set_LeftWheelSpeed(uint16 speed);
-void Sys_Set_RightWheelSpeed(uint16 speed);
+void Sys_Set_LeftWheelSpeed(sint16 speed);
+void Sys_Set_RightWheelSpeed(sint16 speed);
 
 
 #ifdef	__cplusplus

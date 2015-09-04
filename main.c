@@ -43,6 +43,7 @@
 #include "HDI_init_port.h"
 
 #include "system_IO_motors.h"
+#include "system_IO_uart.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -58,22 +59,20 @@ void task2();
 void task3();
 
 void frontLED();
-void bodyLED();
+
+void bluetooth_reader(uint8 data);
 
 int16_t main(void)
 {
 
     //Sys_Init_MCU_HDI();
     /* Configure the oscillator for the device */
-    LED0 = 1;
     Sys_Init_Kernel();
+    Sys_SetReadingFunction_UART1(bluetooth_reader);
     //Sys_Init_Motors();
-    LED1 = 1;
     Sys_Start_Process_HDI(task1);
-    LED2 = 1;
+    
     Sys_Start_Kernel();
-    LED3 = 1;
-    Sys_Register_IOHandler(frontLED);
     //Sys_Register_IOHandler(bodyLED);
 
     LED0 = 0;
@@ -81,9 +80,10 @@ int16_t main(void)
     LED2 = 0;
     LED3 = 0;
     LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
 
-    Sys_Set_LeftWheelSpeed(-128);
-    Sys_Set_RightWheelSpeed(10);
     /* Initialize IO ports and peripherals */
     //InitApp();
 
@@ -93,9 +93,11 @@ int16_t main(void)
     unsigned int i = 0;
     
     while(1){//DO Nothing (do yonly things for testing)
+        
         if(i == 0xFFFE){
             i = 0;
             LED0 = ~LED0;
+            
         }
         i++;
     }
@@ -104,11 +106,19 @@ int16_t main(void)
 
 void task1(){
     unsigned int z=0;
+    unsigned int u=0;
     while(1){
         z++;
         if(z == 0xFFFE){
             z = 0;
             LED4 = ~LED4;
+            u++;
+        }
+        if(u == 20){
+            unsigned char a = 'p';
+            Sys_Writeto_UART1(&a,1);
+            u=0;
+            LED6 = ~LED6;
         }
     }
 }
@@ -124,13 +134,8 @@ void frontLED(){
     i++;
 }
 
-void bodyLED(){
-    static uint16 i = 0;
-
-    if(i == 1000){
-        BODY_LED = ~BODY_LED;
-        i = 0;
-        return;
-    }
-    i++;
+void bluetooth_reader(uint8 data){
+    BODY_LED = ~BODY_LED;
+    
+    Sys_Writeto_UART1(&data,1);
 }

@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define MAX_WHEEL_SPEED 1288
+#define MAX_WHEEL_SPEED 128
 #define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/
 
 typedef struct sys_motors_s{
@@ -73,12 +73,12 @@ void Sys_LeftMotor_Controller(){
    if(left_motor.speed < 0){
        if(--next_phase <= 0){
             phase--;
-            next_phase = MAX_WHEEL_SPEED/abs(left_motor.speed);
+            next_phase = (10*MAX_WHEEL_SPEED)/abs(left_motor.speed);
        }
    }else{
        if(--next_phase <= 0){
            phase++;
-           next_phase = MAX_WHEEL_SPEED/left_motor.speed;
+           next_phase = (10*MAX_WHEEL_SPEED)/left_motor.speed;
        }
    }
 
@@ -88,18 +88,10 @@ void Sys_LeftMotor_Controller(){
 
   switch (phase)
   {
-    case 0:
+    case 3:
     {
       MOTOR1_PHA = 0;
       MOTOR1_PHB = 1;
-      MOTOR1_PHC = 1;
-      MOTOR1_PHD = 0;
-      break;
-    }
-    case 1:
-    {
-      MOTOR1_PHA = 1;
-      MOTOR1_PHB = 0;
       MOTOR1_PHC = 1;
       MOTOR1_PHD = 0;
       break;
@@ -108,11 +100,19 @@ void Sys_LeftMotor_Controller(){
     {
       MOTOR1_PHA = 1;
       MOTOR1_PHB = 0;
+      MOTOR1_PHC = 1;
+      MOTOR1_PHD = 0;
+      break;
+    }
+    case 1:
+    {
+      MOTOR1_PHA = 1;
+      MOTOR1_PHB = 0;
       MOTOR1_PHC = 0;
       MOTOR1_PHD = 1;
       break;
     }
-    case 3:
+    case 0:
     {
       MOTOR1_PHA = 0;
       MOTOR1_PHB = 1;
@@ -138,12 +138,12 @@ void Sys_RightMotor_Controller(){
    if(right_motor.speed < 0){
        if(--next_phase <= 0){
             phase--;
-            next_phase = MAX_WHEEL_SPEED/abs(right_motor.speed);
+            next_phase = (10*MAX_WHEEL_SPEED)/abs(right_motor.speed);
        }
    }else{
        if(--next_phase <= 0){
            phase++;
-           next_phase = MAX_WHEEL_SPEED/right_motor.speed;
+           next_phase = (10*MAX_WHEEL_SPEED)/right_motor.speed;
        }
    }
 
@@ -204,9 +204,23 @@ bool Sys_RightMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *dat
 
 }
 
-void Sys_Set_LeftWheelSpeed(uint16 speed){
+void Sys_Set_LeftWheelSpeed(sint16 speed){
+    if(speed > MAX_WHEEL_SPEED){
+        left_motor.speed = MAX_WHEEL_SPEED;
+        return;
+    }else if(speed < -MAX_WHEEL_SPEED){
+        left_motor.speed = -MAX_WHEEL_SPEED;
+        return;
+    }
     left_motor.speed = speed;
 }
-void Sys_Set_RightWheelSpeed(uint16 speed){
+void Sys_Set_RightWheelSpeed(sint16 speed){
+    if(speed > MAX_WHEEL_SPEED){
+        right_motor.speed = MAX_WHEEL_SPEED;
+        return;
+    }else if(speed < -MAX_WHEEL_SPEED){
+        right_motor.speed = -MAX_WHEEL_SPEED;
+        return;
+    }
     right_motor.speed = speed;
 }

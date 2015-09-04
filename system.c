@@ -34,6 +34,7 @@
 
 #include "system_IO.h"
 #include "system_IO_motors.h"
+#include "system_IO_uart.h"
 
 #include "HDI_init_port.h"
 #include "definitions.h"
@@ -62,6 +63,7 @@ void Sys_Init_Kernel(){
     //init I/O Devices
     Sys_Init_IOManagement();
     Sys_Init_Motors();
+    Sys_Init_UART1();
 }
 
 
