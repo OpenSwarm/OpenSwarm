@@ -12,6 +12,7 @@
 static pUART_reader read_uart_1 = 0;
 static pUART_reader read_uart_2 = 0;
 
+
 inline void Sys_Read_UART1_ISR();
 inline void Sys_Write_UART1_ISR();
 inline void Sys_Read_UART2_ISR();
@@ -24,28 +25,42 @@ typedef struct uart_tx_data_s{
     struct uart_tx_data_s *next;
 }sys_uart_txdata;
 
-sys_uart_txdata *sys_UART1_TX_data = 0;
-sys_uart_txdata *sys_UART2_TX_data = 0;
+static sys_uart_txdata *sys_UART1_TX_data = 0;
+static sys_uart_txdata *sys_UART2_TX_data = 0;
 
+static uint16 byte_counter_uart1 = 0;
+static uint16 byte_counter_uart2 = 0;
 
 void Sys_Init_UART1(void){
     UART1_RX_DIR = INPUT_PIN;
     UART1_TX_DIR = OUTPUT_PIN;
 
-    U1BRG = (((FCY/SYS_UART1_BAUDRATE)/16)-1);
-
-    U1MODEbits.PDSEL = 0b00;//8-bit; no parity
-    U1MODEbits.STSEL = 0;//1 stop-bit
-
     IPC2bits.U1RXIP = SYS_IRQP_UART1;
     IPC2bits.U1TXIP = SYS_IRQP_UART1;
 
-    U1STAbits.UTXISEL = 1;//U1TXIF is set if byte was successfully transmitted
-    U1STAbits.UTXEN = 1;//Transmission is enabled
 
-    U1STAbits.URXISEL = 0b00;//U1RXIF occurs after 1 or more bit were transfered into the buffer
+    IFS0bits.U1RXIF = 0;
+    IEC0bits.U1RXIE = 1;//Transmission is enabled
+    IFS0bits.U1TXIF = 0;
+    IEC0bits.U1TXIE = 1;//Transmission is enabled
 
-    U1STAbits.ADDEN = 0;//No ninth address bit
+    
+    U1MODE = 0;
+    //U1MODEbits.PDSEL = 0b00;//8-bit; no parity
+    //U1MODEbits.STSEL = 0;//1 stop-bit
+
+    U1STA = 0;
+    //U1STAbits.URXISEL = 0b00;//U1RXIF occurs after 1 or more bit were transfered into the buffer
+    //U1STAbits.ADDEN = 0;//No ninth address bit
+    //U1STAbits.UTXISEL = 1;//U1TXIF is set if byte was successfully transmitted
+        
+    U1BRG = (((FCY/SYS_UART1_BAUDRATE)/16)-1);
+    
+    U1MODEbits.UARTEN = 1; //enable UART
+    U1STAbits.UTXEN = 1;
+
+
+
 }
 
 void Sys_Init_UART2(void){
@@ -106,7 +121,7 @@ void Sys_Writeto_UART1(uint8 *data, uint16 length){
         free(element);
         return;
     }
-    memcpy(data,element->data,length);
+    memcpy(element->data,data,length);
     
     element->length = length;
     element->next = 0;
@@ -152,30 +167,38 @@ void Sys_Writeto_UART2(uint8 *data, uint16 length){
 
 void __attribute__((interrupt,auto_psv)) _U1RXInterrupt(void){
     Sys_Read_UART1_ISR();
+    IFS0bits.U1RXIF = 0;
 }
 void __attribute__((interrupt,auto_psv)) _AltU1RXInterrupt(void){
     Sys_Read_UART1_ISR();
+    IFS0bits.U1RXIF = 0;
 }
 
 void __attribute__((interrupt,auto_psv)) _U1TXInterrupt(void){
     Sys_Write_UART1_ISR();
+    IFS0bits.U1TXIF = 0;
 }
 void __attribute__((interrupt,auto_psv)) _AltU1TXInterrupt(void){
     Sys_Write_UART1_ISR();
+    IFS0bits.U1TXIF = 0;
 }
 
 void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void){
     Sys_Read_UART2_ISR();
+    IFS1bits.U2RXIF = 0;
 }
 void __attribute__((interrupt,auto_psv)) _AltU2RXInterrupt(void){
     Sys_Read_UART2_ISR();
+    IFS1bits.U2RXIF = 0;
 }
 
 void __attribute__((interrupt,auto_psv)) _U2TXInterrupt(void){
     Sys_Write_UART2_ISR();
+    IFS1bits.U2TXIF = 0;
 }
 void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
     Sys_Write_UART2_ISR();
+    IFS1bits.U2TXIF = 0;
 }
 
 inline void Sys_Read_UART1_ISR(){
@@ -192,37 +215,48 @@ inline void Sys_Read_UART1_ISR(){
         }
     }
 }
+
 inline void Sys_Write_UART1_ISR(){
 
-    static uint16 byte_counter = 0;
 
     if(sys_UART1_TX_data == 0){//nothing to send
+        byte_counter_uart1 = 0;
         return;
     }
 
     while(U1STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
-        if(byte_counter == sys_UART1_TX_data->length){//transmitted the last byte
-            byte_counter = 0;
-            sys_uart_txdata *element = sys_UART1_TX_data;
 
-            sys_UART1_TX_data = sys_UART1_TX_data->next;
-            element->next = 0;
-
-            free(element->data);
-            free(element);
-
-            if(sys_UART1_TX_data == 0){//it was the last msg
-                return;
-            }
+        if(byte_counter_uart1 < sys_UART1_TX_data->length){
+            U1TXREG = sys_UART1_TX_data->data[byte_counter_uart1];//add new byte
+            byte_counter_uart1++;
+            continue;
         }
 
-        U1TXREG = sys_UART1_TX_data->data[byte_counter++];//add new byte
+        Sys_Start_UninterruptableSection();
+
+        byte_counter_uart1 = 0;
+        sys_uart_txdata *element = sys_UART1_TX_data;
+
+        sys_UART1_TX_data = sys_UART1_TX_data->next;
+        element->next = 0;
+
+        free(element->data);
+        free(element);
+
+        Sys_End_UninterruptableSection();
+
+        if(sys_UART1_TX_data == 0){//it was the last msg
+            return;
+        }
+        
 
     }
 
 }
 inline void Sys_Read_UART2_ISR(){
     uint8 data;
+
+    LED7 = ~LED7;
 
     if(U2STAbits.OERR == 1){//Buffer full?
         U2STAbits.OERR = 0;//I will empty it now
@@ -238,6 +272,7 @@ inline void Sys_Read_UART2_ISR(){
 }
 inline void Sys_Write_UART2_ISR(){
 
+    LED5 = ~LED5;
     static uint16 byte_counter = 0;
 
     if(sys_UART2_TX_data == 0){//nothing to send

@@ -109,5 +109,6 @@ void Sys_Start_Kernel(void){
     Sys_Start_SystemTimer_HDI();
 
     Sys_Start_IOManagement();
+    Sys_Start_UART1();
 }
 

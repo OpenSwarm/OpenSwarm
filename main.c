@@ -115,10 +115,13 @@ void task1(){
             u++;
         }
         if(u == 20){
-            unsigned char a = 'p';
-            Sys_Writeto_UART1(&a,1);
-            u=0;
             LED6 = ~LED6;
+            if(LED6 == 1){
+                Sys_Writeto_UART1("on\r\n",5);
+            }else{
+                Sys_Writeto_UART1("off\r\n",5);
+            }
+            u=0;
         }
     }
 }
@@ -137,5 +140,5 @@ void frontLED(){
 void bluetooth_reader(uint8 data){
     BODY_LED = ~BODY_LED;
     
-    Sys_Writeto_UART1(&data,1);
+    //Sys_Writeto_UART1(&data,1);
 }
