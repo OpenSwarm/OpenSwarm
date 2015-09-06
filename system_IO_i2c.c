@@ -6,6 +6,7 @@
 #include <stdbool.h>
 
 #include "definitions.h"
+#include "system_Memory.h"
 
 typedef enum { I2C_IDLE = 0, I2C_IS_STARTING, I2C_STARTED, I2C_IS_READING, I2C_IS_SENDING, I2C_SENT, I2C_ACKNOWLEDGED, I2C_IS_STOPPING, I2C_ERROR} sys_I2C_state;
 typedef enum { I2C_IDLE_MODE = 0, I2C_WRITING_ADDRESS_MODE, I2C_READING_BYTES_MODE, I2C_WRITING_BYTES_MODE, I2C_ERROR_MODE} sys_I2C_mode;
@@ -337,7 +338,7 @@ void Sys_I2C_AppendMessages(sys_i2c_msg *item){
 }
 
 void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint16 length){
-    sys_i2c_msg *new = malloc(sizeof(sys_i2c_msg));
+    sys_i2c_msg *new = Sys_Malloc(sizeof(sys_i2c_msg));
     if(new == 0){
         return;
     }
@@ -353,7 +354,7 @@ void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint16 length){
 }
 
 void Sys_I2C_Read(uint8 address, uint8 *intern_address, uint16 length, pByteFunction bytehandler){
-    sys_i2c_msg *new = malloc(sizeof(sys_i2c_msg));
+    sys_i2c_msg *new = Sys_Malloc(sizeof(sys_i2c_msg));
     if(new == 0){
         free(intern_address);
         return;
@@ -365,7 +366,7 @@ void Sys_I2C_Read(uint8 address, uint8 *intern_address, uint16 length, pByteFunc
     new->handler = 0;
     new->write = true;
 
-    sys_i2c_msg *second = malloc(sizeof(sys_i2c_msg));
+    sys_i2c_msg *second = Sys_Malloc(sizeof(sys_i2c_msg));
     if(second == 0){
         free(intern_address);
         free(new);

@@ -1,7 +1,7 @@
 #include "system_Events.h"
 #include "system_Process_Management_HDI.h"
 #include "system_Timer_HDI.h"
-
+#include "system_Memory.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -59,7 +59,7 @@ bool Sys_Register_Event(uint16 eventID){
         next_event = events->next;
     }
 
-    new_event = (sys_registered_event*) malloc(sizeof(struct sys_registered_event_s));
+    new_event = (sys_registered_event*) Sys_Malloc(sizeof(struct sys_registered_event_s));
     if(new_event == 0){
         return false;
     }
@@ -94,7 +94,7 @@ bool Sys_Subscribe_to_Event(uint16 eventID, uint16 pid, pEventHandlerFunction ha
                 subscribed_process = subscribed_process->next;
             }
 
-            sys_subscribed_process *new_process = (sys_subscribed_process*) malloc(sizeof(struct sys_subscribed_process_s));
+            sys_subscribed_process *new_process = (sys_subscribed_process*) Sys_Malloc(sizeof(struct sys_subscribed_process_s));
             if(new_process == 0){
                 return false;
             }

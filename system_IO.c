@@ -6,6 +6,7 @@
 #include "definitions.h"
 #include <stdlib.h>
 #include "system_Interrupts.h"
+#include "system_Memory.h"
 
 #include "system_IO_motors.h"
 
@@ -201,7 +202,7 @@ inline void Sys_IOTimer_code_HDI(){
 
 bool Sys_Register_IOHandler(pFunction func){
 
-    sys_pIOHandler *new_handler = malloc(sizeof(sys_periodical_IOHandler));
+    sys_pIOHandler *new_handler = Sys_Malloc(sizeof(sys_periodical_IOHandler));
     if(new_handler == 0){//malloc failed
         return false;
     }

@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c system_IO_uart.c system_IO_camera.c system_Interrupts.c
+SOURCEFILES_QUOTED_IF_SPACED=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c system_IO_uart.c system_IO_camera.c system_Interrupts.c system_Memory.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o ${OBJECTDIR}/system_IO_uart.o ${OBJECTDIR}/system_IO_camera.o ${OBJECTDIR}/system_Interrupts.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/user.o.d ${OBJECTDIR}/traps.o.d ${OBJECTDIR}/system_Timer_HDI.o.d ${OBJECTDIR}/system_Scheduler.o.d ${OBJECTDIR}/system_Process_Management_HDI.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/interrupts.o.d ${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/HDI_init_port.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/system_Events.o.d ${OBJECTDIR}/system_IO.o.d ${OBJECTDIR}/system_IO_motors.o.d ${OBJECTDIR}/system_IO_i2c.o.d ${OBJECTDIR}/system_IO_uart.o.d ${OBJECTDIR}/system_IO_camera.o.d ${OBJECTDIR}/system_Interrupts.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o ${OBJECTDIR}/system_IO_uart.o ${OBJECTDIR}/system_IO_camera.o ${OBJECTDIR}/system_Interrupts.o ${OBJECTDIR}/system_Memory.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/user.o.d ${OBJECTDIR}/traps.o.d ${OBJECTDIR}/system_Timer_HDI.o.d ${OBJECTDIR}/system_Scheduler.o.d ${OBJECTDIR}/system_Process_Management_HDI.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/interrupts.o.d ${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/HDI_init_port.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/system_Events.o.d ${OBJECTDIR}/system_IO.o.d ${OBJECTDIR}/system_IO_motors.o.d ${OBJECTDIR}/system_IO_i2c.o.d ${OBJECTDIR}/system_IO_uart.o.d ${OBJECTDIR}/system_IO_camera.o.d ${OBJECTDIR}/system_Interrupts.o.d ${OBJECTDIR}/system_Memory.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o ${OBJECTDIR}/system_IO_uart.o ${OBJECTDIR}/system_IO_camera.o ${OBJECTDIR}/system_Interrupts.o
+OBJECTFILES=${OBJECTDIR}/user.o ${OBJECTDIR}/traps.o ${OBJECTDIR}/system_Timer_HDI.o ${OBJECTDIR}/system_Scheduler.o ${OBJECTDIR}/system_Process_Management_HDI.o ${OBJECTDIR}/system.o ${OBJECTDIR}/interrupts.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/HDI_init_port.o ${OBJECTDIR}/main.o ${OBJECTDIR}/system_Events.o ${OBJECTDIR}/system_IO.o ${OBJECTDIR}/system_IO_motors.o ${OBJECTDIR}/system_IO_i2c.o ${OBJECTDIR}/system_IO_uart.o ${OBJECTDIR}/system_IO_camera.o ${OBJECTDIR}/system_Interrupts.o ${OBJECTDIR}/system_Memory.o
 
 # Source Files
-SOURCEFILES=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c system_IO_uart.c system_IO_camera.c system_Interrupts.c
+SOURCEFILES=user.c traps.c system_Timer_HDI.c system_Scheduler.c system_Process_Management_HDI.c system.c interrupts.c configuration_bits.c HDI_init_port.c main.c system_Events.c system_IO.c system_IO_motors.c system_IO_i2c.c system_IO_uart.c system_IO_camera.c system_Interrupts.c system_Memory.c
 
 
 CFLAGS=
@@ -201,6 +201,13 @@ ${OBJECTDIR}/system_Interrupts.o: system_Interrupts.c  nbproject/Makefile-${CND_
 	${MP_CC} $(MP_EXTRA_CC_PRE)  system_Interrupts.c  -o ${OBJECTDIR}/system_Interrupts.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_Interrupts.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=on -fms-extensions
 	@${FIXDEPS} "${OBJECTDIR}/system_Interrupts.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/system_Memory.o: system_Memory.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/system_Memory.o.d 
+	@${RM} ${OBJECTDIR}/system_Memory.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_Memory.c  -o ${OBJECTDIR}/system_Memory.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_Memory.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=on -fms-extensions
+	@${FIXDEPS} "${OBJECTDIR}/system_Memory.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/user.o: user.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
@@ -320,6 +327,13 @@ ${OBJECTDIR}/system_Interrupts.o: system_Interrupts.c  nbproject/Makefile-${CND_
 	@${RM} ${OBJECTDIR}/system_Interrupts.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  system_Interrupts.c  -o ${OBJECTDIR}/system_Interrupts.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_Interrupts.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=on -fms-extensions
 	@${FIXDEPS} "${OBJECTDIR}/system_Interrupts.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/system_Memory.o: system_Memory.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/system_Memory.o.d 
+	@${RM} ${OBJECTDIR}/system_Memory.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_Memory.c  -o ${OBJECTDIR}/system_Memory.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/system_Memory.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=on -fms-extensions
+	@${FIXDEPS} "${OBJECTDIR}/system_Memory.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

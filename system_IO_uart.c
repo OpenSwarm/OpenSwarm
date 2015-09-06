@@ -5,6 +5,7 @@
 
 #include "HDI_epuck_ports.h"
 #include "system_Interrupts.h"
+#include "system_Memory.h"
 
 #define SYS_UART1_BAUDRATE 115000
 #define SYS_UART2_BAUDRATE 115000
@@ -111,17 +112,17 @@ void Sys_SetReadingFunction_UART2(pUART_reader func){
 
 void Sys_Writeto_UART1(uint8 *data, uint16 length){
 
-    sys_uart_txdata *element = malloc(sizeof(sys_uart_txdata));
+    sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
         return;
     }
 
-    element->data = malloc(length);
+    element->data = Sys_Malloc(length);
     if(element->data == 0){//not enough memory
         free(element);
         return;
     }
-    memcpy(element->data,data,length);
+    Sys_Memcpy(data,element->data,length);
     
     element->length = length;
     element->next = 0;
@@ -141,7 +142,7 @@ void Sys_Writeto_UART1(uint8 *data, uint16 length){
 
 void Sys_Writeto_UART2(uint8 *data, uint16 length){
 
-    sys_uart_txdata *element = malloc(sizeof(sys_uart_txdata));
+    sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
         free(data);
         return;

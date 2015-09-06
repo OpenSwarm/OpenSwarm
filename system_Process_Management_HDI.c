@@ -21,6 +21,7 @@
 #include "system_Scheduler.h"
 #include "system_Timer_HDI.h"
 #include "system_Interrupts.h"
+#include "system_Memory.h"
 #include "definitions.h"
 
 #include <p30F6014A.h>
@@ -146,7 +147,7 @@ void Sys_Init_Process_Management_HDI(){
     }
     sys_running_process = 0;
 
-    sys_ready_processes = (sys_pcb_list_element *) malloc(sizeof(sys_pcb_list_element));//create the root element
+    sys_ready_processes = (sys_pcb_list_element *) Sys_Malloc(sizeof(sys_pcb_list_element));//create the root element
     if(sys_ready_processes == 0){
         return;//should never happen
     }
@@ -219,7 +220,7 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint16 stacksize){
 
     Sys_Set_Defaults_Info(&element->sheduler_info);// set default values for the scheduler
 
-    element->process_stack = (uint16 *) malloc(stacksize); //create stack for process
+    element->process_stack = (uint16 *) Sys_Malloc(stacksize); //create stack for process
 
     if(element->process_stack == NULL){
         return false;
@@ -244,7 +245,7 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint16 stacksize){
 bool Sys_Start_Process_HDI(pFunction function){
   sys_process_control_block_list_element *element;
 
-  element = (sys_process_control_block_list_element *) malloc(sizeof(sys_process_control_block_list_element));//create the root element
+  element = (sys_process_control_block_list_element *) Sys_Malloc(sizeof(sys_process_control_block_list_element));//create the root element
 
   if(element == NULL){
       return false;
@@ -852,7 +853,7 @@ bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunctio
         return false;
     }
 
-    sys_process_event_handler *new_event = (sys_process_event_handler *) malloc(sizeof(sys_process_event_handler));
+    sys_process_event_handler *new_event = (sys_process_event_handler *) Sys_Malloc(sizeof(sys_process_event_handler));
     if(new_event == 0){
         return false;
     }
@@ -907,7 +908,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
     //add eventID to the list of occured events
     if(sys_occured_events == 0){
        Sys_Start_CriticalSection();
-       sys_occured_events = malloc(sizeof(sys_occured_event));
+       sys_occured_events = Sys_Malloc(sizeof(sys_occured_event));
        if(sys_occured_events == 0){
            return; //no memory left
        }
@@ -923,7 +924,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
 
             if(o_event->next == 0){
                 Sys_Start_CriticalSection();
-                o_event->next = malloc(sizeof(sys_occured_event));
+                o_event->next = Sys_Malloc(sizeof(sys_occured_event));
                 if(o_event->next == 0){
                     return; //no memory left
                 }
@@ -948,19 +949,19 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
         }
 
         if( is_condition_met ){
-            sys_event_data *e_data = (sys_event_data*) malloc(sizeof(sys_event_data));
+            sys_event_data *e_data = (sys_event_data*) Sys_Malloc(sizeof(sys_event_data));
             if(e_data == 0){//if malloc fails .. exit
                 return;
             }
 
             if(length != 0){
-                e_data->value = malloc(length);
+                e_data->value = Sys_Malloc(length);
                 if(e_data->value == 0){//if malloc fails .. exit
                     free(e_data);
                     return;
                 }
 
-                memcpy(e_data->value, data, length);
+                Sys_Memcpy(data, e_data->value, length);
             }else{
                 e_data->value = 0;
             }

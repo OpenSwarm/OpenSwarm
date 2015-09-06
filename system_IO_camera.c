@@ -31,6 +31,7 @@
 #include "system_Events.h"
 #include "system_IO.h"
 #include "system_Interrupts.h"
+#include "system_Memory.h"
 
 #define FRAME_WIDTH     10
 #define FRAME_HEIGHT    10
@@ -58,11 +59,11 @@ inline void Sys_Process_newFrame(void);
 void Sys_Camera_PreProcessor(void);
 
 inline void Sys_Write_to_Camera(uint8 address, uint8* data, uint16 length){
-    uint8 *i2c_data = malloc(length+1);
+    uint8 *i2c_data = (uint8 *) Sys_Malloc(length+1);
 
     i2c_data[0] = address;
 
-    memcpy(i2c_data+1,data,length);
+    Sys_Memcpy(data, i2c_data+1,length);
 
     Sys_I2C_SentBytes(CAMERA_I2C_ADDRESS, i2c_data, length+1);
 }
@@ -94,13 +95,13 @@ void Sys_Init_Camera(){
         free(frame_a);
     }
 
-    frame_a = malloc(sizeof(sys_rgb_pixel *) * FRAME_WIDTH);
+    frame_a = (sys_rgb_pixel **) Sys_Malloc(sizeof(sys_rgb_pixel *) * FRAME_WIDTH);
     if(frame_a == 0){ //no memory
         return;
     }
 
     for(i = 0; i < FRAME_WIDTH; i++){
-        frame_a[i] = malloc(sizeof(sys_rgb_pixel) * FRAME_HEIGHT);
+        frame_a[i] = (sys_rgb_pixel *) Sys_Malloc(sizeof(sys_rgb_pixel) * FRAME_HEIGHT);
         if(frame_a[i] == 0){//no memory
             uint8 j = 0;
             for(j = 0; j < i; j++){
@@ -120,13 +121,13 @@ void Sys_Init_Camera(){
         free(frame_b);
     }
 
-    frame_b = malloc(sizeof(sys_rgb_pixel *) * FRAME_WIDTH);
+    frame_b = (sys_rgb_pixel **) Sys_Malloc(sizeof(sys_rgb_pixel *) * FRAME_WIDTH);
     if(frame_b == 0){ //no memory
         return;
     }
 
     for(i = 0; i < FRAME_WIDTH; i++){
-        frame_b[i] = malloc(sizeof(sys_rgb_pixel) * FRAME_HEIGHT);
+        frame_b[i] = (sys_rgb_pixel *) Sys_Malloc(sizeof(sys_rgb_pixel) * FRAME_HEIGHT);
         if(frame_b[i] == 0){//no memory
             uint8 j = 0;
             for(j = 0; j < i; j++){
