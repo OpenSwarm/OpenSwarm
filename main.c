@@ -36,8 +36,9 @@
 #include <stdbool.h>       /* Includes true/false definition                  */
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
-#include "user.h"          /* User funct/params, such as InitApp              */
 #include "definitions.h"
+
+#include "user.h"          /* User funct/params, such as InitApp              */
 
 #include "HDI_epuck_ports.h"
 #include "HDI_init_port.h"
@@ -68,7 +69,8 @@ int16_t main(void)
     //Sys_Init_MCU_HDI();
     /* Configure the oscillator for the device */
     Sys_Init_Kernel();
-    Sys_SetReadingFunction_UART1(bluetooth_reader);
+    
+    //Sys_SetReadingFunction_UART1(bluetooth_reader);
     //Sys_Init_Motors();
     Sys_Start_Process_HDI(task1);
     
@@ -115,12 +117,12 @@ void task1(){
             u++;
         }
         if(u == 20){
-            LED6 = ~LED6;
-            if(LED6 == 1){
+            //LED6 = ~LED6;
+            //if(LED6 == 1){
                 //Sys_Writeto_UART1("on\r\n",5);
-            }else{
+            //}else{
                 //Sys_Writeto_UART1("off\r\n",5);
-            }
+            //}
             u=0;
         }
     }
