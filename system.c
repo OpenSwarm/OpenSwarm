@@ -35,6 +35,7 @@
 #include "system_IO.h"
 #include "system_IO_motors.h"
 #include "system_IO_uart.h"
+#include "system_IO_camera.h"
 
 #include "HDI_init_port.h"
 #include "definitions.h"
@@ -64,6 +65,7 @@ void Sys_Init_Kernel(){
     Sys_Init_IOManagement();
     Sys_Init_Motors();
     Sys_Init_UART1();
+    Sys_Init_Camera();
 }
 
 
@@ -109,6 +111,7 @@ void Sys_Start_Kernel(void){
     Sys_Start_SystemTimer_HDI();
 
     Sys_Start_IOManagement();
-    Sys_Start_UART1();
+    //Sys_Start_UART1();
+    Sys_Start_Camera();
 }
 

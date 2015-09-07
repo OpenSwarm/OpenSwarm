@@ -20,6 +20,8 @@
       <itemPath>system_IO_camera.h</itemPath>
       <itemPath>system_Interrupts.h</itemPath>
       <itemPath>system_Memory.h</itemPath>
+      <itemPath>e_I2C_master_module.h</itemPath>
+      <itemPath>e_I2C_protocol.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -46,6 +48,8 @@
       <itemPath>system_IO_camera.c</itemPath>
       <itemPath>system_Interrupts.c</itemPath>
       <itemPath>system_Memory.c</itemPath>
+      <itemPath>e_I2C_master_module.c</itemPath>
+      <itemPath>e_I2C_protocol.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

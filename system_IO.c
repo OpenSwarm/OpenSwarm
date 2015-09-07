@@ -238,7 +238,7 @@ void Sys_Unregister_IOHandler(pFunction func){
         if(handler->function == func){
             pre_handler->next = handler->next;
             handler->next = 0;
-            free(handler);
+            Sys_Free(handler);
             return;
         }
 

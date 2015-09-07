@@ -20,7 +20,7 @@
  */
 
 #include "system_IO_camera.h"
-#include "system_IO_i2c.h"
+
 
 #include <p30F6014A.h>
 #include <stdlib.h>
@@ -30,8 +30,11 @@
 
 #include "system_Events.h"
 #include "system_IO.h"
+//#include "system_IO_i2c.h"
 #include "system_Interrupts.h"
 #include "system_Memory.h"
+
+#include "e_I2C_protocol.h"
 
 #define FRAME_WIDTH     10
 #define FRAME_HEIGHT    10
@@ -78,21 +81,24 @@ void Sys_Init_Camera(){
     if(!Sys_Register_Event(SYS_EVENT_IO_CAMERA)){
         return;
     }
+        BODY_LED = 1;
 
     CAM_VSYNC_DIR = INPUT_PIN;
     CAM_HREF_DIR = INPUT_PIN;
     CAM_PCLK_DIR = INPUT_PIN;
 
-    Sys_Init_I2C();
-    Sys_Start_I2C();
+    //Sys_Init_I2C();
+    //Sys_Start_I2C();
+	e_i2cp_init();
 
+    CAM_RESET=0;
     uint8 i = 0;
 
     if(frame_a != 0){
         for(i = 0; i < FRAME_WIDTH; i++){
-            free(frame_a[i]);
+            Sys_Free(frame_a[i]);
         }
-        free(frame_a);
+        Sys_Free(frame_a);
     }
 
     frame_a = (sys_rgb_pixel **) Sys_Malloc(sizeof(sys_rgb_pixel *) * FRAME_WIDTH);
@@ -105,20 +111,22 @@ void Sys_Init_Camera(){
         if(frame_a[i] == 0){//no memory
             uint8 j = 0;
             for(j = 0; j < i; j++){
-                free(frame_a[j]);
+                Sys_Free(frame_a[j]);
             }
-            free(frame_a);
+            Sys_Free(frame_a);
             return;
         }
     }
     //frame_a is initialised
+    CAM_RESET=1;
+
     current_frame = frame_a;
 
     if(frame_b != 0){
         for(i = 0; i < FRAME_WIDTH; i++){
-            free(frame_b[i]);
+            Sys_Free(frame_b[i]);
         }
-        free(frame_b);
+        Sys_Free(frame_b);
     }
 
     frame_b = (sys_rgb_pixel **) Sys_Malloc(sizeof(sys_rgb_pixel *) * FRAME_WIDTH);
@@ -131,9 +139,9 @@ void Sys_Init_Camera(){
         if(frame_b[i] == 0){//no memory
             uint8 j = 0;
             for(j = 0; j < i; j++){
-                free(frame_b[j]);
+                Sys_Free(frame_b[j]);
             }
-            free(frame_b);
+            Sys_Free(frame_b);
             return;
         }
     }
@@ -168,9 +176,10 @@ void Sys_Init_Camera(){
     byte = 0x00;
     Sys_Write_to_Camera(0x03,&byte,1);//set data to R5G6B5
 
-    IEC0bits.T1IE = 1;// enable pixel interrupt
-    IEC1bits.T4IE = 1;// enable line interrupt
-    IEC1bits.T5IE = 1;// enable frame interrupt
+
+    IEC0bits.T1IE = 0;// enable pixel interrupt
+    IEC1bits.T4IE = 0;// enable line interrupt
+    IEC1bits.T5IE = 0;// enable frame interrupt
 
     IFS0bits.T1IF = 0;
     IFS1bits.T4IF = 0;
@@ -205,6 +214,14 @@ void Sys_Init_Camera(){
 }
 
 void Sys_Start_Camera(){
+
+    IFS0bits.T1IF = 0;
+    IFS1bits.T4IF = 0;
+    IFS1bits.T5IF = 0;
+
+    IEC0bits.T1IE = 1;// enable pixel interrupt
+    IEC1bits.T4IE = 1;// enable line interrupt
+    IEC1bits.T5IE = 1;// enable frame interrupt
 
 }
 
@@ -250,6 +267,7 @@ inline void Sys_Finished_Frame(){
 }
 
 inline void Sys_Process_newPixel(){
+    LED1 = 1;
 
     static uint8 buffer = 0;
 
@@ -281,6 +299,8 @@ inline void Sys_Process_newPixel(){
 }
 
 inline void Sys_Process_newLine(){
+    LED2 = 1;
+
     if( CAM_VSYNC != 1){
         Sys_Finished_Frame();
         return;
@@ -289,6 +309,7 @@ inline void Sys_Process_newLine(){
 }
 
 inline void Sys_Process_newFrame(){
+    LED3 = 1;
     T4CONbits.TON = 1;//enable new Line interrupt -> minimise IRQ overhead
 }
 
@@ -319,6 +340,7 @@ void Sys_Camera_PreProcessor(void){
     uint16 red_counter = 0;
     uint16 green_counter = 0;
     uint16 blue_counter = 0;
+
 
     for(c = 0; c < FRAME_WIDTH; c++){
         for(r = 0; r < FRAME_HEIGHT; r++){

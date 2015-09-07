@@ -7,6 +7,7 @@
 
 #include "definitions.h"
 #include "system_Memory.h"
+#include "system_Interrupts.h"
 
 typedef enum { I2C_IDLE = 0, I2C_IS_STARTING, I2C_STARTED, I2C_IS_READING, I2C_IS_SENDING, I2C_SENT, I2C_ACKNOWLEDGED, I2C_IS_STOPPING, I2C_ERROR} sys_I2C_state;
 typedef enum { I2C_IDLE_MODE = 0, I2C_WRITING_ADDRESS_MODE, I2C_READING_BYTES_MODE, I2C_WRITING_BYTES_MODE, I2C_ERROR_MODE} sys_I2C_mode;
@@ -51,7 +52,7 @@ inline void Sys_Init_I2C(){
     I2CBRG=150;		// frequency of SCL at 100kHz
 
     //TODO: have to check the priority levels of the others
-    IPC3bits.MI2CIP=6; // priority level
+    IPC3bits.MI2CIP=SYS_IRQP_I2C; // priority level
 
     I2CCONbits.I2CEN=1; // enable I2C
 }
@@ -85,7 +86,7 @@ inline void Sys_Stop_I2C(void){
  *      ACK was sent/recieved
  *      repeated Start was sent/recieved
  *      Carrier collusion :(
- */
+ 
 void  __attribute__((__interrupt__, auto_psv)) _MI2CInterrupt(void)
 {
     IFS0bits.MI2CIF=0; // clear interrupt flag
@@ -239,7 +240,7 @@ void  __attribute__((__interrupt__, auto_psv)) _MI2CInterrupt(void)
     Sys_I2C_Send_Stop();
     return;
 }
-
+*/
 
 inline void Sys_I2C_Send_Start(){
     if(I2CSTATbits.P){//was the stop-bit = P the last thing which was sent or received -> if yes i2c bus is in idlemode
@@ -314,10 +315,10 @@ void Sys_I2C_FreeMessages(sys_i2c_messages *list){
         list = list->next;
 
         if(element->data != 0){
-            free(element->data);
+            Sys_Free(element->data);
         }
 
-        free(element);
+        Sys_Free(element);
     }
 }
 
@@ -356,7 +357,7 @@ void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint16 length){
 void Sys_I2C_Read(uint8 address, uint8 *intern_address, uint16 length, pByteFunction bytehandler){
     sys_i2c_msg *new = Sys_Malloc(sizeof(sys_i2c_msg));
     if(new == 0){
-        free(intern_address);
+        Sys_Free(intern_address);
         return;
     }
 
@@ -368,8 +369,8 @@ void Sys_I2C_Read(uint8 address, uint8 *intern_address, uint16 length, pByteFunc
 
     sys_i2c_msg *second = Sys_Malloc(sizeof(sys_i2c_msg));
     if(second == 0){
-        free(intern_address);
-        free(new);
+        Sys_Free(intern_address);
+        Sys_Free(new);
         return;
     }
 

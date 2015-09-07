@@ -252,7 +252,7 @@ bool Sys_Start_Process_HDI(pFunction function){
   }
 
   if(!Sys_Set_Defaults_PCB(&element->pcb,0)){
-      free(element);//set default values
+      Sys_Free(element);//set default values
       return false;
   }
   element->pcb.sheduler_info.priority = SYS_PROCESS_PRIORITY_NORMAL; //this element is the system process
@@ -387,9 +387,9 @@ void Sys_Delete_Process(sys_pcb_list_element *element){
 
     Sys_Clear_EventRegister(element);
 
-    free(element->pcb.process_stack);
+    Sys_Free(element->pcb.process_stack);
     element->pcb.process_stack = 0;
-    free(element);
+    Sys_Free(element);
 
     Sys_End_CriticalSection();
 }
@@ -407,6 +407,8 @@ inline void Sys_Save_Running_Process_HDI(){
     if(sys_running_process == 0){//if there is no running process (ERROR)
             return;//don't know what to do
     }
+
+    Sys_Start_UninterruptableSection();
 
     //PUSH all on the stack
     __asm__(
@@ -444,7 +446,6 @@ inline void Sys_Save_Running_Process_HDI(){
             "PUSH W3\n"
             );
 
-    Sys_Start_UninterruptableSection();
             __asm__(
                 "MOV W14, %0\n\t"
                 "MOV W15, %1\n\t"
@@ -514,6 +515,8 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
     new_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_RUNNING;
     sys_running_process = new_process;
 
+    Sys_Start_UninterruptableSection();
+
     __asm__("ULNK\n");//remove the last function waste & restore all registers
     __asm__("POP W3\n");
     __asm__("POP W2\n");
@@ -549,6 +552,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "POP SR\n"
             );
 
+    Sys_End_UninterruptableSection();
             //__asm__("MOV #0x0C40, W14\n");
             //__asm__("MOV #0x0C46, W15\n");
     __asm__("ULNK\n");//remove all waste from Sys_Save_Running_Process_HDI
@@ -957,7 +961,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
             if(length != 0){
                 e_data->value = Sys_Malloc(length);
                 if(e_data->value == 0){//if malloc fails .. exit
-                    free(e_data);
+                    Sys_Free(e_data);
                     return;
                 }
 
@@ -1015,7 +1019,7 @@ inline void Sys_Execute_All_EventHandler(){
         sys_occured_event *occured_event = o_event;
         o_event = o_event->next;
 
-        free(occured_event);
+        Sys_Free(occured_event);
     }
 }
 
@@ -1058,7 +1062,7 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eve
        *list = top->next;
 
        Sys_Clear_EventData(&top->buffered_data);
-       free(top);
+       Sys_Free(top);
 
        return new_top;
     }
@@ -1071,7 +1075,7 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eve
             previous_element->next = element->next;
 
             Sys_Clear_EventData(&element->buffered_data);
-            free(element);
+            Sys_Free(element);
 
             element = previous_element->next;
             continue;
@@ -1090,8 +1094,8 @@ inline void Sys_Clear_EventData(sys_event_data **data){
     while(element != 0){
            sys_event_data *temp = element;
 
-           free(temp->value);
-           free(temp);
+           Sys_Free(temp->value);
+           Sys_Free(temp);
 
            element = element->next;
        }
@@ -1107,7 +1111,7 @@ inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
         event_h = event_h->next;
 
         Sys_Clear_EventData(&temp->buffered_data);
-        free(temp);
+        Sys_Free(temp);
     }
     element->pcb.event_register = 0;
 }
@@ -1170,7 +1174,7 @@ sys_event_data *Sys_Wait_For_Condition(uint16 eventID, pConditionFunction functi
                 prev_event->next = event->next;
             }
             event->next = 0;
-            free(event);//deletes event handler but leaves the data (return value)
+            Sys_Free(event);//deletes event handler but leaves the data (return value)
 
             return data;
         }

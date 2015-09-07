@@ -119,7 +119,7 @@ void Sys_Writeto_UART1(uint8 *data, uint16 length){
 
     element->data = Sys_Malloc(length);
     if(element->data == 0){//not enough memory
-        free(element);
+        Sys_Free(element);
         return;
     }
     Sys_Memcpy(data,element->data,length);
@@ -144,11 +144,16 @@ void Sys_Writeto_UART2(uint8 *data, uint16 length){
 
     sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
-        free(data);
         return;
     }
 
-    element->data = data;
+    element->data = Sys_Malloc(length);
+    if(element->data == 0){//not enough memory
+        Sys_Free(element);
+        return;
+    }
+    Sys_Memcpy(data,element->data,length);
+
     element->length = length;
     element->next = 0;
 
@@ -163,7 +168,6 @@ void Sys_Writeto_UART2(uint8 *data, uint16 length){
         list = list->next;
     }
     list->next = element;
-
 }
 
 void __attribute__((interrupt,auto_psv)) _U1RXInterrupt(void){
@@ -218,8 +222,6 @@ inline void Sys_Read_UART1_ISR(){
 }
 
 inline void Sys_Write_UART1_ISR(){
-
-
     if(sys_UART1_TX_data == 0){//nothing to send
         byte_counter_uart1 = 0;
         return;
@@ -241,18 +243,15 @@ inline void Sys_Write_UART1_ISR(){
         sys_UART1_TX_data = sys_UART1_TX_data->next;
         element->next = 0;
 
-        free(element->data);
-        free(element);
+        Sys_Free(element->data);
+        Sys_Free(element);
 
         Sys_End_UninterruptableSection();
 
         if(sys_UART1_TX_data == 0){//it was the last msg
             return;
         }
-        
-
     }
-
 }
 inline void Sys_Read_UART2_ISR(){
     uint8 data;
@@ -272,31 +271,30 @@ inline void Sys_Read_UART2_ISR(){
 
 }
 inline void Sys_Write_UART2_ISR(){
-
-    LED5 = ~LED5;
-    static uint16 byte_counter = 0;
-
-    if(sys_UART2_TX_data == 0){//nothing to send
-        return;
-    }
-
     while(U2STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
-        if(byte_counter == sys_UART2_TX_data->length){//transmitted the last byte
-            byte_counter = 0;
-            sys_uart_txdata *element = sys_UART2_TX_data;
 
-            sys_UART2_TX_data = sys_UART2_TX_data->next;
-            element->next = 0;
-
-            free(element->data);
-            free(element);
-
-            if(sys_UART2_TX_data == 0){//it was the last msg
-                return;
-            }
+        if(sys_UART2_TX_data == 0){//it was the last msg
+            byte_counter_uart2 = 0;
+            return;
         }
 
-        U2TXREG = sys_UART2_TX_data->data[byte_counter++];//add new byte
+        if(byte_counter_uart2 < sys_UART2_TX_data->length){
+            U1TXREG = sys_UART2_TX_data->data[byte_counter_uart2];//add new byte
+            byte_counter_uart2++;
+            continue;
+        }
 
+        Sys_Start_UninterruptableSection();
+
+        byte_counter_uart2 = 0;
+        sys_uart_txdata *element = sys_UART2_TX_data;
+
+        sys_UART2_TX_data = sys_UART2_TX_data->next;
+        element->next = 0;
+
+        Sys_Free(element->data);
+        Sys_Free(element);
+
+        Sys_End_UninterruptableSection();
     }
 }

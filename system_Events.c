@@ -131,7 +131,7 @@ void Sys_Unregister_Event(uint16 eventID){
                sys_subscribed_process* temp = subscriber;
                subscriber = subscriber->next;
 
-               free(temp);
+               Sys_Free(temp);
             }
 
             Sys_Remove_All_Event_Subscriptions(eventID);//
@@ -146,7 +146,7 @@ void Sys_Unregister_Event(uint16 eventID){
                sys_subscribed_process* temp = subscriber;
                subscriber = subscriber->next;
 
-               free(temp);
+               Sys_Free(temp);
             }
             Sys_Remove_All_Event_Subscriptions(eventID);//removes event elements from all processes
             event = next_event->next;
@@ -166,7 +166,7 @@ void Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid){
     sys_subscribed_process* subscriber = event->subscribers;
     if(event->subscribers->pid == pid){
         event->subscribers = event->subscribers->next;
-        free(subscriber);
+        Sys_Free(subscriber);
 
         Sys_Remove_Event_Subscription(pid, eventID, 0);
         return;
@@ -176,7 +176,7 @@ void Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid){
     while(next_subscriber != 0){
         if(next_subscriber->pid == pid){
             subscriber->next = next_subscriber->next;
-            free(next_subscriber);
+            Sys_Free(next_subscriber);
 
             Sys_Remove_Event_Subscription(pid, eventID, 0);
             return;
@@ -193,7 +193,7 @@ void Sys_Unsubscribe_Handler_from_Event(uint16 eventID, pEventHandlerFunction fu
     sys_subscribed_process* subscriber = event->subscribers;
     if(event->subscribers->pid == pid){
         event->subscribers = event->subscribers->next;
-        free(subscriber);
+        Sys_Free(subscriber);
 
         Sys_Remove_Event_Subscription(pid, eventID, func);
         return;
@@ -203,7 +203,7 @@ void Sys_Unsubscribe_Handler_from_Event(uint16 eventID, pEventHandlerFunction fu
     while(next_subscriber != 0){
         if(next_subscriber->pid == pid){
             subscriber->next = next_subscriber->next;
-            free(next_subscriber);
+            Sys_Free(next_subscriber);
 
             Sys_Remove_Event_Subscription(pid, eventID, func);
             return;
@@ -249,7 +249,7 @@ void Sys_Unsubscribe_Process(uint16 pid){
         sys_subscribed_process* subscriber = event->subscribers;
         if(event->subscribers->pid == pid){
             event->subscribers = event->subscribers->next;
-            free(subscriber);
+            Sys_Free(subscriber);
 
             Sys_Remove_Event_Subscription(pid, event->id, 0);
             continue;
@@ -259,7 +259,7 @@ void Sys_Unsubscribe_Process(uint16 pid){
         while(next_subscriber != 0){
             if(next_subscriber->pid == pid){
                 subscriber->next = next_subscriber->next;
-                free(next_subscriber);
+                Sys_Free(next_subscriber);
 
                 Sys_Remove_Event_Subscription(pid, event->id, 0);
                 break;

@@ -35,6 +35,8 @@ extern "C" {
 #define SYS_IRQP_UART1 4
 #define SYS_IRQP_UART2 4
 
+#define SYS_IRQP_I2C 5
+
 #define SYS_IRQP_CAMERA_PIXEL 5
 #define SYS_IRQP_CAMERA_LINE  6
 #define SYS_IRQP_CAMERA_FRAME 7
