@@ -26,6 +26,7 @@
       <itemPath>e_po6030k.h</itemPath>
       <itemPath>e_po8030d.h</itemPath>
       <itemPath>e_poxxxx.h</itemPath>
+      <itemPath>system_IO_remoteControl.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -69,6 +70,7 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
     <itemPath>e_interrupt.s</itemPath>
+    <itemPath>system_IO_remoteControl.c</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>

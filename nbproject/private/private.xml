@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
@@ -7,7 +8,10 @@
             <file>file:/home/strenkwalder/code/os/e_I2C_protocol.c</file>
             <file>file:/home/strenkwalder/code/os/main.c</file>
             <file>file:/home/strenkwalder/code/os/system.h</file>
+            <file>file:/home/strenkwalder/code/os/nbproject/Makefile-XC16_dsPIC30F6014A.mk</file>
+            <file>file:/home/strenkwalder/code/os/system_IO_remoteControl.h</file>
             <file>file:/home/strenkwalder/code/os/system.c</file>
+            <file>file:/home/strenkwalder/code/os/system_IO_remoteControl.c</file>
             <file>file:/home/strenkwalder/code/os/system_IO_camera.c</file>
             <file>file:/home/strenkwalder/code/os/e_I2C_protocol.h</file>
             <file>file:/home/strenkwalder/code/os/HDI_init_port.c</file>
