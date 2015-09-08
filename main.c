@@ -72,7 +72,7 @@ int16_t main(void)
     
     //Sys_SetReadingFunction_UART1(bluetooth_reader);
     //Sys_Init_Motors();
-    Sys_Start_Process_HDI(task1);
+    //Sys_Start_Process_HDI(task1);
     
     Sys_Start_Kernel();
     //Sys_Register_IOHandler(bodyLED);
@@ -98,7 +98,7 @@ int16_t main(void)
         
         if(i == 0xFFFE){
             i = 0;
-            LED0 = ~LED0;
+            //LED0 = ~LED0;
             
         }
         i++;

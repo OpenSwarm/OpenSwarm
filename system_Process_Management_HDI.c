@@ -495,6 +495,10 @@ void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsi
 
 void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
 
+    if(new_process == sys_running_process){
+        return;
+    }
+
     Sys_Save_Running_Process_HDI();//save all registers
 
     Sys_Change_Stack_HDI(new_process->pcb.framePointer, new_process->pcb.stackPointer, new_process->pcb.stackPointerLimit);//change stack to the new stack

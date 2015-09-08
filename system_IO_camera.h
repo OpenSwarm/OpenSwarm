@@ -33,9 +33,9 @@ extern "C" {
 #define SYS_MAX_BLUE    0b00011111;
 
     typedef struct sys_rgb_pixel_s{
-        uint8 red;
-        uint8 green;
-        uint8 blue;
+        uint8 red   : 5;
+        uint8 green : 6;
+        uint8 blue  : 5;
     }sys_rgb, sys_rgb_pixel;
 
     typedef void (*pCameraPreProcessor)(sys_rgb_pixel **frame, uint16 width, uint16 height);
@@ -45,7 +45,7 @@ extern "C" {
 
     void Sys_Set_Preprocessing(pCameraPreProcessor func);
 
-    sys_rgb_pixel **getFinishedFrame();
+    sys_rgb_pixel *getFinishedFrame();
     bool isNewFrameAvailable();
 
 #ifdef	__cplusplus

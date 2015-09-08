@@ -34,24 +34,27 @@
 #include "system_Interrupts.h"
 #include "system_Memory.h"
 
-#include "e_I2C_protocol.h"
+#include "e_poxxxx.h"
+#include "e_po6030k.h"
 
 #define FRAME_WIDTH     10
 #define FRAME_HEIGHT    10
 #define CAMERA_I2C_ADDRESS 0xDC
 
-#define RED_THRESHOLD   0b00000011
-#define GREEN_THRESHOLD 0b00111111
-#define BLUE_THRESHOLD  0b00010011
+#define RED_THRESHOLD   0b00010011
+#define GREEN_THRESHOLD 0b00011111
+#define BLUE_THRESHOLD  0b00001011
 
 static pCameraPreProcessor pre_processor = 0;
 
-static sys_rgb_pixel **frame_a = 0;
-static sys_rgb_pixel **frame_b = 0;
+static sys_rgb_pixel *frame_a = 0;
+static sys_rgb_pixel *frame_b = 0;
+static uint16 max_frame_size = 0;
 
-static sys_rgb_pixel **current_frame = 0;
+static sys_rgb_pixel *current_frame = 0;
 static uint16 current_row = 0;
 static uint16 current_col = 0;
+static uint16 current_pos = 0;
 
 static bool is_newframe_available = false;
 
@@ -71,7 +74,30 @@ inline void Sys_Write_to_Camera(uint8 address, uint8* data, uint16 length){
 //    Sys_I2C_SentBytes(CAMERA_I2C_ADDRESS, i2c_data, length+1);
 }
 
+
+static unsigned char buffer[10*10*2] = {0};
 void Sys_Init_Camera(){
+
+
+#define CAM_WIDTH 160
+#define CAM_HEIGHT 160
+#define CAM_ZOOM_X 4
+#define CAM_ZOOM_Y 4
+
+e_poxxxx_init_cam ();
+e_poxxxx_config_cam(300, 220, 40, 40, 4, 4, RGB_565_MODE);
+e_po6030k_write_register(BANK_C, 0x04, 0b10011110);
+e_po6030k_write_register(BANK_C, 0x55, 0x00);
+e_po6030k_write_register(BANK_C, 0x56, 0x00);
+e_po6030k_write_register(BANK_C, 0x28, 0x10);
+e_po6030k_write_register(BANK_C, 0x29, 0x00);
+
+e_poxxxx_launch_capture(&buffer[0]); //take first image
+    if(!Sys_Register_IOHandler(Sys_Camera_PreProcessor)){
+        return;
+    }
+    
+    /*
 
     Sys_Init_IOManagement();
 
@@ -79,11 +105,6 @@ void Sys_Init_Camera(){
         return;
     }
     
-    if(!Sys_Register_IOHandler(Sys_Camera_PreProcessor)){
-        return;
-    }
-       
-    BODY_LED = 1;
 
     //CAM_VSYNC_DIR = INPUT_PIN;
     //CAM_HREF_DIR = INPUT_PIN;
@@ -94,29 +115,25 @@ void Sys_Init_Camera(){
 	e_i2cp_init();
 
     CAM_RESET=0;
-    uint8 i = 0;
 
     if(frame_a != 0){
-        for(i = 0; i < FRAME_HEIGHT; i++){
-            Sys_Free(frame_a[i]);
-        }
         Sys_Free(frame_a);
     }
 
-    frame_a = (sys_rgb_pixel **) Sys_Malloc(sizeof(sys_rgb_pixel *) * FRAME_HEIGHT);
+    max_frame_size = sizeof(sys_rgb_pixel) * FRAME_HEIGHT * FRAME_WIDTH;
+    frame_a = (sys_rgb_pixel *) Sys_Malloc(max_frame_size);
     if(frame_a == 0){ //no memory
         return;
     }
 
-    for(i = 0; i < FRAME_WIDTH; i++){
-        frame_a[i] = (sys_rgb_pixel *) Sys_Malloc(sizeof(sys_rgb_pixel) * FRAME_WIDTH);
-        if(frame_a[i] == 0){//no memory
-            uint8 j = 0;
-            for(j = 0; j < i; j++){
-                Sys_Free(frame_a[j]);
-            }
-            Sys_Free(frame_a);
-            return;
+
+    uint16 c = 0;
+    uint16 r = 0;
+    for(r = 0; r < FRAME_HEIGHT; r++){
+        for(c = 0; c < FRAME_WIDTH; c++){
+            frame_a[r*FRAME_WIDTH+c].red = 0;
+            frame_a[r*FRAME_WIDTH+c].green = 0;
+            frame_a[r*FRAME_WIDTH+c].blue = 0;
         }
     }
     //frame_a is initialised
@@ -124,44 +141,26 @@ void Sys_Init_Camera(){
     current_frame = frame_a;
 
     if(frame_b != 0){
-        for(i = 0; i < FRAME_WIDTH; i++){
-            Sys_Free(frame_b[i]);
-        }
         Sys_Free(frame_b);
     }
 
-    frame_b = (sys_rgb_pixel **) Sys_Malloc(sizeof(sys_rgb_pixel *) * FRAME_HEIGHT);
+    CAM_RESET=1;
+
+    frame_b = (sys_rgb_pixel *) Sys_Malloc(sizeof(sys_rgb_pixel) * FRAME_HEIGHT * FRAME_WIDTH);
     if(frame_b == 0){ //no memory
         return;
     }
 
-    for(i = 0; i < FRAME_WIDTH; i++){
-        frame_b[i] = (sys_rgb_pixel *) Sys_Malloc(sizeof(sys_rgb_pixel) * FRAME_WIDTH);
-        if(frame_b[i] == 0){//no memory
-            uint8 j = 0;
-            for(j = 0; j < i; j++){
-                Sys_Free(frame_b[j]);
-            }
-            Sys_Free(frame_b);
-            return;
-        }
-    }
-    CAM_RESET=1;
-    
-    uint16 c = 0;
-    uint16 r = 0;
-    for(c = 0; c < FRAME_WIDTH; c++){
-        for(r = 0; r < FRAME_HEIGHT; r++){
-            frame_a[r][c].red = 0;
-            frame_a[r][c].green = 0;
-            frame_a[r][c].blue = 0;
-            frame_b[r][c].red = 0;
-            frame_b[r][c].green = 0;
-            frame_b[r][c].blue = 0;
+    for(r = 0; r < FRAME_HEIGHT; r++){
+        for(c = 0; c < FRAME_WIDTH; c++){
+            frame_b[r*FRAME_WIDTH+c].red = 0;
+            frame_b[r*FRAME_WIDTH+c].green = 0;
+            frame_b[r*FRAME_WIDTH+c].blue = 0;
         }
     }
     //frame_b is initialised
-    
+    current_pos = 0;
+
 #define BANK_A 0x0
 #define BANK_B 0x1
 #define BANK_C 0x2
@@ -196,7 +195,7 @@ void Sys_Init_Camera(){
 	e_i2cp_write(CAMERA_I2C_ADDRESS, 0x81, 0x80);
 	e_i2cp_write(CAMERA_I2C_ADDRESS, 0x82, 0x01);
     
-    /*
+    ////*
     uint8 byte = 0x01;
     Sys_Write_to_Camera(0x03,&byte,1);//set regesters to group B
 
@@ -227,8 +226,6 @@ void Sys_Init_Camera(){
     byte = 0x00;
     Sys_Write_to_Camera(0x03,&byte,1);//set data to R5G6B5
 
-     * 
-     */
 
     IEC0bits.T1IE = 0;// enable pixel interrupt
     IEC1bits.T4IE = 0;// enable line interrupt
@@ -264,11 +261,11 @@ void Sys_Init_Camera(){
     T5CONbits.TGATE = 0;
     T5CONbits.TCS = 1; //enable external clock from T1CK pin
     T5CONbits.TON = 1;
-
+*/
 }
 
 void Sys_Start_Camera(){
-
+/*
     IFS0bits.T1IF = 0;
     IFS1bits.T4IF = 0;
     IFS1bits.T5IF = 0;
@@ -276,24 +273,54 @@ void Sys_Start_Camera(){
     IEC0bits.T1IE = 1;// enable pixel interrupt
     IEC1bits.T4IE = 1;// enable line interrupt
     IEC1bits.T5IE = 1;// enable frame interrupt
-
+*/
 }
 
 void Sys_Set_Preprocessing(pCameraPreProcessor func){
     pre_processor = func;
 }
 
+/*
+
 void __attribute__((interrupt,auto_psv)) _T1Interrupt(void){
-    Sys_Process_newPixel();
-    
-    TMR1 = 0;
-    IFS0bits.T1IF = 0;
+
+    //PLL  = 8  instructions per MCLK
+    //QQVGA used -> 4 MCKL/Pixel
+    // < 32 instructions
+    __asm__ volatile ("bclr     _IFS0bits, #3");//copy pixel values into w2
+    __asm__ volatile ("clr      _TMR4       ");
+    __asm__ volatile ("push.s               ");//protect w0-4
+
+    __asm__ volatile ("mov    _PORTC, w0  ");
+    __asm__ volatile ("btst     w0,#3");// check CAM_HREF
+    __asm__ volatile ("bra      Z,FRAME_END");
+    __asm__ volatile ("btst     w0,#4");// check CAM_VSYNC
+    __asm__ volatile ("bra      Z,FRAME_END");                          //1 MCLK
+
+    __asm__ volatile ("mov    _PORTD, w4  ");//save pixel values in W4
+    __asm__ volatile ("mov  _current_frame,w1");
+    __asm__ volatile ("mov  #_current_pos, w2");
+    __asm__ volatile ("add  w1, w2, w0      ");//W0 = W1 + W2 -> points to the next pixel part
+    __asm__ volatile ("mov  w4, [w0]        ");
+    __asm__ volatile ("inc  _current_pos     ");//current_pos++
+
+    __asm__ volatile ("mov  #_current_pos,    w2");//
+    __asm__ volatile ("mov  #_max_frame_size, w1");//                   //2 MCLK
+    __asm__ volatile ("cp   w1, w2");//
+    __asm__ volatile ("bra  N, T1_END");//
+
+__asm__ volatile ("FRAME_END:");//retfie = 3 cycles
+    __asm__ volatile ("call  _Sys_Finished_Frame");//
+
+__asm__ volatile ("T1_END:");
+    __asm__ volatile ("pop.s                ");//retfie = 3 cycles
+
+    if(IFS1bits.T4IF == 0){
+        LED7 =1;
+    }
 }
 void __attribute__((interrupt,auto_psv)) _AltT1Interrupt(void){
     Sys_Process_newPixel();
-    
-    TMR1 = 0;
-    IFS0bits.T1IF = 0;
 }
 
 
@@ -323,6 +350,8 @@ void __attribute__((interrupt,auto_psv)) _AltT5Interrupt(void){
     IFS1bits.T5IF = 0;
 }
 
+*/
+
 inline void Sys_Finished_Frame(){
         T4CONbits.TON = 0;
         T1CONbits.TON = 0;
@@ -332,16 +361,49 @@ inline void Sys_Finished_Frame(){
             current_frame = frame_a;
         }
 
-        current_row = 0;
-        current_col = 0;
+        LED1 = ~LED1;
 
         is_newframe_available = true;
 }
 
 inline void Sys_Process_newPixel(){
+//#define CAM_PWDN _RC2
+//#define CAM_VSYNC _RC4
+//#define CAM_HREF _RC3
+//#define CAM_PCLK _RC14
 
-    static uint8 buffer = 0;
+    //PLL  = 8  instructions per MCLK
+    //QQVGA used -> 4 MCKL/Pixel
+    // < 32 instructions
+ /* __asm__ volatile ("bclr     _IFS0bits, #3");//copy pixel values into w2
+    __asm__ volatile ("clr      _TMR4       ");
+    __asm__ volatile ("push.s               ");//protect w0-4
 
+    __asm__ volatile ("mov    _PORTC, w0  ");
+    __asm__ volatile ("btst     w0,#3");// check CAM_HREF
+    __asm__ volatile ("bra      Z,FRAME_END");
+    __asm__ volatile ("btst     w0,#4");// check CAM_VSYNC
+    __asm__ volatile ("bra      Z,FRAME_END");                          //1 MCLK
+
+    __asm__ volatile ("mov    _PORTD, w4  ");//save pixel values in W4
+    __asm__ volatile ("mov  _current_frame,w1");
+    __asm__ volatile ("mov  #_current_pos, w2");
+    __asm__ volatile ("add  w1, w2, w0      ");//W0 = W1 + W2 -> points to the next pixel part
+    __asm__ volatile ("mov  w4, [w0]        ");
+    __asm__ volatile ("inc  _current_pos     ");//current_pos++
+
+    __asm__ volatile ("mov  #_current_pos,    w2");//
+    __asm__ volatile ("mov  #_max_frame_size, w1");//                   //2 MCLK
+    __asm__ volatile ("cp   w2, w1");//
+    __asm__ volatile ("bra  Z, T1_END");//
+
+__asm__ volatile ("FRAME_END:");//retfie = 3 cycles
+    __asm__ volatile ("call  _Sys_Finished_Frame");//
+
+__asm__ volatile ("T1_END:");
+    __asm__ volatile ("pop.s                ");//retfie = 3 cycles
+*/  
+    /*
     if( CAM_VSYNC != 1){
         Sys_Finished_Frame();
         return;
@@ -349,22 +411,34 @@ inline void Sys_Process_newPixel(){
 
     if(CAM_HREF != 1){
         T1CONbits.TON = 0;
-        current_row++;
-        current_col = 0;
         return;
     }
-        
+    
+    uint8 buffer = CAM_DATA;
+    current_frame[current_pos].red = buffer >> 3;
+    current_frame[current_pos].green = (buffer << 3) & 0b00111000;
+
+
+    buffer = CAM_DATA;
+    current_frame[current_pos].green |= (buffer >> 5);
+    current_frame[current_pos].blue = (buffer & 0b00011111);
+    //LED5 = CAM_PCLK_DIR;
+
+    
+    if( current_pos >= FRAME_WIDTH*FRAME_HEIGHT){
+        Sys_Finished_Frame();
+        return;
+    }
+    
     if(current_col >= FRAME_WIDTH){
         if(current_row >= FRAME_HEIGHT){
             Sys_Finished_Frame();
-            LED7 = 1;
             return;            
         }
         
         T1CONbits.TON = 0;
         current_row++;
         current_col = 0;
-            LED6 = 1;
         return;
     }
 
@@ -372,10 +446,6 @@ inline void Sys_Process_newPixel(){
         buffer = CAM_DATA;
         current_frame[current_row][current_col].red = buffer >> 3;
         current_frame[current_row][current_col].green = (buffer << 3) & 0b00111000;
-        
-        if(current_frame[current_row][current_col].red  != 0){
-            LED5 = 1;
-        }
         return;
     }else{
         buffer = CAM_DATA;
@@ -384,7 +454,8 @@ inline void Sys_Process_newPixel(){
 
         buffer = 0;
         current_col++;
-    }
+    }*/
+
 }
 
 inline void Sys_Process_newLine(){
@@ -394,15 +465,17 @@ inline void Sys_Process_newLine(){
         return;
     }
     T1CONbits.TON = 1;//enable new Pixel interrupt -> minimise IRQ overhead
+    TMR4 = 0;
 
 }
 
 inline void Sys_Process_newFrame(){
     T4CONbits.TON = 1;//enable new Line interrupt -> minimise IRQ overhead
+    TMR5 = 0;
 }
 
 
-sys_rgb_pixel **getFinishedFrame(){
+sys_rgb_pixel *getFinishedFrame(){
     is_newframe_available = false;
 
     if(current_frame != frame_a){
@@ -417,53 +490,51 @@ bool isNewFrameAvailable(){
 
 
 void Sys_Camera_PreProcessor(void){
-    if(!isNewFrameAvailable()){
+    if(!e_poxxxx_is_img_ready()){
         return;
     }
 
-    uint16 r = 0;
-    uint16 c = 0;
-    sys_rgb_pixel **frame = getFinishedFrame();
+    
+    uint16 i = 0;
+    sys_rgb_pixel *frame = (sys_rgb_pixel *) buffer;
 
     uint16 red_counter = 0;
     uint16 green_counter = 0;
     uint16 blue_counter = 0;
 
-
-    for(c = 0; c < FRAME_WIDTH; c++){
-        for(r = 0; r < FRAME_HEIGHT; r++){
-            if(frame[r][c].red > RED_THRESHOLD){
-                red_counter++; 
+    for(i = 0; i < 100; i++){
+            if(frame[i].red > RED_THRESHOLD){
+                red_counter++;
             }
-            if(frame[r][c].green > GREEN_THRESHOLD){
-                green_counter++; 
+            if(frame[i].green > GREEN_THRESHOLD){
+                green_counter++;
             }
-            if(frame[r][c].blue > BLUE_THRESHOLD){
-                blue_counter++; 
+            if(frame[i].blue > BLUE_THRESHOLD){
+                blue_counter++;
             }
-        }
     }
 
     uint8 colour = 0;
 
-    if(red_counter > (FRAME_WIDTH*FRAME_HEIGHT)/2){
+    if(red_counter > 35){
         colour |= RED;
         LED1 = 1;
     }else{
         LED1 = 0;
     }
-    if(green_counter > (FRAME_WIDTH*FRAME_HEIGHT)/2){
+    if(green_counter > 35){
         colour |= GREEN;
         LED2 = 1;
     }else{
         LED2 = 0;
     }
-    if(blue_counter > (FRAME_WIDTH*FRAME_HEIGHT)/2){
+    if(blue_counter > 35){
         colour |= BLUE;
         LED3 = 1;
     }else{
         LED3 = 0;
     }
 
-    Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, 1);
+    e_poxxxx_launch_capture(buffer);
+    //Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, 1);
 }

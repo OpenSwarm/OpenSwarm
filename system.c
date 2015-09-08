@@ -59,12 +59,12 @@ void Sys_Init_Kernel(){
     Sys_Init_Process_Management_HDI();
 
     //Init Events
-    Sys_Register_Event(SYS_EVENT_TERMINATION);
+    //Sys_Register_Event(SYS_EVENT_TERMINATION);
 
     //init I/O Devices
     Sys_Init_IOManagement();
-    Sys_Init_Motors();
-    Sys_Init_UART1();
+    //Sys_Init_Motors();
+    //Sys_Init_UART1();
     Sys_Init_Camera();
 }
 

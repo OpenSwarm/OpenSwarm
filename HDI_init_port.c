@@ -50,7 +50,7 @@ void Sys_Init_MCU_HDI(void)
 
 /********************** OUTPUTS ***************************/
 	/*LEDS*/
-	LED0 = 1;
+	LED0 = 0;
 	LED1 = 0;
 	LED2 = 0;
 	LED3 = 0;
@@ -140,5 +140,10 @@ void Sys_Init_MCU_HDI(void)
 	CAM_y5_DIR = INPUT_PIN;
 	CAM_y6_DIR = INPUT_PIN;
 	CAM_y7_DIR = INPUT_PIN;
+
+        //Stefan add
+        CAM_VSYNC_DIR = INPUT_PIN;
+        CAM_HREF_DIR = INPUT_PIN;
+        CAM_PCLK_DIR = INPUT_PIN;
 
 }
