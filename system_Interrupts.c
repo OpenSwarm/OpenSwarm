@@ -25,13 +25,20 @@
 #include <p30F6014A.h>
 
 static uint8 sys_IRQ_Priority = SYS_IRQP_SYSTEM_TIMER;
+static sint16 nesting = 0;
 
 inline void Sys_Start_AtomicSection(){
-    sys_IRQ_Priority = SRbits.IPL;
-    SRbits.IPL = SYS_IRQP_MAX;
+    if(nesting == 0){
+        sys_IRQ_Priority = SRbits.IPL;
+        SRbits.IPL = SYS_IRQP_MAX;
+    }
+    nesting++;
 }
 
 inline void Sys_End_AtomicSection(){
-    SRbits.IPL = sys_IRQ_Priority;
+    nesting--;
+    if(nesting == 0){
+        SRbits.IPL = sys_IRQ_Priority;
+    }
 }
 
