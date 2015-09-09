@@ -235,7 +235,7 @@ inline void Sys_Write_UART1_ISR(){
             continue;
         }
 
-        Sys_Start_UninterruptableSection();
+        Sys_Start_AtomicSection();
 
         byte_counter_uart1 = 0;
         sys_uart_txdata *element = sys_UART1_TX_data;
@@ -246,7 +246,7 @@ inline void Sys_Write_UART1_ISR(){
         Sys_Free(element->data);
         Sys_Free(element);
 
-        Sys_End_UninterruptableSection();
+        Sys_End_AtomicSection();
 
         if(sys_UART1_TX_data == 0){//it was the last msg
             return;
@@ -284,7 +284,7 @@ inline void Sys_Write_UART2_ISR(){
             continue;
         }
 
-        Sys_Start_UninterruptableSection();
+        Sys_Start_AtomicSection();
 
         byte_counter_uart2 = 0;
         sys_uart_txdata *element = sys_UART2_TX_data;
@@ -295,6 +295,6 @@ inline void Sys_Write_UART2_ISR(){
         Sys_Free(element->data);
         Sys_Free(element);
 
-        Sys_End_UninterruptableSection();
+        Sys_End_AtomicSection();
     }
 }

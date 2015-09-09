@@ -26,34 +26,34 @@
 void *Sys_Malloc(uint16 length){
     void *out = 0;
 
-    Sys_Start_UninterruptableSection();
+    Sys_Start_AtomicSection();
 
     out = malloc(length);
 
-    Sys_End_UninterruptableSection();
+    Sys_End_AtomicSection();
 
     return out;
 }
 
 void Sys_Free(void *data){
 
-    Sys_Start_UninterruptableSection();
+    Sys_Start_AtomicSection();
 
     free(data);
 
-    Sys_End_UninterruptableSection();
+    Sys_End_AtomicSection();
 
 }
 
 void Sys_Memcpy(uint8 *source, uint8 *destination, uint16 length){
 
-    Sys_Start_UninterruptableSection();
+    Sys_Start_AtomicSection();
 
     uint16 i = 0;
     for(i = 0; i < length; i++){
         destination[i] = source[i];
     }
 
-    Sys_End_UninterruptableSection();
+    Sys_End_AtomicSection();
 
 }

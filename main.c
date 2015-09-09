@@ -45,6 +45,7 @@
 
 #include "system_IO_motors.h"
 #include "system_IO_uart.h"
+#include "system_IO_remoteControl.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -98,7 +99,47 @@ int16_t main(void)
         
         if(i == 0xFFFE){
             i = 0;
-            //LED0 = ~LED0;
+
+            uint8 value = Sys_RemoteC_Get_Data();
+
+            if(value != 0){
+                FRONT_LED = 1;
+            }else{
+                FRONT_LED = 0;
+            }
+
+            if(value & 0b000001){
+                LED1 = 1;
+            }else{
+                LED1 = 0;
+            }
+            if(value & 0b000010){
+                LED2 = 1;
+            }else{
+                LED2 = 0;
+            }
+            if(value & 0b000100){
+                LED3 = 1;
+            }else{
+                LED3 = 0;
+            }
+            if(value & 0b001000){
+                LED4 = 1;
+            }else{
+                LED4 = 0;
+            }
+            if(value & 0b010000){
+                LED5 = 1;
+            }else{
+                LED5 = 0;
+            }
+            if(value & 0b100000){
+                LED6 = 1;
+            }else{
+                LED6 = 0;
+            }
+
+
             
         }
         i++;

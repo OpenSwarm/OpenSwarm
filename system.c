@@ -36,6 +36,7 @@
 #include "system_IO_motors.h"
 #include "system_IO_uart.h"
 #include "system_IO_camera.h"
+#include "system_IO_remoteControl.h"
 
 #include "HDI_init_port.h"
 #include "definitions.h"
@@ -65,7 +66,10 @@ void Sys_Init_Kernel(){
     Sys_Init_IOManagement();
     //Sys_Init_Motors();
     //Sys_Init_UART1();
-    Sys_Init_Camera();
+   // Sys_Init_Camera();
+    Sys_Init_RemoteControl();
+
+
 }
 
 
@@ -112,6 +116,7 @@ void Sys_Start_Kernel(void){
 
     Sys_Start_IOManagement();
     //Sys_Start_UART1();
-    Sys_Start_Camera();
+    //Sys_Start_Camera();
+    Sys_Start_RemoteControl();
 }
 

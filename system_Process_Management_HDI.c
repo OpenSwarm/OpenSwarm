@@ -408,7 +408,7 @@ inline void Sys_Save_Running_Process_HDI(){
             return;//don't know what to do
     }
 
-    Sys_Start_UninterruptableSection();
+    Sys_Start_AtomicSection();
 
     //PUSH all on the stack
     __asm__(
@@ -454,7 +454,7 @@ inline void Sys_Save_Running_Process_HDI(){
                 :
                 );
 
-    Sys_End_UninterruptableSection();
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -469,7 +469,7 @@ inline void Sys_Save_Running_Process_HDI(){
  */
 void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsigned short lm/*W2*/){
 
-    Sys_Start_UninterruptableSection();
+    Sys_Start_AtomicSection();
     
     __asm__("MOV W0, [W1++]\n\t"   );//push frame pointer to the stack
     __asm__("MOV W1, W0\n\t"   );//set the framepointer to the TOS
@@ -488,7 +488,7 @@ void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsi
     __asm__("PUSH W1\n\t"   );
     __asm__("PUSH W2\n\t"   );
     
-    Sys_End_UninterruptableSection();
+    Sys_End_AtomicSection();
     //__asm__("RETURN\n"   );
 
 }
@@ -519,7 +519,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
     new_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_RUNNING;
     sys_running_process = new_process;
 
-    Sys_Start_UninterruptableSection();
+    Sys_Start_AtomicSection();
 
     __asm__("ULNK\n");//remove the last function waste & restore all registers
     __asm__("POP W3\n");
@@ -556,7 +556,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "POP SR\n"
             );
 
-    Sys_End_UninterruptableSection();
+    Sys_End_AtomicSection();
             //__asm__("MOV #0x0C40, W14\n");
             //__asm__("MOV #0x0C46, W15\n");
     __asm__("ULNK\n");//remove all waste from Sys_Save_Running_Process_HDI

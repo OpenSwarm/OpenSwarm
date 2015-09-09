@@ -26,12 +26,12 @@
 
 static uint8 sys_IRQ_Priority = SYS_IRQP_SYSTEM_TIMER;
 
-inline void Sys_Start_UninterruptableSection(){
+inline void Sys_Start_AtomicSection(){
     sys_IRQ_Priority = SRbits.IPL;
     SRbits.IPL = SYS_IRQP_MAX;
 }
 
-inline void Sys_End_UninterruptableSection(){
+inline void Sys_End_AtomicSection(){
     SRbits.IPL = sys_IRQ_Priority;
 }
 

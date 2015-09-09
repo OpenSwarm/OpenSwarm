@@ -36,7 +36,7 @@ inline void Sys_Init_IOTimer_HDI(){
     Sys_Stop_IOTimer();
 
     TMR3 = 0; //sets countervalue to 0
-    PR3 = 100*MICROSEC/8; // 16MIPS for 1ms
+    PR3 = MILLISEC/10; // 16MIPS for 1ms
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
@@ -47,7 +47,7 @@ inline void Sys_Init_IOTimer_HDI(){
     // TSYNC        = enables the timer to be synchronised with external source (rising edge)
     // TCS          = sets clock source to external (1) or internal (0)
     T3CON = 0; //timer is turned off but set
-    T3CONbits.TCKPS = 1; //Prescaler 8
+    T3CONbits.TCKPS = 0; //Prescaler 8
 }
 
 /**

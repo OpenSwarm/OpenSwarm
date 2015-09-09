@@ -9,4 +9,5 @@ HDI_epuck_ports.h  \
  HDI_init_port.h  \
 system_IO_motors.h  \
 system_IO.h  \
-system_IO_uart.h 
+system_IO_uart.h  \
+ system_IO_remoteControl.h 
