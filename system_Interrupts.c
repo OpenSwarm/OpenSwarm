@@ -37,8 +37,9 @@ inline void Sys_Start_AtomicSection(){
 
 inline void Sys_End_AtomicSection(){
     nesting--;
-    if(nesting == 0){
+    if(nesting <= 0){
         SRbits.IPL = sys_IRQ_Priority;
+        nesting = 0;
     }
 }
 

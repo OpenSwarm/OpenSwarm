@@ -23,7 +23,7 @@ static sys_RemoteControl_Data *current_rx_buffer = 0;
 static bool isNewDataAvailable = false;
 
 #define NOT_STARTED -1
-static uint8 receiving_bit = NOT_STARTED;
+static sint8 receiving_bit = NOT_STARTED;
 
 void Sys_Receive_RemoteControl_Msg(void);
 
@@ -70,7 +70,7 @@ void Sys_Receive_RemoteControl_Msg(){
     }
 
     uint8 value = REMOTE;
-        
+    BODY_LED = value;  
     if (receiving_bit == NOT_STARTED){
         if(value == 1){//this is only noise
             Sys_Start_AtomicSection();
@@ -87,11 +87,11 @@ void Sys_Receive_RemoteControl_Msg(){
         }
     }
 
-    Sys_Start_AtomicSection();
     uint16 *pbuffer = (uint16 *) current_rx_buffer;
 
     if (receiving_bit < 13){
-
+        Sys_Start_AtomicSection();
+        
         *pbuffer <<= 1;
         *pbuffer += value;
         if(value != 0){
@@ -101,9 +101,11 @@ void Sys_Receive_RemoteControl_Msg(){
         waiting_cycles = WAIT_FOR_BIT;
 
         receiving_bit++;
+        Sys_End_AtomicSection();
         return;
     }
 
+    Sys_Start_AtomicSection();
     LED7 = ~REMOTE;
     if(current_rx_buffer->data != 0){
         LED1 = 1;
