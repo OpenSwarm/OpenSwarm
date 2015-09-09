@@ -96,7 +96,7 @@ int16_t main(void)
     unsigned int i = 0;
     
     while(1){//DO Nothing (do yonly things for testing)
-        
+        /*
         if(i == 0xFFFE){
             i = 0;
 
@@ -138,10 +138,11 @@ int16_t main(void)
             }else{
                 LED6 = 0;
             }
-
+            
 
             
         }
+        */
         i++;
     }
 }
