@@ -4,29 +4,35 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f3" displayName="e_Libs" projectFiles="true">
+        <itemPath>e_I2C_master_module.h</itemPath>
+        <itemPath>e_I2C_protocol.h</itemPath>
+        <itemPath>e_po3030k.h</itemPath>
+        <itemPath>e_po6030k.h</itemPath>
+        <itemPath>e_po8030d.h</itemPath>
+        <itemPath>e_poxxxx.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="system" projectFiles="true">
+        <itemPath>system_Memory.h</itemPath>
+        <itemPath>system_Process_Management_HDI.h</itemPath>
+        <itemPath>system_Scheduler.h</itemPath>
+        <itemPath>system_Timer_HDI.h</itemPath>
+        <itemPath>system_Interrupts.h</itemPath>
+        <itemPath>system_Events.h</itemPath>
+        <itemPath>system.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="system_IO" projectFiles="true">
+        <itemPath>system_IO.h</itemPath>
+        <itemPath>system_IO_camera.h</itemPath>
+        <itemPath>system_IO_i2c.h</itemPath>
+        <itemPath>system_IO_motors.h</itemPath>
+        <itemPath>system_IO_remoteControl.h</itemPath>
+        <itemPath>system_IO_uart.h</itemPath>
+      </logicalFolder>
       <itemPath>user.h</itemPath>
       <itemPath>definitions.h</itemPath>
-      <itemPath>system.h</itemPath>
-      <itemPath>system_Process_Management_HDI.h</itemPath>
-      <itemPath>system_Scheduler.h</itemPath>
-      <itemPath>system_Timer_HDI.h</itemPath>
       <itemPath>HDI_epuck_ports.h</itemPath>
       <itemPath>HDI_init_port.h</itemPath>
-      <itemPath>system_Events.h</itemPath>
-      <itemPath>system_IO.h</itemPath>
-      <itemPath>system_IO_motors.h</itemPath>
-      <itemPath>system_IO_i2c.h</itemPath>
-      <itemPath>system_IO_uart.h</itemPath>
-      <itemPath>system_IO_camera.h</itemPath>
-      <itemPath>system_Interrupts.h</itemPath>
-      <itemPath>system_Memory.h</itemPath>
-      <itemPath>e_I2C_master_module.h</itemPath>
-      <itemPath>e_I2C_protocol.h</itemPath>
-      <itemPath>e_po3030k.h</itemPath>
-      <itemPath>e_po6030k.h</itemPath>
-      <itemPath>e_po8030d.h</itemPath>
-      <itemPath>e_poxxxx.h</itemPath>
-      <itemPath>system_IO_remoteControl.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -35,35 +41,41 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f2" displayName="e_Libs" projectFiles="true">
+        <itemPath>e_calc_po3030k.c</itemPath>
+        <itemPath>e_calc_po6030k.c</itemPath>
+        <itemPath>e_calc_po8030d.c</itemPath>
+        <itemPath>e_common.c</itemPath>
+        <itemPath>e_I2C_master_module.c</itemPath>
+        <itemPath>e_I2C_protocol.c</itemPath>
+        <itemPath>e_po3030k_registers.c</itemPath>
+        <itemPath>e_po6030k_registers.c</itemPath>
+        <itemPath>e_po8030d_registers.c</itemPath>
+        <itemPath>e_timers.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="system" projectFiles="true">
+        <itemPath>system.c</itemPath>
+        <itemPath>system_Events.c</itemPath>
+        <itemPath>system_Interrupts.c</itemPath>
+        <itemPath>system_Memory.c</itemPath>
+        <itemPath>system_Process_Management_HDI.c</itemPath>
+        <itemPath>system_Scheduler.c</itemPath>
+        <itemPath>system_Timer_HDI.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="system_IO" projectFiles="true">
+        <itemPath>system_IO.c</itemPath>
+        <itemPath>system_IO_camera.c</itemPath>
+        <itemPath>system_IO_i2c.c</itemPath>
+        <itemPath>system_IO_motors.c</itemPath>
+        <itemPath>system_IO_uart.c</itemPath>
+        <itemPath>system_IO_remoteControl.c</itemPath>
+      </logicalFolder>
       <itemPath>user.c</itemPath>
       <itemPath>traps.c</itemPath>
-      <itemPath>system_Timer_HDI.c</itemPath>
-      <itemPath>system_Scheduler.c</itemPath>
-      <itemPath>system_Process_Management_HDI.c</itemPath>
-      <itemPath>system.c</itemPath>
       <itemPath>interrupts.c</itemPath>
       <itemPath>configuration_bits.c</itemPath>
       <itemPath>HDI_init_port.c</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>system_Events.c</itemPath>
-      <itemPath>system_IO.c</itemPath>
-      <itemPath>system_IO_motors.c</itemPath>
-      <itemPath>system_IO_i2c.c</itemPath>
-      <itemPath>system_IO_uart.c</itemPath>
-      <itemPath>system_IO_camera.c</itemPath>
-      <itemPath>system_Interrupts.c</itemPath>
-      <itemPath>system_Memory.c</itemPath>
-      <itemPath>e_I2C_master_module.c</itemPath>
-      <itemPath>e_I2C_protocol.c</itemPath>
-      <itemPath>e_timers.c</itemPath>
-      <itemPath>e_po8030d_registers.c</itemPath>
-      <itemPath>e_po6030k_registers.c</itemPath>
-      <itemPath>e_po3030k_registers.c</itemPath>
-      <itemPath>e_common.c</itemPath>
-      <itemPath>e_calc_po3030k.c</itemPath>
-      <itemPath>e_calc_po6030k.c</itemPath>
-      <itemPath>e_calc_po8030d.c</itemPath>
-      <itemPath>system_IO_remoteControl.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -85,7 +97,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.24</languageToolchainVersion>
+        <languageToolchainVersion>1.25</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>

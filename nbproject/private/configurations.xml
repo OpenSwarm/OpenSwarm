@@ -5,7 +5,7 @@
   <confs>
     <conf name="XC16_dsPIC30F6014A" type="2">
       <platformToolSN>:=MPLABComm-USB-Microchip:=&lt;vid>04D8:=&lt;pid>9009:=&lt;rev>0100:=&lt;man>Microchip Technology, Inc. (www.microchip.com):=&lt;prod>MPLAB ICD3 tm (www.microchip.com):=&lt;sn>JIT100135853:=&lt;drv>x:=end</platformToolSN>
-      <languageToolchainDir>/opt/microchip/xc16/v1.24/bin</languageToolchainDir>
+      <languageToolchainDir>C:\Program Files (x86)\Microchip\xc16\v1.25\bin</languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>
         <placeholder2>place holder 2</placeholder2>
