@@ -64,7 +64,7 @@ void Sys_Init_Motors(){
 void Sys_LeftMotor_Controller(){
 
    static uint8 phase = 0;		 // phase can be 0 to 3
-   static uint16 next_phase = 0;
+   static sint16 next_phase = 0;
 
    if(left_motor.speed == 0){
        return;
@@ -129,7 +129,7 @@ void Sys_LeftMotor_Controller(){
 void Sys_RightMotor_Controller(){
 
    static uint8 phase = 0;		 // phase can be 0 to 3
-   static uint16 next_phase = 0;
+   static sint16 next_phase = 0;
 
    if(right_motor.speed == 0){
        return;
