@@ -47,9 +47,9 @@ inline void Sys_Start_RemoteControl(void){
 }
 
 #define WAIT_FOR_QUARTERBIT 4
-#define WAIT_FOR_HALFBIT    9
-#define WAIT_FOR_BIT        18
-#define WAIT_INITIALLY      WAIT_FOR_BIT+WAIT_FOR_QUARTERBIT-1
+#define WAIT_FOR_HALFBIT    8
+#define WAIT_FOR_BIT        17
+#define WAIT_INITIALLY      WAIT_FOR_BIT+WAIT_FOR_QUARTERBIT
 void __attribute__((__interrupt__, auto_psv))  _INT0Interrupt(void){
     //When a message arrives deactivate interrupt -> is activated at the end of the message
 	IEC0bits.INT0IE = 0;
