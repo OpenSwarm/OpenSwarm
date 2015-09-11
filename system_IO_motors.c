@@ -45,7 +45,7 @@ void Sys_Init_Motors(){
     if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_LEFT, 0, &Sys_LeftMotor_EventHandler, 0)){
         occured_error = true;
     }
-    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0, &Sys_RightMotor_EventHandler, 0)){
+    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0, Sys_RightMotor_EventHandler, 0)){
         occured_error = true;
     }
 
@@ -189,16 +189,15 @@ void Sys_RightMotor_Controller(){
 }
 
 bool Sys_LeftMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data/*mm/s*/){
-    sint16 *speed = (sint16 *) data;
-
-    left_motor.speed = MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * (*speed);
+    sint16 *speed = (sint16 *) data->value;
+    Sys_Set_LeftWheelSpeed( MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * speed[0]);
     return true;
 }
 
 bool Sys_RightMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data /*mm/s*/){
-    sint16 *speed = (sint16 *) data;
+    sint16 *speed = (sint16 *) data->value;
 
-    right_motor.speed = MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * (*speed);
+    Sys_Set_RightWheelSpeed( MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * speed[0]);
 
     return true;
 

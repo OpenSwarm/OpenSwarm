@@ -42,6 +42,7 @@ typedef struct sys_process_event_handler_s{
     pConditionFunction condition;
     sys_event_data *buffered_data;/*!< stores the data */
 
+    struct sys_process_event_handler_s *previous;
     struct sys_process_event_handler_s *next;
 }sys_process_event_handler, sys_peh;
 
@@ -897,7 +898,7 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
 
     sys_process_event_handler *element = list;
 
-    while(list != 0){
+    while(element != 0){
         if(element->eventID == eventID)
             return element;
 
@@ -976,6 +977,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
 }
 
 //handler has to clean up the data!!!
+//TODO: if handler == 0 remove it from list
 inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_element *elements){
     sys_pcb_list_element *list = elements;
     while(list != 0){//assuming there are less processes then events
@@ -985,7 +987,8 @@ inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_eleme
                 if(event->handler != 0){
                     event->handler(list->pcb.process_ID,eventID,event->buffered_data);
                 }
-                
+                Sys_Clear_EventData(&(event->buffered_data));
+                event->buffered_data = 0;
             }
 
             event = event->next;

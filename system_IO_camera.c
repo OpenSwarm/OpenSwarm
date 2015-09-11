@@ -25,6 +25,7 @@
 #include <p30F6014A.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "HDI_epuck_ports.h"
 
@@ -37,13 +38,20 @@
 #include "e_poxxxx.h"
 #include "e_po6030k.h"
 
+
+#include "system_IO_uart.h"
+
 #define FRAME_WIDTH     10
 #define FRAME_HEIGHT    10
 #define CAMERA_I2C_ADDRESS 0xDC
 
-#define RED_THRESHOLD   0b00010011
-#define GREEN_THRESHOLD 0b00011111
-#define BLUE_THRESHOLD  0b00001011
+#define RED_MAX         0x0C1C
+#define GREEN_MAX       0x189C
+#define BLUE_MAX        0x0C1C
+#define RED_THRESHOLD   0x060E
+//#define GREEN_THRESHOLD 0x0C4E
+#define GREEN_THRESHOLD 0x0E4E
+#define BLUE_THRESHOLD  0x060E
 
 static pCameraPreProcessor pre_processor = 0;
 
@@ -75,7 +83,7 @@ inline void Sys_Write_to_Camera(uint8 address, uint8* data, uint16 length){
 }
 
 
-static unsigned char buffer[10*10*2] = {0};
+static uint16 buffer[10*10] = {0};
 void Sys_Init_Camera(){
 
 
@@ -86,7 +94,8 @@ void Sys_Init_Camera(){
 
 e_poxxxx_init_cam ();
 e_poxxxx_config_cam(300, 220, 40, 40, 4, 4, RGB_565_MODE);
-e_po6030k_write_register(BANK_C, 0x04, 0b10011110);
+
+ e_po6030k_write_register(BANK_C, 0x04, 0b10011110);
 e_po6030k_write_register(BANK_C, 0x55, 0x00);
 e_po6030k_write_register(BANK_C, 0x56, 0x00);
 e_po6030k_write_register(BANK_C, 0x28, 0x10);
@@ -496,44 +505,52 @@ void Sys_Camera_PreProcessor(void){
 
     
     uint16 i = 0;
-    sys_rgb_pixel *frame = (sys_rgb_pixel *) buffer;
+    uint16 *frame = (uint16 *) buffer;
+    
+    uint32 red_counter = 0;
+    uint32 green_counter = 0;
+    uint32 blue_counter = 0;
 
-    uint16 red_counter = 0;
-    uint16 green_counter = 0;
-    uint16 blue_counter = 0;
+    static uint32 red_counter2 = 0;
+    static uint32 green_counter2 = 0;
+    static uint32 blue_counter2 = 0;
 
     for(i = 0; i < 100; i++){
-            if(frame[i].red > RED_THRESHOLD){
-                red_counter++;
-            }
-            if(frame[i].green > GREEN_THRESHOLD){
-                green_counter++;
-            }
-            if(frame[i].blue > BLUE_THRESHOLD){
-                blue_counter++;
-            }
+            red_counter += (frame[i] & 0xF800) >> 11;
+            green_counter += (frame[i] & 0x07E0) >> 5;
+            blue_counter += (frame[i] & 0x001F);
     }
 
     uint8 colour = 0;
 
-    if(red_counter > 35){
+    red_counter2 = (red_counter2*3+red_counter)/4;
+    green_counter2 = (green_counter2*3+green_counter)/4;
+    blue_counter2 = (blue_counter2*3+blue_counter)/4;
+
+    if(red_counter2 > RED_THRESHOLD){
         colour |= RED;
         LED1 = 1;
     }else{
         LED1 = 0;
     }
-    if(green_counter > 35){
+    if(green_counter2 > GREEN_THRESHOLD){
         colour |= GREEN;
         LED2 = 1;
     }else{
         LED2 = 0;
     }
-    if(blue_counter > 35){
+    if(blue_counter2 > BLUE_THRESHOLD){
         colour |= BLUE;
         LED3 = 1;
     }else{
         LED3 = 0;
     }
+
+    static int counter = 0;
+    char msg[24] = {0};
+    uint8 length = 0;
+    length = sprintf(msg, "%u:%u- %u %u %u\r",counter++, colour, red_counter2, green_counter2, blue_counter2);
+    Sys_Writeto_UART1(msg, length);
 
     e_poxxxx_launch_capture((char *) buffer);
     //Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, 1);

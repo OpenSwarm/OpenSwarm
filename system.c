@@ -78,7 +78,10 @@ void Sys_Init_Kernel(){
 #ifdef SYS_SYSTEMCLOCK_USED
     Sys_Init_SystemTime();
 #endif
-    //Sys_Init_Camera();
+#ifdef SYS_CAMERA_USED
+    Sys_Init_Camera();
+#endif
+    //
 
 
 }
@@ -137,6 +140,9 @@ void Sys_Start_Kernel(void){
 #endif
 #ifdef SYS_SYSTEMCLOCK_USED
 #endif
-    //Sys_Start_Camera();
+#ifdef SYS_CAMERA_USED
+    Sys_Start_Camera();
+#endif
+    //
 }
 

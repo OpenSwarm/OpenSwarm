@@ -55,7 +55,7 @@ inline void Sys_Start_RemoteControl(void){
 }
 
 #define WAIT_FOR_QUARTERBIT 4
-#define WAIT_FOR_HALFBIT    9
+#define WAIT_FOR_HALFBIT    8
 #define WAIT_FOR_BIT        18
 #define WAIT_INITIALLY      WAIT_FOR_BIT+WAIT_FOR_QUARTERBIT
 void __attribute__((__interrupt__, auto_psv))  _INT0Interrupt(void){
@@ -100,9 +100,11 @@ void Sys_Receive_RemoteControl_Msg(){
 
     if (receiving_bit < 12){
         Sys_Start_AtomicSection();
-            data_value     += (value) << (11-receiving_bit);
-            //data_value <<= 1;
-            //data_value += value;
+            //data_value     += (value) << (11-receiving_bit);
+        LED1 = REMOTE;
+
+            data_value <<= 1;
+            data_value += value;
             waiting_cycles  = WAIT_FOR_BIT;
             receiving_bit++;
         Sys_End_AtomicSection();
@@ -117,18 +119,24 @@ void Sys_Receive_RemoteControl_Msg(){
         receiving_bit = NOT_STARTED;
         waiting_cycles = 20;
 
-        isNewDataAvailable = true;
-        
-        //Sys_Memcpy( &data_value, &rx_buffer, 2 );
     Sys_End_AtomicSection();
-    
+
     if(rx_buffer == data_value){
-        return;
+       LED0 = ~LED0;
+       return;
     }
     rx_buffer = data_value;
-    
+    isNewDataAvailable = true;
+            
+        //Sys_Memcpy( &data_value, &rx_buffer, 2 );
+
     uint8 val = rx_buffer & 0x003f;
-    Sys_Send_Event(SYS_EVENT_IO_REMOECONTROL, &val, 1);
+    char msg[24] = {0};
+    uint8 length = 0;
+    length = sprintf(msg, " d:%u full: %04x\r\n",rx_buffer & 0x003f, rx_buffer);
+    Sys_Writeto_UART1(msg, length);
+
+   Sys_Send_Event(SYS_EVENT_IO_REMOECONTROL, &val, 1);
 }
 
 bool Sys_HasRemoteC_Sent_New_Data() {

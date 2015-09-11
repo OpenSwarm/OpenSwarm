@@ -31,6 +31,7 @@ bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size){
 
    sys_registered_event *event = Sys_Find_Event(eventID);
    if(event == 0){
+        Sys_Continue_SystemTimer_HDI();
        return false;
    }
 

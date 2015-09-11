@@ -125,7 +125,7 @@ void __attribute__((interrupt,no_auto_psv)) _StackError(void)
 
 void __attribute__((interrupt,no_auto_psv)) _MathError(void)
 {
-    FRONT_LED = 1;
+   FRONT_LED = 1;
     BODY_LED = 1;
     LED0 = 1;
     LED1 = 1;

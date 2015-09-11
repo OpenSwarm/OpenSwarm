@@ -105,13 +105,30 @@ int16_t main(void)
     }
 }
 
-
 bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data){
     char msg[24] = {0};
     uint8 length = 0;
     uint8 *value = data->value;
-    length = sprintf(msg, "? %x %x\r\n",(int)value, (int) value[0] );
+    length = sprintf(msg, "e:%u\r\n", (int) value[0] );
     Sys_Writeto_UART1(msg, length);
+
+    
+static bool toggle = true;
+
+    sint16 speed = 0;
+
+    if(toggle){
+        speed = 50;
+        Sys_Set_LeftWheelSpeed(speed);
+        speed = -50;
+        Sys_Set_RightWheelSpeed(speed);
+    }else{
+        speed = 0;
+        Sys_Send_Event(SYS_EVENT_IO_MOTOR_LEFT, &speed, 2);
+        Sys_Send_Event(SYS_EVENT_IO_MOTOR_RIGHT, &speed, 2);
+    }
+
+    toggle = !toggle;
     return true;
 }
 
