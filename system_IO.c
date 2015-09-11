@@ -111,7 +111,7 @@ inline void Sys_Continue_IOTimer(){
  */
 inline void Sys_Reset_IOTimer_HDI(){
     IFS0bits.T3IF = 0; //unsets the Timer1 interrupt flag
-    TMR3 = 0; //sets countervalue to 0
+    //TMR3 = 0; //sets countervalue to 0
 }
 inline void Sys_Reset_IOTimer(){
     Sys_Reset_IOTimer_HDI();
@@ -126,8 +126,8 @@ inline void Sys_Reset_IOTimer(){
  * @return void
  */
 void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(){
-    Sys_IOTimer_code_HDI();
     IFS0bits.T3IF = 0;
+    Sys_IOTimer_code_HDI();
 }
 
 /**
@@ -139,8 +139,8 @@ void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(){
  * @return void
  */
 void __attribute__((interrupt,no_auto_psv)) _AltT3Interrupt(){
-    Sys_IOTimer_code_HDI();
     IFS0bits.T3IF = 0;
+    Sys_IOTimer_code_HDI();
 }
 
 /**

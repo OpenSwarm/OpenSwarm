@@ -32,8 +32,10 @@
     #endif
 #endif
 
+
 #include <stdint.h>        /* Includes uint16_t definition                    */
 #include <stdbool.h>       /* Includes true/false definition                  */
+#include <stdio.h>
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "definitions.h"
@@ -42,6 +44,8 @@
 
 #include "HDI_epuck_ports.h"
 #include "HDI_init_port.h"
+
+#include "system_Events.h"
 
 #include "system_IO_motors.h"
 #include "system_IO_uart.h"
@@ -63,6 +67,7 @@ void task3();
 void frontLED();
 
 void bluetooth_reader(uint8 data);
+bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data);
 
 int16_t main(void)
 {
@@ -72,11 +77,10 @@ int16_t main(void)
     Sys_Init_Kernel();
     
     //Sys_SetReadingFunction_UART1(bluetooth_reader);
-    //Sys_Init_Motors();
     //Sys_Start_Process_HDI(task1);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
     
     Sys_Start_Kernel();
-    //Sys_Register_IOHandler(bodyLED);
 
     LED0 = 0;
     LED1 = 0;
@@ -87,98 +91,28 @@ int16_t main(void)
     LED6 = 0;
     LED7 = 0;
 
-    /* Initialize IO ports and peripherals */
-    //InitApp();
-
     //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
     //Sys_Clear_EventData(&data);
     
     unsigned int i = 0;
     
     while(1){//DO Nothing (do yonly things for testing)
-        /*
         if(i == 0xFFFE){
             i = 0;
-
-            uint8 value = Sys_RemoteC_Get_Data();
-
-            if(value != 0){
-                FRONT_LED = 1;
-            }else{
-                FRONT_LED = 0;
-            }
-
-            if(value & 0b000001){
-                LED1 = 1;
-            }else{
-                LED1 = 0;
-            }
-            if(value & 0b000010){
-                LED2 = 1;
-            }else{
-                LED2 = 0;
-            }
-            if(value & 0b000100){
-                LED3 = 1;
-            }else{
-                LED3 = 0;
-            }
-            if(value & 0b001000){
-                LED4 = 1;
-            }else{
-                LED4 = 0;
-            }
-            if(value & 0b010000){
-                LED5 = 1;
-            }else{
-                LED5 = 0;
-            }
-            if(value & 0b100000){
-                LED6 = 1;
-            }else{
-                LED6 = 0;
-            }
-            
-
-            
+            LED7 = ~LED7; 
         }
-        */
         i++;
     }
 }
 
 
-void task1(){
-    unsigned int z=0;
-    unsigned int u=0;
-    while(1){
-        z++;
-        if(z == 0xFFFE){
-            z = 0;
-            LED4 = ~LED4;
-            u++;
-        }
-        if(u == 20){
-            //LED6 = ~LED6;
-            //if(LED6 == 1){
-                //Sys_Writeto_UART1("on\r\n",5);
-            //}else{
-                //Sys_Writeto_UART1("off\r\n",5);
-            //}
-            u=0;
-        }
-    }
-}
-
-void frontLED(){
-    static uint16 i = 0;
-
-    if(i == 10000){
-        FRONT_LED = ~FRONT_LED;
-        i = 0;
-        return;
-    }
-    i++;
+bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data){
+    char msg[24] = {0};
+    uint8 length = 0;
+    uint8 *value = data->value;
+    length = sprintf(msg, "? %x %x\r\n",(int)value, (int) value[0] );
+    Sys_Writeto_UART1(msg, length);
+    return true;
 }
 
 void bluetooth_reader(uint8 data){

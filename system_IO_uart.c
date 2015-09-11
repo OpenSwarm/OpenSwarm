@@ -110,7 +110,7 @@ void Sys_SetReadingFunction_UART2(pUART_reader func){
     read_uart_2 = func;
 }
 
-void Sys_Writeto_UART1(uint8 *data, uint16 length){
+void Sys_Writeto_UART1(void *data, uint16 length){
 
     sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
@@ -140,7 +140,7 @@ void Sys_Writeto_UART1(uint8 *data, uint16 length){
     list->next = element;
 }
 
-void Sys_Writeto_UART2(uint8 *data, uint16 length){
+void Sys_Writeto_UART2(void *data, uint16 length){
 
     sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
@@ -152,7 +152,7 @@ void Sys_Writeto_UART2(uint8 *data, uint16 length){
         Sys_Free(element);
         return;
     }
-    Sys_Memcpy(data,element->data,length);
+    Sys_Memcpy((uint8 *) data,element->data,length);
 
     element->length = length;
     element->next = 0;

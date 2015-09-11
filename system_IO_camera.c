@@ -49,12 +49,12 @@ static pCameraPreProcessor pre_processor = 0;
 
 static sys_rgb_pixel *frame_a = 0;
 static sys_rgb_pixel *frame_b = 0;
-static uint16 max_frame_size = 0;
+//static uint16 max_frame_size = 0;
 
 static sys_rgb_pixel *current_frame = 0;
-static uint16 current_row = 0;
-static uint16 current_col = 0;
-static uint16 current_pos = 0;
+//static uint16 current_row = 0;
+//static uint16 current_col = 0;
+//static uint16 current_pos = 0;
 
 static bool is_newframe_available = false;
 
@@ -92,7 +92,7 @@ e_po6030k_write_register(BANK_C, 0x56, 0x00);
 e_po6030k_write_register(BANK_C, 0x28, 0x10);
 e_po6030k_write_register(BANK_C, 0x29, 0x00);
 
-e_poxxxx_launch_capture(&buffer[0]); //take first image
+e_poxxxx_launch_capture((char *) &buffer[0]); //take first image
     if(!Sys_Register_IOHandler(Sys_Camera_PreProcessor)){
         return;
     }
@@ -195,7 +195,7 @@ e_poxxxx_launch_capture(&buffer[0]); //take first image
 	e_i2cp_write(CAMERA_I2C_ADDRESS, 0x81, 0x80);
 	e_i2cp_write(CAMERA_I2C_ADDRESS, 0x82, 0x01);
     
-    ////*
+    ////
     uint8 byte = 0x01;
     Sys_Write_to_Camera(0x03,&byte,1);//set regesters to group B
 
@@ -535,6 +535,6 @@ void Sys_Camera_PreProcessor(void){
         LED3 = 0;
     }
 
-    e_poxxxx_launch_capture(buffer);
+    e_poxxxx_launch_capture((char *) buffer);
     //Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, 1);
 }

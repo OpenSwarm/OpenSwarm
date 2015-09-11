@@ -33,6 +33,8 @@ extern "C" {
 #define SYS_EVENT_IO_MOTOR_LEFT     0x02
 #define SYS_EVENT_IO_MOTOR_RIGHT    0x03
 #define SYS_EVENT_IO_CAMERA         0x04
+#define SYS_EVENT_IO_REMOECONTROL   0x05
+#define SYS_EVENT_IO_TO_BLUETOOTH   0x06
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE)
 

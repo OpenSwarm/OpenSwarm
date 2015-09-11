@@ -4,12 +4,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/Repositories/opensource/extern/openswarm/system_IO_remoteControl.c</file>
-            <file>file:/home/Repositories/opensource/extern/openswarm/system_Memory.h</file>
-            <file>file:/home/Repositories/opensource/extern/openswarm/system_IO_uart.c</file>
-            <file>file:/home/Repositories/opensource/extern/openswarm/main.c</file>
-            <file>file:/home/Repositories/opensource/extern/openswarm/system_Memory.c</file>
-            <file>file:/home/Repositories/opensource/extern/openswarm/system_IO_uart.h</file>
+            <file>file:/home/strenkwalder/code/os/system_Events.c</file>
+            <file>file:/home/strenkwalder/code/os/main.c</file>
+            <file>file:/home/strenkwalder/code/os/system_Process_Management_HDI.c</file>
+            <file>file:/home/strenkwalder/code/os/system.c</file>
+            <file>file:/home/strenkwalder/code/os/system_IO_uart.c</file>
+            <file>file:/home/strenkwalder/code/os/system_IO_remoteControl.c</file>
+            <file>file:/home/strenkwalder/code/os/system_Events.h</file>
         </group>
     </open-files>
 </project-private>

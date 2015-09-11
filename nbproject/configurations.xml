@@ -28,6 +28,7 @@
         <itemPath>system_IO_motors.h</itemPath>
         <itemPath>system_IO_remoteControl.h</itemPath>
         <itemPath>system_IO_uart.h</itemPath>
+        <itemPath>system_IO_clock.h</itemPath>
       </logicalFolder>
       <itemPath>user.h</itemPath>
       <itemPath>definitions.h</itemPath>
@@ -69,6 +70,7 @@
         <itemPath>system_IO_motors.c</itemPath>
         <itemPath>system_IO_uart.c</itemPath>
         <itemPath>system_IO_remoteControl.c</itemPath>
+        <itemPath>system_IO_clock.c</itemPath>
       </logicalFolder>
       <itemPath>user.c</itemPath>
       <itemPath>traps.c</itemPath>
@@ -97,7 +99,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.23</languageToolchainVersion>
+        <languageToolchainVersion>1.24</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>

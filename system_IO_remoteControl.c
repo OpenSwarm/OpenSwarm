@@ -2,10 +2,13 @@
 #include "HDI_epuck_ports.h"
 
 #include <stdbool.h>
+#include <stdio.h>
+
 #include "system_IO.h"
 #include "system_Interrupts.h"
+#include "system_Events.h"
+#include "definitions.h"
 
-#include <string.h>
 #include "system_IO_uart.h"
 
 static bool message_arriving = false;
@@ -42,6 +45,8 @@ inline void Sys_Init_RemoteControl(void){
     if(!Sys_Register_IOHandler(Sys_Receive_RemoteControl_Msg)){// no error handling used
         return;
     }
+    
+    Sys_Register_Event(SYS_EVENT_IO_REMOECONTROL);
 }
 
 inline void Sys_Start_RemoteControl(void){
@@ -50,7 +55,8 @@ inline void Sys_Start_RemoteControl(void){
 }
 
 #define WAIT_FOR_QUARTERBIT 4
-#define WAIT_FOR_BIT        17
+#define WAIT_FOR_HALFBIT    9
+#define WAIT_FOR_BIT        18
 #define WAIT_INITIALLY      WAIT_FOR_BIT+WAIT_FOR_QUARTERBIT
 void __attribute__((__interrupt__, auto_psv))  _INT0Interrupt(void){
     //When a message arrives deactivate interrupt -> is activated at the end of the message
@@ -78,14 +84,14 @@ void Sys_Receive_RemoteControl_Msg(){
     if (receiving_bit == NOT_STARTED){
         if(value == 1){//this is only noise
             Sys_Start_AtomicSection();
-            IEC0bits.INT0IE = 1;    //enable interrupt from falling edge
-            IFS0bits.INT0IF = 0;    //clear interrupt flag from first receive !
-            message_arriving = false;
-            waiting_cycles = WAIT_INITIALLY;
-            //Sys_End_AtomicSection();
+                IEC0bits.INT0IE = 1;    //enable interrupt from falling edge
+                IFS0bits.INT0IF = 0;    //clear interrupt flag from first receive !
+                message_arriving = false;
+                waiting_cycles = WAIT_INITIALLY;
+            Sys_End_AtomicSection();
             return;
         } else {
-            waiting_cycles = WAIT_FOR_BIT; //because active low -> wait at the first half of the bit !!
+            waiting_cycles = WAIT_FOR_HALFBIT; //because active low -> wait at the first half of the bit !!
             receiving_bit = 0;
             data_value = 0;
             return;
@@ -94,7 +100,9 @@ void Sys_Receive_RemoteControl_Msg(){
 
     if (receiving_bit < 12){
         Sys_Start_AtomicSection();
-            data_value     += (!value) << (11-receiving_bit);
+            data_value     += (value) << (11-receiving_bit);
+            //data_value <<= 1;
+            //data_value += value;
             waiting_cycles  = WAIT_FOR_BIT;
             receiving_bit++;
         Sys_End_AtomicSection();
@@ -112,28 +120,15 @@ void Sys_Receive_RemoteControl_Msg(){
         isNewDataAvailable = true;
         
         //Sys_Memcpy( &data_value, &rx_buffer, 2 );
-        rx_buffer = data_value;
     Sys_End_AtomicSection();
-
     
-    /*
-    LED0 = LED1 = LED2 = LED3 = LED4 = LED5 = LED6 = LED7 = FRONT_LED = 0;
-    switch( rx_buffer.data ){
-        case 0: LED0=1; break;
-        case 1: LED1=1; break;
-        case 2: LED2=1; break;
-        case 3: LED3=1; break;
-        case 4: LED4=1; break;
-        case 5: LED5=1; break;
-        case 6: LED6=1; break;
-        case 7: LED7=1; break;
-        default: FRONT_LED=1; break;
+    if(rx_buffer == data_value){
+        return;
     }
-    */
-    char debug_buffer[24];
-    int debug_len;
-    debug_len = sprintf( debug_buffer, "d:%i, b:%i %i %i\n", data_value, Sys_RemoteC_Get_CheckBit(), Sys_RemoteC_Get_Address(), Sys_RemoteC_Get_Data() );
-    Sys_Writeto_UART1( debug_buffer, debug_len );
+    rx_buffer = data_value;
+    
+    uint8 val = rx_buffer & 0x003f;
+    Sys_Send_Event(SYS_EVENT_IO_REMOECONTROL, &val, 1);
 }
 
 bool Sys_HasRemoteC_Sent_New_Data() {
