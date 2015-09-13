@@ -100,9 +100,6 @@ void Sys_Receive_RemoteControl_Msg(){
 
     if (receiving_bit < 12){
         Sys_Start_AtomicSection();
-            //data_value     += (value) << (11-receiving_bit);
-        LED1 = REMOTE;
-
             data_value <<= 1;
             data_value += value;
             waiting_cycles  = WAIT_FOR_BIT;
@@ -122,7 +119,6 @@ void Sys_Receive_RemoteControl_Msg(){
     Sys_End_AtomicSection();
 
     if(rx_buffer == data_value){
-       LED0 = ~LED0;
        return;
     }
     rx_buffer = data_value;
@@ -130,12 +126,7 @@ void Sys_Receive_RemoteControl_Msg(){
             
         //Sys_Memcpy( &data_value, &rx_buffer, 2 );
 
-    uint8 val = rx_buffer & 0x003f;
-    char msg[24] = {0};
-    uint8 length = 0;
-    length = sprintf(msg, " d:%u full: %04x\r\n",rx_buffer & 0x003f, rx_buffer);
-    Sys_Writeto_UART1(msg, length);
-
+   uint8 val = rx_buffer & 0x003f;
    Sys_Send_Event(SYS_EVENT_IO_REMOECONTROL, &val, 1);
 }
 

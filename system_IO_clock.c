@@ -1,12 +1,14 @@
 #include "system_IO_clock.h"
 
 #include "system_IO.h"
+#include "system_Events.h"
 
 static uint32 sys_clock = 0;
     
 void Sys_SystemClock_Counter(void);
 
 inline void Sys_Init_Clock(){
+    Sys_Register_Event(SYS_EVENT_1ms_CLOCK);
     Sys_Register_IOHandler(Sys_SystemClock_Counter);
 }
 
@@ -22,7 +24,7 @@ void Sys_SystemClock_Counter(){
         counter++;
         return;
     }
-    
+    Sys_Send_Event(SYS_EVENT_1ms_CLOCK, &sys_clock, sizeof(sys_clock));
     counter = 0;
     sys_clock++;
 }

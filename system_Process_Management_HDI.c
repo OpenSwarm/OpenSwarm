@@ -293,7 +293,9 @@ bool Sys_Start_Process_HDI(pFunction function){
   return true;
 
 }
-
+inline bool Sys_Start_Process(pFunction function){
+    return Sys_Start_Process_HDI(function);
+}
 /**
  * This function kills a process
  *
@@ -1178,4 +1180,12 @@ sys_event_data *Sys_Wait_For_Condition(uint16 eventID, pConditionFunction functi
 
 inline sys_event_data *Sys_Wait_For_Event(uint16 eventID){
     return Sys_Wait_For_Condition(eventID, 0);
+}
+
+void Sys_Yield(){
+    if( sys_running_process == sys_ready_processes && sys_ready_processes->next == 0){
+        return;
+    }
+    
+    Sys_Force_TimerInterrupt_HDI();
 }

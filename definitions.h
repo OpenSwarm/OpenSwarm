@@ -35,17 +35,19 @@ extern "C" {
 #define SYS_EVENT_IO_CAMERA         0x04
 #define SYS_EVENT_IO_REMOECONTROL   0x05
 #define SYS_EVENT_IO_TO_BLUETOOTH   0x06
+#define SYS_EVENT_1ms_CLOCK         0x07
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE)
 
-enum sys_colour {   BLACK   = 0b00000000,
+typedef enum sys_colour {   BLACK   = 0b00000000,
                     RED     = 0b00000100,
                     YELLOW  = 0b00000110,
                     GREEN   = 0b00000010,
                     CYAN    = 0b00000011,
                     BLUE    = 0b00000001,
                     MAGENTA = 0b00000101,
-                    WHITE   = 0b00000111};
+                    WHITE   = 0b00000111
+} sys_colour;
 
 typedef unsigned char  uint8;
 typedef unsigned short uint16;

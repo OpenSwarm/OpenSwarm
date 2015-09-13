@@ -211,7 +211,6 @@ bool Sys_Register_IOHandler(pFunction func){
     new_handler->next = 0;
 
     if(sys_iohandlers == 0){
-        LED1 = 1;
         sys_iohandlers = new_handler;
         return true;
     }
@@ -219,7 +218,6 @@ bool Sys_Register_IOHandler(pFunction func){
     sys_pIOHandler *handler = sys_iohandlers;
     while(handler != 0){
         if(handler->next == 0){
-            LED2 = 1;
             handler->next = new_handler;
             return true;
         }

@@ -44,6 +44,10 @@ bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size){
     Sys_Continue_SystemTimer_HDI();
     return true;
 }
+inline bool Sys_Send_IntEvent(uint16 eventID, uint16 data){
+    uint16 value = data;
+    return Sys_Send_Event(eventID, &value, 2);
+}
 
 bool Sys_Register_Event(uint16 eventID){
     sys_registered_event* events = registered_events;

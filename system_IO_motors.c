@@ -8,7 +8,6 @@
 #include <stdlib.h>
 
 #define MAX_WHEEL_SPEED 128
-#define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/
 
 typedef struct sys_motors_s{
     sint16 speed;
@@ -190,14 +189,14 @@ void Sys_RightMotor_Controller(){
 
 bool Sys_LeftMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data/*mm/s*/){
     sint16 *speed = (sint16 *) data->value;
-    Sys_Set_LeftWheelSpeed( MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * speed[0]);
+    Sys_Set_LeftWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);
     return true;
 }
 
 bool Sys_RightMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data /*mm/s*/){
     sint16 *speed = (sint16 *) data->value;
 
-    Sys_Set_RightWheelSpeed( MAX_WHEEL_SPEED/MAX_WHEEL_SPEED_MM_S * speed[0]);
+    Sys_Set_RightWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);
 
     return true;
 
@@ -222,4 +221,12 @@ void Sys_Set_RightWheelSpeed(sint16 speed){
         return;
     }
     right_motor.speed = speed;
+}
+
+
+sint16 Sys_Get_LeftWheelSpeed(void){
+    return left_motor.speed;
+}
+sint16 Sys_Get_RightWheelSpeed(void){
+    return left_motor.speed;
 }

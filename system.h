@@ -26,8 +26,7 @@
 #define SYS_MOTOR_USED
 #define SYS_UART1_USED
 #define SYS_REMOTECONTROL_USED
-#define SYS_SYSTEMCLOCK_USED
-//#define SYS_CAMERA_USED
+#define SYS_CAMERA_USED
 
 void Sys_Init_Kernel();   //initialises the hardware
 void Sys_Start_Kernel(void);    //starts all needed functions

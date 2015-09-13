@@ -34,6 +34,7 @@
       <itemPath>definitions.h</itemPath>
       <itemPath>HDI_epuck_ports.h</itemPath>
       <itemPath>HDI_init_port.h</itemPath>
+      <itemPath>camera_processing.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -78,6 +79,7 @@
       <itemPath>configuration_bits.c</itemPath>
       <itemPath>HDI_init_port.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>camera_processing.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -208,7 +210,7 @@
         <property key="general-code-protect" value="no_code_protect"/>
         <property key="general-write-protect" value="no_write_protect"/>
         <property key="generate-cross-reference-file" value="false"/>
-        <property key="heap-size" value="2048"/>
+        <property key="heap-size" value="3072"/>
         <property key="input-libraries" value=""/>
         <property key="linker-stack" value="true"/>
         <property key="linker-symbols" value=""/>
@@ -277,6 +279,7 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="false"/>
@@ -285,6 +288,7 @@
         <property key="memories.dataflash" value="true"/>
         <property key="memories.eeprom" value="true"/>
         <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.end" value="0x17fff"/>
         <property key="memories.programmemory.partition2" value="true"/>

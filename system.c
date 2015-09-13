@@ -33,11 +33,20 @@
 #include "system_Process_Management_HDI.h"
 
 #include "system_IO.h"
-#include "system_IO_motors.h"
-#include "system_IO_uart.h"
-#include "system_IO_camera.h"
-#include "system_IO_remoteControl.h"
 #include "system_IO_clock.h"
+    
+#ifdef SYS_MOTOR_USED
+#include "system_IO_motors.h"
+#endif
+#ifdef SYS_UART1_USED
+#include "system_IO_uart.h"
+#endif
+#ifdef SYS_REMOTECONTROL_USED
+#include "system_IO_remoteControl.h"
+#endif
+#ifdef SYS_CAMERA_USED
+#include "system_IO_camera.h"
+#endif
 
 #include "HDI_init_port.h"
 #include "definitions.h"
@@ -65,6 +74,7 @@ void Sys_Init_Kernel(){
 
     //init I/O Devices
     Sys_Init_IOManagement();
+    Sys_Init_Clock();
     
 #ifdef SYS_MOTOR_USED
     Sys_Init_Motors();
@@ -74,9 +84,6 @@ void Sys_Init_Kernel(){
 #endif
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Init_RemoteControl();
-#endif
-#ifdef SYS_SYSTEMCLOCK_USED
-    Sys_Init_SystemTime();
 #endif
 #ifdef SYS_CAMERA_USED
     Sys_Init_Camera();
@@ -137,8 +144,6 @@ void Sys_Start_Kernel(void){
 #endif
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Start_RemoteControl();
-#endif
-#ifdef SYS_SYSTEMCLOCK_USED
 #endif
 #ifdef SYS_CAMERA_USED
     Sys_Start_Camera();

@@ -256,8 +256,6 @@ inline void Sys_Write_UART1_ISR(){
 inline void Sys_Read_UART2_ISR(){
     uint8 data;
 
-    LED7 = ~LED7;
-
     if(U2STAbits.OERR == 1){//Buffer full?
         U2STAbits.OERR = 0;//I will empty it now
     }
