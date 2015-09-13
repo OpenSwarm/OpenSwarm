@@ -40,8 +40,8 @@ void Sys_Start_UART2(void);
 void Sys_SetReadingFunction_UART1(pUART_reader func);
 void Sys_SetReadingFunction_UART2(pUART_reader func);
 
-void Sys_Writeto_UART1(uint8 *data, uint16 length);
-void Sys_Writeto_UART2(uint8 *data, uint16 length);
+void Sys_Writeto_UART1(void *data, uint16 length);
+void Sys_Writeto_UART2(void *data, uint16 length);
 
 
 #ifdef	__cplusplus

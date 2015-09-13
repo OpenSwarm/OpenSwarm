@@ -2,3 +2,5 @@
 *.o.d
 *.mk
 dist/*
+*.properties
+*.bash

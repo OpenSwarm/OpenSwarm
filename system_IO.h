@@ -29,6 +29,9 @@ extern "C" {
 
 #include "definitions.h"
 
+#define STEPS_PER_SECOND 10000
+#define STEPS_PER_MILISECOND 10
+    
 void Sys_Init_IOManagement(void);   //initialises the system timer and sets a scheduling algorithm
 void Sys_Start_IOManagement(void);
 

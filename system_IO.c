@@ -111,7 +111,7 @@ inline void Sys_Continue_IOTimer(){
  */
 inline void Sys_Reset_IOTimer_HDI(){
     IFS0bits.T3IF = 0; //unsets the Timer1 interrupt flag
-    TMR3 = 0; //sets countervalue to 0
+    //TMR3 = 0; //sets countervalue to 0
 }
 inline void Sys_Reset_IOTimer(){
     Sys_Reset_IOTimer_HDI();
@@ -126,8 +126,8 @@ inline void Sys_Reset_IOTimer(){
  * @return void
  */
 void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(){
-    Sys_IOTimer_code_HDI();
     IFS0bits.T3IF = 0;
+    Sys_IOTimer_code_HDI();
 }
 
 /**
@@ -139,8 +139,8 @@ void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(){
  * @return void
  */
 void __attribute__((interrupt,no_auto_psv)) _AltT3Interrupt(){
-    Sys_IOTimer_code_HDI();
     IFS0bits.T3IF = 0;
+    Sys_IOTimer_code_HDI();
 }
 
 /**
@@ -211,7 +211,6 @@ bool Sys_Register_IOHandler(pFunction func){
     new_handler->next = 0;
 
     if(sys_iohandlers == 0){
-        LED1 = 1;
         sys_iohandlers = new_handler;
         return true;
     }
@@ -219,7 +218,6 @@ bool Sys_Register_IOHandler(pFunction func){
     sys_pIOHandler *handler = sys_iohandlers;
     while(handler != 0){
         if(handler->next == 0){
-            LED2 = 1;
             handler->next = new_handler;
             return true;
         }

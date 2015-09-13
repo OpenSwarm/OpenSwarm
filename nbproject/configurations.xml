@@ -28,11 +28,13 @@
         <itemPath>system_IO_motors.h</itemPath>
         <itemPath>system_IO_remoteControl.h</itemPath>
         <itemPath>system_IO_uart.h</itemPath>
+        <itemPath>system_IO_clock.h</itemPath>
       </logicalFolder>
       <itemPath>user.h</itemPath>
       <itemPath>definitions.h</itemPath>
       <itemPath>HDI_epuck_ports.h</itemPath>
       <itemPath>HDI_init_port.h</itemPath>
+      <itemPath>camera_processing.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -69,6 +71,7 @@
         <itemPath>system_IO_motors.c</itemPath>
         <itemPath>system_IO_uart.c</itemPath>
         <itemPath>system_IO_remoteControl.c</itemPath>
+        <itemPath>system_IO_clock.c</itemPath>
       </logicalFolder>
       <itemPath>user.c</itemPath>
       <itemPath>traps.c</itemPath>
@@ -76,6 +79,7 @@
       <itemPath>configuration_bits.c</itemPath>
       <itemPath>HDI_init_port.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>camera_processing.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -97,7 +101,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.23</languageToolchainVersion>
+        <languageToolchainVersion>1.24</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>
@@ -206,7 +210,7 @@
         <property key="general-code-protect" value="no_code_protect"/>
         <property key="general-write-protect" value="no_write_protect"/>
         <property key="generate-cross-reference-file" value="false"/>
-        <property key="heap-size" value="2048"/>
+        <property key="heap-size" value="3072"/>
         <property key="input-libraries" value=""/>
         <property key="linker-stack" value="true"/>
         <property key="linker-symbols" value=""/>
@@ -275,6 +279,7 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="false"/>

@@ -25,6 +25,8 @@
 #include <p30F6014A.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include <math.h>
 
 #include "HDI_epuck_ports.h"
 
@@ -33,28 +35,36 @@
 //#include "system_IO_i2c.h"
 #include "system_Interrupts.h"
 #include "system_Memory.h"
+#include "camera_processing.h"
 
 #include "e_poxxxx.h"
 #include "e_po6030k.h"
+
+
+#include "system_IO_uart.h"
 
 #define FRAME_WIDTH     10
 #define FRAME_HEIGHT    10
 #define CAMERA_I2C_ADDRESS 0xDC
 
-#define RED_THRESHOLD   0b00010011
-#define GREEN_THRESHOLD 0b00011111
-#define BLUE_THRESHOLD  0b00001011
+#define RED_MAX         0x0C1C
+#define GREEN_MAX       0x189C
+#define BLUE_MAX        0x0C1C
+#define RED_THRESHOLD   0x060E
+//#define GREEN_THRESHOLD 0x0C4E
+#define GREEN_THRESHOLD 0x0E4E
+#define BLUE_THRESHOLD  0x060E
 
 static pCameraPreProcessor pre_processor = 0;
 
 static sys_rgb_pixel *frame_a = 0;
 static sys_rgb_pixel *frame_b = 0;
-static uint16 max_frame_size = 0;
+//static uint16 max_frame_size = 0;
 
 static sys_rgb_pixel *current_frame = 0;
-static uint16 current_row = 0;
-static uint16 current_col = 0;
-static uint16 current_pos = 0;
+//static uint16 current_row = 0;
+//static uint16 current_col = 0;
+//static uint16 current_pos = 0;
 
 static bool is_newframe_available = false;
 
@@ -75,27 +85,39 @@ inline void Sys_Write_to_Camera(uint8 address, uint8* data, uint16 length){
 }
 
 
-static unsigned char buffer[10*10*2] = {0};
-void Sys_Init_Camera(){
-
-
 #define CAM_WIDTH 160
 #define CAM_HEIGHT 160
-#define CAM_ZOOM_X 4
-#define CAM_ZOOM_Y 4
+#define CAM_ZOOM_X 8
+#define CAM_ZOOM_Y 8
+#define CAM_W_SIZE 20
+#define CAM_H_SIZE 20
+static char buffer[CAM_W_SIZE*CAM_H_SIZE*2];
 
-e_poxxxx_init_cam ();
-e_poxxxx_config_cam(300, 220, 40, 40, 4, 4, RGB_565_MODE);
-e_po6030k_write_register(BANK_C, 0x04, 0b10011110);
-e_po6030k_write_register(BANK_C, 0x55, 0x00);
-e_po6030k_write_register(BANK_C, 0x56, 0x00);
-e_po6030k_write_register(BANK_C, 0x28, 0x10);
-e_po6030k_write_register(BANK_C, 0x29, 0x00);
+void Sys_Init_Camera(){
 
-e_poxxxx_launch_capture(&buffer[0]); //take first image
     if(!Sys_Register_IOHandler(Sys_Camera_PreProcessor)){
         return;
     }
+    if(!Sys_Register_Event(SYS_EVENT_IO_CAMERA)){
+        return;
+    }
+
+    e_poxxxx_init_cam();
+    e_poxxxx_config_cam((ARRAY_WIDTH -CAM_WIDTH)/2,(ARRAY_HEIGHT-CAM_HEIGHT)/2,CAM_WIDTH,CAM_HEIGHT,CAM_ZOOM_X,CAM_ZOOM_Y,RGB_565_MODE);
+    e_po6030k_write_register(BANK_C, 0x04, 0b10011110);
+    e_po6030k_set_mirror(1,1);
+    e_poxxxx_write_cam_registers();
+
+//e_po6030k_write_register(BANK_C, 0x55, 0x00);
+//e_po6030k_write_register(BANK_C, 0x56, 0x00);
+//e_po6030k_write_register(BANK_C, 0x28, 0x10);
+//e_po6030k_write_register(BANK_C, 0x29, 0x00);
+
+    
+    
+    
+//    while( !e_poxxxx_is_img_ready() ){}
+    
     
     /*
 
@@ -195,7 +217,7 @@ e_poxxxx_launch_capture(&buffer[0]); //take first image
 	e_i2cp_write(CAMERA_I2C_ADDRESS, 0x81, 0x80);
 	e_i2cp_write(CAMERA_I2C_ADDRESS, 0x82, 0x01);
     
-    ////*
+    ////
     uint8 byte = 0x01;
     Sys_Write_to_Camera(0x03,&byte,1);//set regesters to group B
 
@@ -274,6 +296,7 @@ void Sys_Start_Camera(){
     IEC1bits.T4IE = 1;// enable line interrupt
     IEC1bits.T5IE = 1;// enable frame interrupt
 */
+    e_poxxxx_launch_capture( &buffer[0]); //take first image
 }
 
 void Sys_Set_Preprocessing(pCameraPreProcessor func){
@@ -474,7 +497,6 @@ inline void Sys_Process_newFrame(){
     TMR5 = 0;
 }
 
-
 sys_rgb_pixel *getFinishedFrame(){
     is_newframe_available = false;
 
@@ -489,52 +511,105 @@ bool isNewFrameAvailable(){
 }
 
 
+#define CP_WI 120
+#define CP_RI 80
+#define CP_GI 80
+#define CP_BI 100
+#define COLOUR_THRESHOLD 766
 void Sys_Camera_PreProcessor(void){
     if(!e_poxxxx_is_img_ready()){
         return;
     }
-
     
+    /*
     uint16 i = 0;
-    sys_rgb_pixel *frame = (sys_rgb_pixel *) buffer;
+    
+    uint32 red_counter = 0;
+    uint32 green_counter = 0;
+    uint32 blue_counter = 0;
 
-    uint16 red_counter = 0;
-    uint16 green_counter = 0;
-    uint16 blue_counter = 0;
+    static uint32 red_counter2 = 0;
+    static uint32 green_counter2 = 0;
+    static uint32 blue_counter2 = 0;
 
     for(i = 0; i < 100; i++){
-            if(frame[i].red > RED_THRESHOLD){
-                red_counter++;
-            }
-            if(frame[i].green > GREEN_THRESHOLD){
-                green_counter++;
-            }
-            if(frame[i].blue > BLUE_THRESHOLD){
-                blue_counter++;
-            }
+            red_counter += (frame[i] & 0xF800) >> 11;
+            green_counter += (frame[i] & 0x07E0) >> 5;
+            blue_counter += (frame[i] & 0x001F);
     }
 
     uint8 colour = 0;
 
-    if(red_counter > 35){
-        colour |= RED;
-        LED1 = 1;
-    }else{
-        LED1 = 0;
+    red_counter2 = (red_counter2*3+red_counter)/4;
+    green_counter2 = (green_counter2*3+green_counter)/4;
+    blue_counter2 = (blue_counter2*3+blue_counter)/4;
+    */
+    char rgb565[2], rgb888[3];
+    //char debug_str[16];
+    //int debug_str_length;
+    getRGB565at(buffer, rgb565, 9, 9);
+    convertRGB565ToRGB888( rgb565, rgb888  );
+    char color = nearestNeighborRGB( rgb888, 0b11100001 ); //flag: WRGbymcD
+    
+    sys_colour colour;
+    if( color == 'r' || color == 'd')
+        colour = RED; //object
+    if( color == 'g')
+        colour = GREEN; //robot
+    if( color == 'w')
+        colour = WHITE;
+    /*
+    uint16 px_565  = buffer[2*40*9+2*9] << 8 | buffer[2*40*9+2*9+1];
+    int red   = (px_565 & 0xF800) >> 11;
+    int green = (px_565 & 0x07E0) >> 5;
+    int blue  = (px_565 & 0x001F);
+    
+    int smallestValue = COLOUR_THRESHOLD;
+    sys_colour colour = BLACK;
+    int temp_red, temp_green, temp_white;
+    
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    
+    temp_red = fabs(red - CP_RI) + fabs(green) + fabs(blue) ;
+    if(temp_red < smallestValue){
+        smallestValue = temp_red;
+        colour = RED;
+    LED3 = 1;
+    LED4 = 0;
+    LED5 = 0;
+    
     }
-    if(green_counter > 35){
-        colour |= GREEN;
-        LED2 = 1;
-    }else{
-        LED2 = 0;
+    temp_green = fabs(red) + fabs(green - CP_GI) + fabs(blue) ;
+    if(temp_green < smallestValue){
+        smallestValue = temp_green;
+        colour = GREEN;
+    LED3 = 0;
+    LED4 = 1;
+    LED5 = 0;
+    
     }
-    if(blue_counter > 35){
-        colour |= BLUE;
-        LED3 = 1;
-    }else{
-        LED3 = 0;
+    temp = fabs(blue - CP_BI);
+    if(temp < smallestValue){
+        smallestValue = temp;
+        colour = BLUE;
     }
-
-    e_poxxxx_launch_capture(buffer);
-    //Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, 1);
+     
+    temp_white = fabs(red - CP_WI) + fabs(green - CP_WI) + fabs(blue - CP_WI) ;
+    if(temp_white < smallestValue){
+        smallestValue = temp_white;
+        colour = WHITE;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    
+    }
+    */
+    //static int counter = 0;
+    
+    LED0 = ~LED0;
+    Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, 1);
+    
+    e_poxxxx_launch_capture((char *) buffer);
 }

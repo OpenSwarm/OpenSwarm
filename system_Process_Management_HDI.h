@@ -39,9 +39,10 @@ extern "C" {
 void Sys_Switch_Process(uint16 pid); //loads all values into the registers to start the other programm
 void Sys_Switch_to_next_Process();
 
-bool Sys_Start_Process_HDI(pFunction function);//create a new process with function as template
+inline bool Sys_Start_Process(pFunction function);//create a new process with function as template
 inline void Sys_Kill_Process(uint16 pid);//kills a process
 inline void Sys_Kill_Zombies();//kills any process makred as zomies
+void Sys_Yield();//create a new process with function as template
 
 void Sys_Init_Process_Management_HDI();// initialises the process management and creates a system process
 

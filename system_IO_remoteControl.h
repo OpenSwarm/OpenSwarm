@@ -69,8 +69,6 @@ extern "C" {
 #define RC_BUTTON_PLAY          53
 #define RC_BUTTON_STOP          54
 #define RC_BUTTON_RECORD        55
-
-
     
 inline void Sys_Init_RemoteControl(void);
 inline void Sys_Start_RemoteControl(void);

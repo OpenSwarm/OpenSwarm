@@ -1,0 +1,4 @@
+*.o
+*.o.d
+*.mk
+/dist/XC16_dsPIC30F6014A/

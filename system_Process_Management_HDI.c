@@ -26,6 +26,7 @@
 
 #include <p30F6014A.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 
 typedef struct sys_occured_event_s{
@@ -41,6 +42,7 @@ typedef struct sys_process_event_handler_s{
     pConditionFunction condition;
     sys_event_data *buffered_data;/*!< stores the data */
 
+    struct sys_process_event_handler_s *previous;
     struct sys_process_event_handler_s *next;
 }sys_process_event_handler, sys_peh;
 
@@ -291,7 +293,9 @@ bool Sys_Start_Process_HDI(pFunction function){
   return true;
 
 }
-
+inline bool Sys_Start_Process(pFunction function){
+    return Sys_Start_Process_HDI(function);
+}
 /**
  * This function kills a process
  *
@@ -383,7 +387,7 @@ inline void Sys_Kill_Zombies(){
  * @return void
  */
 void Sys_Delete_Process(sys_pcb_list_element *element){
-    Sys_Start_CriticalSection();
+    Sys_Start_AtomicSection();
 
     Sys_Clear_EventRegister(element);
 
@@ -391,7 +395,7 @@ void Sys_Delete_Process(sys_pcb_list_element *element){
     element->pcb.process_stack = 0;
     Sys_Free(element);
 
-    Sys_End_CriticalSection();
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -627,7 +631,7 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_elem
 
     sys_pcb_list_element *out;
     if((*list)->pcb.process_ID == pID){
-        Sys_Start_CriticalSection();
+        Sys_Start_AtomicSection();
 
         out = *list;
 
@@ -637,7 +641,7 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_elem
         out->previous = 0;
         out->next = 0;
 
-        Sys_End_CriticalSection();
+        Sys_End_AtomicSection();
         return out;
     }
 
@@ -645,7 +649,7 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_elem
     sys_pcb_list_element *element = (*list)->next;
     while(element != 0){
         if(element->pcb.process_ID == pID){
-            Sys_Start_CriticalSection();
+            Sys_Start_AtomicSection();
 
             element->previous->next = element->next;
             element->next->previous = element->previous;
@@ -653,7 +657,7 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_elem
             element->previous = 0;
             element->next = 0;
 
-            Sys_End_CriticalSection();
+            Sys_End_AtomicSection();
             return element;
         }
 
@@ -687,7 +691,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     }
 
     if( (*list)->pcb.process_ID > process->pcb.process_ID){
-        Sys_Start_CriticalSection();
+        Sys_Start_AtomicSection();
 
         process->next = *list;
         process->previous = 0;
@@ -695,7 +699,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
 
         *list = process;
 
-        Sys_End_CriticalSection();
+        Sys_End_AtomicSection();
         return;
     }
 
@@ -703,7 +707,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     sys_pcb_list_element *element = *list;
     while(element->next != 0){
         if(element->next->pcb.process_ID > process->pcb.process_ID){
-            Sys_Start_CriticalSection();
+            Sys_Start_AtomicSection();
 
             process->next = element->next;
             if(process->next != 0){
@@ -713,20 +717,20 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
             element->next = process;
 
 
-            Sys_End_CriticalSection();
+            Sys_End_AtomicSection();
             return;
         }
 
         element = element->next;
     }
 
-    Sys_Start_CriticalSection();
+    Sys_Start_AtomicSection();
 
     process->next = 0;
     element->next = process;
     process->previous = element;
 
-    Sys_End_CriticalSection();
+    Sys_End_AtomicSection();
     return;
 }
 
@@ -791,7 +795,7 @@ void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition)
 
     if(sys_ready_processes == 0 || sys_ready_processes->next == 0) return; //no proccess to block
 
-    Sys_Start_CriticalSection();
+    Sys_Start_AtomicSection();
     sys_pcb_list_element *element = Sys_Remove_Process_from_List(pid, &sys_ready_processes);
     Sys_Insert_Process_to_List(element, &sys_blocked_processes);
 
@@ -805,7 +809,7 @@ void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition)
         Sys_Force_TimerInterrupt_HDI();
     }
     
-    Sys_End_CriticalSection();
+    Sys_End_AtomicSection();
 }
 
 
@@ -820,10 +824,10 @@ void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition)
 bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
     if(sys_blocked_processes == 0) return true; //no proccess is blocked .. process must be running
 
-    Sys_Start_CriticalSection();
+    Sys_Start_AtomicSection();
     sys_pcb_list_element *element = Sys_Remove_Process_from_List(pid, &sys_blocked_processes);
     Sys_Insert_Process_to_List(element, &sys_ready_processes);
-    Sys_End_CriticalSection();
+    Sys_End_AtomicSection();
 
     Sys_Remove_Event_from_EventRegister(eventID, Sys_Continue_Pocess, &(element->pcb.event_register));
 
@@ -896,7 +900,7 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
 
     sys_process_event_handler *element = list;
 
-    while(list != 0){
+    while(element != 0){
         if(element->eventID == eventID)
             return element;
 
@@ -913,39 +917,22 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
         return;
     }
 
-    //add eventID to the list of occured events
-    if(sys_occured_events == 0){
-       Sys_Start_CriticalSection();
-       sys_occured_events = Sys_Malloc(sizeof(sys_occured_event));
-       if(sys_occured_events == 0){
+    sys_occured_event **o_event = &sys_occured_events;
+    while(*o_event != 0){
+        o_event = &((*o_event)->next);
+    }
+    
+    Sys_Start_AtomicSection();
+        (*o_event) = Sys_Malloc(sizeof(sys_occured_event));
+       if((*o_event) == 0){
+           Sys_End_AtomicSection();
            return; //no memory left
        }
 
-       sys_occured_events->eventID = eventID;
-       Sys_End_CriticalSection();
-    }else{
-        sys_occured_event *o_event = sys_occured_events;
-        do{
-            if(o_event->eventID == eventID){//is laready added
-                break;
-            }
-
-            if(o_event->next == 0){
-                Sys_Start_CriticalSection();
-                o_event->next = Sys_Malloc(sizeof(sys_occured_event));
-                if(o_event->next == 0){
-                    return; //no memory left
-                }
-
-                o_event->next->eventID = eventID;
-                break;
-                Sys_End_CriticalSection();
-            }
-
-            o_event = o_event->next;
-        }while(o_event != 0);
-    }
-
+       (*o_event)->eventID = eventID;
+       (*o_event)->next = 0;
+    Sys_End_AtomicSection();
+    //add eventID to the list of occured events
 
     sys_process_event_handler *event = element->pcb.event_register;
     while( (event = Sys_Next_EventHandler(event, eventID)) != 0 ){
@@ -992,6 +979,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
 }
 
 //handler has to clean up the data!!!
+//TODO: if handler == 0 remove it from list
 inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_element *elements){
     sys_pcb_list_element *list = elements;
     while(list != 0){//assuming there are less processes then events
@@ -1001,7 +989,8 @@ inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_eleme
                 if(event->handler != 0){
                     event->handler(list->pcb.process_ID,eventID,event->buffered_data);
                 }
-                
+                Sys_Clear_EventData(&(event->buffered_data));
+                event->buffered_data = 0;
             }
 
             event = event->next;
@@ -1191,4 +1180,12 @@ sys_event_data *Sys_Wait_For_Condition(uint16 eventID, pConditionFunction functi
 
 inline sys_event_data *Sys_Wait_For_Event(uint16 eventID){
     return Sys_Wait_For_Condition(eventID, 0);
+}
+
+void Sys_Yield(){
+    if( sys_running_process == sys_ready_processes && sys_ready_processes->next == 0){
+        return;
+    }
+    
+    Sys_Force_TimerInterrupt_HDI();
 }

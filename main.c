@@ -32,8 +32,11 @@
     #endif
 #endif
 
+
 #include <stdint.h>        /* Includes uint16_t definition                    */
+#include <stdlib.h>
 #include <stdbool.h>       /* Includes true/false definition                  */
+#include <stdio.h>
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "definitions.h"
@@ -43,26 +46,29 @@
 #include "HDI_epuck_ports.h"
 #include "HDI_init_port.h"
 
+#include "system_Events.h"
+
 #include "system_IO_motors.h"
 #include "system_IO_uart.h"
 #include "system_IO_remoteControl.h"
+#include "system_IO_clock.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
 
+static bool run_clustering = false;
 
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
 
-void task1();
-void task2();
-void task3();
-
-void frontLED();
-
 void bluetooth_reader(uint8 data);
+bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data);
+
+void loggingThread();
+bool wait250times(void *data);
+bool object_clustering(uint16 pid, uint16 eventID, sys_event_data *data);
 
 int16_t main(void)
 {
@@ -72,11 +78,11 @@ int16_t main(void)
     Sys_Init_Kernel();
     
     //Sys_SetReadingFunction_UART1(bluetooth_reader);
-    //Sys_Init_Motors();
-    //Sys_Start_Process_HDI(task1);
+    Sys_Start_Process(loggingThread);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
     Sys_Start_Kernel();
-    //Sys_Register_IOHandler(bodyLED);
 
     LED0 = 0;
     LED1 = 0;
@@ -86,9 +92,8 @@ int16_t main(void)
     LED5 = 0;
     LED6 = 0;
     LED7 = 0;
-
-    /* Initialize IO ports and peripherals */
-    //InitApp();
+    BODY_LED = 0;
+    FRONT_LED = 0;
 
     //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
     //Sys_Clear_EventData(&data);
@@ -96,93 +101,110 @@ int16_t main(void)
     unsigned int i = 0;
     
     while(1){//DO Nothing (do yonly things for testing)
-        /*
         if(i == 0xFFFE){
             i = 0;
-
-            uint8 value = Sys_RemoteC_Get_Data();
-
-            if(value != 0){
-                FRONT_LED = 1;
-            }else{
-                FRONT_LED = 0;
-            }
-
-            if(value & 0b000001){
-                LED1 = 1;
-            }else{
-                LED1 = 0;
-            }
-            if(value & 0b000010){
-                LED2 = 1;
-            }else{
-                LED2 = 0;
-            }
-            if(value & 0b000100){
-                LED3 = 1;
-            }else{
-                LED3 = 0;
-            }
-            if(value & 0b001000){
-                LED4 = 1;
-            }else{
-                LED4 = 0;
-            }
-            if(value & 0b010000){
-                LED5 = 1;
-            }else{
-                LED5 = 0;
-            }
-            if(value & 0b100000){
-                LED6 = 1;
-            }else{
-                LED6 = 0;
-            }
-            
-
-            
+            LED7 = ~LED7; 
         }
-        */
         i++;
     }
 }
 
+bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data){
+    char msg[24] = {0};
+    uint8 length = 0;
+    uint8 *value = data->value;
+    length = sprintf(msg, "rc:%u\r\n", (int) value[0] );
+    Sys_Writeto_UART1(msg, length);
 
-void task1(){
-    unsigned int z=0;
-    unsigned int u=0;
-    while(1){
-        z++;
-        if(z == 0xFFFE){
-            z = 0;
-            LED4 = ~LED4;
-            u++;
-        }
-        if(u == 20){
-            //LED6 = ~LED6;
-            //if(LED6 == 1){
-                //Sys_Writeto_UART1("on\r\n",5);
-            //}else{
-                //Sys_Writeto_UART1("off\r\n",5);
-            //}
-            u=0;
-        }
-    }
-}
-
-void frontLED(){
-    static uint16 i = 0;
-
-    if(i == 10000){
-        FRONT_LED = ~FRONT_LED;
-        i = 0;
-        return;
-    }
-    i++;
-}
-
-void bluetooth_reader(uint8 data){
-    BODY_LED = ~BODY_LED;
     
+    run_clustering = false;
+    sint16 speed = 0;
+    
+    switch(*value){
+        case RC_BUTTON_SWAP:
+            srand(Sys_Get_SystemClock() & 0xFF);
+            speed = (rand() % (2*MAX_WHEEL_SPEED_MM_S))-MAX_WHEEL_SPEED_MM_S;//speed \in [-MAX_WHEEL_SPEED_MM_S, MAX_WHEEL_SPEED_MM_S]
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, speed);
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, -speed);
+            BODY_LED = 1;
+            FRONT_LED = 0;
+            break;
+        case RC_BUTTON_OK:
+            speed = 0;
+            BODY_LED = 0;
+            FRONT_LED = 1;
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, 0);
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, 0);
+            run_clustering = true;
+            break;
+        case RC_BUTTON_STANDBY:
+        case RC_BUTTON_SLEEP:
+            speed = 0;
+            BODY_LED = 0;
+            FRONT_LED = 0;
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, 0);
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, 0);
+        default:
+            break;
+    }
+    return true;
+}
+
+void bluetooth_reader(uint8 data){    
    // Sys_Writeto_UART1(&data,1);
+    ;
+}
+
+#define ROBOT_SPEED_L   (MAX_WHEEL_SPEED_MM_S * 89)/100
+#define ROBOT_SPEED_R   (MAX_WHEEL_SPEED_MM_S * 53)/100
+
+#define OBJECT_SPEED_L  (MAX_WHEEL_SPEED_MM_S * 98)/100
+#define OBJECT_SPEED_R  (MAX_WHEEL_SPEED_MM_S * 50)/100
+
+#define NOTHING_SPEED_L (MAX_WHEEL_SPEED_MM_S * 55)/100
+#define NOTHING_SPEED_R (MAX_WHEEL_SPEED_MM_S * 99)/100
+bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
+    
+    sys_colour rx_colour = *((sys_colour *)data->value);
+   
+    
+    switch(rx_colour){//detection of
+    case GREEN://other robot
+        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, ROBOT_SPEED_L);
+        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT,ROBOT_SPEED_R);
+        break;
+    case RED://object
+        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, OBJECT_SPEED_L);
+        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, OBJECT_SPEED_R);
+        break;
+    case WHITE://nothing/wall
+        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, NOTHING_SPEED_L);
+        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, NOTHING_SPEED_R);
+        break;
+    default://anything else
+        break;//keep on
+    }
+    
+    return true;
+}
+
+void loggingThread(){
+    static char message[24];
+    while(true){
+        uint16 length = 0;
+        length = sprintf(message, "\%u:(\%3u,\%3u)\r\n", Sys_Get_SystemTime(), Sys_Get_LeftWheelSpeed(), Sys_Get_RightWheelSpeed());
+        Sys_Writeto_UART1(message, length);//send via Bluetooth
+    
+        sys_event_data *data = Sys_Wait_For_Condition(SYS_EVENT_1ms_CLOCK, &wait250times);
+        Sys_Clear_EventData(&data);
+    } 
+}
+
+bool wait250times(void *data){
+    static uint8 counter = 0;
+    if(counter++ < 250){
+        return false;
+    }
+    counter = 0;
+    return true;
 }

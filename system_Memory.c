@@ -45,8 +45,11 @@ void Sys_Free(void *data){
 
 }
 
-void Sys_Memcpy(uint8 *source, uint8 *destination, uint16 length){
+void Sys_Memcpy(void *source_i, void *destination_o, uint16 length){
 
+    uint8 *source = source_i;
+    uint8 *destination = destination_o;
+    
     Sys_Start_AtomicSection();
 
     uint16 i = 0;

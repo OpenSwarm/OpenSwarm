@@ -42,6 +42,7 @@ extern "C" {
 
 
     bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size);
+    inline bool Sys_Send_IntEvent(uint16 eventID, uint16 data);
 
     bool Sys_Register_Event(uint16 eventID);
     void Sys_Unregister_Event(uint16 eventID);

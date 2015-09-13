@@ -12,8 +12,8 @@
 typedef enum { I2C_IDLE = 0, I2C_IS_STARTING, I2C_STARTED, I2C_IS_READING, I2C_IS_SENDING, I2C_SENT, I2C_ACKNOWLEDGED, I2C_IS_STOPPING, I2C_ERROR} sys_I2C_state;
 typedef enum { I2C_IDLE_MODE = 0, I2C_WRITING_ADDRESS_MODE, I2C_READING_BYTES_MODE, I2C_WRITING_BYTES_MODE, I2C_ERROR_MODE} sys_I2C_mode;
 
-static sys_I2C_state sys_i2c_state = I2C_IDLE;
-static sys_I2C_mode sys_i2c_mode = I2C_IDLE_MODE;
+//static sys_I2C_state sys_i2c_state = I2C_IDLE;
+//static sys_I2C_mode sys_i2c_mode = I2C_IDLE_MODE;
 
 typedef struct sys_i2c_message_s {
     uint8           i2c_device_address; // 7-bit addr

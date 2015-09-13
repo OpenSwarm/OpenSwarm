@@ -30,7 +30,7 @@ extern "C" {
 
 void *Sys_Malloc(uint16 length);
 void Sys_Free(void *);
-void Sys_Memcpy(uint8 *source, uint8 *destination, uint16 length);
+void Sys_Memcpy(void *source, void *destination, uint16 length);
 
 
 #ifdef	__cplusplus

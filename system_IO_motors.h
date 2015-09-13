@@ -29,10 +29,14 @@
 extern "C" {
 #endif
 
+#define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/
+    
 void Sys_Init_Motors(void);
 
 void Sys_Set_LeftWheelSpeed(sint16 speed);
 void Sys_Set_RightWheelSpeed(sint16 speed);
+sint16 Sys_Get_LeftWheelSpeed(void);
+sint16 Sys_Get_RightWheelSpeed(void);
 
 
 #ifdef	__cplusplus
