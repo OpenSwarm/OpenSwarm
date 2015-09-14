@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #define MAX_WHEEL_SPEED 128
+#define POWER_SAVE_WAIT 15
 
 typedef struct sys_motors_s{
     sint16 speed;
@@ -60,12 +61,28 @@ void Sys_Init_Motors(){
     }
 }
 
+inline void Sys_LeftMotor_Reset(){
+      MOTOR1_PHA = 0;
+      MOTOR1_PHB = 0;
+      MOTOR1_PHC = 0;
+      MOTOR1_PHD = 0;
+}
+
+inline void Sys_RightMotor_Reset(){
+      MOTOR2_PHA = 0;
+      MOTOR2_PHB = 0;
+      MOTOR2_PHC = 0;
+      MOTOR2_PHD = 0;
+}
+
 void Sys_LeftMotor_Controller(){
 
    static uint8 phase = 0;		 // phase can be 0 to 3
    static sint16 next_phase = 0;
-
+   static uint8 power_saving = 0;
+   
    if(left_motor.speed == 0){
+       Sys_LeftMotor_Reset();
        return;
    }
 
@@ -73,12 +90,26 @@ void Sys_LeftMotor_Controller(){
        if(--next_phase <= 0){
             phase--;
             next_phase = (10*MAX_WHEEL_SPEED)/abs(left_motor.speed);
+            power_saving = 0;
+       } else {
+           if(power_saving >= POWER_SAVE_WAIT){
+            Sys_LeftMotor_Reset();
+            return;
+           }
+           power_saving++;//
        }
    }else{
        if(--next_phase <= 0){
            phase++;
            next_phase = (10*MAX_WHEEL_SPEED)/left_motor.speed;
-       }
+            power_saving = 0;
+       } else {
+           if(power_saving >= POWER_SAVE_WAIT){
+            Sys_LeftMotor_Reset();
+            return;
+           }
+           power_saving++;
+       } 
    }
 
    phase %= 4;
@@ -129,8 +160,10 @@ void Sys_RightMotor_Controller(){
 
    static uint8 phase = 0;		 // phase can be 0 to 3
    static sint16 next_phase = 0;
+   static uint8 power_saving = 0;
 
    if(right_motor.speed == 0){
+        Sys_RightMotor_Reset();
        return;
    }
 
@@ -138,11 +171,25 @@ void Sys_RightMotor_Controller(){
        if(--next_phase <= 0){
             phase--;
             next_phase = (10*MAX_WHEEL_SPEED)/abs(right_motor.speed);
+            power_saving = 0;
+       } else {
+           if(power_saving >= POWER_SAVE_WAIT){
+            Sys_RightMotor_Reset();
+            return;
+           }
+           power_saving++;
        }
    }else{
        if(--next_phase <= 0){
            phase++;
            next_phase = (10*MAX_WHEEL_SPEED)/right_motor.speed;
+            power_saving = 0;
+       } else {
+           if(power_saving >= POWER_SAVE_WAIT){
+            Sys_RightMotor_Reset();
+            return;
+           }
+           power_saving++;
        }
    }
 

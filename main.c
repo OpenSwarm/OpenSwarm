@@ -78,7 +78,7 @@ int16_t main(void)
     Sys_Init_Kernel();
     
     //Sys_SetReadingFunction_UART1(bluetooth_reader);
-    Sys_Start_Process(loggingThread);
+    //Sys_Start_Process(loggingThread);
     Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
@@ -103,7 +103,7 @@ int16_t main(void)
     while(1){//DO Nothing (do yonly things for testing)
         if(i == 0xFFFE){
             i = 0;
-            LED7 = ~LED7; 
+            //LED7 = ~LED7; 
         }
         i++;
     }
@@ -132,7 +132,7 @@ bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data){
         case RC_BUTTON_OK:
             speed = 0;
             BODY_LED = 0;
-            FRONT_LED = 1;
+            FRONT_LED = 0;
             Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, 0);
             Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, 0);
             run_clustering = true;
@@ -165,23 +165,37 @@ void bluetooth_reader(uint8 data){
 #define NOTHING_SPEED_R (MAX_WHEEL_SPEED_MM_S * 99)/100
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
     
+    LED4 = ~LED4;
+    
+    if(!run_clustering){
+        return true;
+    }
+    
     sys_colour rx_colour = *((sys_colour *)data->value);
    
+    static char message[24];
+        uint16 length = 0;
+        length = sprintf(message, "%i (%i,%i,%i)\r\n", rx_colour, NOTHING_SPEED_L, NOTHING_SPEED_R, WHITE);
+        Sys_Writeto_UART1(message, length);//send via Bluetooth
     
     switch(rx_colour){//detection of
     case GREEN://other robot
         //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, ROBOT_SPEED_L);
         //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT,ROBOT_SPEED_R);
+        LED5 = ~LED5;
         break;
     case RED://object
         //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, OBJECT_SPEED_L);
         //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, OBJECT_SPEED_R);
+        LED6 = ~LED6;
         break;
     case WHITE://nothing/wall
         //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, NOTHING_SPEED_L);
         //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, NOTHING_SPEED_R);
+        LED7 = ~LED7;
         break;
     default://anything else
+        LED1 = ~LED1;
         break;//keep on
     }
     
