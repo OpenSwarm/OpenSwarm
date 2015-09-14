@@ -22,10 +22,10 @@
 */
 
 
-void convertRGB565ToRGB888(char rgb565[], char rgb888[]);
-void getRGB565at( char* buffer, char rgb585[], int x, int y );
-void getRGB888at( char* buffer, char rgb888[], int x, int y );
-char nearestNeighborRGB(char* rbg888, char flag);
+void convertRGB565ToRGB888(unsigned char rgb565[], unsigned char rgb888[]);
+void getRGB565at( char* buffer, unsigned char rgb585[], int x, int y );
+void getRGB888at( char* buffer, unsigned char rgb888[], int x, int y );
+char nearestNeighborRGB(unsigned char* rbg888, char flag);
 
-char brushedColorFromRGB565(char rgb565[], char flag);
+char brushedColorFromRGB565(unsigned char rgb565[], char flag);
 char getBrushedColorAt( char* buffer, char flag, int x, int y, int w );

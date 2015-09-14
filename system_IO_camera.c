@@ -42,6 +42,7 @@
 
 
 #include "system_IO_uart.h"
+#include "system_Interrupts.h"
 
 #define FRAME_WIDTH     10
 #define FRAME_HEIGHT    10
@@ -544,20 +545,38 @@ void Sys_Camera_PreProcessor(void){
     green_counter2 = (green_counter2*3+green_counter)/4;
     blue_counter2 = (blue_counter2*3+blue_counter)/4;
     */
-    char rgb565[2], rgb888[3];
+    unsigned char rgb565[2], rgb888[3];
     //char debug_str[16];
     //int debug_str_length;
-    getRGB565at(buffer, rgb565, 9, 9);
-    convertRGB565ToRGB888( rgb565, rgb888  );
-    char color = nearestNeighborRGB( rgb888, 0b11100001 ); //flag: WRGbymcD
+    int i,j;
+    int WeightOfRed   = 0;
+    int WeightOfGreen = 0;
+    for(i=6;i<=15;i+=3){
+        for(j=4;j<=14;j+=2){
+    Sys_Start_AtomicSection();
+            getRGB565at(buffer, rgb565, i, j);
+            convertRGB565ToRGB888( rgb565, rgb888  );
+    Sys_End_AtomicSection();
+            char color = nearestNeighborRGB( rgb888, 0b11100001 ); //flag: WRGbymcD
+            
+            //char debug[64];
+            //int debug_len;
+            //debug_len = sprintf(debug, "rgb (%i,%i) %i %i %i | %c\r\n",i,j, rgb888[0],rgb888[1],rgb888[2],color);
+            //Sys_Writeto_UART1( debug, debug_len );
+            
+
+            if( color == 'r' || color == 'd')
+                WeightOfRed++;
+            if( color == 'g')
+                WeightOfGreen++;
+        }
+    }
+    sys_colour colour=WHITE;
+    if( WeightOfRed>=2)
+        colour=RED;
+    else if( WeightOfGreen>=2)
+        colour=GREEN;
     
-    sys_colour colour;
-    if( color == 'r' || color == 'd')
-        colour = RED; //object
-    if( color == 'g')
-        colour = GREEN; //robot
-    if( color == 'w')
-        colour = WHITE;
     /*
     uint16 px_565  = buffer[2*40*9+2*9] << 8 | buffer[2*40*9+2*9+1];
     int red   = (px_565 & 0xF800) >> 11;
@@ -608,8 +627,8 @@ void Sys_Camera_PreProcessor(void){
     */
     //static int counter = 0;
     
-    LED0 = ~LED0;
-    Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, 1);
+    //LED0 = ~LED0;
+    Sys_Send_Event(SYS_EVENT_IO_CAMERA, &colour, sizeof(sys_colour));
     
     e_poxxxx_launch_capture((char *) buffer);
 }

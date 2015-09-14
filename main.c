@@ -180,18 +180,18 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
     
     switch(rx_colour){//detection of
     case GREEN://other robot
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, ROBOT_SPEED_L);
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT,ROBOT_SPEED_R);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, ROBOT_SPEED_L);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT,ROBOT_SPEED_R);
         LED5 = ~LED5;
         break;
     case RED://object
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, OBJECT_SPEED_L);
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, OBJECT_SPEED_R);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, OBJECT_SPEED_L);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, OBJECT_SPEED_R);
         LED6 = ~LED6;
         break;
     case WHITE://nothing/wall
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, NOTHING_SPEED_L);
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, NOTHING_SPEED_R);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, NOTHING_SPEED_L);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, NOTHING_SPEED_R);
         LED7 = ~LED7;
         break;
     default://anything else

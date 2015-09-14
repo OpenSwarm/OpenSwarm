@@ -1,30 +1,34 @@
 #include "camera_processing.h"
 #include <math.h>
+#include <stdio.h>
+
+#include "system_IO_uart.h"
 
 //The type of a plain char is unsigned char
 
-void convertRGB565ToRGB888(char rgb565[], char rgb888[]){
+void convertRGB565ToRGB888(unsigned char rgb565[], unsigned char rgb888[]){
     rgb888[0] = (rgb565[0] & 0xF8);
     rgb888[1] = (((rgb565[0] & 0x07) << 5) | ((rgb565[1] & 0xE0) >> 3));
     rgb888[2] = ((rgb565[1] & 0x1F) << 3);
 }
 
-void getRGB565at( char* buffer, char rgb585[], int x, int y ){
-    rgb585[0] = buffer[2*40*y + 2*x];
-    rgb585[1] = buffer[2*40*y + 2*x + 1];
+void getRGB565at( char* buffer, unsigned char rgb585[], int x, int y ){
+    rgb585[0] = buffer[40*y + 2*x];
+    rgb585[1] = buffer[40*y + 2*x + 1];
 }
 
-void getRGB888at( char* buffer, char rgb888[], int x, int y ){
-    char rgb565[2];
+void getRGB888at( char* buffer, unsigned char rgb888[], int x, int y ){
+    unsigned char rgb565[2];
     getRGB565at( buffer, rgb565, x, y );
     convertRGB565ToRGB888( rgb565, rgb888 );
 }
 
-#define CP_WI 120
+#define CP_WI 100
+#define CP_WGB_I 80
 #define CP_RI 80
-#define CP_GI 80
+#define CP_GI 40
 #define CP_BI 100
-const char colorPositions[8][4] = {
+const unsigned char colorPositions[8][4] = {
     { 0    , 0    , 0    , 'd' },
     { 0    , CP_GI, CP_BI, 'c' },
     { CP_RI, 0    , CP_BI, 'm' },
@@ -32,12 +36,12 @@ const char colorPositions[8][4] = {
     { 0    , 0    , CP_BI, 'b' },
     { 0    , CP_GI, 0    , 'g' },
     { CP_RI, 0    , 0    , 'r' },
-    { CP_WI, CP_WI, CP_WI, 'w' }
+    { CP_WI, CP_WGB_I, CP_WGB_I, 'w' }
     
 };
 
 //FLAG 0wrgbymcd
-char nearestNeighborRGB(char* rbg888, char flag){
+char nearestNeighborRGB(unsigned char* rbg888, char flag){
     int current, valueNear = 766;
     char color = 'd';
     int i;
@@ -61,7 +65,7 @@ const int powerTbl[33] = {0,1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,
 #define CBP_GI 11
 #define CBP_BI 13
 #define CBP_DI 2
-const char colorBrushedPositions[8][4] = {
+const unsigned char colorBrushedPositions[8][4] = {
     { CBP_DI, CBP_DI, CBP_DI, 'd' },
     { CBP_DI, CBP_GI, CBP_BI, 'c' },
     { CBP_RI, CBP_DI, CBP_BI, 'm' },
@@ -73,7 +77,7 @@ const char colorBrushedPositions[8][4] = {
     
 };
 
-char brushedColorFromRGB565(char rgb565[], char flag){
+char brushedColorFromRGB565(unsigned char rgb565[], char flag){
     int i, current, valueNear = 3072;
     char r,g,b,color = 'd';
 
@@ -97,7 +101,7 @@ char brushedColorFromRGB565(char rgb565[], char flag){
 }
 
 char getBrushedColorAt( char* buffer, char flag, int x, int y, int w ){
-    char rgb565[2];
+    unsigned char rgb565[2];
     rgb565[0] = buffer[2*w*y + 2*x];
     rgb565[1] = buffer[2*w*y + 2*x + 1];
     return brushedColorFromRGB565( rgb565, flag );
