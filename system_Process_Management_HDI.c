@@ -28,6 +28,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "HDI_epuck_ports.h"
+
 
 typedef struct sys_occured_event_s{
     uint16 eventID;
@@ -917,11 +919,17 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
         return;
     }
 
+    bool add_event = true;
     sys_occured_event **o_event = &sys_occured_events;
     while(*o_event != 0){
+        if((*o_event)->eventID == eventID){
+            add_event = false;
+            break;
+        }
         o_event = &((*o_event)->next);
     }
     
+    if(add_event){
     Sys_Start_AtomicSection();
         (*o_event) = Sys_Malloc(sizeof(sys_occured_event));
        if((*o_event) == 0){
@@ -932,6 +940,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
        (*o_event)->eventID = eventID;
        (*o_event)->next = 0;
     Sys_End_AtomicSection();
+    }
     //add eventID to the list of occured events
 
     sys_process_event_handler *event = element->pcb.event_register;
@@ -990,6 +999,7 @@ inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_eleme
                     event->handler(list->pcb.process_ID,eventID,event->buffered_data);
                 }
                 Sys_Clear_EventData(&(event->buffered_data));
+                //TODO: buffered data is a linked list -> if more elements stored -> mem leak
                 event->buffered_data = 0;
             }
 
@@ -1005,13 +1015,15 @@ inline void Sys_Execute_All_EventHandler(){
     sys_occured_events = 0;
 
     while(o_event != 0){//assuming there are less processes then events
+        
         Sys_Execute_Events_in_ProcessList(o_event->eventID, sys_ready_processes);
         Sys_Execute_Events_in_ProcessList(o_event->eventID, sys_blocked_processes);
 
         
         sys_occured_event *occured_event = o_event;
         o_event = o_event->next;
-
+        
+        occured_event->next = 0;
         Sys_Free(occured_event);
     }
 }
