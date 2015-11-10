@@ -31,17 +31,32 @@
 #include "HDI_epuck_ports.h"
 
 
+/********************************************************
+ *  Private Members
+ ********************************************************/
+
+/********************************************************
+ *  Struct Declarations
+ ********************************************************/
+
+//!  List of occured events
+/*!
+ This struct sores the event ID of an occurred event
+*/
 typedef struct sys_occured_event_s{
     uint16 eventID;
 
     struct sys_occured_event_s *next;
 }sys_occured_event;
 
-
+//!  List of process event-handlers
+/*!
+ This struct sores all information needed to decide if the event-handler is executed for the event (eventID). To store the event data and be executed, a condition has to be met.
+*/
 typedef struct sys_process_event_handler_s{
     uint16 eventID;
     pEventHandlerFunction handler;/*!< Pointer to function which computes the evnt data */
-    pConditionFunction condition;
+    pConditionFunction condition;/*!< Pointer to function which checks if the event-handler has to be executed (true) or nor (false) */
     sys_event_data *buffered_data;/*!< stores the data */
 
     struct sys_process_event_handler_s *previous;
@@ -55,9 +70,9 @@ typedef struct sys_process_event_handler_s{
 typedef struct sys_process_control_block_s{
 
     uint16 process_ID;                                       //    2
-    uint16 stackPointer;/*!< Stack Pointer */
+    uint16 stackPointer;/*!< Stack Pointer to TOP */
     uint16 framePointer;
-    uint16 stackPointerLimit;/*!< Stack Pointer */
+    uint16 stackPointerLimit;/*!< Stack Pointer + MAX SIZE*/
 
     sys_scheduler_info sheduler_info;                               //  + 6
     sys_process_event_handler *event_register;
@@ -76,22 +91,15 @@ typedef struct sys_process_control_block_list_element_s{
     sys_process_control_block pcb;
 
     struct sys_process_control_block_list_element_s* previous;
-    
     struct sys_process_control_block_list_element_s* next;
-
+    
 } sys_process_control_block_list_element, sys_pcb_list_element;
 
-/*
-typedef struct sys_blocked_process_list_element_s{
-    //uint16 eventID;//not needed
-    //uint16 occurrences;//not needed
-    
-    sys_pcb_list_element *process;
-    
-    struct sys_blocked_process_list_element_s *next;
-} sys_blocked_pcb_list_element, sys_bpcb_list_element;
-*/
 
+/********************************************************
+ *  Function Prototypes
+ *      Basic Process Management
+ ********************************************************/
 inline bool Sys_Set_Defaults_PCB(sys_process_control_block *element, uint16 stacksize);  // function to set the default values of the sys_process_control_block struct
 
 void Sys_Change_Stack_HDI(uint16 framepointer, uint16 stackpointer, uint16 stackpointerlimit); //this function switches to the new stack
@@ -108,7 +116,10 @@ void Sys_Set_Running_Process_to_Zombie(); //function to delete a container eleme
 void Sys_Delete_Process(sys_pcb_list_element *element); //function to delete a container element
 
 
-// EVENTS:
+/********************************************************
+ *  Function Prototypes
+ *      Basic Event Management for Processes
+ ********************************************************/
 inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handler *list, uint16 eventID);
 inline void Sys_Clear_EventRegister(sys_pcb_list_element *element); //function to delete all elements in the eventregister
 inline void Sys_Clear_EventData(sys_event_data **data);
@@ -116,15 +127,27 @@ inline void Sys_Clear_EventData(sys_event_data **data);
 inline sys_process_event_handler *Sys_Find_EventHandler(sys_process_event_handler *process, uint16 eventID);
 inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eventID, pEventHandlerFunction func, sys_process_event_handler **list);
 
-//###### START & END PROCESSES
-sys_pcb_list_element *sys_ready_processes = 0;/*!< pointer to the ready processes (single linked list) */
+
+/********************************************************
+ *  Global Variables
+ ********************************************************/
+sys_pcb_list_element *sys_ready_processes = 0;/*!< pointer to the ready processes (linked list) */
 sys_pcb_list_element *sys_running_process = 0;/*!< pointer to the running process */
 sys_pcb_list_element *sys_blocked_processes = 0;/*!< pointer to the blocked process */
 sys_pcb_list_element *sys_zombies = 0;/*!< pointer to the zombie process */
 
-//###### List of all occured events
-sys_occured_event *sys_occured_events = 0;
+sys_occured_event *sys_occured_events = 0;/*!< pointer to the occurred events */
 
+
+/********************************************************
+ ********************************************************
+ *****   Code
+ ********************************************************
+ ********************************************************/
+
+/********************************************************
+ *  General Task Management
+ ********************************************************/
 /**
  * This function initialises the process management
  *
@@ -175,6 +198,9 @@ void Sys_Init_Process_Management_HDI(){
     sys_ready_processes->pcb.process_ID = 0;
     sys_ready_processes->pcb.event_register = 0;
     sys_running_process = sys_ready_processes;//it is the running process
+}
+inline void Sys_Init_Process_Management(){
+    return Sys_Init_Process_Management_HDI();
 }
 
 /**
@@ -298,6 +324,7 @@ bool Sys_Start_Process_HDI(pFunction function){
 inline bool Sys_Start_Process(pFunction function){
     return Sys_Start_Process_HDI(function);
 }
+
 /**
  * This function kills a process
  *
@@ -334,30 +361,48 @@ void Sys_Kill_Process(uint16 pid){
     }
 }
 
+/**
+ * This function puts the running process in the zombie list and switches content to the next ready process
+ *
+ * This function puts the running process in the zombie list and switches content to the next ready process
+ *
+ * @param void
+ * @return void
+ */
 void Sys_Set_Running_Process_to_Zombie(){
 
     if(sys_running_process->pcb.process_ID == 0){//system is never a zombie
         return;
     }
 
+    sys_pcb_list_element *process = 0;
+    sys_pcb_list_element *previous_process = 0;
+    
     sys_running_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_ZOMBIE;
 
-    Sys_Unsubscribe_Process(sys_running_process->pcb.process_ID);
+    Sys_Unsubscribe_Process(sys_running_process->pcb.process_ID);//unsubscribe this process from all events and clear the event-list
 
-    sys_pcb_list_element *previous_process;
+    //remove the element from the list
     if(sys_running_process->previous == 0){
-        previous_process = sys_running_process;
-        while(previous_process != 0){//take the last element
+        
+        previous_process = sys_running_process->next;
+        if(previous_process == 0){//no nnext and no previous element
+            goto goZombieMode;
+        }
+        
+        while(previous_process->next != 0){//take the last element
            previous_process =  previous_process->next;
         }
     }else{
         previous_process = sys_running_process->previous;
     }
+ 
+    sys_running_process = previous_process;
     
-    sys_pcb_list_element *process = Sys_Remove_Process_from_List(sys_running_process->pcb.process_ID, &sys_ready_processes);
+goZombieMode:    
+    process = Sys_Remove_Process_from_List(sys_running_process->pcb.process_ID, &sys_ready_processes);
     Sys_Insert_Process_to_List(process, &sys_zombies);
 
-    sys_running_process = previous_process;
     Sys_Force_TimerInterrupt_HDI();//this schedules the next  after the prvious process
 }
 
@@ -401,9 +446,9 @@ void Sys_Delete_Process(sys_pcb_list_element *element){
 }
 
 /**
- * This function stores all registers and information of the running process into the coresponding struct
+ * This function stores all registers and information of the running process into the corresponding struct
  *
- * This function stores all registers and information of the running process into the coresponding struct
+ * This function stores all registers and information of the running process into the corresponding struct
  *
  * @param void
  * @return void
@@ -416,7 +461,7 @@ inline void Sys_Save_Running_Process_HDI(){
 
     Sys_Start_AtomicSection();
 
-    //PUSH all on the stack
+    //PUSH everything on the stack
     __asm__(
             "PUSH SR\n"
             "PUSH W0\n"
@@ -499,10 +544,18 @@ void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsi
 
 }
 
+/**
+ * This function switches from sys_running_process to new_process
+ *
+ * This function switches from sys_running_process to new_process
+ *
+ * @param[in] new_process pointer to the process which should be executed
+ * @return void
+ */
 void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
 
-    if(new_process == sys_running_process){
-        return;
+    if(new_process == sys_running_process){//Do I want to switch to the same process??
+        return;//How stupid
     }
 
     Sys_Save_Running_Process_HDI();//save all registers
@@ -563,8 +616,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             );
 
     Sys_End_AtomicSection();
-            //__asm__("MOV #0x0C40, W14\n");
-            //__asm__("MOV #0x0C46, W15\n");
+    
     __asm__("ULNK\n");//remove all waste from Sys_Save_Running_Process_HDI
     __asm__("ULNK\n");//remove all waste from Sys_Switch_Process_HDI
     __asm__("RETURN\n");//jump directly to process
@@ -591,6 +643,14 @@ void Sys_Switch_Process(uint16 pid){
     }
 }
 
+/**
+ * This function loads all values into the registers of the process which is next in the list.
+ *
+ * This function loads all values into the registers of the process which is next in the list.
+ *
+ * @param void
+ * @return void
+ */
 void Sys_Switch_to_next_Process(){
     if(sys_running_process->next == 0){
         Sys_Switch_Process_HDI(sys_ready_processes);
@@ -598,23 +658,6 @@ void Sys_Switch_to_next_Process(){
         Sys_Switch_Process_HDI(sys_running_process->next);
     }
 }
-
-/**
- * This function deletes container elements
- *
- * This function deletes container elements. Warning, this function only deletes the process. All the elements which are linked with next are lost in memory, if you haven't take care of that on advance.
- *
- * @param[in] element pointer to the element which should be deleted
- * @return void
- */
-/*
-void Sys_Delete_Blocked_Process(sys_blocked_pcb_list_element *element){
-    Sys_Delete_Process(element->process);
-    element->process = 0;
-    
-    free(element);
-}
-*/
 
 /**
  * This function removed a pcb element from the list
@@ -632,7 +675,8 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_elem
     }
 
     sys_pcb_list_element *out;
-    if((*list)->pcb.process_ID == pID){
+    if((*list)->pcb.process_ID == pID){//is this the PCB with pid
+        // remove from list
         Sys_Start_AtomicSection();
 
         out = *list;
@@ -647,10 +691,12 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_elem
         return out;
     }
 
-
+    //go through all elements in the list
+    //todo: I could do all in one do{}
     sys_pcb_list_element *element = (*list)->next;
-    while(element != 0){
+    while(element != 0){//as long as there is an element
         if(element->pcb.process_ID == pID){
+            //if found -> remove
             Sys_Start_AtomicSection();
 
             element->previous->next = element->next;
@@ -687,12 +733,17 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     process->previous = 0;
     process->next = 0;
 
-    if( *list == 0){
+    if( *list == 0){//is it the first element
         *list = process;
         return;
     }
 
-    if( (*list)->pcb.process_ID > process->pcb.process_ID){
+    if((*list)->pcb.process_ID == process->pcb.process_ID){
+        return;//already exists
+    }
+    
+    if( (*list)->pcb.process_ID >= process->pcb.process_ID){// if first pid is bigger
+        //put it on top
         Sys_Start_AtomicSection();
 
         process->next = *list;
@@ -704,10 +755,15 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
         Sys_End_AtomicSection();
         return;
     }
-
-
+    
+    //todo: put all into  one do{}
     sys_pcb_list_element *element = *list;
-    while(element->next != 0){
+    while(element->next != 0){//as long as there are elements 
+        
+        if(element->next->pcb.process_ID == process->pcb.process_ID){
+            return;//already exists
+        }
+        
         if(element->next->pcb.process_ID > process->pcb.process_ID){
             Sys_Start_AtomicSection();
 
@@ -726,6 +782,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
         element = element->next;
     }
 
+    //put it at the end
     Sys_Start_AtomicSection();
 
     process->next = 0;
@@ -736,6 +793,14 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     return;
 }
 
+/**
+ * This function return the pointer to the PCB of process with pid
+ *
+ * This function return the pointer to the PCB of process with pid
+ *
+ * @param[in] pid process ID
+ * @return void
+ */
 inline sys_pcb_list_element *Sys_Find_Process(uint16 pid){
     sys_pcb_list_element *element = sys_ready_processes;
 
@@ -782,7 +847,10 @@ inline void Sys_End_CriticalSection(void){
 }
 
 
-//###### UN-/BLOCK PROCESSES
+/********************************************************
+ *  Process States (blocking continuing
+ ********************************************************/
+
 /**
  * Puts a process on the blocked list and stops its execution (if it's executed)
  *
@@ -813,7 +881,6 @@ void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition)
     
     Sys_End_AtomicSection();
 }
-
 
 /**
  * Puts a process on the ready list
@@ -850,11 +917,24 @@ bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
     return true;
 }
 
+
 /****** EVENTS: **************************************************************************************************
- *  All functions wich are needed to add/remove/delete events for an process
+ *****************************************************************************************************************
+ *  All functions which are needed to add/remove/delete events for an process
  *
- *
+ *****************************************************************************************************************
  *****************************************************************************************************************/
+
+/**
+ * Puts a process on the blocked list and stops its execution (if it's executed)
+ *
+ * Puts a process on the blocked list and stops its execution (if it's executed)
+ *
+ * @param[in] pid       Process ID
+ * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
+ * @param[in] n         The number of occurences of the event (EventID) which have to occure that the process (PID) gets put on the ready list
+ * @return void
+ */
 bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func, pConditionFunction cond){
 
     if(func == 0){
