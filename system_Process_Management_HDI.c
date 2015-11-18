@@ -136,7 +136,7 @@ sys_pcb_list_element *sys_running_process = 0;/*!< pointer to the running proces
 sys_pcb_list_element *sys_blocked_processes = 0;/*!< pointer to the blocked process */
 sys_pcb_list_element *sys_zombies = 0;/*!< pointer to the zombie process */
 
-sys_occured_event *sys_occured_events = 0;/*!< pointer to the occurred events */
+sys_occured_event *sys_occurred_events = 0;/*!< pointer to the occurred events */
 
 
 /********************************************************
@@ -932,23 +932,23 @@ bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
  *
  * @param[in] pid       Process ID
  * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
- * @param[in] n         The number of occurences of the event (EventID) which have to occure that the process (PID) gets put on the ready list
- * @return void
+ * @param[in] n         The number of occurrences of the event (EventID) which have to occur that the process (PID) gets put on the ready list
+ * @return bool         Was the event-handler successfully added?
  */
 bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func, pConditionFunction cond){
 
-    if(func == 0){
+    if(func == 0){//if nothing handles events, nothing will always handle events -> true
         return true;
     }
 
     sys_pcb_list_element *element = Sys_Find_Process(pid);
 
-    if(element == 0){
+    if(element == 0){//cant find process (pid))
         return false;
     }
 
     sys_process_event_handler *new_event = (sys_process_event_handler *) Sys_Malloc(sizeof(sys_process_event_handler));
-    if(new_event == 0){
+    if(new_event == 0){//no memory
         return false;
     }
 
@@ -959,6 +959,7 @@ bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunctio
     new_event->buffered_data = 0;
 
     if(element->pcb.event_register != 0 ){
+        //add at the end
         sys_process_event_handler *event_h = element->pcb.event_register;
 
         while(event_h != 0){
@@ -971,13 +972,22 @@ bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunctio
 
         event_h->next = new_event;
     }else{
+        //add to top
         element->pcb.event_register = new_event;
     }
 
     return true;
 }
 
-
+/**
+ * This function searches (sequentially) all event handler for an event (eventID) 
+ *
+ * This function searches (sequentially) all event handler for an event (eventID). The list contains a list of eventhandler and this function return the first occurrence of eventID. To search the list entirely, use the function on a list and after resulting an element use the same function on the next element (sublist).
+ *
+ * @param[in] list      list of event handler
+ * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
+ * @return sys_process_event_handler *          pointer to the next event handler for the event (eventID) in list (0 if not found)
+ */
 inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handler *list, uint16 eventID){
 
     sys_process_event_handler *element = list;
@@ -992,6 +1002,17 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
     return 0;
 }
 
+/**
+ * This function adds the event-data to the local list of the process (pid).  
+ *
+ * This function adds the event-data to the local list of the process (pid).
+ *
+ * @param[in] pid      process identifier
+ * @param[in] eventID  event identifier
+ * @param[in] data     memory that contains the value of the occurred event
+ * @param[in] length   length of the data (bytes)
+ * @return void
+ */
 void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 length){
 
     sys_pcb_list_element *element = Sys_Find_Process(pid);
@@ -1000,17 +1021,18 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
     }
 
     bool add_event = true;
-    sys_occured_event **o_event = &sys_occured_events;
-    while(*o_event != 0){
-        if((*o_event)->eventID == eventID){
+    sys_occured_event **o_event = &sys_occurred_events;
+    while(*o_event != 0){//check if the event (eventID) already occurred
+        if((*o_event)->eventID == eventID){//it already occurred
             add_event = false;
             break;
         }
         o_event = &((*o_event)->next);
     }
     
-    if(add_event){
+    if(add_event){//if it hasn't occurred 
     Sys_Start_AtomicSection();
+        //add eventID to the list of occurred events
         (*o_event) = Sys_Malloc(sizeof(sys_occured_event));
        if((*o_event) == 0){
            Sys_End_AtomicSection();
@@ -1021,14 +1043,16 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
        (*o_event)->next = 0;
     Sys_End_AtomicSection();
     }
-    //add eventID to the list of occured events
 
+    //NOW add the data
     sys_process_event_handler *event = element->pcb.event_register;
     while( (event = Sys_Next_EventHandler(event, eventID)) != 0 ){
+        
+        //check if the condition was met to add the event data
         bool is_condition_met = false;
         if(event->condition != 0){
             is_condition_met = event->condition(data);
-        }else{//non condition is always met
+        }else{//no condition is always met
             is_condition_met = true;
         }
 
@@ -1038,7 +1062,8 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
                 return;
             }
 
-            if(length != 0){
+            //create the struct that holds the data
+            if(length != 0){//if there is data
                 e_data->value = Sys_Malloc(length);
                 if(e_data->value == 0){//if malloc fails .. exit
                     Sys_Free(e_data);
@@ -1052,6 +1077,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
             e_data->size = length;
             e_data->next = 0;
 
+            //add the struct to the end of the buffered_data
             if(event->buffered_data == 0){
                 event->buffered_data = e_data;
             }else{
@@ -1067,6 +1093,15 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
     }
 }
 
+/**
+ * This function executes all event handlers and processes stored event data
+ * 
+ * This function executes all event handlers and processes stored event data. First it checks the list of occurred events and then it executes all event handlers of these events
+ *
+ * @param[in] eventID  event identifier
+ * @param[in] elements list of processes
+ * @return void
+ */
 //handler has to clean up the data!!!
 //TODO: if handler == 0 remove it from list
 inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_element *elements){
@@ -1090,9 +1125,17 @@ inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_eleme
     }
 }
 
+/**
+ * This function executes all event handlers and processes stored event data
+ * 
+ * This function executes all event handlers and processes stored event data. First it checks the list of occurred events and then it executes all event handlers of these events
+ *
+ * @param  void
+ * @return void
+ */
 inline void Sys_Execute_All_EventHandler(){
-    sys_occured_event *o_event = sys_occured_events;
-    sys_occured_events = 0;
+    sys_occured_event *o_event = sys_occurred_events;
+    sys_occurred_events = 0;
 
     while(o_event != 0){//assuming there are less processes then events
         
@@ -1108,23 +1151,50 @@ inline void Sys_Execute_All_EventHandler(){
     }
 }
 
-
+/**
+ * This function starts the execution of the event handler and resets the execution time of the process
+ * 
+ * This function starts the execution of the event handler and resets the execution time of the process
+ *  *
+ * @param  void
+ * @return void
+ */
 void Sys_Interprocess_EventHandling(){
     Sys_Execute_All_EventHandler();
     Sys_Reset_SystemTimer_HDI();//to ensure that the following process has the full execution time.
 }
 
+/*******************************
+ *  Cleaning up
+ *******************************/
 
-
+/**
+ * This function removes all subscriptions of any process  to event (eventID)
+ * 
+ * This function removes all subscriptions of any process  to event (eventID)
+ *  *
+ * @param[in] eventID   Identifier of the event that has to be removed
+ * @return void
+ */
 void Sys_Remove_All_Event_Subscriptions(uint16 eventID){
     sys_pcb_list_element *process = sys_ready_processes;
 
-    while(process != 0){
+    while(process != 0){//go through all processes
         Sys_Remove_Event_from_EventRegister(eventID, ALL_FUNCTIONS, &(process->pcb.event_register) );
         process = process->next;
     }
 }
 
+/**
+ * This function removes subscribed handler function for process (pid) to event (eventID)
+ * 
+ * This function removes subscribed handler function for process (pid) to event (eventID)
+ *
+ * @param[in] pid       Identifier of the process
+ * @param[in] eventID   Identifier of the event that has to be removed
+ * @param[in] func      pointer to the subscribed handler function
+ * @return void
+ */
 void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func){
 
     sys_pcb_list_element *element = Sys_Find_Process(pid);
@@ -1134,10 +1204,20 @@ void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunc
     }
 }
 
+/**
+ * This function removes subscribed handler function from event-handler list
+ * 
+ * This function removes subscribed handler function from event-handler list
+ *
+ * @param[in] eventID   Identifier of the event that has to be removed
+ * @param[in] func      pointer to the subscribed handler function
+ * @param[in] list      list of event handlers
+ * @return sys_process_event_handler *      (New) top of the list (if changed)
+ */
 //Assumption eventID+func is unique in process eventregister. Note: -1 means all functions
 inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eventID, pEventHandlerFunction func, sys_process_event_handler **list){
 
-    if(list == 0 || *list == 0){
+    if(list == 0 || *list == 0){//list is empty
         return 0;
     }
 
@@ -1172,6 +1252,14 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eve
     return top;
 }
 
+/**
+ * This function removes and frees a list of sys_event_data
+ * 
+ * This function removes and frees a list of sys_event_data
+ *
+ * @param[in,out] data   pointer to the event_data (list)
+ * @return void
+ */
 inline void Sys_Clear_EventData(sys_event_data **data){
     sys_event_data *element = *data;
     *data = 0;
@@ -1186,6 +1274,14 @@ inline void Sys_Clear_EventData(sys_event_data **data){
        }
 }
 
+/**
+ * This function clears and frees all elements of a process
+ * 
+ * This function clears and frees all elements of a process. The process is also unsubscribed from any event, because and empty event register cannot handle any events. 
+ *
+ * @param[in,out] element   pointer to the pcb of the process
+ * @return void
+ */
 inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
     sys_process_event_handler *event_h = element->pcb.event_register;
 
@@ -1201,52 +1297,27 @@ inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
     element->pcb.event_register = 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //////////'######################## TODO: multiple event handler for 1 process & event
 
+/*******************************
+ *  Blocking processes while waiting of events
+ *******************************/
 
-
-
-
-
-
-
-
-/*
-bool Sys_Has_Process_Subscription(uint16 pid, uint16 eventID){
-    sys_pcb_list_element *process = Sys_Find_Process(pid);
-    if(process == 0){
-        return true;
-    }
-
-    sys_process_event_handler *event_h = Sys_Find_EventHandler(process->pcb.event_register, eventID);
-    if(event_h == 0){
-        return false;
-    }
-
-    return true;
-}
-*/
-
+/**
+ * This function blocks the current process.
+ * 
+ * This function blocks the current process while waiting for an event that sends data which meet the condition. 
+ *
+ * @param[in] eventID   Identifier of the event that need to occur
+ * @param[in] function  Pointer to the function that represents the condition function (return true if condition is met and continues the process). If function = 0 .. condition is always met.
+ * @return void
+ */
 sys_event_data *Sys_Wait_For_Condition(uint16 eventID, pConditionFunction function){
 
     Sys_Block_Process(sys_running_process->pcb.process_ID, eventID, function);
-
+    
+    //This is only executed if process continued
+    //now get return value (tansmited event data)
     sys_process_event_handler *event = sys_running_process->pcb.event_register;
     sys_process_event_handler *prev_event = event;
     while(event != 0){
