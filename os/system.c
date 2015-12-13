@@ -1,14 +1,26 @@
 /**
  * @file system.c
- * @author  Stefan M. Trenkwalder <stefan.markus.trenkwalder@gmail.com>
+ * @author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * @version 1.0
  *
  * @section LICENSE
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; http://www.gnu.org/copyleft/gpl.html
+ * Created on 07 July 2014
  *
+ * LICENSE: adapted FreeBSD License
+ * Copyright (c) 2015, Stefan M. Trenkwalder
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
  * @section DESCRIPTION
  *
  * This file includes all basic system calls, which are nesessary to initialise, configure and the operating system.
@@ -81,36 +93,6 @@ void Sys_Init_Kernel(){
 #endif
     //
 */
-}
-
-
-
-/* Refer to the device Family Reference Manual Oscillator section for
-information about available oscillator configurations.  Typically
-this would involve configuring the oscillator tuning register or clock
-switching useing the compiler's __builtin_write_OSCCON functions.
-Refer to the C Compiler for PIC24F MCUs and dsPIC DSCs User Guide in the
-compiler installation directory /doc folder for documentation on the
-__builtin functions.  Refer to the XC16 C Compiler User's Guide appendix G
- for a list of the XC16 compiler __builtin functions */
-
-/* TODO Add clock switching code if appropriate.  An example stub is below.   */
-void ConfigureOscillator(void)
-{
-#if 0
-        /* Disable Watch Dog Timer */
-        RCONbits.SWDTEN = 0;
-
-        /* When clock switch occurs switch to Pri Osc controlled by FPR<4:0> */
-        __builtin_write_OSCCONH(0x03);  /* Set OSCCONH for clock switch */
-        __builtin_write_OSCCONL(0x01);  /* Start clock switching */
-        while(OSCCONbits.COSC != 0b011);
-
-        /* Wait for Clock switch to occur */
-        /* Wait for PLL to lock, if PLL is used */
-        /* while(OSCCONbits.LOCK != 1); */
-#endif
-
 }
 
 /**
