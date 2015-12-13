@@ -23,14 +23,7 @@
 /* Files to Include                                                           */
 /******************************************************************************/
 
-/* Device header file */
-#if defined(__XC16__)
-    #include <xc.h>
-#elif defined(__C30__)
-    #if defined(__dsPIC30F__)
-        #include <p30Fxxxx.h>
-    #endif
-#endif
+#include "os/definitions.h"
 
 
 #include <stdint.h>        /* Includes uint16_t definition                    */
@@ -38,37 +31,34 @@
 #include <stdbool.h>       /* Includes true/false definition                  */
 #include <stdio.h>
 
-#include "system.h"        /* System funct/params, like osc/peripheral config */
-#include "definitions.h"
+#include "os/system.h"        /* System funct/params, like osc/peripheral config */
 
-#include "user.h"          /* User funct/params, such as InitApp              */
-
-#include "HDI_epuck_ports.h"
-#include "HDI_init_port.h"
-
+/*
 #include "system_Events.h"
 
 #include "system_IO_motors.h"
 #include "system_IO_uart.h"
 #include "system_IO_remoteControl.h"
 #include "system_IO_clock.h"
-
+*/
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
 
-static bool run_clustering = false;
+//static bool run_clustering = false;
 
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
 
+/*
 void bluetooth_reader(uint8 data);
 bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data);
 
 void loggingThread();
 bool wait250times(void *data);
 bool object_clustering(uint16 pid, uint16 eventID, sys_event_data *data);
+*/
 
 int16_t main(void)
 {
@@ -79,11 +69,12 @@ int16_t main(void)
     
     //Sys_SetReadingFunction_UART1(bluetooth_reader);
     //Sys_Start_Process(loggingThread);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
+    //Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
+    //Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
     Sys_Start_Kernel();
 
+    /*
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -94,7 +85,7 @@ int16_t main(void)
     LED7 = 0;
     BODY_LED = 0;
     FRONT_LED = 0;
-
+    */
     //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
     //Sys_Clear_EventData(&data);
     
@@ -109,6 +100,7 @@ int16_t main(void)
     }
 }
 
+/*
 bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data){
     char msg[24] = {0};
     uint8 length = 0;
@@ -222,3 +214,4 @@ bool wait250times(void *data){
     counter = 0;
     return true;
 }
+ * */

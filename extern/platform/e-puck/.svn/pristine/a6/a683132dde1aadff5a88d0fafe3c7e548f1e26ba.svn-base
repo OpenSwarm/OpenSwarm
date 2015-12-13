@@ -1,0 +1,59 @@
+
+      ____  _        ____  
+  ___|  _ \(_) ___  |___ \ 
+ / _ \ |_) | |/ __|   __) |
+|  __/  __/| | (__   / __/ 
+ \___|_|   |_|\___| |_____|
+
+---- Version changelog ----
+
+
+
+
+ePic v2.0 - ePic v2.1 :
+-----------------------
+(updated by Y. Weibel, Oct 08)
+ 
+* fix filter_Floor.m. File was missing
+* fix timer function to allow the usage of multi tic/toc functions. To use multi tic/toc in the application/controller/whatever : tstart = tic; ...statements... ; toc(tstart)
+* fix led selection for external IR sensor
+* fix the fact that by default, when using the LIS turret, the update sensors value is not check to avoid BTcom freeze
+* fix a GUI bug when using the "All leds" button
+---
+* add a check of the camera resolution before setting new parameters and warn user if resolution is too high.
+* add edit button to quickly edit the controller.
+* add workspace. Load workspace to auto select the sensor and the refresh rate.
+* add a status method in the ePic kernel to get information about the selected sensors
+---
+* clean the code to use ePic kernel information for GUI display of states, selected sensors, ... (interface coherence enhancement)
+* clean the controller example function and add some advices to use ePic functionalities
+---
+* check LIS sensors
+    - GP2Y3002-3 (IR with 5 leds and led selection, 2 different sensors) : OK
+    - GP2YA02YK (IR) : OK
+    - GP2D12 (IR) : OK
+    - SRF08 (Ultra sound + light) : OK
+    - MAXSONAR (ultra sound) : OK
+    - SFR10-SFR235 (Ultra sound, 2 different sensors) : OK
+    - CMPS03 (compass) : OK
+* check TPA (Introduction by Tim and Adam) : OK, advice on some improvements
+* check TPB (Sensor characterization by Walter and Mirko) : OK, test all sensors and advice on some improvements
+* check TPC (Visual Feature Extraction by Mirko and Adam) : modify the controller to make it ePic2 compatible and advice on changes for the tp
+* check TPD (Localization by Tim and Antoine) : OK
+---
+*** For full ePic functionalities, do not forget to activate the floor sensor and LIS turret when compiling BTcom ***
+
+ePic v2.1 - ePic v2.1.1 :
+------------------------
+(updated by Y. Weibel, Nov 08)
+
+* add a smooth motion controller. Allow user to quickly send the ePuck to a specific location using controllersub_GoToFct(Position). Example controller in file controller_pos.m
+
+ePic v2.1.1 - ePic v2.1.2 :
+------------------------
+(updated by Y. Weibel, Nov 08)
+
+* add a menu to directly access the documentation
+* add a directory with the right firmware (BTcom)
+---
+* modify the diplay of odometry from mm to cm

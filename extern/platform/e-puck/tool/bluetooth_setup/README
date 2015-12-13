@@ -1,0 +1,66 @@
+BLUETOOTH SETUP FOR THE EPUCK
+=============================
+
+Quick Install
+-------------
+
+We assume you've installed BLUEZ (http://www.bluez.org) on this computer already. If not, it's time to do that now.
+
+Launch in this order (with root privileges)
+	./btepucksetup1_bdaddr.pl EPUCKLIST
+	./btepucksetup2_udev.pl
+	./btepucksetup3_rfcomm.pl BASENUMBER
+	./btepucksetup4_minirc.pl BASENUMBER
+	./btepucksetup5_bluepin.pl
+
+EPUCKLIST is a file containing a list of e-pucks with their corresponding hardware addresses (as returned by "hcitool scan", for example). By default, the file "epuck_bdaddr" is used.
+The scripts will only install the e-pucks with numbers in [BASENUMBER, BASENUMBER+199], because the rfcomm only handles 256 devices at the same time. Hence, if you have e-pucks numbered from 100 to 299, use BASENUMBER=100. The rfcomm device for e-puck N is (N mod 200), no matter what BASENUMBER you choose.
+
+To have the udev system use the right permission, it is sometimes required to reboot the computer.
+
+
+Short Description
+-----------------
+
+- btepucksetup1_bdaddr.pl
+This writes the file /etc/bluetooth/epuck_bdaddr with the bluetooth MAC addresses of the e-pucks.
+
+- btepucksetup2_udev.pl
+This script adds the following lines to "/etc/udev/permissions.d/50-udev.permissions":
+	# bluetooth devices
+	rfcomm*:root:root:0666
+to make the rfcomm-devices readable and writable by any user on this system. If you want these devices to be accessible by root only, skip this step of modify the file by yourself.
+
+- btepucksetup3_rfcomm.pl
+This generates the RFCOMM configuration file "/etc/bluetooth/rfcomm.conf".
+
+- btepucksetup4_minirc.pl
+This generates a minicom configuration file for each epuck. If you're not using minicom, you can skip this step.
+
+- btepucksetup5_bluepin.pl
+This installs another "bluepin" program which provides the bluetooth pins automatically for all epucks. If you skip this step, a window to enter the PIN code will appear each time you connect to an epuck.
+
+
+Troubleshooting
+---------------
+
+Here are the most common problems and pitfalls:
+
+- BLUEZ not installed
+
+- Bluetooth service not running
+	Type "/etc/init.d/bluetooth status" to check whether it is running.
+	Type "/etc/init.d/bluetooth start" to start the service.
+	Type "/etc/init.d/bluetooth stop" to stop the service.
+
+- udev permissions not set
+	If you can connect to an epuck as "root" but not as any other user, rerun ./btepucksetup2_udev.pl (to make sure you've done that) and reboot the computer.
+
+- other udev permission file
+	The script were written for a Red Hat Enterprise Linux WS release 4. On other distributions, the permissions file may be stored somewhere else.
+
+
+Bug Reports
+-----------
+
+Report bugs to Thomas Lochmatter (thomas.lochmatter@epfl.ch).

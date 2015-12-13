@@ -1,0 +1,46 @@
+e-puck Bootloader for Linux
+===========================
+
+(c) 2006 SWIS Group, EPFL, Switzerland
+written by Xavier Raemy and Thomas Lochmatter
+http://swis.epfl.ch
+http://www.epfl.ch
+
+
+Installation
+------------
+
+This bootloader is written in Perl and should therefore run straight away. It requires the "Time::HiRes" Perl module and the Unix/Linux "stty" command, both of which should be available on most Linux/Unix systems.
+
+
+Usage
+-----
+
+epuckupload [OPTIONS] -f FILE [EPUCK1 [EPUCK2 ...]]
+
+This uploads FILE to the epuck. EPUCKn can be a linux device (e.g. /dev/rfcomm34), an epuck name (e.g. epuck34 or e-puck_0034) or just a number (e.g. 34).
+
+By default, the program connects to up to 5 devices at the same time. After all 5 devices are connected, the bootloader start sequence (0xC1) is sent. Reset the epucks now (within 30 seconds) to enter in bootloader mode and start the upload. If the file has been successfully transmitted, the program indicates success and the red LED at the right side of the e-puck should be on for 2 seconds.
+
+Options:
+ -j NUM     Uploads the file to NUM e-pucks in parallel (default: 5)
+ -n NUM     Maximum number of attempts (default: 5)
+ -w SEC     Seconds to wait for the e-puck to reset (default: 30)
+ -l SEC     Seconds to switch on the light on success, 0 means infinite (default: 2)
+ -s         Silent mode (don\'t bell to reset)
+
+If no devices are provided on the command line, the script reads the standard input and tries to find e-puck names (e.g. epuck34 or e-puck_0034) there. For instance, piping the output of "hcitool scan" into epuckupload will upload FILE to all e-pucks in the vicinity:
+	hcitool scan | epuckupload -f FILE
+
+
+Updating the bootloader
+-----------------------
+
+epuckupload can upload a new bootloader program to an e-puck. Since the bootloader must also be programmed with a bootloader, a helper program is required. The command line to update the bootloader looks as follows:
+
+epuckupload [OPTIONS] -bh BOOTLOADERHELPER -b BOOTLOADER [-f FILE] DEVICE1 [DEVICE2 ...]
+
+Note that the -bh option must be specified before the -b option. The new bootloader is uploaded in two steps:
+ - First the BOOTLOADERHELPER is transmitted and stored (using the current bootloader) at address 0x17B00 on the e-puck.
+ - Second the BOOTLOADER is transmitted and stored (using the bootloader helper) at address 0x17F00 on the e-puck.
+If FILE is provided with the -f option, this is uploaded using the new bootloader.

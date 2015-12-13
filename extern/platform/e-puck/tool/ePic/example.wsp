@@ -1,0 +1,10 @@
+s_accel,0
+s_proxi,0
+s_light,0
+s_micro,0
+s_speed,1
+s_pos,1
+s_odom,1
+s_floor,1
+s_external,0
+refreshtime,0.4
