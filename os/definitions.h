@@ -1,22 +1,9 @@
-/*
- * File:   definitions.h
- * Author: Stefan M. Trenkwalder
- *
- * Created on 08 July 2014, 14:55
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
- * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/*! \file	definition.h
+ *  \brief     	This file defines all preprocessor variables and project wide types.
+ *  \author    	Stefan M. Trenkwalder
+ *  \version   	1.0
+ *  \date      	2015
+ *  \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #include <stdbool.h>
@@ -122,7 +109,7 @@ extern "C" {
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE)
 
-typedef enum sys_colour {   BLACK   = 0b00000000,
+typedef enum sys_colour {   BLACK   = 0b00000000, 
                     RED     = 0b00000100,
                     YELLOW  = 0b00000110,
                     GREEN   = 0b00000010,
@@ -132,22 +119,22 @@ typedef enum sys_colour {   BLACK   = 0b00000000,
                     WHITE   = 0b00000111
 } sys_colour;
 
-typedef unsigned char  uint8;
-typedef unsigned short uint16;
-typedef unsigned int   uint32;
-typedef signed char  sint8;
-typedef signed short sint16;
-typedef signed int   sint32;
+typedef unsigned char  uint8; 	/*!< Defines an unsigned  8bit integer*/
+typedef unsigned short uint16; 	/*!< Defines an unsigned 16bit integer*/
+typedef unsigned int   uint32; 	/*!< Defines an unsigned 32bit integer*/
+typedef signed char  sint8;	/*!< Defines a    signed  8bit integer*/
+typedef signed short sint16;	/*!< Defines a    signed 16bit integer*/
+typedef signed int   sint32;	/*!< Defines a    signed 32bit integer*/
 
 #ifdef EPUCK_USED
 typedef signed short sint;
 typedef unsigned short uint;
 #endif
 
-typedef void (*pFunction)(void);
-typedef void (*pByteFunction)(uint8);
+typedef void (*pFunction)(void);	/*!< Defines a pointer to a function with no return value and argument*/
+typedef void (*pByteFunction)(uint8);	/*!< Defines a pointer to a function with no return value and one argument*/
 
-typedef void (*pUART_reader) (uint8 data);
+typedef void (*pUART_reader) (uint8 data); /*!< Defines a pointer to a function with no return value and one argument*/
 
 #ifdef	__cplusplus
 }

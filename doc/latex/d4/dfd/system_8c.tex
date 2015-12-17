@@ -1,0 +1,121 @@
+\hypertarget{system_8c}{}\section{system.\+c File Reference}
+\label{system_8c}\index{system.\+c@{system.\+c}}
+
+
+This file includes all basic system calls, which are nesessary to initialise, configure and the operating system.  
+
+
+{\ttfamily \#include \char`\"{}definitions.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}processes/system\+\_\+\+Timer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}processes/scheduler.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}processes/process\+\_\+\+Management.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+clock.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+motors.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+uart.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+remote\+Control.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+camera.\+h\char`\"{}}\\*
+Include dependency graph for system.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{system_8c_a31ce626d506c2b262ecf5b23946f522f}{Sys\+\_\+\+Init\+\_\+\+Kernel} ()
+\item 
+void \hyperlink{system_8c_a2e15518324643f26cb240108259b30da}{Sys\+\_\+\+Start\+\_\+\+Kernel} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file includes all basic system calls, which are nesessary to initialise, configure and the operating system. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license})
+\end{DoxyCopyright}
+~\newline
+ In short, Openswarm can be executed as shown in the following example 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include "\hyperlink{system_8h}{os/system.h}"}
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{void})\{
+     \textcolor{comment}{//initialise some global or local variables}
+
+    \hyperlink{system_8c_a31ce626d506c2b262ecf5b23946f522f}{Sys\_Init\_Kernel}();
+
+     \textcolor{comment}{//do some preperation before executing OpenSwarm and user applications}
+     
+     \hyperlink{system_8c_a2e15518324643f26cb240108259b30da}{Sys\_Start\_Kernel}();      
+    \textcolor{keywordflow}{while}(1)\{
+        \textcolor{comment}{//do nothing}
+    \}
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Function Documentation}
+\hypertarget{system_8c_a31ce626d506c2b262ecf5b23946f522f}{}\index{system.\+c@{system.\+c}!Sys\+\_\+\+Init\+\_\+\+Kernel@{Sys\+\_\+\+Init\+\_\+\+Kernel}}
+\index{Sys\+\_\+\+Init\+\_\+\+Kernel@{Sys\+\_\+\+Init\+\_\+\+Kernel}!system.\+c@{system.\+c}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Kernel}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Kernel (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{system_8c_a31ce626d506c2b262ecf5b23946f522f}
+Function to initialise the hardware
+
+This Function sets the system Timer (Timer0) and sets an scheduling algorithm. It also intitalises I/\+O devices (e.\+g. if e-\/puck is used\+: motor, U\+A\+R\+T, remote control, and camera)
+
+\begin{DoxyPostcond}{Postcondition}
+To start Open\+Swarm, \hyperlink{system_8c_a2e15518324643f26cb240108259b30da}{Sys\+\_\+\+Start\+\_\+\+Kernel()} mast be executed after the initialisation. 
+\end{DoxyPostcond}
+\begin{DoxyRemark}{Remarks}
+Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active Open\+Swarm. 
+\end{DoxyRemark}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 64 of file system.\+c.
+
+\hypertarget{system_8c_a2e15518324643f26cb240108259b30da}{}\index{system.\+c@{system.\+c}!Sys\+\_\+\+Start\+\_\+\+Kernel@{Sys\+\_\+\+Start\+\_\+\+Kernel}}
+\index{Sys\+\_\+\+Start\+\_\+\+Kernel@{Sys\+\_\+\+Start\+\_\+\+Kernel}!system.\+c@{system.\+c}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Kernel}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Kernel (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{system_8c_a2e15518324643f26cb240108259b30da}
+Function to start the the system timer
+
+This Function starts all functions of the operating system. The system M\+U\+S\+T H\+A\+V\+E B\+E\+E\+N I\+N\+I\+T\+I\+A\+L\+I\+S\+E\+D before. \begin{DoxyPrecond}{Precondition}
+System must be initialised with \hyperlink{system_8c_a31ce626d506c2b262ecf5b23946f522f}{Sys\+\_\+\+Init\+\_\+\+Kernel()}. 
+\end{DoxyPrecond}
+\begin{DoxyRemark}{Remarks}
+Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active Open\+Swarm. 
+\end{DoxyRemark}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file system.\+c.
+

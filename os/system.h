@@ -1,11 +1,12 @@
 /*!
  * \file system.h
+ * \ingroup base
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date{07 July 2014}
  * 
- * \brief This file initialises and starts OpenSwarm.
+ * \brief Initiaises and starts OpenSwarm.
  */
 
 /*! \mainpage OpenSwarm documentation
@@ -13,10 +14,10 @@
  *
  * \section intro_sec Introduction
  * OpenSwarm is an easy-to-use event-driven preemptive operating system for miniature robots. It offers abstract hardware-independent functions to make user code more extendible, maintainable, and portable.
- * The hybrid kernel provides preemptive and cooperative schduling, asynchronous programming models with events, and inter-process communication functions. \n\n  
+ * The hybrid kernel provides preemptive and cooperative scheduling, asynchronous programming models with events, and inter-process communication functions. \n\n  
  * OpenSwarm was created during the PhD of Stefan M Trenkwalder (http://trenkwalder.tech) at the University of Sheffield (http://www.sheffield.ac.uk/) under the Supervision of Dr. Roderich Gross and Dr. Andreas Kolling. 
  *
- * The code of OpenSwarm can be basically devided into 3 different modules:
+ * The code of OpenSwarm can be basically divided into 3 different modules:
  * - Process Management
  * - Event System
  * - I/O Management (This includes device specific sensors and actuators)  
@@ -50,24 +51,43 @@
  * - http://openswarm.org/license/              The link to the newest license (in case it changed)
  */
 
-/*
- has been started at the Ecole Polytechnique Federale de Lausanne as 
- * collaboration between the Autonomous Systems Lab, the Swarm-Intelligent Systems
- * group and the Laboratory of Intelligent System.
- * \n \n An educational robot:
- * The main goal of this project is to develop a miniature mobile robot for educational
- * purposes at university level. To achieve this goal the robot needs, in our opinion,
- * the following features:
- * - Good structure. The robot should have a clean mechanical structure, simple to
- * understand. The electronics, processor structure and software have to be a good
- * example of a clean modern system. 
- * - Flexibility. The robot should cover a large spectrum of educational activities and
- * should therefore have a large potential in its sensors, processing power and
+/*! \defgroup base Base
+ * \author Stefan M. Trenkwalder
+ * 
+ * \section sec_intro_base Introduction
+ * This package contains basic functions to initialise and start all modules of OpenSwarm. This part of OpenSwarm executes all three modules
+ * - Process Management \sa procMan
+ * - Event System \sa EventSys
+ * - I/O Management (This includes device specific sensors and actuators)  \sa IOMan
+ *
+ * It first defines global preprocessor option to configure OpenSwarm. It initialises the system and I/O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided. 
+ * 
+ * \subsection ssec_intro_base_defs Definitions  
+ * definition.h provides standardisation ports, configuration the used platform, and general preprocessor/type definitions that are needed in the entire OpenSwarm project.
+ * 
+ * \subsection ssec_intro_base_mem Memory Management  
+ * OpenSwarm is designed for processing unit that lack a MMU (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. OpenSwarm provides atomic functions to allocate, free and copy memory in memory.h.
+ * 
+ * \subsection ssec_intro_base_irq Interrupt Management  
+ * OpenSwarm provides a clear structure of interrupt priorities and functions to create atomic sections in interrupts.h.
+ * 
+ * \subsection ssec_intro_base_deps Dependencies 
+ * This part of OpenSwarm executes all three modules and depends on the configuration of each part and its implementation:
+ * - Process Management \sa procMan
+ * - Event System \sa EventSys
+ * - I/O Management (This includes device specific sensors and actuators of used platform)  \sa IOMan
+ * 
  */
-#define SYS_MOTOR_USED
-#define SYS_UART1_USED
-#define SYS_REMOTECONTROL_USED
-#define SYS_CAMERA_USED
+
+#include "definitions.h"
+
+#ifdef EPUCK_USED
+#define SYS_MOTOR_USED	 	/*!< Define this preprocessor symbol to use motors */
+#define SYS_UART1_USED		 /*!< Define this preprocessor symbol to use UART1 */
+#define SYS_REMOTECONTROL_USED	 /*!< Define this preprocessor symbol to receive remote control signals */
+#define SYS_CAMERA_USED		 /*!< Define this preprocessor symbol to use the camera */
+#endif
+
 
 void Sys_Init_Kernel(void);   //initialises the hardware
 void Sys_Start_Kernel(void);    //starts all needed functions
