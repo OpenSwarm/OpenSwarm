@@ -1,0 +1,7 @@
+<map id="platform/e&#45;puck/uart_HDI.c" name="platform/e&#45;puck/uart_HDI.c">
+<area shape="rect" id="node2" href="$dc/d0b/uart__HDI_8h.html" title="Hardware dependent implementations to control the message flow of the UART interface. " alt="" coords="533,95,620,121"/>
+<area shape="rect" id="node12" href="$d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="398,95,509,121"/>
+<area shape="rect" id="node13" href="$dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory " alt="" coords="92,95,196,121"/>
+<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="384,169,531,196"/>
+<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="354,244,562,285"/>
+</map>

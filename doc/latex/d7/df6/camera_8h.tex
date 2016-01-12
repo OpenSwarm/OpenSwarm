@@ -1,0 +1,190 @@
+\hypertarget{camera_8h}{}\section{platform/e-\/puck/camera.h File Reference}
+\label{camera_8h}\index{platform/e-\/puck/camera.\+h@{platform/e-\/puck/camera.\+h}}
+
+
+This file includes functions to process data retrieved by a camera.  
+
+
+{\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
+Include dependency graph for camera.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d83/camera_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{d6/d60/camera_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structsys__rgb__pixel__s}{sys\+\_\+rgb\+\_\+pixel\+\_\+s}
+\begin{DoxyCompactList}\small\item\em This bitfield contains the structure of the received pixel of a camera. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{camera_8h_a4f08a1ccf7834bd0d1b8c20c65856a6a}{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+R\+E\+D}~0b00011111;
+\item 
+\#define \hyperlink{camera_8h_ab63ece732ffe256cbb5f3df6f24b721c}{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+G\+R\+E\+E\+N}~0b00111111;
+\item 
+\#define \hyperlink{camera_8h_a80c25ccf9631b085da6582d99d11e094}{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+B\+L\+U\+E}~0b00011111;
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structsys__rgb__pixel__s}{sys\+\_\+rgb\+\_\+pixel\+\_\+s} \hyperlink{camera_8h_ab3179612ebed45894443a98b02ffb391}{sys\+\_\+rgb}
+\begin{DoxyCompactList}\small\item\em This bitfield contains the structure of the received pixel of a camera. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structsys__rgb__pixel__s}{sys\+\_\+rgb\+\_\+pixel\+\_\+s} \hyperlink{camera_8h_a49de3603363bff3140540b40d5fec700}{sys\+\_\+rgb\+\_\+pixel}
+\item 
+typedef void($\ast$ \hyperlink{camera_8h_ac43fbb39015129f2bb24fecb1d7b33b7}{p\+Camera\+Pre\+Processor}) (\hyperlink{camera_8h_a49de3603363bff3140540b40d5fec700}{sys\+\_\+rgb\+\_\+pixel} $\ast$$\ast$frame, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} width, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} height)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{camera_8h_aeefbe8dd86aa2b4588e5e5aa596d41fe}{Sys\+\_\+\+Init\+\_\+\+Camera} (void)
+\item 
+void \hyperlink{camera_8h_ac44e432642eee885441e01f976e2c969}{Sys\+\_\+\+Start\+\_\+\+Camera} (void)
+\item 
+void \hyperlink{camera_8h_ac93ec56d124a0811e638208ad64ed14c}{Sys\+\_\+\+Set\+\_\+\+Preprocessing} (\hyperlink{camera_8h_ac43fbb39015129f2bb24fecb1d7b33b7}{p\+Camera\+Pre\+Processor} func)
+\item 
+\hyperlink{camera_8h_a49de3603363bff3140540b40d5fec700}{sys\+\_\+rgb\+\_\+pixel} $\ast$ \hyperlink{camera_8h_a72c1d6c27d3aeb8399ec41247cc4ba58}{get\+Finished\+Frame} ()
+\item 
+bool \hyperlink{camera_8h_a1b0543ca3f9389e59135838a3c9cbb23}{is\+New\+Frame\+Available} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file includes functions to process data retrieved by a camera. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+27 August 2015
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{camera_8h_a80c25ccf9631b085da6582d99d11e094}{}\index{camera.\+h@{camera.\+h}!S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+B\+L\+U\+E@{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+B\+L\+U\+E}}
+\index{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+B\+L\+U\+E@{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+B\+L\+U\+E}!camera.\+h@{camera.\+h}}
+\subsubsection[{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+B\+L\+U\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+B\+L\+U\+E~0b00011111;}\label{camera_8h_a80c25ccf9631b085da6582d99d11e094}
+blue bits received 
+
+Definition at line 52 of file camera.\+h.
+
+\hypertarget{camera_8h_ab63ece732ffe256cbb5f3df6f24b721c}{}\index{camera.\+h@{camera.\+h}!S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+G\+R\+E\+E\+N@{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+G\+R\+E\+E\+N}}
+\index{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+G\+R\+E\+E\+N@{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+G\+R\+E\+E\+N}!camera.\+h@{camera.\+h}}
+\subsubsection[{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+G\+R\+E\+E\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+G\+R\+E\+E\+N~0b00111111;}\label{camera_8h_ab63ece732ffe256cbb5f3df6f24b721c}
+green bits received 
+
+Definition at line 51 of file camera.\+h.
+
+\hypertarget{camera_8h_a4f08a1ccf7834bd0d1b8c20c65856a6a}{}\index{camera.\+h@{camera.\+h}!S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+R\+E\+D@{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+R\+E\+D}}
+\index{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+R\+E\+D@{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+R\+E\+D}!camera.\+h@{camera.\+h}}
+\subsubsection[{S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+R\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+M\+A\+X\+\_\+\+R\+E\+D~0b00011111;}\label{camera_8h_a4f08a1ccf7834bd0d1b8c20c65856a6a}
+red bits received 
+
+Definition at line 50 of file camera.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{camera_8h_ac43fbb39015129f2bb24fecb1d7b33b7}{}\index{camera.\+h@{camera.\+h}!p\+Camera\+Pre\+Processor@{p\+Camera\+Pre\+Processor}}
+\index{p\+Camera\+Pre\+Processor@{p\+Camera\+Pre\+Processor}!camera.\+h@{camera.\+h}}
+\subsubsection[{p\+Camera\+Pre\+Processor}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ p\+Camera\+Pre\+Processor) ({\bf sys\+\_\+rgb\+\_\+pixel} $\ast$$\ast$frame, {\bf uint16} width, {\bf uint16} height)}\label{camera_8h_ac43fbb39015129f2bb24fecb1d7b33b7}
+pointer to a camera preprocessor 
+
+Definition at line 63 of file camera.\+h.
+
+\hypertarget{camera_8h_ab3179612ebed45894443a98b02ffb391}{}\index{camera.\+h@{camera.\+h}!sys\+\_\+rgb@{sys\+\_\+rgb}}
+\index{sys\+\_\+rgb@{sys\+\_\+rgb}!camera.\+h@{camera.\+h}}
+\subsubsection[{sys\+\_\+rgb}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+rgb\+\_\+pixel\+\_\+s} {\bf sys\+\_\+rgb}}\label{camera_8h_ab3179612ebed45894443a98b02ffb391}
+
+
+This bitfield contains the structure of the received pixel of a camera. 
+
+\hypertarget{camera_8h_a49de3603363bff3140540b40d5fec700}{}\index{camera.\+h@{camera.\+h}!sys\+\_\+rgb\+\_\+pixel@{sys\+\_\+rgb\+\_\+pixel}}
+\index{sys\+\_\+rgb\+\_\+pixel@{sys\+\_\+rgb\+\_\+pixel}!camera.\+h@{camera.\+h}}
+\subsubsection[{sys\+\_\+rgb\+\_\+pixel}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+rgb\+\_\+pixel\+\_\+s}  {\bf sys\+\_\+rgb\+\_\+pixel}}\label{camera_8h_a49de3603363bff3140540b40d5fec700}
+
+
+\subsection{Function Documentation}
+\hypertarget{camera_8h_a72c1d6c27d3aeb8399ec41247cc4ba58}{}\index{camera.\+h@{camera.\+h}!get\+Finished\+Frame@{get\+Finished\+Frame}}
+\index{get\+Finished\+Frame@{get\+Finished\+Frame}!camera.\+h@{camera.\+h}}
+\subsubsection[{get\+Finished\+Frame}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+rgb\+\_\+pixel}$\ast$ get\+Finished\+Frame (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{camera_8h_a72c1d6c27d3aeb8399ec41247cc4ba58}
+\hypertarget{camera_8h_a1b0543ca3f9389e59135838a3c9cbb23}{}\index{camera.\+h@{camera.\+h}!is\+New\+Frame\+Available@{is\+New\+Frame\+Available}}
+\index{is\+New\+Frame\+Available@{is\+New\+Frame\+Available}!camera.\+h@{camera.\+h}}
+\subsubsection[{is\+New\+Frame\+Available}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+New\+Frame\+Available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{camera_8h_a1b0543ca3f9389e59135838a3c9cbb23}
+\hypertarget{camera_8h_aeefbe8dd86aa2b4588e5e5aa596d41fe}{}\index{camera.\+h@{camera.\+h}!Sys\+\_\+\+Init\+\_\+\+Camera@{Sys\+\_\+\+Init\+\_\+\+Camera}}
+\index{Sys\+\_\+\+Init\+\_\+\+Camera@{Sys\+\_\+\+Init\+\_\+\+Camera}!camera.\+h@{camera.\+h}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Camera (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{camera_8h_aeefbe8dd86aa2b4588e5e5aa596d41fe}
+Initialises the Camera
+
+This function initialises the camera using e-\/puck library from Subversion at svn\+://svn.gna.\+org/svn/e-\/puck/trunk
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000002}{Todo}]rewrite the camera to computational less intensive functions\end{DoxyRefDesc}
+
+
+Definition at line 99 of file camera.\+c.
+
+\hypertarget{camera_8h_ac93ec56d124a0811e638208ad64ed14c}{}\index{camera.\+h@{camera.\+h}!Sys\+\_\+\+Set\+\_\+\+Preprocessing@{Sys\+\_\+\+Set\+\_\+\+Preprocessing}}
+\index{Sys\+\_\+\+Set\+\_\+\+Preprocessing@{Sys\+\_\+\+Set\+\_\+\+Preprocessing}!camera.\+h@{camera.\+h}}
+\subsubsection[{Sys\+\_\+\+Set\+\_\+\+Preprocessing}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+\_\+\+Preprocessing (
+\begin{DoxyParamCaption}
+\item[{{\bf p\+Camera\+Pre\+Processor}}]{func}
+\end{DoxyParamCaption}
+)}\label{camera_8h_ac93ec56d124a0811e638208ad64ed14c}
+Defines a preprocessor callback functions.
+
+Defines a preprocessor callback functions to process the frame.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em func} & camera preprocessor which computes events out of the raw image \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 319 of file camera.\+c.
+
+\hypertarget{camera_8h_ac44e432642eee885441e01f976e2c969}{}\index{camera.\+h@{camera.\+h}!Sys\+\_\+\+Start\+\_\+\+Camera@{Sys\+\_\+\+Start\+\_\+\+Camera}}
+\index{Sys\+\_\+\+Start\+\_\+\+Camera@{Sys\+\_\+\+Start\+\_\+\+Camera}!camera.\+h@{camera.\+h}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Camera (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{camera_8h_ac44e432642eee885441e01f976e2c969}
+Starts the Camera
+
+This function starts the capturing using e-\/puck library from Subversion at svn\+://svn.gna.\+org/svn/e-\/puck/trunk
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000003}{Todo}]rewrite the camera to computational less intensive functions\end{DoxyRefDesc}
+
+
+Definition at line 298 of file camera.\+c.
+

@@ -1,0 +1,6 @@
+<map id="memory.c" name="memory.c">
+<area shape="rect" id="node2" href="$dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory " alt="" coords="204,80,284,107"/>
+<area shape="rect" id="node10" href="$d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="309,80,395,107"/>
+<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="198,155,290,181"/>
+<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="525,229,733,271"/>
+</map>

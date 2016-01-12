@@ -1,0 +1,104 @@
+\hypertarget{group__io}{}\section{I/\+O Management}
+\label{group__io}\index{I/\+O Management@{I/\+O Management}}
+
+
+Functions and mechanisms to use I/\+O devices (e.\+g. sensors and actuators) to interact with the environment.  
+
+
+Collaboration diagram for I/\+O Management\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/da3/group__io}
+\end{center}
+\end{figure}
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{io_8c}{io.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes the I\+O timer to start and stop the timer. This timer executes I\+O functions periodically. \end{DoxyCompactList}\item 
+file \hyperlink{io_8h}{io.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes the I\+O timer to start and stop the timer. This timer executes I\+O functions periodically. \end{DoxyCompactList}\item 
+file \hyperlink{io__clock_8c}{io\+\_\+clock.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes the system clock that can be used to measure time. \end{DoxyCompactList}\item 
+file \hyperlink{io__clock_8h}{io\+\_\+clock.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes the system clock that can be used to measure time. \end{DoxyCompactList}\item 
+file \hyperlink{camera_8c}{camera.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes functions to process data retrieved by a camera. \end{DoxyCompactList}\item 
+file \hyperlink{camera_8h}{camera.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes functions to process data retrieved by a camera. \end{DoxyCompactList}\item 
+file \hyperlink{i2c_8c}{i2c.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+file \hyperlink{i2c_8h}{i2c.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+file \hyperlink{i2c__data_8c}{i2c\+\_\+data.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+file \hyperlink{i2c__data_8h}{i2c\+\_\+data.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+file \hyperlink{i2c__HDI_8c}{i2c\+\_\+\+H\+D\+I.\+c}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+file \hyperlink{i2c__HDI_8h}{i2c\+\_\+\+H\+D\+I.\+h}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+file \hyperlink{io__HDI_8c}{io\+\_\+\+H\+D\+I.\+c}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to start and stop the I/\+O timer. This timer executes I\+O functions periodically. \end{DoxyCompactList}\item 
+file \hyperlink{io__HDI_8h}{io\+\_\+\+H\+D\+I.\+h}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to start and stop the I/\+O timer. This timer executes I\+O functions periodically. \end{DoxyCompactList}\item 
+file \hyperlink{motors_8c}{motors.\+c}
+\begin{DoxyCompactList}\small\item\em This file provides the function needed to actuate the motors. \end{DoxyCompactList}\item 
+file \hyperlink{motors_8h}{motors.\+h}
+\begin{DoxyCompactList}\small\item\em This file provides the function needed to actuate the motors. \end{DoxyCompactList}\item 
+file \hyperlink{motors__HDI_8c}{motors\+\_\+\+H\+D\+I.\+c}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to actuate the motors. \end{DoxyCompactList}\item 
+file \hyperlink{motors__HDI_8h}{motors\+\_\+\+H\+D\+I.\+h}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to actuate the motors. \end{DoxyCompactList}\item 
+file \hyperlink{remoteControl_8c}{remote\+Control.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes functions needed to receive and decode messages from a remote control. \end{DoxyCompactList}\item 
+file \hyperlink{remoteControl_8h}{remote\+Control.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes functions needed to receive and decode messages from a remote control. \end{DoxyCompactList}\item 
+file \hyperlink{remoteControl__HDI_8c}{remote\+Control\+\_\+\+H\+D\+I.\+c}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to receive and decode messages from a remote control. \end{DoxyCompactList}\item 
+file \hyperlink{remoteControl__HDI_8h}{remote\+Control\+\_\+\+H\+D\+I.\+h}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to receive and decode messages from a remote control. \end{DoxyCompactList}\item 
+file \hyperlink{uart_8c}{uart.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes functions needed to transmit data via uart(1 \& 2). \end{DoxyCompactList}\item 
+file \hyperlink{uart_8h}{uart.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes functions needed to transmit data via uart(1 \& 2). \end{DoxyCompactList}\item 
+file \hyperlink{uart__HDI_8c}{uart\+\_\+\+H\+D\+I.\+c}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to control the message flow of the U\+A\+R\+T interface. \end{DoxyCompactList}\item 
+file \hyperlink{uart__HDI_8h}{uart\+\_\+\+H\+D\+I.\+h}
+\begin{DoxyCompactList}\small\item\em Hardware dependent implementations to control the message flow of the U\+A\+R\+T interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions and mechanisms to use I/\+O devices (e.\+g. sensors and actuators) to interact with the environment. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org}
+\end{DoxyAuthor}
+\hypertarget{group__io_io_intro}{}\subsection{Introduction}\label{group__io_io_intro}
+I/\+O device are managed by this module. I/\+O devices interfacing and interacting with the environment of the robot. These sensors and actuators might be a camera, motors, or gripper.
+
+In general I/\+O devices might be independent and uses their own interrupts -\/ such as U\+A\+R\+T, A\+D\+C, I2\+C. These functions act independently and only need to be initialised and started. No further interaction is needed.
+
+Many I/\+O devices however need periodic interactions -\/ such as remote control receiver, motor controller, or system clock.\hypertarget{group__io_io_usage}{}\subsection{Usage}\label{group__io_io_usage}
+The I/\+O management is initialised with \hyperlink{io_8h_ad1719208a5855f34e056a8114de973f9}{Sys\+\_\+\+Init\+\_\+\+I\+O\+Management(void)}, which initialised the System Timer (100us) and initialises a list of I/\+O devices that need to be executed periodically. After starting the timer with \hyperlink{io_8h_a6ca66df90d159586d58a19e01f3a7025}{Sys\+\_\+\+Start\+\_\+\+I\+O\+Management(void)}, it can be the stopped with \hyperlink{io_8h_a14d9a8f941c03184049f3bf18d35fb47}{Sys\+\_\+\+Stop\+\_\+\+I\+O\+Management(void)}.
+
+The I/\+O Timer can be manipulated as follows
+\begin{DoxyItemize}
+\item Stop\+: \hyperlink{io_8h_a3aa1e95e0e5be1866738b77f5b504652}{Sys\+\_\+\+Stop\+\_\+\+I\+O\+Timer(void)}
+\item Continue\+: \hyperlink{io_8h_a15a4d1cf4ffaac43d2c1ae131652b869}{Sys\+\_\+\+Continue\+\_\+\+I\+O\+Timer(void)}
+\item Reset (starts the 100us again)\+: \hyperlink{io_8h_a022c90f875bdb0b3cf2c85ab7872f531}{Sys\+\_\+\+Reset\+\_\+\+I\+O\+Timer(void)}
+\item Disable\+: \hyperlink{io_8h_a21ac049cc8b67f8851decbbd0edf9dd6}{Sys\+\_\+\+Disable\+\_\+\+I\+O\+Timer\+Interrupt(void)}
+\item Enable\+: \hyperlink{io_8h_aefef1e8eb442327a4b4c7bc89d6d13ce}{Sys\+\_\+\+Enable\+\_\+\+I\+O\+Timer\+Interrupt(void)}
+\item Force an I/\+O Timer interrupt\+: \hyperlink{io_8h_ac23e12fcd2478b2d820aa55dcd9460ee}{Sys\+\_\+\+Force\+\_\+\+I\+O\+Timer\+Interrupt(void)}
+\end{DoxyItemize}
+
+New I/\+O devices can be added and removed by (un)registering with \hyperlink{io_8h_a915425274eaebb4ed39d8622b90993b7}{Sys\+\_\+\+Register\+\_\+\+I\+O\+Handler(p\+Function func)} and \hyperlink{io_8h_a1b695aa5cbdf06b543b10b9661722d36}{Sys\+\_\+\+Unregister\+\_\+\+I\+O\+Handler(p\+Function func)}.
+
+The I/\+O management is started by initialising \& starting of the kernel \begin{DoxySeeAlso}{See also}
+\hyperlink{group__base}{Base}
+\end{DoxySeeAlso}
+\hypertarget{group__io_io_license}{}\subsection{License}\label{group__io_io_license}
+L\+I\+C\+E\+N\+S\+E\+: adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license})~\newline
+Copyright (c) 2015, Stefan M. Trenkwalder~\newline
+All rights reserved. 

@@ -1,50 +1,53 @@
-/**
- * @file io_clock.c
- * @author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
- * @version 1.0
+/*!
+ * \file
+ * \ingroup io
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * \version 1.0
  *
- * @section LICENSE
- *
- * Created on 07 July 2014
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * \date 28 July 2015
  * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * @section DESCRIPTION
- *
- * This file includes the system clock that can be used to measure time.
+ * \brief  This file includes the system clock that can be used to measure time.
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
-#include "io_clock.h"
-#include "../platform/e-puck/system_IO_HDI.h"
-
 #include "io.h"
+#include "io_clock.h"
+
+#include "e-puck/io_HDI.h"
+
 #include "../events/events.h"
 
-static uint32 sys_clock = 0;
+static uint32 sys_clock = 0; /*!< counter which is system clock */
     
 void Sys_SystemClock_Counter(void);
 
+/**
+ * This function initialises the system clock
+ *
+ * This function initialises the system clock which is in principle a counter that inicates passed milli seconds.
+ *
+ */
 inline void Sys_Init_Clock(){
-    Sys_Register_Event(SYS_EVENT_1ms_CLOCK);
-    Sys_Register_IOHandler(Sys_SystemClock_Counter);
+    Sys_Register_Event(SYS_EVENT_1ms_CLOCK); //event that occurs every milli second
+    Sys_Register_IOHandler(Sys_SystemClock_Counter); 
 }
 
+/**
+ * Renaming of the function Sys_Init_Clock().
+ *
+ * Renaming of the function Sys_Init_Clock().
+ * 
+ */
 inline void Sys_Init_SystemTime(){
     Sys_Init_Clock();
 }
 
+/**
+ * calculates the system clock
+ *
+ * This function calculates the system clock tick and increases the counter if a millisecond passed.
+ *
+ */
 void Sys_SystemClock_Counter(){
     
     static uint16 counter = 0;
@@ -58,10 +61,24 @@ void Sys_SystemClock_Counter(){
     sys_clock++;
 }
 
+/**
+ * Renaming of the function Sys_Get_SystemClock().
+ *
+ * Renaming of the function Sys_Get_SystemClock().
+ * 
+ * @return uint32  time that has passed since OpenSwarm was started
+ */
 inline uint32 Sys_Get_SystemTime(){
     return Sys_Get_SystemClock();
 }
 
+/**
+ * returns the system clock/time in milliseconds
+ *
+ * returns the system clock/time in milliseconds
+ * 
+ * @return uint32  time that has passed since OpenSwarm was started
+ */
 inline uint32 Sys_Get_SystemClock(){
     return sys_clock;
 }

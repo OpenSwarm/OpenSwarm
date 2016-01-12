@@ -1,0 +1,187 @@
+\hypertarget{system__Timer_8h}{}\section{processes/system\+\_\+\+Timer.h File Reference}
+\label{system__Timer_8h}\index{processes/system\+\_\+\+Timer.\+h@{processes/system\+\_\+\+Timer.\+h}}
+
+
+This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time.  
+
+
+{\ttfamily \#include \char`\"{}../../os/definitions.\+h\char`\"{}}\\*
+Include dependency graph for system\+\_\+\+Timer.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/d4d/system__Timer_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/dd7/system__Timer_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{system__Timer_8h_a43fb10a158f96d4512ffa1fdddfe28ec}{Sys\+\_\+\+Init\+\_\+\+System\+Timer} (\hyperlink{definitions_8h_aed53e618f2025481fbe48a5098f70079}{p\+Function})
+\item 
+void \hyperlink{system__Timer_8h_afc0f400adea75936546abe01771ee9b2}{Sys\+\_\+\+Start\+\_\+\+System\+Timer} (void)
+\item 
+void \hyperlink{system__Timer_8h_a2c6bd2b2521ccaeeae10827c5e626f84}{Sys\+\_\+\+Stop\+\_\+\+System\+Timer} ()
+\item 
+void \hyperlink{system__Timer_8h_ab2fcca740eab21a9412fc9ec44aa7c69}{Sys\+\_\+\+Continue\+\_\+\+System\+Timer} ()
+\item 
+void \hyperlink{system__Timer_8h_a038b8f0be088220d0aabc6a13a4769e3}{Sys\+\_\+\+Disable\+\_\+\+Timer\+Interrupt} (void)
+\item 
+void \hyperlink{system__Timer_8h_a27a2d4e84310e08b6b8e50c5e7b9cb2b}{Sys\+\_\+\+Enable\+\_\+\+Timer\+Interrupt} (void)
+\item 
+void \hyperlink{system__Timer_8h_a8ea6aac01f3a93fbbe5b5d03f35b23bd}{Sys\+\_\+\+Force\+\_\+\+Timer\+Interrupt} (void)
+\item 
+void \hyperlink{system__Timer_8h_adae83d87319518b33a7cdd6e01adc546}{Sys\+\_\+\+Reset\+\_\+\+System\+Timer} ()
+\item 
+void \hyperlink{system__Timer_8h_aecfa3effccb0d88a94e9d8adfb99fedd}{Sys\+\_\+todo\+\_\+\+System\+Timer} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+\{07 July 2014\}
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\hypertarget{system__Timer_8h_ab2fcca740eab21a9412fc9ec44aa7c69}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Continue\+\_\+\+System\+Timer@{Sys\+\_\+\+Continue\+\_\+\+System\+Timer}}
+\index{Sys\+\_\+\+Continue\+\_\+\+System\+Timer@{Sys\+\_\+\+Continue\+\_\+\+System\+Timer}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Continue\+\_\+\+System\+Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Continue\+\_\+\+System\+Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_ab2fcca740eab21a9412fc9ec44aa7c69}
+Deactivates the Timer1 Interrupt
+
+This Function deactivated the Timer1 Interrupt 
+
+Definition at line 59 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_a038b8f0be088220d0aabc6a13a4769e3}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Disable\+\_\+\+Timer\+Interrupt@{Sys\+\_\+\+Disable\+\_\+\+Timer\+Interrupt}}
+\index{Sys\+\_\+\+Disable\+\_\+\+Timer\+Interrupt@{Sys\+\_\+\+Disable\+\_\+\+Timer\+Interrupt}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Disable\+\_\+\+Timer\+Interrupt}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Disable\+\_\+\+Timer\+Interrupt (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_a038b8f0be088220d0aabc6a13a4769e3}
+Disables the Timer1 interrupt
+
+Disables the Timer1 interrupt and sets the interrupt flag to 0 
+
+Definition at line 101 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_a27a2d4e84310e08b6b8e50c5e7b9cb2b}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Enable\+\_\+\+Timer\+Interrupt@{Sys\+\_\+\+Enable\+\_\+\+Timer\+Interrupt}}
+\index{Sys\+\_\+\+Enable\+\_\+\+Timer\+Interrupt@{Sys\+\_\+\+Enable\+\_\+\+Timer\+Interrupt}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Enable\+\_\+\+Timer\+Interrupt}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Enable\+\_\+\+Timer\+Interrupt (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_a27a2d4e84310e08b6b8e50c5e7b9cb2b}
+Enables the Timer1 interrupt
+
+Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function. 
+
+Definition at line 111 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_a8ea6aac01f3a93fbbe5b5d03f35b23bd}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Force\+\_\+\+Timer\+Interrupt@{Sys\+\_\+\+Force\+\_\+\+Timer\+Interrupt}}
+\index{Sys\+\_\+\+Force\+\_\+\+Timer\+Interrupt@{Sys\+\_\+\+Force\+\_\+\+Timer\+Interrupt}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Force\+\_\+\+Timer\+Interrupt}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Force\+\_\+\+Timer\+Interrupt (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_a8ea6aac01f3a93fbbe5b5d03f35b23bd}
+Enables the Timer1 interrupt
+
+Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function. 
+
+Definition at line 121 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_a43fb10a158f96d4512ffa1fdddfe28ec}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Init\+\_\+\+System\+Timer@{Sys\+\_\+\+Init\+\_\+\+System\+Timer}}
+\index{Sys\+\_\+\+Init\+\_\+\+System\+Timer@{Sys\+\_\+\+Init\+\_\+\+System\+Timer}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+System\+Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+System\+Timer (
+\begin{DoxyParamCaption}
+\item[{{\bf p\+Function}}]{scheduler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_a43fb10a158f96d4512ffa1fdddfe28ec}
+Function to initialise the system timer
+
+This Function sets the Timer0 of the D\+S\+P\+I\+C 30\+F6014\+A for timer interfvals of 10 ms. The timer will be startet with Start\+\_\+\+System\+Timer\+\_\+\+H\+D\+I()
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em scheduler} & This is a pointer t an callback function, which schuld becalled whenever a timer interrupt is emmitted. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 28 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_adae83d87319518b33a7cdd6e01adc546}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Reset\+\_\+\+System\+Timer@{Sys\+\_\+\+Reset\+\_\+\+System\+Timer}}
+\index{Sys\+\_\+\+Reset\+\_\+\+System\+Timer@{Sys\+\_\+\+Reset\+\_\+\+System\+Timer}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Reset\+\_\+\+System\+Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Reset\+\_\+\+System\+Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_adae83d87319518b33a7cdd6e01adc546}
+Resets the Timer1 value to the initial value
+
+This Function resets the Timer1 value 
+
+Definition at line 69 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_afc0f400adea75936546abe01771ee9b2}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Start\+\_\+\+System\+Timer@{Sys\+\_\+\+Start\+\_\+\+System\+Timer}}
+\index{Sys\+\_\+\+Start\+\_\+\+System\+Timer@{Sys\+\_\+\+Start\+\_\+\+System\+Timer}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+System\+Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+System\+Timer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_afc0f400adea75936546abe01771ee9b2}
+Function to starts the initialised system timer
+
+This Function starts the Timer0 of the D\+S\+P\+I\+C 30\+F6014\+A for timer interfvals of 10 ms. The M\+U\+S\+T be initialised first with Init\+\_\+\+System\+Timer\+\_\+\+H\+D\+I() 
+
+Definition at line 39 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_a2c6bd2b2521ccaeeae10827c5e626f84}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+\+Stop\+\_\+\+System\+Timer@{Sys\+\_\+\+Stop\+\_\+\+System\+Timer}}
+\index{Sys\+\_\+\+Stop\+\_\+\+System\+Timer@{Sys\+\_\+\+Stop\+\_\+\+System\+Timer}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+\+Stop\+\_\+\+System\+Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Stop\+\_\+\+System\+Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_a2c6bd2b2521ccaeeae10827c5e626f84}
+Activates the Timer1 Interrupt
+
+This Function activated the Timer1 Interrupt 
+
+Definition at line 49 of file system\+\_\+\+Timer.\+c.
+
+\hypertarget{system__Timer_8h_aecfa3effccb0d88a94e9d8adfb99fedd}{}\index{system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}!Sys\+\_\+todo\+\_\+\+System\+Timer@{Sys\+\_\+todo\+\_\+\+System\+Timer}}
+\index{Sys\+\_\+todo\+\_\+\+System\+Timer@{Sys\+\_\+todo\+\_\+\+System\+Timer}!system\+\_\+\+Timer.\+h@{system\+\_\+\+Timer.\+h}}
+\subsubsection[{Sys\+\_\+todo\+\_\+\+System\+Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+todo\+\_\+\+System\+Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Timer_8h_aecfa3effccb0d88a94e9d8adfb99fedd}
+This function is executed periodically by the system timer interrupt
+
+This function is executed periodically by the system timer interrupt. It kills all zombies, executes event handlers and executes the scheduling algorithm. 
+
+Definition at line 79 of file system\+\_\+\+Timer.\+c.
+

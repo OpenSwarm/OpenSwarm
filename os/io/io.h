@@ -1,23 +1,50 @@
-/*
- * File:   io.h
- * Author: Stefan M. Trenkwalder
+/*!
+ * \file
+ * \ingroup io
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * \version 1.0
  *
- * Created on 28 July 2015, 11:21
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * \date 28 July 2015
  * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * \brief  This file includes the IO timer to start and stop the timer.  This timer executes IO functions periodically.
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
+
+/*! \defgroup io I/O Management
+ * \brief Functions and mechanisms to use I/O devices (e.g. sensors and actuators) to interact with the environment.
+ * 
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * 
+ * \section io_intro Introduction
+ * I/O device are managed by this module. I/O devices interfacing and interacting with the environment of the robot. 
+ * These sensors and actuators might be a camera, motors, or gripper. 
+ * 
+ * In general I/O devices might be independent and uses their own interrupts - such as UART, ADC, I2C. These functions act independently and only need to be initialised and started. No further interaction is needed.
+ * 
+ * Many I/O devices however need periodic interactions - such as remote control receiver, motor controller, or system clock.
+ * 
+ * 
+ * \section io_usage Usage
+ * The I/O management is initialised with Sys_Init_IOManagement(void), which initialised the System Timer (100us) and initialises a list of I/O devices that need to be executed periodically. After starting the timer with Sys_Start_IOManagement(void), it can be the stopped with Sys_Stop_IOManagement(void).
+ * 
+ * The I/O Timer can be manipulated as follows
+ *   - Stop: Sys_Stop_IOTimer(void)
+ *   - Continue: Sys_Continue_IOTimer(void)
+ *   - Reset (starts the 100us again): Sys_Reset_IOTimer(void)
+ *   - Disable: Sys_Disable_IOTimerInterrupt(void)
+ *   - Enable: Sys_Enable_IOTimerInterrupt(void)
+ *   - Force an I/O Timer interrupt: Sys_Force_IOTimerInterrupt(void)
+ * 
+ * New I/O devices can be added and removed by (un)registering with Sys_Register_IOHandler(pFunction func) and Sys_Unregister_IOHandler(pFunction func).
+ * 
+ * The I/O management is started by initialising & starting of the kernel \sa base
+ * 
+ * \section io_license License
+ * LICENSE: adapted FreeBSD License (see http://openswarm.org/license)\n
+ * Copyright (c) 2015, Stefan M. Trenkwalder\n
+ * All rights reserved. 
+ */
+
 
 #ifndef SYSTEM_IO_H
 #define	SYSTEM_IO_H

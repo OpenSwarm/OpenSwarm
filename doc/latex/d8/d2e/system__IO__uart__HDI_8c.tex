@@ -1,0 +1,248 @@
+\hypertarget{system__IO__uart__HDI_8c}{}\section{platform/e-\/puck/system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.c File Reference}
+\label{system__IO__uart__HDI_8c}\index{platform/e-\/puck/system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{platform/e-\/puck/system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$p30\+F6014\+A.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}library/motor\+\_\+led/e\+\_\+epuck\+\_\+ports.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../../os/interrupts.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../../os/memory.\+h\char`\"{}}\\*
+Include dependency graph for system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d40/system__IO__uart__HDI_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{system__IO__uart__HDI_8c_a97c1615b0d3f397079066331c36e9749}{S\+Y\+S\+\_\+\+U\+A\+R\+T1\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}~115000
+\item 
+\#define \hyperlink{system__IO__uart__HDI_8c_a937e9299d0ad99a931251dd572cc6536}{S\+Y\+S\+\_\+\+U\+A\+R\+T2\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}~115000
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_aa68893b903e41cc4726c534a6ca1c404}{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_af54eb827ecb05c252606a1d6b502bb6c}{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_a26cf382fbdfde40b06315e658d14f3ad}{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_a7231d8b7f89c38e9d74d0c751f855382}{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_a348b663f86a656f5ea991d496ff9b896}{\+\_\+\+\_\+attribute\+\_\+\+\_\+} ((interrupt, auto\+\_\+psv))
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_a4183631ca8e90a2da2819cb62f618f12}{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R} ()
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_a5878ce2b00c408644a8f1c17194d2886}{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R} ()
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_ab3b36156bb429ec87e5bd5d531e5f900}{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R} ()
+\item 
+void \hyperlink{system__IO__uart__HDI_8c_ab116093f64d0cf3ea9436277677bc17e}{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{definitions_8h_ad0a349c40dea7b354efa164b090c0a4f}{p\+U\+A\+R\+T\+\_\+reader} \hyperlink{system__IO__uart__HDI_8c_adc6cc9dcba3e9fca04c8c854f90aad01}{read\+\_\+uart\+\_\+1} = 0
+\item 
+\hyperlink{definitions_8h_ad0a349c40dea7b354efa164b090c0a4f}{p\+U\+A\+R\+T\+\_\+reader} \hyperlink{system__IO__uart__HDI_8c_a3497c0fcee705fb61a25d81423d3804b}{read\+\_\+uart\+\_\+2} = 0
+\item 
+\hyperlink{system__IO__uart__HDI_8h_ac889c78db78b35dd5c98ba6062f5c045}{sys\+\_\+uart\+\_\+txdata} $\ast$ \hyperlink{system__IO__uart__HDI_8c_af30b180d749e11881bb05543af5fe25e}{sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data} = 0
+\item 
+\hyperlink{system__IO__uart__HDI_8h_ac889c78db78b35dd5c98ba6062f5c045}{sys\+\_\+uart\+\_\+txdata} $\ast$ \hyperlink{system__IO__uart__HDI_8c_a5437d55676502090ad34682ed275d11f}{sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data} = 0
+\item 
+\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} \hyperlink{system__IO__uart__HDI_8c_ace99407f75f6ac767119314bc5177667}{byte\+\_\+counter\+\_\+uart1} = 0
+\item 
+\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} \hyperlink{system__IO__uart__HDI_8c_a476bcccf6a99e5a24a8ed32379071325}{byte\+\_\+counter\+\_\+uart2} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\hypertarget{traps_8c_LICENSE}{}\subsection{L\+I\+C\+E\+N\+S\+E}\label{traps_8c_LICENSE}
+Created on 27 August 2015
+
+L\+I\+C\+E\+N\+S\+E\+: adapted Free\+B\+S\+D License Copyright (c) 2015, Stefan M. Trenkwalder All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met\+:
+
+
+\begin{DoxyEnumerate}
+\item Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+\item Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+\item If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that Open\+Swarm was used in this product.
+\end{DoxyEnumerate}
+
+T\+H\+I\+S S\+O\+F\+T\+W\+A\+R\+E I\+S P\+R\+O\+V\+I\+D\+E\+D B\+Y T\+H\+E C\+O\+P\+Y\+R\+I\+G\+H\+T H\+O\+L\+D\+E\+R\+S A\+N\+D C\+O\+N\+T\+R\+I\+B\+U\+T\+O\+R\+S \char`\"{}\+A\+S I\+S\char`\"{} A\+N\+D A\+N\+Y E\+X\+P\+R\+E\+S\+S O\+R I\+M\+P\+L\+I\+E\+D W\+A\+R\+R\+A\+N\+T\+I\+E\+S, I\+N\+C\+L\+U\+D\+I\+N\+G, B\+U\+T N\+O\+T L\+I\+M\+I\+T\+E\+D T\+O, T\+H\+E I\+M\+P\+L\+I\+E\+D W\+A\+R\+R\+A\+N\+T\+I\+E\+S O\+F M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y A\+N\+D F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E A\+R\+E D\+I\+S\+C\+L\+A\+I\+M\+E\+D. I\+N N\+O E\+V\+E\+N\+T S\+H\+A\+L\+L T\+H\+E C\+O\+P\+Y\+R\+I\+G\+H\+T H\+O\+L\+D\+E\+R O\+R C\+O\+N\+T\+R\+I\+B\+U\+T\+O\+R\+S B\+E L\+I\+A\+B\+L\+E F\+O\+R A\+N\+Y D\+I\+R\+E\+C\+T, I\+N\+D\+I\+R\+E\+C\+T, I\+N\+C\+I\+D\+E\+N\+T\+A\+L, S\+P\+E\+C\+I\+A\+L, E\+X\+E\+M\+P\+L\+A\+R\+Y, O\+R C\+O\+N\+S\+E\+Q\+U\+E\+N\+T\+I\+A\+L D\+A\+M\+A\+G\+E\+S (I\+N\+C\+L\+U\+D\+I\+N\+G, B\+U\+T N\+O\+T L\+I\+M\+I\+T\+E\+D T\+O, P\+R\+O\+C\+U\+R\+E\+M\+E\+N\+T O\+F S\+U\+B\+S\+T\+I\+T\+U\+T\+E G\+O\+O\+D\+S O\+R S\+E\+R\+V\+I\+C\+E\+S; L\+O\+S\+S O\+F U\+S\+E, D\+A\+T\+A, O\+R P\+R\+O\+F\+I\+T\+S; O\+R B\+U\+S\+I\+N\+E\+S\+S I\+N\+T\+E\+R\+R\+U\+P\+T\+I\+O\+N) H\+O\+W\+E\+V\+E\+R C\+A\+U\+S\+E\+D A\+N\+D O\+N A\+N\+Y T\+H\+E\+O\+R\+Y O\+F L\+I\+A\+B\+I\+L\+I\+T\+Y, W\+H\+E\+T\+H\+E\+R I\+N C\+O\+N\+T\+R\+A\+C\+T, S\+T\+R\+I\+C\+T L\+I\+A\+B\+I\+L\+I\+T\+Y, O\+R T\+O\+R\+T (I\+N\+C\+L\+U\+D\+I\+N\+G N\+E\+G\+L\+I\+G\+E\+N\+C\+E O\+R O\+T\+H\+E\+R\+W\+I\+S\+E) A\+R\+I\+S\+I\+N\+G I\+N A\+N\+Y W\+A\+Y O\+U\+T O\+F T\+H\+E U\+S\+E O\+F T\+H\+I\+S S\+O\+F\+T\+W\+A\+R\+E, E\+V\+E\+N I\+F A\+D\+V\+I\+S\+E\+D O\+F T\+H\+E P\+O\+S\+S\+I\+B\+I\+L\+I\+T\+Y O\+F S\+U\+C\+H D\+A\+M\+A\+G\+E.\hypertarget{traps_8c_DESCRIPTION}{}\subsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+O\+N}\label{traps_8c_DESCRIPTION}
+This file provides hardware dependent code to use a uart. 
+
+\subsection{Macro Definition Documentation}
+\hypertarget{system__IO__uart__HDI_8c_a97c1615b0d3f397079066331c36e9749}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!S\+Y\+S\+\_\+\+U\+A\+R\+T1\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E@{S\+Y\+S\+\_\+\+U\+A\+R\+T1\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}}
+\index{S\+Y\+S\+\_\+\+U\+A\+R\+T1\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E@{S\+Y\+S\+\_\+\+U\+A\+R\+T1\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{S\+Y\+S\+\_\+\+U\+A\+R\+T1\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+U\+A\+R\+T1\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E~115000}\label{system__IO__uart__HDI_8c_a97c1615b0d3f397079066331c36e9749}
+
+
+Definition at line 39 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a937e9299d0ad99a931251dd572cc6536}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!S\+Y\+S\+\_\+\+U\+A\+R\+T2\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E@{S\+Y\+S\+\_\+\+U\+A\+R\+T2\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}}
+\index{S\+Y\+S\+\_\+\+U\+A\+R\+T2\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E@{S\+Y\+S\+\_\+\+U\+A\+R\+T2\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{S\+Y\+S\+\_\+\+U\+A\+R\+T2\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+U\+A\+R\+T2\+\_\+\+B\+A\+U\+D\+R\+A\+T\+E~115000}\label{system__IO__uart__HDI_8c_a937e9299d0ad99a931251dd572cc6536}
+
+
+Definition at line 40 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{system__IO__uart__HDI_8c_a348b663f86a656f5ea991d496ff9b896}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{\+\_\+\+\_\+attribute\+\_\+\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+\+\_\+attribute\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{(interrupt, auto\+\_\+psv)}]{}
+\end{DoxyParamCaption}
+)}\label{system__IO__uart__HDI_8c_a348b663f86a656f5ea991d496ff9b896}
+
+
+Definition at line 121 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_aa68893b903e41cc4726c534a6ca1c404}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{system__IO__uart__HDI_8c_aa68893b903e41cc4726c534a6ca1c404}
+
+
+Definition at line 51 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_af54eb827ecb05c252606a1d6b502bb6c}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{system__IO__uart__HDI_8c_af54eb827ecb05c252606a1d6b502bb6c}
+
+
+Definition at line 83 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a4183631ca8e90a2da2819cb62f618f12}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R@{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R}}
+\index{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R@{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__IO__uart__HDI_8c_a4183631ca8e90a2da2819cb62f618f12}
+
+
+Definition at line 157 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_ab3b36156bb429ec87e5bd5d531e5f900}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R@{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R}}
+\index{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R@{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Read\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__IO__uart__HDI_8c_ab3b36156bb429ec87e5bd5d531e5f900}
+
+
+Definition at line 203 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a26cf382fbdfde40b06315e658d14f3ad}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{system__IO__uart__HDI_8c_a26cf382fbdfde40b06315e658d14f3ad}
+
+
+Definition at line 103 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a7231d8b7f89c38e9d74d0c751f855382}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{system__IO__uart__HDI_8c_a7231d8b7f89c38e9d74d0c751f855382}
+
+
+Definition at line 112 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a5878ce2b00c408644a8f1c17194d2886}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R@{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R}}
+\index{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R@{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T1\+\_\+\+I\+S\+R (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__IO__uart__HDI_8c_a5878ce2b00c408644a8f1c17194d2886}
+
+
+Definition at line 171 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_ab116093f64d0cf3ea9436277677bc17e}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R@{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R}}
+\index{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R@{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Write\+\_\+\+U\+A\+R\+T2\+\_\+\+I\+S\+R (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__IO__uart__HDI_8c_ab116093f64d0cf3ea9436277677bc17e}
+
+
+Definition at line 218 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{system__IO__uart__HDI_8c_ace99407f75f6ac767119314bc5177667}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!byte\+\_\+counter\+\_\+uart1@{byte\+\_\+counter\+\_\+uart1}}
+\index{byte\+\_\+counter\+\_\+uart1@{byte\+\_\+counter\+\_\+uart1}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{byte\+\_\+counter\+\_\+uart1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint16} byte\+\_\+counter\+\_\+uart1 = 0}\label{system__IO__uart__HDI_8c_ace99407f75f6ac767119314bc5177667}
+
+
+Definition at line 48 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a476bcccf6a99e5a24a8ed32379071325}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!byte\+\_\+counter\+\_\+uart2@{byte\+\_\+counter\+\_\+uart2}}
+\index{byte\+\_\+counter\+\_\+uart2@{byte\+\_\+counter\+\_\+uart2}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{byte\+\_\+counter\+\_\+uart2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint16} byte\+\_\+counter\+\_\+uart2 = 0}\label{system__IO__uart__HDI_8c_a476bcccf6a99e5a24a8ed32379071325}
+
+
+Definition at line 49 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_adc6cc9dcba3e9fca04c8c854f90aad01}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!read\+\_\+uart\+\_\+1@{read\+\_\+uart\+\_\+1}}
+\index{read\+\_\+uart\+\_\+1@{read\+\_\+uart\+\_\+1}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{read\+\_\+uart\+\_\+1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+U\+A\+R\+T\+\_\+reader} read\+\_\+uart\+\_\+1 = 0}\label{system__IO__uart__HDI_8c_adc6cc9dcba3e9fca04c8c854f90aad01}
+
+
+Definition at line 42 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a3497c0fcee705fb61a25d81423d3804b}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!read\+\_\+uart\+\_\+2@{read\+\_\+uart\+\_\+2}}
+\index{read\+\_\+uart\+\_\+2@{read\+\_\+uart\+\_\+2}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{read\+\_\+uart\+\_\+2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+U\+A\+R\+T\+\_\+reader} read\+\_\+uart\+\_\+2 = 0}\label{system__IO__uart__HDI_8c_a3497c0fcee705fb61a25d81423d3804b}
+
+
+Definition at line 43 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_af30b180d749e11881bb05543af5fe25e}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data@{sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data}}
+\index{sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data@{sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+uart\+\_\+txdata}$\ast$ sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data = 0}\label{system__IO__uart__HDI_8c_af30b180d749e11881bb05543af5fe25e}
+
+
+Definition at line 45 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__uart__HDI_8c_a5437d55676502090ad34682ed275d11f}{}\index{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}!sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data@{sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data}}
+\index{sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data@{sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data}!system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+uart\+\_\+txdata}$\ast$ sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data = 0}\label{system__IO__uart__HDI_8c_a5437d55676502090ad34682ed275d11f}
+
+
+Definition at line 46 of file system\+\_\+\+I\+O\+\_\+uart\+\_\+\+H\+D\+I.\+c.
+

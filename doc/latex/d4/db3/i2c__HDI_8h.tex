@@ -1,0 +1,309 @@
+\hypertarget{i2c__HDI_8h}{}\section{platform/e-\/puck/i2c\+\_\+\+H\+D\+I.h File Reference}
+\label{i2c__HDI_8h}\index{platform/e-\/puck/i2c\+\_\+\+H\+D\+I.\+h@{platform/e-\/puck/i2c\+\_\+\+H\+D\+I.\+h}}
+
+
+Hardware dependent implementations to read and write on the I2\+C interface.  
+
+
+{\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
+Include dependency graph for i2c\+\_\+\+H\+D\+I.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d0e/i2c__HDI_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{d8/de9/i2c__HDI_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{i2c__HDI_8h_abf50bdceb354835453ef4650790e9600}{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Start\+\_\+\+H\+D\+I} ()
+\item 
+void \hyperlink{i2c__HDI_8h_aabc16d13b990930e52593cd5abb41a95}{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Restart\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a2d5bb88a3b7dbe61f48234700fdba614}{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Stop\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a2994b42ce95e10c422a7998c132c6589}{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+A\+C\+K\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a7249b63b20eff29ce24e2e5f93a3e7ba}{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+N\+A\+C\+K\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_af1e42f570ec83376a28b6ebee1e49e44}{Sys\+\_\+\+I2\+C\+\_\+\+Start\+\_\+\+Reading\+\_\+\+H\+D\+I} (void)
+\item 
+char \hyperlink{i2c__HDI_8h_a25a16fa198352b2436f8db5c854585f9}{Sys\+\_\+\+I2\+C\+\_\+\+Read\+Byte\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a5941033d2a4855c70e3321f11b846486}{Sys\+\_\+\+I2\+C\+\_\+\+Write\+Byte\+\_\+\+H\+D\+I} (\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} byte)
+\item 
+void \hyperlink{i2c__HDI_8h_aa5491239ac1f93f17b94c25867656390}{Sys\+\_\+\+Init\+\_\+\+I2\+C\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a4c31c5ee2a65479f55423638d9dadf41}{Sys\+\_\+\+Start\+\_\+\+I2\+C\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a2952e63416f7336bdd19cbd71bda6168}{Sys\+\_\+\+Pause\+\_\+\+I2\+C\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a5b59f613b4a1248bc95646317cb5b7ed}{Sys\+\_\+\+Contine\+\_\+\+I2\+C\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_a2a09331981865de9c218c6cf5920ff73}{Sys\+\_\+\+Stop\+\_\+\+I2\+C\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{i2c__HDI_8h_ad333b7abeb87e8f8c18d3dedd031ad5c}{Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes} (\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} address, \hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$bytes, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} length)
+\item 
+void \hyperlink{i2c__HDI_8h_ab85476756c65b454eea96255916e22f9}{Sys\+\_\+\+I2\+C\+\_\+\+Read} (\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} address, \hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$intern\+\_\+address, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} length, \hyperlink{definitions_8h_a82fa7f76266ee1d687b76a44445f21ef}{p\+Byte\+Function} bytehandler)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Hardware dependent implementations to read and write on the I2\+C interface. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 August 2015
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\hypertarget{i2c__HDI_8h_a5b59f613b4a1248bc95646317cb5b7ed}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Contine\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Contine\+\_\+\+I2\+C\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Contine\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Contine\+\_\+\+I2\+C\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Contine\+\_\+\+I2\+C\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Contine\+\_\+\+I2\+C\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a5b59f613b4a1248bc95646317cb5b7ed}
+continues the I2\+C interface
+
+This function continues the I2\+C interface. 
+
+Definition at line 74 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_ab85476756c65b454eea96255916e22f9}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Read@{Sys\+\_\+\+I2\+C\+\_\+\+Read}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Read@{Sys\+\_\+\+I2\+C\+\_\+\+Read}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Read}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Read (
+\begin{DoxyParamCaption}
+\item[{{\bf uint8}}]{address, }
+\item[{{\bf uint8} $\ast$}]{intern\+\_\+address, }
+\item[{{\bf uint16}}]{length, }
+\item[{{\bf p\+Byte\+Function}}]{bytehandler}
+\end{DoxyParamCaption}
+)}\label{i2c__HDI_8h_ab85476756c65b454eea96255916e22f9}
+reads bytes from an I2\+C device
+
+This function first sends a reading request to the I2\+C device and, then, handles the incoming bytes with a callback function.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em address} & The address of the I2\+C device that should receive the request \\
+\hline
+\mbox{\tt in}  & {\em intern\+\_\+address} & A pointer to the address which should be read \\
+\hline
+\mbox{\tt in}  & {\em length} & the number of bytes of the address \\
+\hline
+\mbox{\tt in}  & {\em bytehandler} & a pointer to the handler function that processes the incoming bytes. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 367 of file i2c.\+c.
+
+\hypertarget{i2c__HDI_8h_a25a16fa198352b2436f8db5c854585f9}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Read\+Byte\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Read\+Byte\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Read\+Byte\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Read\+Byte\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Read\+Byte\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}char Sys\+\_\+\+I2\+C\+\_\+\+Read\+Byte\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a25a16fa198352b2436f8db5c854585f9}
+reads a byte via the I2\+C interface
+
+This function reads a byte. 
+
+Definition at line 178 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_a2994b42ce95e10c422a7998c132c6589}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+A\+C\+K\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+A\+C\+K\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+A\+C\+K\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+A\+C\+K\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+A\+C\+K\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+A\+C\+K\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a2994b42ce95e10c422a7998c132c6589}
+sends a ack bits via the I2\+C interface
+
+This function sends a ack bits. 
+
+Definition at line 130 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_a7249b63b20eff29ce24e2e5f93a3e7ba}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+N\+A\+C\+K\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+N\+A\+C\+K\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+N\+A\+C\+K\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+N\+A\+C\+K\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+N\+A\+C\+K\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+N\+A\+C\+K\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a7249b63b20eff29ce24e2e5f93a3e7ba}
+sends a nack bits via the I2\+C interface
+
+This function sends a nack bits. 
+
+Definition at line 146 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_aabc16d13b990930e52593cd5abb41a95}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Restart\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Restart\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Restart\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Restart\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Restart\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Restart\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_aabc16d13b990930e52593cd5abb41a95}
+sends a restart bits via the I2\+C interface
+
+This function sends a restart bits. 
+
+Definition at line 108 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_abf50bdceb354835453ef4650790e9600}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Start\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Start\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Start\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Start\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Start\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Start\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_abf50bdceb354835453ef4650790e9600}
+sends a start bits via the I2\+C interface
+
+This function sends a start bits. 
+
+Definition at line 96 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_a2d5bb88a3b7dbe61f48234700fdba614}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Stop\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Stop\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Stop\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Stop\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Stop\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Send\+\_\+\+Stop\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a2d5bb88a3b7dbe61f48234700fdba614}
+sends a stop bits via the I2\+C interface
+
+This function sends a stop bits. 
+
+Definition at line 120 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_ad333b7abeb87e8f8c18d3dedd031ad5c}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes@{Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes@{Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes (
+\begin{DoxyParamCaption}
+\item[{{\bf uint8}}]{address, }
+\item[{{\bf uint8} $\ast$}]{bytes, }
+\item[{{\bf uint16}}]{length}
+\end{DoxyParamCaption}
+)}\label{i2c__HDI_8h_ad333b7abeb87e8f8c18d3dedd031ad5c}
+adds bytes into a writing buffer
+
+This function adds bytes into a writing buffer that are written as soon as the I2\+C is idle.
+
+\begin{DoxyNote}{Note}
+all bytes are written in sequence 
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em address} & The address of the I2\+C device that should receive the data \\
+\hline
+\mbox{\tt in}  & {\em bytes} & A pointer to the data which should be sent \\
+\hline
+\mbox{\tt in}  & {\em length} & the number of bytes to send \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 341 of file i2c.\+c.
+
+\hypertarget{i2c__HDI_8h_af1e42f570ec83376a28b6ebee1e49e44}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Start\+\_\+\+Reading\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Start\+\_\+\+Reading\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Start\+\_\+\+Reading\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Start\+\_\+\+Reading\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Start\+\_\+\+Reading\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Start\+\_\+\+Reading\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_af1e42f570ec83376a28b6ebee1e49e44}
+sends a reading bits via the I2\+C interface
+
+This function sends a reading bits. 
+
+Definition at line 162 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_a5941033d2a4855c70e3321f11b846486}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Write\+Byte\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Write\+Byte\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Write\+Byte\+\_\+\+H\+D\+I@{Sys\+\_\+\+I2\+C\+\_\+\+Write\+Byte\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Write\+Byte\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Write\+Byte\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{{\bf uint8}}]{byte}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a5941033d2a4855c70e3321f11b846486}
+writes a byte via the I2\+C interface
+
+This function writes a byte.
+
+
+\begin{DoxyParams}{Parameters}
+{\em byte} & the byte that has to be written \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 189 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_aa5491239ac1f93f17b94c25867656390}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Init\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+I2\+C\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Init\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+I2\+C\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+I2\+C\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+I2\+C\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_aa5491239ac1f93f17b94c25867656390}
+Initialises the I2\+C interface
+
+This function initialises the I2\+C interface. 
+
+Definition at line 27 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_a2952e63416f7336bdd19cbd71bda6168}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Pause\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Pause\+\_\+\+I2\+C\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Pause\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Pause\+\_\+\+I2\+C\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Pause\+\_\+\+I2\+C\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Pause\+\_\+\+I2\+C\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a2952e63416f7336bdd19cbd71bda6168}
+pauses the I2\+C interface
+
+This function pauses the I2\+C interface. 
+
+Definition at line 64 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_a4c31c5ee2a65479f55423638d9dadf41}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Start\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+I2\+C\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Start\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+I2\+C\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+I2\+C\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+I2\+C\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a4c31c5ee2a65479f55423638d9dadf41}
+Starts the I2\+C interface
+
+This function starts the I2\+C interface. 
+
+Definition at line 52 of file i2c\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{i2c__HDI_8h_a2a09331981865de9c218c6cf5920ff73}{}\index{i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Stop\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Stop\+\_\+\+I2\+C\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Stop\+\_\+\+I2\+C\+\_\+\+H\+D\+I@{Sys\+\_\+\+Stop\+\_\+\+I2\+C\+\_\+\+H\+D\+I}!i2c\+\_\+\+H\+D\+I.\+h@{i2c\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Stop\+\_\+\+I2\+C\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Stop\+\_\+\+I2\+C\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{i2c__HDI_8h_a2a09331981865de9c218c6cf5920ff73}
+stops the I2\+C interface
+
+This function stops the I2\+C interface. 
+
+Definition at line 84 of file i2c\+\_\+\+H\+D\+I.\+c.
+

@@ -1,24 +1,14 @@
-/* 
- * File:   scheduler.h
- * Author: Stefan M. Trenkwalder
+/*!
+ * \file
+ * \ingroup process
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * \version 1.0
  *
- * Created on 07 July 2014, 17:44
+ * \date{07 July 2014}
  * 
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
- * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * \brief This file includes all functions wich are needed to specify a scheduling algorithm
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
-
 
 #ifndef SYSTEM_SCHEDULER_H
 #define	SYSTEM_SCHEDULER_H
@@ -28,14 +18,14 @@ extern "C" {
 #endif
 
 /*! process state values */
-#define SYS_PROCESS_STATE_BABY 0xBABE
-#define SYS_PROCESS_STATE_RUNNING 0xFFFF
-#define SYS_PROCESS_STATE_BLOCKED 0xBCED
-#define SYS_PROCESS_STATE_WAITING 0x5555
-#define SYS_PROCESS_STATE_ZOMBIE 0xDEAD
+#define SYS_PROCESS_STATE_BABY 0xBABE       /*!< State to indicate that a process is created but not yet ready to be executed */
+#define SYS_PROCESS_STATE_RUNNING 0xFFFF    /*!< State to indicate that a process is executed */
+#define SYS_PROCESS_STATE_BLOCKED 0xBCED    /*!< State to indicate that a process is blocked and waits till an event occurs */
+#define SYS_PROCESS_STATE_WAITING 0x5555    /*!< State to indicate that a process is waiting to be executed*/
+#define SYS_PROCESS_STATE_ZOMBIE 0xDEAD     /*!< State to indicate that a process is about to be deleted*/
 
 /*! process priority values */
-#define SYS_PROCESS_PRIORITY_SYSTEM 0xFFFF
+#define SYS_PROCESS_PRIORITY_SYSTEM 0xFFFF    /*!< Process priority: System = highest */
 #define SYS_PROCESS_PRIORITY_HIGH 0x0FFF
 #define SYS_PROCESS_PRIORITY_NORMAL 0x00FF
 #define SYS_PROCESS_PRIORITY_LOW 0x000F

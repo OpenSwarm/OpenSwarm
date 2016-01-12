@@ -1,0 +1,6 @@
+<map id="I2C interface" name="I2C interface">
+<area shape="rect" id="node1" href="$d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform. " alt="" coords="5,73,168,100"/>
+<area shape="rect" id="node2" href="$d9/d96/group__shefpuck.html" title="External set of functions to assist the programming of the e&#45;Puck. " alt="" coords="633,13,710,40"/>
+<area shape="rect" id="node3" href="$dc/d90/group__camera.html" title="Functions to process incoming frames from a camera module. " alt="" coords="614,73,729,100"/>
+<area shape="rect" id="node5" href="$d2/da3/group__io.html" title="Functions and mechanisms to use I/O devices (e.g. sensors and actuators) to interact with the environ..." alt="" coords="612,192,731,219"/>
+</map>

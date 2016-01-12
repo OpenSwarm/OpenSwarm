@@ -1,7 +1,17 @@
 \hypertarget{interrupts_8h}{}\section{interrupts.\+h File Reference}
 \label{interrupts_8h}\index{interrupts.\+h@{interrupts.\+h}}
-This graph shows which files directly or indirectly include this file\+:
-% FIG 0
+
+
+includes system calls to create atomic sections. (Sections that cannot be interrupted)  
+
+
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d4e/interrupts_8h__dep__incl}
+\end{center}
+\end{figure}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -34,76 +44,93 @@ void \hyperlink{interrupts_8h_aec2c903ebd9339ced317b3a9df5f8433}{Sys\+\_\+\+End\
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+includes system calls to create atomic sections. (Sections that cannot be interrupted) 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+\{03 September 2015\}
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
 \subsection{Macro Definition Documentation}
 \hypertarget{interrupts_8h_a14f55cc62d9f3cca0bd84c72c5415cfc}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+F\+R\+A\+M\+E@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+F\+R\+A\+M\+E}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+F\+R\+A\+M\+E@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+F\+R\+A\+M\+E}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+F\+R\+A\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+F\+R\+A\+M\+E~7}\label{interrupts_8h_a14f55cc62d9f3cca0bd84c72c5415cfc}
+interrupt priority for the camera frame interrupt 
 
-
-Definition at line 44 of file interrupts.\+h.
+Definition at line 35 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_ad7c4deb027ed01f91a2fa272bb8b7b18}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+L\+I\+N\+E@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+L\+I\+N\+E}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+L\+I\+N\+E@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+L\+I\+N\+E}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+L\+I\+N\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+L\+I\+N\+E~6}\label{interrupts_8h_ad7c4deb027ed01f91a2fa272bb8b7b18}
+interrupt priority for the camera line interrupt 
 
-
-Definition at line 43 of file interrupts.\+h.
+Definition at line 34 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_a325ecca3d1e3afcb63ac4c6170f8187c}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+P\+I\+X\+E\+L@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+P\+I\+X\+E\+L}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+P\+I\+X\+E\+L@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+P\+I\+X\+E\+L}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+P\+I\+X\+E\+L}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+P\+I\+X\+E\+L~5}\label{interrupts_8h_a325ecca3d1e3afcb63ac4c6170f8187c}
+interrupt priority for the camera pixel interrupt 
 
-
-Definition at line 42 of file interrupts.\+h.
+Definition at line 33 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_abe88b597dc055319b1224b2bfda0ed78}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I2\+C@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I2\+C}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I2\+C@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I2\+C}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I2\+C}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I2\+C~5}\label{interrupts_8h_abe88b597dc055319b1224b2bfda0ed78}
+interrupt priority for the I2\+C interrupt 
 
-
-Definition at line 38 of file interrupts.\+h.
+Definition at line 29 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_acea06e741c8e65e966768399b39550fd}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I\+O\+\_\+\+T\+I\+M\+E\+R@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I\+O\+\_\+\+T\+I\+M\+E\+R}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I\+O\+\_\+\+T\+I\+M\+E\+R@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I\+O\+\_\+\+T\+I\+M\+E\+R}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I\+O\+\_\+\+T\+I\+M\+E\+R}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+I\+O\+\_\+\+T\+I\+M\+E\+R~3}\label{interrupts_8h_acea06e741c8e65e966768399b39550fd}
+interrupt priority for the I/\+O timer interrupt 
 
-
-Definition at line 33 of file interrupts.\+h.
+Definition at line 24 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_a2665dac9b4f047c8d82e7076eb2c1f0b}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+M\+A\+X@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+M\+A\+X}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+M\+A\+X@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+M\+A\+X}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+M\+A\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+M\+A\+X~7}\label{interrupts_8h_a2665dac9b4f047c8d82e7076eb2c1f0b}
+maximum interrupt priority 
 
-
-Definition at line 29 of file interrupts.\+h.
+Definition at line 20 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_a8861626b5e152d2faca2df0622c0d48e}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+R\+E\+M\+O\+T\+E\+C\+O\+N\+T\+R\+O\+L@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+R\+E\+M\+O\+T\+E\+C\+O\+N\+T\+R\+O\+L}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+R\+E\+M\+O\+T\+E\+C\+O\+N\+T\+R\+O\+L@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+R\+E\+M\+O\+T\+E\+C\+O\+N\+T\+R\+O\+L}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+R\+E\+M\+O\+T\+E\+C\+O\+N\+T\+R\+O\+L}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+R\+E\+M\+O\+T\+E\+C\+O\+N\+T\+R\+O\+L~4}\label{interrupts_8h_a8861626b5e152d2faca2df0622c0d48e}
+interrupt priority for the remote control interrupt 
 
-
-Definition at line 40 of file interrupts.\+h.
+Definition at line 31 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_ae792a67469dbfd96699107868d70b89d}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R~2}\label{interrupts_8h_ae792a67469dbfd96699107868d70b89d}
+interrupt priority for the system timer interrupt 
 
-
-Definition at line 31 of file interrupts.\+h.
+Definition at line 22 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_a20e8d0849325b72878dc32b27876a07b}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T1@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T1}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T1@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T1}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T1~4}\label{interrupts_8h_a20e8d0849325b72878dc32b27876a07b}
+interrupt priority for the U\+A\+R\+T1 interrupt 
 
-
-Definition at line 35 of file interrupts.\+h.
+Definition at line 26 of file interrupts.\+h.
 
 \hypertarget{interrupts_8h_a8a1e0a0bb08cf252f8ffe0d80f04cf49}{}\index{interrupts.\+h@{interrupts.\+h}!S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T2@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T2}}
 \index{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T2@{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T2}!interrupts.\+h@{interrupts.\+h}}
 \subsubsection[{S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+U\+A\+R\+T2~4}\label{interrupts_8h_a8a1e0a0bb08cf252f8ffe0d80f04cf49}
+interrupt priority for the U\+A\+R\+T2 interrupt 
 
-
-Definition at line 36 of file interrupts.\+h.
+Definition at line 27 of file interrupts.\+h.
 
 
 
@@ -115,9 +142,17 @@ Definition at line 36 of file interrupts.\+h.
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{interrupts_8h_aec2c903ebd9339ced317b3a9df5f8433}
+Starts an atomic section
+
+This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. \begin{DoxyPrecond}{Precondition}
+\hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section()} must have been called. 
+\end{DoxyPrecond}
+\begin{DoxyWarning}{Warning}
+Do not execute \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\+\_\+\+Atomic\+Section()} without having called \hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section()} once. Otherwise, the interrupt priority will be set to S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R. This might cause errors. 
+\end{DoxyWarning}
 
 
-Definition at line 43 of file interrupts.\+c.
+Definition at line 58 of file interrupts.\+c.
 
 \hypertarget{interrupts_8h_abf5948c864c1ddce2f7b4a4624f6006f}{}\index{interrupts.\+h@{interrupts.\+h}!Sys\+\_\+\+Start\+\_\+\+Atomic\+Section@{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section}}
 \index{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section@{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section}!interrupts.\+h@{interrupts.\+h}}
@@ -126,7 +161,12 @@ Definition at line 43 of file interrupts.\+c.
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{interrupts_8h_abf5948c864c1ddce2f7b4a4624f6006f}
+Starts an atomic section
+
+This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. \begin{DoxyPostcond}{Postcondition}
+\hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\+\_\+\+Atomic\+Section()} must be called to execute any interrupt that happened or will happen. 
+\end{DoxyPostcond}
 
 
-Definition at line 35 of file interrupts.\+c.
+Definition at line 42 of file interrupts.\+c.
 

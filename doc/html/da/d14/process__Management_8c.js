@@ -1,0 +1,25 @@
+var process__Management_8c =
+[
+    [ "Sys_Add_Event_Subscription", "da/d14/process__Management_8c.html#aff090437f063082d7ab90deca55fbb6b", null ],
+    [ "Sys_Add_Event_to_Process", "da/d14/process__Management_8c.html#aa0b797b238ea3481e2a232a8791294c6", null ],
+    [ "Sys_Block_Process", "da/d14/process__Management_8c.html#a818402dba9dadb05463ad6c9fa048ce1", null ],
+    [ "Sys_Continue_Pocess", "da/d14/process__Management_8c.html#a29277480bb59af0ec75a90375e68fd1a", null ],
+    [ "Sys_End_CriticalSection", "da/d14/process__Management_8c.html#ae1b0a2e19c666539afa53d571c914d6e", null ],
+    [ "Sys_Execute_All_EventHandler", "da/d14/process__Management_8c.html#a766e55607bcf327ec226b205fdde0a1e", null ],
+    [ "Sys_Execute_Events_in_ProcessList", "da/d14/process__Management_8c.html#a5c3ad7165298749ec10a4829aab16091", null ],
+    [ "Sys_Get_Number_Processes", "da/d14/process__Management_8c.html#a996d284e146d1a33dd1d2f3b1622d46d", null ],
+    [ "Sys_Init_Process_Management", "da/d14/process__Management_8c.html#a9922a5cdec449a3e168f91b46e29a789", null ],
+    [ "Sys_Interprocess_EventHandling", "da/d14/process__Management_8c.html#a26f2972dbb61d1654e92f58685902db4", null ],
+    [ "Sys_Kill_Process", "da/d14/process__Management_8c.html#a724935e8f908ee565ff779e7ba5dfc67", null ],
+    [ "Sys_Kill_Zombies", "da/d14/process__Management_8c.html#a0dccf02561f0ca26943fc83b7968abf0", null ],
+    [ "Sys_Remove_All_Event_Subscriptions", "da/d14/process__Management_8c.html#a67190fffc18b7864f1cdc6813c944738", null ],
+    [ "Sys_Remove_Event_Subscription", "da/d14/process__Management_8c.html#a9afc21ae55d2afb70b7a8ceb14512389", null ],
+    [ "Sys_Set_Running_Process_to_Zombie", "da/d14/process__Management_8c.html#a17a7f44ce194cb405d3394e83635fcd2", null ],
+    [ "Sys_Start_CriticalSection", "da/d14/process__Management_8c.html#a355c5fe8c9052d6bd2ddd7ff8e8783f0", null ],
+    [ "Sys_Start_Process", "da/d14/process__Management_8c.html#a0833f904557c4c9b39b4cf5c1e43586f", null ],
+    [ "Sys_Switch_Process", "da/d14/process__Management_8c.html#a212e8074575988bbe55cefd52a9ae504", null ],
+    [ "Sys_Switch_to_next_Process", "da/d14/process__Management_8c.html#a0ffb19016e02f6fae281c87276ac4b89", null ],
+    [ "Sys_Wait_For_Condition", "da/d14/process__Management_8c.html#a5730456418e6d0dd9392522ec8153aec", null ],
+    [ "Sys_Wait_For_Event", "da/d14/process__Management_8c.html#a9f0893d1c6a5ffb1f954737fc3a8904f", null ],
+    [ "Sys_Yield", "da/d14/process__Management_8c.html#a9e21b92be584d4552c0b7aedef12492a", null ]
+];

@@ -1,10 +1,25 @@
 \hypertarget{memory_8h}{}\section{memory.\+h File Reference}
 \label{memory_8h}\index{memory.\+h@{memory.\+h}}
+
+
+includes functions to allocate, free, and copy memory  
+
+
 {\ttfamily \#include \char`\"{}definitions.\+h\char`\"{}}\\*
-Include dependency graph for memory.\+h\+:
-% FIG 0
-This graph shows which files directly or indirectly include this file\+:
-% FIG 1
+Include dependency graph for memory.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/d9a/memory_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/d57/memory_8h__dep__incl}
+\end{center}
+\end{figure}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -16,17 +31,43 @@ void \hyperlink{memory_8h_ac496f9d5e3dc6b8644f137ad7d0e8bc4}{Sys\+\_\+\+Memcpy} 
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+includes functions to allocate, free, and copy memory 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+\{05 September 2015\}
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
 \subsection{Function Documentation}
 \hypertarget{memory_8h_a8f04ee5feb590ac9777b8c76c4d2cd70}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Free@{Sys\+\_\+\+Free}}
 \index{Sys\+\_\+\+Free@{Sys\+\_\+\+Free}!memory.\+h@{memory.\+h}}
 \subsubsection[{Sys\+\_\+\+Free}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Free (
 \begin{DoxyParamCaption}
-\item[{void $\ast$}]{}
+\item[{void $\ast$}]{data}
 \end{DoxyParamCaption}
 )}\label{memory_8h_a8f04ee5feb590ac9777b8c76c4d2cd70}
+Function to free memory
+
+This Function frees dynamic allocated memory. This freeing is performed as atomic action.
 
 
-Definition at line 46 of file memory.\+c.
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to memory that should be freed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 45 of file memory.\+c.
 
 \hypertarget{memory_8h_aac1292ecd85eefecced84ec282250442}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Malloc@{Sys\+\_\+\+Malloc}}
 \index{Sys\+\_\+\+Malloc@{Sys\+\_\+\+Malloc}!memory.\+h@{memory.\+h}}
@@ -35,20 +76,45 @@ Definition at line 46 of file memory.\+c.
 \item[{{\bf uint16}}]{length}
 \end{DoxyParamCaption}
 )}\label{memory_8h_aac1292ecd85eefecced84ec282250442}
+Function to allocate {\bfseries length} bytes of memory
+
+This Function allocates memory of the size {\bfseries length}. This allocation is performed as atomic action.
 
 
-Definition at line 34 of file memory.\+c.
+\begin{DoxyParams}{Parameters}
+{\em length} & value how many bytes should be allocated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the allocated memory 
+\end{DoxyReturn}
+
+
+Definition at line 26 of file memory.\+c.
 
 \hypertarget{memory_8h_ac496f9d5e3dc6b8644f137ad7d0e8bc4}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Memcpy@{Sys\+\_\+\+Memcpy}}
 \index{Sys\+\_\+\+Memcpy@{Sys\+\_\+\+Memcpy}!memory.\+h@{memory.\+h}}
 \subsubsection[{Sys\+\_\+\+Memcpy}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Memcpy (
 \begin{DoxyParamCaption}
-\item[{void $\ast$}]{source, }
-\item[{void $\ast$}]{destination, }
+\item[{void $\ast$}]{source\+\_\+i, }
+\item[{void $\ast$}]{destination\+\_\+o, }
 \item[{{\bf uint16}}]{length}
 \end{DoxyParamCaption}
 )}\label{memory_8h_ac496f9d5e3dc6b8644f137ad7d0e8bc4}
+Function to copies memory of the size {\bfseries length} from {\bfseries source\+\_\+i} to {\bfseries destination\+\_\+o}.
+
+Function to copies memory of the size {\bfseries length} from {\bfseries source\+\_\+i} to {\bfseries destination\+\_\+o}. This copying is performed as atomic action.
 
 
-Definition at line 56 of file memory.\+c.
+\begin{DoxyParams}{Parameters}
+{\em source\+\_\+i} & pointer to the source \\
+\hline
+{\em destination\+\_\+o} & pointer to the destination \\
+\hline
+{\em length} & size of the memory that has to be copied \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 64 of file memory.\+c.
 

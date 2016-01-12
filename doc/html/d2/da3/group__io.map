@@ -1,0 +1,8 @@
+<map id="I/O Management" name="I/O Management">
+<area shape="rect" id="node1" href="$db/d36/group__remotecontrol.html" title="Functions to receive data from a remote control. " alt="" coords="321,59,436,85"/>
+<area shape="rect" id="node2" href="$d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform. " alt="" coords="297,251,460,277"/>
+<area shape="rect" id="node3" href="$dc/d90/group__camera.html" title="Functions to process incoming frames from a camera module. " alt="" coords="321,311,436,337"/>
+<area shape="rect" id="node4" href="$db/def/group__uart.html" title="Functions to control the message flow of the UART interface. " alt="" coords="335,400,422,427"/>
+<area shape="rect" id="node5" href="$d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="330,519,427,545"/>
+<area shape="rect" id="node7" href="$dd/daa/group__motors.html" title="Functions to control the motors. " alt="" coords="328,608,429,635"/>
+</map>

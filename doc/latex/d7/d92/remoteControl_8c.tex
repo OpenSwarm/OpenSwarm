@@ -1,0 +1,171 @@
+\hypertarget{remoteControl_8c}{}\section{platform/e-\/puck/remote\+Control.c File Reference}
+\label{remoteControl_8c}\index{platform/e-\/puck/remote\+Control.\+c@{platform/e-\/puck/remote\+Control.\+c}}
+
+
+This file includes functions needed to receive and decode messages from a remote control.  
+
+
+{\ttfamily \#include \char`\"{}remote\+Control.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}remote\+Control\+\_\+\+H\+D\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}../../io/io.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../events/events.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../interrupts.\+h\char`\"{}}\\*
+Include dependency graph for remote\+Control.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dd0/remoteControl_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{remoteControl_8c_a3265e493859892f6ebca8df6252d6f8e}{Sys\+\_\+\+Init\+\_\+\+Remote\+Control} (void)
+\item 
+void \hyperlink{remoteControl_8c_a5aaecc26aad6d1c545a225b1ce92cec7}{Sys\+\_\+\+Start\+\_\+\+Remote\+Control} (void)
+\item 
+void \hyperlink{remoteControl_8c_a62ac8fe317206fd74e59fe7e32001687}{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg} ()
+\item 
+bool \hyperlink{remoteControl_8c_a1abd6479aaadf1dec343e3bf5919311d}{Sys\+\_\+\+Has\+Remote\+C\+\_\+\+Sent\+\_\+\+New\+\_\+\+Data} ()
+\item 
+\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} \hyperlink{remoteControl_8c_abe2cfa1ff5c9311162e35c270aa02501}{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit} ()
+\item 
+\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} \hyperlink{remoteControl_8c_ae1ea8fc7d2741294fefcd1e8382a4302}{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address} ()
+\item 
+\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} \hyperlink{remoteControl_8c_acefaee64989a1509529aeefd5d37526f}{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file includes functions needed to receive and decode messages from a remote control. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+
+Yuri Kaszubowski Lopes \href{mailto:yurikazuba@gmail.com}{\tt yurikazuba@gmail.\+com}
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+27 August 2015
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\hypertarget{remoteControl_8c_a1abd6479aaadf1dec343e3bf5919311d}{}\index{remote\+Control.\+c@{remote\+Control.\+c}!Sys\+\_\+\+Has\+Remote\+C\+\_\+\+Sent\+\_\+\+New\+\_\+\+Data@{Sys\+\_\+\+Has\+Remote\+C\+\_\+\+Sent\+\_\+\+New\+\_\+\+Data}}
+\index{Sys\+\_\+\+Has\+Remote\+C\+\_\+\+Sent\+\_\+\+New\+\_\+\+Data@{Sys\+\_\+\+Has\+Remote\+C\+\_\+\+Sent\+\_\+\+New\+\_\+\+Data}!remote\+Control.\+c@{remote\+Control.\+c}}
+\subsubsection[{Sys\+\_\+\+Has\+Remote\+C\+\_\+\+Sent\+\_\+\+New\+\_\+\+Data}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Has\+Remote\+C\+\_\+\+Sent\+\_\+\+New\+\_\+\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{remoteControl_8c_a1abd6479aaadf1dec343e3bf5919311d}
+returns if a new command was read
+
+This function returns true if a new remote control command has arrived
+
+\begin{DoxyReturn}{Returns}
+bool true if a new remote control command has arrived 
+\end{DoxyReturn}
+
+
+Definition at line 124 of file remote\+Control.\+c.
+
+\hypertarget{remoteControl_8c_a3265e493859892f6ebca8df6252d6f8e}{}\index{remote\+Control.\+c@{remote\+Control.\+c}!Sys\+\_\+\+Init\+\_\+\+Remote\+Control@{Sys\+\_\+\+Init\+\_\+\+Remote\+Control}}
+\index{Sys\+\_\+\+Init\+\_\+\+Remote\+Control@{Sys\+\_\+\+Init\+\_\+\+Remote\+Control}!remote\+Control.\+c@{remote\+Control.\+c}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Remote\+Control}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Remote\+Control (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{remoteControl_8c_a3265e493859892f6ebca8df6252d6f8e}
+Initialises the remote control handler
+
+This function initialises the handler of the remote control to receive signals from the remote control. 
+
+Definition at line 37 of file remote\+Control.\+c.
+
+\hypertarget{remoteControl_8c_a62ac8fe317206fd74e59fe7e32001687}{}\index{remote\+Control.\+c@{remote\+Control.\+c}!Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg@{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg}}
+\index{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg@{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg}!remote\+Control.\+c@{remote\+Control.\+c}}
+\subsubsection[{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{remoteControl_8c_a62ac8fe317206fd74e59fe7e32001687}
+handles incoming remote control signals
+
+This function reads a remote control signal and reads it\textquotesingle{}s transmitted value. When a signal arrives, an external interrupt is triggered. The remaining values are obtained by using time not interrupts. 
+
+Definition at line 57 of file remote\+Control.\+c.
+
+\hypertarget{remoteControl_8c_ae1ea8fc7d2741294fefcd1e8382a4302}{}\index{remote\+Control.\+c@{remote\+Control.\+c}!Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address}}
+\index{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address}!remote\+Control.\+c@{remote\+Control.\+c}}
+\subsubsection[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{remoteControl_8c_ae1ea8fc7d2741294fefcd1e8382a4302}
+returns the address of the remote control
+
+This function returns the address of an remote control.
+
+\begin{DoxyReturn}{Returns}
+address of the remote control 
+\end{DoxyReturn}
+
+
+Definition at line 146 of file remote\+Control.\+c.
+
+\hypertarget{remoteControl_8c_abe2cfa1ff5c9311162e35c270aa02501}{}\index{remote\+Control.\+c@{remote\+Control.\+c}!Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit}}
+\index{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit}!remote\+Control.\+c@{remote\+Control.\+c}}
+\subsubsection[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{remoteControl_8c_abe2cfa1ff5c9311162e35c270aa02501}
+returns the check bit value
+
+This function returns the check bit value of an remote control to indicate if a button was pressed continuously or sequential.
+
+\begin{DoxyReturn}{Returns}
+bit to indicate the check bit 
+\end{DoxyReturn}
+
+
+Definition at line 135 of file remote\+Control.\+c.
+
+\hypertarget{remoteControl_8c_acefaee64989a1509529aeefd5d37526f}{}\index{remote\+Control.\+c@{remote\+Control.\+c}!Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data}}
+\index{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data}!remote\+Control.\+c@{remote\+Control.\+c}}
+\subsubsection[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{remoteControl_8c_acefaee64989a1509529aeefd5d37526f}
+returns the value received by the remote control
+
+returns the value received by the remote control
+
+\begin{DoxyReturn}{Returns}
+value received by the remote control 
+\end{DoxyReturn}
+
+
+Definition at line 157 of file remote\+Control.\+c.
+
+\hypertarget{remoteControl_8c_a5aaecc26aad6d1c545a225b1ce92cec7}{}\index{remote\+Control.\+c@{remote\+Control.\+c}!Sys\+\_\+\+Start\+\_\+\+Remote\+Control@{Sys\+\_\+\+Start\+\_\+\+Remote\+Control}}
+\index{Sys\+\_\+\+Start\+\_\+\+Remote\+Control@{Sys\+\_\+\+Start\+\_\+\+Remote\+Control}!remote\+Control.\+c@{remote\+Control.\+c}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Remote\+Control}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Remote\+Control (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{remoteControl_8c_a5aaecc26aad6d1c545a225b1ce92cec7}
+start the remote control handler
+
+This function start the handler of the remote control to receive signals from the remote control. 
+
+Definition at line 47 of file remote\+Control.\+c.
+

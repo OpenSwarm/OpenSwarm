@@ -1,0 +1,112 @@
+\hypertarget{system__IO__remoteControl__HDI_8c}{}\section{platform/e-\/puck/system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.c File Reference}
+\label{system__IO__remoteControl__HDI_8c}\index{platform/e-\/puck/system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{platform/e-\/puck/system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../../os/definitions.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../../os/interrupts.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../../os/io/io.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../../os/io/remote\+Control.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../../os/events/events.\+h\char`\"{}}\\*
+Include dependency graph for system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/d7b/system__IO__remoteControl__HDI_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{system__IO__remoteControl__HDI_8c_ad60a4964ce984c787d821f6f00ef2222}{Sys\+\_\+\+Init\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{system__IO__remoteControl__HDI_8c_aee7752380780cfc8ac319320d8f1a8e1}{Sys\+\_\+\+Start\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{system__IO__remoteControl__HDI_8c_a2068c3c2584547dbc1c8b9bca2d55b18}{\+\_\+\+\_\+attribute\+\_\+\+\_\+} ((\+\_\+\+\_\+interrupt\+\_\+\+\_\+, auto\+\_\+psv))
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{system__IO__remoteControl__HDI_8c_abeb3a75354c136ca05cf55eb863e4be9}{message\+\_\+arriving} = false
+\item 
+\hyperlink{definitions_8h_a1a6408291ee3cfd0760a61ac64084154}{sint8} \hyperlink{system__IO__remoteControl__HDI_8c_a19264ca809c8f1b8e317b8e70ad5b755}{waiting\+\_\+cycles} = 20
+\item 
+\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} \hyperlink{system__IO__remoteControl__HDI_8c_a8b85a8ae7cb4c34c2125870e93c14bed}{rx\+\_\+buffer} = 0
+\item 
+bool \hyperlink{system__IO__remoteControl__HDI_8c_abf86e39dc6622df41a4c03bc3b15b58f}{is\+New\+Data\+Available} = false
+\item 
+\hyperlink{definitions_8h_a1a6408291ee3cfd0760a61ac64084154}{sint8} \hyperlink{system__IO__remoteControl__HDI_8c_af874b7a53ef9b01bdbb0d07cb767a921}{receiving\+\_\+bit} = \hyperlink{system__IO__remoteControl__HDI_8h_ab88b7e0cc14fff34b5425285c1474c16}{R\+C\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+E\+D}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{system__IO__remoteControl__HDI_8c_a2068c3c2584547dbc1c8b9bca2d55b18}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{\+\_\+\+\_\+attribute\+\_\+\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+\+\_\+attribute\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{(\+\_\+\+\_\+interrupt\+\_\+\+\_\+, auto\+\_\+psv)}]{}
+\end{DoxyParamCaption}
+)}\label{system__IO__remoteControl__HDI_8c_a2068c3c2584547dbc1c8b9bca2d55b18}
+
+
+Definition at line 65 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__remoteControl__HDI_8c_ad60a4964ce984c787d821f6f00ef2222}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Init\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Init\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__IO__remoteControl__HDI_8c_ad60a4964ce984c787d821f6f00ef2222}
+
+
+Definition at line 46 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__remoteControl__HDI_8c_aee7752380780cfc8ac319320d8f1a8e1}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Start\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Start\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Remote\+Control\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__IO__remoteControl__HDI_8c_aee7752380780cfc8ac319320d8f1a8e1}
+clear to I\+R\+Q flag 
+
+Definition at line 60 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{system__IO__remoteControl__HDI_8c_abf86e39dc6622df41a4c03bc3b15b58f}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!is\+New\+Data\+Available@{is\+New\+Data\+Available}}
+\index{is\+New\+Data\+Available@{is\+New\+Data\+Available}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{is\+New\+Data\+Available}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+New\+Data\+Available = false}\label{system__IO__remoteControl__HDI_8c_abf86e39dc6622df41a4c03bc3b15b58f}
+
+
+Definition at line 42 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__remoteControl__HDI_8c_abeb3a75354c136ca05cf55eb863e4be9}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!message\+\_\+arriving@{message\+\_\+arriving}}
+\index{message\+\_\+arriving@{message\+\_\+arriving}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{message\+\_\+arriving}]{\setlength{\rightskip}{0pt plus 5cm}bool message\+\_\+arriving = false}\label{system__IO__remoteControl__HDI_8c_abeb3a75354c136ca05cf55eb863e4be9}
+
+
+Definition at line 37 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__remoteControl__HDI_8c_af874b7a53ef9b01bdbb0d07cb767a921}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!receiving\+\_\+bit@{receiving\+\_\+bit}}
+\index{receiving\+\_\+bit@{receiving\+\_\+bit}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{receiving\+\_\+bit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sint8} receiving\+\_\+bit = {\bf R\+C\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+E\+D}}\label{system__IO__remoteControl__HDI_8c_af874b7a53ef9b01bdbb0d07cb767a921}
+
+
+Definition at line 44 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__remoteControl__HDI_8c_a8b85a8ae7cb4c34c2125870e93c14bed}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!rx\+\_\+buffer@{rx\+\_\+buffer}}
+\index{rx\+\_\+buffer@{rx\+\_\+buffer}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{rx\+\_\+buffer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint16} rx\+\_\+buffer = 0}\label{system__IO__remoteControl__HDI_8c_a8b85a8ae7cb4c34c2125870e93c14bed}
+
+
+Definition at line 40 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__IO__remoteControl__HDI_8c_a19264ca809c8f1b8e317b8e70ad5b755}{}\index{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}!waiting\+\_\+cycles@{waiting\+\_\+cycles}}
+\index{waiting\+\_\+cycles@{waiting\+\_\+cycles}!system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c@{system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c}}
+\subsubsection[{waiting\+\_\+cycles}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sint8} waiting\+\_\+cycles = 20}\label{system__IO__remoteControl__HDI_8c_a19264ca809c8f1b8e317b8e70ad5b755}
+
+
+Definition at line 38 of file system\+\_\+\+I\+O\+\_\+remote\+Control\+\_\+\+H\+D\+I.\+c.
+

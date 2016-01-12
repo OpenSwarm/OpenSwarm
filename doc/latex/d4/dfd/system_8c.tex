@@ -2,7 +2,7 @@
 \label{system_8c}\index{system.\+c@{system.\+c}}
 
 
-This file includes all basic system calls, which are nesessary to initialise, configure and the operating system.  
+includes system calls that initialise and configure the operating system.  
 
 
 {\ttfamily \#include \char`\"{}definitions.\+h\char`\"{}}\\*
@@ -10,14 +10,20 @@ This file includes all basic system calls, which are nesessary to initialise, co
 {\ttfamily \#include \char`\"{}processes/system\+\_\+\+Timer.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}processes/scheduler.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}processes/process\+\_\+\+Management.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+clock.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+motors.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+uart.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+remote\+Control.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}system\+\_\+\+I\+O\+\_\+camera.\+h\char`\"{}}\\*
-Include dependency graph for system.\+c\+:
-% FIG 0
+{\ttfamily \#include \char`\"{}platform/e-\/puck/library/motor\+\_\+led/e\+\_\+init\+\_\+port.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}io/io.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}io/io\+\_\+clock.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}io/e-\/puck/motors.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}io/e-\/puck/uart.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}io/e-\/puck/remote\+Control.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}io/e-\/puck/camera.\+h\char`\"{}}\\*
+Include dependency graph for system.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d4a/system_8c__incl}
+\end{center}
+\end{figure}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,10 +34,10 @@ void \hyperlink{system_8c_a2e15518324643f26cb240108259b30da}{Sys\+\_\+\+Start\+\
 
 
 \subsection{Detailed Description}
-This file includes all basic system calls, which are nesessary to initialise, configure and the operating system. 
+includes system calls that initialise and configure the operating system. 
 
 \begin{DoxyAuthor}{Author}
-Stefan M. Trenkwalder 
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
 1.\+0 
@@ -81,14 +87,6 @@ To start Open\+Swarm, \hyperlink{system_8c_a2e15518324643f26cb240108259b30da}{Sy
 Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active Open\+Swarm. 
 \end{DoxyRemark}
 
-\begin{DoxyParams}{Parameters}
-{\em void} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-void 
-\end{DoxyReturn}
-
 
 Definition at line 64 of file system.\+c.
 
@@ -108,14 +106,6 @@ System must be initialised with \hyperlink{system_8c_a31ce626d506c2b262ecf5b2394
 Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active Open\+Swarm. 
 \end{DoxyRemark}
 
-\begin{DoxyParams}{Parameters}
-{\em void} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-void 
-\end{DoxyReturn}
 
-
-Definition at line 106 of file system.\+c.
+Definition at line 104 of file system.\+c.
 

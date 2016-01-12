@@ -1,37 +1,20 @@
-/**
- * @file process_Management.c
- * @author  Stefan M. Trenkwalder <stefan.markus.trenkwalder@gmail.com>
- * @version 1.0
+/*!
+ * \file
+ * \ingroup process
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * \version 1.0
  *
- * @section LICENSE
- *
- * Created on 08 July 2014
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * \date{08 July 2014}
  * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * @section DESCRIPTION
- *
- * This file includes all functions wich are needed to manage processes (e.g. task swichting)
+ * \brief This file includes all functions wich are needed to manage processes (e.g. task swichting)
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #include "process_Management.h"
-#include "../platform/e-puck/system_Process_Management_HDI.h"
+#include "../platform/e-puck/process_Management_HDI.h"
 
 #include "data.h"
 
-#include <stdlib.h>
 #include "scheduler.h"
 #include "system_Timer.h"
 
@@ -39,8 +22,6 @@
 #include "../memory.h"
 #include "../definitions.h"
 
-#include <stdbool.h>
-#include <stdio.h>
 
 /********************************************************
  *  Private Members
@@ -70,8 +51,6 @@ void Sys_Set_Running_Process_to_Zombie(); //function to delete a container eleme
  *
  * This function initialises the process management and creates the first elements in the linked list
  *
- * @param void
- * @return void
  */
 inline void Sys_Init_Process_Management(){
     return Sys_Init_Process_Management_HDI();
@@ -82,8 +61,6 @@ inline void Sys_Init_Process_Management(){
  *
  *  This function counts the number of process
  *
- * @param[in] pid This argument is the process identifier
- * @return void
  */
 inline unsigned short Sys_Get_Number_Processes(){
     unsigned short n = 0;
@@ -111,7 +88,6 @@ inline unsigned short Sys_Get_Number_Processes(){
  * This function creates a new sys_process_control_block (in a sys_process_control_block_list_element) which contains all information wich is used to execute this process.
  *
  * @param[in] function This argument points to a function in memory which should be executed as an new task
- * @return void
  */
 inline bool Sys_Start_Process(pFunction function){
     return Sys_Start_Process_HDI(function);
@@ -123,7 +99,6 @@ inline bool Sys_Start_Process(pFunction function){
  * This function deletes the syss_process_control_block element and stops a process
  *
  * @param[in] pid This argument is the process identifier
- * @return void
  */
 void Sys_Kill_Process(uint16 pid){
     // Check if the process is in the ready list
@@ -158,8 +133,6 @@ void Sys_Kill_Process(uint16 pid){
  *
  * This function puts the running process in the zombie list and switches content to the next ready process
  *
- * @param void
- * @return void
  */
 void Sys_Set_Running_Process_to_Zombie(){
 
@@ -203,8 +176,6 @@ goZombieMode:
  *
  * This function deletes all proccesses which are marked as zombies.
  *
- * @param  void
- * @return void
  */
 inline void Sys_Kill_Zombies(){
     sys_pcb_list_element *zombie = sys_zombies;
@@ -224,7 +195,6 @@ inline void Sys_Kill_Zombies(){
  * This function loads all values into the registers of a process with the PID
  *
  * @param[in] pid process id
- * @return void
  */
 void Sys_Switch_Process(uint16 pid){
     sys_pcb_list_element *element = sys_ready_processes;
@@ -244,8 +214,6 @@ void Sys_Switch_Process(uint16 pid){
  *
  * This function loads all values into the registers of the process which is next in the list.
  *
- * @param void
- * @return void
  */
 void Sys_Switch_to_next_Process(){
     if(sys_running_process->next == 0){
@@ -260,8 +228,6 @@ void Sys_Switch_to_next_Process(){
  *
  * This Function starts a critical section to prevent the task-scheduling during its exectution
  *
- * @param void
- * @return void
  */
 inline void Sys_Start_CriticalSection(void){
     Sys_Disable_TimerInterrupt();
@@ -272,8 +238,6 @@ inline void Sys_Start_CriticalSection(void){
  *
  * This Function ends a critical section. The task-scheduling can now occure. Note: if a critical section was started once or more, it only takes a single call of this function to end all critical sections.
  *
- * @param void
- * @return void
  */
 inline void Sys_End_CriticalSection(void){
     Sys_Enable_TimerInterrupt();
@@ -291,8 +255,7 @@ inline void Sys_End_CriticalSection(void){
  *
  * @param[in] pid       Process ID
  * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
- * @param[in] n         The number of occurences of the event (EventID) which have to occure that the process (PID) gets put on the ready list
- * @return void
+ * @param[in] condition the condition under which the process is released
  */
 void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition){
 
@@ -321,7 +284,8 @@ void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition)
  * Puts a process with the process ID (PID) back on the ready list. Consequently the process can be executed again.
  *
  * @param[in] pid       Process ID
- * @return void
+ * @param[in] eventID   Event ID
+ * @param[in] data      pointer to the data of the event
  */
 bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
     if(sys_blocked_processes == 0) return true; //no proccess is blocked .. process must be running
@@ -365,7 +329,8 @@ bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
  *
  * @param[in] pid       Process ID
  * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
- * @param[in] n         The number of occurrences of the event (EventID) which have to occur that the process (PID) gets put on the ready list
+ * @param[in] func      The function that handles the event
+ * @param[in] cond      The condition under which the handler is executed
  * @return bool         Was the event-handler successfully added?
  */
 bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func, pConditionFunction cond){
@@ -421,7 +386,6 @@ bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunctio
  * @param[in] eventID  event identifier
  * @param[in] data     memory that contains the value of the occurred event
  * @param[in] length   length of the data (bytes)
- * @return void
  */
 void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 length){
 
@@ -510,7 +474,6 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
  *
  * @param[in] eventID  event identifier
  * @param[in] elements list of processes
- * @return void
  */
 //handler has to clean up the data!!!
 //TODO: if handler == 0 remove it from list
@@ -540,8 +503,6 @@ inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_eleme
  * 
  * This function executes all event handlers and processes stored event data. First it checks the list of occurred events and then it executes all event handlers of these events
  *
- * @param  void
- * @return void
  */
 inline void Sys_Execute_All_EventHandler(){
     sys_occured_event *o_event = sys_occurred_events;
@@ -565,9 +526,7 @@ inline void Sys_Execute_All_EventHandler(){
  * This function starts the execution of the event handler and resets the execution time of the process
  * 
  * This function starts the execution of the event handler and resets the execution time of the process
- *  *
- * @param  void
- * @return void
+ *
  */
 void Sys_Interprocess_EventHandling(){
     Sys_Execute_All_EventHandler();
@@ -584,7 +543,6 @@ void Sys_Interprocess_EventHandling(){
  * This function removes all subscriptions of any process  to event (eventID)
  *  *
  * @param[in] eventID   Identifier of the event that has to be removed
- * @return void
  */
 void Sys_Remove_All_Event_Subscriptions(uint16 eventID){
     sys_pcb_list_element *process = sys_ready_processes;
@@ -603,7 +561,6 @@ void Sys_Remove_All_Event_Subscriptions(uint16 eventID){
  * @param[in] pid       Identifier of the process
  * @param[in] eventID   Identifier of the event that has to be removed
  * @param[in] func      pointer to the subscribed handler function
- * @return void
  */
 void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func){
 
@@ -675,8 +632,6 @@ inline sys_event_data *Sys_Wait_For_Event(uint16 eventID){
  * 
  * This function blocks the current process and let the next process be executed.
  *
- * @param void
- * @return void
  */
 void Sys_Yield(){
     if( sys_running_process == sys_ready_processes && sys_ready_processes->next == 0){

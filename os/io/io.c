@@ -1,126 +1,125 @@
-/**
- * @file i2c.c
- * @author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
- * @version 1.0
+/*!
+ * \file
+ * \ingroup io
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * \version 1.0
  *
- * @section LICENSE
- *
- * Created on 10 August 2015
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * \date 10 August 2015
  * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * @section DESCRIPTION
- *
- * This file includes the IO timer and functions to execute IO functions periodically.
+ * \brief  This file includes the IO timer to start and stop the timer.  This timer executes IO functions periodically.
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
-#include "io.h"
-#include "../platform/e-puck/system_IO_HDI.h"
-#include <stdlib.h>
 
-#include "../platform/e-puck/DSPIC30F6014A_HDI.h"
+#include "io.h"
 
 #include "../definitions.h"
+
+#ifdef EPUCK_USED 
+#include "e-puck/io_HDI.h"
+#endif
+
 #include "../interrupts.h"
 #include "../memory.h"
 
-#include "motors.h"
-
+/**
+ * Initialises the I/O Management
+ *
+ * This function initialises the I/O Timer and therefore the I/O Management.
+ *
+ */
 void Sys_Init_IOManagement(void){
     Sys_Init_IOTimer_HDI();
 }
 
+/**
+ * Starts the I/O Management
+ *
+ * This function starts the I/O Timer and therefore the I/O Management.
+ *
+ */
 void Sys_Start_IOManagement(void){
     Sys_Start_IOTimer_HDI();
 }
 
+/**
+ * Stops the I/O Management
+ *
+ * This function stops the I/O Timer and therefore the I/O Management.
+ *
+ */
 void Sys_Stop_IOManagement(void){
     Sys_Stop_IOTimer_HDI();
 }
 
 /**
- * Activates the Timer1 Interrupt
+ * Stops the I/O Timer
  *
- * This Function activated the Timer1 Interrupt
+ * This function stops the I/O Timer.
  *
- * @param void
- * @return void
  */
 inline void Sys_Stop_IOTimer(){
    Sys_Stop_IOTimer_HDI();
 }
 
 /**
- * Deactivates the Timer1 Interrupt
+ * Continues the I/O Timer
  *
- * This Function deactivated the Timer1 Interrupt
+ * This function continues the I/O Timer. Note that the timer continues to count where it stops.
  *
- * @param void
- * @return void
  */
 inline void Sys_Continue_IOTimer(){
     Sys_Continue_IOTimer_HDI();
 }
 
 /**
- * Resets the Timer1 value to the initial value
+ * resets the I/O Timer
  *
- * This Function resets the Timer1 value
+ * This function sets the I/O Timer counter to 0 and the I/O timer needs the full time duration to throw the interrupt.
  *
- * @param void
- * @return void
  */
 inline void Sys_Reset_IOTimer(){
     Sys_Reset_IOTimer_HDI();
 }
 
 /**
- * Disables the Timer1 interrupt
+ * Disables the I/O Timer
  *
- * Disables the Timer1 interrupt and sets the interrupt flag to 0
+ * This function disables the I/O Timer interrupt. Note that the timer still continues to count.
  *
- * @param void
- * @return void
  */
 inline void Sys_Disable_IOTimerInterrupt(){
     Sys_Disable_IOTimerInterrupt_HDI();
 }
 
 /**
- * Enables the Timer1 interrupt
+ * Enables the I/O Timer
  *
- * Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function.
+ * This function enables the I/O Timer interrupt.
  *
- * @param void
- * @return void
  */
 inline void Sys_Enable_IOTimerInterrupt(){
     Sys_Enable_IOTimerInterrupt_HDI();
 }
+
 /**
- * Enables the Timer1 interrupt
+ * Force the I/O Timer interrupt.
  *
- * Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function.
+ * This function forces a new I/O Timer interrupt even if the timer hasn't reached its threshold.
  *
- * @param void
- * @return void
  */
 inline void Sys_Force_IOTimerInterrupt(){
     Sys_Force_IOTimerInterrupt_HDI();
 }
 
+/**
+ * registers new I/O handler.
+ *
+ * This function registers a new I/O handler which is executed every time the I/O timer interrupt occurs.
+ *
+ * @param func  pointer to the function that should be executed by the I/O timer periodically
+ * @return bool was it successful?
+ */
 bool Sys_Register_IOHandler(pFunction func){
 
     sys_pIOHandler *new_handler = Sys_Malloc(sizeof(sys_periodical_IOHandler));
@@ -149,6 +148,13 @@ bool Sys_Register_IOHandler(pFunction func){
     return false;
 }
 
+/**
+ * unregisters new I/O handler.
+ *
+ * This function unregisters a I/O handler identified by its function address. 
+ *
+ * @param func  pointer to the function that should be executed by the I/O timer periodically
+ */
 void Sys_Unregister_IOHandler(pFunction func){
     sys_pIOHandler *handler = sys_iohandlers;
     sys_pIOHandler *pre_handler = sys_iohandlers;

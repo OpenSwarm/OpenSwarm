@@ -1,0 +1,157 @@
+\hypertarget{system__Process__Management__HDI_8h}{}\section{platform/e-\/puck/system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.h File Reference}
+\label{system__Process__Management__HDI_8h}\index{platform/e-\/puck/system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{platform/e-\/puck/system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}}
+{\ttfamily \#include \char`\"{}../../../os/processes/data.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+Include dependency graph for system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d2e/system__Process__Management__HDI_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/dde/system__Process__Management__HDI_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{system__Process__Management__HDI_8h_a8ad96e01c2f1868aa8a1acba580800fe}{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} framepointer, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} stackpointer, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} stackpointerlimit)
+\item 
+void \hyperlink{system__Process__Management__HDI_8h_ab7702089bb84ad2634f5b7bf6f5c478f}{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I} (void)
+\item 
+bool \hyperlink{system__Process__Management__HDI_8h_af43d13ab9f8382da5cf2256ef1273336}{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I} (\hyperlink{definitions_8h_aed53e618f2025481fbe48a5098f70079}{p\+Function} function)
+\item 
+void \hyperlink{system__Process__Management__HDI_8h_ae50b0639ca8e35976632e6b97b585f57}{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I} (void)
+\item 
+void \hyperlink{system__Process__Management__HDI_8h_a45fdb2237ab82a4264a7b4d837e13267}{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I} (\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$new\+\_\+process)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{system__Process__Management__HDI_8h_a8ad96e01c2f1868aa8a1acba580800fe}{}\index{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I@{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I@{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I}!system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{{\bf uint16}}]{framepointer, }
+\item[{{\bf uint16}}]{stackpointer, }
+\item[{{\bf uint16}}]{stackpointerlimit}
+\end{DoxyParamCaption}
+)}\label{system__Process__Management__HDI_8h_a8ad96e01c2f1868aa8a1acba580800fe}
+This function changes stackpointers to the new stack
+
+This function changes stackpointers to the new stack
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em fp} & Frame\+Pointer address \\
+\hline
+\mbox{\tt in}  & {\em sp} & Stack\+Pointer address \\
+\hline
+\mbox{\tt in}  & {\em lm} & Stack\+Pointer Limit \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 237 of file system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__Process__Management__HDI_8h_ab7702089bb84ad2634f5b7bf6f5c478f}{}\index{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I}!system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{system__Process__Management__HDI_8h_ab7702089bb84ad2634f5b7bf6f5c478f}
+This function initialises the process management
+
+This function initialises the process management and creates the first elements in the linked list
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__Process__Management__HDI_8h_ae50b0639ca8e35976632e6b97b585f57}{}\index{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I}!system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{system__Process__Management__HDI_8h_ae50b0639ca8e35976632e6b97b585f57}
+This function stores all registers and information of the running process into the corresponding struct
+
+This function stores all registers and information of the running process into the corresponding struct
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 172 of file system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__Process__Management__HDI_8h_af43d13ab9f8382da5cf2256ef1273336}{}\index{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I}!system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{{\bf p\+Function}}]{function}
+\end{DoxyParamCaption}
+)}\label{system__Process__Management__HDI_8h_af43d13ab9f8382da5cf2256ef1273336}
+This function creates a new sys\+\_\+process\+\_\+control\+\_\+block and add all needed info
+
+This function creates a new sys\+\_\+process\+\_\+control\+\_\+block (in a sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element) which contains all information wich is used to execute this process.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em function} & This argument points to a function in memory which should be executed as an new task \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 114 of file system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+
+\hypertarget{system__Process__Management__HDI_8h_a45fdb2237ab82a4264a7b4d837e13267}{}\index{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I}}
+\index{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I}!system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h@{system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+h}}
+\subsubsection[{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I (
+\begin{DoxyParamCaption}
+\item[{{\bf sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$}]{new\+\_\+process}
+\end{DoxyParamCaption}
+)}\label{system__Process__Management__HDI_8h_a45fdb2237ab82a4264a7b4d837e13267}
+This function switches from sys\+\_\+running\+\_\+process to new\+\_\+process
+
+This function switches from sys\+\_\+running\+\_\+process to new\+\_\+process
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em new\+\_\+process} & pointer to the process which should be executed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 271 of file system\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+

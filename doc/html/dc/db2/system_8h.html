@@ -27,6 +27,7 @@
    <div id="projectname">OpenSwarm
    &#160;<span id="projectnumber">0.15.12.2</span>
    </div>
+   <div id="projectbrief">An operating system for miniature robots</div>
   </td>
  </tr>
  </tbody>
@@ -40,7 +41,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="../../modules.html"><span>Modules</span></a></li>
+      <li><a href="../../annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -90,20 +93,26 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Initiaises and starts OpenSwarm.  
+<p>initiaises and starts OpenSwarm.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d6/dc2/definitions_8h_source.html">definitions.h</a>&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for system.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="../../d7/d71/system_8h__incl.png" border="0" usemap="#system_8h" alt=""/></div>
-<!-- MAP 0 -->
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Include dependency graph for system.h:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../d7/d71/system_8h__incl.png" border="0" usemap="#system_8h" alt=""/></div>
+<map name="system_8h" id="system_8h">
+<area shape="rect" id="node2" href="../../d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="198,80,290,107"/><area shape="rect" id="node7" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="525,155,733,196"/></map>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="../../closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="../../dd/d37/system_8h__dep__incl.png" border="0" usemap="#system_8hdep" alt=""/></div>
-<!-- MAP 1 -->
+<map name="system_8hdep" id="system_8hdep">
+<area shape="rect" id="node2" href="../../d4/dfd/system_8c.html" title="includes system calls that initialise and configure the operating system. " alt="" coords="5,80,81,107"/></map>
 </div>
 </div>
 <p><a href="../../dc/db2/system_8h_source.html">Go to the source code of this file.</a></p>
@@ -127,10 +136,11 @@ Functions</h2></td></tr>
 <tr class="separator:a2e15518324643f26cb240108259b30da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Initiaises and starts OpenSwarm. </p>
+<div class="textblock"><p>initiaises and starts OpenSwarm. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a> </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>{07 July 2014} </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>{07 July 2014}</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>adapted FreeBSD License (see <a href="http://openswarm.org/license">http://openswarm.org/license</a>) </dd></dl>
 
 <p>Definition in file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -145,7 +155,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Define this preprocessor symbol to use the camera </p>
 
-<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00088">88</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
+<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00084">84</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
 
 </div>
 </div>
@@ -160,7 +170,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Define this preprocessor symbol to use motors </p>
 
-<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00085">85</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
+<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00081">81</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
 
 </div>
 </div>
@@ -175,7 +185,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Define this preprocessor symbol to receive remote control signals </p>
 
-<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00087">87</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
+<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00083">83</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
 
 </div>
 </div>
@@ -190,7 +200,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Define this preprocessor symbol to use UART1 </p>
 
-<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00086">86</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
+<p>Definition at line <a class="el" href="../../dc/db2/system_8h_source.html#l00082">82</a> of file <a class="el" href="../../dc/db2/system_8h_source.html">system.h</a>.</p>
 
 </div>
 </div>
@@ -212,13 +222,6 @@ Functions</h2></td></tr>
 <p>This Function sets the system Timer (Timer0) and sets an scheduling algorithm. It also intitalises I/O devices (e.g. if e-puck is used: motor, UART, remote control, and camera)</p>
 <dl class="section post"><dt>Postcondition</dt><dd>To start OpenSwarm, <a class="el" href="../../d4/dfd/system_8c.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel()</a> mast be executed after the initialisation. </dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active OpenSwarm. </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">void</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Definition at line <a class="el" href="../../d4/dfd/system_8c_source.html#l00064">64</a> of file <a class="el" href="../../d4/dfd/system_8c_source.html">system.c</a>.</p>
 
@@ -240,15 +243,8 @@ Functions</h2></td></tr>
 <p>Function to start the the system timer</p>
 <p>This Function starts all functions of the operating system. The system MUST HAVE BEEN INITIALISED before. </p><dl class="section pre"><dt>Precondition</dt><dd>System must be initialised with <a class="el" href="../../d4/dfd/system_8c.html#a31ce626d506c2b262ecf5b23946f522f">Sys_Init_Kernel()</a>. </dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active OpenSwarm. </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">void</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d4/dfd/system_8c_source.html#l00106">106</a> of file <a class="el" href="../../d4/dfd/system_8c_source.html">system.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d4/dfd/system_8c_source.html#l00104">104</a> of file <a class="el" href="../../d4/dfd/system_8c_source.html">system.c</a>.</p>
 
 </div>
 </div>

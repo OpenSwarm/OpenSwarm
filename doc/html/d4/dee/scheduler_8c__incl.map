@@ -1,0 +1,7 @@
+<map id="processes/scheduler.c" name="processes/scheduler.c">
+<area shape="rect" id="node2" href="$d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="5,155,95,181"/>
+<area shape="rect" id="node3" href="$dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="88,80,249,107"/>
+<area shape="rect" id="node5" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="282,229,386,256"/>
+<area shape="rect" id="node11" href="$db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="171,155,297,181"/>
+<area shape="rect" id="node9" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="615,304,823,345"/>
+</map>

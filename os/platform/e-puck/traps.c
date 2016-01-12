@@ -1,29 +1,17 @@
-/**
- * @file traps.c
- * @author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
- * @version 1.0
- *
- * @section LICENSE
- *
- * Created on 07 July 2014
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+/*!
+ * \file
+ * \ingroup epuck
+ * \ingroup hdi
  * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * @section DESCRIPTION
+ * \version 1.0
  *
- * This file includes all hardware dependent functions to catch hhardware traps.
+ * \date 07 July 2014
+ * 
+ * \brief  Hardware dependent implementations to catch hardware traps.
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
+ * 
  */
 
 
@@ -102,6 +90,12 @@ void __attribute__((interrupt,no_auto_psv)) _DefaultInterrupt(void);
 /******************************************************************************/
 
 /* Primary (non-alternate) address error trap function declarations */
+/**
+ * Oscillator fail trap.
+ *
+ * This function is called when an oscillator fail occurs. This should never happen.
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _OscillatorFail(void)
 {
     FRONT_LED = 1;
@@ -121,6 +115,12 @@ void __attribute__((interrupt,no_auto_psv)) _OscillatorFail(void)
         }
 }
 
+/**
+ * Address error trap.
+ *
+ * This function is called when an address error occurs. That means that a call address of a function or in the stack addresses an area outside the memory. Similarly, if a pointer points to memory outside the range, this trap happens.
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _AddressError(void)
 {
     FRONT_LED = 1;
@@ -149,6 +149,13 @@ void __attribute__((interrupt,no_auto_psv)) _AddressError(void)
     LED7 = 0;
         }
 }
+
+/**
+ * Stack error trap.
+ *
+ * This function is called when an stack error occurs. That means that the stack pointer, stack pointer limit, or frame pointer are pointing outside their range.
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _StackError(void)
 {
     FRONT_LED = 1;
@@ -177,6 +184,12 @@ void __attribute__((interrupt,no_auto_psv)) _StackError(void)
         }
 }
 
+/**
+ * Math error trap.
+ *
+ * This function is called when an math error occurs. That means an illegal math operation was performed (such as division by 0 or NaN).
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _MathError(void)
 {
    FRONT_LED = 1;
@@ -205,6 +218,12 @@ void __attribute__((interrupt,no_auto_psv)) _MathError(void)
 }
 
 /* Alternate address error trap function declarations */
+/**
+ * Alternative Oscillator fail trap.
+ *
+ * This function is called when an oscillator fail occurs. This should never happen.
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _AltOscillatorFail(void)
 {
     FRONT_LED = 1;
@@ -232,6 +251,12 @@ void __attribute__((interrupt,no_auto_psv)) _AltOscillatorFail(void)
         }
 }
 
+/**
+ * Alternative address error trap.
+ *
+ * This function is called when an address error occurs. That means that a call address of a function or in the stack addresses an area outside the memory. Similarly, if a pointer points to memory outside the range, this trap happens.
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _AltAddressError(void)
 {
     FRONT_LED = 1;
@@ -259,6 +284,12 @@ void __attribute__((interrupt,no_auto_psv)) _AltAddressError(void)
         }
 }
 
+/**
+ * Alternative stack error trap.
+ *
+ * This function is called when an stack error occurs. That means that the stack pointer, stack pointer limit, or frame pointer are pointing outside their range.
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _AltStackError(void)
 {
     FRONT_LED = 1;
@@ -286,6 +317,12 @@ void __attribute__((interrupt,no_auto_psv)) _AltStackError(void)
         }
 }
 
+/**
+ * Alternative math error trap.
+ *
+ * This function is called when an math error occurs. That means an illegal math operation was performed (such as division by 0 or NaN).
+ * 
+ */
 void __attribute__((interrupt,no_auto_psv)) _AltMathError(void)
 {
     FRONT_LED = 1;
@@ -319,6 +356,11 @@ void __attribute__((interrupt,no_auto_psv)) _AltMathError(void)
 /* This executes when an interrupt occurs for an interrupt source with an     */
 /* improperly defined or undefined interrupt handling routine.                */
 /******************************************************************************/
+/**
+ * Default interrupt service routine.
+ *
+ * This function is called when no other interrupt routine is specified. 
+ */
 void __attribute__((interrupt,no_auto_psv)) _DefaultInterrupt(void)
 {
     FRONT_LED = 1;

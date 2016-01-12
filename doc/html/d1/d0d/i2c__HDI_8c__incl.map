@@ -1,0 +1,7 @@
+<map id="platform/e&#45;puck/i2c_HDI.c" name="platform/e&#45;puck/i2c_HDI.c">
+<area shape="rect" id="node2" href="$d4/db3/i2c__HDI_8h.html" title="Hardware dependent implementations to read and write on the I2C interface. " alt="" coords="125,95,206,121"/>
+<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="186,169,302,196"/>
+<area shape="rect" id="node10" href="$d8/ded/i2c__data_8h.html" title="This file includes functions to read and write on the I2C interface. " alt="" coords="281,95,364,121"/>
+<area shape="rect" id="node11" href="$d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="389,95,499,121"/>
+<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="525,244,733,285"/>
+</map>

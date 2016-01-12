@@ -1,0 +1,12 @@
+<map id="platform/e&#45;puck/process_Management_HDI.c" name="platform/e&#45;puck/process_Management_HDI.c">
+<area shape="rect" id="node2" href="$de/dad/process__Management__HDI_8h.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="28,95,179,136"/>
+<area shape="rect" id="node5" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="425,348,560,375"/>
+<area shape="rect" id="node13" href="$dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="255,184,411,225"/>
+<area shape="rect" id="node15" href="$d7/d30/system__Timer__HDI_8h.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="435,191,582,218"/>
+<area shape="rect" id="node16" href="$d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="897,102,1008,129"/>
+<area shape="rect" id="node17" href="$dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory " alt="" coords="529,273,633,300"/>
+<area shape="rect" id="node3" href="$d2/dbd/data_8h.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="35,184,171,225"/>
+<area shape="rect" id="node11" href="$db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="81,273,238,300"/>
+<area shape="rect" id="node12" href="$d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="263,273,352,300"/>
+<area shape="rect" id="node9" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="403,423,611,464"/>
+</map>

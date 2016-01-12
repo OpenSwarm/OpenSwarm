@@ -1,0 +1,50 @@
+\hypertarget{group__camera}{}\section{Camera Module}
+\label{group__camera}\index{Camera Module@{Camera Module}}
+
+
+Functions to process incoming frames from a camera module.  
+
+
+Collaboration diagram for Camera Module\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d90/group__camera}
+\end{center}
+\end{figure}
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{camera_8c}{camera.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes functions to process data retrieved by a camera. \end{DoxyCompactList}\item 
+file \hyperlink{camera_8h}{camera.\+h}
+\begin{DoxyCompactList}\small\item\em This file includes functions to process data retrieved by a camera. \end{DoxyCompactList}\item 
+file \hyperlink{camera__processing_8c}{camera\+\_\+processing.\+c}
+\item 
+file \hyperlink{camera__processing_8h}{camera\+\_\+processing.\+h}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions to process incoming frames from a camera module. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org}
+\end{DoxyAuthor}
+\hypertarget{group__camera_camera_intro}{}\subsection{Introduction}\label{group__camera_camera_intro}
+This module is part of the I/\+O handler. \begin{DoxySeeAlso}{See also}
+\hyperlink{group__io}{I/\+O Management}
+\end{DoxySeeAlso}
+This module currently is under development and is using functions of the e-\/puck library provided using Subversion at svn\+://svn.gna.\+org/svn/e-\/puck/trunk .
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000005}{Todo}]The used functions from the e-\/puck library are very time and computational intensive. These function can be rewritten to decrease the processing load.\end{DoxyRefDesc}
+\hypertarget{group__camera_camera_usage}{}\subsection{Usage}\label{group__camera_camera_usage}
+The camera is initialised and started by Sys\+\_\+\+Init\+\_\+\+Camera and Sys\+\_\+\+Start\+\_\+\+Camera respectively.
+
+The camera uses a preprocessor to process a frame and generate the required events. This preprocessor can be defined by \hyperlink{camera_8h_ac93ec56d124a0811e638208ad64ed14c}{Sys\+\_\+\+Set\+\_\+\+Preprocessing(p\+Camera\+Pre\+Processor)}.
+
+A received frame, if available (\hyperlink{camera_8h_a1b0543ca3f9389e59135838a3c9cbb23}{is\+New\+Frame\+Available()}) can be obtained with \hyperlink{camera_8h_a72c1d6c27d3aeb8399ec41247cc4ba58}{get\+Finished\+Frame()}.\hypertarget{group__camera_camera_license}{}\subsection{License}\label{group__camera_camera_license}
+L\+I\+C\+E\+N\+S\+E\+: adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license})~\newline
+Copyright (c) 2015, Stefan M. Trenkwalder~\newline
+All rights reserved. 

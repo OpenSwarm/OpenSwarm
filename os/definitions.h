@@ -1,4 +1,4 @@
-/*! \file	definition.h
+/*! \file
  *  \brief     	This file defines all preprocessor variables and project wide types.
  *  \author    	Stefan M. Trenkwalder
  *  \version   	1.0
@@ -32,6 +32,7 @@ extern "C" {
     #include <p30F6014A.h>   
 
     #include "platform/e-puck/library/motor_led/e_epuck_ports.h"
+    #include "platform/e-puck/DSPIC30F6014A_HDI.h"
 
     #define UART1_RX _RF2
     #define UART1_TX _RF3
@@ -109,6 +110,11 @@ extern "C" {
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE)
 
+/**
+ * @brief defines a system-wide colour definition
+ *
+ * This enum defines a system-wide colour. (it is based on one bit for red, blue, and green). In total, 8 colours are defined with the first three bits.
+ */
 typedef enum sys_colour {   BLACK   = 0b00000000, 
                     RED     = 0b00000100,
                     YELLOW  = 0b00000110,

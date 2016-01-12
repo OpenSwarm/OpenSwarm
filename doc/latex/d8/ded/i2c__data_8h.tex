@@ -1,0 +1,237 @@
+\hypertarget{i2c__data_8h}{}\section{platform/e-\/puck/i2c\+\_\+data.h File Reference}
+\label{i2c__data_8h}\index{platform/e-\/puck/i2c\+\_\+data.\+h@{platform/e-\/puck/i2c\+\_\+data.\+h}}
+
+
+This file includes functions to read and write on the I2\+C interface.  
+
+
+{\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
+Include dependency graph for i2c\+\_\+data.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/ddf/i2c__data_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/de9/i2c__data_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Linked list element of messages that need to be sent via I2\+C. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s} \hyperlink{i2c__data_8h_a08bf4795a14319ddd3b6d493317f1d4a}{sys\+\_\+i2c\+\_\+message}
+\begin{DoxyCompactList}\small\item\em Linked list element of messages that need to be sent via I2\+C. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s} \hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages}
+\item 
+typedef struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s} \hyperlink{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}{sys\+\_\+i2c\+\_\+msg}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84f}{sys\+\_\+\+I2\+C\+\_\+state} \{ \\*
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa7810297ccb052132c025d8038759159e}{I2\+C\+\_\+\+I\+D\+L\+E} = 0, 
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa173659288d0f90695fa351dae6feb96b}{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+I\+N\+G}, 
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa6afffe631c354782bca82189eed56936}{I2\+C\+\_\+\+S\+T\+A\+R\+T\+E\+D}, 
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa5afe3d6f18faf703105d9c5d2fddf0b3}{I2\+C\+\_\+\+I\+S\+\_\+\+R\+E\+A\+D\+I\+N\+G}, 
+\\*
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fab3d4495decdac5ea39289dc517be74ec}{I2\+C\+\_\+\+I\+S\+\_\+\+S\+E\+N\+D\+I\+N\+G}, 
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa04acad9a2e277c0dc73e52dfa554ea23}{I2\+C\+\_\+\+S\+E\+N\+T}, 
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fabdaaa92cbe9cb268c45f3bbd847c43d6}{I2\+C\+\_\+\+A\+C\+K\+N\+O\+W\+L\+E\+D\+G\+E\+D}, 
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa42a2a9748b25af1d7e1abfcb2a34d99a}{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+I\+N\+G}, 
+\\*
+\hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa2e4932a1868432bff23103fac0127fdc}{I2\+C\+\_\+\+E\+R\+R\+O\+R}
+ \}
+\item 
+enum \hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0}{sys\+\_\+\+I2\+C\+\_\+mode} \{ \\*
+\hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0a29f9afef2b8435a81ccd65d3b5ec9021}{I2\+C\+\_\+\+I\+D\+L\+E\+\_\+\+M\+O\+D\+E} = 0, 
+\hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0aa2577c2ef706dc6500bf1a3680438dcd}{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+M\+O\+D\+E}, 
+\hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0ad96dbed0271c27ac3fd938ac434d31c2}{I2\+C\+\_\+\+R\+E\+A\+D\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E}, 
+\hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0a24bc37b846d00fc16234a2e0c3ea4024}{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E}, 
+\\*
+\hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0ac37fa0c432538664d82d2d282e56dc4b}{I2\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+O\+D\+E}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{i2c__data_8h_a37ea66b4bc94c628d177842936370926}{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages} (\hyperlink{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}{sys\+\_\+i2c\+\_\+msg} $\ast$item)
+\item 
+void \hyperlink{i2c__data_8h_aab570c7924073daf517967958aba4250}{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message} (\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$$\ast$list)
+\item 
+void \hyperlink{i2c__data_8h_a11867d2a3620c96f6a9621f246939a28}{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages} (\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$list)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$ \hyperlink{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}{sys\+\_\+i2c\+\_\+msgs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file includes functions to read and write on the I2\+C interface. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 August 2015
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{i2c__data_8h_a08bf4795a14319ddd3b6d493317f1d4a}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+message@{sys\+\_\+i2c\+\_\+message}}
+\index{sys\+\_\+i2c\+\_\+message@{sys\+\_\+i2c\+\_\+message}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{sys\+\_\+i2c\+\_\+message}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+i2c\+\_\+message\+\_\+s}  {\bf sys\+\_\+i2c\+\_\+message}}\label{i2c__data_8h_a08bf4795a14319ddd3b6d493317f1d4a}
+
+
+Linked list element of messages that need to be sent via I2\+C. 
+
+\hypertarget{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+messages@{sys\+\_\+i2c\+\_\+messages}}
+\index{sys\+\_\+i2c\+\_\+messages@{sys\+\_\+i2c\+\_\+messages}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{sys\+\_\+i2c\+\_\+messages}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+i2c\+\_\+message\+\_\+s}  {\bf sys\+\_\+i2c\+\_\+messages}}\label{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}
+\hypertarget{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{sys\+\_\+i2c\+\_\+msg}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+i2c\+\_\+message\+\_\+s}  {\bf sys\+\_\+i2c\+\_\+msg}}\label{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+\+I2\+C\+\_\+mode@{sys\+\_\+\+I2\+C\+\_\+mode}}
+\index{sys\+\_\+\+I2\+C\+\_\+mode@{sys\+\_\+\+I2\+C\+\_\+mode}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{sys\+\_\+\+I2\+C\+\_\+mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf sys\+\_\+\+I2\+C\+\_\+mode}}\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I2\+C\+\_\+\+I\+D\+L\+E\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+I\+D\+L\+E\+\_\+\+M\+O\+D\+E}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+I\+D\+L\+E\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+I\+D\+L\+E\+\_\+\+M\+O\+D\+E}}\item[{\em 
+\hypertarget{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0a29f9afef2b8435a81ccd65d3b5ec9021}{}I2\+C\+\_\+\+I\+D\+L\+E\+\_\+\+M\+O\+D\+E\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0a29f9afef2b8435a81ccd65d3b5ec9021}
+}]\index{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+M\+O\+D\+E}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+M\+O\+D\+E}}\item[{\em 
+\hypertarget{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0aa2577c2ef706dc6500bf1a3680438dcd}{}I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+M\+O\+D\+E\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0aa2577c2ef706dc6500bf1a3680438dcd}
+}]\index{I2\+C\+\_\+\+R\+E\+A\+D\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+R\+E\+A\+D\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+R\+E\+A\+D\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+R\+E\+A\+D\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E}}\item[{\em 
+\hypertarget{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0ad96dbed0271c27ac3fd938ac434d31c2}{}I2\+C\+\_\+\+R\+E\+A\+D\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0ad96dbed0271c27ac3fd938ac434d31c2}
+}]\index{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E}}\item[{\em 
+\hypertarget{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0a24bc37b846d00fc16234a2e0c3ea4024}{}I2\+C\+\_\+\+W\+R\+I\+T\+I\+N\+G\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+M\+O\+D\+E\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0a24bc37b846d00fc16234a2e0c3ea4024}
+}]\index{I2\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+O\+D\+E}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+O\+D\+E@{I2\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+O\+D\+E}}\item[{\em 
+\hypertarget{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0ac37fa0c432538664d82d2d282e56dc4b}{}I2\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+O\+D\+E\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0ac37fa0c432538664d82d2d282e56dc4b}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 25 of file i2c\+\_\+data.\+h.
+
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84f}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+\+I2\+C\+\_\+state@{sys\+\_\+\+I2\+C\+\_\+state}}
+\index{sys\+\_\+\+I2\+C\+\_\+state@{sys\+\_\+\+I2\+C\+\_\+state}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{sys\+\_\+\+I2\+C\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf sys\+\_\+\+I2\+C\+\_\+state}}\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84f}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I2\+C\+\_\+\+I\+D\+L\+E@{I2\+C\+\_\+\+I\+D\+L\+E}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+I\+D\+L\+E@{I2\+C\+\_\+\+I\+D\+L\+E}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa7810297ccb052132c025d8038759159e}{}I2\+C\+\_\+\+I\+D\+L\+E\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa7810297ccb052132c025d8038759159e}
+}]\index{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+I\+N\+G}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+I\+N\+G}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa173659288d0f90695fa351dae6feb96b}{}I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+A\+R\+T\+I\+N\+G\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa173659288d0f90695fa351dae6feb96b}
+}]\index{I2\+C\+\_\+\+S\+T\+A\+R\+T\+E\+D@{I2\+C\+\_\+\+S\+T\+A\+R\+T\+E\+D}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+S\+T\+A\+R\+T\+E\+D@{I2\+C\+\_\+\+S\+T\+A\+R\+T\+E\+D}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa6afffe631c354782bca82189eed56936}{}I2\+C\+\_\+\+S\+T\+A\+R\+T\+E\+D\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa6afffe631c354782bca82189eed56936}
+}]\index{I2\+C\+\_\+\+I\+S\+\_\+\+R\+E\+A\+D\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+R\+E\+A\+D\+I\+N\+G}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+I\+S\+\_\+\+R\+E\+A\+D\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+R\+E\+A\+D\+I\+N\+G}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa5afe3d6f18faf703105d9c5d2fddf0b3}{}I2\+C\+\_\+\+I\+S\+\_\+\+R\+E\+A\+D\+I\+N\+G\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa5afe3d6f18faf703105d9c5d2fddf0b3}
+}]\index{I2\+C\+\_\+\+I\+S\+\_\+\+S\+E\+N\+D\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+S\+E\+N\+D\+I\+N\+G}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+I\+S\+\_\+\+S\+E\+N\+D\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+S\+E\+N\+D\+I\+N\+G}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fab3d4495decdac5ea39289dc517be74ec}{}I2\+C\+\_\+\+I\+S\+\_\+\+S\+E\+N\+D\+I\+N\+G\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fab3d4495decdac5ea39289dc517be74ec}
+}]\index{I2\+C\+\_\+\+S\+E\+N\+T@{I2\+C\+\_\+\+S\+E\+N\+T}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+S\+E\+N\+T@{I2\+C\+\_\+\+S\+E\+N\+T}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa04acad9a2e277c0dc73e52dfa554ea23}{}I2\+C\+\_\+\+S\+E\+N\+T\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa04acad9a2e277c0dc73e52dfa554ea23}
+}]\index{I2\+C\+\_\+\+A\+C\+K\+N\+O\+W\+L\+E\+D\+G\+E\+D@{I2\+C\+\_\+\+A\+C\+K\+N\+O\+W\+L\+E\+D\+G\+E\+D}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+A\+C\+K\+N\+O\+W\+L\+E\+D\+G\+E\+D@{I2\+C\+\_\+\+A\+C\+K\+N\+O\+W\+L\+E\+D\+G\+E\+D}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fabdaaa92cbe9cb268c45f3bbd847c43d6}{}I2\+C\+\_\+\+A\+C\+K\+N\+O\+W\+L\+E\+D\+G\+E\+D\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fabdaaa92cbe9cb268c45f3bbd847c43d6}
+}]\index{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+I\+N\+G}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+I\+N\+G@{I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+I\+N\+G}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa42a2a9748b25af1d7e1abfcb2a34d99a}{}I2\+C\+\_\+\+I\+S\+\_\+\+S\+T\+O\+P\+P\+I\+N\+G\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa42a2a9748b25af1d7e1abfcb2a34d99a}
+}]\index{I2\+C\+\_\+\+E\+R\+R\+O\+R@{I2\+C\+\_\+\+E\+R\+R\+O\+R}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!I2\+C\+\_\+\+E\+R\+R\+O\+R@{I2\+C\+\_\+\+E\+R\+R\+O\+R}}\item[{\em 
+\hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa2e4932a1868432bff23103fac0127fdc}{}I2\+C\+\_\+\+E\+R\+R\+O\+R\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84fa2e4932a1868432bff23103fac0127fdc}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 24 of file i2c\+\_\+data.\+h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{i2c__data_8h_a37ea66b4bc94c628d177842936370926}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages (
+\begin{DoxyParamCaption}
+\item[{{\bf sys\+\_\+i2c\+\_\+msg} $\ast$}]{item}
+\end{DoxyParamCaption}
+)}\label{i2c__data_8h_a37ea66b4bc94c628d177842936370926}
+appends an element to the linked list.
+
+This function appends on the bottom of the linked list.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em item} & pointer to a element that should be added \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 69 of file i2c\+\_\+data.\+c.
+
+\hypertarget{i2c__data_8h_a11867d2a3620c96f6a9621f246939a28}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages (
+\begin{DoxyParamCaption}
+\item[{{\bf sys\+\_\+i2c\+\_\+messages} $\ast$}]{list}
+\end{DoxyParamCaption}
+)}\label{i2c__data_8h_a11867d2a3620c96f6a9621f246939a28}
+frees all messages of the linked list
+
+This function frees all messages of the linked list.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em list} & pointer to a list of elements that should be removed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 47 of file i2c\+\_\+data.\+c.
+
+\hypertarget{i2c__data_8h_aab570c7924073daf517967958aba4250}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message@{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}}
+\index{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message@{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf sys\+\_\+i2c\+\_\+messages} $\ast$$\ast$}]{list}
+\end{DoxyParamCaption}
+)}\label{i2c__data_8h_aab570c7924073daf517967958aba4250}
+removes oldest message from the linked list
+
+This function removes the oldest message (first element) of the linked list
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em list} & pointer to the linked list \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 30 of file i2c\+\_\+data.\+c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+msgs@{sys\+\_\+i2c\+\_\+msgs}}
+\index{sys\+\_\+i2c\+\_\+msgs@{sys\+\_\+i2c\+\_\+msgs}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
+\subsubsection[{sys\+\_\+i2c\+\_\+msgs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+i2c\+\_\+messages}$\ast$ sys\+\_\+i2c\+\_\+msgs}\label{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}
+Pointer to the linked list of messages 
+
+Definition at line 21 of file i2c\+\_\+data.\+c.
+

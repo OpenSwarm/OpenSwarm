@@ -1,29 +1,13 @@
-/**
- * @file events.c
- * @author  Stefan M. Trenkwalder <stefan.markus.trenkwalder@gmail.com>
- * @version 1.0
+/*!
+ * \file
+ * \ingroup events
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * \version 1.0
  *
- * @section LICENSE
- *
- * Created on 23 March 2015
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * \date 23 March 2015
  * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * @section DESCRIPTION
- *
- * This file includes all system calls needed to create, (un)subsscribe, (un)register, and delete events and related handler.
+ * \brief This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler.
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #include "events.h"
@@ -32,17 +16,25 @@
 #include "../memory.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
+/**
+ * @brief A struct to store a list of subscribed processes
+ */
 typedef struct sys_subscribed_process_s{
-    uint16 pid;
-    struct sys_subscribed_process_s *next;
+    uint16 pid;/*!< process identifier */
+    struct sys_subscribed_process_s *next;/*!< pointer to the next element in the List */
 }sys_subscribed_process;
 
+/**
+ * @brief A struct to store registered events. It also includes a list of processes that are subscribed to the registered event 
+ */
 typedef struct sys_registered_event_s{
-    uint16 id;
-    sys_subscribed_process *subscribers;
-    struct sys_registered_event_s *next;
+    uint16 id;/*!< event identifier */
+    sys_subscribed_process *subscribers;/*!< pointer to a list of subscribed processes */
+    struct sys_registered_event_s *next;/*!< pointer to the next element in the List */
 }sys_registered_event;
+
 /*
 typedef struct sys_event_s {
     uint16 id;
@@ -50,10 +42,21 @@ typedef struct sys_event_s {
     uint16 value_length;
 } sys_event;
 */
-sys_registered_event *registered_events = 0;
+
+sys_registered_event *registered_events = 0;/*!< pointer to the List of registered events*/
 
 sys_registered_event *Sys_Find_Event(uint16 eventID);
 
+/**
+ * Function to send an event
+ *
+ * This function sends an event to all subscribers.
+ *
+ * @param[in] 	eventID    ID of the event
+ * @param[in] 	data       pointer to the data that want to be sent as an event
+ * @param[in] 	data_size  size of the data in bytes
+ * @return 	was it successful.
+ */
 bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size){
     Sys_Stop_SystemTimer();//doesn't consume execution time
 
@@ -72,11 +75,29 @@ bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size){
     Sys_Continue_SystemTimer();
     return true;
 }
+
+/**
+ * Function to send an integer event
+ *
+ * This function sends an integer (16-bit) to all subscribers.
+ *
+ * @param[in] 	eventID    ID of the event
+ * @param[in] 	data       integer value that should be sent as an event
+ * @return 	was it successful.
+ */
 inline bool Sys_Send_IntEvent(uint16 eventID, uint16 data){
     uint16 value = data;
     return Sys_Send_Event(eventID, &value, 2);
 }
 
+/**
+ * Function to register an event
+ *
+ * This function registers an new event. The registration tells the operating system that this event can occur.
+ *
+ * @param[in] 	eventID    ID of the event
+ * @return 	was it successful.
+ */
 bool Sys_Register_Event(uint16 eventID){
     sys_registered_event* events = registered_events;
     sys_registered_event* next_event = registered_events;
@@ -109,6 +130,17 @@ bool Sys_Register_Event(uint16 eventID){
     return true;
 }
 
+/**
+ * subscribes a specific handler function to an process and a specific event
+ *
+ * This function subscribes a specific handler function to an process and a specific event
+ *
+ * @param[in] 	eventID     ID of the event
+ * @param[in] 	pid         ID of the process
+ * @param[in] 	handler     pointer to the function that should handle the event data
+ * @param[in] 	condition   pointer to the function that decides if the handler should be executed or not
+ * @return 	was it successful.
+ */
 bool Sys_Subscribe_to_Event(uint16 eventID, uint16 pid, pEventHandlerFunction handler, pConditionFunction condition){
     sys_registered_event* events = registered_events;
     
@@ -148,7 +180,13 @@ bool Sys_Subscribe_to_Event(uint16 eventID, uint16 pid, pEventHandlerFunction ha
     return false;
 }
 
-
+/**
+ * unregisters an event
+ *
+ * This function unregisters an event
+ *
+ * @param[in] 	eventID     ID of the event
+ */
 void Sys_Unregister_Event(uint16 eventID){
     sys_registered_event* event = registered_events;
     sys_registered_event* next_event = registered_events;
@@ -193,6 +231,14 @@ void Sys_Unregister_Event(uint16 eventID){
     return;
 }
 
+/**
+ * unsubscribes an event
+ *
+ * This function unsubscribes an event
+ *
+ * @param[in] 	eventID     ID of the event
+ * @param[in] 	pid         ID of the process
+ */
 void Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid){
     sys_registered_event* event = Sys_Find_Event(eventID);
 
@@ -220,6 +266,15 @@ void Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid){
     }
 }
 
+/**
+ * only unsubscribes a specific handler function
+ *
+ * This function only unsubscribes a specific handler function
+ *
+ * @param[in] 	eventID     ID of the event
+ * @param[in] 	func        pointer to the handler function
+ * @param[in] 	pid         ID of the process
+ */
 void Sys_Unsubscribe_Handler_from_Event(uint16 eventID, pEventHandlerFunction func,  uint16 pid){
     sys_registered_event* event = Sys_Find_Event(eventID);
 
@@ -247,6 +302,14 @@ void Sys_Unsubscribe_Handler_from_Event(uint16 eventID, pEventHandlerFunction fu
     }
 }
 
+/**
+ * finds the registered event
+ *
+ * This function returns the data structure of an event if the eventID was registered otherwise it's 0.
+ *
+ * @param[in] 	eventID     ID of the event
+ * @return 	    pointer to the data structure of the found event ( or 0 if it wasn't found)
+ */
 sys_registered_event *Sys_Find_Event(uint16 eventID){
     sys_registered_event* event = registered_events;
 
@@ -261,6 +324,14 @@ sys_registered_event *Sys_Find_Event(uint16 eventID){
     return 0;
 }
 
+/**
+ * returns true if the event was registered
+ *
+ * returns true if the event was registered
+ *
+ * @param[in] 	eventID     ID of the event
+ * @return 	   is the event registered?
+ */
 bool Sys_IsEventRegistered(uint16 eventID){
     sys_registered_event* event = registered_events;
 
@@ -275,6 +346,13 @@ bool Sys_IsEventRegistered(uint16 eventID){
     return false;
 }
 
+/**
+ * unsubscribes all events that were subscribed to a process
+ *
+ * unsubscribes all events that were subscribed to a process
+ *
+ * @param[in] 	pid     process identifier
+ */
 void Sys_Unsubscribe_Process(uint16 pid){
     sys_registered_event* event = registered_events;
 

@@ -1,10 +1,18 @@
+/*!
+ * \file
+ * \ingroup i2c
+ * \ingroup camera
+ * \ingroup shefpuck
+ * \ingroup epuck
+ * \author  Yuri Kaszubowski Lopes <yurikazuba@gmail.com>
+ * \version 1.0
+ *
+ * \date 2014
+ */
+
 #include "camera_processing.h"
 #include <math.h>
 #include <stdio.h>
-
-#include "../../../os/io/uart.h"
-
-//The type of a plain char is unsigned char
 
 void convertRGB565ToRGB888(unsigned char rgb565[], unsigned char rgb888[]){
     rgb888[0] = (rgb565[0] & 0xF8);

@@ -1,0 +1,9 @@
+<map id="platform/e&#45;puck/system_IO_HDI.c" name="platform/e&#45;puck/system_IO_HDI.c">
+<area shape="rect" id="node2" href="$d6/de2/system__IO__HDI_8h.html" title="system_IO_HDI.h" alt="" coords="93,169,221,196"/>
+<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="237,244,383,271"/>
+<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="platform/e&#45;puck/DSPIC30F6014\lA_HDI.h" alt="" coords="525,319,733,360"/>
+<area shape="rect" id="node11" href="$d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="285,95,426,121"/>
+<area shape="rect" id="node12" href="$dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory " alt="" coords="245,169,380,196"/>
+<area shape="rect" id="node13" href="$dd/d59/motors_8h.html" title="This file provides the function needed to actuate the motors. " alt="" coords="450,95,591,121"/>
+<area shape="rect" id="node14" href="$dc/dac/io_8h.html" title="This file includes the IO timer to start and stop the timer. This timer executes IO functions periodi..." alt="" coords="450,169,493,196"/>
+</map>

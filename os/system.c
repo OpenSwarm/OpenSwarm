@@ -1,6 +1,7 @@
-/*! \file	system.c
- *  \brief     	This file includes all basic system calls, which are nesessary to initialise, configure and the operating system.
- *  \author    	Stefan M. Trenkwalder
+/*! \file
+ * \ingroup base
+ *  \brief  includes  system calls that initialise and configure the operating system.
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  *  \version   	1.0
  *  \date      	2015
  *  \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
@@ -31,25 +32,26 @@
 #include "processes/scheduler.h"    /* the implementation of the scheduler */
 #include "processes/process_Management.h"
 
+#include "platform/e-puck/library/motor_led/e_init_port.h"
 
-#include "system_IO.h"
-#include "system_IO_clock.h"
+
+#include "io/io.h"
+#include "io/io_clock.h"
     
 #ifdef EPUCK_USED
 #ifdef SYS_MOTOR_USED
-#include "system_IO_motors.h"
+#include "io/e-puck/motors.h"
 #endif
 #ifdef SYS_UART1_USED
-#include "system_IO_uart.h"
+#include "io/e-puck/uart.h"
 #endif
 #ifdef SYS_REMOTECONTROL_USED
-#include "system_IO_remoteControl.h"
+#include "io/e-puck/remoteControl.h"
 #endif
 #ifdef SYS_CAMERA_USED
-#include "system_IO_camera.h"
+#include "io/e-puck/camera.h"
 #endif
 #endif
-
 
 /**
  * Function to initialise the hardware
@@ -58,8 +60,6 @@
  *
  * @post 	To start OpenSwarm, Sys_Start_Kernel() mast be executed after the initialisation.
  * @remark	Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active OpenSwarm.
- * @param 	void
- * @return 	void
  */
 void Sys_Init_Kernel(){
 
@@ -100,8 +100,6 @@ void Sys_Init_Kernel(){
  * This Function starts all functions of the operating system. The system MUST HAVE BEEN INITIALISED before.
  * @pre	 System must be initialised with Sys_Init_Kernel().
  * @remark	Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active OpenSwarm.
- * @param void
- * @return void
  */
 void Sys_Start_Kernel(void){
 

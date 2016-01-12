@@ -1,0 +1,74 @@
+\hypertarget{group__events}{}\section{Event System}
+\label{group__events}\index{Event System@{Event System}}
+
+
+Functions to emit, create, (un)subscribe, (un)register, and manage events.  
+
+
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{events_8c}{events.\+c}
+\begin{DoxyCompactList}\small\item\em This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler. \end{DoxyCompactList}\item 
+file \hyperlink{events_8h}{events.\+h}
+\begin{DoxyCompactList}\small\item\em functions to create handle and configure events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions to emit, create, (un)subscribe, (un)register, and manage events. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org}
+\end{DoxyAuthor}
+Events are a main component of Open\+Swarm. It can be used to synchronise and communicate with processes, to implement asynchronous programming model, and process incoming data/signals.\hypertarget{group__events_events_usage}{}\subsection{Usage}\label{group__events_events_usage}
+The event system doesn\textquotesingle{}t need to be initialised. Any event is identified by an integer {\bfseries event\+I\+D}. To use an event the following steps have to be taken\+:
+\begin{DoxyEnumerate}
+\item An event ({\bfseries event\+I\+D} ) can be (un)registered by \hyperlink{events_8h_a386acd8573c1118d80986721664d2689}{Sys\+\_\+\+Register\+\_\+\+Event(uint16 event\+I\+D)} and \hyperlink{events_8h_a1d203ee6c6d21cb00d5b84a03bbbda6b}{Sys\+\_\+\+Unregister\+\_\+\+Event(uint16 event\+I\+D)}. When an event is registered, it means that an event ({\bfseries event\+I\+D} ) can occur and handled by Open\+Swarm.
+\item After the event was registered, processes can be subscribed to it with \hyperlink{events_8h_abbd55109964743556ffc20f8520bfabf}{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event(uint16 event\+I\+D, uint16 pid, p\+Event\+Handler\+Function handler, p\+Condition\+Function condition)} and \hyperlink{events_8h_a0f37de65bd64e262ea80d96d7e691a8d}{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event(uint16 event\+I\+D, uint16 pid)}. During the subscription, an event handler (i.\+e. a function to process data that was sent by events) is subscribed to a specific event ({\bfseries event\+I\+D} ) and a process. Each event handler of a process for an specific event is unique. As a result the same handler function can be assigned to the same event if they are assigned to other processes.
+\item After an event is registered, events can be sent with \hyperlink{events_8h_a24dadcefc1b4c45c50fb351efc8e841c}{Sys\+\_\+\+Send\+\_\+\+Event(uint16 event\+I\+D, void $\ast$data, uint16 data\+\_\+size)} and \hyperlink{events_8h_ae2b6a4d1db2b3fb8777fa56297001d05}{Sys\+\_\+\+Send\+\_\+\+Int\+Event(uint16 event\+I\+D, uint16 data)}.
+\end{DoxyEnumerate}\hypertarget{group__events_events_example}{}\subsection{Example}\label{group__events_events_example}
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include "\hyperlink{system_8h}{os/system.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{events_8h}{os/events/events.h}"}
+
+\textcolor{preprocessor}{#define USER\_EVENT\_ID 0xCC}
+
+\textcolor{keywordtype}{bool} \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{pConditionFunction}(\textcolor{keywordtype}{void} *data)\{\textcolor{comment}{//only execute the the eventHandler every 5th time.}
+     \textcolor{keyword}{static} \textcolor{keywordtype}{int} counter = 0;
+
+     \textcolor{keywordflow}{if}(++counter >= 4)\{\textcolor{comment}{//if event occurred 5 times}
+         counter = 0;
+         \textcolor{keywordflow}{return} \textcolor{keyword}{true};\textcolor{comment}{//execute eventHandler}
+     \}
+
+    \textcolor{keywordflow}{return} \textcolor{keyword}{false};\textcolor{comment}{//don't execute eventHandler}
+\}
+
+\textcolor{keywordtype}{bool} eventHandler(\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} eventID, \hyperlink{structsys__event__data__s}{sys\_event\_data} *data)\{
+     \textcolor{comment}{//do something with the data}
+\}
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{void})\{
+ \textcolor{comment}{//initialise some global or local variables}
+
+ \textcolor{keywordtype}{int} variable;
+
+    \hyperlink{system_8c_a31ce626d506c2b262ecf5b23946f522f}{Sys\_Init\_Kernel}();
+
+ \hyperlink{events_8c_a386acd8573c1118d80986721664d2689}{Sys\_Register\_Event}(USER\_EVENT\_ID);
+     
+ \hyperlink{system_8c_a2e15518324643f26cb240108259b30da}{Sys\_Start\_Kernel}();      
+    \textcolor{keywordflow}{while}(1)\{
+
+     \textcolor{keywordflow}{if}( condition )\{
+          \hyperlink{events_8c_a24dadcefc1b4c45c50fb351efc8e841c}{Sys\_Send\_Event}(USER\_EVENT\_ID, &variable, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));
+     \}
+     \textcolor{comment}{//do something}
+    \}
+\}
+\end{DoxyCode}
+\hypertarget{group__events_events_license}{}\subsection{License}\label{group__events_events_license}
+L\+I\+C\+E\+N\+S\+E\+: adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license})~\newline
+Copyright (c) 2015, Stefan M. Trenkwalder~\newline
+All rights reserved. 

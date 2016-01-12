@@ -1,22 +1,54 @@
-/*
- * File:   HDI_DSPIC30F6014A.h
- * Author: Stefan M. Trenkwalder
- *
- * Created on 07 July 2014, 14:47
- *
- * LICENSE: adapted FreeBSD License
- * Copyright (c) 2015, Stefan M. Trenkwalder
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+/*!
+ * \file
+ * \ingroup epuck
+ * \ingroup hdi
  * 
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * \version 1.0
+ *
+ * \date 07 July 2014
+ * 
+ * \brief  Hardware dependent declarations and definitions. 
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
+ * 
+ */
+
+/*! \defgroup epuck e-puck specific modules
+ * \brief Modules and functions that are needed to use the e-puck platform \sa http://www.gctronic.com/doc/index.php/E-Puck
+ * 
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * 
+ * This module includes all other modules that are specific to the e-puck platform. 
+ * 
+ * The e-puck provides the following features:
+ * \section epuck_sensor Sensors:
+ *      \subsection epuck_prox 8 infra-red proximity sensors
+ *      The infra-red proximity sensors are currently under implementation. Therefore not ready yet.
+ *      \subsection epuck_acc accelerometer
+ *      The accelerometer weren't needed for many applications and, therefore, the priority to implement the speakers is small.
+ *      \subsection epuck_mic 3 microphones
+ *      The microphones weren't needed for many applications and, therefore, the priority to implement the speakers is small.
+ *      \subsection epuck_camera camera:
+ *      The camera functions can be found at \sa camera
+ *      \subsection epuck_remote remote control receiver:
+ *      This function is fully implemented. \sa remotecontrol
+ * \section epuck_output Actuators:
+ *      \subsection epuck_motors differential drive \sa motors
+ *      \subsection epuck_led leds:
+ *      Hardware independent functions to control the LEDs are not yet implemented, due to it's simple nature. Currently you can use the MACROs LED0, LED1, ..., LED7, BODYLED, FRONTLED to use the LEDs.
+ *      \subsection epuck_speaker speaker:
+ *      The speakers weren't needed for many applications and, therefore, the priority to implement the speakers is small.
+ * \section epuck_com communication:
+ *      \subsection epuck_bluetooth Bluetooth:
+ *      The Bluetooth can be used by sending and receiving bytes via UART1 \sa uart
+ *      \subsection epuck_ircom Infra-red communication
+ *      The infra-red proximity sensors can be used to transmit and receive data. This function leads to a local broadcasting. However, this function has not been implemented yet.
+ *
+ * \section epuck_license License
+ * LICENSE: adapted FreeBSD License (see http://openswarm.org/license)\n
+ * Copyright (c) 2015, Stefan M. Trenkwalder\n
+ * All rights reserved. 
  */
 
 #ifndef HDI_DSPIC30F6014A_H

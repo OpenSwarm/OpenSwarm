@@ -1,0 +1,6 @@
+<map id="sys_process_control_block_list_element_s" name="sys_process_control_block_list_element_s">
+<area shape="rect" id="node2" href="$db/d2e/structsys__process__control__block__s.html" title="Process Control Block for the processes. " alt="" coords="85,201,228,243"/>
+<area shape="rect" id="node3" href="$dd/da1/structsys__scheduler__info__s.html" title="The scheduling information for each process. " alt="" coords="5,111,153,137"/>
+<area shape="rect" id="node4" href="$dc/dfe/structsys__process__event__handler__s.html" title="List of process event&#45;handlers. " alt="" coords="177,111,376,137"/>
+<area shape="rect" id="node5" href="$d9/d85/structsys__event__data__s.html" title="This struct contains data of the size size at the memory of value. It is a struct for a linked list..." alt="" coords="213,5,341,32"/>
+</map>

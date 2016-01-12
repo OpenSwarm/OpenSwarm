@@ -27,6 +27,7 @@
    <div id="projectname">OpenSwarm
    &#160;<span id="projectnumber">0.15.12.2</span>
    </div>
+   <div id="projectbrief">An operating system for miniature robots</div>
   </td>
  </tr>
  </tbody>
@@ -40,7 +41,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="../../modules.html"><span>Modules</span></a></li>
+      <li><a href="../../annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -82,34 +85,69 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="title">Base</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Basic functions to start and initialise the operating system; allocate, free and copy memory, and create and end atomic sections.  
+<a href="#details">More...</a></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Collaboration diagram for Base:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<center><table><tr><td><img src="../../dd/df2/group__base.png" border="0" alt="" usemap="#dd_2df2_2group____base"/>
+<map name="dd_2df2_2group____base" id="dd_2df2_2group____base">
+<area shape="rect" id="node1" href="../../d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform. " alt="" coords="231,21,393,48"/></map>
+</td></tr></table></center>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
+<tr class="memitem:d8/d22/interrupts_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d22/interrupts_8c.html">interrupts.c</a></td></tr>
+<tr class="memdesc:d8/d22/interrupts_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes basic system calls to create atomic sections. (Sections that cannot be interrupted) <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:d6/ded/interrupts_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/ded/interrupts_8h.html">interrupts.h</a></td></tr>
+<tr class="memdesc:d6/ded/interrupts_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes system calls to create atomic sections. (Sections that cannot be interrupted) <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:df/dd5/memory_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dd5/memory_8c.html">memory.c</a></td></tr>
+<tr class="memdesc:df/dd5/memory_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes functions to allocate, free, and copy memory <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:dc/d18/memory_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d18/memory_8h.html">memory.h</a></td></tr>
+<tr class="memdesc:dc/d18/memory_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes functions to allocate, free, and copy memory <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:d4/dfd/system_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dfd/system_8c.html">system.c</a></td></tr>
+<tr class="memdesc:d4/dfd/system_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes system calls that initialise and configure the operating system. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:dc/db2/system_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db2/system_8h.html">system.h</a></td></tr>
-<tr class="memdesc:dc/db2/system_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiaises and starts OpenSwarm. <br /></td></tr>
+<tr class="memdesc:dc/db2/system_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">initiaises and starts OpenSwarm. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:d7/de8/system__Timer__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/de8/system__Timer__HDI_8c.html">system_Timer_HDI.c</a></td></tr>
+<tr class="memdesc:d7/de8/system__Timer__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to initialise, configure and the operating system. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:d7/d30/system__Timer__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d30/system__Timer__HDI_8h.html">system_Timer_HDI.h</a></td></tr>
+<tr class="memdesc:d7/d30/system__Timer__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to initialise, configure and the operating system. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder</dd></dl>
+<p>Basic functions to start and initialise the operating system; allocate, free and copy memory, and create and end atomic sections. </p>
+<dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a></dd></dl>
 <h1><a class="anchor" id="sec_intro_base"></a>
 Introduction</h1>
-<p>This package contains basic functions to initialise and start all modules of OpenSwarm. This part of OpenSwarm executes all three modules</p><ul>
+<p>This package contains basic functions to initialise and start all modules of OpenSwarm. This part of OpenSwarm executes all three modules</p><ol type="1">
 <li>Process Management <dl class="section see"><dt>See also</dt><dd>procMan</dd></dl>
 </li>
-<li>Event System <dl class="section see"><dt>See also</dt><dd>EventSys</dd></dl>
+<li><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/ddf/group__events.html" title="Functions to emit, create, (un)subscribe, (un)register, and manage events. ">Event System</a></dd></dl>
 </li>
 <li>I/O Management (This includes device specific sensors and actuators) <dl class="section see"><dt>See also</dt><dd>IOMan</dd></dl>
 It first defines global preprocessor option to configure OpenSwarm. It initialises the system and I/O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided.</li>
-</ul>
+</ol>
 <h2><a class="anchor" id="ssec_intro_base_defs"></a>
 Definitions</h2>
 <p>definition.h provides standardisation ports, configuration the used platform, and general preprocessor/type definitions that are needed in the entire OpenSwarm project.</p>
 <h2><a class="anchor" id="ssec_intro_base_mem"></a>
 Memory Management</h2>
-<p>OpenSwarm is designed for processing unit that lack a MMU (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. OpenSwarm provides atomic functions to allocate, free and copy memory in <a class="el" href="../../dc/d18/memory_8h.html">memory.h</a>.</p>
+<p>OpenSwarm is designed for processing unit that lack a MMU (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. OpenSwarm provides atomic functions to allocate, free and copy memory in <a class="el" href="../../dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory ">memory.h</a>.</p>
 <h2><a class="anchor" id="ssec_intro_base_irq"></a>
 Interrupt Management</h2>
-<p>OpenSwarm provides a clear structure of interrupt priorities and functions to create atomic sections in <a class="el" href="../../d6/ded/interrupts_8h.html">interrupts.h</a>.</p>
+<p>OpenSwarm provides a clear structure of interrupt priorities and functions to create atomic sections in <a class="el" href="../../d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ...">interrupts.h</a>.</p>
 <h2><a class="anchor" id="ssec_intro_base_deps"></a>
 Dependencies</h2>
 <p>This part of OpenSwarm executes all three modules and depends on the configuration of each part and its implementation:</p><ul>

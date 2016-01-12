@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['sheduler_5finfo',['sheduler_info',['../db/d2e/structsys__process__control__block__s.html#a0ef282f8acb4718b5a896e3c7d693a4a',1,'sys_process_control_block_s']]],
+  ['size',['size',['../d9/d85/structsys__event__data__s.html#a61e4846d66a617a9e5ed3602a3be63ef',1,'sys_event_data_s']]],
+  ['speed',['speed',['../d6/d85/structsys__motors__s.html#af052a7c6ad50ff8e0acaa8293b37f659',1,'sys_motors_s']]],
+  ['stackpointer',['stackPointer',['../db/d2e/structsys__process__control__block__s.html#a524ae2611a8aeb602c9c3ad78f4cae97',1,'sys_process_control_block_s']]],
+  ['stackpointerlimit',['stackPointerLimit',['../db/d2e/structsys__process__control__block__s.html#a6ace28a95ee3d1ae4f0e36aa2675cf51',1,'sys_process_control_block_s']]],
+  ['state',['state',['../dd/da1/structsys__scheduler__info__s.html#a95d0294a71162ffbd1e65fd381e54a6b',1,'sys_scheduler_info_s']]],
+  ['subscribers',['subscribers',['../d2/d46/structsys__registered__event__s.html#acea93fade98b2e5bd81cc9b6ed35388d',1,'sys_registered_event_s']]],
+  ['sys_5fblocked_5fprocesses',['sys_blocked_processes',['../de/da9/data_8c.html#af1ffef9f4baaf82b3f6f396f83d8a98e',1,'sys_blocked_processes():&#160;data.c'],['../d2/dbd/data_8h.html#af1ffef9f4baaf82b3f6f396f83d8a98e',1,'sys_blocked_processes():&#160;data.c']]],
+  ['sys_5fi2c_5fmsgs',['sys_i2c_msgs',['../df/dd6/i2c__data_8c.html#ab06ea00913c00acfd046536bef96a344',1,'sys_i2c_msgs():&#160;i2c_data.c'],['../d8/ded/i2c__data_8h.html#ab06ea00913c00acfd046536bef96a344',1,'sys_i2c_msgs():&#160;i2c_data.c']]],
+  ['sys_5fiohandlers',['sys_iohandlers',['../d3/d87/io__HDI_8c.html#a3ad4a33dee3d7041caaa39bd294644dd',1,'sys_iohandlers():&#160;io_HDI.c'],['../d1/d81/io__HDI_8h.html#a3ad4a33dee3d7041caaa39bd294644dd',1,'sys_iohandlers():&#160;io_HDI.c']]],
+  ['sys_5foccurred_5fevents',['sys_occurred_events',['../de/da9/data_8c.html#a8f64edc06850662e57d4d278f042a017',1,'sys_occurred_events():&#160;data.c'],['../d2/dbd/data_8h.html#a8f64edc06850662e57d4d278f042a017',1,'sys_occurred_events():&#160;data.c']]],
+  ['sys_5fprocess_5fscheduler',['sys_process_scheduler',['../d7/de8/system__Timer__HDI_8c.html#aadb835800c4f3186f3aa4285d926c848',1,'sys_process_scheduler():&#160;system_Timer_HDI.c'],['../d7/d30/system__Timer__HDI_8h.html#aadb835800c4f3186f3aa4285d926c848',1,'sys_process_scheduler():&#160;system_Timer_HDI.c']]],
+  ['sys_5fready_5fprocesses',['sys_ready_processes',['../de/da9/data_8c.html#a690d5642057296225a2adbad03bb9483',1,'sys_ready_processes():&#160;data.c'],['../d2/dbd/data_8h.html#a690d5642057296225a2adbad03bb9483',1,'sys_ready_processes():&#160;data.c']]],
+  ['sys_5frunning_5fprocess',['sys_running_process',['../de/da9/data_8c.html#ae40e38bb69287141cc2c13a83a65f892',1,'sys_running_process():&#160;data.c'],['../d2/dbd/data_8h.html#ae40e38bb69287141cc2c13a83a65f892',1,'sys_running_process():&#160;data.c']]],
+  ['sys_5fuart1_5ftx_5fdata',['sys_UART1_TX_data',['../da/d3a/uart__HDI_8c.html#af30b180d749e11881bb05543af5fe25e',1,'sys_UART1_TX_data():&#160;uart_HDI.c'],['../dc/d0b/uart__HDI_8h.html#af30b180d749e11881bb05543af5fe25e',1,'sys_UART1_TX_data():&#160;uart_HDI.c']]],
+  ['sys_5fuart2_5ftx_5fdata',['sys_UART2_TX_data',['../da/d3a/uart__HDI_8c.html#a5437d55676502090ad34682ed275d11f',1,'sys_UART2_TX_data():&#160;uart_HDI.c'],['../dc/d0b/uart__HDI_8h.html#a5437d55676502090ad34682ed275d11f',1,'sys_UART2_TX_data():&#160;uart_HDI.c']]],
+  ['sys_5fzombies',['sys_zombies',['../de/da9/data_8c.html#a704449d0e3b4b60338acccb12eff7099',1,'sys_zombies():&#160;data.c'],['../d2/dbd/data_8h.html#a704449d0e3b4b60338acccb12eff7099',1,'sys_zombies():&#160;data.c']]]
+];

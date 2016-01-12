@@ -1,0 +1,83 @@
+\hypertarget{traps_8c}{}\section{platform/e-\/puck/traps.c File Reference}
+\label{traps_8c}\index{platform/e-\/puck/traps.\+c@{platform/e-\/puck/traps.\+c}}
+
+
+Hardware dependent implementations to catch hardware traps.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}../../../os/definitions.\+h\char`\"{}}\\*
+Include dependency graph for traps.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d34/traps_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{traps_8c_a226557d5e42f7e29ddaff30606138459}{\+\_\+\+\_\+attribute\+\_\+\+\_\+} ((interrupt, no\+\_\+auto\+\_\+psv))
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Hardware dependent implementations to catch hardware traps. 
+
+\begin{DoxyAuthor}{Author}
+Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org}
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+07 July 2014
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license}) 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\hypertarget{traps_8c_a226557d5e42f7e29ddaff30606138459}{}\index{traps.\+c@{traps.\+c}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!traps.\+c@{traps.\+c}}
+\subsubsection[{\+\_\+\+\_\+attribute\+\_\+\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+\+\_\+attribute\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{(interrupt, no\+\_\+auto\+\_\+psv)}]{}
+\end{DoxyParamCaption}
+)}\label{traps_8c_a226557d5e42f7e29ddaff30606138459}
+Address error trap.
+
+This function is called when an address error occurs. That means that a call address of a function or in the stack addresses an area outside the memory. Similarly, if a pointer points to memory outside the range, this trap happens.
+
+Stack error trap.
+
+This function is called when an stack error occurs. That means that the stack pointer, stack pointer limit, or frame pointer are pointing outside their range.
+
+Math error trap.
+
+This function is called when an math error occurs. That means an illegal math operation was performed (such as division by 0 or Na\+N).
+
+Alternative Oscillator fail trap.
+
+This function is called when an oscillator fail occurs. This should never happen.
+
+Alternative address error trap.
+
+This function is called when an address error occurs. That means that a call address of a function or in the stack addresses an area outside the memory. Similarly, if a pointer points to memory outside the range, this trap happens.
+
+Alternative stack error trap.
+
+This function is called when an stack error occurs. That means that the stack pointer, stack pointer limit, or frame pointer are pointing outside their range.
+
+Alternative math error trap.
+
+This function is called when an math error occurs. That means an illegal math operation was performed (such as division by 0 or Na\+N).
+
+Default interrupt service routine.
+
+This function is called when no other interrupt routine is specified. 
+
+Definition at line 68 of file traps.\+c.
+
