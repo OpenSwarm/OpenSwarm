@@ -95,11 +95,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">events.c File Reference<div class="ingroups"><a class="el" href="../../d1/ddf/group__events.html">Event System</a></div></div>  </div>
+<div class="title">events.c File Reference<div class="ingroups"><a class="el" href="../../d1/ddf/group__events.html">Event Management</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler.  
+<p>defines functions to create, (un)subscribe, (un)register, and delete events and related handler.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="../../db/dd2/events_8h_source.html">events.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../dd/de5/process__Management_8h_source.html">../processes/process_Management.h</a>&quot;</code><br />
@@ -123,19 +123,19 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d24/structsys__subscribed__process__s.html">sys_subscribed_process_s</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to store a list of subscribed processes.  <a href="../../d7/d24/structsys__subscribed__process__s.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single linked list element containing the ID of a subscribed process.  <a href="../../d7/d24/structsys__subscribed__process__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/structsys__registered__event__s.html">sys_registered_event_s</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to store registered events. It also includes a list of processes that are subscribed to the registered event.  <a href="../../d2/d46/structsys__registered__event__s.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single linked element containing a registered event and its subscribers.  <a href="../../d2/d46/structsys__registered__event__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a855a9b5c8c07fedd9f2a8bbf5ee9b4f0"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="../../d7/d24/structsys__subscribed__process__s.html">sys_subscribed_process_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/deb/events_8c.html#a855a9b5c8c07fedd9f2a8bbf5ee9b4f0">sys_subscribed_process</a></td></tr>
-<tr class="memdesc:a855a9b5c8c07fedd9f2a8bbf5ee9b4f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to store a list of subscribed processes.  <a href="#a855a9b5c8c07fedd9f2a8bbf5ee9b4f0">More...</a><br /></td></tr>
+<tr class="memdesc:a855a9b5c8c07fedd9f2a8bbf5ee9b4f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single linked list element containing the ID of a subscribed process.  <a href="#a855a9b5c8c07fedd9f2a8bbf5ee9b4f0">More...</a><br /></td></tr>
 <tr class="separator:a855a9b5c8c07fedd9f2a8bbf5ee9b4f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7779e3e7a7914df656c29f2a963989b"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="../../d2/d46/structsys__registered__event__s.html">sys_registered_event_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/deb/events_8c.html#ab7779e3e7a7914df656c29f2a963989b">sys_registered_event</a></td></tr>
-<tr class="memdesc:ab7779e3e7a7914df656c29f2a963989b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to store registered events. It also includes a list of processes that are subscribed to the registered event.  <a href="#ab7779e3e7a7914df656c29f2a963989b">More...</a><br /></td></tr>
+<tr class="memdesc:ab7779e3e7a7914df656c29f2a963989b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single linked element containing a registered event and its subscribers.  <a href="#ab7779e3e7a7914df656c29f2a963989b">More...</a><br /></td></tr>
 <tr class="separator:ab7779e3e7a7914df656c29f2a963989b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -167,7 +167,7 @@ Variables</h2></td></tr>
 <tr class="separator:a7b6f4f08f23614fda314aebb80042b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler. </p>
+<div class="textblock"><p>defines functions to create, (un)subscribe, (un)register, and delete events and related handler. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a> </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>23 March 2015</dd></dl>
@@ -185,7 +185,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>A struct to store registered events. It also includes a list of processes that are subscribed to the registered event. </p>
+<p>A single linked element containing a registered event and its subscribers. </p>
+<p>It is a single linked list element that contains registered events and a list of processes that are subscribed to it. </p>
 
 </div>
 </div>
@@ -199,7 +200,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>A struct to store a list of subscribed processes. </p>
+<p>A single linked list element containing the ID of a subscribed process. </p>
 
 </div>
 </div>
@@ -227,7 +228,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to the data structure of the found event ( or 0 if it wasn't found) </dd></dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00313">313</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00315">315</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -254,7 +255,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>is the event registered? </dd></dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00335">335</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00337">337</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -281,7 +282,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>was it successful. </dd></dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00101">101</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00103">103</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -326,7 +327,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>was it successful. </dd></dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00060">60</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00062">62</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -372,7 +373,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>was it successful. </dd></dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00088">88</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00090">90</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -424,7 +425,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>was it successful. </dd></dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00144">144</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00146">146</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -450,7 +451,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00190">190</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00192">192</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -487,7 +488,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00242">242</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00244">244</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -531,7 +532,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00278">278</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00280">280</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -557,7 +558,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00356">356</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00358">358</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -573,7 +574,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>pointer to the List of registered events </p>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00046">46</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00048">48</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>

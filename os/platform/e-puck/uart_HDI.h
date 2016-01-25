@@ -23,7 +23,7 @@
 extern "C" {
 #endif
 
-#include "../../../os/definitions.h"
+#include "../../definitions.h"
 
 #define UART1_RX _RF2  /*!< Used port on the microcontroller to read from the UART1 */
 #define UART1_TX _RF3 /*!< Used port on the microcontroller to  write on the UART1 */
@@ -39,16 +39,16 @@ extern "C" {
 #define SYS_UART2_BAUDRATE 115000 /*!< Baud rate for UART2 */
     
 /**
- * Linked list element to store the transmission data
+ * @brief Linked list element to store transmission data
  *
- * This struct contains data and the amount of bytes that should be sent via UART1.
+ * It is a single linked list containing a set of bytes that should be sent via UART.
  *
  */
-typedef struct uart_tx_data_s{
+typedef struct sys_uart_tx_data_s{
     uint8 *data;
     uint16 length;
 
-    struct uart_tx_data_s *next;
+    struct sys_uart_tx_data_s *next;
 }sys_uart_txdata;
 
 extern sys_uart_txdata *sys_UART1_TX_data;

@@ -6,7 +6,7 @@
  *
  * \date 23 March 2015
  * 
- * \brief This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler.
+ * \brief defines functions to create, (un)subscribe, (un)register, and delete events and related handler.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -19,7 +19,7 @@
 #include <stdbool.h>
 
 /**
- * @brief A struct to store a list of subscribed processes
+ * @brief A single linked list element containing the ID of a subscribed process
  */
 typedef struct sys_subscribed_process_s{
     uint16 pid;/*!< process identifier */
@@ -27,7 +27,9 @@ typedef struct sys_subscribed_process_s{
 }sys_subscribed_process;
 
 /**
- * @brief A struct to store registered events. It also includes a list of processes that are subscribed to the registered event 
+ * @brief A single linked element containing a registered event and its subscribers
+ * 
+ * It is a single linked list element that contains registered events and a list of processes that are subscribed to it. 
  */
 typedef struct sys_registered_event_s{
     uint16 id;/*!< event identifier */

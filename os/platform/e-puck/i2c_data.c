@@ -8,7 +8,7 @@
  *
  * \date 10 August 2015
  * 
- * \brief  This file includes functions to read and write on the I2C interface.
+ * \brief defines functions to manage the I2C queue.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 

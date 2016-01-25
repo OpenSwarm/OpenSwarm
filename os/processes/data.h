@@ -27,33 +27,33 @@ extern "C" {
  *  Struct Declarations
  ********************************************************/
     
-//!  List of occured events
+//! Linked list element containing an occurred events
 /*!
- This struct sores the event ID of an occurred event
+ It is a single linked list element that stores the id on an occurred event.
 */
-typedef struct sys_occured_event_s{
+typedef struct sys_occurred_event_s{
     uint16 eventID;
 
-    struct sys_occured_event_s *next;
-}sys_occured_event;
+    struct sys_occurred_event_s *next;
+}sys_occurred_event;
 
-//!  List of process event-handlers
+//!  Double linked list element of process event-handlers
 /*!
- This struct sores all information needed to decide if the event-handler is executed for the event (eventID). To store the event data and be executed, a condition has to be met.
+ It is a double linked list containing all information needed to decide if the event-handler should be executed for an occurred event or not. It sores the pointer to the handler the condition function and data.
 */
 typedef struct sys_process_event_handler_s{
     uint16 eventID;
-    pEventHandlerFunction handler;/*!< Pointer to function which computes the evnt data */
-    pConditionFunction condition;/*!< Pointer to function which checks if the event-handler has to be executed (true) or nor (false) */
-    sys_event_data *buffered_data;/*!< stores the data */
+    pEventHandlerFunction handler;/*!< Pointer to a function which processes occurred events*/
+    pConditionFunction condition;/*!< Pointer to  a function which checks if the event-handler should be executed (true) or not (false) */
+    sys_event_data *buffered_data;/*!< stores a list of recieved event data that need to be processed */
 
     struct sys_process_event_handler_s *previous;
     struct sys_process_event_handler_s *next;
 }sys_process_event_handler, sys_peh;
 
-//!  Process Control Block for the processes
+//!  Process Control Block for a single process
 /*!
- This struct sores all information of the current state of a process
+ * It contains all information related to a single process. (including stack pointer, frame pointer, stack, etc. )
 */
 typedef struct sys_process_control_block_s{
 
@@ -70,9 +70,9 @@ typedef struct sys_process_control_block_s{
 } sys_process_control_block, sys_pcb;
 
 
-//!  Container struct for Process Control Block
+//!  Double linked list element containing sys_process_control_block
 /*!
- This struct is a container (linked list) for PCB
+ It is a double linked list element containing the PCB of a process
 */
 typedef struct sys_process_control_block_list_element_s{
 
@@ -87,7 +87,7 @@ extern sys_pcb_list_element *sys_ready_processes;/*!< pointer to the ready proce
 extern sys_pcb_list_element *sys_running_process;/*!< pointer to the running process */
 extern sys_pcb_list_element *sys_blocked_processes;/*!< pointer to the blocked process */
 extern sys_pcb_list_element *sys_zombies;/*!< pointer to the zombie process */
-extern sys_occured_event *sys_occurred_events;/*!< pointer to the occurred events */
+extern sys_occurred_event *sys_occurred_events;/*!< pointer to the occurred events */
 
 /********************************************************
  *  Function Prototypes

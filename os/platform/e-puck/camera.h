@@ -52,7 +52,7 @@ extern "C" {
 #define SYS_MAX_BLUE    0b00011111;/*!< blue bits received */
 
     /**
-     * @brief This bitfield contains the structure of the received pixel of a camera
+     * @brief This bitfield contains the structure of a received camera pixel.
      */
     typedef struct sys_rgb_pixel_s{
         uint8 red   : 5;

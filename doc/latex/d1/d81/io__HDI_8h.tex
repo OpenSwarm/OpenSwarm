@@ -6,7 +6,8 @@ Hardware dependent implementations to start and stop the I/\+O timer. This timer
 
 
 {\ttfamily \#include \char`\"{}../../../os/definitions.\+h\char`\"{}}\\*
-Include dependency graph for io\+\_\+\+H\+D\+I.\+h\+:\nopagebreak
+Include dependency graph for io\+\_\+\+H\+D\+I.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -24,7 +25,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structsys__periodical__IOHandler__s}{sys\+\_\+periodical\+\_\+\+I\+O\+Handler\+\_\+s}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Linked list element containing I\+O Handler function pointers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,7 +37,7 @@ struct \hyperlink{structsys__periodical__IOHandler__s}{sys\+\_\+periodical\+\_\+
 \begin{DoxyCompactItemize}
 \item 
 typedef struct \hyperlink{structsys__periodical__IOHandler__s}{sys\+\_\+periodical\+\_\+\+I\+O\+Handler\+\_\+s} \hyperlink{io__HDI_8h_ad7821201f73ad9a8f829d1883ef2346d}{sys\+\_\+periodical\+\_\+\+I\+O\+Handler}
-\item 
+\begin{DoxyCompactList}\small\item\em Linked list element containing I\+O Handler function pointers. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structsys__periodical__IOHandler__s}{sys\+\_\+periodical\+\_\+\+I\+O\+Handler\+\_\+s} \hyperlink{io__HDI_8h_a2c21c7610a28b36d1a142eecf10f78a5}{sys\+\_\+p\+I\+O\+Handler}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
@@ -105,7 +106,11 @@ Definition at line 25 of file io\+\_\+\+H\+D\+I.\+h.
 \hypertarget{io__HDI_8h_ad7821201f73ad9a8f829d1883ef2346d}{}\index{io\+\_\+\+H\+D\+I.\+h@{io\+\_\+\+H\+D\+I.\+h}!sys\+\_\+periodical\+\_\+\+I\+O\+Handler@{sys\+\_\+periodical\+\_\+\+I\+O\+Handler}}
 \index{sys\+\_\+periodical\+\_\+\+I\+O\+Handler@{sys\+\_\+periodical\+\_\+\+I\+O\+Handler}!io\+\_\+\+H\+D\+I.\+h@{io\+\_\+\+H\+D\+I.\+h}}
 \subsubsection[{sys\+\_\+periodical\+\_\+\+I\+O\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+periodical\+\_\+\+I\+O\+Handler\+\_\+s}  {\bf sys\+\_\+periodical\+\_\+\+I\+O\+Handler}}\label{io__HDI_8h_ad7821201f73ad9a8f829d1883ef2346d}
-\hypertarget{io__HDI_8h_a2c21c7610a28b36d1a142eecf10f78a5}{}\index{io\+\_\+\+H\+D\+I.\+h@{io\+\_\+\+H\+D\+I.\+h}!sys\+\_\+p\+I\+O\+Handler@{sys\+\_\+p\+I\+O\+Handler}}
+
+
+Linked list element containing I\+O Handler function pointers. 
+
+It is a single linked list element containing a function pointer to an I\+O hander. \hypertarget{io__HDI_8h_a2c21c7610a28b36d1a142eecf10f78a5}{}\index{io\+\_\+\+H\+D\+I.\+h@{io\+\_\+\+H\+D\+I.\+h}!sys\+\_\+p\+I\+O\+Handler@{sys\+\_\+p\+I\+O\+Handler}}
 \index{sys\+\_\+p\+I\+O\+Handler@{sys\+\_\+p\+I\+O\+Handler}!io\+\_\+\+H\+D\+I.\+h@{io\+\_\+\+H\+D\+I.\+h}}
 \subsubsection[{sys\+\_\+p\+I\+O\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+periodical\+\_\+\+I\+O\+Handler\+\_\+s}  {\bf sys\+\_\+p\+I\+O\+Handler}}\label{io__HDI_8h_a2c21c7610a28b36d1a142eecf10f78a5}
 

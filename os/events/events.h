@@ -6,11 +6,11 @@
  *
  * \date 23 March 2015
  * 
- * \brief functions to create handle and configure events.
+ * \brief declares functions to create, (un)subscribe, (un)register, and delete events and related handler. 
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
-/*! \defgroup events Event System
+/*! \defgroup events Event Management
  * \brief Functions to emit, create, (un)subscribe, (un)register, and manage events.
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -84,23 +84,27 @@ extern "C" {
 #endif
     
     /**
-     * @brief This struct contains data of the size \b size at the memory of \b value. It is a struct for a linked list.
+     * @brief It is a single linked list element and contains data of an occurred event.
      */
     typedef struct sys_event_data_s{
-        void *value;/*!< pointer to the data transfered by an event */
-        uint16 size;/*!< size of the dransfered data (bytes) */
+        void *value;/*!< pointer to the data transferred by an event */
+        uint16 size;/*!< size of the transferred data (bytes) */
 
         struct sys_event_data_s *next;/*!< pointer to the next element in the List */
     }sys_event_data;
     
      
     /**
-     * @brief Event handler function pinter type (process id, event id, received data) 
+     * @brief Event handler function pointer type (process id, event id, received data) 
+     * 
+     * This function points to an event handler function, which processes incoming events and its data. 
      */
-    typedef bool (*pEventHandlerFunction)(uint16, uint16, sys_event_data *);//PID, EventID, EventData
-     
+    typedef bool (*pEventHandlerFunction)(uint16 /*PID*/, uint16 /*EventID*/, sys_event_data */*EventData*/);
+    
     /**
-     * @brief Condition function pinter type (received data)
+     * @brief Condition function pointer type 
+     * 
+     * This function points to a condition function, which defines if an event handler should be executed or not. 
      */
     typedef bool (*pConditionFunction)(void *);
 

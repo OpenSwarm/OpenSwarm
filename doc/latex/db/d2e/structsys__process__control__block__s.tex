@@ -2,7 +2,7 @@
 \label{structsys__process__control__block__s}\index{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s@{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s}}
 
 
-Process Control Block for the processes.  
+Process Control Block for a single process.  
 
 
 
@@ -11,13 +11,8 @@ Process Control Block for the processes.
 
 
 
-Collaboration diagram for sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{d5/d90/structsys__process__control__block__s__coll__graph}
-\end{center}
-\end{figure}
+Collaboration diagram for sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s\+:
+% FIG 0
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
@@ -38,9 +33,9 @@ Collaboration diagram for sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s\+:\nop
 
 
 \subsection{Detailed Description}
-Process Control Block for the processes. 
+Process Control Block for a single process. 
 
-This struct sores all information of the current state of a process 
+It contains all information related to a single process. (including stack pointer, frame pointer, stack, etc. ) 
 
 Definition at line 58 of file data.\+h.
 

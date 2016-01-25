@@ -32,7 +32,7 @@ extern "C" {
 
 //!  The scheduling information for each process
 /*!
- This struct defines all values wich are needed for the scheduling algorithm
+ This struct defines all values wich are needed for the scheduling algorithm.
 */
 typedef struct sys_scheduler_info_s{
     unsigned short state;       /*!< Process state information */

@@ -26,7 +26,7 @@ typedef enum { I2C_IDLE_MODE = 0, I2C_WRITING_ADDRESS_MODE, I2C_READING_BYTES_MO
 
 
 /**
- * @brief Linked list element of messages that need to be sent via I2C.
+ * @brief It is a single linked list element containing messages that need to be sent via I2C.
  *
  */
 typedef struct sys_i2c_message_s {

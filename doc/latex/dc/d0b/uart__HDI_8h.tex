@@ -5,8 +5,9 @@
 Hardware dependent implementations to control the message flow of the U\+A\+R\+T interface.  
 
 
-{\ttfamily \#include \char`\"{}../../../os/definitions.\+h\char`\"{}}\\*
-Include dependency graph for uart\+\_\+\+H\+D\+I.\+h\+:\nopagebreak
+{\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
+Include dependency graph for uart\+\_\+\+H\+D\+I.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -23,8 +24,8 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structuart__tx__data__s}{uart\+\_\+tx\+\_\+data\+\_\+s}
-\end{DoxyCompactItemize}
+struct \hyperlink{structsys__uart__tx__data__s}{sys\+\_\+uart\+\_\+tx\+\_\+data\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Linked list element to store transmission data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -51,8 +52,8 @@ struct \hyperlink{structuart__tx__data__s}{uart\+\_\+tx\+\_\+data\+\_\+s}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef struct \hyperlink{structuart__tx__data__s}{uart\+\_\+tx\+\_\+data\+\_\+s} \hyperlink{uart__HDI_8h_ac889c78db78b35dd5c98ba6062f5c045}{sys\+\_\+uart\+\_\+txdata}
-\end{DoxyCompactItemize}
+typedef struct \hyperlink{structsys__uart__tx__data__s}{sys\+\_\+uart\+\_\+tx\+\_\+data\+\_\+s} \hyperlink{uart__HDI_8h_a9662a398266fb1b49c5b35ff45d7d521}{sys\+\_\+uart\+\_\+txdata}
+\begin{DoxyCompactList}\small\item\em Linked list element to store transmission data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -75,9 +76,9 @@ void \hyperlink{uart__HDI_8h_ab116093f64d0cf3ea9436277677bc17e}{Sys\+\_\+\+Write
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{uart__HDI_8h_ac889c78db78b35dd5c98ba6062f5c045}{sys\+\_\+uart\+\_\+txdata} $\ast$ \hyperlink{uart__HDI_8h_af30b180d749e11881bb05543af5fe25e}{sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data}
+\hyperlink{uart__HDI_8h_a9662a398266fb1b49c5b35ff45d7d521}{sys\+\_\+uart\+\_\+txdata} $\ast$ \hyperlink{uart__HDI_8h_af30b180d749e11881bb05543af5fe25e}{sys\+\_\+\+U\+A\+R\+T1\+\_\+\+T\+X\+\_\+data}
 \item 
-\hyperlink{uart__HDI_8h_ac889c78db78b35dd5c98ba6062f5c045}{sys\+\_\+uart\+\_\+txdata} $\ast$ \hyperlink{uart__HDI_8h_a5437d55676502090ad34682ed275d11f}{sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data}
+\hyperlink{uart__HDI_8h_a9662a398266fb1b49c5b35ff45d7d521}{sys\+\_\+uart\+\_\+txdata} $\ast$ \hyperlink{uart__HDI_8h_a5437d55676502090ad34682ed275d11f}{sys\+\_\+\+U\+A\+R\+T2\+\_\+\+T\+X\+\_\+data}
 \item 
 \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} \hyperlink{uart__HDI_8h_ace99407f75f6ac767119314bc5177667}{byte\+\_\+counter\+\_\+uart1}
 \item 
@@ -180,12 +181,14 @@ Definition at line 36 of file uart\+\_\+\+H\+D\+I.\+h.
 
 
 \subsection{Typedef Documentation}
-\hypertarget{uart__HDI_8h_ac889c78db78b35dd5c98ba6062f5c045}{}\index{uart\+\_\+\+H\+D\+I.\+h@{uart\+\_\+\+H\+D\+I.\+h}!sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}}
+\hypertarget{uart__HDI_8h_a9662a398266fb1b49c5b35ff45d7d521}{}\index{uart\+\_\+\+H\+D\+I.\+h@{uart\+\_\+\+H\+D\+I.\+h}!sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}}
 \index{sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}!uart\+\_\+\+H\+D\+I.\+h@{uart\+\_\+\+H\+D\+I.\+h}}
-\subsubsection[{sys\+\_\+uart\+\_\+txdata}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf uart\+\_\+tx\+\_\+data\+\_\+s} {\bf sys\+\_\+uart\+\_\+txdata}}\label{uart__HDI_8h_ac889c78db78b35dd5c98ba6062f5c045}
-Linked list element to store the transmission data
+\subsubsection[{sys\+\_\+uart\+\_\+txdata}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+uart\+\_\+tx\+\_\+data\+\_\+s} {\bf sys\+\_\+uart\+\_\+txdata}}\label{uart__HDI_8h_a9662a398266fb1b49c5b35ff45d7d521}
 
-This struct contains data and the amount of bytes that should be sent via U\+A\+R\+T1. 
+
+Linked list element to store transmission data. 
+
+It is a single linked list containing a set of bytes that should be sent via U\+A\+R\+T. 
 
 \subsection{Function Documentation}
 \hypertarget{uart__HDI_8h_aa68893b903e41cc4726c534a6ca1c404}{}\index{uart\+\_\+\+H\+D\+I.\+h@{uart\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1\+\_\+\+H\+D\+I}}

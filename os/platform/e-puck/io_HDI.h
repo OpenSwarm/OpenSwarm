@@ -25,6 +25,11 @@ extern "C" {
 #define STEPS_PER_SECOND 10000
 #define STEPS_PER_MILISECOND 10
     
+/**
+ * @brief Linked list element containing IO Handler function pointers 
+ * 
+ * It is a single linked list element containing a function pointer to an IO hander.
+ */
 typedef struct sys_periodical_IOHandler_s {
     pFunction function;
     

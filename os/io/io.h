@@ -6,7 +6,7 @@
  *
  * \date 28 July 2015
  * 
- * \brief  This file includes the IO timer to start and stop the timer.  This timer executes IO functions periodically.
+ * \brief  declares functions to control the IO timer and to (un)register IO Handler.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 

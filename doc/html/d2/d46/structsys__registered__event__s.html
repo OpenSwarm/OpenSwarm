@@ -93,7 +93,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>A struct to store registered events. It also includes a list of processes that are subscribed to the registered event.  
+<p>A single linked element containing a registered event and its subscribers.  
  <a href="../../d2/d46/structsys__registered__event__s.html#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Collaboration diagram for sys_registered_event_s:</div>
@@ -101,8 +101,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="../../de/d55/structsys__registered__event__s__coll__graph.png" border="0" usemap="#sys__registered__event__s_coll__map" alt="Collaboration graph"/></div>
-<map name="sys__registered__event__s_coll__map" id="sys__registered__event__s_coll__map">
-<area shape="rect" id="node2" href="../../d7/d24/structsys__subscribed__process__s.html" title="A struct to store a list of subscribed processes. " alt="" coords="5,5,185,32"/></map>
+<!-- MAP 0 -->
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -115,9 +114,10 @@ Data Fields</h2></td></tr>
 <tr class="separator:a084bfc795b0f5135b6439a28bf9920c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A struct to store registered events. It also includes a list of processes that are subscribed to the registered event. </p>
+<div class="textblock"><p>A single linked element containing a registered event and its subscribers. </p>
+<p>It is a single linked list element that contains registered events and a list of processes that are subscribed to it. </p>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00032">32</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00034">34</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="a44886c67a44aee553cbbbcd9903fcd39"></a>
 <div class="memitem">
@@ -130,7 +130,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>event identifier </p>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00033">33</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00035">35</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -145,7 +145,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>pointer to the next element in the List </p>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00035">35</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00037">37</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>
@@ -160,7 +160,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p>pointer to a list of subscribed processes </p>
 
-<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00034">34</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/deb/events_8c_source.html#l00036">36</a> of file <a class="el" href="../../de/deb/events_8c_source.html">events.c</a>.</p>
 
 </div>
 </div>

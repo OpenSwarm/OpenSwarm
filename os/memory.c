@@ -6,7 +6,7 @@
  *
  * \date{05 September 2015}
  * 
- * \brief includes functions to allocate, free, and copy memory
+ * \brief defines functions to allocate, free, and copy memory
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 

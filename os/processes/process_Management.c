@@ -395,7 +395,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
     }
 
     bool add_event = true;
-    sys_occured_event **o_event = &sys_occurred_events;
+    sys_occurred_event **o_event = &sys_occurred_events;
     while(*o_event != 0){//check if the event (eventID) already occurred
         if((*o_event)->eventID == eventID){//it already occurred
             add_event = false;
@@ -407,7 +407,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
     if(add_event){//if it hasn't occurred 
     Sys_Start_AtomicSection();
         //add eventID to the list of occurred events
-        (*o_event) = Sys_Malloc(sizeof(sys_occured_event));
+        (*o_event) = Sys_Malloc(sizeof(sys_occurred_event));
        if((*o_event) == 0){
            Sys_End_AtomicSection();
            return; //no memory left
@@ -505,7 +505,7 @@ inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_eleme
  *
  */
 inline void Sys_Execute_All_EventHandler(){
-    sys_occured_event *o_event = sys_occurred_events;
+    sys_occurred_event *o_event = sys_occurred_events;
     sys_occurred_events = 0;
 
     while(o_event != 0){//assuming there are less processes then events
@@ -514,7 +514,7 @@ inline void Sys_Execute_All_EventHandler(){
         Sys_Execute_Events_in_ProcessList(o_event->eventID, sys_blocked_processes);
 
         
-        sys_occured_event *occured_event = o_event;
+        sys_occurred_event *occured_event = o_event;
         o_event = o_event->next;
         
         occured_event->next = 0;

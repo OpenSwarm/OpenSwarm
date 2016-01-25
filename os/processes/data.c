@@ -33,7 +33,7 @@ sys_pcb_list_element *sys_ready_processes = 0;/*!< pointer to the ready processe
 sys_pcb_list_element *sys_running_process = 0;/*!< pointer to the running process */
 sys_pcb_list_element *sys_blocked_processes = 0;/*!< pointer to the blocked process */
 sys_pcb_list_element *sys_zombies = 0;/*!< pointer to the zombie process */
-sys_occured_event *sys_occurred_events = 0;/*!< pointer to the occurred events */
+sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events */
 
 /********************************************************
  ********************************************************

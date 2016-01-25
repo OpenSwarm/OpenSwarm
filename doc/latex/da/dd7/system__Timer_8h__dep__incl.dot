@@ -1,0 +1,14 @@
+digraph "processes/system_Timer.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="processes/system_Timer.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="system.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d4/dfd/system_8c.html",tooltip="defines functions to initialise and start OpenSwarm. "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="events/events.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$de/deb/events_8c.html",tooltip="defines functions to create, (un)subscribe, (un)register, and delete events and related handler..."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="platform/e-puck/system\l_Timer_HDI.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d7/de8/system__Timer__HDI_8c.html",tooltip="Hardware dependent implementations to initialise, configure and the operating system. "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="processes/process_Management.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$da/d14/process__Management_8c.html",tooltip="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..."];
+}

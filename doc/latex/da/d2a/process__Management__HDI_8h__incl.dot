@@ -1,0 +1,30 @@
+digraph "platform/e-puck/process_Management_HDI.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="platform/e-puck/process\l_Management_HDI.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="../../../os/processes\l/data.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d2/dbd/data_8h.html",tooltip="This file includes all functions which are needed to manage data structures needed by the processes m..."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="stdbool.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="../../os/definitions.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d6/dc2/definitions_8h.html",tooltip="This file declares general preprocessor variables and types. "];
+  Node4 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="stdint.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="p30F6014A.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="platform/e-puck/library\l/motor_led/e_epuck_ports.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="platform/e-puck/DSPIC30F6014\lA_HDI.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d9/d1f/DSPIC30F6014A__HDI_8h.html",tooltip="declares e-puck specific types and preprocessor variables "];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="library/motor_led/e\l_epuck_ports.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="../../os/events/events.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$db/dd2/events_8h.html",tooltip="declares functions to create, (un)subscribe, (un)register, and delete events and related handler..."];
+  Node10 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="scheduler.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d2/dd8/scheduler_8h.html",tooltip="This file includes all functions wich are needed to specify a scheduling algorithm. "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+}

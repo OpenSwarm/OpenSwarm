@@ -6,7 +6,7 @@
  *
  * \date 28 July 2015
  * 
- * \brief  This file includes the system clock that can be used to measure time.
+ * \brief  declares the system clock that provides a continuous time value (granulation of 1 ms).
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 

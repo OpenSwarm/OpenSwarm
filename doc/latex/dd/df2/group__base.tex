@@ -16,17 +16,17 @@ Collaboration diagram for Base\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 file \hyperlink{interrupts_8c}{interrupts.\+c}
-\begin{DoxyCompactList}\small\item\em includes basic system calls to create atomic sections. (Sections that cannot be interrupted) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It defines the functions to create atomic sections. \end{DoxyCompactList}\item 
 file \hyperlink{interrupts_8h}{interrupts.\+h}
-\begin{DoxyCompactList}\small\item\em includes system calls to create atomic sections. (Sections that cannot be interrupted) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It declares interrupt priority levels and functions to create atomic sections. \end{DoxyCompactList}\item 
 file \hyperlink{memory_8c}{memory.\+c}
-\begin{DoxyCompactList}\small\item\em includes functions to allocate, free, and copy memory \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em defines functions to allocate, free, and copy memory \end{DoxyCompactList}\item 
 file \hyperlink{memory_8h}{memory.\+h}
-\begin{DoxyCompactList}\small\item\em includes functions to allocate, free, and copy memory \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em declares functions to allocate, free, and copy memory \end{DoxyCompactList}\item 
 file \hyperlink{system_8c}{system.\+c}
-\begin{DoxyCompactList}\small\item\em includes system calls that initialise and configure the operating system. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em defines functions to initialise and start Open\+Swarm. \end{DoxyCompactList}\item 
 file \hyperlink{system_8h}{system.\+h}
-\begin{DoxyCompactList}\small\item\em initiaises and starts Open\+Swarm. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em declares functions to initialise and start Open\+Swarm. \end{DoxyCompactList}\item 
 file \hyperlink{system__Timer__HDI_8c}{system\+\_\+\+Timer\+\_\+\+H\+D\+I.\+c}
 \begin{DoxyCompactList}\small\item\em Hardware dependent implementations to initialise, configure and the operating system. \end{DoxyCompactList}\item 
 file \hyperlink{system__Timer__HDI_8h}{system\+\_\+\+Timer\+\_\+\+H\+D\+I.\+h}
@@ -42,20 +42,13 @@ Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwal
 \hypertarget{group__base_sec_intro_base}{}\subsection{Introduction}\label{group__base_sec_intro_base}
 This package contains basic functions to initialise and start all modules of Open\+Swarm. This part of Open\+Swarm executes all three modules
 \begin{DoxyEnumerate}
-\item Process Management \begin{DoxySeeAlso}{See also}
-proc\+Man
-\end{DoxySeeAlso}
+\item \hyperlink{group__process}{Process Manages}
+\item \hyperlink{group__events}{Event Management}
+\item \hyperlink{group__io}{I/\+O Management}
+\end{DoxyEnumerate}
 
-\item \begin{DoxySeeAlso}{See also}
-\hyperlink{group__events}{Event System}
-\end{DoxySeeAlso}
-
-\item I/\+O Management (This includes device specific sensors and actuators) \begin{DoxySeeAlso}{See also}
-I\+O\+Man
-\end{DoxySeeAlso}
-It first defines global preprocessor option to configure Open\+Swarm. It initialises the system and I/\+O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided.
-\end{DoxyEnumerate}\hypertarget{group__base_ssec_intro_base_defs}{}\subsubsection{Definitions}\label{group__base_ssec_intro_base_defs}
-definition.\+h provides standardisation ports, configuration the used platform, and general preprocessor/type definitions that are needed in the entire Open\+Swarm project.\hypertarget{group__base_ssec_intro_base_mem}{}\subsubsection{Memory Management}\label{group__base_ssec_intro_base_mem}
+It first defines global preprocessor option to configure Open\+Swarm. It initialises the system and I/\+O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided.\hypertarget{group__base_ssec_intro_base_defs}{}\subsubsection{Definitions}\label{group__base_ssec_intro_base_defs}
+definition.\+h provides standardised ports, configuration the used platform, and general preprocessor/type definitions that are needed in the entire Open\+Swarm project.\hypertarget{group__base_ssec_intro_base_mem}{}\subsubsection{Memory Management}\label{group__base_ssec_intro_base_mem}
 Open\+Swarm is designed for processing unit that lack a M\+M\+U (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. Open\+Swarm provides atomic functions to allocate, free and copy memory in \hyperlink{memory_8h}{memory.\+h}.\hypertarget{group__base_ssec_intro_base_irq}{}\subsubsection{Interrupt Management}\label{group__base_ssec_intro_base_irq}
 Open\+Swarm provides a clear structure of interrupt priorities and functions to create atomic sections in \hyperlink{interrupts_8h}{interrupts.\+h}.\hypertarget{group__base_ssec_intro_base_deps}{}\subsubsection{Dependencies}\label{group__base_ssec_intro_base_deps}
 This part of Open\+Swarm executes all three modules and depends on the configuration of each part and its implementation\+:

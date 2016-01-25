@@ -28,7 +28,7 @@
 #define POWER_SAVE_WAIT 15      /*!< amount of steps needed to move the motor one step further */
 
 /**
- * @brief This struct contains speed for motors.
+ * @brief This struct contains the speed for a motor.
  */
 typedef struct sys_motors_s{
     sint16 speed;

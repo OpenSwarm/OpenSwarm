@@ -9,7 +9,8 @@ This file includes all functions which are needed to manage data structures need
 {\ttfamily \#include \char`\"{}../../os/definitions.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../os/events/events.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}scheduler.\+h\char`\"{}}\\*
-Include dependency graph for data.\+h\+:\nopagebreak
+Include dependency graph for data.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -26,29 +27,29 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structsys__occured__event__s}{sys\+\_\+occured\+\_\+event\+\_\+s}
-\begin{DoxyCompactList}\small\item\em List of occured events. \end{DoxyCompactList}\item 
+struct \hyperlink{structsys__occurred__event__s}{sys\+\_\+occurred\+\_\+event\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Linked list element containing an occurred events. \end{DoxyCompactList}\item 
 struct \hyperlink{structsys__process__event__handler__s}{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}
-\begin{DoxyCompactList}\small\item\em List of process event-\/handlers. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Double linked list element of process event-\/handlers. \end{DoxyCompactList}\item 
 struct \hyperlink{structsys__process__control__block__s}{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s}
-\begin{DoxyCompactList}\small\item\em Process Control Block for the processes. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Process Control Block for a single process. \end{DoxyCompactList}\item 
 struct \hyperlink{structsys__process__control__block__list__element__s}{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element\+\_\+s}
-\begin{DoxyCompactList}\small\item\em Container struct for Process Control Block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Double linked list element containing sys\+\_\+process\+\_\+control\+\_\+block. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef struct \hyperlink{structsys__occured__event__s}{sys\+\_\+occured\+\_\+event\+\_\+s} \hyperlink{data_8h_a1b3a35eb6e5e0d2286dfdcda0d0f2e72}{sys\+\_\+occured\+\_\+event}
-\begin{DoxyCompactList}\small\item\em List of occured events. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structsys__occurred__event__s}{sys\+\_\+occurred\+\_\+event\+\_\+s} \hyperlink{data_8h_a4fcd64553cc0da94330cf470bc07a268}{sys\+\_\+occurred\+\_\+event}
+\begin{DoxyCompactList}\small\item\em Linked list element containing an occurred events. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structsys__process__event__handler__s}{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s} \hyperlink{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}{sys\+\_\+process\+\_\+event\+\_\+handler}
-\begin{DoxyCompactList}\small\item\em List of process event-\/handlers. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Double linked list element of process event-\/handlers. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structsys__process__event__handler__s}{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s} \hyperlink{data_8h_a993c5df339cf9d76fd91108b4736c391}{sys\+\_\+peh}
 \item 
 typedef struct \hyperlink{structsys__process__control__block__s}{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s} \hyperlink{data_8h_a4a97a9fe481ab1cef2c0bb4c799431d0}{sys\+\_\+process\+\_\+control\+\_\+block}
-\begin{DoxyCompactList}\small\item\em Process Control Block for the processes. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Process Control Block for a single process. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structsys__process__control__block__s}{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s} \hyperlink{data_8h_a7d0b7b720fcd20824dd86aa3fe69b181}{sys\+\_\+pcb}
 \item 
 typedef struct \hyperlink{structsys__process__control__block__list__element__s}{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element\+\_\+s} \hyperlink{data_8h_ab0c42630be04d1ee14b0c6db9ee5aae4}{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element}
-\begin{DoxyCompactList}\small\item\em Container struct for Process Control Block. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Double linked list element containing sys\+\_\+process\+\_\+control\+\_\+block. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structsys__process__control__block__list__element__s}{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element\+\_\+s} \hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
@@ -85,7 +86,7 @@ void \hyperlink{data_8h_a4ce23b19b4229d1d0ba38d45a9f36bf8}{Sys\+\_\+\+Clear\+\_\
 \item 
 \hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8h_a704449d0e3b4b60338acccb12eff7099}{sys\+\_\+zombies}
 \item 
-\hyperlink{data_8h_a1b3a35eb6e5e0d2286dfdcda0d0f2e72}{sys\+\_\+occured\+\_\+event} $\ast$ \hyperlink{data_8h_a8f64edc06850662e57d4d278f042a017}{sys\+\_\+occurred\+\_\+events}
+\hyperlink{data_8h_a4fcd64553cc0da94330cf470bc07a268}{sys\+\_\+occurred\+\_\+event} $\ast$ \hyperlink{data_8h_a85abae706ed2a3f01168b05b19ff71f0}{sys\+\_\+occurred\+\_\+events}
 \end{DoxyCompactItemize}
 
 
@@ -107,14 +108,14 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 
 
 \subsection{Typedef Documentation}
-\hypertarget{data_8h_a1b3a35eb6e5e0d2286dfdcda0d0f2e72}{}\index{data.\+h@{data.\+h}!sys\+\_\+occured\+\_\+event@{sys\+\_\+occured\+\_\+event}}
-\index{sys\+\_\+occured\+\_\+event@{sys\+\_\+occured\+\_\+event}!data.\+h@{data.\+h}}
-\subsubsection[{sys\+\_\+occured\+\_\+event}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+occured\+\_\+event\+\_\+s} {\bf sys\+\_\+occured\+\_\+event}}\label{data_8h_a1b3a35eb6e5e0d2286dfdcda0d0f2e72}
+\hypertarget{data_8h_a4fcd64553cc0da94330cf470bc07a268}{}\index{data.\+h@{data.\+h}!sys\+\_\+occurred\+\_\+event@{sys\+\_\+occurred\+\_\+event}}
+\index{sys\+\_\+occurred\+\_\+event@{sys\+\_\+occurred\+\_\+event}!data.\+h@{data.\+h}}
+\subsubsection[{sys\+\_\+occurred\+\_\+event}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+occurred\+\_\+event\+\_\+s} {\bf sys\+\_\+occurred\+\_\+event}}\label{data_8h_a4fcd64553cc0da94330cf470bc07a268}
 
 
-List of occured events. 
+Linked list element containing an occurred events. 
 
-This struct sores the event I\+D of an occurred event \hypertarget{data_8h_a7d0b7b720fcd20824dd86aa3fe69b181}{}\index{data.\+h@{data.\+h}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+It is a single linked list element that stores the id on an occurred event. \hypertarget{data_8h_a7d0b7b720fcd20824dd86aa3fe69b181}{}\index{data.\+h@{data.\+h}!sys\+\_\+pcb@{sys\+\_\+pcb}}
 \index{sys\+\_\+pcb@{sys\+\_\+pcb}!data.\+h@{data.\+h}}
 \subsubsection[{sys\+\_\+pcb}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s}  {\bf sys\+\_\+pcb}}\label{data_8h_a7d0b7b720fcd20824dd86aa3fe69b181}
 \hypertarget{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{}\index{data.\+h@{data.\+h}!sys\+\_\+pcb\+\_\+list\+\_\+element@{sys\+\_\+pcb\+\_\+list\+\_\+element}}
@@ -128,23 +129,23 @@ This struct sores the event I\+D of an occurred event \hypertarget{data_8h_a7d0b
 \subsubsection[{sys\+\_\+process\+\_\+control\+\_\+block}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+process\+\_\+control\+\_\+block\+\_\+s}  {\bf sys\+\_\+process\+\_\+control\+\_\+block}}\label{data_8h_a4a97a9fe481ab1cef2c0bb4c799431d0}
 
 
-Process Control Block for the processes. 
+Process Control Block for a single process. 
 
-This struct sores all information of the current state of a process \hypertarget{data_8h_ab0c42630be04d1ee14b0c6db9ee5aae4}{}\index{data.\+h@{data.\+h}!sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element@{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element}}
+It contains all information related to a single process. (including stack pointer, frame pointer, stack, etc. ) \hypertarget{data_8h_ab0c42630be04d1ee14b0c6db9ee5aae4}{}\index{data.\+h@{data.\+h}!sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element@{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element}}
 \index{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element@{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element}!data.\+h@{data.\+h}}
 \subsubsection[{sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element\+\_\+s}  {\bf sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element}}\label{data_8h_ab0c42630be04d1ee14b0c6db9ee5aae4}
 
 
-Container struct for Process Control Block. 
+Double linked list element containing sys\+\_\+process\+\_\+control\+\_\+block. 
 
-This struct is a container (linked list) for P\+C\+B \hypertarget{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}{}\index{data.\+h@{data.\+h}!sys\+\_\+process\+\_\+event\+\_\+handler@{sys\+\_\+process\+\_\+event\+\_\+handler}}
+It is a double linked list element containing the P\+C\+B of a process \hypertarget{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}{}\index{data.\+h@{data.\+h}!sys\+\_\+process\+\_\+event\+\_\+handler@{sys\+\_\+process\+\_\+event\+\_\+handler}}
 \index{sys\+\_\+process\+\_\+event\+\_\+handler@{sys\+\_\+process\+\_\+event\+\_\+handler}!data.\+h@{data.\+h}}
 \subsubsection[{sys\+\_\+process\+\_\+event\+\_\+handler}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s} {\bf sys\+\_\+process\+\_\+event\+\_\+handler}}\label{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}
 
 
-List of process event-\/handlers. 
+Double linked list element of process event-\/handlers. 
 
-This struct sores all information needed to decide if the event-\/handler is executed for the event (event\+I\+D). To store the event data and be executed, a condition has to be met. 
+It is a double linked list containing all information needed to decide if the event-\/handler should be executed for an occurred event or not. It sores the pointer to the handler the condition function and data. 
 
 \subsection{Function Documentation}
 \hypertarget{data_8h_a4ce23b19b4229d1d0ba38d45a9f36bf8}{}\index{data.\+h@{data.\+h}!Sys\+\_\+\+Clear\+\_\+\+Event\+Data@{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}}
@@ -390,9 +391,9 @@ pointer to the blocked process
 
 Definition at line 34 of file data.\+c.
 
-\hypertarget{data_8h_a8f64edc06850662e57d4d278f042a017}{}\index{data.\+h@{data.\+h}!sys\+\_\+occurred\+\_\+events@{sys\+\_\+occurred\+\_\+events}}
+\hypertarget{data_8h_a85abae706ed2a3f01168b05b19ff71f0}{}\index{data.\+h@{data.\+h}!sys\+\_\+occurred\+\_\+events@{sys\+\_\+occurred\+\_\+events}}
 \index{sys\+\_\+occurred\+\_\+events@{sys\+\_\+occurred\+\_\+events}!data.\+h@{data.\+h}}
-\subsubsection[{sys\+\_\+occurred\+\_\+events}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+occured\+\_\+event}$\ast$ sys\+\_\+occurred\+\_\+events}\label{data_8h_a8f64edc06850662e57d4d278f042a017}
+\subsubsection[{sys\+\_\+occurred\+\_\+events}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+occurred\+\_\+event}$\ast$ sys\+\_\+occurred\+\_\+events}\label{data_8h_a85abae706ed2a3f01168b05b19ff71f0}
 pointer to the occurred events 
 
 Definition at line 36 of file data.\+c.

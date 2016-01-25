@@ -102,22 +102,22 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:d8/d22/interrupts_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d22/interrupts_8c.html">interrupts.c</a></td></tr>
-<tr class="memdesc:d8/d22/interrupts_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes basic system calls to create atomic sections. (Sections that cannot be interrupted) <br /></td></tr>
+<tr class="memdesc:d8/d22/interrupts_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">It defines the functions to create atomic sections. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d6/ded/interrupts_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/ded/interrupts_8h.html">interrupts.h</a></td></tr>
-<tr class="memdesc:d6/ded/interrupts_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes system calls to create atomic sections. (Sections that cannot be interrupted) <br /></td></tr>
+<tr class="memdesc:d6/ded/interrupts_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">It declares interrupt priority levels and functions to create atomic sections. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:df/dd5/memory_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dd5/memory_8c.html">memory.c</a></td></tr>
-<tr class="memdesc:df/dd5/memory_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes functions to allocate, free, and copy memory <br /></td></tr>
+<tr class="memdesc:df/dd5/memory_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines functions to allocate, free, and copy memory <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:dc/d18/memory_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d18/memory_8h.html">memory.h</a></td></tr>
-<tr class="memdesc:dc/d18/memory_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes functions to allocate, free, and copy memory <br /></td></tr>
+<tr class="memdesc:dc/d18/memory_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">declares functions to allocate, free, and copy memory <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d4/dfd/system_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dfd/system_8c.html">system.c</a></td></tr>
-<tr class="memdesc:d4/dfd/system_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">includes system calls that initialise and configure the operating system. <br /></td></tr>
+<tr class="memdesc:d4/dfd/system_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines functions to initialise and start OpenSwarm. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:dc/db2/system_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db2/system_8h.html">system.h</a></td></tr>
-<tr class="memdesc:dc/db2/system_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">initiaises and starts OpenSwarm. <br /></td></tr>
+<tr class="memdesc:dc/db2/system_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">declares functions to initialise and start OpenSwarm. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d7/de8/system__Timer__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/de8/system__Timer__HDI_8c.html">system_Timer_HDI.c</a></td></tr>
 <tr class="memdesc:d7/de8/system__Timer__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to initialise, configure and the operating system. <br /></td></tr>
@@ -132,22 +132,20 @@ Files</h2></td></tr>
 <h1><a class="anchor" id="sec_intro_base"></a>
 Introduction</h1>
 <p>This package contains basic functions to initialise and start all modules of OpenSwarm. This part of OpenSwarm executes all three modules</p><ol type="1">
-<li>Process Management <dl class="section see"><dt>See also</dt><dd>procMan</dd></dl>
-</li>
-<li><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/ddf/group__events.html" title="Functions to emit, create, (un)subscribe, (un)register, and manage events. ">Event System</a></dd></dl>
-</li>
-<li>I/O Management (This includes device specific sensors and actuators) <dl class="section see"><dt>See also</dt><dd>IOMan</dd></dl>
-It first defines global preprocessor option to configure OpenSwarm. It initialises the system and I/O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided.</li>
+<li><a class="el" href="../../da/dd7/group__process.html">Process Manages</a></li>
+<li><a class="el" href="../../d1/ddf/group__events.html">Event Management</a></li>
+<li><a class="el" href="../../d2/da3/group__io.html">I/O Management</a></li>
 </ol>
+<p>It first defines global preprocessor option to configure OpenSwarm. It initialises the system and I/O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided.</p>
 <h2><a class="anchor" id="ssec_intro_base_defs"></a>
 Definitions</h2>
-<p>definition.h provides standardisation ports, configuration the used platform, and general preprocessor/type definitions that are needed in the entire OpenSwarm project.</p>
+<p>definition.h provides standardised ports, configuration the used platform, and general preprocessor/type definitions that are needed in the entire OpenSwarm project.</p>
 <h2><a class="anchor" id="ssec_intro_base_mem"></a>
 Memory Management</h2>
-<p>OpenSwarm is designed for processing unit that lack a MMU (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. OpenSwarm provides atomic functions to allocate, free and copy memory in <a class="el" href="../../dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory ">memory.h</a>.</p>
+<p>OpenSwarm is designed for processing unit that lack a MMU (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. OpenSwarm provides atomic functions to allocate, free and copy memory in <a class="el" href="../../dc/d18/memory_8h.html" title="declares functions to allocate, free, and copy memory ">memory.h</a>.</p>
 <h2><a class="anchor" id="ssec_intro_base_irq"></a>
 Interrupt Management</h2>
-<p>OpenSwarm provides a clear structure of interrupt priorities and functions to create atomic sections in <a class="el" href="../../d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ...">interrupts.h</a>.</p>
+<p>OpenSwarm provides a clear structure of interrupt priorities and functions to create atomic sections in <a class="el" href="../../d6/ded/interrupts_8h.html" title="It declares interrupt priority levels and functions to create atomic sections. ">interrupts.h</a>.</p>
 <h2><a class="anchor" id="ssec_intro_base_deps"></a>
 Dependencies</h2>
 <p>This part of OpenSwarm executes all three modules and depends on the configuration of each part and its implementation:</p><ul>

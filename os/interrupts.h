@@ -6,7 +6,7 @@
  *
  * \date{03 September 2015}
  * 
- * \brief includes system calls to create atomic sections. (Sections that cannot be interrupted)
+ * \brief It declares interrupt priority levels and functions to create atomic sections.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 

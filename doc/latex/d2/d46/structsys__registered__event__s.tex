@@ -2,18 +2,13 @@
 \label{structsys__registered__event__s}\index{sys\+\_\+registered\+\_\+event\+\_\+s@{sys\+\_\+registered\+\_\+event\+\_\+s}}
 
 
-A struct to store registered events. It also includes a list of processes that are subscribed to the registered event.  
+A single linked element containing a registered event and its subscribers.  
 
 
 
 
-Collaboration diagram for sys\+\_\+registered\+\_\+event\+\_\+s\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=255pt]{de/d55/structsys__registered__event__s__coll__graph}
-\end{center}
-\end{figure}
+Collaboration diagram for sys\+\_\+registered\+\_\+event\+\_\+s\+:
+% FIG 0
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,9 +21,11 @@ struct \hyperlink{structsys__registered__event__s}{sys\+\_\+registered\+\_\+even
 
 
 \subsection{Detailed Description}
-A struct to store registered events. It also includes a list of processes that are subscribed to the registered event. 
+A single linked element containing a registered event and its subscribers. 
 
-Definition at line 32 of file events.\+c.
+It is a single linked list element that contains registered events and a list of processes that are subscribed to it. 
+
+Definition at line 34 of file events.\+c.
 
 
 
@@ -38,21 +35,21 @@ Definition at line 32 of file events.\+c.
 \subsubsection[{id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint16} sys\+\_\+registered\+\_\+event\+\_\+s\+::id}\label{structsys__registered__event__s_a44886c67a44aee553cbbbcd9903fcd39}
 event identifier 
 
-Definition at line 33 of file events.\+c.
+Definition at line 35 of file events.\+c.
 
 \hypertarget{structsys__registered__event__s_a084bfc795b0f5135b6439a28bf9920c1}{}\index{sys\+\_\+registered\+\_\+event\+\_\+s@{sys\+\_\+registered\+\_\+event\+\_\+s}!next@{next}}
 \index{next@{next}!sys\+\_\+registered\+\_\+event\+\_\+s@{sys\+\_\+registered\+\_\+event\+\_\+s}}
 \subsubsection[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf sys\+\_\+registered\+\_\+event\+\_\+s}$\ast$ sys\+\_\+registered\+\_\+event\+\_\+s\+::next}\label{structsys__registered__event__s_a084bfc795b0f5135b6439a28bf9920c1}
 pointer to the next element in the List 
 
-Definition at line 35 of file events.\+c.
+Definition at line 37 of file events.\+c.
 
 \hypertarget{structsys__registered__event__s_acea93fade98b2e5bd81cc9b6ed35388d}{}\index{sys\+\_\+registered\+\_\+event\+\_\+s@{sys\+\_\+registered\+\_\+event\+\_\+s}!subscribers@{subscribers}}
 \index{subscribers@{subscribers}!sys\+\_\+registered\+\_\+event\+\_\+s@{sys\+\_\+registered\+\_\+event\+\_\+s}}
 \subsubsection[{subscribers}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+subscribed\+\_\+process}$\ast$ sys\+\_\+registered\+\_\+event\+\_\+s\+::subscribers}\label{structsys__registered__event__s_acea93fade98b2e5bd81cc9b6ed35388d}
 pointer to a list of subscribed processes 
 
-Definition at line 34 of file events.\+c.
+Definition at line 36 of file events.\+c.
 
 
 

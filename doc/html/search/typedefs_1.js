@@ -10,7 +10,7 @@ var searchData=
   ['sys_5fi2c_5fmessages',['sys_i2c_messages',['../d8/ded/i2c__data_8h.html#a27b7f72b53024ca33a713e12d9c5a5b6',1,'i2c_data.h']]],
   ['sys_5fi2c_5fmsg',['sys_i2c_msg',['../d8/ded/i2c__data_8h.html#a63103d69a23446aa735d85acef1936bf',1,'i2c_data.h']]],
   ['sys_5fmotors',['sys_motors',['../d6/d0e/motors_8c.html#ad379d5cc8b0c2126a23e94dd03257224',1,'motors.c']]],
-  ['sys_5foccured_5fevent',['sys_occured_event',['../d2/dbd/data_8h.html#a1b3a35eb6e5e0d2286dfdcda0d0f2e72',1,'data.h']]],
+  ['sys_5foccurred_5fevent',['sys_occurred_event',['../d2/dbd/data_8h.html#a4fcd64553cc0da94330cf470bc07a268',1,'data.h']]],
   ['sys_5fpcb',['sys_pcb',['../d2/dbd/data_8h.html#a7d0b7b720fcd20824dd86aa3fe69b181',1,'data.h']]],
   ['sys_5fpcb_5flist_5felement',['sys_pcb_list_element',['../d2/dbd/data_8h.html#a4bc86a9d244a6e19ed98dda5f249500d',1,'data.h']]],
   ['sys_5fpeh',['sys_peh',['../d2/dbd/data_8h.html#a993c5df339cf9d76fd91108b4736c391',1,'data.h']]],
@@ -24,5 +24,5 @@ var searchData=
   ['sys_5frgb_5fpixel',['sys_rgb_pixel',['../d7/df6/camera_8h.html#a49de3603363bff3140540b40d5fec700',1,'camera.h']]],
   ['sys_5fscheduler_5finfo',['sys_scheduler_info',['../d2/dd8/scheduler_8h.html#aa491087633867d367d0f0c63f75ac41a',1,'scheduler.h']]],
   ['sys_5fsubscribed_5fprocess',['sys_subscribed_process',['../de/deb/events_8c.html#a855a9b5c8c07fedd9f2a8bbf5ee9b4f0',1,'events.c']]],
-  ['sys_5fuart_5ftxdata',['sys_uart_txdata',['../dc/d0b/uart__HDI_8h.html#ac889c78db78b35dd5c98ba6062f5c045',1,'uart_HDI.h']]]
+  ['sys_5fuart_5ftxdata',['sys_uart_txdata',['../dc/d0b/uart__HDI_8h.html#a9662a398266fb1b49c5b35ff45d7d521',1,'uart_HDI.h']]]
 ];

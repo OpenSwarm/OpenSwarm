@@ -1,5 +1,5 @@
 /*! \file
- *  \brief     	This file defines all preprocessor variables and project wide types.
+ *  \brief     	This file declares general preprocessor variables and types.
  *  \author    	Stefan M. Trenkwalder
  *  \version   	1.0
  *  \date      	2015

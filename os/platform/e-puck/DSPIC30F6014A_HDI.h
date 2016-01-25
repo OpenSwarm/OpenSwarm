@@ -9,7 +9,7 @@
  *
  * \date 07 July 2014
  * 
- * \brief  Hardware dependent declarations and definitions. 
+ * \brief  declares  e-puck specific types and preprocessor variables
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */

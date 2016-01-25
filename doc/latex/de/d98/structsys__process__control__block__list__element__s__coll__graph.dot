@@ -1,0 +1,17 @@
+digraph "sys_process_control_block_list_element_s"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="sys_process_control\l_block_list_element_s",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" previous\nnext" ];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pcb" ];
+  Node2 [label="sys_process_control\l_block_s",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$db/d2e/structsys__process__control__block__s.html",tooltip="Process Control Block for a single process. "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" sheduler_info" ];
+  Node3 [label="sys_scheduler_info_s",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dd/da1/structsys__scheduler__info__s.html",tooltip="The scheduling information for each process. "];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" event_register" ];
+  Node4 [label="sys_process_event_handler_s",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dc/dfe/structsys__process__event__handler__s.html",tooltip="Double linked list element of process event-handlers. "];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" buffered_data\nhandler" ];
+  Node5 [label="sys_event_data_s",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d9/d85/structsys__event__data__s.html",tooltip="It is a single linked list element and contains data of an occurred event. "];
+  Node5 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ];
+  Node4 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" previous\nnext" ];
+}

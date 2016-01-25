@@ -2,12 +2,13 @@
 \label{interrupts_8c}\index{interrupts.\+c@{interrupts.\+c}}
 
 
-includes basic system calls to create atomic sections. (Sections that cannot be interrupted)  
+It defines the functions to create atomic sections.  
 
 
 {\ttfamily \#include \char`\"{}interrupts.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}definitions.\+h\char`\"{}}\\*
-Include dependency graph for interrupts.\+c\+:\nopagebreak
+Include dependency graph for interrupts.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -24,7 +25,7 @@ void \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\
 
 
 \subsection{Detailed Description}
-includes basic system calls to create atomic sections. (Sections that cannot be interrupted) 
+It defines the functions to create atomic sections. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -66,9 +67,6 @@ Starts an atomic section
 This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. \begin{DoxyPrecond}{Precondition}
 \hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section()} must have been called. 
 \end{DoxyPrecond}
-\begin{DoxyWarning}{Warning}
-Do not execute \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\+\_\+\+Atomic\+Section()} without having called \hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section()} once. Otherwise, the interrupt priority will be set to S\+Y\+S\+\_\+\+I\+R\+Q\+P\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+T\+I\+M\+E\+R. This might cause errors. 
-\end{DoxyWarning}
 
 
 Definition at line 58 of file interrupts.\+c.
@@ -82,10 +80,13 @@ Definition at line 58 of file interrupts.\+c.
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}
 Starts an atomic section
 
-This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. \begin{DoxyPostcond}{Postcondition}
+This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. \begin{DoxyNote}{Note}
+This function can be called within an atomic section. However, it doesn\textquotesingle{}t change the behaviour when called within an atomic section. To end an atomic section, \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\+\_\+\+Atomic\+Section()} must be called as often as \hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section()} was called. 
+\end{DoxyNote}
+\begin{DoxyPostcond}{Postcondition}
 \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\+\_\+\+Atomic\+Section()} must be called to execute any interrupt that happened or will happen. 
 \end{DoxyPostcond}
 
 
-Definition at line 42 of file interrupts.\+c.
+Definition at line 43 of file interrupts.\+c.
 

@@ -1,0 +1,10 @@
+digraph "sys_registered_event_s"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="sys_registered_event_s",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ,fontname="Helvetica"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" subscribers" ,fontname="Helvetica"];
+  Node2 [label="sys_subscribed_process_s",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d7/d24/structsys__subscribed__process__s.html",tooltip="A single linked list element containing the ID of a subscribed process. "];
+  Node2 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ,fontname="Helvetica"];
+}

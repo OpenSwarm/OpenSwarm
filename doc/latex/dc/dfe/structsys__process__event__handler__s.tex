@@ -2,7 +2,7 @@
 \label{structsys__process__event__handler__s}\index{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s@{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}}
 
 
-List of process event-\/handlers.  
+Double linked list element of process event-\/handlers.  
 
 
 
@@ -11,13 +11,8 @@ List of process event-\/handlers.
 
 
 
-Collaboration diagram for sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=287pt]{d8/d90/structsys__process__event__handler__s__coll__graph}
-\end{center}
-\end{figure}
+Collaboration diagram for sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s\+:
+% FIG 0
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,9 +31,9 @@ struct \hyperlink{structsys__process__event__handler__s}{sys\+\_\+process\+\_\+e
 
 
 \subsection{Detailed Description}
-List of process event-\/handlers. 
+Double linked list element of process event-\/handlers. 
 
-This struct sores all information needed to decide if the event-\/handler is executed for the event (event\+I\+D). To store the event data and be executed, a condition has to be met. 
+It is a double linked list containing all information needed to decide if the event-\/handler should be executed for an occurred event or not. It sores the pointer to the handler the condition function and data. 
 
 Definition at line 44 of file data.\+h.
 
@@ -48,14 +43,14 @@ Definition at line 44 of file data.\+h.
 \hypertarget{structsys__process__event__handler__s_adbcb330724f201fb328fb91d2c6353e3}{}\index{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s@{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}!buffered\+\_\+data@{buffered\+\_\+data}}
 \index{buffered\+\_\+data@{buffered\+\_\+data}!sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s@{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}}
 \subsubsection[{buffered\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+event\+\_\+data}$\ast$ sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s\+::buffered\+\_\+data}\label{structsys__process__event__handler__s_adbcb330724f201fb328fb91d2c6353e3}
-stores the data 
+stores a list of recieved event data that need to be processed 
 
 Definition at line 48 of file data.\+h.
 
 \hypertarget{structsys__process__event__handler__s_a43ea89783cb8b5cfd0896410f1f7a691}{}\index{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s@{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}!condition@{condition}}
 \index{condition@{condition}!sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s@{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}}
 \subsubsection[{condition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Condition\+Function} sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s\+::condition}\label{structsys__process__event__handler__s_a43ea89783cb8b5cfd0896410f1f7a691}
-Pointer to function which checks if the event-\/handler has to be executed (true) or nor (false) 
+Pointer to a function which checks if the event-\/handler should be executed (true) or not (false) 
 
 Definition at line 47 of file data.\+h.
 
@@ -69,7 +64,7 @@ Definition at line 45 of file data.\+h.
 \hypertarget{structsys__process__event__handler__s_a980eeb4cb54ac72cd3ebc38e391c40a5}{}\index{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s@{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}!handler@{handler}}
 \index{handler@{handler}!sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s@{sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s}}
 \subsubsection[{handler}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Event\+Handler\+Function} sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s\+::handler}\label{structsys__process__event__handler__s_a980eeb4cb54ac72cd3ebc38e391c40a5}
-Pointer to function which computes the evnt data 
+Pointer to a function which processes occurred events 
 
 Definition at line 46 of file data.\+h.
 

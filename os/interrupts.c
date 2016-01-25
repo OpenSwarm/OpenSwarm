@@ -1,6 +1,6 @@
 /*! \file
  * \ingroup base
- *  \brief  includes basic system calls to create atomic sections. (Sections that cannot be interrupted)
+ *  \brief  It defines the functions to create atomic sections.
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  *  \version   	1.0
  *  \date      	2015
@@ -37,6 +37,7 @@ static sint16 nesting = 0;
  * Starts an atomic section
  *
  * This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt.
+ * @note    This function can be called within an atomic section. However, it doesn't change the behaviour when called within an atomic section. To end an atomic section, Sys_End_AtomicSection() must be called as often as Sys_Start_AtomicSection() was called.
  * @post	Sys_End_AtomicSection() must be called to execute any interrupt that happened or will happen.
  */
 inline void Sys_Start_AtomicSection(){
@@ -53,12 +54,13 @@ inline void Sys_Start_AtomicSection(){
  *
  * This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt.
  * @pre	Sys_Start_AtomicSection() must have been called.
- * @warning Do not execute Sys_End_AtomicSection() without having called Sys_Start_AtomicSection() once. Otherwise, the interrupt priority will be set to SYS_IRQP_SYSTEM_TIMER. This might cause errors.
  */
 inline void Sys_End_AtomicSection(){
     nesting--;
     if(nesting <= 0){
-        SRbits.IPL = sys_IRQ_Priority;
+        if(nesting == 0){
+            SRbits.IPL = sys_IRQ_Priority;
+        }
         nesting = 0;
     }
 }

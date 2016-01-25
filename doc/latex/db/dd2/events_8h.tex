@@ -2,19 +2,21 @@
 \label{events_8h}\index{events/events.\+h@{events/events.\+h}}
 
 
-functions to create handle and configure events.  
+declares functions to create, (un)subscribe, (un)register, and delete events and related handler.  
 
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}../definitions.\+h\char`\"{}}\\*
-Include dependency graph for events.\+h\+:\nopagebreak
+Include dependency graph for events.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d4/dbb/events_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -25,16 +27,16 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structsys__event__data__s}{sys\+\_\+event\+\_\+data\+\_\+s}
-\begin{DoxyCompactList}\small\item\em This struct contains data of the size {\bfseries size} at the memory of {\bfseries value}. It is a struct for a linked list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em It is a single linked list element and contains data of an occurred event. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 typedef struct \hyperlink{structsys__event__data__s}{sys\+\_\+event\+\_\+data\+\_\+s} \hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data}
-\begin{DoxyCompactList}\small\item\em This struct contains data of the size {\bfseries size} at the memory of {\bfseries value}. It is a struct for a linked list. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It is a single linked list element and contains data of an occurred event. \end{DoxyCompactList}\item 
 typedef bool($\ast$ \hyperlink{events_8h_a38c799788eea576b2d878371da3d5385}{p\+Event\+Handler\+Function}) (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$)
-\begin{DoxyCompactList}\small\item\em Event handler function pinter type (process id, event id, received data) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Event handler function pointer type (process id, event id, received data) \end{DoxyCompactList}\item 
 typedef bool($\ast$ \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function}) (void $\ast$)
-\begin{DoxyCompactList}\small\item\em Condition function pinter type (received data) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Condition function pointer type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,7 +59,7 @@ bool \hyperlink{events_8h_a2578b4d7c0bd540acd4414d00e758ed1}{Sys\+\_\+\+Is\+Even
 
 
 \subsection{Detailed Description}
-functions to create handle and configure events. 
+declares functions to create, (un)subscribe, (un)register, and delete events and related handler. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -79,29 +81,29 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \subsubsection[{p\+Condition\+Function}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ p\+Condition\+Function) (void $\ast$)}\label{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}
 
 
-Condition function pinter type (received data) 
+Condition function pointer type. 
 
+This function points to a condition function, which defines if an event handler should be executed or not. 
 
-
-Definition at line 105 of file events.\+h.
+Definition at line 109 of file events.\+h.
 
 \hypertarget{events_8h_a38c799788eea576b2d878371da3d5385}{}\index{events.\+h@{events.\+h}!p\+Event\+Handler\+Function@{p\+Event\+Handler\+Function}}
 \index{p\+Event\+Handler\+Function@{p\+Event\+Handler\+Function}!events.\+h@{events.\+h}}
 \subsubsection[{p\+Event\+Handler\+Function}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ p\+Event\+Handler\+Function) ({\bf uint16}, {\bf uint16}, {\bf sys\+\_\+event\+\_\+data} $\ast$)}\label{events_8h_a38c799788eea576b2d878371da3d5385}
 
 
-Event handler function pinter type (process id, event id, received data) 
+Event handler function pointer type (process id, event id, received data) 
 
+This function points to an event handler function, which processes incoming events and its data. 
 
-
-Definition at line 100 of file events.\+h.
+Definition at line 102 of file events.\+h.
 
 \hypertarget{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{}\index{events.\+h@{events.\+h}!sys\+\_\+event\+\_\+data@{sys\+\_\+event\+\_\+data}}
 \index{sys\+\_\+event\+\_\+data@{sys\+\_\+event\+\_\+data}!events.\+h@{events.\+h}}
 \subsubsection[{sys\+\_\+event\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+event\+\_\+data\+\_\+s} {\bf sys\+\_\+event\+\_\+data}}\label{events_8h_ae3a76ca1b349999a35d55f3224897b5f}
 
 
-This struct contains data of the size {\bfseries size} at the memory of {\bfseries value}. It is a struct for a linked list. 
+It is a single linked list element and contains data of an occurred event. 
 
 
 
@@ -127,7 +129,7 @@ is the event registered?
 \end{DoxyReturn}
 
 
-Definition at line 335 of file events.\+c.
+Definition at line 337 of file events.\+c.
 
 \hypertarget{events_8h_a386acd8573c1118d80986721664d2689}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Register\+\_\+\+Event@{Sys\+\_\+\+Register\+\_\+\+Event}}
 \index{Sys\+\_\+\+Register\+\_\+\+Event@{Sys\+\_\+\+Register\+\_\+\+Event}!events.\+h@{events.\+h}}
@@ -150,7 +152,7 @@ was it successful.
 \end{DoxyReturn}
 
 
-Definition at line 101 of file events.\+c.
+Definition at line 103 of file events.\+c.
 
 \hypertarget{events_8h_a24dadcefc1b4c45c50fb351efc8e841c}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Send\+\_\+\+Event@{Sys\+\_\+\+Send\+\_\+\+Event}}
 \index{Sys\+\_\+\+Send\+\_\+\+Event@{Sys\+\_\+\+Send\+\_\+\+Event}!events.\+h@{events.\+h}}
@@ -179,7 +181,7 @@ was it successful.
 \end{DoxyReturn}
 
 
-Definition at line 60 of file events.\+c.
+Definition at line 62 of file events.\+c.
 
 \hypertarget{events_8h_ae2b6a4d1db2b3fb8777fa56297001d05}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Send\+\_\+\+Int\+Event@{Sys\+\_\+\+Send\+\_\+\+Int\+Event}}
 \index{Sys\+\_\+\+Send\+\_\+\+Int\+Event@{Sys\+\_\+\+Send\+\_\+\+Int\+Event}!events.\+h@{events.\+h}}
@@ -205,7 +207,7 @@ was it successful.
 \end{DoxyReturn}
 
 
-Definition at line 88 of file events.\+c.
+Definition at line 90 of file events.\+c.
 
 \hypertarget{events_8h_abbd55109964743556ffc20f8520bfabf}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event@{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event}}
 \index{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event@{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event}!events.\+h@{events.\+h}}
@@ -237,7 +239,7 @@ was it successful.
 \end{DoxyReturn}
 
 
-Definition at line 144 of file events.\+c.
+Definition at line 146 of file events.\+c.
 
 \hypertarget{events_8h_a1d203ee6c6d21cb00d5b84a03bbbda6b}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unregister\+\_\+\+Event@{Sys\+\_\+\+Unregister\+\_\+\+Event}}
 \index{Sys\+\_\+\+Unregister\+\_\+\+Event@{Sys\+\_\+\+Unregister\+\_\+\+Event}!events.\+h@{events.\+h}}
@@ -257,7 +259,7 @@ This function unregisters an event
 \end{DoxyParams}
 
 
-Definition at line 190 of file events.\+c.
+Definition at line 192 of file events.\+c.
 
 \hypertarget{events_8h_a0f37de65bd64e262ea80d96d7e691a8d}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event@{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event}}
 \index{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event@{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event}!events.\+h@{events.\+h}}
@@ -280,7 +282,7 @@ This function unsubscribes an event
 \end{DoxyParams}
 
 
-Definition at line 242 of file events.\+c.
+Definition at line 244 of file events.\+c.
 
 \hypertarget{events_8h_ad8cea2286df3506129e686d1fcfa674c}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unsubscribe\+\_\+\+Process@{Sys\+\_\+\+Unsubscribe\+\_\+\+Process}}
 \index{Sys\+\_\+\+Unsubscribe\+\_\+\+Process@{Sys\+\_\+\+Unsubscribe\+\_\+\+Process}!events.\+h@{events.\+h}}
@@ -300,5 +302,5 @@ unsubscribes all events that were subscribed to a process
 \end{DoxyParams}
 
 
-Definition at line 356 of file events.\+c.
+Definition at line 358 of file events.\+c.
 

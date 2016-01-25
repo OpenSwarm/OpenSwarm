@@ -1,6 +1,6 @@
 /*! \file
  * \ingroup base
- *  \brief  includes  system calls that initialise and configure the operating system.
+ * \brief defines functions to initialise and start OpenSwarm.
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  *  \version   	1.0
  *  \date      	2015
