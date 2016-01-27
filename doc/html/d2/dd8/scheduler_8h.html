@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -92,31 +92,36 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">scheduler.h File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Manages</a></div></div>  </div>
+<div class="title">scheduler.h File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Management</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This file includes all functions wich are needed to specify a scheduling algorithm.  
+<p>It declares functions to specify a scheduling algorithm.  
 <a href="#details">More...</a></p>
-<div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d6/dc2/definitions_8h_source.html">../definitions.h</a>&quot;</code><br />
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Include dependency graph for scheduler.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../d2/d76/scheduler_8h__dep__incl.png" border="0" usemap="#processes_2scheduler_8hdep" alt=""/></div>
-<map name="processes_2scheduler_8hdep" id="processes_2scheduler_8hdep">
-<area shape="rect" id="node2" href="../../d4/dfd/system_8c.html" title="includes system calls that initialise and configure the operating system. " alt="" coords="5,162,81,189"/><area shape="rect" id="node3" href="../../dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="401,80,627,107"/><area shape="rect" id="node8" href="../../da/d14/process__Management_8c.html" title="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..." alt="" coords="992,251,1217,278"/><area shape="rect" id="node9" href="../../dd/d6c/scheduler_8c.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="787,162,940,189"/><area shape="rect" id="node11" href="../../d2/dbd/data_8h.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="985,80,1107,107"/><area shape="rect" id="node4" href="../../de/deb/events_8c.html" title="This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler. " alt="" coords="362,162,477,189"/><area shape="rect" id="node5" href="../../d2/d78/process__Management__HDI_8c.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="349,244,511,285"/><area shape="rect" id="node6" href="../../d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="552,155,711,196"/><area shape="rect" id="node7" href="../../de/da9/data_8c.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="649,251,771,278"/><area shape="rect" id="node10" href="../../de/dfb/system__Timer_8c.html" title="This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. " alt="" coords="157,162,337,189"/><area shape="rect" id="node12" href="../../de/dad/process__Management__HDI_8h.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="965,155,1127,196"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d5/d04/scheduler_8h__incl.svg" width="100%" height="518"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="../../closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d2/d76/scheduler_8h__dep__incl.svg" width="100%" height="518"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d2/dd8/scheduler_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da1/structsys__scheduler__info__s.html">sys_scheduler_info_s</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scheduling information for each process.  <a href="../../dd/da1/structsys__scheduler__info__s.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/df0/structsys__scheduler__info.html">sys_scheduler_info</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scheduling information for each process.  <a href="../../d7/df0/structsys__scheduler__info.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -140,21 +145,15 @@ Macros</h2></td></tr>
 <tr class="memitem:adf68b9826cf099f8c23e3b0360fa3916"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dd8/scheduler_8h.html#adf68b9826cf099f8c23e3b0360fa3916">SYS_PROCESS_PRIORITY_LOW</a>&#160;&#160;&#160;0x000F</td></tr>
 <tr class="separator:adf68b9826cf099f8c23e3b0360fa3916"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aa491087633867d367d0f0c63f75ac41a"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="../../dd/da1/structsys__scheduler__info__s.html">sys_scheduler_info_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dd8/scheduler_8h.html#aa491087633867d367d0f0c63f75ac41a">sys_scheduler_info</a></td></tr>
-<tr class="memdesc:aa491087633867d367d0f0c63f75ac41a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scheduling information for each process.  <a href="#aa491087633867d367d0f0c63f75ac41a">More...</a><br /></td></tr>
-<tr class="separator:aa491087633867d367d0f0c63f75ac41a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aae6175fb1a68266365aa1cb681bf12ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dd8/scheduler_8h.html#aae6175fb1a68266365aa1cb681bf12ff">Sys_Scheduler_RoundRobin</a> (void)</td></tr>
 <tr class="separator:aae6175fb1a68266365aa1cb681bf12ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8992c7e866ac510c5db6ac1f1b00f324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dd8/scheduler_8h.html#a8992c7e866ac510c5db6ac1f1b00f324">Sys_Set_Defaults_Info</a> (<a class="el" href="../../d2/dd8/scheduler_8h.html#aa491087633867d367d0f0c63f75ac41a">sys_scheduler_info</a> *sct)</td></tr>
+<tr class="memitem:a8992c7e866ac510c5db6ac1f1b00f324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dd8/scheduler_8h.html#a8992c7e866ac510c5db6ac1f1b00f324">Sys_Set_Defaults_Info</a> (<a class="el" href="../../d7/df0/structsys__scheduler__info.html">sys_scheduler_info</a> *sct)</td></tr>
 <tr class="separator:a8992c7e866ac510c5db6ac1f1b00f324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file includes all functions wich are needed to specify a scheduling algorithm. </p>
+<div class="textblock"><p>It declares functions to specify a scheduling algorithm. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a> </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>{07 July 2014}</dd></dl>
@@ -172,7 +171,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00029">29</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00031">31</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -186,7 +185,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00031">31</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00033">33</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -200,7 +199,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00030">30</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00032">32</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -215,7 +214,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>process priority values Process priority: System = highest </p>
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00028">28</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00030">30</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -230,7 +229,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>process state values State to indicate that a process is created but not yet ready to be executed </p>
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00021">21</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00023">23</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -245,7 +244,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>State to indicate that a process is blocked and waits till an event occurs </p>
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00023">23</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00025">25</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -260,7 +259,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>State to indicate that a process is executed </p>
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00022">22</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00024">24</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -275,7 +274,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>State to indicate that a process is waiting to be executed </p>
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00024">24</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00026">26</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -290,23 +289,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>State to indicate that a process is about to be deleted </p>
 
-<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00025">25</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="aa491087633867d367d0f0c63f75ac41a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="../../dd/da1/structsys__scheduler__info__s.html">sys_scheduler_info_s</a> <a class="el" href="../../d2/dd8/scheduler_8h.html#aa491087633867d367d0f0c63f75ac41a">sys_scheduler_info</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The scheduling information for each process. </p>
-<p>This struct defines all values wich are needed for the scheduling algorithm. </p>
+<p>Definition at line <a class="el" href="../../d2/dd8/scheduler_8h_source.html#l00027">27</a> of file <a class="el" href="../../d2/dd8/scheduler_8h_source.html">scheduler.h</a>.</p>
 
 </div>
 </div>
@@ -324,10 +307,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function represents the Schedling algorithm</p>
 <p>This function shows the implementation of the RoundRobin Scheduling algorithm </p>
 
-<p>Definition at line <a class="el" href="../../dd/d6c/scheduler_8c_source.html#l00025">25</a> of file <a class="el" href="../../dd/d6c/scheduler_8c_source.html">scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="../../dd/d6c/scheduler_8c_source.html#l00024">24</a> of file <a class="el" href="../../dd/d6c/scheduler_8c_source.html">scheduler.c</a>.</p>
 
 </div>
 </div>
@@ -341,7 +323,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void Sys_Set_Defaults_Info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d2/dd8/scheduler_8h.html#aa491087633867d367d0f0c63f75ac41a">sys_scheduler_info</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d7/df0/structsys__scheduler__info.html">sys_scheduler_info</a> *&#160;</td>
           <td class="paramname"><em>sct</em></td><td>)</td>
           <td></td>
         </tr>
@@ -352,16 +334,16 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function sets default values to the scheduling struct</p>
-<p>This function sets the default values in a sys_scheduler_info struct</p>
+<p>This function sets the default values in a <a class="el" href="../../d7/df0/structsys__scheduler__info.html" title="The scheduling information for each process. ">sys_scheduler_info</a> struct</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">sct</td><td>This is a pointer to a sys_scheduler_info struct </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">sct</td><td>This is a pointer to a <a class="el" href="../../d7/df0/structsys__scheduler__info.html" title="The scheduling information for each process. ">sys_scheduler_info</a> struct </td></tr>
   </table>
   </dd>
 </dl>
+<p>&lt; State to indicate that a process is waiting to be executed </p>
 
-<p>Definition at line <a class="el" href="../../dd/d6c/scheduler_8c_source.html#l00047">47</a> of file <a class="el" href="../../dd/d6c/scheduler_8c_source.html">scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="../../dd/d6c/scheduler_8c_source.html#l00045">45</a> of file <a class="el" href="../../dd/d6c/scheduler_8c_source.html">scheduler.c</a>.</p>
 
 </div>
 </div>

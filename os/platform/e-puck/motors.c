@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup motors
- * \ingroup epuck
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \author  Gabriel Kapellmann Zafra <gkapellmann@gmail.com >
@@ -11,7 +9,7 @@
  *
  * \date 30 July 2015
  * 
- * \brief  This file provides the function needed to actuate the motors
+ * \brief  It defines function to drive motors
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -31,20 +29,19 @@
  * @brief This struct contains the speed for a motor.
  */
 typedef struct sys_motors_s{
-    sint16 speed;
+    sint16 speed;/*!< speed of one motor*/
 } sys_motors;
 
 void Sys_LeftMotor_Controller(void);
 void Sys_RightMotor_Controller(void);
 
-bool Sys_LeftMotor_EventHandler(uint16, uint16, sys_event_data *);
-bool Sys_RightMotor_EventHandler(uint16, uint16, sys_event_data *);
+bool Sys_LeftMotor_EventHandler(uint, uint, sys_event_data *);
+bool Sys_RightMotor_EventHandler(uint, uint, sys_event_data *);
 
 static sys_motors left_motor;/*!< wheel speed for the left motor*/
 static sys_motors right_motor;/*!< wheel speed for the right motor*/
 
 /**
- * Initialises the Motor Module
  *
  * This function initialises the motor module including both left and right motor.
  *
@@ -88,7 +85,6 @@ void Sys_Init_Motors(){
 }
 
 /**
- * resets the left motor
  *
  * This function resets the left motor to a reset state.
  *
@@ -98,7 +94,6 @@ inline void Sys_LeftMotor_Reset(){
 }
 
 /**
- * resets the right motor
  *
  * This function resets the right motor to a reset state.
  *
@@ -108,7 +103,6 @@ inline void Sys_RightMotor_Reset(){
 }
 
 /**
- * I/O handler for the left motor
  *
  * This function controls the speed of the left motor. The speed is set by moving the to the next step within the appropriate time step.
  *
@@ -155,7 +149,6 @@ void Sys_LeftMotor_Controller(){
 }
 
 /**
- * I/O handler for the right motor
  *
  * This function controls the speed of the right motor. The speed is set by moving the to the next step within the appropriate time step.
  *
@@ -204,7 +197,6 @@ void Sys_RightMotor_Controller(){
 }
 
 /**
- * Left motor event handler to set the speed
  *
  * This function sets the left motor speed that is received by the  event SYS_EVENT_IO_MOTOR_LEFT.
  *
@@ -212,14 +204,13 @@ void Sys_RightMotor_Controller(){
  * @param[in] eventID the event id which identifies the event that is handled
  * @param[in] data the event data that contain the motor speed.
  */
-bool Sys_LeftMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data/*mm/s*/){
+bool Sys_LeftMotor_EventHandler(uint pid, uint eventID, sys_event_data *data/*mm/s*/){
     sint16 *speed = (sint16 *) data->value;
     Sys_Set_LeftWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);
     return true;
 }
 
 /**
- * Right motor event handler to set the speed
  *
  * This function sets the right motor speed that is received by the  event SYS_EVENT_IO_MOTOR_RIGHT.
  *
@@ -227,7 +218,7 @@ bool Sys_LeftMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data
  * @param[in] eventID the event id which identifies the event that is handled
  * @param[in] data the event data that contain the motor speed.
  */
-bool Sys_RightMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *data /*mm/s*/){
+bool Sys_RightMotor_EventHandler(uint pid, uint eventID, sys_event_data *data /*mm/s*/){
     sint16 *speed = (sint16 *) data->value;
 
     Sys_Set_RightWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);
@@ -237,7 +228,6 @@ bool Sys_RightMotor_EventHandler(uint16 pid, uint16 eventID, sys_event_data *dat
 }
 
 /**
- * sets left wheel speed
  *
  * This function sets the value for the speed of the left motor.
  * 
@@ -255,7 +245,6 @@ void Sys_Set_LeftWheelSpeed(sint16 speed){
 }
 
 /**
- * sets right wheel speed
  *
  * This function sets the value for the speed of the right motor.
  * 
@@ -273,7 +262,6 @@ void Sys_Set_RightWheelSpeed(sint16 speed){
 }
 
 /**
- * returns the left wheel speed
  *
  * This function returns the speed of the left motor.
  * 
@@ -283,7 +271,6 @@ sint16 Sys_Get_LeftWheelSpeed(void){
 }
 
 /**
- * returns the right wheel speed
  *
  * This function returns the speed of the right motor.
  * 

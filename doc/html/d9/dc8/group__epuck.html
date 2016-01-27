@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -87,29 +87,27 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Modules and functions that are needed to use the e-puck platform.  
+<p>Modules and functions that are needed to use the e-puck platform ( <a href="http://www.gctronic.com/doc/index.php/E-Puck">http://www.gctronic.com/doc/index.php/E-Puck</a> )  
 <a href="#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Collaboration diagram for e-puck specific modules:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<center><table><tr><td><img src="../../d9/dc8/group__epuck.png" border="0" alt="" usemap="#d9_2dc8_2group____epuck"/>
-<map name="d9_2dc8_2group____epuck" id="d9_2dc8_2group____epuck">
-<area shape="rect" id="node1" href="../../db/d36/group__remotecontrol.html" title="Functions to receive data from a remote control. " alt="" coords="343,33,458,60"/><area shape="rect" id="node3" href="../../d9/d96/group__shefpuck.html" title="External set of functions to assist the programming of the e&#45;Puck. " alt="" coords="362,132,439,159"/><area shape="rect" id="node4" href="../../dd/df2/group__base.html" title="Basic functions to start and initialise the operating system; allocate, free and copy memory..." alt="" coords="375,192,427,219"/><area shape="rect" id="node5" href="../../dc/d90/group__camera.html" title="Functions to process incoming frames from a camera module. " alt="" coords="343,272,458,299"/><area shape="rect" id="node6" href="../../db/def/group__uart.html" title="Functions to control the message flow of the UART interface. " alt="" coords="357,384,444,411"/><area shape="rect" id="node7" href="../../d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="352,536,449,563"/><area shape="rect" id="node8" href="../../d2/da3/group__io.html" title="Functions and mechanisms to use I/O devices (e.g. sensors and actuators) to interact with the environ..." alt="" coords="341,796,460,823"/><area shape="rect" id="node9" href="../../dd/daa/group__motors.html" title="Functions to control the motors. " alt="" coords="350,883,451,909"/></map>
+<center><table><tr><td><div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/dc8/group__epuck.svg" width="336" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </td></tr></table></center>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 Modules</h2></td></tr>
 <tr class="memitem:dc/d90/group__camera"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d90/group__camera.html">Camera Module</a></td></tr>
-<tr class="memdesc:dc/d90/group__camera"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to process incoming frames from a camera module. <br /></td></tr>
+<tr class="memdesc:dc/d90/group__camera"><td class="mdescLeft">&#160;</td><td class="mdescRight">The camera module is used to retrieve raw camera data, process the incoming frames, and emits the result as <a class="el" href="../../d1/ddf/group__events.html">events</a>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d3/df5/group__i2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df5/group__i2c.html">I2C interface</a></td></tr>
 <tr class="memdesc:d3/df5/group__i2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to read from and write on the I2C interface. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:dd/daa/group__motors"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/daa/group__motors.html">Motor Control</a></td></tr>
-<tr class="memdesc:dd/daa/group__motors"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to control the motors. <br /></td></tr>
+<tr class="memdesc:dd/daa/group__motors"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to control the two stepper motors of the e-puck. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:db/d36/group__remotecontrol"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d36/group__remotecontrol.html">Remote Control</a></td></tr>
 <tr class="memdesc:db/d36/group__remotecontrol"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to receive data from a remote control. <br /></td></tr>
@@ -120,127 +118,54 @@ Modules</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
-<tr class="memitem:d1/de0/camera_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/de0/camera_8c.html">camera.c</a></td></tr>
-<tr class="memdesc:d1/de0/camera_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions to process data retrieved by a camera. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:df/ded/camera__processing_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/ded/camera__processing_8c.html">camera_processing.c</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d6/d91/camera__processing_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/camera__processing_8h.html">camera_processing.h</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d9/d1f/DSPIC30F6014A__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html">DSPIC30F6014A_HDI.h</a></td></tr>
 <tr class="memdesc:d9/d1f/DSPIC30F6014A__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">declares e-puck specific types and preprocessor variables <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d9/dcb/i2c_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/i2c_8c.html">i2c.c</a></td></tr>
-<tr class="memdesc:d9/dcb/i2c_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines functions to read and write on the I2C interface. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d5/daf/i2c_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/daf/i2c_8h.html">i2c.h</a></td></tr>
-<tr class="memdesc:d5/daf/i2c_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions to read and write on the I2C interface. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:df/dd6/i2c__data_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dd6/i2c__data_8c.html">i2c_data.c</a></td></tr>
-<tr class="memdesc:df/dd6/i2c__data_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines functions to manage the I2C queue. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d8/ded/i2c__data_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ded/i2c__data_8h.html">i2c_data.h</a></td></tr>
-<tr class="memdesc:d8/ded/i2c__data_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions to read and write on the I2C interface. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d9/df1/i2c__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df1/i2c__HDI_8c.html">i2c_HDI.c</a></td></tr>
-<tr class="memdesc:d9/df1/i2c__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to read and write on the I2C interface. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d4/db3/i2c__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/db3/i2c__HDI_8h.html">i2c_HDI.h</a></td></tr>
-<tr class="memdesc:d4/db3/i2c__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to read and write on the I2C interface. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d3/d87/io__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d87/io__HDI_8c.html">io_HDI.c</a></td></tr>
-<tr class="memdesc:d3/d87/io__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to start and stop the I/O timer. This timer executes IO functions periodically. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d1/d81/io__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/io__HDI_8h.html">io_HDI.h</a></td></tr>
-<tr class="memdesc:d1/d81/io__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to start and stop the I/O timer. This timer executes IO functions periodically. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d6/d0e/motors_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d0e/motors_8c.html">motors.c</a></td></tr>
-<tr class="memdesc:d6/d0e/motors_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file provides the function needed to actuate the motors. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:dd/d59/motors_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d59/motors_8h.html">motors.h</a></td></tr>
-<tr class="memdesc:dd/d59/motors_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file provides the function needed to actuate the motors. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:da/d9d/motors__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d9d/motors__HDI_8c.html">motors_HDI.c</a></td></tr>
-<tr class="memdesc:da/d9d/motors__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to actuate the motors. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:df/d85/motors__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d85/motors__HDI_8h.html">motors_HDI.h</a></td></tr>
-<tr class="memdesc:df/d85/motors__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to actuate the motors. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d7/d92/remoteControl_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d92/remoteControl_8c.html">remoteControl.c</a></td></tr>
-<tr class="memdesc:d7/d92/remoteControl_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions needed to receive and decode messages from a remote control. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d2/d2f/remoteControl_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2f/remoteControl_8h.html">remoteControl.h</a></td></tr>
-<tr class="memdesc:d2/d2f/remoteControl_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions needed to receive and decode messages from a remote control. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d0/dae/remoteControl__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dae/remoteControl__HDI_8c.html">remoteControl_HDI.c</a></td></tr>
-<tr class="memdesc:d0/dae/remoteControl__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to receive and decode messages from a remote control. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d8/d4a/remoteControl__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d4a/remoteControl__HDI_8h.html">remoteControl_HDI.h</a></td></tr>
-<tr class="memdesc:d8/d4a/remoteControl__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to receive and decode messages from a remote control. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d7/de8/system__Timer__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/de8/system__Timer__HDI_8c.html">system_Timer_HDI.c</a></td></tr>
-<tr class="memdesc:d7/de8/system__Timer__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to initialise, configure and the operating system. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d7/d30/system__Timer__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d30/system__Timer__HDI_8h.html">system_Timer_HDI.h</a></td></tr>
-<tr class="memdesc:d7/d30/system__Timer__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to initialise, configure and the operating system. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d8/d4b/traps_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d4b/traps_8c.html">traps.c</a></td></tr>
 <tr class="memdesc:d8/d4b/traps_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to catch hardware traps. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d1/d87/uart_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d87/uart_8c.html">uart.c</a></td></tr>
-<tr class="memdesc:d1/d87/uart_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions needed to transmit data via uart(1 &amp; 2). <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d2/d86/uart_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d86/uart_8h.html">uart.h</a></td></tr>
-<tr class="memdesc:d2/d86/uart_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions needed to transmit data via uart(1 &amp; 2). <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:da/d3a/uart__HDI_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d3a/uart__HDI_8c.html">uart_HDI.c</a></td></tr>
-<tr class="memdesc:da/d3a/uart__HDI_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to control the message flow of the UART interface. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:dc/d0b/uart__HDI_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d0b/uart__HDI_8h.html">uart_HDI.h</a></td></tr>
-<tr class="memdesc:dc/d0b/uart__HDI_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware dependent implementations to control the message flow of the UART interface. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Modules and functions that are needed to use the e-puck platform. </p>
-<dl class="section see"><dt>See also</dt><dd><a href="http://www.gctronic.com/doc/index.php/E-Puck">http://www.gctronic.com/doc/index.php/E-Puck</a></dd></dl>
+<p>Modules and functions that are needed to use the e-puck platform ( <a href="http://www.gctronic.com/doc/index.php/E-Puck">http://www.gctronic.com/doc/index.php/E-Puck</a> ) </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a></dd></dl>
-<p>This module includes all other modules that are specific to the e-puck platform.</p>
+<h1><a class="anchor" id="Provided"></a>
+Features</h1>
 <p>The e-puck provides the following features: </p>
-<h1><a class="anchor" id="epuck_sensor"></a>
-Sensors:</h1>
-<h2><a class="anchor" id="epuck_prox"></a>
-8 infra-red proximity sensors</h2>
+<h2><a class="anchor" id="epuck_sensor"></a>
+Sensors:</h2>
+<h3><a class="anchor" id="epuck_prox"></a>
+8 infra-red proximity sensors</h3>
 <p>The infra-red proximity sensors are currently under implementation. Therefore not ready yet. </p>
-<h2><a class="anchor" id="epuck_acc"></a>
-accelerometer</h2>
-<p>The accelerometer weren't needed for many applications and, therefore, the priority to implement the speakers is small. </p>
-<h2><a class="anchor" id="epuck_mic"></a>
-3 microphones</h2>
-<p>The microphones weren't needed for many applications and, therefore, the priority to implement the speakers is small. </p>
-<h2><a class="anchor" id="epuck_camera"></a>
-camera:</h2>
-<p>The camera functions can be found at </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../dc/d90/group__camera.html" title="Functions to process incoming frames from a camera module. ">Camera Module</a> </dd></dl>
-<h2><a class="anchor" id="epuck_remote"></a>
-remote control receiver:</h2>
-<p>This function is fully implemented. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../db/d36/group__remotecontrol.html" title="Functions to receive data from a remote control. ">Remote Control</a> </dd></dl>
-<h1><a class="anchor" id="epuck_output"></a>
-Actuators:</h1>
-<h2><a class="anchor" id="epuck_motors"></a>
-differential drive \sa motors</h2>
-<h2><a class="anchor" id="epuck_led"></a>
-leds:</h2>
-<p>Hardware independent functions to control the LEDs are not yet implemented, due to it's simple nature. Currently you can use the MACROs LED0, LED1, ..., LED7, BODYLED, FRONTLED to use the LEDs. </p>
-<h2><a class="anchor" id="epuck_speaker"></a>
-speaker:</h2>
+<h3><a class="anchor" id="epuck_acc"></a>
+accelerometer</h3>
+<p>The accelerometer weren't needed for many applications and, therefore, the priority to implement the accelerometer is small. </p>
+<h3><a class="anchor" id="epuck_mic"></a>
+3 microphones</h3>
+<p>The microphones weren't needed for many applications and, therefore, the priority to implement the microphones is small. </p>
+<h3><a class="anchor" id="epuck_camera"></a>
+camera:</h3>
+<p>The camera functions can be found at <a class="el" href="../../dc/d90/group__camera.html">Camera Module</a> </p>
+<h3><a class="anchor" id="epuck_remote"></a>
+remote control receiver:</h3>
+<p>This function is fully implemented (<a class="el" href="../../db/d36/group__remotecontrol.html">Remote Control</a> ). </p>
+<h2><a class="anchor" id="epuck_output"></a>
+Actuators:</h2>
+<h3><a class="anchor" id="epuck_motors"></a>
+differential drive (\ref motors ).</h3>
+<h3><a class="anchor" id="epuck_led"></a>
+leds:</h3>
+<p>Hardware independent functions to control the LEDs are not yet implemented, due to it's simple nature. Currently you can use the MACROs LED0, LED1, ..., LED7, BODYLED, FRONTLED to set and unset these LEDs. </p>
+<h3><a class="anchor" id="epuck_speaker"></a>
+speaker:</h3>
 <p>The speakers weren't needed for many applications and, therefore, the priority to implement the speakers is small. </p>
-<h1><a class="anchor" id="epuck_com"></a>
-communication:</h1>
-<h2><a class="anchor" id="epuck_bluetooth"></a>
-Bluetooth:</h2>
-<p>The Bluetooth can be used by sending and receiving bytes via UART1 </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../db/def/group__uart.html" title="Functions to control the message flow of the UART interface. ">UART 1&amp;2</a> </dd></dl>
-<h2><a class="anchor" id="epuck_ircom"></a>
-Infra-red communication</h2>
-<p>The infra-red proximity sensors can be used to transmit and receive data. This function leads to a local broadcasting. However, this function has not been implemented yet.</p>
+<h2><a class="anchor" id="epuck_com"></a>
+communication:</h2>
+<h3><a class="anchor" id="epuck_bluetooth"></a>
+Bluetooth:</h3>
+<p>The Bluetooth can be used by sending and receiving bytes via UART1 (<a class="el" href="../../db/def/group__uart.html">UART 1&amp;2</a> ) </p>
+<h3><a class="anchor" id="epuck_ircom"></a>
+Infra-red communication</h3>
+<p>The infra-red proximity sensors can be used to transmit and receive data. This function leads to a local broadcasting. However, this function is still under development.</p>
 <h1><a class="anchor" id="epuck_license"></a>
 License</h1>
 <p>LICENSE: adapted FreeBSD License (see <a href="http://openswarm.org/license">http://openswarm.org/license</a>)<br />

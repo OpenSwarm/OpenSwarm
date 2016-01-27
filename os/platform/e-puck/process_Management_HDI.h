@@ -1,6 +1,7 @@
 /*!
  * \file
  * \ingroup process
+ * \ingroup hdi
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *

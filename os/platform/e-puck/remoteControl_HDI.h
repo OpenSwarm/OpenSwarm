@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup remotecontrol
- * \ingroup epuck
  * \ingroup hdi
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -37,7 +35,7 @@ extern "C" {
 extern bool message_arriving; 
 extern sint8 waiting_cycles;
 
-extern uint16 rx_buffer;
+extern uint rx_buffer;
 
 extern bool isNewDataAvailable;
 

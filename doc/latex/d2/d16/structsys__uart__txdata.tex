@@ -1,0 +1,58 @@
+\hypertarget{structsys__uart__txdata}{}\subsection{sys\+\_\+uart\+\_\+txdata Struct Reference}
+\label{structsys__uart__txdata}\index{sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}}
+
+
+Linked list element to store transmission data.  
+
+
+
+
+{\ttfamily \#include $<$uart\+\_\+\+H\+D\+I.\+h$>$}
+
+\subsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$ \hyperlink{structsys__uart__txdata_aff4fde7bf4b3b6f3d88dc39727685dae}{data}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__uart__txdata_ae3cfb063b546b81d0755cd3a38128a7b}{length}
+\item 
+struct sys\+\_\+uart\+\_\+tx\+\_\+data\+\_\+s $\ast$ \hyperlink{structsys__uart__txdata_a6973ea48e25f4d9abaed720cad5f0212}{next}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Linked list element to store transmission data. 
+
+It is a single linked list containing a set of bytes that should be sent via U\+A\+R\+T. 
+
+Definition at line 45 of file uart\+\_\+\+H\+D\+I.\+h.
+
+
+
+\subsubsection{Field Documentation}
+\hypertarget{structsys__uart__txdata_aff4fde7bf4b3b6f3d88dc39727685dae}{}\index{sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}!data@{data}}
+\index{data@{data}!sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}}
+\paragraph[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8}$\ast$ sys\+\_\+uart\+\_\+txdata\+::data}\label{structsys__uart__txdata_aff4fde7bf4b3b6f3d88dc39727685dae}
+pointer to bytes that should be sent 
+
+Definition at line 46 of file uart\+\_\+\+H\+D\+I.\+h.
+
+\hypertarget{structsys__uart__txdata_ae3cfb063b546b81d0755cd3a38128a7b}{}\index{sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}!length@{length}}
+\index{length@{length}!sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}}
+\paragraph[{length}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+uart\+\_\+txdata\+::length}\label{structsys__uart__txdata_ae3cfb063b546b81d0755cd3a38128a7b}
+number of bytes that need to be sent 
+
+Definition at line 47 of file uart\+\_\+\+H\+D\+I.\+h.
+
+\hypertarget{structsys__uart__txdata_a6973ea48e25f4d9abaed720cad5f0212}{}\index{sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}!next@{next}}
+\index{next@{next}!sys\+\_\+uart\+\_\+txdata@{sys\+\_\+uart\+\_\+txdata}}
+\paragraph[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct sys\+\_\+uart\+\_\+tx\+\_\+data\+\_\+s$\ast$ sys\+\_\+uart\+\_\+txdata\+::next}\label{structsys__uart__txdata_a6973ea48e25f4d9abaed720cad5f0212}
+pointer to the next element in the list 
+
+Definition at line 49 of file uart\+\_\+\+H\+D\+I.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+platform/e-\/puck/\hyperlink{uart__HDI_8h}{uart\+\_\+\+H\+D\+I.\+h}\end{DoxyCompactItemize}

@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup uart
- * \ingroup epuck
  * \ingroup hdi
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -11,7 +9,7 @@
  *
  * \date 27 August 2015
  * 
- * \brief  Hardware dependent implementations to control the message flow of the UART interface.
+ * \brief  Hardware dependent implementations to transmit bytes via UART.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */
@@ -33,11 +31,10 @@ pUART_reader read_uart_2 = 0; /*!< pointer to the functions that processes incom
 sys_uart_txdata *sys_UART1_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART1*/
 sys_uart_txdata *sys_UART2_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART2*/
 
-uint16 byte_counter_uart1 = 0;  /*!< Bytes that were written */
-uint16 byte_counter_uart2 = 0;  /*!< Bytes that were written */
+uint byte_counter_uart1 = 0;  /*!< Bytes that were written */
+uint byte_counter_uart2 = 0;  /*!< Bytes that were written */
 
 /**
- * Initialises UART1
  *
  * This function initialises UART1.
  * 
@@ -75,7 +72,6 @@ void Sys_Init_UART1_HDI(void){
 }
 
 /**
- * Initialises UART2
  *
  * This function initialises UART2.
  * 
@@ -101,7 +97,6 @@ void Sys_Init_UART2_HDI(void){
 }
 
 /**
- * starts UART2
  *
  * This function starts UART2.
  * 
@@ -118,7 +113,6 @@ void Sys_Start_UART1_HDI(void){
 }
 
 /**
- * starts UART2
  *
  * This function starts UART2.
  * 
@@ -135,7 +129,6 @@ void Sys_Start_UART2_HDI(void){
 }
 
 /**
- * UART1 reading interrupt
  *
  * UART1 reading interrupt.
  * 
@@ -146,7 +139,6 @@ void __attribute__((interrupt,auto_psv)) _U1RXInterrupt(void){
 }
 
 /**
- * Alternative UART1 reading interrupt
  *
  * Alternative UART1 reading interrupt.
  * 
@@ -157,7 +149,6 @@ void __attribute__((interrupt,auto_psv)) _AltU1RXInterrupt(void){
 }
 
 /**
- * UART1 writing interrupt
  *
  * UART1 writing interrupt.
  * 
@@ -167,7 +158,6 @@ void __attribute__((interrupt,auto_psv)) _U1TXInterrupt(void){
     IFS0bits.U1TXIF = 0;
 }
 /**
- * Alternative UART1 writing interrupt
  *
  * Alternative UART1 writing interrupt.
  * 
@@ -178,7 +168,6 @@ void __attribute__((interrupt,auto_psv)) _AltU1TXInterrupt(void){
 }
 
 /**
- * UART2 reading interrupt
  *
  * UART2 reading interrupt.
  * 
@@ -188,7 +177,6 @@ void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void){
     IFS1bits.U2RXIF = 0;
 }
 /**
- * Alternative UART2 reading interrupt
  *
  * Alternative UART2 reading interrupt.
  * 
@@ -199,7 +187,6 @@ void __attribute__((interrupt,auto_psv)) _AltU2RXInterrupt(void){
 }
 
 /**
- * UART2 writing interrupt
  *
  * UART2 writing interrupt.
  * 
@@ -209,7 +196,6 @@ void __attribute__((interrupt,auto_psv)) _U2TXInterrupt(void){
     IFS1bits.U2TXIF = 0;
 }
 /**
- * Alternative UART2 writing interrupt
  *
  * Alternative UART2 writing interrupt.
  * 
@@ -220,7 +206,6 @@ void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
 }
 
 /**
- * UART1 reading function
  *
  * This function is executed at occurrence of the UART1 reading interrupt.
  * 
@@ -241,7 +226,6 @@ inline void Sys_Read_UART1_ISR(){
 }
 
 /**
- * UART1 writing function
  *
  * This function is executed at occurrence of the UART1 writing interrupt.
  * 
@@ -280,7 +264,6 @@ inline void Sys_Write_UART1_ISR(){
 }
 
 /**
- * UART2 reading function
  *
  * This function is executed at occurrence of the UART2 reading interrupt.
  * 
@@ -301,7 +284,6 @@ inline void Sys_Read_UART2_ISR(){
 
 }
 /**
- * UART1 writing function
  *
  * This function is executed at occurrence of the UART1 writing interrupt.
  * 

@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -90,21 +90,21 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="../../dc/db2/system_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d6/dc2/definitions_8h.html">definitions.h</a>&quot;</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef EPUCK_USED</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#aa790380273821f8d44cd42773fdd7e2a">   85</a></span>&#160;<span class="preprocessor">#define SYS_MOTOR_USED      </span></div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#a7230b7bc459e2e3b1de072f9c2490d74">   86</a></span>&#160;<span class="preprocessor">#define SYS_UART1_USED       </span></div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#acf553b2b5b8bb08ffc74d03b52ea68bd">   87</a></span>&#160;<span class="preprocessor">#define SYS_REMOTECONTROL_USED   </span></div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#ac4c4020859ec5bd6347651b6babe7388">   88</a></span>&#160;<span class="preprocessor">#define SYS_CAMERA_USED      </span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../dc/db2/system_8h.html#a9cfaef0a7af7eea16e065c481662eaa4">Sys_Init_Kernel</a>(<span class="keywordtype">void</span>);   <span class="comment">//initialises the hardware</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../dc/db2/system_8h.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel</a>(<span class="keywordtype">void</span>);    <span class="comment">//starts all needed functions</span></div>
-<div class="ttc" id="definitions_8h_html"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html">definitions.h</a></div><div class="ttdoc">This file declares general preprocessor variables and types. </div></div>
-<div class="ttc" id="system_8h_html_a9cfaef0a7af7eea16e065c481662eaa4"><div class="ttname"><a href="../../dc/db2/system_8h.html#a9cfaef0a7af7eea16e065c481662eaa4">Sys_Init_Kernel</a></div><div class="ttdeci">void Sys_Init_Kernel(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dfd/system_8c_source.html#l00064">system.c:64</a></div></div>
-<div class="ttc" id="system_8h_html_a2e15518324643f26cb240108259b30da"><div class="ttname"><a href="../../dc/db2/system_8h.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel</a></div><div class="ttdeci">void Sys_Start_Kernel(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dfd/system_8c_source.html#l00104">system.c:104</a></div></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d6/dc2/definitions_8h.html">definitions.h</a>&quot;</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#ifdef EPUCK_USED</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#aa790380273821f8d44cd42773fdd7e2a">   82</a></span>&#160;<span class="preprocessor">#define SYS_MOTOR_USED      </span></div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#a7230b7bc459e2e3b1de072f9c2490d74">   83</a></span>&#160;<span class="preprocessor">#define SYS_UART1_USED       </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#acf553b2b5b8bb08ffc74d03b52ea68bd">   84</a></span>&#160;<span class="preprocessor">#define SYS_REMOTECONTROL_USED   </span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="../../dc/db2/system_8h.html#ac4c4020859ec5bd6347651b6babe7388">   85</a></span>&#160;<span class="preprocessor">#define SYS_CAMERA_USED      </span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../dc/db2/system_8h.html#a9cfaef0a7af7eea16e065c481662eaa4">Sys_Init_Kernel</a>(<span class="keywordtype">void</span>);   <span class="comment">//initialises the hardware</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../dc/db2/system_8h.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel</a>(<span class="keywordtype">void</span>);    <span class="comment">//starts all needed functions</span></div>
+<div class="ttc" id="definitions_8h_html"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html">definitions.h</a></div><div class="ttdoc">It declares general preprocessor variables and types. </div></div>
+<div class="ttc" id="system_8h_html_a9cfaef0a7af7eea16e065c481662eaa4"><div class="ttname"><a href="../../dc/db2/system_8h.html#a9cfaef0a7af7eea16e065c481662eaa4">Sys_Init_Kernel</a></div><div class="ttdeci">void Sys_Init_Kernel(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dfd/system_8c_source.html#l00063">system.c:63</a></div></div>
+<div class="ttc" id="system_8h_html_a2e15518324643f26cb240108259b30da"><div class="ttname"><a href="../../dc/db2/system_8h.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel</a></div><div class="ttdeci">void Sys_Start_Kernel(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dfd/system_8c_source.html#l00102">system.c:102</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

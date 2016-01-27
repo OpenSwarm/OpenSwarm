@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">process_Management_HDI.c File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Manages</a></div></div>  </div>
+<div class="title">process_Management_HDI.c File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Management</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,9 +112,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../d9/db4/process__Management__HDI_8c__incl.png" border="0" usemap="#platform_2e-puck_2process__Management__HDI_8c" alt=""/></div>
-<map name="platform_2e-puck_2process__Management__HDI_8c" id="platform_2e-puck_2process__Management__HDI_8c">
-<area shape="rect" id="node2" href="../../de/dad/process__Management__HDI_8h.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="28,95,179,136"/><area shape="rect" id="node5" href="../../d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="425,348,560,375"/><area shape="rect" id="node13" href="../../dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="255,184,411,225"/><area shape="rect" id="node15" href="../../d7/d30/system__Timer__HDI_8h.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="435,191,582,218"/><area shape="rect" id="node16" href="../../d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="897,102,1008,129"/><area shape="rect" id="node17" href="../../dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory " alt="" coords="529,273,633,300"/><area shape="rect" id="node3" href="../../d2/dbd/data_8h.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="35,184,171,225"/><area shape="rect" id="node11" href="../../db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="81,273,238,300"/><area shape="rect" id="node12" href="../../d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="263,273,352,300"/><area shape="rect" id="node9" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="403,423,611,464"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d9/db4/process__Management__HDI_8c__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d2/d78/process__Management__HDI_8c_source.html">Go to the source code of this file.</a></p>
@@ -129,7 +127,7 @@ Functions</h2></td></tr>
 <tr class="separator:a4d34eac39eff8fbbb6ac0e27d7a91702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909eacc2436d97a6727dd5ffe00486b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d78/process__Management__HDI_8c.html#a909eacc2436d97a6727dd5ffe00486b7">Sys_Change_Stack_HDI</a> (unsigned short fp, unsigned short sp, unsigned short lm)</td></tr>
 <tr class="separator:a909eacc2436d97a6727dd5ffe00486b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45fdb2237ab82a4264a7b4d837e13267"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d78/process__Management__HDI_8c.html#a45fdb2237ab82a4264a7b4d837e13267">Sys_Switch_Process_HDI</a> (<a class="el" href="../../d2/dbd/data_8h.html#a4bc86a9d244a6e19ed98dda5f249500d">sys_pcb_list_element</a> *new_process)</td></tr>
+<tr class="memitem:a45fdb2237ab82a4264a7b4d837e13267"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d78/process__Management__HDI_8c.html#a45fdb2237ab82a4264a7b4d837e13267">Sys_Switch_Process_HDI</a> (<a class="el" href="../../da/d6c/structsys__pcb__list__element.html">sys_pcb_list_element</a> *new_process)</td></tr>
 <tr class="separator:a45fdb2237ab82a4264a7b4d837e13267"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -171,7 +169,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This function changes stackpointers to the new stack</p>
-<p>This function changes stackpointers to the new stack</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">fp</td><td>FramePointer address </td></tr>
@@ -181,7 +178,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00215">215</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00212">212</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
 
 </div>
 </div>
@@ -198,8 +195,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function initialises the process management</p>
 <p>This function initialises the process management and creates the first elements in the linked list </p>
+<p>&lt; Process priority: System = highest </p>
 
 <p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00044">44</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
 
@@ -226,10 +223,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function stores all registers and information of the running process into the corresponding struct</p>
 <p>This function stores all registers and information of the running process into the corresponding struct </p>
 
-<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00151">151</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00149">149</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
 
 </div>
 </div>
@@ -246,7 +242,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function creates a new sys_process_control_block and add all needed info</p>
 <p>This function creates a new sys_process_control_block (in a sys_process_control_block_list_element) which contains all information wich is used to execute this process.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -254,8 +249,9 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p>&lt; State to indicate that a process is created but not yet ready to be executed </p>
 
-<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00095">95</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00094">94</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
 
 </div>
 </div>
@@ -266,13 +262,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void Sys_Switch_Process_HDI </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d2/dbd/data_8h.html#a4bc86a9d244a6e19ed98dda5f249500d">sys_pcb_list_element</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="../../da/d6c/structsys__pcb__list__element.html">sys_pcb_list_element</a> *&#160;</td>
           <td class="paramname"><em>new_process</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function switches from sys_running_process to new_process</p>
 <p>This function switches from sys_running_process to new_process</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -280,8 +275,12 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p>&lt; State to indicate that a process is waiting to be executed</p>
+<p>&lt; State to indicate that a process is created but not yet ready to be executed</p>
+<p>&lt; State to indicate that a process is executed</p>
+<p>&lt; State to indicate that a process is executed </p>
 
-<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00248">248</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html#l00244">244</a> of file <a class="el" href="../../d2/d78/process__Management__HDI_8c_source.html">process_Management_HDI.c</a>.</p>
 
 </div>
 </div>

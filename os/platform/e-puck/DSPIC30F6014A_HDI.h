@@ -15,35 +15,34 @@
  */
 
 /*! \defgroup epuck e-puck specific modules
- * \brief Modules and functions that are needed to use the e-puck platform \sa http://www.gctronic.com/doc/index.php/E-Puck
+ * \brief Modules and functions that are needed to use the e-puck platform ( http://www.gctronic.com/doc/index.php/E-Puck )
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
- * 
- * This module includes all other modules that are specific to the e-puck platform. 
- * 
+ *  
+ * \section Provided Features
  * The e-puck provides the following features:
- * \section epuck_sensor Sensors:
- *      \subsection epuck_prox 8 infra-red proximity sensors
+ * \subsection epuck_sensor Sensors:
+ *      \subsubsection epuck_prox 8 infra-red proximity sensors
  *      The infra-red proximity sensors are currently under implementation. Therefore not ready yet.
- *      \subsection epuck_acc accelerometer
- *      The accelerometer weren't needed for many applications and, therefore, the priority to implement the speakers is small.
- *      \subsection epuck_mic 3 microphones
- *      The microphones weren't needed for many applications and, therefore, the priority to implement the speakers is small.
- *      \subsection epuck_camera camera:
- *      The camera functions can be found at \sa camera
- *      \subsection epuck_remote remote control receiver:
- *      This function is fully implemented. \sa remotecontrol
- * \section epuck_output Actuators:
- *      \subsection epuck_motors differential drive \sa motors
- *      \subsection epuck_led leds:
- *      Hardware independent functions to control the LEDs are not yet implemented, due to it's simple nature. Currently you can use the MACROs LED0, LED1, ..., LED7, BODYLED, FRONTLED to use the LEDs.
- *      \subsection epuck_speaker speaker:
+ *      \subsubsection epuck_acc accelerometer
+ *      The accelerometer weren't needed for many applications and, therefore, the priority to implement the accelerometer is small.
+ *      \subsubsection epuck_mic 3 microphones
+ *      The microphones weren't needed for many applications and, therefore, the priority to implement the microphones is small.
+ *      \subsubsection epuck_camera camera:
+ *      The camera functions can be found at \ref camera
+ *      \subsubsection epuck_remote remote control receiver:
+ *      This function is fully implemented (\ref remotecontrol ).
+ * \subsection epuck_output Actuators:
+ *      \subsubsection epuck_motors differential drive (\ref motors ).
+ *      \subsubsection epuck_led leds:
+ *      Hardware independent functions to control the LEDs are not yet implemented, due to it's simple nature. Currently you can use the MACROs LED0, LED1, ..., LED7, BODYLED, FRONTLED to set and unset these LEDs.
+ *      \subsubsection epuck_speaker speaker:
  *      The speakers weren't needed for many applications and, therefore, the priority to implement the speakers is small.
- * \section epuck_com communication:
- *      \subsection epuck_bluetooth Bluetooth:
- *      The Bluetooth can be used by sending and receiving bytes via UART1 \sa uart
- *      \subsection epuck_ircom Infra-red communication
- *      The infra-red proximity sensors can be used to transmit and receive data. This function leads to a local broadcasting. However, this function has not been implemented yet.
+ * \subsection epuck_com communication:
+ *      \subsubsection epuck_bluetooth Bluetooth:
+ *      The Bluetooth can be used by sending and receiving bytes via UART1 (\ref uart )
+ *      \subsubsection epuck_ircom Infra-red communication
+ *      The infra-red proximity sensors can be used to transmit and receive data. This function leads to a local broadcasting. However, this function is still under development.
  *
  * \section epuck_license License
  * LICENSE: adapted FreeBSD License (see http://openswarm.org/license)\n

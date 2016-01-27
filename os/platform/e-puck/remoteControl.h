@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup remotecontrol
- * \ingroup epuck
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \author  Yuri Kaszubowski Lopes <yurikazuba@gmail.com>
@@ -11,24 +9,25 @@
  *
  * \date 27 August 2015
  * 
- * \brief  This file includes functions needed to receive and decode messages from a remote control
+ * \brief  It declares functions to receive and decode messages from a remote control
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */
 
 /*! \defgroup remotecontrol Remote Control
  * \ingroup epuck
+ * \ingroup io
  * 
  * \brief Functions to receive data from a remote control
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * 
- * This module is based on the RC-5 coding for the (Toshiba RC-3910)
+ * This module is based on the RC-5 coding for the Toshiba RC-3910 (https://en.wikipedia.org/wiki/RC-5)
  *  
  * \section rc_usage Usage
  * After the initialisation with Sys_Init_RemoteControl(), the interface needs to be started to be able to receive or transmit bytes with Sys_Start_RemoteControl().
  * 
- * After this every button pressed on the remote control is received as an event (SYS_EVENT_IO_REMOECONTROL).
+ * After this, any pressed button on the remote control is received as an event (SYS_EVENT_IO_REMOECONTROL).
  * 
  * \section rc_license License
  * LICENSE: adapted FreeBSD License (see http://openswarm.org/license)\n

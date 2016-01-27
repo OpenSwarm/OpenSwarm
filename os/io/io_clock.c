@@ -6,7 +6,7 @@
  *
  * \date 28 July 2015
  * 
- * \brief  defines the system clock that provides a continuous time value (granulation of 1 ms).
+ * \brief  It defines the system clock that provides a continuous time value (granulation of 1 ms).
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -22,7 +22,6 @@ static uint32 sys_clock = 0; /*!< counter which is system clock */
 void Sys_SystemClock_Counter(void);
 
 /**
- * This function initialises the system clock
  *
  * This function initialises the system clock which is in principle a counter that inicates passed milli seconds.
  *
@@ -33,7 +32,6 @@ inline void Sys_Init_Clock(){
 }
 
 /**
- * Renaming of the function Sys_Init_Clock().
  *
  * Renaming of the function Sys_Init_Clock().
  * 
@@ -43,14 +41,13 @@ inline void Sys_Init_SystemTime(){
 }
 
 /**
- * calculates the system clock
  *
  * This function calculates the system clock tick and increases the counter if a millisecond passed.
  *
  */
 void Sys_SystemClock_Counter(){
     
-    static uint16 counter = 0;
+    static uint counter = 0;
     
     if( counter < STEPS_PER_MILISECOND){
         counter++;
@@ -62,18 +59,16 @@ void Sys_SystemClock_Counter(){
 }
 
 /**
- * Renaming of the function Sys_Get_SystemClock().
  *
  * Renaming of the function Sys_Get_SystemClock().
  * 
- * @return uint32  time that has passed since OpenSwarm was started
+ * @return time that has passed since OpenSwarm was started (uint32)
  */
 inline uint32 Sys_Get_SystemTime(){
     return Sys_Get_SystemClock();
 }
 
 /**
- * returns the system clock/time in milliseconds
  *
  * returns the system clock/time in milliseconds
  * 

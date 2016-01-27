@@ -1,14 +1,13 @@
 /*!
  * \file
  * \ingroup io
- * \ingroup epuck
  * \ingroup hdi
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date 10 August 2015
  * 
- * \brief  Hardware dependent implementations to start and stop the I/O timer.  This timer executes IO functions periodically.
+ * \brief  Hardware dependent implementations to control the IO timer and to (un)register IO Handler.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -27,7 +26,6 @@ sys_periodical_IOHandler *sys_iohandlers;	/*!< List of I/O handlers*/
 
 
 /**
- * initialises the I/O Timer
  *
  * This function initialises the I/O Timer.
  *
@@ -52,7 +50,6 @@ inline void Sys_Init_IOTimer_HDI(){
 }
 
 /**
- * starts the I/O Timer
  *
  * This function starts the I/O Timer.
  *
@@ -65,7 +62,6 @@ inline void Sys_Start_IOTimer_HDI(){
 }
 
 /**
- * stops the I/O Timer
  *
  * This function stops the I/O Timer.
  *
@@ -78,7 +74,6 @@ inline void Sys_Stop_IOTimer_HDI(){
 }
 
 /**
- * continues the I/O Timer
  *
  * This function continues the I/O Timer.
  *
@@ -91,7 +86,6 @@ inline void Sys_Continue_IOTimer_HDI(){
 }
 
 /**
- * resets the I/O Timer
  *
  * This function resets the I/O Timer.
  *
@@ -102,7 +96,6 @@ inline void Sys_Reset_IOTimer_HDI(){
 }
 
 /**
- * Interrupt Service Routine for the Timer1 HDI
  *
  * This Function starts the task-scheduling algorithm
  *
@@ -113,9 +106,7 @@ void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(){
 }
 
 /**
- * Interrupt Service Routine for the Timer1 HDI (alternate)
- *
- * This Function starts the task-scheduling algorithm
+ * Interrupt Service Routine for the Timer1 (alternate) starts the task-scheduling algorithm
  *
  */
 void __attribute__((interrupt,no_auto_psv)) _AltT3Interrupt(){
@@ -124,7 +115,6 @@ void __attribute__((interrupt,no_auto_psv)) _AltT3Interrupt(){
 }
 
 /**
- * Disables the Timer1 interrupt
  *
  * Disables the Timer1 interrupt and sets the interrupt flag to 0
  *
@@ -135,7 +125,6 @@ inline void Sys_Disable_IOTimerInterrupt_HDI(){
 }
 
 /**
- * Enables the Timer1 interrupt
  *
  * Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function.
  *
@@ -144,7 +133,6 @@ inline void Sys_Enable_IOTimerInterrupt_HDI(){
     IEC0bits.T3IE = 1; //enable Timer1 interrupt -> T1IE = 1
 }
 /**
- * forces the Timer1 interrupt
  *
  * forces the Timer1 interrupt to occur.
  *
@@ -154,7 +142,6 @@ inline void Sys_Force_IOTimerInterrupt_HDI(){
 }
 
 /**
- * execution of all I/O handlers.
  *
  * This function is executed every time the I/O timer is active and executes all I/O handlers
  *

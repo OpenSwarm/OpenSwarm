@@ -6,7 +6,7 @@
  *
  * \date{07 July 2014}
  * 
- * \brief This file includes all functions wich are needed to specify a scheduling algorithm
+ * \brief It defines functions to specify a scheduling algorithm
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -17,7 +17,6 @@
 static unsigned short called_Scheduler = 0;
 
 /**
- * This function represents the Schedling algorithm
  *
  * This function shows the implementation of the RoundRobin Scheduling algorithm
  *
@@ -38,7 +37,6 @@ void Sys_Scheduler_RoundRobin(void){
 
 
 /**
- * This function sets default values to the scheduling struct
  *
  * This function sets the default values in a sys_scheduler_info struct
  *

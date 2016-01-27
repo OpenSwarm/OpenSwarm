@@ -1,39 +1,38 @@
-\hypertarget{i2c__data_8c}{}\section{platform/e-\/puck/i2c\+\_\+data.c File Reference}
+\hypertarget{i2c__data_8c}{}\subsection{platform/e-\/puck/i2c\+\_\+data.c File Reference}
 \label{i2c__data_8c}\index{platform/e-\/puck/i2c\+\_\+data.\+c@{platform/e-\/puck/i2c\+\_\+data.\+c}}
 
 
-defines functions to manage the I2\+C queue.  
+It defines functions to manage the I2\+C queue.  
 
 
 {\ttfamily \#include \char`\"{}i2c\+\_\+data.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../memory.\+h\char`\"{}}\\*
-Include dependency graph for i2c\+\_\+data.\+c\+:
-\nopagebreak
+Include dependency graph for i2c\+\_\+data.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d3/d9e/i2c__data_8c__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{i2c__data_8c_aab570c7924073daf517967958aba4250}{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message} (\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$$\ast$list)
+void \hyperlink{i2c__data_8c_aab570c7924073daf517967958aba4250}{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message} (sys\+\_\+i2c\+\_\+messages $\ast$$\ast$list)
 \item 
-void \hyperlink{i2c__data_8c_a11867d2a3620c96f6a9621f246939a28}{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages} (\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$list)
+void \hyperlink{i2c__data_8c_a11867d2a3620c96f6a9621f246939a28}{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages} (sys\+\_\+i2c\+\_\+messages $\ast$list)
 \item 
-void \hyperlink{i2c__data_8c_a37ea66b4bc94c628d177842936370926}{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages} (\hyperlink{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}{sys\+\_\+i2c\+\_\+msg} $\ast$item)
+void \hyperlink{i2c__data_8c_a37ea66b4bc94c628d177842936370926}{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages} (\hyperlink{structsys__i2c__msg}{sys\+\_\+i2c\+\_\+msg} $\ast$item)
 \end{DoxyCompactItemize}
-\subsection*{Variables}
+\subsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$ \hyperlink{i2c__data_8c_ab06ea00913c00acfd046536bef96a344}{sys\+\_\+i2c\+\_\+msgs} = 0
+sys\+\_\+i2c\+\_\+messages $\ast$ \hyperlink{i2c__data_8c_ab06ea00913c00acfd046536bef96a344}{sys\+\_\+i2c\+\_\+msgs} = 0
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-defines functions to manage the I2\+C queue. 
+\subsubsection{Detailed Description}
+It defines functions to manage the I2\+C queue. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -49,16 +48,14 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{i2c__data_8c_a37ea66b4bc94c628d177842936370926}{}\index{i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}!Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}}
 \index{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}!i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}}
-\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages (
+\paragraph[{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+i2c\+\_\+msg} $\ast$}]{item}
 \end{DoxyParamCaption}
 )}\label{i2c__data_8c_a37ea66b4bc94c628d177842936370926}
-appends an element to the linked list.
-
 This function appends on the bottom of the linked list.
 
 
@@ -68,17 +65,15 @@ This function appends on the bottom of the linked list.
 \end{DoxyParams}
 
 
-Definition at line 69 of file i2c\+\_\+data.\+c.
+Definition at line 64 of file i2c\+\_\+data.\+c.
 
 \hypertarget{i2c__data_8c_a11867d2a3620c96f6a9621f246939a28}{}\index{i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}!Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}}
 \index{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}!i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}}
-\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages (
+\paragraph[{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages (
 \begin{DoxyParamCaption}
-\item[{{\bf sys\+\_\+i2c\+\_\+messages} $\ast$}]{list}
+\item[{sys\+\_\+i2c\+\_\+messages $\ast$}]{list}
 \end{DoxyParamCaption}
 )}\label{i2c__data_8c_a11867d2a3620c96f6a9621f246939a28}
-frees all messages of the linked list
-
 This function frees all messages of the linked list.
 
 
@@ -88,17 +83,15 @@ This function frees all messages of the linked list.
 \end{DoxyParams}
 
 
-Definition at line 47 of file i2c\+\_\+data.\+c.
+Definition at line 43 of file i2c\+\_\+data.\+c.
 
 \hypertarget{i2c__data_8c_aab570c7924073daf517967958aba4250}{}\index{i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}!Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message@{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}}
 \index{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message@{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}!i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}}
-\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message (
+\paragraph[{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message (
 \begin{DoxyParamCaption}
-\item[{{\bf sys\+\_\+i2c\+\_\+messages} $\ast$$\ast$}]{list}
+\item[{sys\+\_\+i2c\+\_\+messages $\ast$$\ast$}]{list}
 \end{DoxyParamCaption}
 )}\label{i2c__data_8c_aab570c7924073daf517967958aba4250}
-removes oldest message from the linked list
-
 This function removes the oldest message (first element) of the linked list
 
 
@@ -108,15 +101,15 @@ This function removes the oldest message (first element) of the linked list
 \end{DoxyParams}
 
 
-Definition at line 30 of file i2c\+\_\+data.\+c.
+Definition at line 27 of file i2c\+\_\+data.\+c.
 
 
 
-\subsection{Variable Documentation}
+\subsubsection{Variable Documentation}
 \hypertarget{i2c__data_8c_ab06ea00913c00acfd046536bef96a344}{}\index{i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}!sys\+\_\+i2c\+\_\+msgs@{sys\+\_\+i2c\+\_\+msgs}}
 \index{sys\+\_\+i2c\+\_\+msgs@{sys\+\_\+i2c\+\_\+msgs}!i2c\+\_\+data.\+c@{i2c\+\_\+data.\+c}}
-\subsubsection[{sys\+\_\+i2c\+\_\+msgs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+i2c\+\_\+messages}$\ast$ sys\+\_\+i2c\+\_\+msgs = 0}\label{i2c__data_8c_ab06ea00913c00acfd046536bef96a344}
+\paragraph[{sys\+\_\+i2c\+\_\+msgs}]{\setlength{\rightskip}{0pt plus 5cm}sys\+\_\+i2c\+\_\+messages$\ast$ sys\+\_\+i2c\+\_\+msgs = 0}\label{i2c__data_8c_ab06ea00913c00acfd046536bef96a344}
 Pointer to the linked list of messages 
 
-Definition at line 21 of file i2c\+\_\+data.\+c.
+Definition at line 19 of file i2c\+\_\+data.\+c.
 

@@ -1,13 +1,13 @@
 <map id="processes/scheduler.h" name="processes/scheduler.h">
-<area shape="rect" id="node2" href="$d4/dfd/system_8c.html" title="includes system calls that initialise and configure the operating system. " alt="" coords="5,162,81,189"/>
-<area shape="rect" id="node3" href="$dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="401,80,627,107"/>
-<area shape="rect" id="node8" href="$da/d14/process__Management_8c.html" title="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..." alt="" coords="992,251,1217,278"/>
-<area shape="rect" id="node9" href="$dd/d6c/scheduler_8c.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="787,162,940,189"/>
-<area shape="rect" id="node11" href="$d2/dbd/data_8h.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="985,80,1107,107"/>
-<area shape="rect" id="node4" href="$de/deb/events_8c.html" title="This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler. " alt="" coords="362,162,477,189"/>
+<area shape="rect" id="node2" href="$d4/dfd/system_8c.html" title="defines functions to initialise and start OpenSwarm. " alt="" coords="5,162,81,189"/>
+<area shape="rect" id="node3" href="$dd/de5/process__Management_8h.html" title="It declares functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="401,80,627,107"/>
+<area shape="rect" id="node8" href="$da/d14/process__Management_8c.html" title="It defines functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="992,251,1217,278"/>
+<area shape="rect" id="node9" href="$dd/d6c/scheduler_8c.html" title="It defines functions to specify a scheduling algorithm. " alt="" coords="787,162,940,189"/>
+<area shape="rect" id="node11" href="$d2/dbd/data_8h.html" title="It declares functions to manage process lists and related structs. " alt="" coords="985,80,1107,107"/>
+<area shape="rect" id="node4" href="$de/deb/events_8c.html" title="defines functions to create, (un)subscribe, (un)register, and delete events and related handler..." alt="" coords="362,162,477,189"/>
 <area shape="rect" id="node5" href="$d2/d78/process__Management__HDI_8c.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="349,244,511,285"/>
-<area shape="rect" id="node6" href="$d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="552,155,711,196"/>
-<area shape="rect" id="node7" href="$de/da9/data_8c.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="649,251,771,278"/>
-<area shape="rect" id="node10" href="$de/dfb/system__Timer_8c.html" title="This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. " alt="" coords="157,162,337,189"/>
+<area shape="rect" id="node6" href="$d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and run the system Timer. " alt="" coords="552,155,711,196"/>
+<area shape="rect" id="node7" href="$de/da9/data_8c.html" title="It defines functions to manage process lists and related structs. " alt="" coords="649,251,771,278"/>
+<area shape="rect" id="node10" href="$de/dfb/system__Timer_8c.html" title="It defines functions to initialise, configure and run the system Timer. " alt="" coords="157,162,337,189"/>
 <area shape="rect" id="node12" href="$de/dad/process__Management__HDI_8h.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="965,155,1127,196"/>
 </map>

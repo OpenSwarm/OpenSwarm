@@ -6,7 +6,7 @@
  *
  * \date{07 July 2014}
  * 
- * \brief This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time
+ * \brief It declares functions to initialise, configure and run the system Timer
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 

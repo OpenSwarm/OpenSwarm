@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup remotecontrol
- * \ingroup epuck
  * \ingroup hdi
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -28,14 +26,13 @@
 bool message_arriving = false; /*!< A flag that is set as soon as a messgage is recieved */
 sint8 waiting_cycles = 20;/*!< The cycles that need to be waited until the next stage (set for 100us) */
 
-uint16 rx_buffer = 0;/*!< The initial state of the state machine to decode a remote control message */
+uint rx_buffer = 0;/*!< The initial state of the state machine to decode a remote control message */
 
 bool isNewDataAvailable = false;/*!< a flag to indicate that a new message was received */
 
 sint8 receiving_bit = RC_NOT_STARTED;/*!< State indicator (for the state machine) */
 
 /**
- * Initialises the remote control handler
  *
  * This function initialises the handler of the remote control to receive signals from the remote control.
  *
@@ -55,7 +52,6 @@ inline void Sys_Init_RemoteControl_HDI(void){
 }
 
 /**
- * start the remote control handler
  *
  * This function start the handler of the remote control to receive signals from the remote control.
  *
@@ -66,7 +62,6 @@ inline void Sys_Start_RemoteControl_HDI(void){
 }
 
 /**
- * external interrupt handler for the remote control
  *
  * This function is executed at the arrival of a new remote control message.
  *

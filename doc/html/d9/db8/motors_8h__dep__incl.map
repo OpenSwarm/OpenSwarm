@@ -1,4 +1,4 @@
 <map id="platform/e&#45;puck/motors.h" name="platform/e&#45;puck/motors.h">
-<area shape="rect" id="node2" href="$d3/d87/io__HDI_8c.html" title="Hardware dependent implementations to start and stop the I/O timer. This timer executes IO functions ..." alt="" coords="5,80,132,121"/>
-<area shape="rect" id="node3" href="$d6/d0e/motors_8c.html" title="This file provides the function needed to actuate the motors. " alt="" coords="156,87,323,114"/>
+<area shape="rect" id="node2" href="$d3/d87/io__HDI_8c.html" title="Hardware dependent implementations to control the IO timer and to (un)register IO Handler..." alt="" coords="5,80,132,121"/>
+<area shape="rect" id="node3" href="$d6/d0e/motors_8c.html" title="It defines function to drive motors. " alt="" coords="156,87,323,114"/>
 </map>

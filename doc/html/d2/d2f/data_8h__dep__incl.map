@@ -1,6 +1,6 @@
 <map id="processes/data.h" name="processes/data.h">
 <area shape="rect" id="node2" href="$de/dad/process__Management__HDI_8h.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="192,80,355,121"/>
-<area shape="rect" id="node5" href="$da/d14/process__Management_8c.html" title="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..." alt="" coords="339,177,565,203"/>
+<area shape="rect" id="node5" href="$da/d14/process__Management_8c.html" title="It defines functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="339,177,565,203"/>
 <area shape="rect" id="node3" href="$d2/d78/process__Management__HDI_8c.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="5,169,168,211"/>
-<area shape="rect" id="node4" href="$de/da9/data_8c.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="192,177,315,203"/>
+<area shape="rect" id="node4" href="$de/da9/data_8c.html" title="It defines functions to manage process lists and related structs. " alt="" coords="192,177,315,203"/>
 </map>

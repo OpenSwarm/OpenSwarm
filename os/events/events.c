@@ -19,11 +19,11 @@
 #include <stdbool.h>
 
 /**
- * @brief A single linked list element containing the ID of a subscribed process
+ * @brief A single linked list element containing the ID of a process that is subscribed to a specific event
  */
 typedef struct sys_subscribed_process_s{
-    uint16 pid;/*!< process identifier */
-    struct sys_subscribed_process_s *next;/*!< pointer to the next element in the List */
+    uint pid;/*!< process identifier */
+    struct sys_subscribed_process_s *next;/*!< pointer to the next element in the list */
 }sys_subscribed_process;
 
 /**
@@ -32,9 +32,9 @@ typedef struct sys_subscribed_process_s{
  * It is a single linked list element that contains registered events and a list of processes that are subscribed to it. 
  */
 typedef struct sys_registered_event_s{
-    uint16 id;/*!< event identifier */
+    uint eventID;/*!< event identifier */
     sys_subscribed_process *subscribers;/*!< pointer to a list of subscribed processes */
-    struct sys_registered_event_s *next;/*!< pointer to the next element in the List */
+    struct sys_registered_event_s *next;/*!< pointer to the next element in the list */
 }sys_registered_event;
 
 /*
@@ -47,19 +47,18 @@ typedef struct sys_event_s {
 
 sys_registered_event *registered_events = 0;/*!< pointer to the List of registered events*/
 
-sys_registered_event *Sys_Find_Event(uint16 eventID);
+sys_registered_event *Sys_Find_Event(uint eventID);
 
 /**
- * Function to send an event
  *
  * This function sends an event to all subscribers.
  *
  * @param[in] 	eventID    ID of the event
  * @param[in] 	data       pointer to the data that want to be sent as an event
  * @param[in] 	data_size  size of the data in bytes
- * @return 	was it successful.
+ * @return true if it was successful.
  */
-bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size){
+bool Sys_Send_Event(uint eventID, void *data, uint data_size){
     Sys_Stop_SystemTimer();//doesn't consume execution time
 
    sys_registered_event *event = Sys_Find_Event(eventID);
@@ -79,7 +78,6 @@ bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size){
 }
 
 /**
- * Function to send an integer event
  *
  * This function sends an integer (16-bit) to all subscribers.
  *
@@ -87,27 +85,26 @@ bool Sys_Send_Event(uint16 eventID, void *data, uint16 data_size){
  * @param[in] 	data       integer value that should be sent as an event
  * @return 	was it successful.
  */
-inline bool Sys_Send_IntEvent(uint16 eventID, uint16 data){
-    uint16 value = data;
+inline bool Sys_Send_IntEvent(uint eventID, uint data){
+    uint value = data;
     return Sys_Send_Event(eventID, &value, 2);
 }
 
 /**
- * Function to register an event
  *
  * This function registers an new event. The registration tells the operating system that this event can occur.
  *
  * @param[in] 	eventID    ID of the event
  * @return 	was it successful.
  */
-bool Sys_Register_Event(uint16 eventID){
+bool Sys_Register_Event(uint eventID){
     sys_registered_event* events = registered_events;
     sys_registered_event* next_event = registered_events;
     sys_registered_event* new_event = 0;
     
 
     while(next_event != 0){
-        if(events->id == eventID){ //is Event (EID) already registered?
+        if(events->eventID == eventID){ //is Event (EID) already registered?
             return false;
         }
 
@@ -119,7 +116,7 @@ bool Sys_Register_Event(uint16 eventID){
     if(new_event == 0){
         return false;
     }
-    new_event->id = eventID;
+    new_event->eventID = eventID;
     new_event->subscribers = 0;
     new_event->next = 0;
 
@@ -133,7 +130,6 @@ bool Sys_Register_Event(uint16 eventID){
 }
 
 /**
- * subscribes a specific handler function to an process and a specific event
  *
  * This function subscribes a specific handler function to an process and a specific event
  *
@@ -143,11 +139,11 @@ bool Sys_Register_Event(uint16 eventID){
  * @param[in] 	condition   pointer to the function that decides if the handler should be executed or not
  * @return 	was it successful.
  */
-bool Sys_Subscribe_to_Event(uint16 eventID, uint16 pid, pEventHandlerFunction handler, pConditionFunction condition){
+bool Sys_Subscribe_to_Event(uint eventID, uint pid, pEventHandlerFunction handler, pConditionFunction condition){
     sys_registered_event* events = registered_events;
     
     while(events != 0){
-        if(events->id == eventID){
+        if(events->eventID == eventID){
             if(!Sys_Add_Event_Subscription(pid, eventID, handler, condition)){
                 return false;
             }
@@ -183,20 +179,19 @@ bool Sys_Subscribe_to_Event(uint16 eventID, uint16 pid, pEventHandlerFunction ha
 }
 
 /**
- * unregisters an event
  *
  * This function unregisters an event
  *
  * @param[in] 	eventID     ID of the event
  */
-void Sys_Unregister_Event(uint16 eventID){
+void Sys_Unregister_Event(uint eventID){
     sys_registered_event* event = registered_events;
     sys_registered_event* next_event = registered_events;
 
     if(registered_events == 0){
         return;
     }else{
-        if(event->id == eventID){
+        if(event->eventID == eventID){
             registered_events = event->next;
 
             sys_subscribed_process* subscriber = event->subscribers;
@@ -213,7 +208,7 @@ void Sys_Unregister_Event(uint16 eventID){
     }
 
     while(next_event != 0){
-        if(next_event->id == eventID){
+        if(next_event->eventID == eventID){
             sys_subscribed_process* subscriber = event->subscribers;
             while(subscriber != 0){//REMOVE all subscribed processes
                sys_subscribed_process* temp = subscriber;
@@ -234,14 +229,13 @@ void Sys_Unregister_Event(uint16 eventID){
 }
 
 /**
- * unsubscribes an event
  *
  * This function unsubscribes an event
  *
  * @param[in] 	eventID     ID of the event
  * @param[in] 	pid         ID of the process
  */
-void Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid){
+void Sys_Unsubscribe_from_Event(uint eventID, uint pid){
     sys_registered_event* event = Sys_Find_Event(eventID);
 
     sys_subscribed_process* subscriber = event->subscribers;
@@ -269,7 +263,6 @@ void Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid){
 }
 
 /**
- * only unsubscribes a specific handler function
  *
  * This function only unsubscribes a specific handler function
  *
@@ -277,7 +270,7 @@ void Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid){
  * @param[in] 	func        pointer to the handler function
  * @param[in] 	pid         ID of the process
  */
-void Sys_Unsubscribe_Handler_from_Event(uint16 eventID, pEventHandlerFunction func,  uint16 pid){
+void Sys_Unsubscribe_Handler_from_Event(uint eventID, pEventHandlerFunction func,  uint pid){
     sys_registered_event* event = Sys_Find_Event(eventID);
 
     sys_subscribed_process* subscriber = event->subscribers;
@@ -305,18 +298,17 @@ void Sys_Unsubscribe_Handler_from_Event(uint16 eventID, pEventHandlerFunction fu
 }
 
 /**
- * finds the registered event
  *
  * This function returns the data structure of an event if the eventID was registered otherwise it's 0.
  *
  * @param[in] 	eventID     ID of the event
  * @return 	    pointer to the data structure of the found event ( or 0 if it wasn't found)
  */
-sys_registered_event *Sys_Find_Event(uint16 eventID){
+sys_registered_event *Sys_Find_Event(uint eventID){
     sys_registered_event* event = registered_events;
 
     while(event != 0){
-        if(event->id == eventID){
+        if(event->eventID == eventID){
             return event;
         }
 
@@ -327,18 +319,17 @@ sys_registered_event *Sys_Find_Event(uint16 eventID){
 }
 
 /**
- * returns true if the event was registered
  *
  * returns true if the event was registered
  *
  * @param[in] 	eventID     ID of the event
  * @return 	   is the event registered?
  */
-bool Sys_IsEventRegistered(uint16 eventID){
+bool Sys_IsEventRegistered(uint eventID){
     sys_registered_event* event = registered_events;
 
     while(event != 0){
-        if(event->id == eventID){
+        if(event->eventID == eventID){
             return true;
         }
 
@@ -351,11 +342,9 @@ bool Sys_IsEventRegistered(uint16 eventID){
 /**
  * unsubscribes all events that were subscribed to a process
  *
- * unsubscribes all events that were subscribed to a process
- *
  * @param[in] 	pid     process identifier
  */
-void Sys_Unsubscribe_Process(uint16 pid){
+void Sys_Unsubscribe_Process(uint pid){
     sys_registered_event* event = registered_events;
 
     while(event != 0){//look into every event
@@ -364,7 +353,7 @@ void Sys_Unsubscribe_Process(uint16 pid){
             event->subscribers = event->subscribers->next;
             Sys_Free(subscriber);
 
-            Sys_Remove_Event_Subscription(pid, event->id, 0);
+            Sys_Remove_Event_Subscription(pid, event->eventID, 0);
             continue;
         }
 
@@ -374,7 +363,7 @@ void Sys_Unsubscribe_Process(uint16 pid){
                 subscriber->next = next_subscriber->next;
                 Sys_Free(next_subscriber);
 
-                Sys_Remove_Event_Subscription(pid, event->id, 0);
+                Sys_Remove_Event_Subscription(pid, event->eventID, 0);
                 break;
             }
 

@@ -6,12 +6,14 @@
  *
  * \date{07 July 2014}
  * 
- * \brief This file includes all functions wich are needed to specify a scheduling algorithm
+ * \brief It declares functions to specify a scheduling algorithm
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #ifndef SYSTEM_SCHEDULER_H
 #define	SYSTEM_SCHEDULER_H
+
+#include "../definitions.h"
 
 #ifdef	__cplusplus
 extern "C" {
@@ -32,11 +34,12 @@ extern "C" {
 
 //!  The scheduling information for each process
 /*!
- This struct defines all values wich are needed for the scheduling algorithm.
+ * This struct contains all values that are needed for the scheduling algorithm. For instance, if priority based round robin sheduling is used, the process priorities should be stored within this struct.
+ * This struced is designed to be reimplemented by the user, if required. 
 */
 typedef struct sys_scheduler_info_s{
-    unsigned short state;       /*!< Process state information */
-    unsigned short priority;    /*!< process priority level */
+    uint state;       /*!< Process state information */
+    uint priority;    /*!< process priority level */
 }sys_scheduler_info;
 
 

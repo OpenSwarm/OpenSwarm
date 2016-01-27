@@ -6,7 +6,7 @@
  *
  * \date{05 September 2015}
  * 
- * \brief declares functions to allocate, free, and copy memory
+ * \brief It declares functions to allocate, free, and copy memory
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -19,9 +19,9 @@ extern "C" {
 
 #include "definitions.h"
 
-void *Sys_Malloc(uint16 length);
+void *Sys_Malloc(uint length);
 void Sys_Free(void *);
-void Sys_Memcpy(void *source, void *destination, uint16 length);
+void Sys_Memcpy(void *source, void *destination, uint length);
 
 
 #ifdef	__cplusplus

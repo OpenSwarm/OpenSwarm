@@ -1,8 +1,8 @@
-\hypertarget{data_8c}{}\section{processes/data.c File Reference}
+\hypertarget{data_8c}{}\subsection{processes/data.c File Reference}
 \label{data_8c}\index{processes/data.\+c@{processes/data.\+c}}
 
 
-This file includes all functions which are needed to manage data structures needed by the processes management.  
+It defines functions to manage process lists and related structs.  
 
 
 {\ttfamily \#include \char`\"{}process\+\_\+\+Management.\+h\char`\"{}}\\*
@@ -13,52 +13,51 @@ This file includes all functions which are needed to manage data structures need
 {\ttfamily \#include \char`\"{}../definitions.\+h\char`\"{}}\\*
 {\ttfamily \#include $<$stdbool.\+h$>$}\\*
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
-Include dependency graph for data.\+c\+:
-\nopagebreak
+Include dependency graph for data.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{de/dce/data_8c__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_ac68a6f16d5a04fb8b087d71f2ea8dd30}{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} p\+I\+D, \hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$$\ast$list)
+\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_aa6580a5c9dc2b76a7d2fa660941e4790}{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} p\+I\+D, \hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$$\ast$list)
 \item 
-\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_a3da9c93afa52f8624e2f51c5862ed56e}{Sys\+\_\+\+Find\+\_\+\+Process} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid)
+\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_a61240d9d77466466d49465c40a2864df}{Sys\+\_\+\+Find\+\_\+\+Process} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid)
 \item 
-\hyperlink{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}{sys\+\_\+process\+\_\+event\+\_\+handler} $\ast$ \hyperlink{data_8c_a1f54e43907a01ea5d336040eeb40f927}{Sys\+\_\+\+Next\+\_\+\+Event\+Handler} (\hyperlink{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}{sys\+\_\+process\+\_\+event\+\_\+handler} $\ast$list, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D)
+sys\+\_\+process\+\_\+event\+\_\+handler $\ast$ \hyperlink{data_8c_a38f5f2e4594ef9c130bad05060b306af}{Sys\+\_\+\+Next\+\_\+\+Event\+Handler} (sys\+\_\+process\+\_\+event\+\_\+handler $\ast$list, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D)
 \item 
-\hyperlink{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}{sys\+\_\+process\+\_\+event\+\_\+handler} $\ast$ \hyperlink{data_8c_a0ae12f291a065fb40114e8a2a2532419}{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, \hyperlink{events_8h_a38c799788eea576b2d878371da3d5385}{p\+Event\+Handler\+Function} func, \hyperlink{data_8h_a8840f47ed02e5b3b5b9ad35c55057a45}{sys\+\_\+process\+\_\+event\+\_\+handler} $\ast$$\ast$list)
+sys\+\_\+process\+\_\+event\+\_\+handler $\ast$ \hyperlink{data_8c_ad94784b0ca0dafccf857f90c937bb929}{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, \hyperlink{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}{p\+Event\+Handler\+Function} func, sys\+\_\+process\+\_\+event\+\_\+handler $\ast$$\ast$list)
 \item 
-void \hyperlink{data_8c_a4ce23b19b4229d1d0ba38d45a9f36bf8}{Sys\+\_\+\+Clear\+\_\+\+Event\+Data} (\hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$$\ast$data)
+void \hyperlink{data_8c_a4ce23b19b4229d1d0ba38d45a9f36bf8}{Sys\+\_\+\+Clear\+\_\+\+Event\+Data} (\hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$$\ast$data)
 \item 
-void \hyperlink{data_8c_af50414b23fdbc218e3994974892ddaa9}{Sys\+\_\+\+Clear\+\_\+\+Event\+Register} (\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$element)
+void \hyperlink{data_8c_af50414b23fdbc218e3994974892ddaa9}{Sys\+\_\+\+Clear\+\_\+\+Event\+Register} (\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$element)
 \item 
-void \hyperlink{data_8c_a61151bf48da3164ed5ac1defa6e9fdf1}{Sys\+\_\+\+Delete\+\_\+\+Process} (\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$element)
+void \hyperlink{data_8c_a61151bf48da3164ed5ac1defa6e9fdf1}{Sys\+\_\+\+Delete\+\_\+\+Process} (\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$element)
 \item 
-bool \hyperlink{data_8c_a6d296c1402bcca7be896d1277be9cf6b}{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B} (\hyperlink{data_8h_a7d0b7b720fcd20824dd86aa3fe69b181}{sys\+\_\+pcb} $\ast$element, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} stacksize)
+bool \hyperlink{data_8c_a4880737ba69851eabf2de6516d3460b5}{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B} (\hyperlink{structsys__pcb}{sys\+\_\+pcb} $\ast$element, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} stacksize)
 \item 
-void \hyperlink{data_8c_a4494a1f297f91c6aba0431ecd7f96fc3}{Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List} (\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$process, \hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$$\ast$list)
+void \hyperlink{data_8c_a4494a1f297f91c6aba0431ecd7f96fc3}{Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List} (\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$process, \hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$$\ast$list)
 \end{DoxyCompactItemize}
-\subsection*{Variables}
+\subsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_a690d5642057296225a2adbad03bb9483}{sys\+\_\+ready\+\_\+processes} = 0
+\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_a690d5642057296225a2adbad03bb9483}{sys\+\_\+ready\+\_\+processes} = 0
 \item 
-\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_ae40e38bb69287141cc2c13a83a65f892}{sys\+\_\+running\+\_\+process} = 0
+\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_ae40e38bb69287141cc2c13a83a65f892}{sys\+\_\+running\+\_\+process} = 0
 \item 
-\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_af1ffef9f4baaf82b3f6f396f83d8a98e}{sys\+\_\+blocked\+\_\+processes} = 0
+\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_af1ffef9f4baaf82b3f6f396f83d8a98e}{sys\+\_\+blocked\+\_\+processes} = 0
 \item 
-\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_a704449d0e3b4b60338acccb12eff7099}{sys\+\_\+zombies} = 0
+\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$ \hyperlink{data_8c_a704449d0e3b4b60338acccb12eff7099}{sys\+\_\+zombies} = 0
 \item 
-\hyperlink{data_8h_a4fcd64553cc0da94330cf470bc07a268}{sys\+\_\+occurred\+\_\+event} $\ast$ \hyperlink{data_8c_a85abae706ed2a3f01168b05b19ff71f0}{sys\+\_\+occurred\+\_\+events} = 0
+\hyperlink{structsys__occurred__event}{sys\+\_\+occurred\+\_\+event} $\ast$ \hyperlink{data_8c_a85abae706ed2a3f01168b05b19ff71f0}{sys\+\_\+occurred\+\_\+events} = 0
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-This file includes all functions which are needed to manage data structures needed by the processes management. 
+\subsubsection{Detailed Description}
+It defines functions to manage process lists and related structs. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -74,17 +73,15 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{data_8c_a4ce23b19b4229d1d0ba38d45a9f36bf8}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Clear\+\_\+\+Event\+Data@{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}}
 \index{Sys\+\_\+\+Clear\+\_\+\+Event\+Data@{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Clear\+\_\+\+Event\+Data (
+\paragraph[{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Clear\+\_\+\+Event\+Data (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+event\+\_\+data} $\ast$$\ast$}]{data}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a4ce23b19b4229d1d0ba38d45a9f36bf8}
-This function removes and frees a list of sys\+\_\+event\+\_\+data
-
-This function removes and frees a list of sys\+\_\+event\+\_\+data
+This function removes and frees a list of \hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data}
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -96,17 +93,15 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 219 of file data.\+c.
+Definition at line 214 of file data.\+c.
 
 \hypertarget{data_8c_af50414b23fdbc218e3994974892ddaa9}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Clear\+\_\+\+Event\+Register@{Sys\+\_\+\+Clear\+\_\+\+Event\+Register}}
 \index{Sys\+\_\+\+Clear\+\_\+\+Event\+Register@{Sys\+\_\+\+Clear\+\_\+\+Event\+Register}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Clear\+\_\+\+Event\+Register}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Clear\+\_\+\+Event\+Register (
+\paragraph[{Sys\+\_\+\+Clear\+\_\+\+Event\+Register}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Clear\+\_\+\+Event\+Register (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$}]{element}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_af50414b23fdbc218e3994974892ddaa9}
-This function clears and frees all elements of a process
-
 This function clears and frees all elements of a process. The process is also unsubscribed from any event, because and empty event register cannot handle any events.
 
 
@@ -119,17 +114,15 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 241 of file data.\+c.
+Definition at line 235 of file data.\+c.
 
 \hypertarget{data_8c_a61151bf48da3164ed5ac1defa6e9fdf1}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Delete\+\_\+\+Process@{Sys\+\_\+\+Delete\+\_\+\+Process}}
 \index{Sys\+\_\+\+Delete\+\_\+\+Process@{Sys\+\_\+\+Delete\+\_\+\+Process}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Delete\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Delete\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Delete\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Delete\+\_\+\+Process (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$}]{element}
 \end{DoxyParamCaption}
 )}\label{data_8c_a61151bf48da3164ed5ac1defa6e9fdf1}
-This function deletes container elements
-
 This function deletes container elements. Warning\+: this function only deletes the process. All the elements which are linked with next are lost in memory, if you haven\textquotesingle{}t take care of that on advance.
 
 
@@ -142,17 +135,15 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 264 of file data.\+c.
+Definition at line 257 of file data.\+c.
 
-\hypertarget{data_8c_a3da9c93afa52f8624e2f51c5862ed56e}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Find\+\_\+\+Process@{Sys\+\_\+\+Find\+\_\+\+Process}}
+\hypertarget{data_8c_a61240d9d77466466d49465c40a2864df}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Find\+\_\+\+Process@{Sys\+\_\+\+Find\+\_\+\+Process}}
 \index{Sys\+\_\+\+Find\+\_\+\+Process@{Sys\+\_\+\+Find\+\_\+\+Process}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Find\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ Sys\+\_\+\+Find\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Find\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ Sys\+\_\+\+Find\+\_\+\+Process (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid}
+\item[{{\bf uint}}]{pid}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a3da9c93afa52f8624e2f51c5862ed56e}
-This function return the pointer to the P\+C\+B of process with pid
-
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a61240d9d77466466d49465c40a2864df}
 This function return the pointer to the P\+C\+B of process with pid
 
 
@@ -165,18 +156,16 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 108 of file data.\+c.
+Definition at line 106 of file data.\+c.
 
 \hypertarget{data_8c_a4494a1f297f91c6aba0431ecd7f96fc3}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List@{Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List}}
 \index{Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List@{Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List (
+\paragraph[{Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Insert\+\_\+\+Process\+\_\+to\+\_\+\+List (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$}]{process, }
 \item[{{\bf sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$$\ast$}]{list}
 \end{DoxyParamCaption}
 )}\label{data_8c_a4494a1f297f91c6aba0431ecd7f96fc3}
-This function inserts a process into a process list.
-
 This function inserts a process into a process list. Note\+: The elements are sorted (process I\+D)
 
 
@@ -191,18 +180,16 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 318 of file data.\+c.
+Definition at line 309 of file data.\+c.
 
-\hypertarget{data_8c_a1f54e43907a01ea5d336040eeb40f927}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Next\+\_\+\+Event\+Handler@{Sys\+\_\+\+Next\+\_\+\+Event\+Handler}}
+\hypertarget{data_8c_a38f5f2e4594ef9c130bad05060b306af}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Next\+\_\+\+Event\+Handler@{Sys\+\_\+\+Next\+\_\+\+Event\+Handler}}
 \index{Sys\+\_\+\+Next\+\_\+\+Event\+Handler@{Sys\+\_\+\+Next\+\_\+\+Event\+Handler}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Next\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+process\+\_\+event\+\_\+handler}$\ast$ Sys\+\_\+\+Next\+\_\+\+Event\+Handler (
+\paragraph[{Sys\+\_\+\+Next\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}sys\+\_\+process\+\_\+event\+\_\+handler$\ast$ Sys\+\_\+\+Next\+\_\+\+Event\+Handler (
 \begin{DoxyParamCaption}
-\item[{{\bf sys\+\_\+process\+\_\+event\+\_\+handler} $\ast$}]{list, }
-\item[{{\bf uint16}}]{event\+I\+D}
+\item[{sys\+\_\+process\+\_\+event\+\_\+handler $\ast$}]{list, }
+\item[{{\bf uint}}]{event\+I\+D}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a1f54e43907a01ea5d336040eeb40f927}
-This function searches (sequentially) all event handler for an event (event\+I\+D)
-
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a38f5f2e4594ef9c130bad05060b306af}
 This function searches (sequentially) all event handler for an event (event\+I\+D). The list contains a list of eventhandler and this function return the first occurrence of event\+I\+D. To search the list entirely, use the function on a list and after resulting an element use the same function on the next element (sublist).
 
 
@@ -217,19 +204,17 @@ sys\+\_\+process\+\_\+event\+\_\+handler $\ast$ pointer to the next event handle
 \end{DoxyReturn}
 
 
-Definition at line 145 of file data.\+c.
+Definition at line 142 of file data.\+c.
 
-\hypertarget{data_8c_a0ae12f291a065fb40114e8a2a2532419}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register@{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register}}
+\hypertarget{data_8c_ad94784b0ca0dafccf857f90c937bb929}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register@{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register}}
 \index{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register@{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+process\+\_\+event\+\_\+handler}$\ast$ Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register (
+\paragraph[{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register}]{\setlength{\rightskip}{0pt plus 5cm}sys\+\_\+process\+\_\+event\+\_\+handler$\ast$ Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+from\+\_\+\+Event\+Register (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{{\bf p\+Event\+Handler\+Function}}]{func, }
-\item[{{\bf sys\+\_\+process\+\_\+event\+\_\+handler} $\ast$$\ast$}]{list}
+\item[{sys\+\_\+process\+\_\+event\+\_\+handler $\ast$$\ast$}]{list}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a0ae12f291a065fb40114e8a2a2532419}
-This function removes subscribed handler function from event-\/handler list
-
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_ad94784b0ca0dafccf857f90c937bb929}
 This function removes subscribed handler function from event-\/handler list
 
 
@@ -244,20 +229,20 @@ This function removes subscribed handler function from event-\/handler list
 \begin{DoxyReturn}{Returns}
 sys\+\_\+process\+\_\+event\+\_\+handler $\ast$ (New) top of the list (if changed) 
 \end{DoxyReturn}
+$<$ the value to indicate all event handler
 
+$<$ the value to indicate all event handler 
 
-Definition at line 174 of file data.\+c.
+Definition at line 170 of file data.\+c.
 
-\hypertarget{data_8c_ac68a6f16d5a04fb8b087d71f2ea8dd30}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List@{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List}}
+\hypertarget{data_8c_aa6580a5c9dc2b76a7d2fa660941e4790}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List@{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List}}
 \index{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List@{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List (
+\paragraph[{Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ Sys\+\_\+\+Remove\+\_\+\+Process\+\_\+from\+\_\+\+List (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{p\+I\+D, }
+\item[{{\bf uint}}]{p\+I\+D, }
 \item[{{\bf sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$$\ast$}]{list}
 \end{DoxyParamCaption}
-)}\label{data_8c_ac68a6f16d5a04fb8b087d71f2ea8dd30}
-This function removed a pcb element from the list
-
+)}\label{data_8c_aa6580a5c9dc2b76a7d2fa660941e4790}
 This function seaches all elements of a process list and removes the processs p\+I\+D from it. Note\+: The element is not deleted. The pointer to it is returned.
 
 
@@ -272,25 +257,23 @@ sys\+\_\+pcb\+\_\+list\+\_\+element$\ast$ the pointer to the removed element
 \end{DoxyReturn}
 
 
-Definition at line 53 of file data.\+c.
+Definition at line 52 of file data.\+c.
 
-\hypertarget{data_8c_a6d296c1402bcca7be896d1277be9cf6b}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B@{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B}}
+\hypertarget{data_8c_a4880737ba69851eabf2de6516d3460b5}{}\index{data.\+c@{data.\+c}!Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B@{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B}}
 \index{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B@{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B}!data.\+c@{data.\+c}}
-\subsubsection[{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B (
+\paragraph[{Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Set\+\_\+\+Defaults\+\_\+\+P\+C\+B (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+pcb} $\ast$}]{element, }
-\item[{{\bf uint16}}]{stacksize}
+\item[{{\bf uint}}]{stacksize}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a6d296c1402bcca7be896d1277be9cf6b}
-This function sets default values to the sys\+\_\+process\+\_\+control\+\_\+block struct
-
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{data_8c_a4880737ba69851eabf2de6516d3460b5}
 This function sets the default values in a sys\+\_\+process\+\_\+control\+\_\+block struct
 
 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in,out}  & {\em element} & This is a pointer to a sys\+\_\+process\+\_\+control\+\_\+block struct \\
 \hline
-\mbox{\tt in}  & {\em stacksize} & This is a uint16 whch represents the size of the stack which should be allocated for this process. The default value (=0) is in D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E. \\
+\mbox{\tt in}  & {\em stacksize} & This is a uint whch represents the size of the stack which should be allocated for this process. The default value (=0) is in D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -298,42 +281,42 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 285 of file data.\+c.
+Definition at line 277 of file data.\+c.
 
 
 
-\subsection{Variable Documentation}
+\subsubsection{Variable Documentation}
 \hypertarget{data_8c_af1ffef9f4baaf82b3f6f396f83d8a98e}{}\index{data.\+c@{data.\+c}!sys\+\_\+blocked\+\_\+processes@{sys\+\_\+blocked\+\_\+processes}}
 \index{sys\+\_\+blocked\+\_\+processes@{sys\+\_\+blocked\+\_\+processes}!data.\+c@{data.\+c}}
-\subsubsection[{sys\+\_\+blocked\+\_\+processes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+blocked\+\_\+processes = 0}\label{data_8c_af1ffef9f4baaf82b3f6f396f83d8a98e}
+\paragraph[{sys\+\_\+blocked\+\_\+processes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+blocked\+\_\+processes = 0}\label{data_8c_af1ffef9f4baaf82b3f6f396f83d8a98e}
 pointer to the blocked process 
 
 Definition at line 34 of file data.\+c.
 
 \hypertarget{data_8c_a85abae706ed2a3f01168b05b19ff71f0}{}\index{data.\+c@{data.\+c}!sys\+\_\+occurred\+\_\+events@{sys\+\_\+occurred\+\_\+events}}
 \index{sys\+\_\+occurred\+\_\+events@{sys\+\_\+occurred\+\_\+events}!data.\+c@{data.\+c}}
-\subsubsection[{sys\+\_\+occurred\+\_\+events}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+occurred\+\_\+event}$\ast$ sys\+\_\+occurred\+\_\+events = 0}\label{data_8c_a85abae706ed2a3f01168b05b19ff71f0}
+\paragraph[{sys\+\_\+occurred\+\_\+events}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+occurred\+\_\+event}$\ast$ sys\+\_\+occurred\+\_\+events = 0}\label{data_8c_a85abae706ed2a3f01168b05b19ff71f0}
 pointer to the occurred events 
 
 Definition at line 36 of file data.\+c.
 
 \hypertarget{data_8c_a690d5642057296225a2adbad03bb9483}{}\index{data.\+c@{data.\+c}!sys\+\_\+ready\+\_\+processes@{sys\+\_\+ready\+\_\+processes}}
 \index{sys\+\_\+ready\+\_\+processes@{sys\+\_\+ready\+\_\+processes}!data.\+c@{data.\+c}}
-\subsubsection[{sys\+\_\+ready\+\_\+processes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+ready\+\_\+processes = 0}\label{data_8c_a690d5642057296225a2adbad03bb9483}
+\paragraph[{sys\+\_\+ready\+\_\+processes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+ready\+\_\+processes = 0}\label{data_8c_a690d5642057296225a2adbad03bb9483}
 pointer to the ready processes (linked list) 
 
 Definition at line 32 of file data.\+c.
 
 \hypertarget{data_8c_ae40e38bb69287141cc2c13a83a65f892}{}\index{data.\+c@{data.\+c}!sys\+\_\+running\+\_\+process@{sys\+\_\+running\+\_\+process}}
 \index{sys\+\_\+running\+\_\+process@{sys\+\_\+running\+\_\+process}!data.\+c@{data.\+c}}
-\subsubsection[{sys\+\_\+running\+\_\+process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+running\+\_\+process = 0}\label{data_8c_ae40e38bb69287141cc2c13a83a65f892}
+\paragraph[{sys\+\_\+running\+\_\+process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+running\+\_\+process = 0}\label{data_8c_ae40e38bb69287141cc2c13a83a65f892}
 pointer to the running process 
 
 Definition at line 33 of file data.\+c.
 
 \hypertarget{data_8c_a704449d0e3b4b60338acccb12eff7099}{}\index{data.\+c@{data.\+c}!sys\+\_\+zombies@{sys\+\_\+zombies}}
 \index{sys\+\_\+zombies@{sys\+\_\+zombies}!data.\+c@{data.\+c}}
-\subsubsection[{sys\+\_\+zombies}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+zombies = 0}\label{data_8c_a704449d0e3b4b60338acccb12eff7099}
+\paragraph[{sys\+\_\+zombies}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+pcb\+\_\+list\+\_\+element}$\ast$ sys\+\_\+zombies = 0}\label{data_8c_a704449d0e3b4b60338acccb12eff7099}
 pointer to the zombie process 
 
 Definition at line 35 of file data.\+c.

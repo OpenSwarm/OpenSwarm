@@ -1,4 +1,4 @@
 <map id="Remote Control" name="Remote Control">
-<area shape="rect" id="node2" href="$d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform. " alt="" coords="293,51,456,77"/>
-<area shape="rect" id="node3" href="$d2/da3/group__io.html" title="Functions and mechanisms to use I/O devices (e.g. sensors and actuators) to interact with the environ..." alt="" coords="315,151,434,177"/>
+<area shape="rect" id="node2" href="$d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform ( http://www.gctronic.com/doc/index.php/E&#45;Puck ) " alt="" coords="5,5,168,32"/>
+<area shape="rect" id="node3" href="$d2/da3/group__io.html" title="I/O Management controls the input (e.g. sensors or camera), output (e.g. motors), and communication (..." alt="" coords="27,56,146,83"/>
 </map>

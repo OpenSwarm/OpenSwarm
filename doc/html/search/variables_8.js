@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['length',['length',['../dd/dfe/structsys__i2c__message__s.html#a1846dd3ca2c59e4a1e68f2edb0c4b191',1,'sys_i2c_message_s::length()'],['../d0/d6b/structsys__uart__tx__data__s.html#a8722c46cb1b932884a2105316b490328',1,'sys_uart_tx_data_s::length()']]]
+  ['length',['length',['../d7/dfd/structsys__i2c__msg.html#a92073f759594ee543835f8ad73031e11',1,'sys_i2c_msg::length()'],['../d2/d16/structsys__uart__txdata.html#ae3cfb063b546b81d0755cd3a38128a7b',1,'sys_uart_txdata::length()']]]
 ];

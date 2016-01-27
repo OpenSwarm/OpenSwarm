@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['green',['green',['../d0/d4b/structsys__rgb__pixel__s.html#aad4178b262be3365f99a3cadece2f528',1,'sys_rgb_pixel_s']]]
+  ['green',['green',['../da/d42/structsys__rgb__pixel.html#a7186eba1f72a58f28ff7a04caaffb8f6',1,'sys_rgb_pixel']]]
 ];

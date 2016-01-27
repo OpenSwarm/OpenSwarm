@@ -1,0 +1,103 @@
+\hypertarget{structsys__pcb}{}\subsection{sys\+\_\+pcb Struct Reference}
+\label{structsys__pcb}\index{sys\+\_\+pcb@{sys\+\_\+pcb}}
+
+
+Process Control Block contains all data for a single process.  
+
+
+
+
+{\ttfamily \#include $<$data.\+h$>$}
+
+
+
+Collaboration diagram for sys\+\_\+pcb\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{d4/dd5/structsys__pcb__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__pcb_a11351019f4ef27eedfdd0ce37c2295b7}{process\+\_\+\+I\+D}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__pcb_a02da00ceff54f8cc4dba8cfdb92094f6}{stack\+Pointer}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__pcb_a8f7cd57c4feb12f1fcda4f675e68f525}{frame\+Pointer}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__pcb_a0321026d7029970d2a9e2bf3ffc31763}{stack\+Pointer\+Limit}
+\item 
+\hyperlink{structsys__scheduler__info}{sys\+\_\+scheduler\+\_\+info} \hyperlink{structsys__pcb_a590605cd2630ebc18d854f668a0696f2}{sheduler\+\_\+info}
+\item 
+sys\+\_\+process\+\_\+event\+\_\+handler $\ast$ \hyperlink{structsys__pcb_afd9aeee04956909043bb0a7fe5915bcb}{event\+\_\+register}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} $\ast$ \hyperlink{structsys__pcb_a9ae44700870c76d5517c239ed30f7be0}{process\+\_\+stack}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Process Control Block contains all data for a single process. 
+
+It contains all information related to a single process. (including stack pointer, frame pointer, stack, etc. ) 
+
+Definition at line 58 of file data.\+h.
+
+
+
+\subsubsection{Field Documentation}
+\hypertarget{structsys__pcb_afd9aeee04956909043bb0a7fe5915bcb}{}\index{sys\+\_\+pcb@{sys\+\_\+pcb}!event\+\_\+register@{event\+\_\+register}}
+\index{event\+\_\+register@{event\+\_\+register}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+\paragraph[{event\+\_\+register}]{\setlength{\rightskip}{0pt plus 5cm}sys\+\_\+process\+\_\+event\+\_\+handler$\ast$ sys\+\_\+pcb\+::event\+\_\+register}\label{structsys__pcb_afd9aeee04956909043bb0a7fe5915bcb}
+Lists of all events the process is subscribed to 
+
+Definition at line 66 of file data.\+h.
+
+\hypertarget{structsys__pcb_a8f7cd57c4feb12f1fcda4f675e68f525}{}\index{sys\+\_\+pcb@{sys\+\_\+pcb}!frame\+Pointer@{frame\+Pointer}}
+\index{frame\+Pointer@{frame\+Pointer}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+\paragraph[{frame\+Pointer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+pcb\+::frame\+Pointer}\label{structsys__pcb_a8f7cd57c4feb12f1fcda4f675e68f525}
+Frame Pointer Register 
+
+Definition at line 62 of file data.\+h.
+
+\hypertarget{structsys__pcb_a11351019f4ef27eedfdd0ce37c2295b7}{}\index{sys\+\_\+pcb@{sys\+\_\+pcb}!process\+\_\+\+I\+D@{process\+\_\+\+I\+D}}
+\index{process\+\_\+\+I\+D@{process\+\_\+\+I\+D}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+\paragraph[{process\+\_\+\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+pcb\+::process\+\_\+\+I\+D}\label{structsys__pcb_a11351019f4ef27eedfdd0ce37c2295b7}
+Process identifier 
+
+Definition at line 60 of file data.\+h.
+
+\hypertarget{structsys__pcb_a9ae44700870c76d5517c239ed30f7be0}{}\index{sys\+\_\+pcb@{sys\+\_\+pcb}!process\+\_\+stack@{process\+\_\+stack}}
+\index{process\+\_\+stack@{process\+\_\+stack}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+\paragraph[{process\+\_\+stack}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint}$\ast$ sys\+\_\+pcb\+::process\+\_\+stack}\label{structsys__pcb_a9ae44700870c76d5517c239ed30f7be0}
+Pointer to the beginning of the stack 
+
+Definition at line 68 of file data.\+h.
+
+\hypertarget{structsys__pcb_a590605cd2630ebc18d854f668a0696f2}{}\index{sys\+\_\+pcb@{sys\+\_\+pcb}!sheduler\+\_\+info@{sheduler\+\_\+info}}
+\index{sheduler\+\_\+info@{sheduler\+\_\+info}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+\paragraph[{sheduler\+\_\+info}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+scheduler\+\_\+info} sys\+\_\+pcb\+::sheduler\+\_\+info}\label{structsys__pcb_a590605cd2630ebc18d854f668a0696f2}
+scheduler-\/specific datastructure 
+
+Definition at line 65 of file data.\+h.
+
+\hypertarget{structsys__pcb_a02da00ceff54f8cc4dba8cfdb92094f6}{}\index{sys\+\_\+pcb@{sys\+\_\+pcb}!stack\+Pointer@{stack\+Pointer}}
+\index{stack\+Pointer@{stack\+Pointer}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+\paragraph[{stack\+Pointer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+pcb\+::stack\+Pointer}\label{structsys__pcb_a02da00ceff54f8cc4dba8cfdb92094f6}
+Stack Pointer Register 
+
+Definition at line 61 of file data.\+h.
+
+\hypertarget{structsys__pcb_a0321026d7029970d2a9e2bf3ffc31763}{}\index{sys\+\_\+pcb@{sys\+\_\+pcb}!stack\+Pointer\+Limit@{stack\+Pointer\+Limit}}
+\index{stack\+Pointer\+Limit@{stack\+Pointer\+Limit}!sys\+\_\+pcb@{sys\+\_\+pcb}}
+\paragraph[{stack\+Pointer\+Limit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+pcb\+::stack\+Pointer\+Limit}\label{structsys__pcb_a0321026d7029970d2a9e2bf3ffc31763}
+Stack Pointer Limit Register 
+
+Definition at line 63 of file data.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+processes/\hyperlink{data_8h}{data.\+h}\end{DoxyCompactItemize}

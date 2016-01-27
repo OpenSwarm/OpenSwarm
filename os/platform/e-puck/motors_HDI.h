@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup motors
- * \ingroup epuck
  * \ingroup hdi
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -11,7 +9,7 @@
  *
  * \date 27 August 2015
  * 
- * \brief  Hardware dependent implementations to actuate the motors.
+ * \brief  Hardware dependent implementations to  drive motors
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */

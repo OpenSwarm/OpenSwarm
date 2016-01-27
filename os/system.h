@@ -6,7 +6,7 @@
  *
  * \date{07 July 2014}
  * 
- * \brief declares functions to initialise and start OpenSwarm.
+ * \brief It declares functions to initialise and start OpenSwarm.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -49,33 +49,30 @@
  * OpenSwarm is part of the PhD of Stefan M. Trenkwalder (http://trenkwalder.tech) who is recipient of a DOC Fellowship of the Austrian Academy of Sciences (http://www.oeaw.ac.at/).
  */
 
-/*! \defgroup base Base
- * \brief Basic functions to start and initialise the operating system; allocate, free and copy memory, and create and end atomic sections.
+/*! \defgroup base Kernel
+ * \brief OpenSwarm provides functions to start and initialise the operating system; allocate, free and copy memory; and create and end atomic sections.
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * 
  * \section sec_intro_base Introduction
- * This package contains basic functions to initialise and start all modules of OpenSwarm. This part of OpenSwarm executes all three modules
+ * The Kernel contains basic functions to initialise and start all modules of OpenSwarm. This part of OpenSwarm executes all three modules
  *  -# \ref process
  *  -# \ref events
  *  -# \ref io
  *
- * It first defines global preprocessor option to configure OpenSwarm. It initialises the system and I/O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided. 
+ * 
+ * First, the system has to be configured by setting preprocessor values and variables. Then, OpenSwarm initialises the system and I/O according to its configuration (preprocessor definitions) and with an additional command the system can be started. In addition, functions to define atomic sections (sections that cannot be interrupted by anything), allocate and free memory are also provided. 
  * 
  * \subsection ssec_intro_base_defs Definitions  
- * definition.h provides standardised ports, configuration the used platform, and general preprocessor/type definitions that are needed in the entire OpenSwarm project.
+ * definition.h provides standardised ports, configures the used platform, and defines general preprocessor/type definitions that are needed in OpenSwarm.
  * 
  * \subsection ssec_intro_base_mem Memory Management  
- * OpenSwarm is designed for processing unit that lack a MMU (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. OpenSwarm provides atomic functions to allocate, free and copy memory in memory.h.
+ * OpenSwarm is designed for processing units that lack a MMU (Memory Management Unit). As a consequence, advance memory management functions as virtual memory cannot be implemented without a significant reduction of efficiency. 
+ * 
+ * However, OpenSwarm provides atomic functions to allocate, free and copy memory in memory.h.
  * 
  * \subsection ssec_intro_base_irq Interrupt Management  
- * OpenSwarm provides a clear structure of interrupt priorities and functions to create atomic sections in interrupts.h.
- * 
- * \subsection ssec_intro_base_deps Dependencies 
- * This part of OpenSwarm executes all three modules and depends on the configuration of each part and its implementation:
- * - Process Management \sa procMan
- * - Event System \sa EventSys
- * - I/O Management (This includes device specific sensors and actuators of used platform)  \sa IOMan
+ * OpenSwarm provides defined interrupt priorities and functions to create atomic sections in interrupts.h. A atomic section is a section of code that cannot be interrupted.
  * 
  */
 

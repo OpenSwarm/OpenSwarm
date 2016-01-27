@@ -1,6 +1,6 @@
 <map id="processes/system_Timer.h" name="processes/system_Timer.h">
-<area shape="rect" id="node2" href="$d4/dfd/system_8c.html" title="includes system calls that initialise and configure the operating system. " alt="" coords="5,87,81,114"/>
-<area shape="rect" id="node3" href="$de/deb/events_8c.html" title="This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler. " alt="" coords="106,87,221,114"/>
-<area shape="rect" id="node4" href="$d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="245,80,404,121"/>
-<area shape="rect" id="node5" href="$da/d14/process__Management_8c.html" title="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..." alt="" coords="428,87,653,114"/>
+<area shape="rect" id="node2" href="$d4/dfd/system_8c.html" title="defines functions to initialise and start OpenSwarm. " alt="" coords="5,87,81,114"/>
+<area shape="rect" id="node3" href="$de/deb/events_8c.html" title="defines functions to create, (un)subscribe, (un)register, and delete events and related handler..." alt="" coords="106,87,221,114"/>
+<area shape="rect" id="node4" href="$d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and run the system Timer. " alt="" coords="245,80,404,121"/>
+<area shape="rect" id="node5" href="$da/d14/process__Management_8c.html" title="It defines functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="428,87,653,114"/>
 </map>

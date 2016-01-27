@@ -1,4 +1,4 @@
-\hypertarget{group__i2c}{}\section{I2\+C interface}
+\hypertarget{group__i2c}{}\subsection{I2\+C interface}
 \label{group__i2c}\index{I2\+C interface@{I2\+C interface}}
 
 
@@ -9,54 +9,43 @@ Collaboration diagram for I2\+C interface\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{d3/df5/group__i2c}
+\includegraphics[width=311pt]{d3/df5/group__i2c}
 \end{center}
 \end{figure}
-\subsection*{Files}
+\subsubsection*{Files}
 \begin{DoxyCompactItemize}
 \item 
-file \hyperlink{camera__processing_8c}{camera\+\_\+processing.\+c}
-\item 
-file \hyperlink{camera__processing_8h}{camera\+\_\+processing.\+h}
-\item 
 file \hyperlink{i2c_8c}{i2c.\+c}
-\begin{DoxyCompactList}\small\item\em defines functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It defines functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
 file \hyperlink{i2c_8h}{i2c.\+h}
-\begin{DoxyCompactList}\small\item\em This file includes functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It declares functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
 file \hyperlink{i2c__data_8c}{i2c\+\_\+data.\+c}
-\begin{DoxyCompactList}\small\item\em defines functions to manage the I2\+C queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It defines functions to manage the I2\+C queue. \end{DoxyCompactList}\item 
 file \hyperlink{i2c__data_8h}{i2c\+\_\+data.\+h}
-\begin{DoxyCompactList}\small\item\em This file includes functions to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It declares functions to manage the I2\+C queue. \end{DoxyCompactList}\item 
 file \hyperlink{i2c__HDI_8c}{i2c\+\_\+\+H\+D\+I.\+c}
 \begin{DoxyCompactList}\small\item\em Hardware dependent implementations to read and write on the I2\+C interface. \end{DoxyCompactList}\item 
 file \hyperlink{i2c__HDI_8h}{i2c\+\_\+\+H\+D\+I.\+h}
 \begin{DoxyCompactList}\small\item\em Hardware dependent implementations to read and write on the I2\+C interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\subsubsection{Detailed Description}
 Functions to read from and write on the I2\+C interface. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org}
 \end{DoxyAuthor}
-Inter-\/\+Integrated Circuit bus is a multi-\/master, multi-\/slave, serial bus (see also \href{https://en.wikipedia.org/wiki/I%C2%B2C}{\tt https\+://en.\+wikipedia.\+org/wiki/\+I\%\+C2\%\+B2\+C} )
-
-Open\+Swarm organises processes in three lists of processes (pid sorted)\+:
-\begin{DoxyEnumerate}
-\item running list\+: includes all processes are ready to be executed and are scheduled according to the scheduling algorithm.
-\item blocked list\+: includes all processes that are waiting for events to occur.
-\item Zombie list\+: includes all processes that are about to be terminated but not deleted yet.
-\end{DoxyEnumerate}\hypertarget{group__i2c_i2c_usage}{}\subsection{Usage}\label{group__i2c_i2c_usage}
-T\+He I2\+C interface can be initialised and started with Sys\+\_\+\+Init\+\_\+\+I2\+C and Sys\+\_\+\+Start\+\_\+\+I2\+C respectively. Similarly, it can be paused, continued, or stopped by Sys\+\_\+\+Pause\+\_\+\+I2\+C, Sys\+\_\+\+Contine\+\_\+\+I2\+C, or Sys\+\_\+\+Stop\+\_\+\+I2\+C respectively. While the interface is running, data can be written with Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes. Values can be read with Sys\+\_\+\+I2\+C\+\_\+\+Read where the request message has also to be specified.
+Inter-\/\+Integrated Circuit bus is a multi-\/master, multi-\/slave, serial bus (see also \href{https://en.wikipedia.org/wiki/I%C2%B2C}{\tt https\+://en.\+wikipedia.\+org/wiki/\+I\%\+C2\%\+B2\+C} )\hypertarget{group__i2c_i2c_usage}{}\subsubsection{Usage}\label{group__i2c_i2c_usage}
+The I2\+C interface can be initialised and started with \hyperlink{i2c_8h_ae0e15cb80a0603c250857c1a799a62f5}{Sys\+\_\+\+Init\+\_\+\+I2\+C()} and \hyperlink{i2c_8h_a47a8891b8d4ec015d28d2fb38db7af81}{Sys\+\_\+\+Start\+\_\+\+I2\+C()} respectively. Similarly, it can be paused, continued, or stopped by \hyperlink{i2c_8h_a5093f0861938b0821984309c08ed245a}{Sys\+\_\+\+Pause\+\_\+\+I2\+C()}, \hyperlink{i2c_8h_afd7fe98d1cae4221b8541e2f232a1fe8}{Sys\+\_\+\+Contine\+\_\+\+I2\+C()}, or \hyperlink{i2c_8h_a808f963da209bf3a2437be9ac98b3ae3}{Sys\+\_\+\+Stop\+\_\+\+I2\+C()} respectively. While the interface is running, data can be written with \hyperlink{i2c_8h_aae28d108698f25ca0465e1b57d28eaaa}{Sys\+\_\+\+I2\+C\+\_\+\+Sent\+Bytes(uint8, uint8 $\ast$, uint16)}. Values can be read with \hyperlink{i2c_8h_ac368d180152e0f85b5b5f210ad7dc573}{Sys\+\_\+\+I2\+C\+\_\+\+Read(uint8 , uint8 $\ast$, uint16, p\+Byte\+Function)} where the request message has also to be specified.
 
 \begin{DoxyRefDesc}{Todo}
 \item[\hyperlink{todo__todo000006}{Todo}]testing and debugging of this module.\end{DoxyRefDesc}
 
 
 \begin{DoxyNote}{Note}
-This module is currently untested. Might doesn\textquotesingle{}t work or includes some bugs. The interrupt handler \+\_\+\+M\+I2\+C\+Interrupt is also out commented, because it might interfere with the e-\/\+Puck library used in the camera module.
+This module is currently untested. It might not work or includes some bugs. The interrupt handler \+\_\+\+M\+I2\+C\+Interrupt() is also out commented, because it might interfere with the e-\/\+Puck library used in the camera module.
 \end{DoxyNote}
-\hypertarget{group__i2c_i2c_license}{}\subsection{License}\label{group__i2c_i2c_license}
+\hypertarget{group__i2c_i2c_license}{}\subsubsection{License}\label{group__i2c_i2c_license}
 L\+I\+C\+E\+N\+S\+E\+: adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\+://openswarm.\+org/license})~\newline
 Copyright (c) 2015, Stefan M. Trenkwalder~\newline
 All rights reserved. 

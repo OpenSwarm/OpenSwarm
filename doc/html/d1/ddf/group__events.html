@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -86,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Functions to emit, create, (un)subscribe, (un)register, and manage events.  
+<p>Events are the main information exchange method in OpenSwarm. Events can be emitted, created, and (un)registered. Functions to handle events can also (un)subscribed to certain events. It can be used to synchronise and communicate with processes, to implement asynchronous programming model, and process incoming data/signals.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
@@ -99,15 +99,17 @@ Files</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Functions to emit, create, (un)subscribe, (un)register, and manage events. </p>
+<p>Events are the main information exchange method in OpenSwarm. Events can be emitted, created, and (un)registered. Functions to handle events can also (un)subscribed to certain events. It can be used to synchronise and communicate with processes, to implement asynchronous programming model, and process incoming data/signals. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a></dd></dl>
-<p>Events are a main component of OpenSwarm. It can be used to synchronise and communicate with processes, to implement asynchronous programming model, and process incoming data/signals.</p>
+<p>In general, events are data structures passed from one process/part of OpenSwarm to another.</p>
+<p>For example, an event might be triggered by detecting another robot within range. If a function is subscribed to this event, the robot can react on the detection of another robot.</p>
+<p>Events can also carry additional information&mdash;such as the distance and angle to the detected robot.</p>
 <h1><a class="anchor" id="events_usage"></a>
 Usage</h1>
-<p>The event system doesn't need to be initialised. Any event is identified by an integer <b>eventID</b>. To use an event the following steps have to be taken:</p><ol type="1">
-<li>An event (<b>eventID</b> ) can be (un)registered by <a class="el" href="../../db/dd2/events_8h.html#a386acd8573c1118d80986721664d2689">Sys_Register_Event(uint16 eventID)</a> and <a class="el" href="../../db/dd2/events_8h.html#a1d203ee6c6d21cb00d5b84a03bbbda6b">Sys_Unregister_Event(uint16 eventID)</a>. When an event is registered, it means that an event (<b>eventID</b> ) can occur and handled by OpenSwarm.</li>
-<li>After the event was registered, processes can be subscribed to it with <a class="el" href="../../db/dd2/events_8h.html#abbd55109964743556ffc20f8520bfabf">Sys_Subscribe_to_Event(uint16 eventID, uint16 pid, pEventHandlerFunction handler, pConditionFunction condition)</a> and <a class="el" href="../../db/dd2/events_8h.html#a0f37de65bd64e262ea80d96d7e691a8d">Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid)</a>. During the subscription, an event handler (i.e. a function to process data that was sent by events) is subscribed to a specific event (<b>eventID</b> ) and a process. Each event handler of a process for an specific event is unique. As a result the same handler function can be assigned to the same event if they are assigned to other processes.</li>
-<li>After an event is registered, events can be sent with <a class="el" href="../../db/dd2/events_8h.html#a24dadcefc1b4c45c50fb351efc8e841c">Sys_Send_Event(uint16 eventID, void *data, uint16 data_size)</a> and <a class="el" href="../../db/dd2/events_8h.html#ae2b6a4d1db2b3fb8777fa56297001d05">Sys_Send_IntEvent(uint16 eventID, uint16 data)</a>.</li>
+<p>The event system is ready to be used after the start of OpenSwarm. Each event is identified by an integer <b>eventID</b>. To use an event the following steps have to be taken:</p><ol type="1">
+<li>An event (<b>eventID</b> ) can be (un)registered by <a class="el" href="../../db/dd2/events_8h.html#a5d9657772509ddb7ac6f6e1aa5730308">Sys_Register_Event(uint16 eventID)</a> and <a class="el" href="../../db/dd2/events_8h.html#a41c81e9472691694352ac8316dc0ddbf">Sys_Unregister_Event(uint16 eventID)</a>. When an event is registered, it means that an event (<b>eventID</b>) can occur and be handled by OpenSwarm.</li>
+<li>After the event was registered, processes can be subscribed to it with <a class="el" href="../../db/dd2/events_8h.html#a04afa9d5b243723e844d49ab9a7fd21e">Sys_Subscribe_to_Event(uint16 eventID, uint16 pid, pEventHandlerFunction handler, pConditionFunction condition)</a> and <a class="el" href="../../db/dd2/events_8h.html#a267d472a623ac449be3922865e736029">Sys_Unsubscribe_from_Event(uint16 eventID, uint16 pid)</a>. During the subscription, an event handler (i.e. a function to process the event) is subscribed to a specific event (<b>eventID</b> ) and a process. Each event handler of a process for an specific event is unique. As a result, the same handler function can be used by multiple processes.</li>
+<li>After an event is registered, events can be sent with <a class="el" href="../../db/dd2/events_8h.html#a67230a5307e77a8112e56436f372926f">Sys_Send_Event(uint16 eventID, void *data, uint16 data_size)</a> and <a class="el" href="../../db/dd2/events_8h.html#a3b90448a001da0eee45d39ac8bb76ac0">Sys_Send_IntEvent(uint16 eventID, uint16 data)</a>.</li>
 </ol>
 <h1><a class="anchor" id="events_example"></a>
 Example</h1>
@@ -116,10 +118,10 @@ Example</h1>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#define USER_EVENT_ID 0xCC</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> <a class="code" href="../../db/dd2/events_8h.html#a653a4a4b7d9f5a65e1415365267a9d9e">pConditionFunction</a>(<span class="keywordtype">void</span> *data){<span class="comment">//only execute the the eventHandler every 5th time.</span></div>
+<div class="line"><span class="keywordtype">bool</span> <a class="code" href="../../db/dd2/events_8h.html#a653a4a4b7d9f5a65e1415365267a9d9e">pConditionFunction</a>(<span class="keywordtype">void</span> *data){<span class="comment">//only executes the eventHandler every 5th time.</span></div>
 <div class="line">     <span class="keyword">static</span> <span class="keywordtype">int</span> counter = 0;</div>
 <div class="line"></div>
-<div class="line">     <span class="keywordflow">if</span>(++counter &gt;= 4){<span class="comment">//if event occurred 5 times</span></div>
+<div class="line">     <span class="keywordflow">if</span>(++counter &gt;= 4){<span class="comment">//if the event occurred the 5th time</span></div>
 <div class="line">         counter = 0;</div>
 <div class="line">         <span class="keywordflow">return</span> <span class="keyword">true</span>;<span class="comment">//execute eventHandler</span></div>
 <div class="line">     }</div>
@@ -127,7 +129,7 @@ Example</h1>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;<span class="comment">//don&#39;t execute eventHandler</span></div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> eventHandler(<a class="code" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> pid, <a class="code" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID, <a class="code" href="../../d9/d85/structsys__event__data__s.html">sys_event_data</a> *data){</div>
+<div class="line"><span class="keywordtype">bool</span> eventHandler(<a class="code" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> pid, <a class="code" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID, <a class="code" href="../../d7/d0c/structsys__event__data.html">sys_event_data</a> *data){</div>
 <div class="line">     <span class="comment">//do something with the data</span></div>
 <div class="line">}</div>
 <div class="line"></div>
@@ -138,13 +140,14 @@ Example</h1>
 <div class="line"></div>
 <div class="line">    <a class="code" href="../../d4/dfd/system_8c.html#a31ce626d506c2b262ecf5b23946f522f">Sys_Init_Kernel</a>();</div>
 <div class="line"></div>
-<div class="line"> <a class="code" href="../../de/deb/events_8c.html#a386acd8573c1118d80986721664d2689">Sys_Register_Event</a>(USER_EVENT_ID);</div>
+<div class="line"> <a class="code" href="../../de/deb/events_8c.html#a5d9657772509ddb7ac6f6e1aa5730308">Sys_Register_Event</a>(USER_EVENT_ID);</div>
 <div class="line">     </div>
-<div class="line"> <a class="code" href="../../d4/dfd/system_8c.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel</a>();      </div>
-<div class="line">    <span class="keywordflow">while</span>(1){</div>
-<div class="line"></div>
-<div class="line">     <span class="keywordflow">if</span>( condition ){</div>
-<div class="line">          <a class="code" href="../../de/deb/events_8c.html#a24dadcefc1b4c45c50fb351efc8e841c">Sys_Send_Event</a>(USER_EVENT_ID, &amp;variable, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"> <a class="code" href="../../d4/dfd/system_8c.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel</a>();<span class="comment">//OpenSwarm is running now.</span></div>
+<div class="line">    </div>
+<div class="line"><span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
+<div class="line">     <span class="keywordflow">if</span>( ... ){<span class="comment">//under a certain condition</span></div>
+<div class="line">          <a class="code" href="../../de/deb/events_8c.html#a67230a5307e77a8112e56436f372926f">Sys_Send_Event</a>(USER_EVENT_ID, &amp;variable, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line">          <span class="comment">//alternatively, you could use Sys_Send_IntEvent(USER_EVENT_ID, variable);</span></div>
 <div class="line">     }</div>
 <div class="line">     <span class="comment">//do something</span></div>
 <div class="line">    }</div>

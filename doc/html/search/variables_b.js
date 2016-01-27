@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['pcb',['pcb',['../de/d93/structsys__process__control__block__list__element__s.html#a31a8928210b29e097924862367ae70a7',1,'sys_process_control_block_list_element_s']]],
-  ['pid',['pid',['../d7/d24/structsys__subscribed__process__s.html#a94e62af7fee25e53ea6c81cbb311783d',1,'sys_subscribed_process_s']]],
+  ['pcb',['pcb',['../da/d6c/structsys__pcb__list__element.html#acb5a7246aa5eec849c42eafb63105088',1,'sys_pcb_list_element']]],
+  ['pid',['pid',['../d1/d9d/structsys__subscribed__process.html#a921208fb1aaecfa56282941d9781a173',1,'sys_subscribed_process']]],
   ['powertbl',['powerTbl',['../df/ded/camera__processing_8c.html#afea30c7dedb8b7deb70d4ab8ec9c8eed',1,'camera_processing.c']]],
-  ['previous',['previous',['../dc/dfe/structsys__process__event__handler__s.html#abbb4742265dace5feffc2a1b05d5271c',1,'sys_process_event_handler_s::previous()'],['../de/d93/structsys__process__control__block__list__element__s.html#a91a80f7180ef47545efc44c1f94d5fb7',1,'sys_process_control_block_list_element_s::previous()']]],
-  ['priority',['priority',['../dd/da1/structsys__scheduler__info__s.html#ad04085351f98898a0631e07aba0338d6',1,'sys_scheduler_info_s']]],
-  ['process_5fid',['process_ID',['../db/d2e/structsys__process__control__block__s.html#a3f7ec6be0e16d1ae6b123a9b2bbb7176',1,'sys_process_control_block_s']]],
-  ['process_5fstack',['process_stack',['../db/d2e/structsys__process__control__block__s.html#a094b1d3add4317d0100c53c8bdc26553',1,'sys_process_control_block_s']]]
+  ['previous',['previous',['../d5/d91/structsys__peh.html#abff1942a90e410b023d50b4fd6b6e8ed',1,'sys_peh::previous()'],['../da/d6c/structsys__pcb__list__element.html#a15f2b704a96be29b91fc99a7c7ed6f83',1,'sys_pcb_list_element::previous()']]],
+  ['priority',['priority',['../d7/df0/structsys__scheduler__info.html#a864ef702aee0479b6e9d002c33aafd70',1,'sys_scheduler_info']]],
+  ['process_5fid',['process_ID',['../d4/db0/structsys__pcb.html#a11351019f4ef27eedfdd0ce37c2295b7',1,'sys_pcb']]],
+  ['process_5fstack',['process_stack',['../d4/db0/structsys__pcb.html#a9ae44700870c76d5517c239ed30f7be0',1,'sys_pcb']]]
 ];

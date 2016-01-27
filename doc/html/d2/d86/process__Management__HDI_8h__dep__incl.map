@@ -1,5 +1,5 @@
 <map id="platform/e&#45;puck/process_Management_HDI.h" name="platform/e&#45;puck/process_Management_HDI.h">
 <area shape="rect" id="node2" href="$d2/d78/process__Management__HDI_8c.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="5,95,168,136"/>
-<area shape="rect" id="node3" href="$de/da9/data_8c.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="192,102,315,129"/>
-<area shape="rect" id="node4" href="$da/d14/process__Management_8c.html" title="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..." alt="" coords="339,102,565,129"/>
+<area shape="rect" id="node3" href="$de/da9/data_8c.html" title="It defines functions to manage process lists and related structs. " alt="" coords="192,102,315,129"/>
+<area shape="rect" id="node4" href="$da/d14/process__Management_8c.html" title="It defines functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="339,102,565,129"/>
 </map>

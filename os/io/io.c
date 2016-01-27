@@ -6,7 +6,7 @@
  *
  * \date 10 August 2015
  * 
- * \brief  defines functions to control the IO timer and to (un)register IO Handler.
+ * \brief  It defines functions to control the IO timer and to (un)register IO Handler.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -23,7 +23,6 @@
 #include "../memory.h"
 
 /**
- * Initialises the I/O Management
  *
  * This function initialises the I/O Timer and therefore the I/O Management.
  *
@@ -33,7 +32,6 @@ void Sys_Init_IOManagement(void){
 }
 
 /**
- * Starts the I/O Management
  *
  * This function starts the I/O Timer and therefore the I/O Management.
  *
@@ -43,7 +41,6 @@ void Sys_Start_IOManagement(void){
 }
 
 /**
- * Stops the I/O Management
  *
  * This function stops the I/O Timer and therefore the I/O Management.
  *
@@ -53,7 +50,6 @@ void Sys_Stop_IOManagement(void){
 }
 
 /**
- * Stops the I/O Timer
  *
  * This function stops the I/O Timer.
  *
@@ -63,7 +59,6 @@ inline void Sys_Stop_IOTimer(){
 }
 
 /**
- * Continues the I/O Timer
  *
  * This function continues the I/O Timer. Note that the timer continues to count where it stops.
  *
@@ -73,7 +68,6 @@ inline void Sys_Continue_IOTimer(){
 }
 
 /**
- * resets the I/O Timer
  *
  * This function sets the I/O Timer counter to 0 and the I/O timer needs the full time duration to throw the interrupt.
  *
@@ -83,7 +77,6 @@ inline void Sys_Reset_IOTimer(){
 }
 
 /**
- * Disables the I/O Timer
  *
  * This function disables the I/O Timer interrupt. Note that the timer still continues to count.
  *
@@ -93,7 +86,6 @@ inline void Sys_Disable_IOTimerInterrupt(){
 }
 
 /**
- * Enables the I/O Timer
  *
  * This function enables the I/O Timer interrupt.
  *
@@ -103,7 +95,6 @@ inline void Sys_Enable_IOTimerInterrupt(){
 }
 
 /**
- * Force the I/O Timer interrupt.
  *
  * This function forces a new I/O Timer interrupt even if the timer hasn't reached its threshold.
  *
@@ -113,12 +104,11 @@ inline void Sys_Force_IOTimerInterrupt(){
 }
 
 /**
- * registers new I/O handler.
  *
  * This function registers a new I/O handler which is executed every time the I/O timer interrupt occurs.
  *
- * @param func  pointer to the function that should be executed by the I/O timer periodically
- * @return bool was it successful?
+ * @param[in] func  pointer to the function that should be executed by the I/O timer periodically
+ * @return true if it was successful
  */
 bool Sys_Register_IOHandler(pFunction func){
 
@@ -149,11 +139,10 @@ bool Sys_Register_IOHandler(pFunction func){
 }
 
 /**
- * unregisters new I/O handler.
  *
  * This function unregisters a I/O handler identified by its function address. 
  *
- * @param func  pointer to the function that should be executed by the I/O timer periodically
+ * @param[in] func  pointer to the function that should be executed by the I/O timer periodically
  */
 void Sys_Unregister_IOHandler(pFunction func){
     sys_pIOHandler *handler = sys_iohandlers;

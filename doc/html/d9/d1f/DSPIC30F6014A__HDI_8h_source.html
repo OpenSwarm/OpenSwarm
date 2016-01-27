@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -94,39 +94,39 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#ifndef HDI_DSPIC30F6014A_H</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define HDI_DSPIC30F6014A_H</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#include &quot;library/motor_led/e_epuck_ports.h&quot;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#ifdef  __cplusplus</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">// Interrupt Vector Table</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a7702c960dffab411cc9b8ff73050f80d">   64</a></span>&#160;<span class="preprocessor">#define ADDRESS_IVT                 0x000004</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a9cc033666041c0dcb074a39c4c3fb71f">   65</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_OSC_FAIL        ADDRESS_IVT+2</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a580df2d89a9bd567c0961ae9ec6fce8f">   66</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_ADDRESS_ERROR   ADDRESS_IVT+4</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#abbaa1320b64c9aab11e49dcaebfb6a9a">   67</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_STACK_ERROR     ADDRESS_IVT+6</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a0431d3a5ce33898fcd5eb343101eca65">   68</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_MATH_ERROR      ADDRESS_IVT+8</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a7d47228ffb61ec3118d613034c8fa560">   69</a></span>&#160;<span class="preprocessor">#define ADDRESS_IVT_T1              0x00001A</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#ifndef HDI_DSPIC30F6014A_H</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define HDI_DSPIC30F6014A_H</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &quot;library/motor_led/e_epuck_ports.h&quot;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#ifdef  __cplusplus</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">// Interrupt Vector Table</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a7702c960dffab411cc9b8ff73050f80d">   63</a></span>&#160;<span class="preprocessor">#define ADDRESS_IVT                 0x000004</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a9cc033666041c0dcb074a39c4c3fb71f">   64</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_OSC_FAIL        ADDRESS_IVT+2</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a580df2d89a9bd567c0961ae9ec6fce8f">   65</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_ADDRESS_ERROR   ADDRESS_IVT+4</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#abbaa1320b64c9aab11e49dcaebfb6a9a">   66</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_STACK_ERROR     ADDRESS_IVT+6</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a0431d3a5ce33898fcd5eb343101eca65">   67</a></span>&#160;<span class="preprocessor">#define ADDRESS_ITV_MATH_ERROR      ADDRESS_IVT+8</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a7d47228ffb61ec3118d613034c8fa560">   68</a></span>&#160;<span class="preprocessor">#define ADDRESS_IVT_T1              0x00001A</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#ae3c44069639816f295543638b367b89a">   72</a></span>&#160;<span class="preprocessor">#define ADDRESS_AIVT                 0x000084</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a35e587ecff2c88b0b152da2780350c67">   73</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_OSC_FAIL        ADDRESS_AIVT+2</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a3cc13527af6ad1f3b69348add12febad">   74</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_ADDRESS_ERROR   ADDRESS_AIVT+4</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a7ee4d9f555fe279b9ff12c929c912236">   75</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_STACK_ERROR     ADDRESS_AIVT+6</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a38ba5f4837f45684c018c28eb245cb9d">   76</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_MATH_ERROR      ADDRESS_AIVT+8</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a5c8bbde3591fc148b1c88f24b1b4b5a5">   77</a></span>&#160;<span class="preprocessor">#define ADDRESS_AIVT_T1              0x00009A</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#ae3c44069639816f295543638b367b89a">   71</a></span>&#160;<span class="preprocessor">#define ADDRESS_AIVT                 0x000084</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a35e587ecff2c88b0b152da2780350c67">   72</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_OSC_FAIL        ADDRESS_AIVT+2</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a3cc13527af6ad1f3b69348add12febad">   73</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_ADDRESS_ERROR   ADDRESS_AIVT+4</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a7ee4d9f555fe279b9ff12c929c912236">   74</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_STACK_ERROR     ADDRESS_AIVT+6</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a38ba5f4837f45684c018c28eb245cb9d">   75</a></span>&#160;<span class="preprocessor">#define ADDRESS_AITV_MATH_ERROR      ADDRESS_AIVT+8</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html#a5c8bbde3591fc148b1c88f24b1b4b5a5">   76</a></span>&#160;<span class="preprocessor">#define ADDRESS_AIVT_T1              0x00009A</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#ifdef  __cplusplus</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* HDI_DSPIC30F6014A_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#ifdef  __cplusplus</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* HDI_DSPIC30F6014A_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,14 +1,12 @@
 /*!
  * \file
  * \ingroup i2c
- * \ingroup io
- * \ingroup epuck
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date 10 August 2015
  * 
- * \brief  declares functions to manage the I2C queue.
+ * \brief  It declares functions to manage the I2C queue.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -26,16 +24,16 @@ typedef enum { I2C_IDLE_MODE = 0, I2C_WRITING_ADDRESS_MODE, I2C_READING_BYTES_MO
 
 
 /**
- * @brief It is a single linked list element containing messages that need to be sent via I2C.
+ * @brief It is a single linked list element containing messages that need to be sent via I2C. This list acts as a message buffer.
  *
  */
 typedef struct sys_i2c_message_s {
-    uint8           i2c_device_address; // 7-bit addr
-    uint8 *         data;
-    uint16          length;
-    bool            write;//= not read
-    pByteFunction   handler;
-    struct sys_i2c_message_s *next;
+    uint8           i2c_device_address; /*!< 7-bit I2C address*/
+    uint8 *         data;               /*!< pointer to the bytes that should be sent*/
+    uint          length;               /*!< number of bytes contained in data*/
+    bool            write;              /*!< is it a write only operating (true) or is the slave tranmitting data as a response (false)*/
+    pByteFunction   handler;            /*!< function pointer to handle incoming bytes (unused = 0 )*/
+    struct sys_i2c_message_s *next;     /*!< pointer to the next element in the linked list*/
 } sys_i2c_message, sys_i2c_messages, sys_i2c_msg;
 
 extern sys_i2c_messages *sys_i2c_msgs;

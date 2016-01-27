@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -93,11 +93,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">process_Management.h File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Manages</a></div></div>  </div>
+<div class="title">process_Management.h File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Management</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination)  
+<p>It declares functions to manage processes (e.g. task creation, switching, termination)  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="../../d6/dc2/definitions_8h_source.html">../definitions.h</a>&quot;</code><br />
@@ -108,18 +108,14 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../d5/d93/process__Management_8h__incl.png" border="0" usemap="#processes_2process__Management_8h" alt=""/></div>
-<map name="processes_2process__Management_8h" id="processes_2process__Management_8h">
-<area shape="rect" id="node3" href="../../d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="192,155,296,181"/><area shape="rect" id="node9" href="../../db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="81,80,207,107"/><area shape="rect" id="node10" href="../../d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="283,80,373,107"/><area shape="rect" id="node7" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="525,229,733,271"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d5/d93/process__Management_8h__incl.svg" width="100%" height="574"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="../../closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../da/d0d/process__Management_8h__dep__incl.png" border="0" usemap="#processes_2process__Management_8hdep" alt=""/></div>
-<map name="processes_2process__Management_8hdep" id="processes_2process__Management_8hdep">
-<area shape="rect" id="node2" href="../../d4/dfd/system_8c.html" title="includes system calls that initialise and configure the operating system. " alt="" coords="5,87,81,114"/><area shape="rect" id="node3" href="../../de/deb/events_8c.html" title="This file includes all system calls needed to create, (un)subscribe, (un)register, and delete events and related handler. " alt="" coords="106,87,221,114"/><area shape="rect" id="node4" href="../../d2/d78/process__Management__HDI_8c.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="245,80,407,121"/><area shape="rect" id="node5" href="../../d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="432,80,591,121"/><area shape="rect" id="node6" href="../../de/da9/data_8c.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="615,87,738,114"/><area shape="rect" id="node7" href="../../da/d14/process__Management_8c.html" title="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..." alt="" coords="763,87,988,114"/><area shape="rect" id="node8" href="../../dd/d6c/scheduler_8c.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="1012,87,1165,114"/><area shape="rect" id="node9" href="../../de/dfb/system__Timer_8c.html" title="This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. " alt="" coords="1189,87,1369,114"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../da/d0d/process__Management_8h__dep__incl.svg" width="100%" height="395"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../dd/de5/process__Management_8h_source.html">Go to the source code of this file.</a></p>
@@ -131,14 +127,14 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a212e8074575988bbe55cefd52a9ae504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a212e8074575988bbe55cefd52a9ae504">Sys_Switch_Process</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> pid)</td></tr>
-<tr class="separator:a212e8074575988bbe55cefd52a9ae504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5434c0bfa037779752d41518b1886f6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a5434c0bfa037779752d41518b1886f6b">Sys_Switch_Process</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> pid)</td></tr>
+<tr class="separator:a5434c0bfa037779752d41518b1886f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed6f39a867fac05effd63289b304ced1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#aed6f39a867fac05effd63289b304ced1">Sys_Switch_to_next_Process</a> (void)</td></tr>
 <tr class="separator:aed6f39a867fac05effd63289b304ced1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0833f904557c4c9b39b4cf5c1e43586f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a0833f904557c4c9b39b4cf5c1e43586f">Sys_Start_Process</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#aed53e618f2025481fbe48a5098f70079">pFunction</a> function)</td></tr>
 <tr class="separator:a0833f904557c4c9b39b4cf5c1e43586f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a724935e8f908ee565ff779e7ba5dfc67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a724935e8f908ee565ff779e7ba5dfc67">Sys_Kill_Process</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> pid)</td></tr>
-<tr class="separator:a724935e8f908ee565ff779e7ba5dfc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d95b14e319ffff426fc04025d22ac68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a6d95b14e319ffff426fc04025d22ac68">Sys_Kill_Process</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> pid)</td></tr>
+<tr class="separator:a6d95b14e319ffff426fc04025d22ac68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9aa2d3d18165118343798ba40826f272"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a9aa2d3d18165118343798ba40826f272">Sys_Kill_Zombies</a> (void)</td></tr>
 <tr class="separator:a9aa2d3d18165118343798ba40826f272"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afea22f7c15161f12a5b108b3795da332"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#afea22f7c15161f12a5b108b3795da332">Sys_Yield</a> (void)</td></tr>
@@ -151,25 +147,25 @@ Functions</h2></td></tr>
 <tr class="separator:a355c5fe8c9052d6bd2ddd7ff8e8783f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1b0a2e19c666539afa53d571c914d6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#ae1b0a2e19c666539afa53d571c914d6e">Sys_End_CriticalSection</a> (void)</td></tr>
 <tr class="separator:ae1b0a2e19c666539afa53d571c914d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff090437f063082d7ab90deca55fbb6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#aff090437f063082d7ab90deca55fbb6b">Sys_Add_Event_Subscription</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> pid, <a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID, <a class="el" href="../../db/dd2/events_8h.html#a38c799788eea576b2d878371da3d5385">pEventHandlerFunction</a> func, <a class="el" href="../../db/dd2/events_8h.html#a653a4a4b7d9f5a65e1415365267a9d9e">pConditionFunction</a> cond)</td></tr>
-<tr class="separator:aff090437f063082d7ab90deca55fbb6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9afc21ae55d2afb70b7a8ceb14512389"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a9afc21ae55d2afb70b7a8ceb14512389">Sys_Remove_Event_Subscription</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> pid, <a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID, <a class="el" href="../../db/dd2/events_8h.html#a38c799788eea576b2d878371da3d5385">pEventHandlerFunction</a> func)</td></tr>
-<tr class="separator:a9afc21ae55d2afb70b7a8ceb14512389"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67190fffc18b7864f1cdc6813c944738"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a67190fffc18b7864f1cdc6813c944738">Sys_Remove_All_Event_Subscriptions</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID)</td></tr>
-<tr class="separator:a67190fffc18b7864f1cdc6813c944738"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0b797b238ea3481e2a232a8791294c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#aa0b797b238ea3481e2a232a8791294c6">Sys_Add_Event_to_Process</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> pid, <a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID, void *data, <a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> length)</td></tr>
-<tr class="separator:aa0b797b238ea3481e2a232a8791294c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa84594222e7b081e9f7675721db4b71f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#aa84594222e7b081e9f7675721db4b71f">Sys_Add_Event_Subscription</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> pid, <a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> eventID, <a class="el" href="../../db/dd2/events_8h.html#a3db5730a7fed6827a4c46ff3fae3e55b">pEventHandlerFunction</a> func, <a class="el" href="../../db/dd2/events_8h.html#a653a4a4b7d9f5a65e1415365267a9d9e">pConditionFunction</a> cond)</td></tr>
+<tr class="separator:aa84594222e7b081e9f7675721db4b71f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec9fdba5ebf517a49d2ac38d662ebce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a0ec9fdba5ebf517a49d2ac38d662ebce">Sys_Remove_Event_Subscription</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> pid, <a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> eventID, <a class="el" href="../../db/dd2/events_8h.html#a3db5730a7fed6827a4c46ff3fae3e55b">pEventHandlerFunction</a> func)</td></tr>
+<tr class="separator:a0ec9fdba5ebf517a49d2ac38d662ebce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad34bd4f154b25e45c5381e6f271d15ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#ad34bd4f154b25e45c5381e6f271d15ab">Sys_Remove_All_Event_Subscriptions</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> eventID)</td></tr>
+<tr class="separator:ad34bd4f154b25e45c5381e6f271d15ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa333c28860a6719936380076883766a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#aa333c28860a6719936380076883766a3">Sys_Add_Event_to_Process</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> pid, <a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> eventID, void *data, <a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> length)</td></tr>
+<tr class="separator:aa333c28860a6719936380076883766a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a766e55607bcf327ec226b205fdde0a1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a766e55607bcf327ec226b205fdde0a1e">Sys_Execute_All_EventHandler</a> ()</td></tr>
 <tr class="separator:a766e55607bcf327ec226b205fdde0a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ce23b19b4229d1d0ba38d45a9f36bf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a4ce23b19b4229d1d0ba38d45a9f36bf8">Sys_Clear_EventData</a> (<a class="el" href="../../db/dd2/events_8h.html#ae3a76ca1b349999a35d55f3224897b5f">sys_event_data</a> **data)</td></tr>
+<tr class="memitem:a4ce23b19b4229d1d0ba38d45a9f36bf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a4ce23b19b4229d1d0ba38d45a9f36bf8">Sys_Clear_EventData</a> (<a class="el" href="../../d7/d0c/structsys__event__data.html">sys_event_data</a> **data)</td></tr>
 <tr class="separator:a4ce23b19b4229d1d0ba38d45a9f36bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f0893d1c6a5ffb1f954737fc3a8904f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/dd2/events_8h.html#ae3a76ca1b349999a35d55f3224897b5f">sys_event_data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a9f0893d1c6a5ffb1f954737fc3a8904f">Sys_Wait_For_Event</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID)</td></tr>
-<tr class="separator:a9f0893d1c6a5ffb1f954737fc3a8904f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5730456418e6d0dd9392522ec8153aec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/dd2/events_8h.html#ae3a76ca1b349999a35d55f3224897b5f">sys_event_data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a5730456418e6d0dd9392522ec8153aec">Sys_Wait_For_Condition</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> eventID, <a class="el" href="../../db/dd2/events_8h.html#a653a4a4b7d9f5a65e1415365267a9d9e">pConditionFunction</a> function)</td></tr>
-<tr class="separator:a5730456418e6d0dd9392522ec8153aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b45be80626e64bb659b16e5dabcfc1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d0c/structsys__event__data.html">sys_event_data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#a4b45be80626e64bb659b16e5dabcfc1d">Sys_Wait_For_Event</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> eventID)</td></tr>
+<tr class="separator:a4b45be80626e64bb659b16e5dabcfc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade99052670becc704e8f0cf153bb844f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d0c/structsys__event__data.html">sys_event_data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de5/process__Management_8h.html#ade99052670becc704e8f0cf153bb844f">Sys_Wait_For_Condition</a> (<a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a> eventID, <a class="el" href="../../db/dd2/events_8h.html#a653a4a4b7d9f5a65e1415365267a9d9e">pConditionFunction</a> function)</td></tr>
+<tr class="separator:ade99052670becc704e8f0cf153bb844f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) </p>
+<div class="textblock"><p>It declares functions to manage processes (e.g. task creation, switching, termination) </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a> </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>08 July 2014</dd></dl>
@@ -193,26 +189,26 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="aff090437f063082d7ab90deca55fbb6b"></a>
+<a class="anchor" id="aa84594222e7b081e9f7675721db4b71f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Sys_Add_Event_Subscription </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>pid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>eventID</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../db/dd2/events_8h.html#a38c799788eea576b2d878371da3d5385">pEventHandlerFunction</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../db/dd2/events_8h.html#a3db5730a7fed6827a4c46ff3fae3e55b">pEventHandlerFunction</a>&#160;</td>
           <td class="paramname"><em>func</em>, </td>
         </tr>
         <tr>
@@ -229,7 +225,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Puts a process on the blocked list and stops its execution (if it's executed)</p>
-<p>Puts a process on the blocked list and stops its execution (if it's executed)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pid</td><td>Process ID </td></tr>
@@ -241,24 +236,24 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>bool Was the event-handler successfully added? </dd></dl>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00336">336</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00323">323</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa0b797b238ea3481e2a232a8791294c6"></a>
+<a class="anchor" id="aa333c28860a6719936380076883766a3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Sys_Add_Event_to_Process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>pid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>eventID</em>, </td>
         </tr>
         <tr>
@@ -270,7 +265,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>length</em>&#160;</td>
         </tr>
         <tr>
@@ -280,7 +275,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function adds the event-data to the local list of the process (pid).</p>
 <p>This function adds the event-data to the local list of the process (pid).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -292,7 +286,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00390">390</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00376">376</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -306,7 +300,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void Sys_Clear_EventData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../db/dd2/events_8h.html#ae3a76ca1b349999a35d55f3224897b5f">sys_event_data</a> **&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d7/d0c/structsys__event__data.html">sys_event_data</a> **&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
@@ -317,8 +311,7 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function removes and frees a list of sys_event_data</p>
-<p>This function removes and frees a list of sys_event_data</p>
+<p>This function removes and frees a list of <a class="el" href="../../d7/d0c/structsys__event__data.html" title="It is a single linked list element and contains data of an occurred event. ">sys_event_data</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">data</td><td>pointer to the event_data (list) </td></tr>
@@ -327,7 +320,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="../../de/da9/data_8c_source.html#l00219">219</a> of file <a class="el" href="../../de/da9/data_8c_source.html">data.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/da9/data_8c_source.html#l00214">214</a> of file <a class="el" href="../../de/da9/data_8c_source.html">data.c</a>.</p>
 
 </div>
 </div>
@@ -352,10 +345,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Ends a critical section</p>
 <p>This Function ends a critical section. The task-scheduling can now occure. Note: if a critical section was started once or more, it only takes a single call of this function to end all critical sections. </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00242">242</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00232">232</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -379,10 +371,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function executes all event handlers and processes stored event data</p>
 <p>This function executes all event handlers and processes stored event data. First it checks the list of occurred events and then it executes all event handlers of these events </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00507">507</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00491">491</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -407,10 +398,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function counts the number of process</p>
 <p>This function counts the number of process </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00065">65</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00063">63</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -435,14 +425,13 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function initialises the process management</p>
 <p>This function initialises the process management and creates the first elements in the linked list </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00055">55</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00054">54</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a724935e8f908ee565ff779e7ba5dfc67"></a>
+<a class="anchor" id="a6d95b14e319ffff426fc04025d22ac68"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -452,7 +441,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void Sys_Kill_Process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>pid</em></td><td>)</td>
           <td></td>
         </tr>
@@ -463,7 +452,6 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function kills a process</p>
 <p>This function deletes the syss_process_control_block element and stops a process</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -471,8 +459,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p>&lt; State to indicate that a process is about to be deleted</p>
+<p>&lt; State to indicate that a process is about to be deleted </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00103">103</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00099">99</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -497,27 +487,25 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function kills all zombie process</p>
 <p>This function deletes all proccesses which are marked as zombies. </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00180">180</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00174">174</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a67190fffc18b7864f1cdc6813c944738"></a>
+<a class="anchor" id="ad34bd4f154b25e45c5381e6f271d15ab"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Sys_Remove_All_Event_Subscriptions </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>eventID</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function removes all subscriptions of any process to event (eventID)</p>
 <p>This function removes all subscriptions of any process to event (eventID)</p><ul>
 <li><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -527,31 +515,32 @@ Functions</h2></td></tr>
 </dl>
 </li>
 </ul>
+<p>&lt; the value to indicate all event handler </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00547">547</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00529">529</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9afc21ae55d2afb70b7a8ceb14512389"></a>
+<a class="anchor" id="a0ec9fdba5ebf517a49d2ac38d662ebce"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Sys_Remove_Event_Subscription </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>pid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>eventID</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../db/dd2/events_8h.html#a38c799788eea576b2d878371da3d5385">pEventHandlerFunction</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../db/dd2/events_8h.html#a3db5730a7fed6827a4c46ff3fae3e55b">pEventHandlerFunction</a>&#160;</td>
           <td class="paramname"><em>func</em>&#160;</td>
         </tr>
         <tr>
@@ -562,7 +551,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This function removes subscribed handler function for process (pid) to event (eventID)</p>
-<p>This function removes subscribed handler function for process (pid) to event (eventID)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pid</td><td>Identifier of the process </td></tr>
@@ -572,7 +560,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00565">565</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00546">546</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -597,10 +585,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Starts a critical section</p>
 <p>This Function starts a critical section to prevent the task-scheduling during its exectution </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00232">232</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00223">223</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -625,7 +612,6 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function creates a new sys_process_control_block and add all needed info</p>
 <p>This function creates a new sys_process_control_block (in a sys_process_control_block_list_element) which contains all information wich is used to execute this process.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -634,24 +620,23 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00092">92</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00089">89</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a212e8074575988bbe55cefd52a9ae504"></a>
+<a class="anchor" id="a5434c0bfa037779752d41518b1886f6b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Sys_Switch_Process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>pid</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function loads all values into the registers of a process with the PID</p>
 <p>This function loads all values into the registers of a process with the PID</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -660,7 +645,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00199">199</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00192">192</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -677,21 +662,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function loads all values into the registers of the process which is next in the list.</p>
 <p>This function loads all values into the registers of the process which is next in the list. </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00218">218</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00210">210</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5730456418e6d0dd9392522ec8153aec"></a>
+<a class="anchor" id="ade99052670becc704e8f0cf153bb844f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../db/dd2/events_8h.html#ae3a76ca1b349999a35d55f3224897b5f">sys_event_data</a>* Sys_Wait_For_Condition </td>
+          <td class="memname"><a class="el" href="../../d7/d0c/structsys__event__data.html">sys_event_data</a>* Sys_Wait_For_Condition </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>eventID</em>, </td>
         </tr>
         <tr>
@@ -707,7 +691,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function blocks the current process.</p>
 <p>This function blocks the current process while waiting for an event that sends data which meet the condition.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -716,13 +699,13 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>sys_event_data * Pointer to the event data struct that contains the values carried by the event </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d7/d0c/structsys__event__data.html" title="It is a single linked list element and contains data of an occurred event. ">sys_event_data</a> * Pointer to the event data struct that contains the values carried by the event </dd></dl>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00589">589</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00569">569</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9f0893d1c6a5ffb1f954737fc3a8904f"></a>
+<a class="anchor" id="a4b45be80626e64bb659b16e5dabcfc1d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -730,9 +713,9 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../db/dd2/events_8h.html#ae3a76ca1b349999a35d55f3224897b5f">sys_event_data</a>* Sys_Wait_For_Event </td>
+          <td class="memname"><a class="el" href="../../d7/d0c/structsys__event__data.html">sys_event_data</a>* Sys_Wait_For_Event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d6/dc2/definitions_8h.html#a1445ebbbf93d62972255ec5e89a5ab01">uint</a>&#160;</td>
           <td class="paramname"><em>eventID</em></td><td>)</td>
           <td></td>
         </tr>
@@ -743,7 +726,6 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function blocks the current process.</p>
 <p>This function blocks the current process and waits for the occurrence of event (eventID).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -753,7 +735,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sys_event_data* Pointer to the event data struct that contains the values carried by the event </dd></dl>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00626">626</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00605">605</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>
@@ -770,10 +752,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function blocks the current process.</p>
 <p>This function blocks the current process and let the next process be executed. </p>
 
-<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00636">636</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
+<p>Definition at line <a class="el" href="../../da/d14/process__Management_8c_source.html#l00614">614</a> of file <a class="el" href="../../da/d14/process__Management_8c_source.html">process_Management.c</a>.</p>
 
 </div>
 </div>

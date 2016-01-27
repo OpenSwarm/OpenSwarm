@@ -1,13 +1,12 @@
-\hypertarget{motors__HDI_8h}{}\section{platform/e-\/puck/motors\+\_\+\+H\+D\+I.h File Reference}
+\hypertarget{motors__HDI_8h}{}\subsection{platform/e-\/puck/motors\+\_\+\+H\+D\+I.h File Reference}
 \label{motors__HDI_8h}\index{platform/e-\/puck/motors\+\_\+\+H\+D\+I.\+h@{platform/e-\/puck/motors\+\_\+\+H\+D\+I.\+h}}
 
 
-Hardware dependent implementations to actuate the motors.  
+Hardware dependent implementations to drive motors.  
 
 
 {\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
-Include dependency graph for motors\+\_\+\+H\+D\+I.\+h\+:
-\nopagebreak
+Include dependency graph for motors\+\_\+\+H\+D\+I.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,12 +20,12 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \includegraphics[width=340pt]{dd/d76/motors__HDI_8h__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Macros}
+\subsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \hyperlink{motors__HDI_8h_a16a8e7bd12376aae17e46b41c10a1b17}{M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T}~-\/1
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{motors__HDI_8h_a73dc0f34167e0519ca8ee7d89564f7c5}{Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I} (\hyperlink{definitions_8h_a1a6408291ee3cfd0760a61ac64084154}{sint8} phase)
@@ -35,8 +34,8 @@ void \hyperlink{motors__HDI_8h_a452ba4afcd1cd938544f65cce86e3816}{Sys\+\_\+\+Rig
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-Hardware dependent implementations to actuate the motors. 
+\subsubsection{Detailed Description}
+Hardware dependent implementations to drive motors. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org}
@@ -52,26 +51,24 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Macro Definition Documentation}
+\subsubsection{Macro Definition Documentation}
 \hypertarget{motors__HDI_8h_a16a8e7bd12376aae17e46b41c10a1b17}{}\index{motors\+\_\+\+H\+D\+I.\+h@{motors\+\_\+\+H\+D\+I.\+h}!M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T@{M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T}}
 \index{M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T@{M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T}!motors\+\_\+\+H\+D\+I.\+h@{motors\+\_\+\+H\+D\+I.\+h}}
-\subsubsection[{M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T~-\/1}\label{motors__HDI_8h_a16a8e7bd12376aae17e46b41c10a1b17}
+\paragraph[{M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+O\+T\+O\+R\+P\+H\+A\+S\+E\+\_\+\+R\+E\+S\+E\+T~-\/1}\label{motors__HDI_8h_a16a8e7bd12376aae17e46b41c10a1b17}
 the reset value for the motor phase 
 
-Definition at line 26 of file motors\+\_\+\+H\+D\+I.\+h.
+Definition at line 24 of file motors\+\_\+\+H\+D\+I.\+h.
 
 
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{motors__HDI_8h_a73dc0f34167e0519ca8ee7d89564f7c5}{}\index{motors\+\_\+\+H\+D\+I.\+h@{motors\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I@{Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}}
 \index{Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I@{Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}!motors\+\_\+\+H\+D\+I.\+h@{motors\+\_\+\+H\+D\+I.\+h}}
-\subsubsection[{Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I (
+\paragraph[{Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Left\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I (
 \begin{DoxyParamCaption}
 \item[{{\bf sint8}}]{phase}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{motors__HDI_8h_a73dc0f34167e0519ca8ee7d89564f7c5}
-sets the left motor phase
-
 This function sets the left motor phase
 
 
@@ -81,17 +78,15 @@ This function sets the left motor phase
 \end{DoxyParams}
 
 
-Definition at line 28 of file motors\+\_\+\+H\+D\+I.\+c.
+Definition at line 25 of file motors\+\_\+\+H\+D\+I.\+c.
 
 \hypertarget{motors__HDI_8h_a452ba4afcd1cd938544f65cce86e3816}{}\index{motors\+\_\+\+H\+D\+I.\+h@{motors\+\_\+\+H\+D\+I.\+h}!Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I@{Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}}
 \index{Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I@{Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}!motors\+\_\+\+H\+D\+I.\+h@{motors\+\_\+\+H\+D\+I.\+h}}
-\subsubsection[{Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I (
+\paragraph[{Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Right\+Motor\+\_\+\+Set\+Phase\+\_\+\+H\+D\+I (
 \begin{DoxyParamCaption}
 \item[{{\bf sint8}}]{phase}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{motors__HDI_8h_a452ba4afcd1cd938544f65cce86e3816}
-sets the right motor phase
-
 This function sets the right motor phase
 
 
@@ -101,5 +96,5 @@ This function sets the right motor phase
 \end{DoxyParams}
 
 
-Definition at line 82 of file motors\+\_\+\+H\+D\+I.\+c.
+Definition at line 78 of file motors\+\_\+\+H\+D\+I.\+c.
 

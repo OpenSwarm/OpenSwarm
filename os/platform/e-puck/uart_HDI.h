@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup uart
- * \ingroup epuck
  * \ingroup hdi
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -11,7 +9,7 @@
  *
  * \date 27 August 2015
  * 
- * \brief  Hardware dependent implementations to control the message flow of the UART interface.
+ * \brief  Hardware dependent implementations to transmit bytes via UART.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */
@@ -45,17 +43,17 @@ extern "C" {
  *
  */
 typedef struct sys_uart_tx_data_s{
-    uint8 *data;
-    uint16 length;
+    uint8 *data;/*!< pointer to bytes that should be sent */
+    uint length;/*!< number of bytes that need to be sent */
 
-    struct sys_uart_tx_data_s *next;
+    struct sys_uart_tx_data_s *next;/*!< pointer to the next element in the list */
 }sys_uart_txdata;
 
 extern sys_uart_txdata *sys_UART1_TX_data;
 extern sys_uart_txdata *sys_UART2_TX_data;
 
-extern uint16 byte_counter_uart1;
-extern uint16 byte_counter_uart2;
+extern uint byte_counter_uart1;
+extern uint byte_counter_uart2;
 
 extern pUART_reader read_uart_1;
 extern pUART_reader read_uart_2;

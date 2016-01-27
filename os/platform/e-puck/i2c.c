@@ -1,14 +1,12 @@
 /*!
  * \file
  * \ingroup i2c
- * \ingroup io
- * \ingroup epuck
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date 10 August 2015
  * 
- * \brief  defines functions to read and write on the I2C interface.
+ * \brief  It defines functions to read and write on the I2C interface.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -34,7 +32,6 @@ inline char Sys_I2C_ReadByte(void);
 inline void Sys_I2C_WriteByte(uint8 byte);
 
 /**
- * Initialises the I2C interface
  *
  * This function initialises the I2C interface.
  *
@@ -44,7 +41,6 @@ inline void Sys_Init_I2C(){
 }
 
 /**
- * Starts the I2C interface
  *
  * This function starts the I2C interface.
  *
@@ -54,7 +50,6 @@ inline void Sys_Start_I2C(){
 }
 
 /**
- * pauses the I2C interface
  *
  * This function pauses the I2C interface.
  *
@@ -64,7 +59,6 @@ inline void Sys_Pause_I2C(){
 }
 
 /**
- * continues the I2C interface
  *
  * This function continues the I2C interface.
  *
@@ -74,7 +68,6 @@ inline void Sys_Contine_I2C(){
 }
 
 /**
- * stops the I2C interface
  *
  * This function stops the I2C interface.
  *
@@ -248,9 +241,8 @@ void  __attribute__((__interrupt__, auto_psv)) _MI2CInterrupt(void)
 */
 
 /**
- * sends a start bits via the I2C interface
  *
- * This function sends a start bits.
+ * This function sends a start bits  via the I2C interface
  *
  */
 inline void Sys_I2C_Send_Start(){
@@ -258,7 +250,6 @@ inline void Sys_I2C_Send_Start(){
 }
 
 /**
- * sends a restart bits via the I2C interface
  *
  * This function sends a restart bits.
  *
@@ -268,7 +259,6 @@ inline void Sys_I2C_Send_Restart(){
 }
 
 /**
- * sends a stop bits via the I2C interface
  *
  * This function sends a stop bits.
  *
@@ -278,7 +268,6 @@ inline void Sys_I2C_Send_Stop(){
 }
 
 /**
- * sends a ack bits via the I2C interface
  *
  * This function sends a ack bits.
  *
@@ -288,9 +277,8 @@ inline void Sys_I2C_Send_ACK(){
 }
 
 /**
- * sends a nack bits via the I2C interface
  *
- * This function sends a nack bits.
+ * This function sends a NACK bits.
  *
  */
 inline void Sys_I2C_Send_NACK(){
@@ -298,7 +286,6 @@ inline void Sys_I2C_Send_NACK(){
 }
 
 /**
- * sends a reading bits via the I2C interface
  *
  * This function sends a reading bits.
  *
@@ -308,7 +295,6 @@ inline void Sys_I2C_Start_Reading(){
 }
 
 /**
- * reads a byte via the I2C interface
  *
  * This function reads a byte.
  *
@@ -318,18 +304,16 @@ inline char Sys_I2C_ReadByte(){
 }
 
 /**
- * writes a byte via the I2C interface
  *
  * This function writes a byte.
  *
- * @param byte the byte that has to be written
+ * @param[in] byte the byte that has to be written
  */
 inline void Sys_I2C_WriteByte(uint8 byte){
     Sys_I2C_WriteByte_HDI(byte);
 }
 
 /**
- * adds bytes into a writing buffer
  * 
  * This function adds bytes into a writing buffer that are written as soon as the I2C is idle.
  * 
@@ -338,7 +322,7 @@ inline void Sys_I2C_WriteByte(uint8 byte){
  * @param[in] bytes  A pointer to the data which should be sent
  * @param[in] length the number of bytes to send
  */
-void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint16 length){
+void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint length){
     sys_i2c_msg *new = Sys_Malloc(sizeof(sys_i2c_msg));
     if(new == 0){
         return;
@@ -355,7 +339,6 @@ void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint16 length){
 }
 
 /**
- * reads bytes from an I2C device
  * 
  * This function first sends a reading request to the I2C device and, then, handles the incoming bytes with a callback function.
  * 
@@ -364,7 +347,7 @@ void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint16 length){
  * @param[in] length the number of bytes of the address
  * @param[in] bytehandler a pointer to the handler function that processes the incoming bytes.
  */
-void Sys_I2C_Read(uint8 address, uint8 *intern_address, uint16 length, pByteFunction bytehandler){
+void Sys_I2C_Read(uint8 address, uint8 *intern_address, uint length, pByteFunction bytehandler){
     sys_i2c_msg *new = Sys_Malloc(sizeof(sys_i2c_msg));
     if(new == 0){
         Sys_Free(intern_address);

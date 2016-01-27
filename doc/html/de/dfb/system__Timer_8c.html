@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -92,11 +92,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">system_Timer.c File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Manages</a></div></div>  </div>
+<div class="title">system_Timer.c File Reference<div class="ingroups"><a class="el" href="../../da/dd7/group__process.html">Process Management</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time.  
+<p>It defines functions to initialise, configure and run the system Timer.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d7/d30/system__Timer__HDI_8h_source.html">../platform/e-puck/system_Timer_HDI.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../dd/de5/process__Management_8h_source.html">process_Management.h</a>&quot;</code><br />
@@ -107,9 +107,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../db/d2e/system__Timer_8c__incl.png" border="0" usemap="#processes_2system__Timer_8c" alt=""/></div>
-<map name="processes_2system__Timer_8c" id="processes_2system__Timer_8c">
-<area shape="rect" id="node2" href="../../d7/d30/system__Timer__HDI_8h.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="226,155,377,196"/><area shape="rect" id="node8" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="5,319,213,360"/><area shape="rect" id="node10" href="../../dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="397,80,558,107"/><area shape="rect" id="node13" href="../../d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="582,80,711,107"/><area shape="rect" id="node3" href="../../d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="360,244,507,271"/><area shape="rect" id="node11" href="../../db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="566,162,693,189"/><area shape="rect" id="node12" href="../../d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="453,162,542,189"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../db/d2e/system__Timer_8c__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../de/dfb/system__Timer_8c_source.html">Go to the source code of this file.</a></p>
@@ -136,7 +134,7 @@ Functions</h2></td></tr>
 <tr class="separator:a8ea6aac01f3a93fbbe5b5d03f35b23bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. </p>
+<div class="textblock"><p>It defines functions to initialise, configure and run the system Timer. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a> </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>{07 July 2014}</dd></dl>
@@ -164,10 +162,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deactivates the Timer1 Interrupt</p>
 <p>This Function deactivated the Timer1 Interrupt </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00059">59</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00055">55</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -192,10 +189,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Disables the Timer1 interrupt</p>
 <p>Disables the Timer1 interrupt and sets the interrupt flag to 0 </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00101">101</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00094">94</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -220,10 +216,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Enables the Timer1 interrupt</p>
 <p>Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function. </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00111">111</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00103">103</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -248,10 +243,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Enables the Timer1 interrupt</p>
 <p>Enables the Timer1 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function. </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00121">121</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00112">112</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -276,7 +270,6 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Function to initialise the system timer</p>
 <p>This Function sets the Timer0 of the DSPIC 30F6014A for timer interfvals of 10 ms. The timer will be startet with Start_SystemTimer_HDI()</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -285,7 +278,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00028">28</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00027">27</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -309,10 +302,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Resets the Timer1 value to the initial value</p>
 <p>This Function resets the Timer1 value </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00069">69</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00064">64</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -337,10 +329,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Function to starts the initialised system timer</p>
 <p>This Function starts the Timer0 of the DSPIC 30F6014A for timer interfvals of 10 ms. The MUST be initialised first with Init_SystemTimer_HDI() </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00039">39</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00037">37</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -364,10 +355,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Activates the Timer1 Interrupt</p>
 <p>This Function activated the Timer1 Interrupt </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00049">49</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00046">46</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>
@@ -391,10 +381,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function is executed periodically by the system timer interrupt</p>
 <p>This function is executed periodically by the system timer interrupt. It kills all zombies, executes event handlers and executes the scheduling algorithm. </p>
 
-<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00079">79</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
+<p>Definition at line <a class="el" href="../../de/dfb/system__Timer_8c_source.html#l00073">73</a> of file <a class="el" href="../../de/dfb/system__Timer_8c_source.html">system_Timer.c</a>.</p>
 
 </div>
 </div>

@@ -1,42 +1,31 @@
-\hypertarget{i2c__data_8h}{}\section{platform/e-\/puck/i2c\+\_\+data.h File Reference}
+\hypertarget{i2c__data_8h}{}\subsection{platform/e-\/puck/i2c\+\_\+data.h File Reference}
 \label{i2c__data_8h}\index{platform/e-\/puck/i2c\+\_\+data.\+h@{platform/e-\/puck/i2c\+\_\+data.\+h}}
 
 
-This file includes functions to read and write on the I2\+C interface.  
+It declares functions to manage the I2\+C queue.  
 
 
 {\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
-Include dependency graph for i2c\+\_\+data.\+h\+:
-\nopagebreak
+Include dependency graph for i2c\+\_\+data.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d5/ddf/i2c__data_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d0/de9/i2c__data_8h__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Data Structures}
+\subsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s}
-\begin{DoxyCompactList}\small\item\em It is a single linked list element containing messages that need to be sent via I2\+C. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-typedef struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s} \hyperlink{i2c__data_8h_a08bf4795a14319ddd3b6d493317f1d4a}{sys\+\_\+i2c\+\_\+message}
-\begin{DoxyCompactList}\small\item\em It is a single linked list element containing messages that need to be sent via I2\+C. \end{DoxyCompactList}\item 
-typedef struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s} \hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages}
-\item 
-typedef struct \hyperlink{structsys__i2c__message__s}{sys\+\_\+i2c\+\_\+message\+\_\+s} \hyperlink{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}{sys\+\_\+i2c\+\_\+msg}
-\end{DoxyCompactItemize}
-\subsection*{Enumerations}
+struct \hyperlink{structsys__i2c__msg}{sys\+\_\+i2c\+\_\+msg}
+\begin{DoxyCompactList}\small\item\em It is a single linked list element containing messages that need to be sent via I2\+C. This list acts as a message buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
 enum \hyperlink{i2c__data_8h_aaea896519531b1b103f1c379945cf84f}{sys\+\_\+\+I2\+C\+\_\+state} \{ \\*
@@ -62,24 +51,24 @@ enum \hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0}{sys\+\_\+\+I2\+C
 \hyperlink{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0ac37fa0c432538664d82d2d282e56dc4b}{I2\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+O\+D\+E}
  \}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{i2c__data_8h_a37ea66b4bc94c628d177842936370926}{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages} (\hyperlink{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}{sys\+\_\+i2c\+\_\+msg} $\ast$item)
+void \hyperlink{i2c__data_8h_a37ea66b4bc94c628d177842936370926}{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages} (\hyperlink{structsys__i2c__msg}{sys\+\_\+i2c\+\_\+msg} $\ast$item)
 \item 
-void \hyperlink{i2c__data_8h_aab570c7924073daf517967958aba4250}{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message} (\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$$\ast$list)
+void \hyperlink{i2c__data_8h_aab570c7924073daf517967958aba4250}{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message} (sys\+\_\+i2c\+\_\+messages $\ast$$\ast$list)
 \item 
-void \hyperlink{i2c__data_8h_a11867d2a3620c96f6a9621f246939a28}{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages} (\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$list)
+void \hyperlink{i2c__data_8h_a11867d2a3620c96f6a9621f246939a28}{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages} (sys\+\_\+i2c\+\_\+messages $\ast$list)
 \end{DoxyCompactItemize}
-\subsection*{Variables}
+\subsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{sys\+\_\+i2c\+\_\+messages} $\ast$ \hyperlink{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}{sys\+\_\+i2c\+\_\+msgs}
+sys\+\_\+i2c\+\_\+messages $\ast$ \hyperlink{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}{sys\+\_\+i2c\+\_\+msgs}
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-This file includes functions to read and write on the I2\+C interface. 
+\subsubsection{Detailed Description}
+It declares functions to manage the I2\+C queue. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -95,26 +84,10 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Typedef Documentation}
-\hypertarget{i2c__data_8h_a08bf4795a14319ddd3b6d493317f1d4a}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+message@{sys\+\_\+i2c\+\_\+message}}
-\index{sys\+\_\+i2c\+\_\+message@{sys\+\_\+i2c\+\_\+message}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{sys\+\_\+i2c\+\_\+message}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+i2c\+\_\+message\+\_\+s}  {\bf sys\+\_\+i2c\+\_\+message}}\label{i2c__data_8h_a08bf4795a14319ddd3b6d493317f1d4a}
-
-
-It is a single linked list element containing messages that need to be sent via I2\+C. 
-
-\hypertarget{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+messages@{sys\+\_\+i2c\+\_\+messages}}
-\index{sys\+\_\+i2c\+\_\+messages@{sys\+\_\+i2c\+\_\+messages}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{sys\+\_\+i2c\+\_\+messages}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+i2c\+\_\+message\+\_\+s}  {\bf sys\+\_\+i2c\+\_\+messages}}\label{i2c__data_8h_a27b7f72b53024ca33a713e12d9c5a5b6}
-\hypertarget{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
-\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{sys\+\_\+i2c\+\_\+msg}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+i2c\+\_\+message\+\_\+s}  {\bf sys\+\_\+i2c\+\_\+msg}}\label{i2c__data_8h_a63103d69a23446aa735d85acef1936bf}
-
-
-\subsection{Enumeration Type Documentation}
+\subsubsection{Enumeration Type Documentation}
 \hypertarget{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+\+I2\+C\+\_\+mode@{sys\+\_\+\+I2\+C\+\_\+mode}}
 \index{sys\+\_\+\+I2\+C\+\_\+mode@{sys\+\_\+\+I2\+C\+\_\+mode}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{sys\+\_\+\+I2\+C\+\_\+mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf sys\+\_\+\+I2\+C\+\_\+mode}}\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0}
+\paragraph[{sys\+\_\+\+I2\+C\+\_\+mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf sys\+\_\+\+I2\+C\+\_\+mode}}\label{i2c__data_8h_a85128b419fb98b83541abe5a09898bd0}
 \begin{Desc}
 \item[Enumerator]\par
 \begin{description}
@@ -132,11 +105,11 @@ It is a single linked list element containing messages that need to be sent via 
 \end{Desc}
 
 
-Definition at line 25 of file i2c\+\_\+data.\+h.
+Definition at line 23 of file i2c\+\_\+data.\+h.
 
 \hypertarget{i2c__data_8h_aaea896519531b1b103f1c379945cf84f}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+\+I2\+C\+\_\+state@{sys\+\_\+\+I2\+C\+\_\+state}}
 \index{sys\+\_\+\+I2\+C\+\_\+state@{sys\+\_\+\+I2\+C\+\_\+state}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{sys\+\_\+\+I2\+C\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf sys\+\_\+\+I2\+C\+\_\+state}}\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84f}
+\paragraph[{sys\+\_\+\+I2\+C\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf sys\+\_\+\+I2\+C\+\_\+state}}\label{i2c__data_8h_aaea896519531b1b103f1c379945cf84f}
 \begin{Desc}
 \item[Enumerator]\par
 \begin{description}
@@ -162,20 +135,18 @@ Definition at line 25 of file i2c\+\_\+data.\+h.
 \end{Desc}
 
 
-Definition at line 24 of file i2c\+\_\+data.\+h.
+Definition at line 22 of file i2c\+\_\+data.\+h.
 
 
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{i2c__data_8h_a37ea66b4bc94c628d177842936370926}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}}
 \index{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages (
+\paragraph[{Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Append\+Messages (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+i2c\+\_\+msg} $\ast$}]{item}
 \end{DoxyParamCaption}
 )}\label{i2c__data_8h_a37ea66b4bc94c628d177842936370926}
-appends an element to the linked list.
-
 This function appends on the bottom of the linked list.
 
 
@@ -185,17 +156,15 @@ This function appends on the bottom of the linked list.
 \end{DoxyParams}
 
 
-Definition at line 69 of file i2c\+\_\+data.\+c.
+Definition at line 64 of file i2c\+\_\+data.\+c.
 
 \hypertarget{i2c__data_8h_a11867d2a3620c96f6a9621f246939a28}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}}
 \index{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages@{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages (
+\paragraph[{Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Free\+Messages (
 \begin{DoxyParamCaption}
-\item[{{\bf sys\+\_\+i2c\+\_\+messages} $\ast$}]{list}
+\item[{sys\+\_\+i2c\+\_\+messages $\ast$}]{list}
 \end{DoxyParamCaption}
 )}\label{i2c__data_8h_a11867d2a3620c96f6a9621f246939a28}
-frees all messages of the linked list
-
 This function frees all messages of the linked list.
 
 
@@ -205,17 +174,15 @@ This function frees all messages of the linked list.
 \end{DoxyParams}
 
 
-Definition at line 47 of file i2c\+\_\+data.\+c.
+Definition at line 43 of file i2c\+\_\+data.\+c.
 
 \hypertarget{i2c__data_8h_aab570c7924073daf517967958aba4250}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message@{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}}
 \index{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message@{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message (
+\paragraph[{Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+I2\+C\+\_\+\+Remove\+Oldest\+Message (
 \begin{DoxyParamCaption}
-\item[{{\bf sys\+\_\+i2c\+\_\+messages} $\ast$$\ast$}]{list}
+\item[{sys\+\_\+i2c\+\_\+messages $\ast$$\ast$}]{list}
 \end{DoxyParamCaption}
 )}\label{i2c__data_8h_aab570c7924073daf517967958aba4250}
-removes oldest message from the linked list
-
 This function removes the oldest message (first element) of the linked list
 
 
@@ -225,15 +192,15 @@ This function removes the oldest message (first element) of the linked list
 \end{DoxyParams}
 
 
-Definition at line 30 of file i2c\+\_\+data.\+c.
+Definition at line 27 of file i2c\+\_\+data.\+c.
 
 
 
-\subsection{Variable Documentation}
+\subsubsection{Variable Documentation}
 \hypertarget{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}{}\index{i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}!sys\+\_\+i2c\+\_\+msgs@{sys\+\_\+i2c\+\_\+msgs}}
 \index{sys\+\_\+i2c\+\_\+msgs@{sys\+\_\+i2c\+\_\+msgs}!i2c\+\_\+data.\+h@{i2c\+\_\+data.\+h}}
-\subsubsection[{sys\+\_\+i2c\+\_\+msgs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+i2c\+\_\+messages}$\ast$ sys\+\_\+i2c\+\_\+msgs}\label{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}
+\paragraph[{sys\+\_\+i2c\+\_\+msgs}]{\setlength{\rightskip}{0pt plus 5cm}sys\+\_\+i2c\+\_\+messages$\ast$ sys\+\_\+i2c\+\_\+msgs}\label{i2c__data_8h_ab06ea00913c00acfd046536bef96a344}
 Pointer to the linked list of messages 
 
-Definition at line 21 of file i2c\+\_\+data.\+c.
+Definition at line 19 of file i2c\+\_\+data.\+c.
 

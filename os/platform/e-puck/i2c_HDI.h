@@ -1,8 +1,6 @@
 /*!
  * \file
  * \ingroup i2c
- * \ingroup io
- * \ingroup epuck
  * \ingroup hdi
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
@@ -36,11 +34,6 @@ inline void Sys_Start_I2C_HDI(void);
 inline void Sys_Pause_I2C_HDI(void);
 inline void Sys_Contine_I2C_HDI(void);
 inline void Sys_Stop_I2C_HDI(void);
-
-void Sys_I2C_SentBytes(uint8 address, uint8 *bytes, uint16 length);
-void Sys_I2C_Read(uint8 address, uint8 *intern_address, uint16 length, pByteFunction bytehandler);
-
-
 
 #ifdef	__cplusplus
 }

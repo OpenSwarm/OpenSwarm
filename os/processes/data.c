@@ -5,8 +5,8 @@
  * \version 1.0
  *
  * \date 08 July 2014
- * 
- * \brief  This file includes all functions which are needed to manage data structures needed by the processes management
+ *
+ * \brief  It defines functions to manage process lists and related structs
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -42,7 +42,6 @@ sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events 
  ********************************************************/
 
 /**
- * This function removed a pcb element from the list
  *
  * This function seaches all elements of a process list and removes the processs pID from it. Note: The element is not deleted. The pointer to it is returned.
  *
@@ -50,7 +49,7 @@ sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events 
  * @param[in,out] **list the process list which has to be seached
  * @return sys_pcb_list_element* the pointer to the removed element
  */
-sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_element **list){
+sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_element **list){
 
     if( (*list) == 0){//empty list
         return 0;
@@ -98,14 +97,13 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_elem
 }
 
 /**
- * This function return the pointer to the PCB of process with pid
  *
  * This function return the pointer to the PCB of process with pid
  *
  * @param[in] pid process ID
  * @return void
  */
-inline sys_pcb_list_element *Sys_Find_Process(uint16 pid){
+inline sys_pcb_list_element *Sys_Find_Process(uint pid){
     sys_pcb_list_element *element = sys_ready_processes;
 
     while(element != 0){
@@ -134,7 +132,6 @@ inline sys_pcb_list_element *Sys_Find_Process(uint16 pid){
  *****************************************************************************************************************/
 
 /**
- * This function searches (sequentially) all event handler for an event (eventID) 
  *
  * This function searches (sequentially) all event handler for an event (eventID). The list contains a list of eventhandler and this function return the first occurrence of eventID. To search the list entirely, use the function on a list and after resulting an element use the same function on the next element (sublist).
  *
@@ -142,7 +139,7 @@ inline sys_pcb_list_element *Sys_Find_Process(uint16 pid){
  * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
  * @return sys_process_event_handler *          pointer to the next event handler for the event (eventID) in list (0 if not found)
  */
-inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handler *list, uint16 eventID){
+inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handler *list, uint eventID){
 
     sys_process_event_handler *element = list;
 
@@ -161,7 +158,6 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
  *******************************/
 
 /**
- * This function removes subscribed handler function from event-handler list
  * 
  * This function removes subscribed handler function from event-handler list
  *
@@ -171,7 +167,7 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
  * @return sys_process_event_handler *      (New) top of the list (if changed)
  */
 //Assumption eventID+func is unique in process eventregister. Note: -1 means all functions
-inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eventID, pEventHandlerFunction func, sys_process_event_handler **list){
+inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint eventID, pEventHandlerFunction func, sys_process_event_handler **list){
 
     if(list == 0 || *list == 0){//list is empty
         return 0;
@@ -209,7 +205,6 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eve
 }
 
 /**
- * This function removes and frees a list of sys_event_data
  * 
  * This function removes and frees a list of sys_event_data
  *
@@ -231,7 +226,6 @@ inline void Sys_Clear_EventData(sys_event_data **data){
 }
 
 /**
- * This function clears and frees all elements of a process
  * 
  * This function clears and frees all elements of a process. The process is also unsubscribed from any event, because and empty event register cannot handle any events. 
  *
@@ -254,7 +248,6 @@ inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
 }
 
 /**
- * This function deletes container elements
  *
  * This function deletes container elements. Warning: this function only deletes the process. All the elements which are linked with next are lost in memory, if you haven't take care of that on advance.
  *
@@ -274,16 +267,15 @@ void Sys_Delete_Process(sys_pcb_list_element *element){
 }
 
 /**
- * This function sets default values to the sys_process_control_block struct
  *
  * This function sets the default values in a sys_process_control_block struct
  *
  * @param[in, out] element This is a pointer to a sys_process_control_block struct
- * @param[in] stacksize This is a uint16 whch represents the size of the stack which should be allocated for this process. The default value (=0) is in DEFAULT_PROCESS_STACK_SIZE.
+ * @param[in] stacksize This is a uint whch represents the size of the stack which should be allocated for this process. The default value (=0) is in DEFAULT_PROCESS_STACK_SIZE.
  * @return void
  */
-inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint16 stacksize){
-    static uint16 new_id = 1;
+inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint stacksize){
+    static uint new_id = 1;
     element->process_ID = new_id++;
 
     if(stacksize == 0){//if there is no stack size -> set default value
@@ -292,13 +284,13 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint16 stacksize){
 
     Sys_Set_Defaults_Info(&element->sheduler_info);// set default values for the scheduler
 
-    element->process_stack = (uint16 *) Sys_Malloc(stacksize); //create stack for process
+    element->process_stack = (uint *) Sys_Malloc(stacksize); //create stack for process
 
     if(element->process_stack == NULL){
         return false;
     }
 
-    element->stackPointer = (uint16) element->process_stack;
+    element->stackPointer = (uint) element->process_stack;
     element->framePointer = element->stackPointer;
     element->stackPointerLimit = element->stackPointer + stacksize;
     element->event_register = 0;
@@ -307,7 +299,6 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint16 stacksize){
 }
 
 /**
- * This function inserts a process into a process list.
  *
  * This function inserts a process into a process list. Note: The elements are sorted (process ID)
  *

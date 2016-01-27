@@ -1,12 +1,11 @@
 /*!
  * \file
- * \ingroup i2c
  * \ingroup camera
  * \ingroup shefpuck
- * \ingroup epuck
  * \author  Yuri Kaszubowski Lopes <yurikazuba@gmail.com>
  * \version 1.0
  *
+ * \brief External set of functions to assist the use of the camera. (provided by \ref shefpuck ) 
  * \date 2014
  */
 
@@ -27,7 +26,7 @@
  * You should have received a copy of the GNU Lesser General Public License along with shefpuck.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright (C) 2014-2015 Yuri Kaszubowski Lopes - yurikazuba@gmail.com
  * 
- * \note This module is used because the e-puck library functions are used to access the camera. This module as well as the e-puck camera well be replaced.
+ * \note Due to the use of the e-puck library while processing the camera input, this module is used to process a camera frame into a virtual simple line of sight sensor value. This module, as well as the functions used from the e-puck library, will be replaced.
  * 
  */
 

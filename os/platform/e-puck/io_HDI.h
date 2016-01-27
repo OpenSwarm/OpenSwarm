@@ -1,14 +1,13 @@
 /*!
  * \file
  * \ingroup io
- * \ingroup epuck
  * \ingroup hdi
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date 10 August 2015
  * 
- * \brief  Hardware dependent implementations to start and stop the I/O timer.  This timer executes IO functions periodically.
+ * \brief  Hardware dependent implementations to control the IO timer and to (un)register IO Handler.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -26,14 +25,14 @@ extern "C" {
 #define STEPS_PER_MILISECOND 10
     
 /**
- * @brief Linked list element containing IO Handler function pointers 
+ * @brief Linked list element containing I/O Handler function pointers 
  * 
- * It is a single linked list element containing a function pointer to an IO hander.
+ * It is a single linked list element containing a function pointer to an I/O hander. I/O Handlers are functions that are periodically executed to interact with a specific I/O device.
  */
 typedef struct sys_periodical_IOHandler_s {
-    pFunction function;
+    pFunction function;/*!< function pointer to the I/O handler */
     
-    struct sys_periodical_IOHandler_s *next;
+    struct sys_periodical_IOHandler_s *next;/*!< pointer to the next I/O handler */
 } sys_periodical_IOHandler, sys_pIOHandler;
 
 inline void Sys_Init_IOTimer_HDI();

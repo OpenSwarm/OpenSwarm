@@ -1,5 +1,5 @@
 <map id="platform/e&#45;puck/system_Timer_HDI.h" name="platform/e&#45;puck/system_Timer_HDI.h">
 <area shape="rect" id="node2" href="$d2/d78/process__Management__HDI_8c.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="5,95,168,136"/>
-<area shape="rect" id="node3" href="$d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="193,95,351,136"/>
-<area shape="rect" id="node4" href="$de/dfb/system__Timer_8c.html" title="This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. " alt="" coords="375,102,555,129"/>
+<area shape="rect" id="node3" href="$d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and run the system Timer. " alt="" coords="193,95,351,136"/>
+<area shape="rect" id="node4" href="$de/dfb/system__Timer_8c.html" title="It defines functions to initialise, configure and run the system Timer. " alt="" coords="375,102,555,129"/>
 </map>

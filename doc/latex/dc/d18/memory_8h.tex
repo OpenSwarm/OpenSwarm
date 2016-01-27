@@ -1,40 +1,38 @@
-\hypertarget{memory_8h}{}\section{memory.\+h File Reference}
+\hypertarget{memory_8h}{}\subsection{memory.\+h File Reference}
 \label{memory_8h}\index{memory.\+h@{memory.\+h}}
 
 
-declares functions to allocate, free, and copy memory  
+It declares functions to allocate, free, and copy memory.  
 
 
 {\ttfamily \#include \char`\"{}definitions.\+h\char`\"{}}\\*
-Include dependency graph for memory.\+h\+:
-\nopagebreak
+Include dependency graph for memory.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{df/d9a/memory_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{db/d57/memory_8h__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void $\ast$ \hyperlink{memory_8h_aac1292ecd85eefecced84ec282250442}{Sys\+\_\+\+Malloc} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} length)
+void $\ast$ \hyperlink{memory_8h_a5a1d784fb71f08efeb9e56c4b2ff8534}{Sys\+\_\+\+Malloc} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} length)
 \item 
 void \hyperlink{memory_8h_a8f04ee5feb590ac9777b8c76c4d2cd70}{Sys\+\_\+\+Free} (void $\ast$)
 \item 
-void \hyperlink{memory_8h_ac496f9d5e3dc6b8644f137ad7d0e8bc4}{Sys\+\_\+\+Memcpy} (void $\ast$source, void $\ast$destination, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} length)
+void \hyperlink{memory_8h_a71922fc7a33cc1ef84dc86b7e754ba01}{Sys\+\_\+\+Memcpy} (void $\ast$source, void $\ast$destination, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} length)
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-declares functions to allocate, free, and copy memory 
+\subsubsection{Detailed Description}
+It declares functions to allocate, free, and copy memory. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -50,16 +48,14 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{memory_8h_a8f04ee5feb590ac9777b8c76c4d2cd70}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Free@{Sys\+\_\+\+Free}}
 \index{Sys\+\_\+\+Free@{Sys\+\_\+\+Free}!memory.\+h@{memory.\+h}}
-\subsubsection[{Sys\+\_\+\+Free}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Free (
+\paragraph[{Sys\+\_\+\+Free}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Free (
 \begin{DoxyParamCaption}
 \item[{void $\ast$}]{data}
 \end{DoxyParamCaption}
 )}\label{memory_8h_a8f04ee5feb590ac9777b8c76c4d2cd70}
-Function to free memory
-
 This Function frees dynamic allocated memory. This freeing is performed as atomic action.
 
 
@@ -69,17 +65,15 @@ This Function frees dynamic allocated memory. This freeing is performed as atomi
 \end{DoxyParams}
 
 
-Definition at line 45 of file memory.\+c.
+Definition at line 43 of file memory.\+c.
 
-\hypertarget{memory_8h_aac1292ecd85eefecced84ec282250442}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Malloc@{Sys\+\_\+\+Malloc}}
+\hypertarget{memory_8h_a5a1d784fb71f08efeb9e56c4b2ff8534}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Malloc@{Sys\+\_\+\+Malloc}}
 \index{Sys\+\_\+\+Malloc@{Sys\+\_\+\+Malloc}!memory.\+h@{memory.\+h}}
-\subsubsection[{Sys\+\_\+\+Malloc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ Sys\+\_\+\+Malloc (
+\paragraph[{Sys\+\_\+\+Malloc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ Sys\+\_\+\+Malloc (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{length}
+\item[{{\bf uint}}]{length}
 \end{DoxyParamCaption}
-)}\label{memory_8h_aac1292ecd85eefecced84ec282250442}
-Function to allocate {\bfseries length} bytes of memory
-
+)}\label{memory_8h_a5a1d784fb71f08efeb9e56c4b2ff8534}
 This Function allocates memory of the size {\bfseries length}. This allocation is performed as atomic action.
 
 
@@ -92,31 +86,29 @@ pointer to the allocated memory
 \end{DoxyReturn}
 
 
-Definition at line 26 of file memory.\+c.
+Definition at line 25 of file memory.\+c.
 
-\hypertarget{memory_8h_ac496f9d5e3dc6b8644f137ad7d0e8bc4}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Memcpy@{Sys\+\_\+\+Memcpy}}
+\hypertarget{memory_8h_a71922fc7a33cc1ef84dc86b7e754ba01}{}\index{memory.\+h@{memory.\+h}!Sys\+\_\+\+Memcpy@{Sys\+\_\+\+Memcpy}}
 \index{Sys\+\_\+\+Memcpy@{Sys\+\_\+\+Memcpy}!memory.\+h@{memory.\+h}}
-\subsubsection[{Sys\+\_\+\+Memcpy}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Memcpy (
+\paragraph[{Sys\+\_\+\+Memcpy}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Memcpy (
 \begin{DoxyParamCaption}
 \item[{void $\ast$}]{source\+\_\+i, }
 \item[{void $\ast$}]{destination\+\_\+o, }
-\item[{{\bf uint16}}]{length}
+\item[{{\bf uint}}]{length}
 \end{DoxyParamCaption}
-)}\label{memory_8h_ac496f9d5e3dc6b8644f137ad7d0e8bc4}
-Function to copies memory of the size {\bfseries length} from {\bfseries source\+\_\+i} to {\bfseries destination\+\_\+o}.
-
+)}\label{memory_8h_a71922fc7a33cc1ef84dc86b7e754ba01}
 Function to copies memory of the size {\bfseries length} from {\bfseries source\+\_\+i} to {\bfseries destination\+\_\+o}. This copying is performed as atomic action.
 
 
-\begin{DoxyParams}{Parameters}
-{\em source\+\_\+i} & pointer to the source \\
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em source\+\_\+i} & pointer to the source \\
 \hline
-{\em destination\+\_\+o} & pointer to the destination \\
+\mbox{\tt out}  & {\em destination\+\_\+o} & pointer to the destination \\
 \hline
-{\em length} & size of the memory that has to be copied \\
+\mbox{\tt in}  & {\em length} & size of the memory that has to be copied \\
 \hline
 \end{DoxyParams}
 
 
-Definition at line 64 of file memory.\+c.
+Definition at line 61 of file memory.\+c.
 

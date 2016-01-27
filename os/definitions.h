@@ -1,5 +1,5 @@
 /*! \file
- *  \brief     	This file declares general preprocessor variables and types.
+ *  \brief     	It declares general preprocessor variables and types.
  *  \author    	Stefan M. Trenkwalder
  *  \version   	1.0
  *  \date      	2015
@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-#define EPUCK_USED
+#define EPUCK_USED /*!< defines that the currently used platform is the e-puck*/
 //#define KILOBOT_USED
     
     
@@ -44,76 +44,21 @@ extern "C" {
     #define UART2_RX_DIR _TRISF4
     #define UART2_TX_DIR _TRISF5
 #endif
-    
-//RC-5 coding -- Toshiba RC-3910
-#define RC_BUTTON_STANDBY       12
+        
+#define SYS_EVENT_TERMINATION       0x01    /*!< ID of the event that signal a general termination event*/
+#define SYS_EVENT_IO_MOTOR_LEFT     0x02    /*!< ID of the event that controls the left motor speed/direction*/
+#define SYS_EVENT_IO_MOTOR_RIGHT    0x03    /*!< ID of the event that controls the right motor speed/direction*/
+#define SYS_EVENT_IO_CAMERA         0x04    /*!< ID of the event that is emmited by the camera*/
+#define SYS_EVENT_IO_REMOECONTROL   0x05    /*!< ID of the event that is sent after receiving a remote control signal*/
+#define SYS_EVENT_IO_TO_BLUETOOTH   0x06    /*!< ID of the event that sends data via Bluetooth*/
+#define SYS_EVENT_1ms_CLOCK         0x07    /*!< ID of the event that signals 1ms timer ticks*/
 
-#define RC_BUTTON_SCREEN        11
-#define RC_BUTTON_LANG          15
-#define RC_BUTTON_SUBTTL        31
-#define RC_BUTTON_INTERNET      46
-
-#define RC_BUTTON_RED           55
-#define RC_BUTTON_GREEN         54
-#define RC_BUTTON_YELLOW        50
-#define RC_BUTTON_BLUE          52
-
-#define RC_BUTTON_0             0
-#define RC_BUTTON_1             1
-#define RC_BUTTON_2             2
-#define RC_BUTTON_3             3
-#define RC_BUTTON_4             4
-#define RC_BUTTON_5             5
-#define RC_BUTTON_6             6
-#define RC_BUTTON_7             7
-#define RC_BUTTON_8             8
-#define RC_BUTTON_9             9
-#define RC_BUTTON_TELE_TEXT     60
-#define RC_BUTTON_SWAP          34
-
-#define RC_BUTTON_OK            53
-#define RC_BUTTON_CURSOR_UP     20
-#define RC_BUTTON_CURSOR_DOWN   19
-#define RC_BUTTON_CURSOR_LEFT   21
-#define RC_BUTTON_CURSOR_RIGHT  22
-#define RC_BUTTON_BACK          10
-#define RC_BUTTON_MENU          48
-#define RC_BUTTON_EPG           47
-#define RC_BUTTON_FAV           40
-
-#define RC_BUTTON_SOURCE        56
-#define RC_BUTTON_INFO          18
-#define RC_BUTTON_PRESETS       14
-#define RC_BUTTON_SLEEP         42
-
-#define RC_BUTTON_VOLUME_UP     16
-#define RC_BUTTON_VOLUME_DOWN   17
-#define RC_BUTTON_MUTE          13
-#define RC_BUTTON_CHANNEL_UP    32
-#define RC_BUTTON_CHANNEL_DOWN  33
-
-////
-#define RC_BUTTON_PAUSE         48
-#define RC_BUTTON_REWIND        50
-#define RC_BUTTON_WIND          52
-#define RC_BUTTON_PLAY          53
-#define RC_BUTTON_STOP          54
-#define RC_BUTTON_RECORD        55
-    
-#define SYS_EVENT_TERMINATION       0x01
-#define SYS_EVENT_IO_MOTOR_LEFT     0x02
-#define SYS_EVENT_IO_MOTOR_RIGHT    0x03
-#define SYS_EVENT_IO_CAMERA         0x04
-#define SYS_EVENT_IO_REMOECONTROL   0x05
-#define SYS_EVENT_IO_TO_BLUETOOTH   0x06
-#define SYS_EVENT_1ms_CLOCK         0x07
-
-#define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE)
+#define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE) /*!< the value to indicate all event handler*/
 
 /**
- * @brief defines a system-wide colour definition
+ * @brief defines a system-wide colours
  *
- * This enum defines a system-wide colour. (it is based on one bit for red, blue, and green). In total, 8 colours are defined with the first three bits.
+ * This enum defines system-wide colours. (it is based on one bit for red, blue, and green). In total, 8 colours are defined with the first three bits.
  */
 typedef enum sys_colour {   BLACK   = 0b00000000, 
                     RED     = 0b00000100,
@@ -133,8 +78,8 @@ typedef signed short sint16;	/*!< Defines a    signed 16bit integer*/
 typedef signed int   sint32;	/*!< Defines a    signed 32bit integer*/
 
 #ifdef EPUCK_USED
-typedef signed short sint;
-typedef unsigned short uint;
+typedef signed short sint;/*!< e-puck specific valued for the default signed integer*/
+typedef unsigned short uint;/*!< e-puck specific valued for the default unsigned integer*/
 #endif
 
 typedef void (*pFunction)(void);	/*!< Defines a pointer to a function with no return value and argument*/

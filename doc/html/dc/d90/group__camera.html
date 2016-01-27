@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -82,49 +82,46 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="summary">
 <a href="#files">Files</a>  </div>
   <div class="headertitle">
-<div class="title">Camera Module<div class="ingroups"><a class="el" href="../../d9/dc8/group__epuck.html">e-puck specific modules</a></div></div>  </div>
+<div class="title">Camera Module<div class="ingroups"><a class="el" href="../../d2/da3/group__io.html">I/O Management</a> &#124; <a class="el" href="../../d9/dc8/group__epuck.html">e-puck specific modules</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Functions to process incoming frames from a camera module.  
+<p>The camera module is used to retrieve raw camera data, process the incoming frames, and emits the result as <a class="el" href="../../d1/ddf/group__events.html">events</a>.  
 <a href="#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Collaboration diagram for Camera Module:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<center><table><tr><td><img src="../../dc/d90/group__camera.png" border="0" alt="" usemap="#dc_2d90_2group____camera"/>
-<map name="dc_2d90_2group____camera" id="dc_2d90_2group____camera">
-<area shape="rect" id="node1" href="../../d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform. " alt="" coords="5,73,168,100"/><area shape="rect" id="node2" href="../../d9/d96/group__shefpuck.html" title="External set of functions to assist the programming of the e&#45;Puck. " alt="" coords="650,13,727,40"/><area shape="rect" id="node4" href="../../d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="640,73,737,100"/><area shape="rect" id="node5" href="../../d2/da3/group__io.html" title="Functions and mechanisms to use I/O devices (e.g. sensors and actuators) to interact with the environ..." alt="" coords="629,133,748,160"/></map>
+<center><table><tr><td><div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d90/group__camera.svg" width="588" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </td></tr></table></center>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:d1/de0/camera_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/de0/camera_8c.html">camera.c</a></td></tr>
-<tr class="memdesc:d1/de0/camera_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions to process data retrieved by a camera. <br /></td></tr>
+<tr class="memdesc:d1/de0/camera_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">It defines functions to process data retrieved by a camera. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d7/df6/camera_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/df6/camera_8h.html">camera.h</a></td></tr>
-<tr class="memdesc:d7/df6/camera_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file includes functions to process data retrieved by a camera. <br /></td></tr>
+<tr class="memdesc:d7/df6/camera_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">It declares functions to process data retrieved by a camera. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:df/ded/camera__processing_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/ded/camera__processing_8c.html">camera_processing.c</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d6/d91/camera__processing_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/camera__processing_8h.html">camera_processing.h</a></td></tr>
+<tr class="memdesc:d6/d91/camera__processing_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">External set of functions to assist the use of the camera. (provided by <a class="el" href="../../d9/d96/group__shefpuck.html">Shefpuck</a> ) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Functions to process incoming frames from a camera module. </p>
-<dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a></dd></dl>
-<h1><a class="anchor" id="camera_intro"></a>
-Introduction</h1>
-<p>This module is part of the I/O handler. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d2/da3/group__io.html" title="Functions and mechanisms to use I/O devices (e.g. sensors and actuators) to interact with the environ...">I/O Management</a></dd></dl>
-<p>This module currently is under development and is using functions of the e-puck library provided using Subversion at svn://svn.gna.org/svn/e-puck/trunk .</p>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000005">Todo:</a></b></dt><dd>The used functions from the e-puck library are very time and computational intensive. These function can be rewritten to decrease the processing load.</dd></dl>
+<p>The camera module is used to retrieve raw camera data, process the incoming frames, and emits the result as <a class="el" href="../../d1/ddf/group__events.html">events</a>. </p>
+<p>This module currently is under development and is using functions of the e-puck library provided using Subversion at svn://svn.gna.org/svn/e-puck/trunk (01/01/2016).</p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000005">Todo:</a></b></dt><dd>The used functions from the e-puck library are very time and computational intensive. These function need to be rewritten to decrease the processing load.</dd></dl>
 <h1><a class="anchor" id="camera_usage"></a>
 Usage</h1>
-<p>The camera is initialised and started by Sys_Init_Camera and Sys_Start_Camera respectively.</p>
+<p>The camera is initialised and started by <a class="el" href="../../d7/df6/camera_8h.html#aeefbe8dd86aa2b4588e5e5aa596d41fe">Sys_Init_Camera()</a> and <a class="el" href="../../d7/df6/camera_8h.html#ac44e432642eee885441e01f976e2c969">Sys_Start_Camera()</a> respectively.</p>
 <p>The camera uses a preprocessor to process a frame and generate the required events. This preprocessor can be defined by <a class="el" href="../../d7/df6/camera_8h.html#ac93ec56d124a0811e638208ad64ed14c">Sys_Set_Preprocessing(pCameraPreProcessor)</a>.</p>
 <p>A received frame, if available (<a class="el" href="../../d7/df6/camera_8h.html#a1b0543ca3f9389e59135838a3c9cbb23">isNewFrameAvailable()</a>) can be obtained with <a class="el" href="../../d7/df6/camera_8h.html#a72c1d6c27d3aeb8399ec41247cc4ba58">getFinishedFrame()</a>.</p>
+<dl class="section note"><dt>Note</dt><dd>An e-puck cannot store a entire frame with full resolution (640x480). Consequently, only sub-frames can be taken.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a></dd></dl>
 <h1><a class="anchor" id="camera_license"></a>
 License</h1>
 <p>LICENSE: adapted FreeBSD License (see <a href="http://openswarm.org/license">http://openswarm.org/license</a>)<br />

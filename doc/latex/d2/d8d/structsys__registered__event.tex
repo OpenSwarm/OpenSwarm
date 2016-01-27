@@ -1,0 +1,63 @@
+\hypertarget{structsys__registered__event}{}\subsection{sys\+\_\+registered\+\_\+event Struct Reference}
+\label{structsys__registered__event}\index{sys\+\_\+registered\+\_\+event@{sys\+\_\+registered\+\_\+event}}
+
+
+A single linked element containing a registered event and its subscribers.  
+
+
+
+
+Collaboration diagram for sys\+\_\+registered\+\_\+event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{d3/df0/structsys__registered__event__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__registered__event_a2a51dcccee68f255abf32bc3feb584f4}{event\+I\+D}
+\item 
+\hyperlink{structsys__subscribed__process}{sys\+\_\+subscribed\+\_\+process} $\ast$ \hyperlink{structsys__registered__event_a05b146034143e4b7998e265c41e8dea6}{subscribers}
+\item 
+struct sys\+\_\+registered\+\_\+event\+\_\+s $\ast$ \hyperlink{structsys__registered__event_acbd46e5730440d227197def0c9e51a79}{next}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+A single linked element containing a registered event and its subscribers. 
+
+It is a single linked list element that contains registered events and a list of processes that are subscribed to it. 
+
+Definition at line 34 of file events.\+c.
+
+
+
+\subsubsection{Field Documentation}
+\hypertarget{structsys__registered__event_a2a51dcccee68f255abf32bc3feb584f4}{}\index{sys\+\_\+registered\+\_\+event@{sys\+\_\+registered\+\_\+event}!event\+I\+D@{event\+I\+D}}
+\index{event\+I\+D@{event\+I\+D}!sys\+\_\+registered\+\_\+event@{sys\+\_\+registered\+\_\+event}}
+\paragraph[{event\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+registered\+\_\+event\+::event\+I\+D}\label{structsys__registered__event_a2a51dcccee68f255abf32bc3feb584f4}
+event identifier 
+
+Definition at line 35 of file events.\+c.
+
+\hypertarget{structsys__registered__event_acbd46e5730440d227197def0c9e51a79}{}\index{sys\+\_\+registered\+\_\+event@{sys\+\_\+registered\+\_\+event}!next@{next}}
+\index{next@{next}!sys\+\_\+registered\+\_\+event@{sys\+\_\+registered\+\_\+event}}
+\paragraph[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct sys\+\_\+registered\+\_\+event\+\_\+s$\ast$ sys\+\_\+registered\+\_\+event\+::next}\label{structsys__registered__event_acbd46e5730440d227197def0c9e51a79}
+pointer to the next element in the list 
+
+Definition at line 37 of file events.\+c.
+
+\hypertarget{structsys__registered__event_a05b146034143e4b7998e265c41e8dea6}{}\index{sys\+\_\+registered\+\_\+event@{sys\+\_\+registered\+\_\+event}!subscribers@{subscribers}}
+\index{subscribers@{subscribers}!sys\+\_\+registered\+\_\+event@{sys\+\_\+registered\+\_\+event}}
+\paragraph[{subscribers}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+subscribed\+\_\+process}$\ast$ sys\+\_\+registered\+\_\+event\+::subscribers}\label{structsys__registered__event_a05b146034143e4b7998e265c41e8dea6}
+pointer to a list of subscribed processes 
+
+Definition at line 36 of file events.\+c.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+events/\hyperlink{events_8c}{events.\+c}\end{DoxyCompactItemize}

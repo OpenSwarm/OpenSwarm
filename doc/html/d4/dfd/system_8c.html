@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">system.c File Reference<div class="ingroups"><a class="el" href="../../dd/df2/group__base.html">Base</a></div></div>  </div>
+<div class="title">system.c File Reference<div class="ingroups"><a class="el" href="../../dd/df2/group__base.html">Kernel</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -111,9 +111,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../d3/d4a/system_8c__incl.png" border="0" usemap="#system_8c" alt=""/></div>
-<map name="system_8c" id="system_8c">
-<area shape="rect" id="node2" href="../../d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="286,244,378,271"/><area shape="rect" id="node9" href="../../dc/db2/system_8h.html" title="initiaises and starts OpenSwarm. " alt="" coords="23,169,99,196"/><area shape="rect" id="node10" href="../../df/dbf/system__Timer_8h.html" title="This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. " alt="" coords="323,169,503,196"/><area shape="rect" id="node11" href="../../d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="527,169,681,196"/><area shape="rect" id="node12" href="../../dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="701,87,926,114"/><area shape="rect" id="node15" href="../../dc/dac/io_8h.html" title="This file includes the IO timer to start and stop the timer. This timer executes IO functions periodi..." alt="" coords="123,169,181,196"/><area shape="rect" id="node16" href="../../d9/ded/io__clock_8h.html" title="This file includes the system clock that can be used to measure time. " alt="" coords="205,169,299,196"/><area shape="rect" id="node7" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="531,319,739,360"/><area shape="rect" id="node13" href="../../db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="757,169,883,196"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d3/d4a/system_8c__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d4/dfd/system_8c_source.html">Go to the source code of this file.</a></p>
@@ -162,12 +160,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Function to initialise the hardware</p>
 <p>This Function sets the system Timer (Timer0) and sets an scheduling algorithm. It also intitalises I/O devices (e.g. if e-puck is used: motor, UART, remote control, and camera)</p>
 <dl class="section post"><dt>Postcondition</dt><dd>To start OpenSwarm, <a class="el" href="../../d4/dfd/system_8c.html#a2e15518324643f26cb240108259b30da">Sys_Start_Kernel()</a> mast be executed after the initialisation. </dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active OpenSwarm. </dd></dl>
+<p>&lt; ID of the event that signal a general termination event </p>
 
-<p>Definition at line <a class="el" href="../../d4/dfd/system_8c_source.html#l00064">64</a> of file <a class="el" href="../../d4/dfd/system_8c_source.html">system.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d4/dfd/system_8c_source.html#l00063">63</a> of file <a class="el" href="../../d4/dfd/system_8c_source.html">system.c</a>.</p>
 
 </div>
 </div>
@@ -184,11 +182,10 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Function to start the the system timer</p>
 <p>This Function starts all functions of the operating system. The system MUST HAVE BEEN INITIALISED before. </p><dl class="section pre"><dt>Precondition</dt><dd>System must be initialised with <a class="el" href="../../d4/dfd/system_8c.html#a31ce626d506c2b262ecf5b23946f522f">Sys_Init_Kernel()</a>. </dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>Code can be executed between initialisation and start of the kernel. But, note that you can only execute code that does not depend on an active OpenSwarm. </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d4/dfd/system_8c_source.html#l00104">104</a> of file <a class="el" href="../../d4/dfd/system_8c_source.html">system.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d4/dfd/system_8c_source.html#l00102">102</a> of file <a class="el" href="../../d4/dfd/system_8c_source.html">system.c</a>.</p>
 
 </div>
 </div>

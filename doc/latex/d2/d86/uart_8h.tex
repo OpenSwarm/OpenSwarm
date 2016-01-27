@@ -1,13 +1,12 @@
-\hypertarget{uart_8h}{}\section{platform/e-\/puck/uart.h File Reference}
+\hypertarget{uart_8h}{}\subsection{platform/e-\/puck/uart.h File Reference}
 \label{uart_8h}\index{platform/e-\/puck/uart.\+h@{platform/e-\/puck/uart.\+h}}
 
 
-This file includes functions needed to transmit data via uart(1 \& 2).  
+It declares functions to transmit bytes via U\+A\+R\+T.  
 
 
 {\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
-Include dependency graph for uart.\+h\+:
-\nopagebreak
+Include dependency graph for uart.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,7 +20,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \includegraphics[width=338pt]{d9/d48/uart_8h__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{uart_8h_a64689486ee92e3dcd519778bc7afd3de}{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1} (void)
@@ -36,14 +35,14 @@ void \hyperlink{uart_8h_a09b6e9f0a90b382e5bb453035ca337af}{Sys\+\_\+\+Set\+Readi
 \item 
 void \hyperlink{uart_8h_a9fad382ce87c7296fe5ba2005d0a7b10}{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2} (\hyperlink{definitions_8h_ad0a349c40dea7b354efa164b090c0a4f}{p\+U\+A\+R\+T\+\_\+reader} func)
 \item 
-void \hyperlink{uart_8h_a42235b0108b800702868ff72b469a506}{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1} (void $\ast$data, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} length)
+void \hyperlink{uart_8h_a8528d7cc7f24e0051d8f7697605d9c8f}{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1} (void $\ast$data, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} length)
 \item 
-void \hyperlink{uart_8h_aca91435956e315a98741efe947b3437d}{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2} (void $\ast$data, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} length)
+void \hyperlink{uart_8h_a40e935da5e650eeaa7a15feddd65322a}{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2} (void $\ast$data, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} length)
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-This file includes functions needed to transmit data via uart(1 \& 2). 
+\subsubsection{Detailed Description}
+It declares functions to transmit bytes via U\+A\+R\+T. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -59,42 +58,36 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{uart_8h_a64689486ee92e3dcd519778bc7afd3de}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1}}
 \index{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1 (
+\paragraph[{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T1 (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{uart_8h_a64689486ee92e3dcd519778bc7afd3de}
-Initialises U\+A\+R\+T1
-
 This function initialises U\+A\+R\+T1. 
 
-Definition at line 34 of file uart.\+c.
+Definition at line 31 of file uart.\+c.
 
 \hypertarget{uart_8h_a8ab8608f691dd2652da615b79935ac96}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2}}
 \index{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2 (
+\paragraph[{Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+U\+A\+R\+T2 (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{uart_8h_a8ab8608f691dd2652da615b79935ac96}
-Initialises U\+A\+R\+T2
-
 This function initialises U\+A\+R\+T2. 
 
-Definition at line 44 of file uart.\+c.
+Definition at line 40 of file uart.\+c.
 
 \hypertarget{uart_8h_a09b6e9f0a90b382e5bb453035ca337af}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1}}
 \index{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1 (
+\paragraph[{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T1 (
 \begin{DoxyParamCaption}
 \item[{{\bf p\+U\+A\+R\+T\+\_\+reader}}]{func}
 \end{DoxyParamCaption}
 )}\label{uart_8h_a09b6e9f0a90b382e5bb453035ca337af}
-defines a function that processes received bytes (U\+A\+R\+T1)
-
 defines a function that processes received bytes (U\+A\+R\+T1). This defined callback function is only executed once by arrival of one byte.
 
 
@@ -104,17 +97,15 @@ defines a function that processes received bytes (U\+A\+R\+T1). This defined cal
 \end{DoxyParams}
 
 
-Definition at line 79 of file uart.\+c.
+Definition at line 72 of file uart.\+c.
 
 \hypertarget{uart_8h_a9fad382ce87c7296fe5ba2005d0a7b10}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2}}
 \index{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2 (
+\paragraph[{Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+Reading\+Function\+\_\+\+U\+A\+R\+T2 (
 \begin{DoxyParamCaption}
 \item[{{\bf p\+U\+A\+R\+T\+\_\+reader}}]{func}
 \end{DoxyParamCaption}
 )}\label{uart_8h_a9fad382ce87c7296fe5ba2005d0a7b10}
-defines a function that processes received bytes (U\+A\+R\+T2)
-
 defines a function that processes received bytes (U\+A\+R\+T2). This defined callback function is only executed once by arrival of one byte.
 
 
@@ -124,17 +115,15 @@ defines a function that processes received bytes (U\+A\+R\+T2). This defined cal
 \end{DoxyParams}
 
 
-Definition at line 90 of file uart.\+c.
+Definition at line 82 of file uart.\+c.
 
 \hypertarget{uart_8h_a80f2ec0b87dbbe5c412a8eed603f5a55}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1}}
 \index{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1 (
+\paragraph[{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T1 (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{uart_8h_a80f2ec0b87dbbe5c412a8eed603f5a55}
-starts U\+A\+R\+T1
-
 This function starts U\+A\+R\+T1.
 
 \begin{DoxyNote}{Note}
@@ -142,17 +131,15 @@ When executed this function, bytes can be received or transmitted at any time.
 \end{DoxyNote}
 
 
-Definition at line 56 of file uart.\+c.
+Definition at line 51 of file uart.\+c.
 
 \hypertarget{uart_8h_adf0cbb7ee9bf3111f4df85d637dbde78}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2}}
 \index{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2 (
+\paragraph[{Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+U\+A\+R\+T2 (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{uart_8h_adf0cbb7ee9bf3111f4df85d637dbde78}
-starts U\+A\+R\+T2
-
 This function starts U\+A\+R\+T2.
 
 \begin{DoxyNote}{Note}
@@ -160,18 +147,16 @@ When executed this function, bytes can be received or transmitted at any time.
 \end{DoxyNote}
 
 
-Definition at line 68 of file uart.\+c.
+Definition at line 62 of file uart.\+c.
 
-\hypertarget{uart_8h_a42235b0108b800702868ff72b469a506}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1}}
+\hypertarget{uart_8h_a8528d7cc7f24e0051d8f7697605d9c8f}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1}}
 \index{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1@{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1 (
+\paragraph[{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T1 (
 \begin{DoxyParamCaption}
 \item[{void $\ast$}]{data, }
-\item[{{\bf uint16}}]{length}
+\item[{{\bf uint}}]{length}
 \end{DoxyParamCaption}
-)}\label{uart_8h_a42235b0108b800702868ff72b469a506}
-writes a set of bytes to U\+A\+R\+T1
-
+)}\label{uart_8h_a8528d7cc7f24e0051d8f7697605d9c8f}
 This function writes sequentially the bytes on the U\+A\+R\+T1.
 
 \begin{DoxyNote}{Note}
@@ -186,18 +171,16 @@ The data will be put into a queue, where it will be sent as soon as the U\+A\+R\
 \end{DoxyParams}
 
 
-Definition at line 104 of file uart.\+c.
+Definition at line 95 of file uart.\+c.
 
-\hypertarget{uart_8h_aca91435956e315a98741efe947b3437d}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2}}
+\hypertarget{uart_8h_a40e935da5e650eeaa7a15feddd65322a}{}\index{uart.\+h@{uart.\+h}!Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2}}
 \index{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2@{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2}!uart.\+h@{uart.\+h}}
-\subsubsection[{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2 (
+\paragraph[{Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Writeto\+\_\+\+U\+A\+R\+T2 (
 \begin{DoxyParamCaption}
 \item[{void $\ast$}]{data, }
-\item[{{\bf uint16}}]{length}
+\item[{{\bf uint}}]{length}
 \end{DoxyParamCaption}
-)}\label{uart_8h_aca91435956e315a98741efe947b3437d}
-writes a set of bytes to U\+A\+R\+T2
-
+)}\label{uart_8h_a40e935da5e650eeaa7a15feddd65322a}
 This function writes sequentially the bytes on the U\+A\+R\+T2.
 
 \begin{DoxyNote}{Note}
@@ -212,5 +195,5 @@ The data will be put into a queue, where it will be sent as soon as the U\+A\+R\
 \end{DoxyParams}
 
 
-Definition at line 144 of file uart.\+c.
+Definition at line 134 of file uart.\+c.
 

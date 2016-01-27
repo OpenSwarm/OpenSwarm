@@ -6,7 +6,7 @@
  *
  * \date{08 July 2014}
  * 
- * \brief This file includes all functions wich are needed to manage processes (e.g. task swichting)
+ * \brief  It defines functions to manage processes (e.g. task creation, switching, termination)
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -32,8 +32,8 @@
  *      Basic Process Management
  ********************************************************/
 
-void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition);
-bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data);
+void Sys_Block_Process(uint pid, uint eventID, pConditionFunction condition);
+bool Sys_Continue_Pocess(uint pid, uint eventID, sys_event_data *data);
 
 void Sys_Set_Running_Process_to_Zombie(); //function to delete a container element
 
@@ -47,7 +47,6 @@ void Sys_Set_Running_Process_to_Zombie(); //function to delete a container eleme
  *  General Task Management
  ********************************************************/
 /**
- * This function initialises the process management
  *
  * This function initialises the process management and creates the first elements in the linked list
  *
@@ -57,7 +56,6 @@ inline void Sys_Init_Process_Management(){
 }
 
 /**
- * This function counts the number of process
  *
  *  This function counts the number of process
  *
@@ -83,7 +81,6 @@ inline unsigned short Sys_Get_Number_Processes(){
 }
 
 /**
- * This function creates a new sys_process_control_block and add all needed info
  *
  * This function creates a new sys_process_control_block (in a sys_process_control_block_list_element) which contains all information wich is used to execute this process.
  *
@@ -94,13 +91,12 @@ inline bool Sys_Start_Process(pFunction function){
 }
 
 /**
- * This function kills a process
  *
  * This function deletes the syss_process_control_block element and stops a process
  *
  * @param[in] pid This argument is the process identifier
  */
-void Sys_Kill_Process(uint16 pid){
+void Sys_Kill_Process(uint pid){
     // Check if the process is in the ready list
     sys_pcb_list_element *element;//first is the system
 
@@ -129,7 +125,6 @@ void Sys_Kill_Process(uint16 pid){
 }
 
 /**
- * This function puts the running process in the zombie list and switches content to the next ready process
  *
  * This function puts the running process in the zombie list and switches content to the next ready process
  *
@@ -172,7 +167,6 @@ goZombieMode:
 }
 
 /**
- * This function kills all zombie process
  *
  * This function deletes all proccesses which are marked as zombies.
  *
@@ -190,13 +184,12 @@ inline void Sys_Kill_Zombies(){
 
 
 /**
- * This function loads all values into the registers of a process with the PID
  *
  * This function loads all values into the registers of a process with the PID
  *
  * @param[in] pid process id
  */
-void Sys_Switch_Process(uint16 pid){
+void Sys_Switch_Process(uint pid){
     sys_pcb_list_element *element = sys_ready_processes;
 
     while(element != 0){//search for the right process
@@ -210,7 +203,6 @@ void Sys_Switch_Process(uint16 pid){
 }
 
 /**
- * This function loads all values into the registers of the process which is next in the list.
  *
  * This function loads all values into the registers of the process which is next in the list.
  *
@@ -224,7 +216,6 @@ void Sys_Switch_to_next_Process(){
 }
 
 /**
- * Starts a critical section
  *
  * This Function starts a critical section to prevent the task-scheduling during its exectution
  *
@@ -234,7 +225,6 @@ inline void Sys_Start_CriticalSection(void){
 }
 
 /**
- * Ends a critical section
  *
  * This Function ends a critical section. The task-scheduling can now occure. Note: if a critical section was started once or more, it only takes a single call of this function to end all critical sections.
  *
@@ -249,7 +239,6 @@ inline void Sys_End_CriticalSection(void){
  ********************************************************/
 
 /**
- * Puts a process on the blocked list and stops its execution (if it's executed)
  *
  * Puts a process on the blocked list and stops its execution (if it's executed)
  *
@@ -257,7 +246,7 @@ inline void Sys_End_CriticalSection(void){
  * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
  * @param[in] condition the condition under which the process is released
  */
-void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition){
+void Sys_Block_Process(uint pid, uint eventID, pConditionFunction condition){
 
     if(sys_ready_processes == 0 || sys_ready_processes->next == 0) return; //no proccess to block
 
@@ -279,7 +268,6 @@ void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition)
 }
 
 /**
- * Puts a process on the ready list
  *
  * Puts a process with the process ID (PID) back on the ready list. Consequently the process can be executed again.
  *
@@ -287,7 +275,7 @@ void Sys_Block_Process(uint16 pid, uint16 eventID, pConditionFunction condition)
  * @param[in] eventID   Event ID
  * @param[in] data      pointer to the data of the event
  */
-bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
+bool Sys_Continue_Pocess(uint pid, uint eventID, sys_event_data *data){
     if(sys_blocked_processes == 0) return true; //no proccess is blocked .. process must be running
 
     Sys_Start_AtomicSection();
@@ -323,7 +311,6 @@ bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
  *****************************************************************************************************************/
 
 /**
- * Puts a process on the blocked list and stops its execution (if it's executed)
  *
  * Puts a process on the blocked list and stops its execution (if it's executed)
  *
@@ -333,7 +320,7 @@ bool Sys_Continue_Pocess(uint16 pid, uint16 eventID, sys_event_data *data){
  * @param[in] cond      The condition under which the handler is executed
  * @return bool         Was the event-handler successfully added?
  */
-bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func, pConditionFunction cond){
+bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction func, pConditionFunction cond){
 
     if(func == 0){//if nothing handles events, nothing will always handle events -> true
         return true;
@@ -377,8 +364,7 @@ bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunctio
     return true;
 }
 
-/**
- * This function adds the event-data to the local list of the process (pid).  
+/**  
  *
  * This function adds the event-data to the local list of the process (pid).
  *
@@ -387,7 +373,7 @@ bool Sys_Add_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunctio
  * @param[in] data     memory that contains the value of the occurred event
  * @param[in] length   length of the data (bytes)
  */
-void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 length){
+void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
 
     sys_pcb_list_element *element = Sys_Find_Process(pid);
     if(element == 0){//no process with pid
@@ -468,7 +454,6 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
 }
 
 /**
- * This function executes all event handlers and processes stored event data
  * 
  * This function executes all event handlers and processes stored event data. First it checks the list of occurred events and then it executes all event handlers of these events
  *
@@ -477,7 +462,7 @@ void Sys_Add_Event_to_Process(uint16 pid, uint16 eventID, void *data, uint16 len
  */
 //handler has to clean up the data!!!
 //TODO: if handler == 0 remove it from list
-inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_element *elements){
+inline void Sys_Execute_Events_in_ProcessList(uint eventID, sys_pcb_list_element *elements){
     sys_pcb_list_element *list = elements;
     while(list != 0){//assuming there are less processes then events
         sys_process_event_handler *event = list->pcb.event_register;
@@ -499,7 +484,6 @@ inline void Sys_Execute_Events_in_ProcessList(uint16 eventID, sys_pcb_list_eleme
 }
 
 /**
- * This function executes all event handlers and processes stored event data
  * 
  * This function executes all event handlers and processes stored event data. First it checks the list of occurred events and then it executes all event handlers of these events
  *
@@ -523,7 +507,6 @@ inline void Sys_Execute_All_EventHandler(){
 }
 
 /**
- * This function starts the execution of the event handler and resets the execution time of the process
  * 
  * This function starts the execution of the event handler and resets the execution time of the process
  *
@@ -538,13 +521,12 @@ void Sys_Interprocess_EventHandling(){
  *******************************/
 
 /**
- * This function removes all subscriptions of any process  to event (eventID)
  * 
  * This function removes all subscriptions of any process  to event (eventID)
  *  *
  * @param[in] eventID   Identifier of the event that has to be removed
  */
-void Sys_Remove_All_Event_Subscriptions(uint16 eventID){
+void Sys_Remove_All_Event_Subscriptions(uint eventID){
     sys_pcb_list_element *process = sys_ready_processes;
 
     while(process != 0){//go through all processes
@@ -554,7 +536,6 @@ void Sys_Remove_All_Event_Subscriptions(uint16 eventID){
 }
 
 /**
- * This function removes subscribed handler function for process (pid) to event (eventID)
  * 
  * This function removes subscribed handler function for process (pid) to event (eventID)
  *
@@ -562,7 +543,7 @@ void Sys_Remove_All_Event_Subscriptions(uint16 eventID){
  * @param[in] eventID   Identifier of the event that has to be removed
  * @param[in] func      pointer to the subscribed handler function
  */
-void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunction func){
+void Sys_Remove_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction func){
 
     sys_pcb_list_element *element = Sys_Find_Process(pid);
 
@@ -578,7 +559,6 @@ void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunc
  *******************************/
 
 /**
- * This function blocks the current process.
  * 
  * This function blocks the current process while waiting for an event that sends data which meet the condition. 
  *
@@ -586,7 +566,7 @@ void Sys_Remove_Event_Subscription(uint16 pid, uint16 eventID, pEventHandlerFunc
  * @param[in] function  Pointer to the function that represents the condition function (return true if condition is met and continues the process). If function = 0 .. condition is always met.
  * @return sys_event_data *  Pointer to the event data struct that contains the values carried by the event
  */
-sys_event_data *Sys_Wait_For_Condition(uint16 eventID, pConditionFunction function){
+sys_event_data *Sys_Wait_For_Condition(uint eventID, pConditionFunction function){
 
     Sys_Block_Process(sys_running_process->pcb.process_ID, eventID, function);
     
@@ -616,19 +596,17 @@ sys_event_data *Sys_Wait_For_Condition(uint16 eventID, pConditionFunction functi
 }
 
 /**
- * This function blocks the current process.
  * 
  * This function blocks the current process and waits for the occurrence of event (eventID).
  *
  * @param eventID 	ID of the event
  * @return sys_event_data* Pointer to the event data struct that contains the values carried by the event
  */
-inline sys_event_data *Sys_Wait_For_Event(uint16 eventID){
+inline sys_event_data *Sys_Wait_For_Event(uint eventID){
     return Sys_Wait_For_Condition(eventID, 0);
 }
 
 /**
- * This function blocks the current process.
  * 
  * This function blocks the current process and let the next process be executed.
  *

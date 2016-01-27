@@ -1,7 +1,7 @@
 <map id="io/io.c" name="io/io.c">
-<area shape="rect" id="node2" href="$dc/dac/io_8h.html" title="This file includes the IO timer to start and stop the timer. This timer executes IO functions periodi..." alt="" coords="164,80,207,107"/>
-<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="192,155,296,181"/>
-<area shape="rect" id="node11" href="$d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="423,80,521,107"/>
-<area shape="rect" id="node12" href="$dc/d18/memory_8h.html" title="includes functions to allocate, free, and copy memory " alt="" coords="546,80,638,107"/>
-<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="525,229,733,271"/>
+<area shape="rect" id="node2" href="$dc/dac/io_8h.html" title="It declares functions to control the IO timer and to (un)register IO Handler. " alt="" coords="164,80,207,107"/>
+<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="It declares general preprocessor variables and types. " alt="" coords="192,155,296,181"/>
+<area shape="rect" id="node11" href="$d6/ded/interrupts_8h.html" title="It declares interrupt priority levels and functions to create atomic sections. " alt="" coords="423,80,521,107"/>
+<area shape="rect" id="node12" href="$dc/d18/memory_8h.html" title="It declares functions to allocate, free, and copy memory. " alt="" coords="546,80,638,107"/>
+<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="declares e&#45;puck specific types and preprocessor variables " alt="" coords="525,229,733,271"/>
 </map>

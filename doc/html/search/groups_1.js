@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['camera_20module',['Camera Module',['../dc/d90/group__camera.html',1,'']]]
+  ['e_2dpuck_20specific_20modules',['e-puck specific modules',['../d9/dc8/group__epuck.html',1,'']]],
+  ['event_20management',['Event Management',['../d1/ddf/group__events.html',1,'']]]
 ];

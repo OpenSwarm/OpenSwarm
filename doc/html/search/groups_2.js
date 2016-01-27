@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['e_2dpuck_20specific_20modules',['e-puck specific modules',['../d9/dc8/group__epuck.html',1,'']]],
-  ['event_20management',['Event Management',['../d1/ddf/group__events.html',1,'']]]
+  ['i2c_20interface',['I2C interface',['../d3/df5/group__i2c.html',1,'']]],
+  ['i_2fo_20management',['I/O Management',['../d2/da3/group__io.html',1,'']]]
 ];

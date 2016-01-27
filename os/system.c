@@ -54,7 +54,6 @@
 #endif
 
 /**
- * Function to initialise the hardware
  *
  * This Function sets the system Timer (Timer0) and sets an scheduling algorithm. It also intitalises I/O devices (e.g. if e-puck is used: motor, UART, remote control, and camera)
  *
@@ -95,7 +94,6 @@ void Sys_Init_Kernel(){
 }
 
 /**
- * Function to start the  the system timer
  *
  * This Function starts all functions of the operating system. The system MUST HAVE BEEN INITIALISED before.
  * @pre	 System must be initialised with Sys_Init_Kernel().

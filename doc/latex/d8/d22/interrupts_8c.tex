@@ -1,4 +1,4 @@
-\hypertarget{interrupts_8c}{}\section{interrupts.\+c File Reference}
+\hypertarget{interrupts_8c}{}\subsection{interrupts.\+c File Reference}
 \label{interrupts_8c}\index{interrupts.\+c@{interrupts.\+c}}
 
 
@@ -7,15 +7,14 @@ It defines the functions to create atomic sections.
 
 {\ttfamily \#include \char`\"{}interrupts.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}definitions.\+h\char`\"{}}\\*
-Include dependency graph for interrupts.\+c\+:
-\nopagebreak
+Include dependency graph for interrupts.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d3/d24/interrupts_8c__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section} ()
@@ -24,7 +23,7 @@ void \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\subsubsection{Detailed Description}
 It defines the functions to create atomic sections. 
 
 \begin{DoxyAuthor}{Author}
@@ -54,39 +53,35 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCode}
  
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{interrupts_8c_a04cce7e66e6b181477698c6398714240}{}\index{interrupts.\+c@{interrupts.\+c}!Sys\+\_\+\+End\+\_\+\+Atomic\+Section@{Sys\+\_\+\+End\+\_\+\+Atomic\+Section}}
 \index{Sys\+\_\+\+End\+\_\+\+Atomic\+Section@{Sys\+\_\+\+End\+\_\+\+Atomic\+Section}!interrupts.\+c@{interrupts.\+c}}
-\subsubsection[{Sys\+\_\+\+End\+\_\+\+Atomic\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+End\+\_\+\+Atomic\+Section (
+\paragraph[{Sys\+\_\+\+End\+\_\+\+Atomic\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+End\+\_\+\+Atomic\+Section (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{interrupts_8c_a04cce7e66e6b181477698c6398714240}
-Starts an atomic section
-
-This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. \begin{DoxyPrecond}{Precondition}
+This Function ends an atomic section. This means the code afterwards can be interrupted by a interrupt. \begin{DoxyPrecond}{Precondition}
 \hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section()} must have been called. 
 \end{DoxyPrecond}
 
 
-Definition at line 58 of file interrupts.\+c.
+Definition at line 56 of file interrupts.\+c.
 
 \hypertarget{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{}\index{interrupts.\+c@{interrupts.\+c}!Sys\+\_\+\+Start\+\_\+\+Atomic\+Section@{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section}}
 \index{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section@{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section}!interrupts.\+c@{interrupts.\+c}}
-\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Atomic\+Section (
+\paragraph[{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Atomic\+Section (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}
-Starts an atomic section
-
 This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. \begin{DoxyNote}{Note}
 This function can be called within an atomic section. However, it doesn\textquotesingle{}t change the behaviour when called within an atomic section. To end an atomic section, \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\+\_\+\+Atomic\+Section()} must be called as often as \hyperlink{interrupts_8c_acce68565a1263b2b7bc870bfe0601f45}{Sys\+\_\+\+Start\+\_\+\+Atomic\+Section()} was called. 
 \end{DoxyNote}
 \begin{DoxyPostcond}{Postcondition}
 \hyperlink{interrupts_8c_a04cce7e66e6b181477698c6398714240}{Sys\+\_\+\+End\+\_\+\+Atomic\+Section()} must be called to execute any interrupt that happened or will happen. 
 \end{DoxyPostcond}
+$<$ maximum interrupt priority 
 
-
-Definition at line 43 of file interrupts.\+c.
+Definition at line 42 of file interrupts.\+c.
 

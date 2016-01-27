@@ -1,11 +1,11 @@
 <map id="system.c" name="system.c">
-<area shape="rect" id="node2" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="286,244,378,271"/>
-<area shape="rect" id="node9" href="$dc/db2/system_8h.html" title="initiaises and starts OpenSwarm. " alt="" coords="23,169,99,196"/>
-<area shape="rect" id="node10" href="$df/dbf/system__Timer_8h.html" title="This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. " alt="" coords="323,169,503,196"/>
-<area shape="rect" id="node11" href="$d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="527,169,681,196"/>
-<area shape="rect" id="node12" href="$dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="701,87,926,114"/>
-<area shape="rect" id="node15" href="$dc/dac/io_8h.html" title="This file includes the IO timer to start and stop the timer. This timer executes IO functions periodi..." alt="" coords="123,169,181,196"/>
-<area shape="rect" id="node16" href="$d9/ded/io__clock_8h.html" title="This file includes the system clock that can be used to measure time. " alt="" coords="205,169,299,196"/>
-<area shape="rect" id="node7" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="531,319,739,360"/>
-<area shape="rect" id="node13" href="$db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="757,169,883,196"/>
+<area shape="rect" id="node2" href="$d6/dc2/definitions_8h.html" title="It declares general preprocessor variables and types. " alt="" coords="406,244,498,271"/>
+<area shape="rect" id="node9" href="$dc/db2/system_8h.html" title="It declares functions to initialise and start OpenSwarm. " alt="" coords="675,169,751,196"/>
+<area shape="rect" id="node10" href="$df/dbf/system__Timer_8h.html" title="It declares functions to initialise, configure and run the system Timer. " alt="" coords="775,169,955,196"/>
+<area shape="rect" id="node11" href="$d2/dd8/scheduler_8h.html" title="It declares functions to specify a scheduling algorithm. " alt="" coords="246,169,399,196"/>
+<area shape="rect" id="node12" href="$dd/de5/process__Management_8h.html" title="It declares functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="95,87,321,114"/>
+<area shape="rect" id="node15" href="$dc/dac/io_8h.html" title="It declares functions to control the IO timer and to (un)register IO Handler. " alt="" coords="423,169,481,196"/>
+<area shape="rect" id="node16" href="$d9/ded/io__clock_8h.html" title="It declares the system clock that provides a continuous time value (granulation of 1 ms)..." alt="" coords="505,169,599,196"/>
+<area shape="rect" id="node7" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="declares e&#45;puck specific types and preprocessor variables " alt="" coords="520,319,728,360"/>
+<area shape="rect" id="node13" href="$db/dd2/events_8h.html" title="declares functions to create, (un)subscribe, (un)register, and delete events and related handler..." alt="" coords="43,169,170,196"/>
 </map>

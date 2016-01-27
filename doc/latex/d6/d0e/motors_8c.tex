@@ -1,8 +1,8 @@
-\hypertarget{motors_8c}{}\section{platform/e-\/puck/motors.c File Reference}
+\hypertarget{motors_8c}{}\subsection{platform/e-\/puck/motors.c File Reference}
 \label{motors_8c}\index{platform/e-\/puck/motors.\+c@{platform/e-\/puck/motors.\+c}}
 
 
-This file provides the function needed to actuate the motors.  
+It defines function to drive motors.  
 
 
 {\ttfamily \#include \char`\"{}motors.\+h\char`\"{}}\\*
@@ -11,41 +11,35 @@ This file provides the function needed to actuate the motors.
 {\ttfamily \#include \char`\"{}../../events/events.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
-Include dependency graph for motors.\+c\+:
-\nopagebreak
+Include dependency graph for motors.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{da/d35/motors_8c__incl}
 \end{center}
 \end{figure}
-\subsection*{Data Structures}
+\subsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structsys__motors__s}{sys\+\_\+motors\+\_\+s}
+struct \hyperlink{structsys__motors}{sys\+\_\+motors}
 \begin{DoxyCompactList}\small\item\em This struct contains the speed for a motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Macros}
+\subsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \hyperlink{motors_8c_aee8df75a64652a05648659bed4692669}{M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D}~128
 \item 
 \#define \hyperlink{motors_8c_a514b7b7a13c8d267b928283cf018acae}{P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T}~15
 \end{DoxyCompactItemize}
-\subsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-typedef struct \hyperlink{structsys__motors__s}{sys\+\_\+motors\+\_\+s} \hyperlink{motors_8c_ad379d5cc8b0c2126a23e94dd03257224}{sys\+\_\+motors}
-\begin{DoxyCompactList}\small\item\em This struct contains the speed for a motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{motors_8c_a48c99d0c0375ac4835dbdc12787a040a}{Sys\+\_\+\+Left\+Motor\+\_\+\+Controller} (void)
 \item 
 void \hyperlink{motors_8c_a09e6b588ba811b76b805094320c3e14a}{Sys\+\_\+\+Right\+Motor\+\_\+\+Controller} (void)
 \item 
-bool \hyperlink{motors_8c_a9810458535420efa33e028cc14a99716}{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$)
+bool \hyperlink{motors_8c_a34a3fac1d9fff1cd5460efafa11263a5}{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint}, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint}, \hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$)
 \item 
-bool \hyperlink{motors_8c_a84777e3f841b911bf4ecc8ee7f3cf1a6}{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$)
+bool \hyperlink{motors_8c_a2bd3e2f732d118213b58d5d3d4c237be}{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint}, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint}, \hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$)
 \item 
 void \hyperlink{motors_8c_add3594fd26395549f67938fafb92cacc}{Sys\+\_\+\+Init\+\_\+\+Motors} ()
 \item 
@@ -63,8 +57,8 @@ void \hyperlink{motors_8c_a497d00bbd91ce1308c6e6d15d16b482d}{Sys\+\_\+\+Set\+\_\
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-This file provides the function needed to actuate the motors. 
+\subsubsection{Detailed Description}
+It defines function to drive motors. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -82,97 +76,97 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Macro Definition Documentation}
+\subsubsection{Macro Definition Documentation}
 \hypertarget{motors_8c_aee8df75a64652a05648659bed4692669}{}\index{motors.\+c@{motors.\+c}!M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D@{M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D}}
 \index{M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D@{M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D}!motors.\+c@{motors.\+c}}
-\subsubsection[{M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D~128}\label{motors_8c_aee8df75a64652a05648659bed4692669}
+\paragraph[{M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+W\+H\+E\+E\+L\+\_\+\+S\+P\+E\+E\+D~128}\label{motors_8c_aee8df75a64652a05648659bed4692669}
 Maximum wheel speed in steps 
 
-Definition at line 27 of file motors.\+c.
+Definition at line 25 of file motors.\+c.
 
 \hypertarget{motors_8c_a514b7b7a13c8d267b928283cf018acae}{}\index{motors.\+c@{motors.\+c}!P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T@{P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T}}
 \index{P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T@{P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T}!motors.\+c@{motors.\+c}}
-\subsubsection[{P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T~15}\label{motors_8c_a514b7b7a13c8d267b928283cf018acae}
+\paragraph[{P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+O\+W\+E\+R\+\_\+\+S\+A\+V\+E\+\_\+\+W\+A\+I\+T~15}\label{motors_8c_a514b7b7a13c8d267b928283cf018acae}
 amount of steps needed to move the motor one step further 
 
-Definition at line 28 of file motors.\+c.
+Definition at line 26 of file motors.\+c.
 
 
 
-\subsection{Typedef Documentation}
-\hypertarget{motors_8c_ad379d5cc8b0c2126a23e94dd03257224}{}\index{motors.\+c@{motors.\+c}!sys\+\_\+motors@{sys\+\_\+motors}}
-\index{sys\+\_\+motors@{sys\+\_\+motors}!motors.\+c@{motors.\+c}}
-\subsubsection[{sys\+\_\+motors}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+motors\+\_\+s}  {\bf sys\+\_\+motors}}\label{motors_8c_ad379d5cc8b0c2126a23e94dd03257224}
-
-
-This struct contains the speed for a motor. 
-
-
-
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{motors_8c_a5bbad23cd0753c64c8e265434acbf954}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed@{Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed}}
 \index{Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed@{Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sint16} Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed (
+\paragraph[{Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sint16} Sys\+\_\+\+Get\+\_\+\+Left\+Wheel\+Speed (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{motors_8c_a5bbad23cd0753c64c8e265434acbf954}
-returns the left wheel speed
-
 This function returns the speed of the left motor. 
 
-Definition at line 281 of file motors.\+c.
+Definition at line 269 of file motors.\+c.
 
 \hypertarget{motors_8c_af1bbe9f3268a03f3a75e1c39296794e9}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed@{Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed}}
 \index{Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed@{Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sint16} Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed (
+\paragraph[{Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sint16} Sys\+\_\+\+Get\+\_\+\+Right\+Wheel\+Speed (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{motors_8c_af1bbe9f3268a03f3a75e1c39296794e9}
-returns the right wheel speed
-
 This function returns the speed of the right motor. 
 
-Definition at line 291 of file motors.\+c.
+Definition at line 278 of file motors.\+c.
 
 \hypertarget{motors_8c_add3594fd26395549f67938fafb92cacc}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Init\+\_\+\+Motors@{Sys\+\_\+\+Init\+\_\+\+Motors}}
 \index{Sys\+\_\+\+Init\+\_\+\+Motors@{Sys\+\_\+\+Init\+\_\+\+Motors}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Motors}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Motors (
+\paragraph[{Sys\+\_\+\+Init\+\_\+\+Motors}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Motors (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{motors_8c_add3594fd26395549f67938fafb92cacc}
-Initialises the Motor Module
+This function initialises the motor module including both left and right motor. $<$ I\+D of the event that controls the left motor speed/direction
 
-This function initialises the motor module including both left and right motor. 
+$<$ I\+D of the event that controls the right motor speed/direction
 
-Definition at line 52 of file motors.\+c.
+$<$ I\+D of the event that controls the left motor speed/direction
+
+$<$ I\+D of the event that controls the right motor speed/direction
+
+$<$ I\+D of the event that controls the left motor speed/direction
+
+$<$ I\+D of the event that controls the right motor speed/direction
+
+$<$ I\+D of the event that controls the left motor speed/direction
+
+$<$ I\+D of the event that controls the right motor speed/direction 
+
+Definition at line 49 of file motors.\+c.
 
 \hypertarget{motors_8c_a48c99d0c0375ac4835dbdc12787a040a}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Left\+Motor\+\_\+\+Controller@{Sys\+\_\+\+Left\+Motor\+\_\+\+Controller}}
 \index{Sys\+\_\+\+Left\+Motor\+\_\+\+Controller@{Sys\+\_\+\+Left\+Motor\+\_\+\+Controller}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Left\+Motor\+\_\+\+Controller}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Left\+Motor\+\_\+\+Controller (
+\paragraph[{Sys\+\_\+\+Left\+Motor\+\_\+\+Controller}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Left\+Motor\+\_\+\+Controller (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}\label{motors_8c_a48c99d0c0375ac4835dbdc12787a040a}
-I/\+O handler for the left motor
+This function controls the speed of the left motor. The speed is set by moving the to the next step within the appropriate time step. $<$ Maximum wheel speed in steps
 
-This function controls the speed of the left motor. The speed is set by moving the to the next step within the appropriate time step. 
+$<$ amount of steps needed to move the motor one step further
 
-Definition at line 116 of file motors.\+c.
+$<$ Maximum wheel speed in steps
 
-\hypertarget{motors_8c_a9810458535420efa33e028cc14a99716}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler@{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler}}
+$<$ amount of steps needed to move the motor one step further 
+
+Definition at line 110 of file motors.\+c.
+
+\hypertarget{motors_8c_a34a3fac1d9fff1cd5460efafa11263a5}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler@{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler}}
 \index{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler@{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler (
+\paragraph[{Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Left\+Motor\+\_\+\+Event\+Handler (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid, }
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{pid, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{{\bf sys\+\_\+event\+\_\+data} $\ast$}]{data}
 \end{DoxyParamCaption}
-)}\label{motors_8c_a9810458535420efa33e028cc14a99716}
-Left motor event handler to set the speed
-
+)}\label{motors_8c_a34a3fac1d9fff1cd5460efafa11263a5}
 This function sets the left motor speed that is received by the event S\+Y\+S\+\_\+\+E\+V\+E\+N\+T\+\_\+\+I\+O\+\_\+\+M\+O\+T\+O\+R\+\_\+\+L\+E\+F\+T.
 
 
@@ -184,47 +178,49 @@ This function sets the left motor speed that is received by the event S\+Y\+S\+\
 \mbox{\tt in}  & {\em data} & the event data that contain the motor speed. \\
 \hline
 \end{DoxyParams}
+$<$ Maximum wheel speed in steps
 
+$<$ Maximum wheel speed in mm/s 
 
-Definition at line 215 of file motors.\+c.
+Definition at line 207 of file motors.\+c.
 
 \hypertarget{motors_8c_a4f477cca1bf9a5e97a4e10ddd3d9cba5}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Left\+Motor\+\_\+\+Reset@{Sys\+\_\+\+Left\+Motor\+\_\+\+Reset}}
 \index{Sys\+\_\+\+Left\+Motor\+\_\+\+Reset@{Sys\+\_\+\+Left\+Motor\+\_\+\+Reset}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Left\+Motor\+\_\+\+Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Left\+Motor\+\_\+\+Reset (
+\paragraph[{Sys\+\_\+\+Left\+Motor\+\_\+\+Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Left\+Motor\+\_\+\+Reset (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{motors_8c_a4f477cca1bf9a5e97a4e10ddd3d9cba5}
-resets the left motor
+This function resets the left motor to a reset state. $<$ the reset value for the motor phase 
 
-This function resets the left motor to a reset state. 
-
-Definition at line 96 of file motors.\+c.
+Definition at line 92 of file motors.\+c.
 
 \hypertarget{motors_8c_a09e6b588ba811b76b805094320c3e14a}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Right\+Motor\+\_\+\+Controller@{Sys\+\_\+\+Right\+Motor\+\_\+\+Controller}}
 \index{Sys\+\_\+\+Right\+Motor\+\_\+\+Controller@{Sys\+\_\+\+Right\+Motor\+\_\+\+Controller}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Right\+Motor\+\_\+\+Controller}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Right\+Motor\+\_\+\+Controller (
+\paragraph[{Sys\+\_\+\+Right\+Motor\+\_\+\+Controller}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Right\+Motor\+\_\+\+Controller (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}\label{motors_8c_a09e6b588ba811b76b805094320c3e14a}
-I/\+O handler for the right motor
+This function controls the speed of the right motor. The speed is set by moving the to the next step within the appropriate time step. $<$ Maximum wheel speed in steps
 
-This function controls the speed of the right motor. The speed is set by moving the to the next step within the appropriate time step. 
+$<$ amount of steps needed to move the motor one step further
 
-Definition at line 163 of file motors.\+c.
+$<$ Maximum wheel speed in steps
 
-\hypertarget{motors_8c_a84777e3f841b911bf4ecc8ee7f3cf1a6}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler@{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler}}
+$<$ amount of steps needed to move the motor one step further 
+
+Definition at line 156 of file motors.\+c.
+
+\hypertarget{motors_8c_a2bd3e2f732d118213b58d5d3d4c237be}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler@{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler}}
 \index{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler@{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler (
+\paragraph[{Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Right\+Motor\+\_\+\+Event\+Handler (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid, }
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{pid, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{{\bf sys\+\_\+event\+\_\+data} $\ast$}]{data}
 \end{DoxyParamCaption}
-)}\label{motors_8c_a84777e3f841b911bf4ecc8ee7f3cf1a6}
-Right motor event handler to set the speed
-
+)}\label{motors_8c_a2bd3e2f732d118213b58d5d3d4c237be}
 This function sets the right motor speed that is received by the event S\+Y\+S\+\_\+\+E\+V\+E\+N\+T\+\_\+\+I\+O\+\_\+\+M\+O\+T\+O\+R\+\_\+\+R\+I\+G\+H\+T.
 
 
@@ -236,32 +232,30 @@ This function sets the right motor speed that is received by the event S\+Y\+S\+
 \mbox{\tt in}  & {\em data} & the event data that contain the motor speed. \\
 \hline
 \end{DoxyParams}
+$<$ Maximum wheel speed in steps
 
+$<$ Maximum wheel speed in mm/s 
 
-Definition at line 230 of file motors.\+c.
+Definition at line 221 of file motors.\+c.
 
 \hypertarget{motors_8c_ac64db9706617cbeb66e07ba216417c54}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Right\+Motor\+\_\+\+Reset@{Sys\+\_\+\+Right\+Motor\+\_\+\+Reset}}
 \index{Sys\+\_\+\+Right\+Motor\+\_\+\+Reset@{Sys\+\_\+\+Right\+Motor\+\_\+\+Reset}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Right\+Motor\+\_\+\+Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Right\+Motor\+\_\+\+Reset (
+\paragraph[{Sys\+\_\+\+Right\+Motor\+\_\+\+Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Right\+Motor\+\_\+\+Reset (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{motors_8c_ac64db9706617cbeb66e07ba216417c54}
-resets the right motor
+This function resets the right motor to a reset state. $<$ the reset value for the motor phase 
 
-This function resets the right motor to a reset state. 
-
-Definition at line 106 of file motors.\+c.
+Definition at line 101 of file motors.\+c.
 
 \hypertarget{motors_8c_a3bd56e9540443f08d15bdef558e77dd5}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed@{Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed}}
 \index{Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed@{Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed (
+\paragraph[{Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+\_\+\+Left\+Wheel\+Speed (
 \begin{DoxyParamCaption}
 \item[{{\bf sint16}}]{speed}
 \end{DoxyParamCaption}
 )}\label{motors_8c_a3bd56e9540443f08d15bdef558e77dd5}
-sets left wheel speed
-
 This function sets the value for the speed of the left motor.
 
 
@@ -269,19 +263,23 @@ This function sets the value for the speed of the left motor.
 {\em speed} & of the left wheel \\
 \hline
 \end{DoxyParams}
+$<$ Maximum wheel speed in steps
 
+$<$ Maximum wheel speed in steps
 
-Definition at line 246 of file motors.\+c.
+$<$ Maximum wheel speed in steps
+
+$<$ Maximum wheel speed in steps 
+
+Definition at line 236 of file motors.\+c.
 
 \hypertarget{motors_8c_a497d00bbd91ce1308c6e6d15d16b482d}{}\index{motors.\+c@{motors.\+c}!Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed@{Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed}}
 \index{Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed@{Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed}!motors.\+c@{motors.\+c}}
-\subsubsection[{Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed (
+\paragraph[{Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Set\+\_\+\+Right\+Wheel\+Speed (
 \begin{DoxyParamCaption}
 \item[{{\bf sint16}}]{speed}
 \end{DoxyParamCaption}
 )}\label{motors_8c_a497d00bbd91ce1308c6e6d15d16b482d}
-sets right wheel speed
-
 This function sets the value for the speed of the right motor.
 
 
@@ -289,7 +287,13 @@ This function sets the value for the speed of the right motor.
 {\em speed} & of the right wheel \\
 \hline
 \end{DoxyParams}
+$<$ Maximum wheel speed in steps
 
+$<$ Maximum wheel speed in steps
 
-Definition at line 264 of file motors.\+c.
+$<$ Maximum wheel speed in steps
+
+$<$ Maximum wheel speed in steps 
+
+Definition at line 253 of file motors.\+c.
 

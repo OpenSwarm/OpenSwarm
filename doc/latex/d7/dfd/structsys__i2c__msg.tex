@@ -1,0 +1,83 @@
+\hypertarget{structsys__i2c__msg}{}\subsection{sys\+\_\+i2c\+\_\+msg Struct Reference}
+\label{structsys__i2c__msg}\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+
+
+It is a single linked list element containing messages that need to be sent via I2\+C. This list acts as a message buffer.  
+
+
+
+
+{\ttfamily \#include $<$i2c\+\_\+data.\+h$>$}
+
+\subsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} \hyperlink{structsys__i2c__msg_a0657e58d9f887db8a031ad86e7fb8fd7}{i2c\+\_\+device\+\_\+address}
+\item 
+\hyperlink{definitions_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$ \hyperlink{structsys__i2c__msg_a93aff6118afb10c8c7ca0401d3ee41e5}{data}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__i2c__msg_a92073f759594ee543835f8ad73031e11}{length}
+\item 
+bool \hyperlink{structsys__i2c__msg_ac4d2c8d778512502b11f6ec055b2daf5}{write}
+\item 
+\hyperlink{definitions_8h_a82fa7f76266ee1d687b76a44445f21ef}{p\+Byte\+Function} \hyperlink{structsys__i2c__msg_af659ffc0b34b155664e99fafc6a6cc5f}{handler}
+\item 
+struct sys\+\_\+i2c\+\_\+message\+\_\+s $\ast$ \hyperlink{structsys__i2c__msg_af32e596f9bfb62fb8cb06d996c1573d2}{next}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+It is a single linked list element containing messages that need to be sent via I2\+C. This list acts as a message buffer. 
+
+Definition at line 30 of file i2c\+\_\+data.\+h.
+
+
+
+\subsubsection{Field Documentation}
+\hypertarget{structsys__i2c__msg_a93aff6118afb10c8c7ca0401d3ee41e5}{}\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!data@{data}}
+\index{data@{data}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+\paragraph[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8}$\ast$ sys\+\_\+i2c\+\_\+msg\+::data}\label{structsys__i2c__msg_a93aff6118afb10c8c7ca0401d3ee41e5}
+pointer to the bytes that should be sent 
+
+Definition at line 32 of file i2c\+\_\+data.\+h.
+
+\hypertarget{structsys__i2c__msg_af659ffc0b34b155664e99fafc6a6cc5f}{}\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!handler@{handler}}
+\index{handler@{handler}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+\paragraph[{handler}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Byte\+Function} sys\+\_\+i2c\+\_\+msg\+::handler}\label{structsys__i2c__msg_af659ffc0b34b155664e99fafc6a6cc5f}
+function pointer to handle incoming bytes (unused = 0 ) 
+
+Definition at line 35 of file i2c\+\_\+data.\+h.
+
+\hypertarget{structsys__i2c__msg_a0657e58d9f887db8a031ad86e7fb8fd7}{}\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!i2c\+\_\+device\+\_\+address@{i2c\+\_\+device\+\_\+address}}
+\index{i2c\+\_\+device\+\_\+address@{i2c\+\_\+device\+\_\+address}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+\paragraph[{i2c\+\_\+device\+\_\+address}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} sys\+\_\+i2c\+\_\+msg\+::i2c\+\_\+device\+\_\+address}\label{structsys__i2c__msg_a0657e58d9f887db8a031ad86e7fb8fd7}
+7-\/bit I2\+C address 
+
+Definition at line 31 of file i2c\+\_\+data.\+h.
+
+\hypertarget{structsys__i2c__msg_a92073f759594ee543835f8ad73031e11}{}\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!length@{length}}
+\index{length@{length}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+\paragraph[{length}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+i2c\+\_\+msg\+::length}\label{structsys__i2c__msg_a92073f759594ee543835f8ad73031e11}
+number of bytes contained in data 
+
+Definition at line 33 of file i2c\+\_\+data.\+h.
+
+\hypertarget{structsys__i2c__msg_af32e596f9bfb62fb8cb06d996c1573d2}{}\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!next@{next}}
+\index{next@{next}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+\paragraph[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct sys\+\_\+i2c\+\_\+message\+\_\+s$\ast$ sys\+\_\+i2c\+\_\+msg\+::next}\label{structsys__i2c__msg_af32e596f9bfb62fb8cb06d996c1573d2}
+pointer to the next element in the linked list 
+
+Definition at line 36 of file i2c\+\_\+data.\+h.
+
+\hypertarget{structsys__i2c__msg_ac4d2c8d778512502b11f6ec055b2daf5}{}\index{sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}!write@{write}}
+\index{write@{write}!sys\+\_\+i2c\+\_\+msg@{sys\+\_\+i2c\+\_\+msg}}
+\paragraph[{write}]{\setlength{\rightskip}{0pt plus 5cm}bool sys\+\_\+i2c\+\_\+msg\+::write}\label{structsys__i2c__msg_ac4d2c8d778512502b11f6ec055b2daf5}
+is it a write only operating (true) or is the slave tranmitting data as a response (false) 
+
+Definition at line 34 of file i2c\+\_\+data.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+platform/e-\/puck/\hyperlink{i2c__data_8h}{i2c\+\_\+data.\+h}\end{DoxyCompactItemize}

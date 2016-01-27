@@ -1,4 +1,4 @@
-\hypertarget{events_8h}{}\section{events/events.h File Reference}
+\hypertarget{events_8h}{}\subsection{events/events.h File Reference}
 \label{events_8h}\index{events/events.\+h@{events/events.\+h}}
 
 
@@ -7,58 +7,54 @@ declares functions to create, (un)subscribe, (un)register, and delete events and
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}../definitions.\+h\char`\"{}}\\*
-Include dependency graph for events.\+h\+:
-\nopagebreak
+Include dependency graph for events.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d4/dbb/events_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d2/d46/events_8h__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Data Structures}
+\subsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structsys__event__data__s}{sys\+\_\+event\+\_\+data\+\_\+s}
+struct \hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data}
 \begin{DoxyCompactList}\small\item\em It is a single linked list element and contains data of an occurred event. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Typedefs}
+\subsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef struct \hyperlink{structsys__event__data__s}{sys\+\_\+event\+\_\+data\+\_\+s} \hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data}
-\begin{DoxyCompactList}\small\item\em It is a single linked list element and contains data of an occurred event. \end{DoxyCompactList}\item 
-typedef bool($\ast$ \hyperlink{events_8h_a38c799788eea576b2d878371da3d5385}{p\+Event\+Handler\+Function}) (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16}, \hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$)
+typedef bool($\ast$ \hyperlink{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}{p\+Event\+Handler\+Function}) (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint}, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint}, \hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$)
 \begin{DoxyCompactList}\small\item\em Event handler function pointer type (process id, event id, received data) \end{DoxyCompactList}\item 
 typedef bool($\ast$ \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function}) (void $\ast$)
 \begin{DoxyCompactList}\small\item\em Condition function pointer type. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{events_8h_a24dadcefc1b4c45c50fb351efc8e841c}{Sys\+\_\+\+Send\+\_\+\+Event} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, void $\ast$data, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} data\+\_\+size)
+bool \hyperlink{events_8h_a67230a5307e77a8112e56436f372926f}{Sys\+\_\+\+Send\+\_\+\+Event} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, void $\ast$data, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} data\+\_\+size)
 \item 
-bool \hyperlink{events_8h_ae2b6a4d1db2b3fb8777fa56297001d05}{Sys\+\_\+\+Send\+\_\+\+Int\+Event} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} data)
+bool \hyperlink{events_8h_a3b90448a001da0eee45d39ac8bb76ac0}{Sys\+\_\+\+Send\+\_\+\+Int\+Event} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} data)
 \item 
-bool \hyperlink{events_8h_a386acd8573c1118d80986721664d2689}{Sys\+\_\+\+Register\+\_\+\+Event} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D)
+bool \hyperlink{events_8h_a5d9657772509ddb7ac6f6e1aa5730308}{Sys\+\_\+\+Register\+\_\+\+Event} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D)
 \item 
-void \hyperlink{events_8h_a1d203ee6c6d21cb00d5b84a03bbbda6b}{Sys\+\_\+\+Unregister\+\_\+\+Event} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D)
+void \hyperlink{events_8h_a41c81e9472691694352ac8316dc0ddbf}{Sys\+\_\+\+Unregister\+\_\+\+Event} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D)
 \item 
-bool \hyperlink{events_8h_abbd55109964743556ffc20f8520bfabf}{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid, \hyperlink{events_8h_a38c799788eea576b2d878371da3d5385}{p\+Event\+Handler\+Function} handler, \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function} condition)
+bool \hyperlink{events_8h_a04afa9d5b243723e844d49ab9a7fd21e}{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid, \hyperlink{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}{p\+Event\+Handler\+Function} handler, \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function} condition)
 \item 
-void \hyperlink{events_8h_a0f37de65bd64e262ea80d96d7e691a8d}{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid)
+void \hyperlink{events_8h_a267d472a623ac449be3922865e736029}{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid)
 \item 
-void \hyperlink{events_8h_ad8cea2286df3506129e686d1fcfa674c}{Sys\+\_\+\+Unsubscribe\+\_\+\+Process} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid)
+void \hyperlink{events_8h_a71efab58004708fcd7e645ad10a213c1}{Sys\+\_\+\+Unsubscribe\+\_\+\+Process} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid)
 \item 
-bool \hyperlink{events_8h_a2578b4d7c0bd540acd4414d00e758ed1}{Sys\+\_\+\+Is\+Event\+Registered} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D)
+bool \hyperlink{events_8h_a9fc67102602189c4d1835c315719e368}{Sys\+\_\+\+Is\+Event\+Registered} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D)
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\subsubsection{Detailed Description}
 declares functions to create, (un)subscribe, (un)register, and delete events and related handler. 
 
 \begin{DoxyAuthor}{Author}
@@ -75,48 +71,39 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Typedef Documentation}
+\subsubsection{Typedef Documentation}
 \hypertarget{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{}\index{events.\+h@{events.\+h}!p\+Condition\+Function@{p\+Condition\+Function}}
 \index{p\+Condition\+Function@{p\+Condition\+Function}!events.\+h@{events.\+h}}
-\subsubsection[{p\+Condition\+Function}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ p\+Condition\+Function) (void $\ast$)}\label{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}
+\paragraph[{p\+Condition\+Function}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ p\+Condition\+Function) (void $\ast$)}\label{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}
 
 
 Condition function pointer type. 
 
 This function points to a condition function, which defines if an event handler should be executed or not. 
 
-Definition at line 109 of file events.\+h.
+Definition at line 114 of file events.\+h.
 
-\hypertarget{events_8h_a38c799788eea576b2d878371da3d5385}{}\index{events.\+h@{events.\+h}!p\+Event\+Handler\+Function@{p\+Event\+Handler\+Function}}
+\hypertarget{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}{}\index{events.\+h@{events.\+h}!p\+Event\+Handler\+Function@{p\+Event\+Handler\+Function}}
 \index{p\+Event\+Handler\+Function@{p\+Event\+Handler\+Function}!events.\+h@{events.\+h}}
-\subsubsection[{p\+Event\+Handler\+Function}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ p\+Event\+Handler\+Function) ({\bf uint16}, {\bf uint16}, {\bf sys\+\_\+event\+\_\+data} $\ast$)}\label{events_8h_a38c799788eea576b2d878371da3d5385}
+\paragraph[{p\+Event\+Handler\+Function}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ p\+Event\+Handler\+Function) ({\bf uint}, {\bf uint}, {\bf sys\+\_\+event\+\_\+data} $\ast$)}\label{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}
 
 
 Event handler function pointer type (process id, event id, received data) 
 
 This function points to an event handler function, which processes incoming events and its data. 
 
-Definition at line 102 of file events.\+h.
-
-\hypertarget{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{}\index{events.\+h@{events.\+h}!sys\+\_\+event\+\_\+data@{sys\+\_\+event\+\_\+data}}
-\index{sys\+\_\+event\+\_\+data@{sys\+\_\+event\+\_\+data}!events.\+h@{events.\+h}}
-\subsubsection[{sys\+\_\+event\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf sys\+\_\+event\+\_\+data\+\_\+s} {\bf sys\+\_\+event\+\_\+data}}\label{events_8h_ae3a76ca1b349999a35d55f3224897b5f}
-
-
-It is a single linked list element and contains data of an occurred event. 
+Definition at line 107 of file events.\+h.
 
 
 
-\subsection{Function Documentation}
-\hypertarget{events_8h_a2578b4d7c0bd540acd4414d00e758ed1}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Is\+Event\+Registered@{Sys\+\_\+\+Is\+Event\+Registered}}
+\subsubsection{Function Documentation}
+\hypertarget{events_8h_a9fc67102602189c4d1835c315719e368}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Is\+Event\+Registered@{Sys\+\_\+\+Is\+Event\+Registered}}
 \index{Sys\+\_\+\+Is\+Event\+Registered@{Sys\+\_\+\+Is\+Event\+Registered}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Is\+Event\+Registered}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Is\+Event\+Registered (
+\paragraph[{Sys\+\_\+\+Is\+Event\+Registered}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Is\+Event\+Registered (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D}
+\item[{{\bf uint}}]{event\+I\+D}
 \end{DoxyParamCaption}
-)}\label{events_8h_a2578b4d7c0bd540acd4414d00e758ed1}
-returns true if the event was registered
-
+)}\label{events_8h_a9fc67102602189c4d1835c315719e368}
 returns true if the event was registered
 
 
@@ -129,17 +116,15 @@ is the event registered?
 \end{DoxyReturn}
 
 
-Definition at line 337 of file events.\+c.
+Definition at line 328 of file events.\+c.
 
-\hypertarget{events_8h_a386acd8573c1118d80986721664d2689}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Register\+\_\+\+Event@{Sys\+\_\+\+Register\+\_\+\+Event}}
+\hypertarget{events_8h_a5d9657772509ddb7ac6f6e1aa5730308}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Register\+\_\+\+Event@{Sys\+\_\+\+Register\+\_\+\+Event}}
 \index{Sys\+\_\+\+Register\+\_\+\+Event@{Sys\+\_\+\+Register\+\_\+\+Event}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Register\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Register\+\_\+\+Event (
+\paragraph[{Sys\+\_\+\+Register\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Register\+\_\+\+Event (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D}
+\item[{{\bf uint}}]{event\+I\+D}
 \end{DoxyParamCaption}
-)}\label{events_8h_a386acd8573c1118d80986721664d2689}
-Function to register an event
-
+)}\label{events_8h_a5d9657772509ddb7ac6f6e1aa5730308}
 This function registers an new event. The registration tells the operating system that this event can occur.
 
 
@@ -152,19 +137,17 @@ was it successful.
 \end{DoxyReturn}
 
 
-Definition at line 103 of file events.\+c.
+Definition at line 100 of file events.\+c.
 
-\hypertarget{events_8h_a24dadcefc1b4c45c50fb351efc8e841c}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Send\+\_\+\+Event@{Sys\+\_\+\+Send\+\_\+\+Event}}
+\hypertarget{events_8h_a67230a5307e77a8112e56436f372926f}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Send\+\_\+\+Event@{Sys\+\_\+\+Send\+\_\+\+Event}}
 \index{Sys\+\_\+\+Send\+\_\+\+Event@{Sys\+\_\+\+Send\+\_\+\+Event}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Send\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Send\+\_\+\+Event (
+\paragraph[{Sys\+\_\+\+Send\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Send\+\_\+\+Event (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{void $\ast$}]{data, }
-\item[{{\bf uint16}}]{data\+\_\+size}
+\item[{{\bf uint}}]{data\+\_\+size}
 \end{DoxyParamCaption}
-)}\label{events_8h_a24dadcefc1b4c45c50fb351efc8e841c}
-Function to send an event
-
+)}\label{events_8h_a67230a5307e77a8112e56436f372926f}
 This function sends an event to all subscribers.
 
 
@@ -177,22 +160,20 @@ This function sends an event to all subscribers.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-was it successful. 
+true if it was successful. 
 \end{DoxyReturn}
 
 
-Definition at line 62 of file events.\+c.
+Definition at line 61 of file events.\+c.
 
-\hypertarget{events_8h_ae2b6a4d1db2b3fb8777fa56297001d05}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Send\+\_\+\+Int\+Event@{Sys\+\_\+\+Send\+\_\+\+Int\+Event}}
+\hypertarget{events_8h_a3b90448a001da0eee45d39ac8bb76ac0}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Send\+\_\+\+Int\+Event@{Sys\+\_\+\+Send\+\_\+\+Int\+Event}}
 \index{Sys\+\_\+\+Send\+\_\+\+Int\+Event@{Sys\+\_\+\+Send\+\_\+\+Int\+Event}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Send\+\_\+\+Int\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Send\+\_\+\+Int\+Event (
+\paragraph[{Sys\+\_\+\+Send\+\_\+\+Int\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Send\+\_\+\+Int\+Event (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D, }
-\item[{{\bf uint16}}]{data}
+\item[{{\bf uint}}]{event\+I\+D, }
+\item[{{\bf uint}}]{data}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{events_8h_ae2b6a4d1db2b3fb8777fa56297001d05}
-Function to send an integer event
-
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{events_8h_a3b90448a001da0eee45d39ac8bb76ac0}
 This function sends an integer (16-\/bit) to all subscribers.
 
 
@@ -207,20 +188,18 @@ was it successful.
 \end{DoxyReturn}
 
 
-Definition at line 90 of file events.\+c.
+Definition at line 88 of file events.\+c.
 
-\hypertarget{events_8h_abbd55109964743556ffc20f8520bfabf}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event@{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event}}
+\hypertarget{events_8h_a04afa9d5b243723e844d49ab9a7fd21e}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event@{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event}}
 \index{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event@{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event (
+\paragraph[{Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Subscribe\+\_\+to\+\_\+\+Event (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D, }
-\item[{{\bf uint16}}]{pid, }
+\item[{{\bf uint}}]{event\+I\+D, }
+\item[{{\bf uint}}]{pid, }
 \item[{{\bf p\+Event\+Handler\+Function}}]{handler, }
 \item[{{\bf p\+Condition\+Function}}]{condition}
 \end{DoxyParamCaption}
-)}\label{events_8h_abbd55109964743556ffc20f8520bfabf}
-subscribes a specific handler function to an process and a specific event
-
+)}\label{events_8h_a04afa9d5b243723e844d49ab9a7fd21e}
 This function subscribes a specific handler function to an process and a specific event
 
 
@@ -239,17 +218,15 @@ was it successful.
 \end{DoxyReturn}
 
 
-Definition at line 146 of file events.\+c.
+Definition at line 142 of file events.\+c.
 
-\hypertarget{events_8h_a1d203ee6c6d21cb00d5b84a03bbbda6b}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unregister\+\_\+\+Event@{Sys\+\_\+\+Unregister\+\_\+\+Event}}
+\hypertarget{events_8h_a41c81e9472691694352ac8316dc0ddbf}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unregister\+\_\+\+Event@{Sys\+\_\+\+Unregister\+\_\+\+Event}}
 \index{Sys\+\_\+\+Unregister\+\_\+\+Event@{Sys\+\_\+\+Unregister\+\_\+\+Event}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Unregister\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Unregister\+\_\+\+Event (
+\paragraph[{Sys\+\_\+\+Unregister\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Unregister\+\_\+\+Event (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D}
+\item[{{\bf uint}}]{event\+I\+D}
 \end{DoxyParamCaption}
-)}\label{events_8h_a1d203ee6c6d21cb00d5b84a03bbbda6b}
-unregisters an event
-
+)}\label{events_8h_a41c81e9472691694352ac8316dc0ddbf}
 This function unregisters an event
 
 
@@ -259,18 +236,16 @@ This function unregisters an event
 \end{DoxyParams}
 
 
-Definition at line 192 of file events.\+c.
+Definition at line 187 of file events.\+c.
 
-\hypertarget{events_8h_a0f37de65bd64e262ea80d96d7e691a8d}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event@{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event}}
+\hypertarget{events_8h_a267d472a623ac449be3922865e736029}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event@{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event}}
 \index{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event@{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event (
+\paragraph[{Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Unsubscribe\+\_\+from\+\_\+\+Event (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D, }
-\item[{{\bf uint16}}]{pid}
+\item[{{\bf uint}}]{event\+I\+D, }
+\item[{{\bf uint}}]{pid}
 \end{DoxyParamCaption}
-)}\label{events_8h_a0f37de65bd64e262ea80d96d7e691a8d}
-unsubscribes an event
-
+)}\label{events_8h_a267d472a623ac449be3922865e736029}
 This function unsubscribes an event
 
 
@@ -282,17 +257,15 @@ This function unsubscribes an event
 \end{DoxyParams}
 
 
-Definition at line 244 of file events.\+c.
+Definition at line 238 of file events.\+c.
 
-\hypertarget{events_8h_ad8cea2286df3506129e686d1fcfa674c}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unsubscribe\+\_\+\+Process@{Sys\+\_\+\+Unsubscribe\+\_\+\+Process}}
+\hypertarget{events_8h_a71efab58004708fcd7e645ad10a213c1}{}\index{events.\+h@{events.\+h}!Sys\+\_\+\+Unsubscribe\+\_\+\+Process@{Sys\+\_\+\+Unsubscribe\+\_\+\+Process}}
 \index{Sys\+\_\+\+Unsubscribe\+\_\+\+Process@{Sys\+\_\+\+Unsubscribe\+\_\+\+Process}!events.\+h@{events.\+h}}
-\subsubsection[{Sys\+\_\+\+Unsubscribe\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Unsubscribe\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Unsubscribe\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Unsubscribe\+\_\+\+Process (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid}
+\item[{{\bf uint}}]{pid}
 \end{DoxyParamCaption}
-)}\label{events_8h_ad8cea2286df3506129e686d1fcfa674c}
-unsubscribes all events that were subscribed to a process
-
+)}\label{events_8h_a71efab58004708fcd7e645ad10a213c1}
 unsubscribes all events that were subscribed to a process
 
 
@@ -302,5 +275,5 @@ unsubscribes all events that were subscribed to a process
 \end{DoxyParams}
 
 
-Definition at line 358 of file events.\+c.
+Definition at line 347 of file events.\+c.
 

@@ -1,5 +1,15 @@
 var searchData=
 [
-  ['nearestneighborrgb',['nearestNeighborRGB',['../df/ded/camera__processing_8c.html#a8655b5660f79ef090db798451f1ed701',1,'nearestNeighborRGB(unsigned char *rbg888, char flag):&#160;camera_processing.c'],['../d6/d91/camera__processing_8h.html#a8655b5660f79ef090db798451f1ed701',1,'nearestNeighborRGB(unsigned char *rbg888, char flag):&#160;camera_processing.c']]],
-  ['next',['next',['../d7/d24/structsys__subscribed__process__s.html#abcf0ef070dc4fd0ba7165dfae52d7316',1,'sys_subscribed_process_s::next()'],['../d2/d46/structsys__registered__event__s.html#a084bfc795b0f5135b6439a28bf9920c1',1,'sys_registered_event_s::next()'],['../d9/d85/structsys__event__data__s.html#aa6f72c940fd46fc646876fe4271040a8',1,'sys_event_data_s::next()'],['../dd/dfe/structsys__i2c__message__s.html#aa435a9b8a1c7fabb600fd1394931a9a8',1,'sys_i2c_message_s::next()'],['../de/d8b/structsys__periodical__IOHandler__s.html#a36ad85ffbae299cfa418f69b6f2d745e',1,'sys_periodical_IOHandler_s::next()'],['../d0/d6b/structsys__uart__tx__data__s.html#ab931bb63187bc75b8b800a08d902b1ad',1,'sys_uart_tx_data_s::next()'],['../da/d34/structsys__occurred__event__s.html#aacf6971697c77f2a0892ba17c2c6d483',1,'sys_occurred_event_s::next()'],['../dc/dfe/structsys__process__event__handler__s.html#abd718f866343f0a1e139c977bbae72b8',1,'sys_process_event_handler_s::next()'],['../de/d93/structsys__process__control__block__list__element__s.html#a1f16ad20706b2be26e3ed97088b6d2f2',1,'sys_process_control_block_list_element_s::next()']]]
+  ['magenta',['MAGENTA',['../d6/dc2/definitions_8h.html#a305962be90b6e5c8f0dd0b7b48604f26a56926c820ad72d0977e7ee44d9916e62',1,'definitions.h']]],
+  ['max_5fwheel_5fspeed',['MAX_WHEEL_SPEED',['../d6/d0e/motors_8c.html#aee8df75a64652a05648659bed4692669',1,'motors.c']]],
+  ['max_5fwheel_5fspeed_5fmm_5fs',['MAX_WHEEL_SPEED_MM_S',['../dd/d59/motors_8h.html#acbc48eadf1ee827b6eb60bcfac8cc4e2',1,'motors.h']]],
+  ['memory_2ec',['memory.c',['../df/dd5/memory_8c.html',1,'']]],
+  ['memory_2eh',['memory.h',['../dc/d18/memory_8h.html',1,'']]],
+  ['message_5farriving',['message_arriving',['../d0/dae/remoteControl__HDI_8c.html#abeb3a75354c136ca05cf55eb863e4be9',1,'message_arriving():&#160;remoteControl_HDI.c'],['../d8/d4a/remoteControl__HDI_8h.html#abeb3a75354c136ca05cf55eb863e4be9',1,'message_arriving():&#160;remoteControl_HDI.c']]],
+  ['motorphase_5freset',['MOTORPHASE_RESET',['../df/d85/motors__HDI_8h.html#a16a8e7bd12376aae17e46b41c10a1b17',1,'motors_HDI.h']]],
+  ['motor_20control',['Motor Control',['../dd/daa/group__motors.html',1,'']]],
+  ['motors_2ec',['motors.c',['../d6/d0e/motors_8c.html',1,'']]],
+  ['motors_2eh',['motors.h',['../dd/d59/motors_8h.html',1,'']]],
+  ['motors_5fhdi_2ec',['motors_HDI.c',['../da/d9d/motors__HDI_8c.html',1,'']]],
+  ['motors_5fhdi_2eh',['motors_HDI.h',['../df/d85/motors__HDI_8h.html',1,'']]]
 ];

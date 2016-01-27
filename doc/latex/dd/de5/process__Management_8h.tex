@@ -1,45 +1,43 @@
-\hypertarget{process__Management_8h}{}\section{processes/process\+\_\+\+Management.h File Reference}
+\hypertarget{process__Management_8h}{}\subsection{processes/process\+\_\+\+Management.h File Reference}
 \label{process__Management_8h}\index{processes/process\+\_\+\+Management.\+h@{processes/process\+\_\+\+Management.\+h}}
 
 
-This file includes all functions wich are needed to manage processes (e.\+g. task creation, switching, termination)  
+It declares functions to manage processes (e.\+g. task creation, switching, termination)  
 
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}../definitions.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../events/events.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}scheduler.\+h\char`\"{}}\\*
-Include dependency graph for process\+\_\+\+Management.\+h\+:
-\nopagebreak
+Include dependency graph for process\+\_\+\+Management.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d5/d93/process__Management_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{da/d0d/process__Management_8h__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Macros}
+\subsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \hyperlink{process__Management_8h_aa2a2da6227e6bd8aa49941b1101ec363}{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E}~200
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{process__Management_8h_a212e8074575988bbe55cefd52a9ae504}{Sys\+\_\+\+Switch\+\_\+\+Process} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid)
+void \hyperlink{process__Management_8h_a5434c0bfa037779752d41518b1886f6b}{Sys\+\_\+\+Switch\+\_\+\+Process} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid)
 \item 
 void \hyperlink{process__Management_8h_aed6f39a867fac05effd63289b304ced1}{Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process} (void)
 \item 
 bool \hyperlink{process__Management_8h_a0833f904557c4c9b39b4cf5c1e43586f}{Sys\+\_\+\+Start\+\_\+\+Process} (\hyperlink{definitions_8h_aed53e618f2025481fbe48a5098f70079}{p\+Function} function)
 \item 
-void \hyperlink{process__Management_8h_a724935e8f908ee565ff779e7ba5dfc67}{Sys\+\_\+\+Kill\+\_\+\+Process} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid)
+void \hyperlink{process__Management_8h_a6d95b14e319ffff426fc04025d22ac68}{Sys\+\_\+\+Kill\+\_\+\+Process} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid)
 \item 
 void \hyperlink{process__Management_8h_a9aa2d3d18165118343798ba40826f272}{Sys\+\_\+\+Kill\+\_\+\+Zombies} (void)
 \item 
@@ -53,26 +51,26 @@ void \hyperlink{process__Management_8h_a355c5fe8c9052d6bd2ddd7ff8e8783f0}{Sys\+\
 \item 
 void \hyperlink{process__Management_8h_ae1b0a2e19c666539afa53d571c914d6e}{Sys\+\_\+\+End\+\_\+\+Critical\+Section} (void)
 \item 
-bool \hyperlink{process__Management_8h_aff090437f063082d7ab90deca55fbb6b}{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, \hyperlink{events_8h_a38c799788eea576b2d878371da3d5385}{p\+Event\+Handler\+Function} func, \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function} cond)
+bool \hyperlink{process__Management_8h_aa84594222e7b081e9f7675721db4b71f}{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, \hyperlink{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}{p\+Event\+Handler\+Function} func, \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function} cond)
 \item 
-void \hyperlink{process__Management_8h_a9afc21ae55d2afb70b7a8ceb14512389}{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, \hyperlink{events_8h_a38c799788eea576b2d878371da3d5385}{p\+Event\+Handler\+Function} func)
+void \hyperlink{process__Management_8h_a0ec9fdba5ebf517a49d2ac38d662ebce}{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, \hyperlink{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}{p\+Event\+Handler\+Function} func)
 \item 
-void \hyperlink{process__Management_8h_a67190fffc18b7864f1cdc6813c944738}{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D)
+void \hyperlink{process__Management_8h_ad34bd4f154b25e45c5381e6f271d15ab}{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D)
 \item 
-void \hyperlink{process__Management_8h_aa0b797b238ea3481e2a232a8791294c6}{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} pid, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, void $\ast$data, \hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} length)
+void \hyperlink{process__Management_8h_aa333c28860a6719936380076883766a3}{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} pid, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, void $\ast$data, \hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} length)
 \item 
 void \hyperlink{process__Management_8h_a766e55607bcf327ec226b205fdde0a1e}{Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler} ()
 \item 
-void \hyperlink{process__Management_8h_a4ce23b19b4229d1d0ba38d45a9f36bf8}{Sys\+\_\+\+Clear\+\_\+\+Event\+Data} (\hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$$\ast$data)
+void \hyperlink{process__Management_8h_a4ce23b19b4229d1d0ba38d45a9f36bf8}{Sys\+\_\+\+Clear\+\_\+\+Event\+Data} (\hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$$\ast$data)
 \item 
-\hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$ \hyperlink{process__Management_8h_a9f0893d1c6a5ffb1f954737fc3a8904f}{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D)
+\hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$ \hyperlink{process__Management_8h_a4b45be80626e64bb659b16e5dabcfc1d}{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D)
 \item 
-\hyperlink{events_8h_ae3a76ca1b349999a35d55f3224897b5f}{sys\+\_\+event\+\_\+data} $\ast$ \hyperlink{process__Management_8h_a5730456418e6d0dd9392522ec8153aec}{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition} (\hyperlink{definitions_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} event\+I\+D, \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function} function)
+\hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$ \hyperlink{process__Management_8h_ade99052670becc704e8f0cf153bb844f}{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition} (\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} event\+I\+D, \hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function} function)
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-This file includes all functions wich are needed to manage processes (e.\+g. task creation, switching, termination) 
+\subsubsection{Detailed Description}
+It declares functions to manage processes (e.\+g. task creation, switching, termination) 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -88,29 +86,27 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Macro Definition Documentation}
+\subsubsection{Macro Definition Documentation}
 \hypertarget{process__Management_8h_aa2a2da6227e6bd8aa49941b1101ec363}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E@{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E}}
 \index{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E@{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E~200}\label{process__Management_8h_aa2a2da6227e6bd8aa49941b1101ec363}
+\paragraph[{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+Z\+E~200}\label{process__Management_8h_aa2a2da6227e6bd8aa49941b1101ec363}
 process default stack size 
 
 Definition at line 110 of file process\+\_\+\+Management.\+h.
 
 
 
-\subsection{Function Documentation}
-\hypertarget{process__Management_8h_aff090437f063082d7ab90deca55fbb6b}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription@{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription}}
+\subsubsection{Function Documentation}
+\hypertarget{process__Management_8h_aa84594222e7b081e9f7675721db4b71f}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription@{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription}}
 \index{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription@{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription (
+\paragraph[{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Add\+\_\+\+Event\+\_\+\+Subscription (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid, }
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{pid, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{{\bf p\+Event\+Handler\+Function}}]{func, }
 \item[{{\bf p\+Condition\+Function}}]{cond}
 \end{DoxyParamCaption}
-)}\label{process__Management_8h_aff090437f063082d7ab90deca55fbb6b}
-Puts a process on the blocked list and stops its execution (if it\textquotesingle{}s executed)
-
+)}\label{process__Management_8h_aa84594222e7b081e9f7675721db4b71f}
 Puts a process on the blocked list and stops its execution (if it\textquotesingle{}s executed)
 
 
@@ -129,20 +125,18 @@ bool Was the event-\/handler successfully added?
 \end{DoxyReturn}
 
 
-Definition at line 336 of file process\+\_\+\+Management.\+c.
+Definition at line 323 of file process\+\_\+\+Management.\+c.
 
-\hypertarget{process__Management_8h_aa0b797b238ea3481e2a232a8791294c6}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process@{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process}}
+\hypertarget{process__Management_8h_aa333c28860a6719936380076883766a3}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process@{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process}}
 \index{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process@{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Add\+\_\+\+Event\+\_\+to\+\_\+\+Process (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid, }
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{pid, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{void $\ast$}]{data, }
-\item[{{\bf uint16}}]{length}
+\item[{{\bf uint}}]{length}
 \end{DoxyParamCaption}
-)}\label{process__Management_8h_aa0b797b238ea3481e2a232a8791294c6}
-This function adds the event-\/data to the local list of the process (pid).
-
+)}\label{process__Management_8h_aa333c28860a6719936380076883766a3}
 This function adds the event-\/data to the local list of the process (pid).
 
 
@@ -158,18 +152,16 @@ This function adds the event-\/data to the local list of the process (pid).
 \end{DoxyParams}
 
 
-Definition at line 390 of file process\+\_\+\+Management.\+c.
+Definition at line 376 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_a4ce23b19b4229d1d0ba38d45a9f36bf8}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Clear\+\_\+\+Event\+Data@{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}}
 \index{Sys\+\_\+\+Clear\+\_\+\+Event\+Data@{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Clear\+\_\+\+Event\+Data (
+\paragraph[{Sys\+\_\+\+Clear\+\_\+\+Event\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Clear\+\_\+\+Event\+Data (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+event\+\_\+data} $\ast$$\ast$}]{data}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a4ce23b19b4229d1d0ba38d45a9f36bf8}
-This function removes and frees a list of sys\+\_\+event\+\_\+data
-
-This function removes and frees a list of sys\+\_\+event\+\_\+data
+This function removes and frees a list of \hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data}
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -181,69 +173,59 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 219 of file data.\+c.
+Definition at line 214 of file data.\+c.
 
 \hypertarget{process__Management_8h_ae1b0a2e19c666539afa53d571c914d6e}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+End\+\_\+\+Critical\+Section@{Sys\+\_\+\+End\+\_\+\+Critical\+Section}}
 \index{Sys\+\_\+\+End\+\_\+\+Critical\+Section@{Sys\+\_\+\+End\+\_\+\+Critical\+Section}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+End\+\_\+\+Critical\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+End\+\_\+\+Critical\+Section (
+\paragraph[{Sys\+\_\+\+End\+\_\+\+Critical\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+End\+\_\+\+Critical\+Section (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_ae1b0a2e19c666539afa53d571c914d6e}
-Ends a critical section
-
 This Function ends a critical section. The task-\/scheduling can now occure. Note\+: if a critical section was started once or more, it only takes a single call of this function to end all critical sections. 
 
-Definition at line 242 of file process\+\_\+\+Management.\+c.
+Definition at line 232 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_a766e55607bcf327ec226b205fdde0a1e}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler@{Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler}}
 \index{Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler@{Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler (
+\paragraph[{Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Execute\+\_\+\+All\+\_\+\+Event\+Handler (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a766e55607bcf327ec226b205fdde0a1e}
-This function executes all event handlers and processes stored event data
-
 This function executes all event handlers and processes stored event data. First it checks the list of occurred events and then it executes all event handlers of these events 
 
-Definition at line 507 of file process\+\_\+\+Management.\+c.
+Definition at line 491 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_af108b730540f6c999461c700049ceb0b}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes@{Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes}}
 \index{Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes@{Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes (
+\paragraph[{Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short Sys\+\_\+\+Get\+\_\+\+Number\+\_\+\+Processes (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_af108b730540f6c999461c700049ceb0b}
-This function counts the number of process
-
 This function counts the number of process 
 
-Definition at line 65 of file process\+\_\+\+Management.\+c.
+Definition at line 63 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_ae2b7783ff0eedf8b5cc0fbe90ffc6a6b}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management@{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management}}
 \index{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management@{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management (
+\paragraph[{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_ae2b7783ff0eedf8b5cc0fbe90ffc6a6b}
-This function initialises the process management
-
 This function initialises the process management and creates the first elements in the linked list 
 
-Definition at line 55 of file process\+\_\+\+Management.\+c.
+Definition at line 54 of file process\+\_\+\+Management.\+c.
 
-\hypertarget{process__Management_8h_a724935e8f908ee565ff779e7ba5dfc67}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Kill\+\_\+\+Process@{Sys\+\_\+\+Kill\+\_\+\+Process}}
+\hypertarget{process__Management_8h_a6d95b14e319ffff426fc04025d22ac68}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Kill\+\_\+\+Process@{Sys\+\_\+\+Kill\+\_\+\+Process}}
 \index{Sys\+\_\+\+Kill\+\_\+\+Process@{Sys\+\_\+\+Kill\+\_\+\+Process}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Kill\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Kill\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Kill\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Kill\+\_\+\+Process (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid}
+\item[{{\bf uint}}]{pid}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a724935e8f908ee565ff779e7ba5dfc67}
-This function kills a process
-
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a6d95b14e319ffff426fc04025d22ac68}
 This function deletes the syss\+\_\+process\+\_\+control\+\_\+block element and stops a process
 
 
@@ -251,32 +233,30 @@ This function deletes the syss\+\_\+process\+\_\+control\+\_\+block element and 
 \mbox{\tt in}  & {\em pid} & This argument is the process identifier \\
 \hline
 \end{DoxyParams}
+$<$ State to indicate that a process is about to be deleted
 
+$<$ State to indicate that a process is about to be deleted 
 
-Definition at line 103 of file process\+\_\+\+Management.\+c.
+Definition at line 99 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_a9aa2d3d18165118343798ba40826f272}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Kill\+\_\+\+Zombies@{Sys\+\_\+\+Kill\+\_\+\+Zombies}}
 \index{Sys\+\_\+\+Kill\+\_\+\+Zombies@{Sys\+\_\+\+Kill\+\_\+\+Zombies}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Kill\+\_\+\+Zombies}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Kill\+\_\+\+Zombies (
+\paragraph[{Sys\+\_\+\+Kill\+\_\+\+Zombies}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Kill\+\_\+\+Zombies (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a9aa2d3d18165118343798ba40826f272}
-This function kills all zombie process
-
 This function deletes all proccesses which are marked as zombies. 
 
-Definition at line 180 of file process\+\_\+\+Management.\+c.
+Definition at line 174 of file process\+\_\+\+Management.\+c.
 
-\hypertarget{process__Management_8h_a67190fffc18b7864f1cdc6813c944738}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions@{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions}}
+\hypertarget{process__Management_8h_ad34bd4f154b25e45c5381e6f271d15ab}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions@{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions}}
 \index{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions@{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions (
+\paragraph[{Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Remove\+\_\+\+All\+\_\+\+Event\+\_\+\+Subscriptions (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D}
+\item[{{\bf uint}}]{event\+I\+D}
 \end{DoxyParamCaption}
-)}\label{process__Management_8h_a67190fffc18b7864f1cdc6813c944738}
-This function removes all subscriptions of any process to event (event\+I\+D)
-
+)}\label{process__Management_8h_ad34bd4f154b25e45c5381e6f271d15ab}
 This function removes all subscriptions of any process to event (event\+I\+D)
 \begin{DoxyItemize}
 \item 
@@ -285,21 +265,19 @@ This function removes all subscriptions of any process to event (event\+I\+D)
 \hline
 \end{DoxyParams}
 
-\end{DoxyItemize}
+\end{DoxyItemize}$<$ the value to indicate all event handler 
 
-Definition at line 547 of file process\+\_\+\+Management.\+c.
+Definition at line 529 of file process\+\_\+\+Management.\+c.
 
-\hypertarget{process__Management_8h_a9afc21ae55d2afb70b7a8ceb14512389}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription@{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription}}
+\hypertarget{process__Management_8h_a0ec9fdba5ebf517a49d2ac38d662ebce}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription@{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription}}
 \index{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription@{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription (
+\paragraph[{Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Remove\+\_\+\+Event\+\_\+\+Subscription (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid, }
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{pid, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{{\bf p\+Event\+Handler\+Function}}]{func}
 \end{DoxyParamCaption}
-)}\label{process__Management_8h_a9afc21ae55d2afb70b7a8ceb14512389}
-This function removes subscribed handler function for process (pid) to event (event\+I\+D)
-
+)}\label{process__Management_8h_a0ec9fdba5ebf517a49d2ac38d662ebce}
 This function removes subscribed handler function for process (pid) to event (event\+I\+D)
 
 
@@ -313,30 +291,26 @@ This function removes subscribed handler function for process (pid) to event (ev
 \end{DoxyParams}
 
 
-Definition at line 565 of file process\+\_\+\+Management.\+c.
+Definition at line 546 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_a355c5fe8c9052d6bd2ddd7ff8e8783f0}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Start\+\_\+\+Critical\+Section@{Sys\+\_\+\+Start\+\_\+\+Critical\+Section}}
 \index{Sys\+\_\+\+Start\+\_\+\+Critical\+Section@{Sys\+\_\+\+Start\+\_\+\+Critical\+Section}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Critical\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Critical\+Section (
+\paragraph[{Sys\+\_\+\+Start\+\_\+\+Critical\+Section}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Critical\+Section (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a355c5fe8c9052d6bd2ddd7ff8e8783f0}
-Starts a critical section
-
 This Function starts a critical section to prevent the task-\/scheduling during its exectution 
 
-Definition at line 232 of file process\+\_\+\+Management.\+c.
+Definition at line 223 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_a0833f904557c4c9b39b4cf5c1e43586f}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Start\+\_\+\+Process@{Sys\+\_\+\+Start\+\_\+\+Process}}
 \index{Sys\+\_\+\+Start\+\_\+\+Process@{Sys\+\_\+\+Start\+\_\+\+Process}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Start\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Start\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Start\+\_\+\+Process (
 \begin{DoxyParamCaption}
 \item[{{\bf p\+Function}}]{function}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a0833f904557c4c9b39b4cf5c1e43586f}
-This function creates a new sys\+\_\+process\+\_\+control\+\_\+block and add all needed info
-
 This function creates a new sys\+\_\+process\+\_\+control\+\_\+block (in a sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element) which contains all information wich is used to execute this process.
 
 
@@ -346,17 +320,15 @@ This function creates a new sys\+\_\+process\+\_\+control\+\_\+block (in a sys\+
 \end{DoxyParams}
 
 
-Definition at line 92 of file process\+\_\+\+Management.\+c.
+Definition at line 89 of file process\+\_\+\+Management.\+c.
 
-\hypertarget{process__Management_8h_a212e8074575988bbe55cefd52a9ae504}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Switch\+\_\+\+Process@{Sys\+\_\+\+Switch\+\_\+\+Process}}
+\hypertarget{process__Management_8h_a5434c0bfa037779752d41518b1886f6b}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Switch\+\_\+\+Process@{Sys\+\_\+\+Switch\+\_\+\+Process}}
 \index{Sys\+\_\+\+Switch\+\_\+\+Process@{Sys\+\_\+\+Switch\+\_\+\+Process}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Switch\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Switch\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Switch\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Switch\+\_\+\+Process (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{pid}
+\item[{{\bf uint}}]{pid}
 \end{DoxyParamCaption}
-)}\label{process__Management_8h_a212e8074575988bbe55cefd52a9ae504}
-This function loads all values into the registers of a process with the P\+I\+D
-
+)}\label{process__Management_8h_a5434c0bfa037779752d41518b1886f6b}
 This function loads all values into the registers of a process with the P\+I\+D
 
 
@@ -366,31 +338,27 @@ This function loads all values into the registers of a process with the P\+I\+D
 \end{DoxyParams}
 
 
-Definition at line 199 of file process\+\_\+\+Management.\+c.
+Definition at line 192 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_aed6f39a867fac05effd63289b304ced1}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process@{Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process}}
 \index{Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process@{Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process (
+\paragraph[{Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Switch\+\_\+to\+\_\+next\+\_\+\+Process (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{process__Management_8h_aed6f39a867fac05effd63289b304ced1}
-This function loads all values into the registers of the process which is next in the list.
-
 This function loads all values into the registers of the process which is next in the list. 
 
-Definition at line 218 of file process\+\_\+\+Management.\+c.
+Definition at line 210 of file process\+\_\+\+Management.\+c.
 
-\hypertarget{process__Management_8h_a5730456418e6d0dd9392522ec8153aec}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition@{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition}}
+\hypertarget{process__Management_8h_ade99052670becc704e8f0cf153bb844f}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition@{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition}}
 \index{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition@{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+event\+\_\+data}$\ast$ Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition (
+\paragraph[{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+event\+\_\+data}$\ast$ Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Condition (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D, }
+\item[{{\bf uint}}]{event\+I\+D, }
 \item[{{\bf p\+Condition\+Function}}]{function}
 \end{DoxyParamCaption}
-)}\label{process__Management_8h_a5730456418e6d0dd9392522ec8153aec}
-This function blocks the current process.
-
+)}\label{process__Management_8h_ade99052670becc704e8f0cf153bb844f}
 This function blocks the current process while waiting for an event that sends data which meet the condition.
 
 
@@ -401,21 +369,19 @@ This function blocks the current process while waiting for an event that sends d
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-sys\+\_\+event\+\_\+data $\ast$ Pointer to the event data struct that contains the values carried by the event 
+\hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$ Pointer to the event data struct that contains the values carried by the event 
 \end{DoxyReturn}
 
 
-Definition at line 589 of file process\+\_\+\+Management.\+c.
+Definition at line 569 of file process\+\_\+\+Management.\+c.
 
-\hypertarget{process__Management_8h_a9f0893d1c6a5ffb1f954737fc3a8904f}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event@{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event}}
+\hypertarget{process__Management_8h_a4b45be80626e64bb659b16e5dabcfc1d}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event@{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event}}
 \index{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event@{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+event\+\_\+data}$\ast$ Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event (
+\paragraph[{Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+event\+\_\+data}$\ast$ Sys\+\_\+\+Wait\+\_\+\+For\+\_\+\+Event (
 \begin{DoxyParamCaption}
-\item[{{\bf uint16}}]{event\+I\+D}
+\item[{{\bf uint}}]{event\+I\+D}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a9f0893d1c6a5ffb1f954737fc3a8904f}
-This function blocks the current process.
-
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management_8h_a4b45be80626e64bb659b16e5dabcfc1d}
 This function blocks the current process and waits for the occurrence of event (event\+I\+D).
 
 
@@ -428,18 +394,16 @@ sys\+\_\+event\+\_\+data$\ast$ Pointer to the event data struct that contains th
 \end{DoxyReturn}
 
 
-Definition at line 626 of file process\+\_\+\+Management.\+c.
+Definition at line 605 of file process\+\_\+\+Management.\+c.
 
 \hypertarget{process__Management_8h_afea22f7c15161f12a5b108b3795da332}{}\index{process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}!Sys\+\_\+\+Yield@{Sys\+\_\+\+Yield}}
 \index{Sys\+\_\+\+Yield@{Sys\+\_\+\+Yield}!process\+\_\+\+Management.\+h@{process\+\_\+\+Management.\+h}}
-\subsubsection[{Sys\+\_\+\+Yield}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Yield (
+\paragraph[{Sys\+\_\+\+Yield}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Yield (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{process__Management_8h_afea22f7c15161f12a5b108b3795da332}
-This function blocks the current process.
-
 This function blocks the current process and let the next process be executed. 
 
-Definition at line 636 of file process\+\_\+\+Management.\+c.
+Definition at line 614 of file process\+\_\+\+Management.\+c.
 

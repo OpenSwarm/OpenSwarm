@@ -1,4 +1,4 @@
 <map id="platform/e&#45;puck/uart_HDI.h" name="platform/e&#45;puck/uart_HDI.h">
-<area shape="rect" id="node2" href="$d1/d87/uart_8c.html" title="This file includes functions needed to transmit data via uart(1 &amp; 2). " alt="" coords="5,102,155,129"/>
-<area shape="rect" id="node3" href="$da/d3a/uart__HDI_8c.html" title="Hardware dependent implementations to control the message flow of the UART interface. " alt="" coords="179,95,317,136"/>
+<area shape="rect" id="node2" href="$d1/d87/uart_8c.html" title="It declares functions to transmit bytes via UART. " alt="" coords="5,102,155,129"/>
+<area shape="rect" id="node3" href="$da/d3a/uart__HDI_8c.html" title="Hardware dependent implementations to transmit bytes via UART. " alt="" coords="179,95,317,136"/>
 </map>

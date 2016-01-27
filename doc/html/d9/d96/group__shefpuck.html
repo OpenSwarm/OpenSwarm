@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -93,9 +93,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<center><table><tr><td><img src="../../d9/d96/group__shefpuck.png" border="0" alt="" usemap="#d9_2d96_2group____shefpuck"/>
-<map name="d9_2d96_2group____shefpuck" id="d9_2d96_2group____shefpuck">
-<area shape="rect" id="node1" href="../../d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform. " alt="" coords="256,15,419,41"/><area shape="rect" id="node3" href="../../dc/d90/group__camera.html" title="Functions to process incoming frames from a camera module. " alt="" coords="280,75,395,101"/><area shape="rect" id="node4" href="../../d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="289,135,386,161"/></map>
+<center><table><tr><td><div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/d96/group__shefpuck.svg" width="376" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </td></tr></table></center>
 </div>
 <table class="memberdecls">
@@ -104,6 +102,7 @@ Files</h2></td></tr>
 <tr class="memitem:df/ded/camera__processing_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/ded/camera__processing_8c.html">camera_processing.c</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:d6/d91/camera__processing_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/camera__processing_8h.html">camera_processing.h</a></td></tr>
+<tr class="memdesc:d6/d91/camera__processing_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">External set of functions to assist the use of the camera. (provided by <a class="el" href="../../d9/d96/group__shefpuck.html">Shefpuck</a> ) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -116,7 +115,7 @@ License</h1>
 <p>shefpuck is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 <p>shefpuck is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</p>
 <p>You should have received a copy of the GNU Lesser General Public License along with shefpuck. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. Copyright (C) 2014-2015 Yuri Kaszubowski Lopes - <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik'+'azu'+'ba'+'@gm'+'ai'+'l.c'+'om'; return false;">yurik<span style="display: none;">.nosp@m.</span>azub<span style="display: none;">.nosp@m.</span>a@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a></p>
-<dl class="section note"><dt>Note</dt><dd>This module is used because the e-puck library functions are used to access the camera. This module as well as the e-puck camera well be replaced. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Due to the use of the e-puck library while processing the camera input, this module is used to process a camera frame into a virtual simple line of sight sensor value. This module, as well as the functions used from the e-puck library, will be replaced. </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

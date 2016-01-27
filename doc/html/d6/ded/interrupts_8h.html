@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">interrupts.h File Reference<div class="ingroups"><a class="el" href="../../dd/df2/group__base.html">Base</a></div></div>  </div>
+<div class="title">interrupts.h File Reference<div class="ingroups"><a class="el" href="../../dd/df2/group__base.html">Kernel</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,9 +100,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../d9/d4e/interrupts_8h__dep__incl.png" border="0" usemap="#interrupts_8hdep" alt=""/></div>
-<map name="interrupts_8hdep" id="interrupts_8hdep">
-<area shape="rect" id="node2" href="../../d8/d22/interrupts_8c.html" title="includes basic system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="5,87,92,114"/><area shape="rect" id="node3" href="../../df/dd5/memory_8c.html" title="includes functions to allocate, free, and copy memory " alt="" coords="117,87,197,114"/><area shape="rect" id="node4" href="../../df/d0a/io_8c.html" title="This file includes the IO timer to start and stop the timer. This timer executes IO functions periodi..." alt="" coords="221,87,279,114"/><area shape="rect" id="node5" href="../../d1/de0/camera_8c.html" title="This file includes functions to process data retrieved by a camera. " alt="" coords="303,87,474,114"/><area shape="rect" id="node6" href="../../d9/dcb/i2c_8c.html" title="This file includes functions to read and write on the I2C interface. " alt="" coords="498,87,642,114"/><area shape="rect" id="node7" href="../../d9/df1/i2c__HDI_8c.html" title="Hardware dependent implementations to read and write on the I2C interface. " alt="" coords="666,80,799,121"/><area shape="rect" id="node8" href="../../d3/d87/io__HDI_8c.html" title="Hardware dependent implementations to start and stop the I/O timer. This timer executes IO functions ..." alt="" coords="824,80,951,121"/><area shape="rect" id="node9" href="../../d2/d78/process__Management__HDI_8c.html" title="Hardware dependent implementations to manage processes (e.g. task swichting) " alt="" coords="975,80,1138,121"/><area shape="rect" id="node10" href="../../d7/d92/remoteControl_8c.html" title="This file includes functions needed to receive and decode messages from a remote control. " alt="" coords="1163,87,1372,114"/><area shape="rect" id="node11" href="../../d0/dae/remoteControl__HDI_8c.html" title="Hardware dependent implementations to receive and decode messages from a remote control. " alt="" coords="1396,80,1595,121"/><area shape="rect" id="node12" href="../../d7/de8/system__Timer__HDI_8c.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="1619,80,1777,121"/><area shape="rect" id="node13" href="../../d1/d87/uart_8c.html" title="This file includes functions needed to transmit data via uart(1 &amp; 2). " alt="" coords="1802,87,1951,114"/><area shape="rect" id="node14" href="../../da/d3a/uart__HDI_8c.html" title="Hardware dependent implementations to control the message flow of the UART interface. " alt="" coords="1975,80,2114,121"/><area shape="rect" id="node15" href="../../de/da9/data_8c.html" title="This file includes all functions which are needed to manage data structures needed by the processes m..." alt="" coords="2138,87,2261,114"/><area shape="rect" id="node16" href="../../da/d14/process__Management_8c.html" title="This file includes all functions wich are needed to manage processes (e.g. task swichting) ..." alt="" coords="2285,87,2511,114"/><area shape="rect" id="node17" href="../../de/dfb/system__Timer_8c.html" title="This file includes all hardware dependent functions, which are nesessary to initialise, configure and run the system Time. " alt="" coords="2535,87,2715,114"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d9/d4e/interrupts_8h__dep__incl.svg" width="100%" height="395"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d6/ded/interrupts_8h_source.html">Go to the source code of this file.</a></p>
@@ -318,10 +316,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Starts an atomic section</p>
-<p>This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="../../d8/d22/interrupts_8c.html#acce68565a1263b2b7bc870bfe0601f45">Sys_Start_AtomicSection()</a> must have been called. </dd></dl>
+<p>This Function ends an atomic section. This means the code afterwards can be interrupted by a interrupt. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="../../d8/d22/interrupts_8c.html#acce68565a1263b2b7bc870bfe0601f45">Sys_Start_AtomicSection()</a> must have been called. </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d8/d22/interrupts_8c_source.html#l00058">58</a> of file <a class="el" href="../../d8/d22/interrupts_8c_source.html">interrupts.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d8/d22/interrupts_8c_source.html#l00056">56</a> of file <a class="el" href="../../d8/d22/interrupts_8c_source.html">interrupts.c</a>.</p>
 
 </div>
 </div>
@@ -346,11 +343,11 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Starts an atomic section</p>
 <p>This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt. </p><dl class="section note"><dt>Note</dt><dd>This function can be called within an atomic section. However, it doesn't change the behaviour when called within an atomic section. To end an atomic section, <a class="el" href="../../d8/d22/interrupts_8c.html#a04cce7e66e6b181477698c6398714240">Sys_End_AtomicSection()</a> must be called as often as <a class="el" href="../../d8/d22/interrupts_8c.html#acce68565a1263b2b7bc870bfe0601f45">Sys_Start_AtomicSection()</a> was called. </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd><a class="el" href="../../d8/d22/interrupts_8c.html#a04cce7e66e6b181477698c6398714240">Sys_End_AtomicSection()</a> must be called to execute any interrupt that happened or will happen. </dd></dl>
+<p>&lt; maximum interrupt priority </p>
 
-<p>Definition at line <a class="el" href="../../d8/d22/interrupts_8c_source.html#l00043">43</a> of file <a class="el" href="../../d8/d22/interrupts_8c_source.html">interrupts.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d8/d22/interrupts_8c_source.html#l00042">42</a> of file <a class="el" href="../../d8/d22/interrupts_8c_source.html">interrupts.c</a>.</p>
 
 </div>
 </div>

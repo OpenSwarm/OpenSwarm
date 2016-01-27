@@ -1,9 +1,9 @@
 <map id="processes/system_Timer.c" name="processes/system_Timer.c">
-<area shape="rect" id="node2" href="$d7/d30/system__Timer__HDI_8h.html" title="Hardware dependent implementations to initialise, configure and the operating system. " alt="" coords="226,155,377,196"/>
-<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="5,319,213,360"/>
-<area shape="rect" id="node10" href="$dd/de5/process__Management_8h.html" title="This file includes all functions wich are needed to manage processes (e.g. task creation, switching, termination) " alt="" coords="397,80,558,107"/>
-<area shape="rect" id="node13" href="$d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="582,80,711,107"/>
-<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="360,244,507,271"/>
-<area shape="rect" id="node11" href="$db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="566,162,693,189"/>
-<area shape="rect" id="node12" href="$d2/dd8/scheduler_8h.html" title="This file includes all functions wich are needed to specify a scheduling algorithm. " alt="" coords="453,162,542,189"/>
+<area shape="rect" id="node2" href="$d7/d30/system__Timer__HDI_8h.html" title="Hardware dependent implementations to initialise, configure and run the system Timer. " alt="" coords="60,155,211,196"/>
+<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="declares e&#45;puck specific types and preprocessor variables " alt="" coords="525,319,733,360"/>
+<area shape="rect" id="node10" href="$dd/de5/process__Management_8h.html" title="It declares functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="383,80,544,107"/>
+<area shape="rect" id="node13" href="$d6/ded/interrupts_8h.html" title="It declares interrupt priority levels and functions to create atomic sections. " alt="" coords="653,80,783,107"/>
+<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="It declares general preprocessor variables and types. " alt="" coords="237,244,383,271"/>
+<area shape="rect" id="node11" href="$db/dd2/events_8h.html" title="declares functions to create, (un)subscribe, (un)register, and delete events and related handler..." alt="" coords="400,162,527,189"/>
+<area shape="rect" id="node12" href="$d2/dd8/scheduler_8h.html" title="It declares functions to specify a scheduling algorithm. " alt="" coords="235,162,324,189"/>
 </map>

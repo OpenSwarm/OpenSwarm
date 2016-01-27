@@ -1,4 +1,4 @@
-\hypertarget{process__Management__HDI_8c}{}\section{platform/e-\/puck/process\+\_\+\+Management\+\_\+\+H\+D\+I.c File Reference}
+\hypertarget{process__Management__HDI_8c}{}\subsection{platform/e-\/puck/process\+\_\+\+Management\+\_\+\+H\+D\+I.c File Reference}
 \label{process__Management__HDI_8c}\index{platform/e-\/puck/process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{platform/e-\/puck/process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}}
 
 
@@ -14,15 +14,14 @@ Hardware dependent implementations to manage processes (e.\+g. task swichting)
 {\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
 {\ttfamily \#include $<$p30\+F6014\+A.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}library/motor\+\_\+led/e\+\_\+epuck\+\_\+ports.\+h\char`\"{}}\\*
-Include dependency graph for process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c\+:
-\nopagebreak
+Include dependency graph for process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d9/db4/process__Management__HDI_8c__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{process__Management__HDI_8c_af464684bcd4625b593a3932c6ededb1f}{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I} ()
@@ -33,11 +32,11 @@ void \hyperlink{process__Management__HDI_8c_a4d34eac39eff8fbbb6ac0e27d7a91702}{S
 \item 
 void \hyperlink{process__Management__HDI_8c_a909eacc2436d97a6727dd5ffe00486b7}{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I} (unsigned short fp, unsigned short sp, unsigned short lm)
 \item 
-void \hyperlink{process__Management__HDI_8c_a45fdb2237ab82a4264a7b4d837e13267}{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I} (\hyperlink{data_8h_a4bc86a9d244a6e19ed98dda5f249500d}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$new\+\_\+process)
+void \hyperlink{process__Management__HDI_8c_a45fdb2237ab82a4264a7b4d837e13267}{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I} (\hyperlink{structsys__pcb__list__element}{sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$new\+\_\+process)
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\subsubsection{Detailed Description}
 Hardware dependent implementations to manage processes (e.\+g. task swichting) 
 
 \begin{DoxyAuthor}{Author}
@@ -54,18 +53,16 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Function Documentation}
+\subsubsection{Function Documentation}
 \hypertarget{process__Management__HDI_8c_a909eacc2436d97a6727dd5ffe00486b7}{}\index{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I@{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I}}
 \index{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I@{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I}!process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}}
-\subsubsection[{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I (
+\paragraph[{Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Change\+\_\+\+Stack\+\_\+\+H\+D\+I (
 \begin{DoxyParamCaption}
 \item[{unsigned short}]{fp, }
 \item[{unsigned short}]{sp, }
 \item[{unsigned short}]{lm}
 \end{DoxyParamCaption}
 )}\label{process__Management__HDI_8c_a909eacc2436d97a6727dd5ffe00486b7}
-This function changes stackpointers to the new stack
-
 This function changes stackpointers to the new stack
 
 
@@ -79,43 +76,37 @@ This function changes stackpointers to the new stack
 \end{DoxyParams}
 
 
-Definition at line 215 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+Definition at line 212 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
 
 \hypertarget{process__Management__HDI_8c_af464684bcd4625b593a3932c6ededb1f}{}\index{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I}}
 \index{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I@{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I}!process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}}
-\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I (
+\paragraph[{Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Process\+\_\+\+Management\+\_\+\+H\+D\+I (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{process__Management__HDI_8c_af464684bcd4625b593a3932c6ededb1f}
-This function initialises the process management
-
-This function initialises the process management and creates the first elements in the linked list 
+This function initialises the process management and creates the first elements in the linked list $<$ Process priority\+: System = highest 
 
 Definition at line 44 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
 
 \hypertarget{process__Management__HDI_8c_a4d34eac39eff8fbbb6ac0e27d7a91702}{}\index{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I}}
 \index{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I}!process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}}
-\subsubsection[{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I (
+\paragraph[{Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Save\+\_\+\+Running\+\_\+\+Process\+\_\+\+H\+D\+I (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{process__Management__HDI_8c_a4d34eac39eff8fbbb6ac0e27d7a91702}
-This function stores all registers and information of the running process into the corresponding struct
-
 This function stores all registers and information of the running process into the corresponding struct 
 
-Definition at line 151 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+Definition at line 149 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
 
 \hypertarget{process__Management__HDI_8c_af43d13ab9f8382da5cf2256ef1273336}{}\index{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I}}
 \index{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I}!process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}}
-\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I (
+\paragraph[{Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Start\+\_\+\+Process\+\_\+\+H\+D\+I (
 \begin{DoxyParamCaption}
 \item[{{\bf p\+Function}}]{function}
 \end{DoxyParamCaption}
 )}\label{process__Management__HDI_8c_af43d13ab9f8382da5cf2256ef1273336}
-This function creates a new sys\+\_\+process\+\_\+control\+\_\+block and add all needed info
-
 This function creates a new sys\+\_\+process\+\_\+control\+\_\+block (in a sys\+\_\+process\+\_\+control\+\_\+block\+\_\+list\+\_\+element) which contains all information wich is used to execute this process.
 
 
@@ -123,19 +114,17 @@ This function creates a new sys\+\_\+process\+\_\+control\+\_\+block (in a sys\+
 \mbox{\tt in}  & {\em function} & This argument points to a function in memory which should be executed as an new task \\
 \hline
 \end{DoxyParams}
+$<$ State to indicate that a process is created but not yet ready to be executed 
 
-
-Definition at line 95 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+Definition at line 94 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
 
 \hypertarget{process__Management__HDI_8c_a45fdb2237ab82a4264a7b4d837e13267}{}\index{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}!Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I}}
 \index{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I@{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I}!process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c@{process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c}}
-\subsubsection[{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I (
+\paragraph[{Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Switch\+\_\+\+Process\+\_\+\+H\+D\+I (
 \begin{DoxyParamCaption}
 \item[{{\bf sys\+\_\+pcb\+\_\+list\+\_\+element} $\ast$}]{new\+\_\+process}
 \end{DoxyParamCaption}
 )}\label{process__Management__HDI_8c_a45fdb2237ab82a4264a7b4d837e13267}
-This function switches from sys\+\_\+running\+\_\+process to new\+\_\+process
-
 This function switches from sys\+\_\+running\+\_\+process to new\+\_\+process
 
 
@@ -143,7 +132,13 @@ This function switches from sys\+\_\+running\+\_\+process to new\+\_\+process
 \mbox{\tt in}  & {\em new\+\_\+process} & pointer to the process which should be executed \\
 \hline
 \end{DoxyParams}
+$<$ State to indicate that a process is waiting to be executed
 
+$<$ State to indicate that a process is created but not yet ready to be executed
 
-Definition at line 248 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
+$<$ State to indicate that a process is executed
+
+$<$ State to indicate that a process is executed 
+
+Definition at line 244 of file process\+\_\+\+Management\+\_\+\+H\+D\+I.\+c.
 

@@ -1,0 +1,94 @@
+\hypertarget{structsys__peh}{}\subsection{sys\+\_\+peh Struct Reference}
+\label{structsys__peh}\index{sys\+\_\+peh@{sys\+\_\+peh}}
+
+
+Double linked list element of process event-\/handlers.  
+
+
+
+
+{\ttfamily \#include $<$data.\+h$>$}
+
+
+
+Collaboration diagram for sys\+\_\+peh\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{d4/d1b/structsys__peh__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__peh_a7d9fce797a1666da32c8f76d8c748132}{event\+I\+D}
+\item 
+\hyperlink{events_8h_a3db5730a7fed6827a4c46ff3fae3e55b}{p\+Event\+Handler\+Function} \hyperlink{structsys__peh_a9603c4c65e4e4bf2912d9eb87da7bf51}{handler}
+\item 
+\hyperlink{events_8h_a653a4a4b7d9f5a65e1415365267a9d9e}{p\+Condition\+Function} \hyperlink{structsys__peh_ac6054670e82aec5a0bfef3b7e114c9e5}{condition}
+\item 
+\hyperlink{structsys__event__data}{sys\+\_\+event\+\_\+data} $\ast$ \hyperlink{structsys__peh_ab9909d1cf3fca775e314682ef25ae132}{buffered\+\_\+data}
+\item 
+struct sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s $\ast$ \hyperlink{structsys__peh_abff1942a90e410b023d50b4fd6b6e8ed}{previous}
+\item 
+struct sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s $\ast$ \hyperlink{structsys__peh_a899a879b50fc6baf6d8d2417eee0e8c5}{next}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Double linked list element of process event-\/handlers. 
+
+It is a double linked list containing all information needed to decide if the event-\/handler should be executed for an occurred event or not. It sores the pointer to the handler the condition function and data. 
+
+Definition at line 44 of file data.\+h.
+
+
+
+\subsubsection{Field Documentation}
+\hypertarget{structsys__peh_ab9909d1cf3fca775e314682ef25ae132}{}\index{sys\+\_\+peh@{sys\+\_\+peh}!buffered\+\_\+data@{buffered\+\_\+data}}
+\index{buffered\+\_\+data@{buffered\+\_\+data}!sys\+\_\+peh@{sys\+\_\+peh}}
+\paragraph[{buffered\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sys\+\_\+event\+\_\+data}$\ast$ sys\+\_\+peh\+::buffered\+\_\+data}\label{structsys__peh_ab9909d1cf3fca775e314682ef25ae132}
+stores a list of recieved event data that need to be processed 
+
+Definition at line 48 of file data.\+h.
+
+\hypertarget{structsys__peh_ac6054670e82aec5a0bfef3b7e114c9e5}{}\index{sys\+\_\+peh@{sys\+\_\+peh}!condition@{condition}}
+\index{condition@{condition}!sys\+\_\+peh@{sys\+\_\+peh}}
+\paragraph[{condition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Condition\+Function} sys\+\_\+peh\+::condition}\label{structsys__peh_ac6054670e82aec5a0bfef3b7e114c9e5}
+Pointer to a function which checks if the event-\/handler should be executed (true) or not (false) 
+
+Definition at line 47 of file data.\+h.
+
+\hypertarget{structsys__peh_a7d9fce797a1666da32c8f76d8c748132}{}\index{sys\+\_\+peh@{sys\+\_\+peh}!event\+I\+D@{event\+I\+D}}
+\index{event\+I\+D@{event\+I\+D}!sys\+\_\+peh@{sys\+\_\+peh}}
+\paragraph[{event\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+peh\+::event\+I\+D}\label{structsys__peh_a7d9fce797a1666da32c8f76d8c748132}
+I\+D of the occured event 
+
+Definition at line 45 of file data.\+h.
+
+\hypertarget{structsys__peh_a9603c4c65e4e4bf2912d9eb87da7bf51}{}\index{sys\+\_\+peh@{sys\+\_\+peh}!handler@{handler}}
+\index{handler@{handler}!sys\+\_\+peh@{sys\+\_\+peh}}
+\paragraph[{handler}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Event\+Handler\+Function} sys\+\_\+peh\+::handler}\label{structsys__peh_a9603c4c65e4e4bf2912d9eb87da7bf51}
+Pointer to a function which processes occurred events 
+
+Definition at line 46 of file data.\+h.
+
+\hypertarget{structsys__peh_a899a879b50fc6baf6d8d2417eee0e8c5}{}\index{sys\+\_\+peh@{sys\+\_\+peh}!next@{next}}
+\index{next@{next}!sys\+\_\+peh@{sys\+\_\+peh}}
+\paragraph[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s$\ast$ sys\+\_\+peh\+::next}\label{structsys__peh_a899a879b50fc6baf6d8d2417eee0e8c5}
+pointer to the next element in the linked list. 
+
+Definition at line 51 of file data.\+h.
+
+\hypertarget{structsys__peh_abff1942a90e410b023d50b4fd6b6e8ed}{}\index{sys\+\_\+peh@{sys\+\_\+peh}!previous@{previous}}
+\index{previous@{previous}!sys\+\_\+peh@{sys\+\_\+peh}}
+\paragraph[{previous}]{\setlength{\rightskip}{0pt plus 5cm}struct sys\+\_\+process\+\_\+event\+\_\+handler\+\_\+s$\ast$ sys\+\_\+peh\+::previous}\label{structsys__peh_abff1942a90e410b023d50b4fd6b6e8ed}
+pointer to the previous element in the linked list. 
+
+Definition at line 50 of file data.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+processes/\hyperlink{data_8h}{data.\+h}\end{DoxyCompactItemize}

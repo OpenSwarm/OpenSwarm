@@ -1,6 +1,7 @@
 /*!
  * \file
  * \ingroup process
+ * \ingroup hdi
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
@@ -36,7 +37,6 @@
  *  General Task Management
  ********************************************************/
 /**
- * This function initialises the process management
  *
  * This function initialises the process management and creates the first elements in the linked list
  *
@@ -86,7 +86,6 @@ void Sys_Init_Process_Management_HDI(){
 }
 
 /**
- * This function creates a new sys_process_control_block and add all needed info
  *
  * This function creates a new sys_process_control_block (in a sys_process_control_block_list_element) which contains all information wich is used to execute this process.
  *
@@ -143,7 +142,6 @@ bool Sys_Start_Process_HDI(pFunction function){
 }
 
 /**
- * This function stores all registers and information of the running process into the corresponding struct
  *
  * This function stores all registers and information of the running process into the corresponding struct
  *
@@ -204,7 +202,6 @@ inline void Sys_Save_Running_Process_HDI(){
 }
 
 /**
- * This function changes stackpointers to the new stack
  *
  *  This function changes stackpointers to the new stack
  *
@@ -239,7 +236,6 @@ void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsi
 }
 
 /**
- * This function switches from sys_running_process to new_process
  *
  * This function switches from sys_running_process to new_process
  *

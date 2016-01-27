@@ -1,5 +1,3 @@
 <map id="Shefpuck" name="Shefpuck">
-<area shape="rect" id="node1" href="$d9/dc8/group__epuck.html" title="Modules and functions that are needed to use the e&#45;puck platform. " alt="" coords="256,15,419,41"/>
-<area shape="rect" id="node3" href="$dc/d90/group__camera.html" title="Functions to process incoming frames from a camera module. " alt="" coords="280,75,395,101"/>
-<area shape="rect" id="node4" href="$d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="289,135,386,161"/>
+<area shape="rect" id="node2" href="$dc/d90/group__camera.html" title="The camera module is used to retrieve raw camera data, process the incoming frames, and emits the result as events. " alt="" coords="256,21,371,48"/>
 </map>

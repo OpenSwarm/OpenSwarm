@@ -1,7 +1,6 @@
 /*!
  * \file
- * \ingroup base
- * \ingroup epuck
+ * \ingroup process
  * \ingroup hdi
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -10,7 +9,7 @@
  *
  * \date 07 July 2014
  * 
- * \brief  Hardware dependent implementations to initialise, configure and the operating system.
+ * \brief  Hardware dependent implementations to initialise, configure and run the system Timer
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */

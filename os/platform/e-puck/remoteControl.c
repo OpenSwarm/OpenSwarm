@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup remotecontrol
- * \ingroup epuck
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \author  Yuri Kaszubowski Lopes <yurikazuba@gmail.com>
@@ -11,7 +9,7 @@
  *
  * \date 27 August 2015
  * 
- * \brief  This file includes functions needed to receive and decode messages from a remote control
+ * \brief  It defines functions to receive and decode messages from a remote control
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */
@@ -29,7 +27,6 @@
 
 
 /**
- * Initialises the remote control handler
  *
  * This function initialises the handler of the remote control to receive signals from the remote control.
  *
@@ -39,7 +36,6 @@ inline void Sys_Init_RemoteControl(void){
 }
 
 /**
- * start the remote control handler
  *
  * This function start the handler of the remote control to receive signals from the remote control.
  *
@@ -49,7 +45,6 @@ inline void Sys_Start_RemoteControl(void){
 }
 //https://en.wikipedia.org/wiki/RC-5
 /**
- * handles incoming remote control signals
  *
  * This function reads a remote control signal and reads it's transmitted value. When a signal arrives, an external interrupt is triggered. The remaining values are obtained by using time not interrupts.
  *
@@ -115,7 +110,6 @@ void Sys_Receive_RemoteControl_Msg(){
 }
 
 /**
- * returns if a new command was read
  *
  * This function returns true if a new remote control command has arrived
  *
@@ -126,7 +120,6 @@ bool Sys_HasRemoteC_Sent_New_Data() {
 }
 
 /**
- * returns the check bit value
  *
  * This function returns the check bit value of an remote control to indicate if a button was pressed continuously or sequential.
  *
@@ -137,7 +130,6 @@ uint8 Sys_RemoteC_Get_CheckBit() {
 }
 
 /**
- * returns the address of the remote control
  *
  * This function returns the address of an remote control.
  *
@@ -148,7 +140,6 @@ uint8 Sys_RemoteC_Get_Address() {
 }
 
 /**
- * returns the value received by the remote control
  *
  * returns the value received by the remote control
  *

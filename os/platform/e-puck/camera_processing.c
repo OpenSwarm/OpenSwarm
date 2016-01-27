@@ -1,9 +1,7 @@
 /*!
  * \file
- * \ingroup i2c
  * \ingroup camera
  * \ingroup shefpuck
- * \ingroup epuck
  * \author  Yuri Kaszubowski Lopes <yurikazuba@gmail.com>
  * \version 1.0
  *

@@ -1,14 +1,12 @@
 /*!
  * \file
  * \ingroup i2c
- * \ingroup io
- * \ingroup epuck
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date 10 August 2015
  * 
- * \brief defines functions to manage the I2C queue.
+ * \brief It defines functions to manage the I2C queue.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -21,7 +19,6 @@
 sys_i2c_messages *sys_i2c_msgs = 0;  /*!< Pointer to the linked list of messages */
 
 /**
- * removes oldest message from the linked list
  *
  * This function removes the oldest message (first element) of the linked list
  *
@@ -38,7 +35,6 @@ void Sys_I2C_RemoveOldestMessage(sys_i2c_messages **list){
 }
 
 /**
- * frees all messages of the linked list
  *
  * This function frees all messages of the linked list.
  *
@@ -60,7 +56,6 @@ void Sys_I2C_FreeMessages(sys_i2c_messages *list){
 }
 
 /**
- * appends an element to the linked list.
  *
  * This function appends  on the bottom of the linked list.
  *

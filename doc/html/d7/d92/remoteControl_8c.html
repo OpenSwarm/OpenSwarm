@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -92,11 +92,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">remoteControl.c File Reference<div class="ingroups"><a class="el" href="../../d2/da3/group__io.html">I/O Management</a><a class="el" href="../../d9/dc8/group__epuck.html">e-puck specific modules</a> &raquo;  &#124; <a class="el" href="../../db/d36/group__remotecontrol.html">Remote Control</a> &#124; <a class="el" href="../../d9/dc8/group__epuck.html">e-puck specific modules</a></div></div>  </div>
+<div class="title">remoteControl.c File Reference<div class="ingroups"><a class="el" href="../../d9/dc8/group__epuck.html">e-puck specific modules</a> &#124; <a class="el" href="../../d2/da3/group__io.html">I/O Management</a> &raquo; <a class="el" href="../../db/d36/group__remotecontrol.html">Remote Control</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This file includes functions needed to receive and decode messages from a remote control.  
+<p>It defines functions to receive and decode messages from a remote control.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d2/d2f/remoteControl_8h_source.html">remoteControl.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d8/d4a/remoteControl__HDI_8h_source.html">remoteControl_HDI.h</a>&quot;</code><br />
@@ -110,9 +110,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="../../dc/dd0/remoteControl_8c__incl.png" border="0" usemap="#platform_2e-puck_2remoteControl_8c" alt=""/></div>
-<map name="platform_2e-puck_2remoteControl_8c" id="platform_2e-puck_2remoteControl_8c">
-<area shape="rect" id="node2" href="../../d2/d2f/remoteControl_8h.html" title="This file includes functions needed to receive and decode messages from a remote control. " alt="" coords="31,80,145,107"/><area shape="rect" id="node4" href="../../d6/dc2/definitions_8h.html" title="This file defines all preprocessor variables and project wide types. " alt="" coords="354,155,470,181"/><area shape="rect" id="node10" href="../../d8/d4a/remoteControl__HDI_8h.html" title="Hardware dependent implementations to receive and decode messages from a remote control. " alt="" coords="169,80,316,107"/><area shape="rect" id="node11" href="../../dc/dac/io_8h.html" title="This file includes the IO timer to start and stop the timer. This timer executes IO functions periodi..." alt="" coords="503,80,585,107"/><area shape="rect" id="node12" href="../../db/dd2/events_8h.html" title="functions to create handle and configure events. " alt="" coords="340,80,479,107"/><area shape="rect" id="node13" href="../../d6/ded/interrupts_8h.html" title="includes system calls to create atomic sections. (Sections that cannot be interrupted) ..." alt="" coords="661,80,771,107"/><area shape="rect" id="node8" href="../../d9/d1f/DSPIC30F6014A__HDI_8h.html" title="Hardware dependent declarations and definitions. " alt="" coords="149,229,357,271"/></map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../dc/dd0/remoteControl_8c__incl.svg" width="100%" height="574"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d7/d92/remoteControl_8c_source.html">Go to the source code of this file.</a></p>
@@ -135,7 +133,7 @@ Functions</h2></td></tr>
 <tr class="separator:acefaee64989a1509529aeefd5d37526f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file includes functions needed to receive and decode messages from a remote control. </p>
+<div class="textblock"><p>It defines functions to receive and decode messages from a remote control. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefan M. Trenkwalder <a href="#" onclick="location.href='mai'+'lto:'+'s.t'+'re'+'nkw'+'al'+'der'+'@o'+'pen'+'sw'+'arm'+'.o'+'rg'; return false;">s.tre<span style="display: none;">.nosp@m.</span>nkwa<span style="display: none;">.nosp@m.</span>lder@<span style="display: none;">.nosp@m.</span>open<span style="display: none;">.nosp@m.</span>swarm<span style="display: none;">.nosp@m.</span>.org</a> </dd>
 <dd>
 Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik'+'azu'+'ba'+'@gm'+'ai'+'l.c'+'om'; return false;">yurik<span style="display: none;">.nosp@m.</span>azub<span style="display: none;">.nosp@m.</span>a@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a></dd></dl>
@@ -157,11 +155,10 @@ Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik
         </tr>
       </table>
 </div><div class="memdoc">
-<p>returns if a new command was read</p>
 <p>This function returns true if a new remote control command has arrived</p>
 <dl class="section return"><dt>Returns</dt><dd>bool true if a new remote control command has arrived </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00124">124</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00118">118</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
 
 </div>
 </div>
@@ -186,10 +183,9 @@ Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Initialises the remote control handler</p>
 <p>This function initialises the handler of the remote control to receive signals from the remote control. </p>
 
-<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00037">37</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00034">34</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
 
 </div>
 </div>
@@ -206,10 +202,17 @@ Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik
         </tr>
       </table>
 </div><div class="memdoc">
-<p>handles incoming remote control signals</p>
 <p>This function reads a remote control signal and reads it's transmitted value. When a signal arrives, an external interrupt is triggered. The remaining values are obtained by using time not interrupts. </p>
+<p>&lt; The initial state of the state machine to decode a remote control message</p>
+<p>&lt; Cycles that are needed to wait a single bit duration</p>
+<p>&lt; Cycles that are needed to wait a quarter of a single bit duration</p>
+<p>&lt; Cycles that are needed to wait at the beginning of a message</p>
+<p>&lt; Cycles that are needed to wait a half of a single bit duration</p>
+<p>&lt; Cycles that are needed to wait a single bit duration</p>
+<p>&lt; The initial state of the state machine to decode a remote control message</p>
+<p>&lt; ID of the event that is sent after receiving a remote control signal </p>
 
-<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00057">57</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00052">52</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
 
 </div>
 </div>
@@ -226,11 +229,10 @@ Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik
         </tr>
       </table>
 </div><div class="memdoc">
-<p>returns the address of the remote control</p>
 <p>This function returns the address of an remote control.</p>
 <dl class="section return"><dt>Returns</dt><dd>address of the remote control </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00146">146</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00138">138</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
 
 </div>
 </div>
@@ -247,11 +249,10 @@ Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik
         </tr>
       </table>
 </div><div class="memdoc">
-<p>returns the check bit value</p>
 <p>This function returns the check bit value of an remote control to indicate if a button was pressed continuously or sequential.</p>
 <dl class="section return"><dt>Returns</dt><dd>bit to indicate the check bit </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00135">135</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00128">128</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
 
 </div>
 </div>
@@ -269,10 +270,9 @@ Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik
       </table>
 </div><div class="memdoc">
 <p>returns the value received by the remote control</p>
-<p>returns the value received by the remote control</p>
 <dl class="section return"><dt>Returns</dt><dd>value received by the remote control </dd></dl>
 
-<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00157">157</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00148">148</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
 
 </div>
 </div>
@@ -297,10 +297,9 @@ Yuri Kaszubowski Lopes <a href="#" onclick="location.href='mai'+'lto:'+'yur'+'ik
   </tr>
 </table>
 </div><div class="memdoc">
-<p>start the remote control handler</p>
 <p>This function start the handler of the remote control to receive signals from the remote control. </p>
 
-<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00047">47</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
+<p>Definition at line <a class="el" href="../../d7/d92/remoteControl_8c_source.html#l00043">43</a> of file <a class="el" href="../../d7/d92/remoteControl_8c_source.html">remoteControl.c</a>.</p>
 
 </div>
 </div>

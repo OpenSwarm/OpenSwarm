@@ -25,7 +25,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../openswarm_logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">OpenSwarm
-   &#160;<span id="projectnumber">0.15.12.2</span>
+   &#160;<span id="projectnumber">0.16.1.2</span>
    </div>
    <div id="projectbrief">An operating system for miniature robots</div>
   </td>
@@ -95,35 +95,35 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">static</span> <a class="code" href="../../d6/dc2/definitions_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> sys_IRQ_Priority = <a class="code" href="../../d6/ded/interrupts_8h.html#ae792a67469dbfd96699107868d70b89d">SYS_IRQP_SYSTEM_TIMER</a>;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">static</span> <a class="code" href="../../d6/dc2/definitions_8h.html#a74df79fde3c518e55b29ce6360a9c76e">sint16</a> nesting = 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">static</span> <a class="code" href="../../d6/dc2/definitions_8h.html#a0cfd70ce9210301c9c924b2f8dce5ab3">sint</a> nesting = 0;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="../../d6/ded/interrupts_8h.html#abf5948c864c1ddce2f7b4a4624f6006f">   43</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="../../d8/d22/interrupts_8c.html#acce68565a1263b2b7bc870bfe0601f45">Sys_Start_AtomicSection</a>(){</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span>(nesting == 0){</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        sys_IRQ_Priority = SRbits.IPL;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        SRbits.IPL = <a class="code" href="../../d6/ded/interrupts_8h.html#a2665dac9b4f047c8d82e7076eb2c1f0b">SYS_IRQP_MAX</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    nesting++;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="../../d6/ded/interrupts_8h.html#abf5948c864c1ddce2f7b4a4624f6006f">   42</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="../../d8/d22/interrupts_8c.html#acce68565a1263b2b7bc870bfe0601f45">Sys_Start_AtomicSection</a>(){</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span>(nesting == 0){</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        sys_IRQ_Priority = SRbits.IPL;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        SRbits.IPL = <a class="code" href="../../d6/ded/interrupts_8h.html#a2665dac9b4f047c8d82e7076eb2c1f0b">SYS_IRQP_MAX</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    nesting++;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="../../d6/ded/interrupts_8h.html#aec2c903ebd9339ced317b3a9df5f8433">   58</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="../../d8/d22/interrupts_8c.html#a04cce7e66e6b181477698c6398714240">Sys_End_AtomicSection</a>(){</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    nesting--;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span>(nesting &lt;= 0){</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">if</span>(nesting == 0){</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            SRbits.IPL = sys_IRQ_Priority;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        nesting = 0;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="ttc" id="definitions_8h_html_a74df79fde3c518e55b29ce6360a9c76e"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html#a74df79fde3c518e55b29ce6360a9c76e">sint16</a></div><div class="ttdeci">signed short sint16</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dc2/definitions_8h_source.html#l00132">definitions.h:132</a></div></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="../../d6/ded/interrupts_8h.html#aec2c903ebd9339ced317b3a9df5f8433">   56</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="../../d8/d22/interrupts_8c.html#a04cce7e66e6b181477698c6398714240">Sys_End_AtomicSection</a>(){</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    nesting--;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span>(nesting &lt;= 0){</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">if</span>(nesting == 0){</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            SRbits.IPL = sys_IRQ_Priority;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        nesting = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="ttc" id="interrupts_8h_html_ae792a67469dbfd96699107868d70b89d"><div class="ttname"><a href="../../d6/ded/interrupts_8h.html#ae792a67469dbfd96699107868d70b89d">SYS_IRQP_SYSTEM_TIMER</a></div><div class="ttdeci">#define SYS_IRQP_SYSTEM_TIMER</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/ded/interrupts_8h_source.html#l00022">interrupts.h:22</a></div></div>
+<div class="ttc" id="definitions_8h_html_a0cfd70ce9210301c9c924b2f8dce5ab3"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html#a0cfd70ce9210301c9c924b2f8dce5ab3">sint</a></div><div class="ttdeci">signed short sint</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dc2/definitions_8h_source.html#l00081">definitions.h:81</a></div></div>
 <div class="ttc" id="interrupts_8h_html_a2665dac9b4f047c8d82e7076eb2c1f0b"><div class="ttname"><a href="../../d6/ded/interrupts_8h.html#a2665dac9b4f047c8d82e7076eb2c1f0b">SYS_IRQP_MAX</a></div><div class="ttdeci">#define SYS_IRQP_MAX</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/ded/interrupts_8h_source.html#l00020">interrupts.h:20</a></div></div>
-<div class="ttc" id="definitions_8h_html"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html">definitions.h</a></div><div class="ttdoc">This file declares general preprocessor variables and types. </div></div>
+<div class="ttc" id="definitions_8h_html"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html">definitions.h</a></div><div class="ttdoc">It declares general preprocessor variables and types. </div></div>
 <div class="ttc" id="interrupts_8h_html"><div class="ttname"><a href="../../d6/ded/interrupts_8h.html">interrupts.h</a></div><div class="ttdoc">It declares interrupt priority levels and functions to create atomic sections. </div></div>
-<div class="ttc" id="interrupts_8c_html_acce68565a1263b2b7bc870bfe0601f45"><div class="ttname"><a href="../../d8/d22/interrupts_8c.html#acce68565a1263b2b7bc870bfe0601f45">Sys_Start_AtomicSection</a></div><div class="ttdeci">void Sys_Start_AtomicSection()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d22/interrupts_8c_source.html#l00043">interrupts.c:43</a></div></div>
-<div class="ttc" id="interrupts_8c_html_a04cce7e66e6b181477698c6398714240"><div class="ttname"><a href="../../d8/d22/interrupts_8c.html#a04cce7e66e6b181477698c6398714240">Sys_End_AtomicSection</a></div><div class="ttdeci">void Sys_End_AtomicSection()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d22/interrupts_8c_source.html#l00058">interrupts.c:58</a></div></div>
-<div class="ttc" id="definitions_8h_html_adde6aaee8457bee49c2a92621fe22b79"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a></div><div class="ttdeci">unsigned char uint8</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dc2/definitions_8h_source.html#l00128">definitions.h:128</a></div></div>
+<div class="ttc" id="interrupts_8c_html_acce68565a1263b2b7bc870bfe0601f45"><div class="ttname"><a href="../../d8/d22/interrupts_8c.html#acce68565a1263b2b7bc870bfe0601f45">Sys_Start_AtomicSection</a></div><div class="ttdeci">void Sys_Start_AtomicSection()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d22/interrupts_8c_source.html#l00042">interrupts.c:42</a></div></div>
+<div class="ttc" id="interrupts_8c_html_a04cce7e66e6b181477698c6398714240"><div class="ttname"><a href="../../d8/d22/interrupts_8c.html#a04cce7e66e6b181477698c6398714240">Sys_End_AtomicSection</a></div><div class="ttdeci">void Sys_End_AtomicSection()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d22/interrupts_8c_source.html#l00056">interrupts.c:56</a></div></div>
+<div class="ttc" id="definitions_8h_html_adde6aaee8457bee49c2a92621fe22b79"><div class="ttname"><a href="../../d6/dc2/definitions_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a></div><div class="ttdeci">unsigned char uint8</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dc2/definitions_8h_source.html#l00073">definitions.h:73</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

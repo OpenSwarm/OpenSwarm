@@ -1,8 +1,6 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup camera
- * \ingroup epuck
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \author  Yuri Kaszubowski Lopes <yurikazuba@gmail.com>
@@ -11,7 +9,7 @@
  *
  * \date 27 August 2015
  * 
- * \brief  This file includes functions to process data retrieved by a camera.
+ * \brief  It defines functions to process data retrieved by a camera.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  * \todo The used functions from the e-puck library are very time and computational intensive. These function can be rewritten to decrease the processing load.
@@ -61,14 +59,7 @@ inline void Sys_Process_newFrame(void);
 
 void Sys_Camera_PreProcessor(void);
 
-/**
- * Initialises the I/O Management
- *
- * This function initialises the I/O Timer and therefore the I/O Management.
- *
- * param void
- * return void
-
+/*
 inline void Sys_Write_to_Camera(uint8 address, uint8* data, uint16 length){
     uint8 *i2c_data = (uint8 *) Sys_Malloc(length+1);
 
@@ -89,7 +80,6 @@ inline void Sys_Write_to_Camera(uint8 address, uint8* data, uint16 length){
 static char buffer[CAM_W_SIZE*CAM_H_SIZE*2];  /*!< received frame */
 
 /**
- * Initialises the Camera
  *
  * This function initialises the camera using e-puck library from Subversion at svn://svn.gna.org/svn/e-puck/trunk
  *
@@ -288,7 +278,6 @@ void Sys_Init_Camera(){
 }
 
 /**
- * Starts the Camera
  *
  * This function starts the capturing using e-puck library from Subversion at svn://svn.gna.org/svn/e-puck/trunk
  *
@@ -309,7 +298,6 @@ void Sys_Start_Camera(){
 }
 
 /**
- * Defines a preprocessor callback functions.
  *
  * Defines a preprocessor callback functions to process the frame.
  *
@@ -541,7 +529,6 @@ bool isNewFrameAvailable(){
 
 
 /**
- * processes an incoming camera frame and emits events according to used algorithm
  *
  * This function processes an incoming camera frame and emits events according to used algorithm. 
  *

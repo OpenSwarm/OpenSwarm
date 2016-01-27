@@ -1,15 +1,13 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup uart
- * \ingroup epuck
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date 27 August 2015
  * 
- * \brief  This file includes functions needed to transmit data via uart(1 & 2).
+ * \brief It declares functions to transmit bytes via UART.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -26,7 +24,6 @@
 
 
 /**
- * Initialises UART1
  *
  * This function initialises UART1.
  * 
@@ -36,7 +33,6 @@ inline void Sys_Init_UART1(void){
 }
 
 /**
- * Initialises UART2
  *
  * This function initialises UART2.
  * 
@@ -46,7 +42,6 @@ inline void Sys_Init_UART2(void){
 }
 
 /**
- * starts UART1
  *
  * This function starts UART1.
  * 
@@ -58,7 +53,6 @@ inline void Sys_Start_UART1(void){
 }
 
 /**
- * starts UART2
  *
  * This function starts UART2.
  * 
@@ -70,7 +64,6 @@ inline void Sys_Start_UART2(void){
 }
 
 /**
- * defines a function that processes received bytes (UART1)
  *
  * defines a function that processes received bytes (UART1). This defined callback function is only executed once by arrival of one byte.
  * 
@@ -81,7 +74,6 @@ void Sys_SetReadingFunction_UART1(pUART_reader func){
 }
 
 /**
- * defines a function that processes received bytes (UART2)
  *
  * defines a function that processes received bytes (UART2). This defined callback function is only executed once by arrival of one byte.
  * 
@@ -92,7 +84,6 @@ void Sys_SetReadingFunction_UART2(pUART_reader func){
 }
 
 /**
- * writes a set of bytes to UART1
  *
  * This function writes sequentially the bytes on the UART1.
  * 
@@ -101,7 +92,7 @@ void Sys_SetReadingFunction_UART2(pUART_reader func){
  * @param[in] data  pointer to the bytes that should be transmitted.
  * @param[in] length  number of bytes to send.
  */
-void Sys_Writeto_UART1(void *data, uint16 length){
+void Sys_Writeto_UART1(void *data, uint length){
 
     sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
@@ -132,7 +123,6 @@ void Sys_Writeto_UART1(void *data, uint16 length){
 }
 
 /**
- * writes a set of bytes to UART2
  *
  * This function writes sequentially the bytes on the UART2. 
  * 
@@ -141,7 +131,7 @@ void Sys_Writeto_UART1(void *data, uint16 length){
  * @param[in] data  pointer to the bytes that should be transmitted.
  * @param[in] length  number of bytes to send.
  */
-void Sys_Writeto_UART2(void *data, uint16 length){
+void Sys_Writeto_UART2(void *data, uint length){
 
     sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory

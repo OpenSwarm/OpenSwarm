@@ -6,7 +6,7 @@
  *
  * \date 08 July 2014
  * 
- * \brief  This file includes all functions which are needed to manage data structures needed by the processes management
+ * \brief  It declares functions to manage process lists and related structs
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
@@ -32,9 +32,9 @@ extern "C" {
  It is a single linked list element that stores the id on an occurred event.
 */
 typedef struct sys_occurred_event_s{
-    uint16 eventID;
+    uint eventID;/*!< ID of the occured event*/
 
-    struct sys_occurred_event_s *next;
+    struct sys_occurred_event_s *next;/*!< pointer to the next element in the linked list.*/
 }sys_occurred_event;
 
 //!  Double linked list element of process event-handlers
@@ -42,30 +42,30 @@ typedef struct sys_occurred_event_s{
  It is a double linked list containing all information needed to decide if the event-handler should be executed for an occurred event or not. It sores the pointer to the handler the condition function and data.
 */
 typedef struct sys_process_event_handler_s{
-    uint16 eventID;
+    uint eventID;/*!< ID of the occured event*/
     pEventHandlerFunction handler;/*!< Pointer to a function which processes occurred events*/
     pConditionFunction condition;/*!< Pointer to  a function which checks if the event-handler should be executed (true) or not (false) */
     sys_event_data *buffered_data;/*!< stores a list of recieved event data that need to be processed */
 
-    struct sys_process_event_handler_s *previous;
-    struct sys_process_event_handler_s *next;
+    struct sys_process_event_handler_s *previous;/*!< pointer to the previous element in the linked list.*/
+    struct sys_process_event_handler_s *next;/*!< pointer to the next element in the linked list.*/
 }sys_process_event_handler, sys_peh;
 
-//!  Process Control Block for a single process
+//!  Process Control Block contains all data for a single process
 /*!
  * It contains all information related to a single process. (including stack pointer, frame pointer, stack, etc. )
 */
 typedef struct sys_process_control_block_s{
 
-    uint16 process_ID;                                       //    2
-    uint16 stackPointer;/*!< Stack Pointer to TOP */
-    uint16 framePointer;
-    uint16 stackPointerLimit;/*!< Stack Pointer + MAX SIZE*/
+    uint process_ID;                            /*!< Process identifier */
+    uint stackPointer;                        /*!< Stack Pointer Register */
+    uint framePointer;                        /*!< Frame Pointer Register*/
+    uint stackPointerLimit;                   /*!< Stack Pointer Limit Register*/
 
-    sys_scheduler_info sheduler_info;                               //  + 6
-    sys_process_event_handler *event_register;
+    sys_scheduler_info sheduler_info;           /*!< scheduler-specific datastructure */
+    sys_process_event_handler *event_register;  /*!< Lists of all events the process is subscribed to */
 
-    uint16 *process_stack;                                  //  + DEFAULT STACK SIZE (200)
+    uint *process_stack;                      /*!< Pointer to the beginning of the stack */
 
 } sys_process_control_block, sys_pcb;
 
@@ -76,10 +76,10 @@ typedef struct sys_process_control_block_s{
 */
 typedef struct sys_process_control_block_list_element_s{
 
-    sys_process_control_block pcb;
+    sys_process_control_block pcb;/*!< Process Control Block of a process */
 
-    struct sys_process_control_block_list_element_s* previous;
-    struct sys_process_control_block_list_element_s* next;
+    struct sys_process_control_block_list_element_s* previous;/*!< pointer to the previous PCB */
+    struct sys_process_control_block_list_element_s* next;/*!< pointer to the next PCB */
     
 } sys_process_control_block_list_element, sys_pcb_list_element;
 

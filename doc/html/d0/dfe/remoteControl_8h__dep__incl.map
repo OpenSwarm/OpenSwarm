@@ -1,4 +1,4 @@
 <map id="platform/e&#45;puck/remoteControl.h" name="platform/e&#45;puck/remoteControl.h">
-<area shape="rect" id="node2" href="$d7/d92/remoteControl_8c.html" title="This file includes functions needed to receive and decode messages from a remote control. " alt="" coords="5,87,215,114"/>
+<area shape="rect" id="node2" href="$d7/d92/remoteControl_8c.html" title="It defines functions to receive and decode messages from a remote control. " alt="" coords="5,87,215,114"/>
 <area shape="rect" id="node3" href="$d0/dae/remoteControl__HDI_8c.html" title="Hardware dependent implementations to receive and decode messages from a remote control. " alt="" coords="239,80,437,121"/>
 </map>

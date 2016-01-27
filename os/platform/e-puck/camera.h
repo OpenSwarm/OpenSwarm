@@ -1,35 +1,35 @@
 /*!
  * \file
- * \ingroup io
  * \ingroup camera
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
  * \date 27 August 2015
  * 
- * \brief  This file includes functions to process data retrieved by a camera.
+ * \brief  It declares functions to process data retrieved by a camera.
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */
 /*! \defgroup camera Camera Module
+ * \ingroup io
  * \ingroup epuck
- * \brief Functions to process incoming frames from a camera module.
+ * \brief The camera module is used to retrieve raw camera data, process the incoming frames, and emits the result as \link events events\endlink.
  * 
- * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * 
- * \section camera_intro Introduction
- * This module is part of the I/O handler. \sa io
+ * This module currently is under development and is using functions of the e-puck library provided using Subversion at  svn://svn.gna.org/svn/e-puck/trunk (01/01/2016).
  * 
- * This module currently is under development and is using functions of the e-puck library provided using Subversion at svn://svn.gna.org/svn/e-puck/trunk .
- * 
- * \todo The used functions from the e-puck library are very time and computational intensive. These function can be rewritten to decrease the processing load.
+ * \todo The used functions from the e-puck library are very time and computational intensive. These function need to be rewritten to decrease the processing load.
  * 
  * \section camera_usage Usage
- * The camera is initialised and started by Sys_Init_Camera and Sys_Start_Camera respectively.
+ * The camera is initialised and started by Sys_Init_Camera() and Sys_Start_Camera() respectively.
  * 
  * The camera uses a preprocessor to process a frame and generate the required events. This preprocessor can be defined by Sys_Set_Preprocessing(pCameraPreProcessor).
  * 
  * A received frame, if available (isNewFrameAvailable()) can be obtained with getFinishedFrame().
+ * 
+ * \note An e-puck cannot store a entire frame with full resolution (640x480). Consequently, only sub-frames can be taken.
+ * 
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * 
  * \section camera_license License
  * LICENSE: adapted FreeBSD License (see http://openswarm.org/license)\n

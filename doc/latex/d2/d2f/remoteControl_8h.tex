@@ -1,14 +1,13 @@
-\hypertarget{remoteControl_8h}{}\section{platform/e-\/puck/remote\+Control.h File Reference}
+\hypertarget{remoteControl_8h}{}\subsection{platform/e-\/puck/remote\+Control.h File Reference}
 \label{remoteControl_8h}\index{platform/e-\/puck/remote\+Control.\+h@{platform/e-\/puck/remote\+Control.\+h}}
 
 
-This file includes functions needed to receive and decode messages from a remote control.  
+It declares functions to receive and decode messages from a remote control.  
 
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}../../definitions.\+h\char`\"{}}\\*
-Include dependency graph for remote\+Control.\+h\+:
-\nopagebreak
+Include dependency graph for remote\+Control.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,7 +21,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \includegraphics[width=350pt]{d0/dfe/remoteControl_8h__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Macros}
+\subsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \hyperlink{remoteControl_8h_a1150f73eac2904d5d48123c6d4bbc564}{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y}~12
@@ -115,7 +114,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 \#define \hyperlink{remoteControl_8h_a0b4fed7d37677e9a6ba539c3db94a523}{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D}~55
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{remoteControl_8h_a3265e493859892f6ebca8df6252d6f8e}{Sys\+\_\+\+Init\+\_\+\+Remote\+Control} (void)
@@ -134,8 +133,8 @@ void \hyperlink{remoteControl_8h_a8f9f0bb60b7bb99345ac44134cd416cd}{Sys\+\_\+\+R
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-This file includes functions needed to receive and decode messages from a remote control. 
+\subsubsection{Detailed Description}
+It declares functions to receive and decode messages from a remote control. 
 
 \begin{DoxyAuthor}{Author}
 Stefan M. Trenkwalder \href{mailto:s.trenkwalder@openswarm.org}{\tt s.\+trenkwalder@openswarm.\+org} 
@@ -153,360 +152,368 @@ adapted Free\+B\+S\+D License (see \href{http://openswarm.org/license}{\tt http\
 \end{DoxyCopyright}
 
 
-\subsection{Macro Definition Documentation}
+\subsubsection{Macro Definition Documentation}
 \hypertarget{remoteControl_8h_ab5ad529c5a02f7037710f36cb255f9cd}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0~0}\label{remoteControl_8h_ab5ad529c5a02f7037710f36cb255f9cd}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+0~0}\label{remoteControl_8h_ab5ad529c5a02f7037710f36cb255f9cd}
 Value for the 0 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 61 of file remote\+Control.\+h.
+Definition at line 60 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_aa963ccacf54d0ff1b4d1510279d028d7}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1~1}\label{remoteControl_8h_aa963ccacf54d0ff1b4d1510279d028d7}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+1~1}\label{remoteControl_8h_aa963ccacf54d0ff1b4d1510279d028d7}
 Value for the 1 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 62 of file remote\+Control.\+h.
+Definition at line 61 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_ad8570dc0bd9847eee366daeae0aa7c39}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2~2}\label{remoteControl_8h_ad8570dc0bd9847eee366daeae0aa7c39}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+2~2}\label{remoteControl_8h_ad8570dc0bd9847eee366daeae0aa7c39}
 Value for the 2 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 63 of file remote\+Control.\+h.
+Definition at line 62 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_a34a2d3b4b2decf336bf54decbf57773e}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3~3}\label{remoteControl_8h_a34a2d3b4b2decf336bf54decbf57773e}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+3~3}\label{remoteControl_8h_a34a2d3b4b2decf336bf54decbf57773e}
 Value for the 3 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 64 of file remote\+Control.\+h.
+Definition at line 63 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_ae0194a02fded242b9ac68043b82f1e45}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4~4}\label{remoteControl_8h_ae0194a02fded242b9ac68043b82f1e45}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+4~4}\label{remoteControl_8h_ae0194a02fded242b9ac68043b82f1e45}
 Value for the 4 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 65 of file remote\+Control.\+h.
+Definition at line 64 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_aca1a75da685fe4dfc04a76789d71bab8}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5~5}\label{remoteControl_8h_aca1a75da685fe4dfc04a76789d71bab8}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+5~5}\label{remoteControl_8h_aca1a75da685fe4dfc04a76789d71bab8}
 Value for the 5 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 66 of file remote\+Control.\+h.
+Definition at line 65 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_ae3029483c99ba813bb7da0975658f163}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6~6}\label{remoteControl_8h_ae3029483c99ba813bb7da0975658f163}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+6~6}\label{remoteControl_8h_ae3029483c99ba813bb7da0975658f163}
 Value for the 6 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 67 of file remote\+Control.\+h.
+Definition at line 66 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_a86ab7edbd89e5621d37322eebbc95009}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7~7}\label{remoteControl_8h_a86ab7edbd89e5621d37322eebbc95009}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+7~7}\label{remoteControl_8h_a86ab7edbd89e5621d37322eebbc95009}
 Value for the 7 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 68 of file remote\+Control.\+h.
+Definition at line 67 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_a9832b72db64c971e891bf676eb25c0ee}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8~8}\label{remoteControl_8h_a9832b72db64c971e891bf676eb25c0ee}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+8~8}\label{remoteControl_8h_a9832b72db64c971e891bf676eb25c0ee}
 Value for the 8 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 69 of file remote\+Control.\+h.
+Definition at line 68 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_a9c77578a02e10bc68eb82dd60d5064de}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9~9}\label{remoteControl_8h_a9c77578a02e10bc68eb82dd60d5064de}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+9~9}\label{remoteControl_8h_a9c77578a02e10bc68eb82dd60d5064de}
 Value for the 9 button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
-Definition at line 70 of file remote\+Control.\+h.
+Definition at line 69 of file remote\+Control.\+h.
 
 \hypertarget{remoteControl_8h_ad1cced8a60f50fa9a1d42453c713fa0b}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K}}
 \index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K~10}\label{remoteControl_8h_ad1cced8a60f50fa9a1d42453c713fa0b}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+C\+K~10}\label{remoteControl_8h_ad1cced8a60f50fa9a1d42453c713fa0b}
 Value for the back button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 79 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a3dd8e5447d10a6b9b7f7e5d69d26cf80}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E~52}\label{remoteControl_8h_a3dd8e5447d10a6b9b7f7e5d69d26cf80}
-Value for the blue button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 59 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a51ae07db3dc077dce9c816f8a30d66a0}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N~33}\label{remoteControl_8h_a51ae07db3dc077dce9c816f8a30d66a0}
-Value for the channel down button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 93 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a1e034e03106dfb3df29374903d1f6ba1}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P~32}\label{remoteControl_8h_a1e034e03106dfb3df29374903d1f6ba1}
-Value for the channel up button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 92 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a1365cdf6f0c5429dbbc0ff01e1fc8928}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N~19}\label{remoteControl_8h_a1365cdf6f0c5429dbbc0ff01e1fc8928}
-Value for the courser down button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 76 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a673a93c7c7903a3c3a668a0082224d2a}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T~21}\label{remoteControl_8h_a673a93c7c7903a3c3a668a0082224d2a}
-Value for the courser left button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 77 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_ae8666aacc18ef0d66447edce87650417}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T~22}\label{remoteControl_8h_ae8666aacc18ef0d66447edce87650417}
-Value for the courser right button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
 Definition at line 78 of file remote\+Control.\+h.
 
-\hypertarget{remoteControl_8h_a369b67a1b87a025b5bbb5692a2121c70}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P~20}\label{remoteControl_8h_a369b67a1b87a025b5bbb5692a2121c70}
-Value for the coursor up button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 75 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a65e52f69d18eb14f7d9ca35553f5d306}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G~47}\label{remoteControl_8h_a65e52f69d18eb14f7d9ca35553f5d306}
-Value for the epg button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 81 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_ac518384f7b465d7f8f6d6b55e98f9260}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V~40}\label{remoteControl_8h_ac518384f7b465d7f8f6d6b55e98f9260}
-Value for the favourite button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 82 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_ae94ff9ff2358dab19e08e7796c8c695c}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N~54}\label{remoteControl_8h_ae94ff9ff2358dab19e08e7796c8c695c}
-Value for the green button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 57 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_ab45ac667a1bffea744d6364f4cfb7e5c}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O~18}\label{remoteControl_8h_ab45ac667a1bffea744d6364f4cfb7e5c}
-Value for the info button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 85 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a39ca4c7381107edd7d10f1a99f445bf1}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T~46}\label{remoteControl_8h_a39ca4c7381107edd7d10f1a99f445bf1}
-Value for the internet button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 54 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a15541537e15c32e1357b0c4128328762}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G~15}\label{remoteControl_8h_a15541537e15c32e1357b0c4128328762}
-Value for the language button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 52 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a371b072ec975ae94e4ec58f2c32c7a94}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U~48}\label{remoteControl_8h_a371b072ec975ae94e4ec58f2c32c7a94}
-Value for the menu button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 80 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a0421b9845e3bc8a91cea4da103e7e07b}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E~13}\label{remoteControl_8h_a0421b9845e3bc8a91cea4da103e7e07b}
-Value for the mute button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 91 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a8caa19fb497be37af155b31e3471cc7f}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K~53}\label{remoteControl_8h_a8caa19fb497be37af155b31e3471cc7f}
-Value for the O\+K button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 74 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a558eb585cd7d641673f93ddfa66a2f40}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E~48}\label{remoteControl_8h_a558eb585cd7d641673f93ddfa66a2f40}
-Value for the pause button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 96 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a8de79733c2292cae0446776f7fedd1cf}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y~53}\label{remoteControl_8h_a8de79733c2292cae0446776f7fedd1cf}
-Value for the play button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 99 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_ac37989b9c38266544c14d2760e7d3278}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S~14}\label{remoteControl_8h_ac37989b9c38266544c14d2760e7d3278}
-Value for the preset button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 86 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a0b4fed7d37677e9a6ba539c3db94a523}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D~55}\label{remoteControl_8h_a0b4fed7d37677e9a6ba539c3db94a523}
-Value for the record button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 101 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_ad81d64967d6133295bb8656a01619954}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D~55}\label{remoteControl_8h_ad81d64967d6133295bb8656a01619954}
-Value for the red button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 56 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a074fb9c98c3d946467b65c3a392de685}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D~50}\label{remoteControl_8h_a074fb9c98c3d946467b65c3a392de685}
-Value for the rewind button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 97 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a4aeba132de489c172f9a95ab78f121c4}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N~11}\label{remoteControl_8h_a4aeba132de489c172f9a95ab78f121c4}
-Value for the screen button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 51 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a07a075f3b347e65883dec54764858b1f}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P~42}\label{remoteControl_8h_a07a075f3b347e65883dec54764858b1f}
-Value for the sleep button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 87 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a11cabd8561519c965f9bcd738cf82bc6}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E~56}\label{remoteControl_8h_a11cabd8561519c965f9bcd738cf82bc6}
-Value for the source button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 84 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a1150f73eac2904d5d48123c6d4bbc564}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y~12}\label{remoteControl_8h_a1150f73eac2904d5d48123c6d4bbc564}
-Value for the standby button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 49 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a299f38929867edf28d9a1f233994a3c3}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P~54}\label{remoteControl_8h_a299f38929867edf28d9a1f233994a3c3}
-Value for the stop button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 100 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a1ee639897d600f34106b63017d0aa6e6}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L~31}\label{remoteControl_8h_a1ee639897d600f34106b63017d0aa6e6}
-Value for the subtitle button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 53 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a7ce120624618f5456ed6ffed1e80942e}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P~34}\label{remoteControl_8h_a7ce120624618f5456ed6ffed1e80942e}
-Value for the swap button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 72 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a3fb0b2746e63346fabd181cc4cf7b51e}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T~60}\label{remoteControl_8h_a3fb0b2746e63346fabd181cc4cf7b51e}
-Value for the tele text button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 71 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a5ca9216837355cb57011c155130885c4}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N~17}\label{remoteControl_8h_a5ca9216837355cb57011c155130885c4}
-Value for the volume down button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 90 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_abcb38ae5c844ee4c2d1b889c2825dc97}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P~16}\label{remoteControl_8h_abcb38ae5c844ee4c2d1b889c2825dc97}
-Value for the volume up button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 89 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a11434fcb3c5451768007de677a69c7ae}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D~52}\label{remoteControl_8h_a11434fcb3c5451768007de677a69c7ae}
-Value for the wind button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
-
-Definition at line 98 of file remote\+Control.\+h.
-
-\hypertarget{remoteControl_8h_a6a23aebc919b1be60aef8e91149a21eb}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W}}
-\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W~50}\label{remoteControl_8h_a6a23aebc919b1be60aef8e91149a21eb}
-Value for the yellow button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+\hypertarget{remoteControl_8h_a3dd8e5447d10a6b9b7f7e5d69d26cf80}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+L\+U\+E~52}\label{remoteControl_8h_a3dd8e5447d10a6b9b7f7e5d69d26cf80}
+Value for the blue button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
 
 Definition at line 58 of file remote\+Control.\+h.
 
+\hypertarget{remoteControl_8h_a51ae07db3dc077dce9c816f8a30d66a0}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+O\+W\+N~33}\label{remoteControl_8h_a51ae07db3dc077dce9c816f8a30d66a0}
+Value for the channel down button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 92 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a1e034e03106dfb3df29374903d1f6ba1}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+U\+P~32}\label{remoteControl_8h_a1e034e03106dfb3df29374903d1f6ba1}
+Value for the channel up button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 91 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a1365cdf6f0c5429dbbc0ff01e1fc8928}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+O\+W\+N~19}\label{remoteControl_8h_a1365cdf6f0c5429dbbc0ff01e1fc8928}
+Value for the courser down button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 75 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a673a93c7c7903a3c3a668a0082224d2a}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+L\+E\+F\+T~21}\label{remoteControl_8h_a673a93c7c7903a3c3a668a0082224d2a}
+Value for the courser left button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 76 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_ae8666aacc18ef0d66447edce87650417}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+R\+I\+G\+H\+T~22}\label{remoteControl_8h_ae8666aacc18ef0d66447edce87650417}
+Value for the courser right button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 77 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a369b67a1b87a025b5bbb5692a2121c70}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+U\+P~20}\label{remoteControl_8h_a369b67a1b87a025b5bbb5692a2121c70}
+Value for the coursor up button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 74 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a65e52f69d18eb14f7d9ca35553f5d306}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+E\+P\+G~47}\label{remoteControl_8h_a65e52f69d18eb14f7d9ca35553f5d306}
+Value for the epg button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 80 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_ac518384f7b465d7f8f6d6b55e98f9260}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+F\+A\+V~40}\label{remoteControl_8h_ac518384f7b465d7f8f6d6b55e98f9260}
+Value for the favourite button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 81 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_ae94ff9ff2358dab19e08e7796c8c695c}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+R\+E\+E\+N~54}\label{remoteControl_8h_ae94ff9ff2358dab19e08e7796c8c695c}
+Value for the green button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 56 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_ab45ac667a1bffea744d6364f4cfb7e5c}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+F\+O~18}\label{remoteControl_8h_ab45ac667a1bffea744d6364f4cfb7e5c}
+Value for the info button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 84 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a39ca4c7381107edd7d10f1a99f445bf1}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+I\+N\+T\+E\+R\+N\+E\+T~46}\label{remoteControl_8h_a39ca4c7381107edd7d10f1a99f445bf1}
+Value for the internet button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 53 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a15541537e15c32e1357b0c4128328762}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+N\+G~15}\label{remoteControl_8h_a15541537e15c32e1357b0c4128328762}
+Value for the language button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 51 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a371b072ec975ae94e4ec58f2c32c7a94}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+E\+N\+U~48}\label{remoteControl_8h_a371b072ec975ae94e4ec58f2c32c7a94}
+Value for the menu button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 79 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a0421b9845e3bc8a91cea4da103e7e07b}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+M\+U\+T\+E~13}\label{remoteControl_8h_a0421b9845e3bc8a91cea4da103e7e07b}
+Value for the mute button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 90 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a8caa19fb497be37af155b31e3471cc7f}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+O\+K~53}\label{remoteControl_8h_a8caa19fb497be37af155b31e3471cc7f}
+Value for the O\+K button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 73 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a558eb585cd7d641673f93ddfa66a2f40}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+A\+U\+S\+E~48}\label{remoteControl_8h_a558eb585cd7d641673f93ddfa66a2f40}
+Value for the pause button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 95 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a8de79733c2292cae0446776f7fedd1cf}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+L\+A\+Y~53}\label{remoteControl_8h_a8de79733c2292cae0446776f7fedd1cf}
+Value for the play button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 98 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_ac37989b9c38266544c14d2760e7d3278}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+P\+R\+E\+S\+E\+T\+S~14}\label{remoteControl_8h_ac37989b9c38266544c14d2760e7d3278}
+Value for the preset button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 85 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a0b4fed7d37677e9a6ba539c3db94a523}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+C\+O\+R\+D~55}\label{remoteControl_8h_a0b4fed7d37677e9a6ba539c3db94a523}
+Value for the record button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 100 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_ad81d64967d6133295bb8656a01619954}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+D~55}\label{remoteControl_8h_ad81d64967d6133295bb8656a01619954}
+Value for the red button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 55 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a074fb9c98c3d946467b65c3a392de685}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+E\+W\+I\+N\+D~50}\label{remoteControl_8h_a074fb9c98c3d946467b65c3a392de685}
+Value for the rewind button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 96 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a4aeba132de489c172f9a95ab78f121c4}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+C\+R\+E\+E\+N~11}\label{remoteControl_8h_a4aeba132de489c172f9a95ab78f121c4}
+Value for the screen button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 50 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a07a075f3b347e65883dec54764858b1f}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+L\+E\+E\+P~42}\label{remoteControl_8h_a07a075f3b347e65883dec54764858b1f}
+Value for the sleep button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 86 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a11cabd8561519c965f9bcd738cf82bc6}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+O\+U\+R\+C\+E~56}\label{remoteControl_8h_a11cabd8561519c965f9bcd738cf82bc6}
+Value for the source button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 83 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a1150f73eac2904d5d48123c6d4bbc564}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+N\+D\+B\+Y~12}\label{remoteControl_8h_a1150f73eac2904d5d48123c6d4bbc564}
+Value for the standby button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 48 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a299f38929867edf28d9a1f233994a3c3}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+O\+P~54}\label{remoteControl_8h_a299f38929867edf28d9a1f233994a3c3}
+Value for the stop button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 99 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a1ee639897d600f34106b63017d0aa6e6}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+U\+B\+T\+T\+L~31}\label{remoteControl_8h_a1ee639897d600f34106b63017d0aa6e6}
+Value for the subtitle button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 52 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a7ce120624618f5456ed6ffed1e80942e}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+W\+A\+P~34}\label{remoteControl_8h_a7ce120624618f5456ed6ffed1e80942e}
+Value for the swap button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 71 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a3fb0b2746e63346fabd181cc4cf7b51e}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+E\+L\+E\+\_\+\+T\+E\+X\+T~60}\label{remoteControl_8h_a3fb0b2746e63346fabd181cc4cf7b51e}
+Value for the tele text button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 70 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a5ca9216837355cb57011c155130885c4}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+D\+O\+W\+N~17}\label{remoteControl_8h_a5ca9216837355cb57011c155130885c4}
+Value for the volume down button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 89 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_abcb38ae5c844ee4c2d1b889c2825dc97}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+U\+P~16}\label{remoteControl_8h_abcb38ae5c844ee4c2d1b889c2825dc97}
+Value for the volume up button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 88 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a11434fcb3c5451768007de677a69c7ae}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+W\+I\+N\+D~52}\label{remoteControl_8h_a11434fcb3c5451768007de677a69c7ae}
+Value for the wind button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 97 of file remote\+Control.\+h.
+
+\hypertarget{remoteControl_8h_a6a23aebc919b1be60aef8e91149a21eb}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W}}
+\index{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W@{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W}!remote\+Control.\+h@{remote\+Control.\+h}}
+\paragraph[{R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+C\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+Y\+E\+L\+L\+O\+W~50}\label{remoteControl_8h_a6a23aebc919b1be60aef8e91149a21eb}
+Value for the yellow button (R\+C-\/5 coding for a Toshiba R\+C-\/3910) 
+
+Definition at line 57 of file remote\+Control.\+h.
 
 
-\subsection{Function Documentation}
+
+\subsubsection{Function Documentation}
 \hypertarget{remoteControl_8h_a3265e493859892f6ebca8df6252d6f8e}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!Sys\+\_\+\+Init\+\_\+\+Remote\+Control@{Sys\+\_\+\+Init\+\_\+\+Remote\+Control}}
 \index{Sys\+\_\+\+Init\+\_\+\+Remote\+Control@{Sys\+\_\+\+Init\+\_\+\+Remote\+Control}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{Sys\+\_\+\+Init\+\_\+\+Remote\+Control}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Remote\+Control (
+\paragraph[{Sys\+\_\+\+Init\+\_\+\+Remote\+Control}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Init\+\_\+\+Remote\+Control (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{remoteControl_8h_a3265e493859892f6ebca8df6252d6f8e}
-Initialises the remote control handler
-
 This function initialises the handler of the remote control to receive signals from the remote control. 
 
-Definition at line 37 of file remote\+Control.\+c.
+Definition at line 34 of file remote\+Control.\+c.
 
 \hypertarget{remoteControl_8h_a8f9f0bb60b7bb99345ac44134cd416cd}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg@{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg}}
 \index{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg@{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg (
+\paragraph[{Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Receive\+\_\+\+Remote\+Control\+\_\+\+Msg (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{remoteControl_8h_a8f9f0bb60b7bb99345ac44134cd416cd}
-handles incoming remote control signals
+This function reads a remote control signal and reads it\textquotesingle{}s transmitted value. When a signal arrives, an external interrupt is triggered. The remaining values are obtained by using time not interrupts. $<$ The initial state of the state machine to decode a remote control message
 
-This function reads a remote control signal and reads it\textquotesingle{}s transmitted value. When a signal arrives, an external interrupt is triggered. The remaining values are obtained by using time not interrupts. 
+$<$ Cycles that are needed to wait a single bit duration
 
-Definition at line 57 of file remote\+Control.\+c.
+$<$ Cycles that are needed to wait a quarter of a single bit duration
+
+$<$ Cycles that are needed to wait at the beginning of a message
+
+$<$ Cycles that are needed to wait a half of a single bit duration
+
+$<$ Cycles that are needed to wait a single bit duration
+
+$<$ The initial state of the state machine to decode a remote control message
+
+$<$ I\+D of the event that is sent after receiving a remote control signal 
+
+Definition at line 52 of file remote\+Control.\+c.
 
 \hypertarget{remoteControl_8h_acb4d98f144b9e77520eca0cfbe6275f9}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address}}
 \index{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address (
+\paragraph[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Address (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{remoteControl_8h_acb4d98f144b9e77520eca0cfbe6275f9}
-returns the address of the remote control
-
 This function returns the address of an remote control.
 
 \begin{DoxyReturn}{Returns}
@@ -514,17 +521,15 @@ address of the remote control
 \end{DoxyReturn}
 
 
-Definition at line 146 of file remote\+Control.\+c.
+Definition at line 138 of file remote\+Control.\+c.
 
 \hypertarget{remoteControl_8h_a3789b95784459beec525a1803271be97}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit}}
 \index{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit (
+\paragraph[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Check\+Bit (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{remoteControl_8h_a3789b95784459beec525a1803271be97}
-returns the check bit value
-
 This function returns the check bit value of an remote control to indicate if a button was pressed continuously or sequential.
 
 \begin{DoxyReturn}{Returns}
@@ -532,17 +537,15 @@ bit to indicate the check bit
 \end{DoxyReturn}
 
 
-Definition at line 135 of file remote\+Control.\+c.
+Definition at line 128 of file remote\+Control.\+c.
 
 \hypertarget{remoteControl_8h_a28c2ff6afa796eb184ef84535e620701}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data}}
 \index{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data@{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data (
+\paragraph[{Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} Sys\+\_\+\+Remote\+C\+\_\+\+Get\+\_\+\+Data (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{remoteControl_8h_a28c2ff6afa796eb184ef84535e620701}
-returns the value received by the remote control
-
 returns the value received by the remote control
 
 \begin{DoxyReturn}{Returns}
@@ -550,25 +553,23 @@ value received by the remote control
 \end{DoxyReturn}
 
 
-Definition at line 157 of file remote\+Control.\+c.
+Definition at line 148 of file remote\+Control.\+c.
 
 \hypertarget{remoteControl_8h_a794445a7ab52f66d52e09d50233e079f}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data@{Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data}}
 \index{Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data@{Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data (
+\paragraph[{Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data}]{\setlength{\rightskip}{0pt plus 5cm}bool Sys\+\_\+\+Remote\+C\+\_\+\+Received\+\_\+\+New\+\_\+\+Data (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{remoteControl_8h_a794445a7ab52f66d52e09d50233e079f}
 \hypertarget{remoteControl_8h_a5aaecc26aad6d1c545a225b1ce92cec7}{}\index{remote\+Control.\+h@{remote\+Control.\+h}!Sys\+\_\+\+Start\+\_\+\+Remote\+Control@{Sys\+\_\+\+Start\+\_\+\+Remote\+Control}}
 \index{Sys\+\_\+\+Start\+\_\+\+Remote\+Control@{Sys\+\_\+\+Start\+\_\+\+Remote\+Control}!remote\+Control.\+h@{remote\+Control.\+h}}
-\subsubsection[{Sys\+\_\+\+Start\+\_\+\+Remote\+Control}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Remote\+Control (
+\paragraph[{Sys\+\_\+\+Start\+\_\+\+Remote\+Control}]{\setlength{\rightskip}{0pt plus 5cm}void Sys\+\_\+\+Start\+\_\+\+Remote\+Control (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{remoteControl_8h_a5aaecc26aad6d1c545a225b1ce92cec7}
-start the remote control handler
-
 This function start the handler of the remote control to receive signals from the remote control. 
 
-Definition at line 47 of file remote\+Control.\+c.
+Definition at line 43 of file remote\+Control.\+c.
 

@@ -1,10 +1,7 @@
 <map id="e&#45;puck specific modules" name="e&#45;puck specific modules">
-<area shape="rect" id="node1" href="$db/d36/group__remotecontrol.html" title="Functions to receive data from a remote control. " alt="" coords="343,33,458,60"/>
-<area shape="rect" id="node3" href="$d9/d96/group__shefpuck.html" title="External set of functions to assist the programming of the e&#45;Puck. " alt="" coords="362,132,439,159"/>
-<area shape="rect" id="node4" href="$dd/df2/group__base.html" title="Basic functions to start and initialise the operating system; allocate, free and copy memory..." alt="" coords="375,192,427,219"/>
-<area shape="rect" id="node5" href="$dc/d90/group__camera.html" title="Functions to process incoming frames from a camera module. " alt="" coords="343,272,458,299"/>
-<area shape="rect" id="node6" href="$db/def/group__uart.html" title="Functions to control the message flow of the UART interface. " alt="" coords="357,384,444,411"/>
-<area shape="rect" id="node7" href="$d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="352,536,449,563"/>
-<area shape="rect" id="node8" href="$d2/da3/group__io.html" title="Functions and mechanisms to use I/O devices (e.g. sensors and actuators) to interact with the environ..." alt="" coords="341,796,460,823"/>
-<area shape="rect" id="node9" href="$dd/daa/group__motors.html" title="Functions to control the motors. " alt="" coords="350,883,451,909"/>
+<area shape="rect" id="node1" href="$db/d36/group__remotecontrol.html" title="Functions to receive data from a remote control. " alt="" coords="216,5,331,32"/>
+<area shape="rect" id="node3" href="$dc/d90/group__camera.html" title="The camera module is used to retrieve raw camera data, process the incoming frames, and emits the result as events. " alt="" coords="216,56,331,83"/>
+<area shape="rect" id="node4" href="$db/def/group__uart.html" title="Functions to control the message flow of the UART interface. " alt="" coords="230,107,317,133"/>
+<area shape="rect" id="node5" href="$d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="225,157,322,184"/>
+<area shape="rect" id="node6" href="$dd/daa/group__motors.html" title="Functions to control the two stepper motors of the e&#45;puck. " alt="" coords="223,208,324,235"/>
 </map>

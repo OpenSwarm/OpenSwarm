@@ -1,0 +1,49 @@
+\hypertarget{structsys__scheduler__info}{}\subsection{sys\+\_\+scheduler\+\_\+info Struct Reference}
+\label{structsys__scheduler__info}\index{sys\+\_\+scheduler\+\_\+info@{sys\+\_\+scheduler\+\_\+info}}
+
+
+The scheduling information for each process.  
+
+
+
+
+{\ttfamily \#include $<$scheduler.\+h$>$}
+
+\subsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__scheduler__info_ac43d2cf748d5c052df80179e72c1d355}{state}
+\item 
+\hyperlink{definitions_8h_a1445ebbbf93d62972255ec5e89a5ab01}{uint} \hyperlink{structsys__scheduler__info_a864ef702aee0479b6e9d002c33aafd70}{priority}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+The scheduling information for each process. 
+
+This struct contains all values that are needed for the scheduling algorithm. For instance, if priority based round robin sheduling is used, the process priorities should be stored within this struct. This struced is designed to be reimplemented by the user, if required. 
+
+Definition at line 40 of file scheduler.\+h.
+
+
+
+\subsubsection{Field Documentation}
+\hypertarget{structsys__scheduler__info_a864ef702aee0479b6e9d002c33aafd70}{}\index{sys\+\_\+scheduler\+\_\+info@{sys\+\_\+scheduler\+\_\+info}!priority@{priority}}
+\index{priority@{priority}!sys\+\_\+scheduler\+\_\+info@{sys\+\_\+scheduler\+\_\+info}}
+\paragraph[{priority}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+scheduler\+\_\+info\+::priority}\label{structsys__scheduler__info_a864ef702aee0479b6e9d002c33aafd70}
+process priority level 
+
+Definition at line 42 of file scheduler.\+h.
+
+\hypertarget{structsys__scheduler__info_ac43d2cf748d5c052df80179e72c1d355}{}\index{sys\+\_\+scheduler\+\_\+info@{sys\+\_\+scheduler\+\_\+info}!state@{state}}
+\index{state@{state}!sys\+\_\+scheduler\+\_\+info@{sys\+\_\+scheduler\+\_\+info}}
+\paragraph[{state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} sys\+\_\+scheduler\+\_\+info\+::state}\label{structsys__scheduler__info_ac43d2cf748d5c052df80179e72c1d355}
+Process state information 
+
+Definition at line 41 of file scheduler.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+processes/\hyperlink{scheduler_8h}{scheduler.\+h}\end{DoxyCompactItemize}

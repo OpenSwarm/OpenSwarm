@@ -1,8 +1,7 @@
 /*!
  * \file
  * \ingroup i2c
- * \ingroup io
- * \ingroup epuck
+ * \ingroup hdi
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
  * \version 1.0
  *
@@ -19,7 +18,6 @@
 #include "../../interrupts.h"
 
 /**
- * Initialises the I2C interface
  *
  * This function initialises the I2C interface.
  *
@@ -44,7 +42,6 @@ inline void Sys_Init_I2C_HDI(){
 }
 
 /**
- * Starts the I2C interface
  *
  * This function starts the I2C interface.
  *
@@ -56,7 +53,6 @@ inline void Sys_Start_I2C_HDI(void){
 }
 
 /**
- * pauses the I2C interface
  *
  * This function pauses the I2C interface.
  *
@@ -66,7 +62,6 @@ inline void Sys_Pause_I2C_HDI(void){
 }
 
 /**
- * continues the I2C interface
  *
  * This function continues the I2C interface.
  *
@@ -76,7 +71,6 @@ inline void Sys_Contine_I2C_HDI(void){
 }
 
 /**
- * stops the I2C interface
  *
  * This function stops the I2C interface.
  *
@@ -88,7 +82,6 @@ inline void Sys_Stop_I2C_HDI(void){
 }
 
 /**
- * sends a start bits via the I2C interface
  *
  * This function sends a start bits.
  *
@@ -100,7 +93,6 @@ inline void Sys_I2C_Send_Start_HDI(){
 }
 
 /**
- * sends a restart bits via the I2C interface
  *
  * This function sends a restart bits.
  *
@@ -112,7 +104,6 @@ inline void Sys_I2C_Send_Restart_HDI(void){
 }
 
 /**
- * sends a stop bits via the I2C interface
  *
  * This function sends a stop bits.
  *
@@ -122,7 +113,6 @@ inline void Sys_I2C_Send_Stop_HDI(void){
 }
 
 /**
- * sends a ack bits via the I2C interface
  *
  * This function sends a ack bits.
  *
@@ -138,7 +128,6 @@ inline void Sys_I2C_Send_ACK_HDI(void){
 }
 
 /**
- * sends a nack bits via the I2C interface
  *
  * This function sends a nack bits.
  *
@@ -154,7 +143,6 @@ inline void Sys_I2C_Send_NACK_HDI(void){
 }
 
 /**
- * sends a reading bits via the I2C interface
  *
  * This function sends a reading bits.
  *
@@ -170,7 +158,6 @@ inline void Sys_I2C_Start_Reading_HDI(){
 }
 
 /**
- * reads a byte via the I2C interface
  *
  * This function reads a byte.
  *
@@ -180,11 +167,10 @@ inline char Sys_I2C_ReadByte_HDI(){
 }
 
 /**
- * writes a byte via the I2C interface
  *
  * This function writes a byte.
  *
- * @param byte the byte that has to be written
+ * @param[in] byte the byte that has to be written
  */
 inline void Sys_I2C_WriteByte_HDI(uint8 byte){
     I2CTRN=byte;

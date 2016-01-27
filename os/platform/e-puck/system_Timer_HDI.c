@@ -1,7 +1,6 @@
 /*!
  * \file
- * \ingroup base
- * \ingroup epuck
+ * \ingroup process
  * \ingroup hdi
  * 
  * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
@@ -10,7 +9,7 @@
  *
  * \date 07 July 2014
  * 
- * \brief  Hardware dependent implementations to initialise, configure and the operating system.
+ * \brief  Hardware dependent implementations to initialise, configure and run the system Timer
  * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  * 
  */
@@ -27,7 +26,6 @@
 pFunction sys_process_scheduler = 0; //points to the task scheduling algorithm
 
 /**
- * Function to initialise the system timer
  *
  * This Function sets the Timer0 of the DSPIC 30F6014A for timer interfvals of 10 ms. The timer will be startet with Start_SystemTimer_HDI()
  *
@@ -54,7 +52,6 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
 
 
 /**
- * Function to starts the initialised system timer
  *
  * This Function starts the Timer2 of the DSPIC 30F6014A for timer interfvals of 10 ms. The MUST be initialised first with Init_SystemTimer_HDI()
  *
@@ -68,7 +65,6 @@ void Sys_Start_SystemTimer_HDI(){
 }
 
 /**
- * Activates the Timer2 Interrupt
  *
  * This Function activated the Timer2 Interrupt
  *
@@ -81,7 +77,6 @@ inline void Sys_Stop_SystemTimer_HDI(){
 }
 
 /**
- * Deactivates the Timer2 Interrupt
  *
  * This Function deactivated the Timer2 Interrupt
  *
@@ -94,7 +89,6 @@ inline void Sys_Continue_SystemTimer_HDI(){
 }
 
 /**
- * Resets the Timer2 value to the initial value
  *
  * This Function resets the Timer2 value
  *
@@ -104,7 +98,6 @@ inline void Sys_Reset_SystemTimer_HDI(){
 }
 
 /**
- * Interrupt Service Routine for the Timer2 HDI
  *
  * This Function starts the task-scheduling algorithm
  *
@@ -114,7 +107,6 @@ void __attribute__((interrupt,no_auto_psv)) _T2Interrupt(void){
 }
 
 /**
- * Interrupt Service Routine for the Timer2 HDI (alternate)
  *
  * This Function starts the task-scheduling algorithm
  *
@@ -124,7 +116,6 @@ void __attribute__((interrupt,no_auto_psv)) _AltT2Interrupt(void){
 }
 
 /**
- * Disables the Timer2 interrupt
  *
  * Disables the Timer2 interrupt and sets the interrupt flag to 0
  *
@@ -135,7 +126,6 @@ inline void Sys_Disable_TimerInterrupt_HDI(void){
 }
 
 /**
- * Enables the Timer2 interrupt
  *
  * Enables the Timer2 interrupt and leaves the interrupt flag to its value. If the flag was set, the Timer1 interrupt will be emitted after executing this function.
  *
@@ -145,7 +135,6 @@ inline void Sys_Enable_TimerInterrupt_HDI(void){
 }
 
 /**
- * forces the Timer2 interrupt
  *
  * forces the Timer2 interrupt.
  *
