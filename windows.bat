@@ -1,3 +1,6 @@
+:: local directory
+cd %~dp0
+
 :: create all symbolic links
 cd "os\events"
 mklink /D e-puck "..\platform\e-puck"

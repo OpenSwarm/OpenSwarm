@@ -11,5 +11,5 @@ rm pre-commit
 rm post-merge
 
 # create new links
-ln -s ../.git-hooks/pre-commit pre-commit
-ln -s ../.git-hooks/post-merge post-merge
+ln -s ../../.git-hooks/pre-commit pre-commit
+ln -s ../../.git-hooks/post-merge post-merge
