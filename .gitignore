@@ -1,3 +1,9 @@
+# symbolic links
+os/events/e-puck
+os/io/e-puck
+os/processes/e-puck
+os/platform/e-puck/library
+
 # Object files
 *.o
 *.o.d

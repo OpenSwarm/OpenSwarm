@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# reinitialises the symbolic links for the git hooks
+#
+# This file is executed before "git commit" is executed.
+
+cd .git/hooks
+
+# remove old links
+rm pre-commit
+rm post-merge
+
+# create new links
+ln -s ../.git-hooks/pre-commit pre-commit
+ln -s ../.git-hooks/post-merge post-merge

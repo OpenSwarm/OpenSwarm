@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# reinitialises the symbolic links for the repository
+#
+# This file is executed after the repository was updated.
+
+# remove old links
+rm os/events/e-puck
+rm os/io/e-puck
+rm os/processes/e-puck
+rm os/platform/e-puck/library
+
+# create new links
+ln -s os/platform/e-puck os/events/e-puck
+ln -s os/platform/e-puck os/io/e-puck
+ln -s os/platform/e-puck os/processes/e-puck
+ln -s extern/platform/e-puck/library os/platform/e-puck/library
