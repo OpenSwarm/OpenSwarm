@@ -94,7 +94,7 @@ int16_t main(void)
     while(1){//DO Nothing (do yonly things for testing)
         if(i == 0xFFFE){
             i = 0;
-            //LED7 = ~LED7; 
+            LED7 = ~LED7; 
         }
         i++;
     }

@@ -4,12 +4,28 @@
 #
 # This file is executed after the repository was updated.
 
+# delete existing links
+rm os/events/e-puck
+rm os/io/e-puck
+rm os/processes/e-puck
+rm os/platform/e-puck/library 
+rm .git/hooks/pre-commit 
+rm .git/hooks/post-merge
+
 # create new links
-ln -s os/platform/e-puck os/events/e-puck
-ln -s os/platform/e-puck os/io/e-puck
-ln -s os/platform/e-puck os/processes/e-puck
-ln -s extern/platform/e-puck/library os/platform/e-puck/library
+cd os/events/
+ln -s ../platform/e-puck e-puck
+
+cd ../io/
+ln -s ../platform/e-puck e-puck
+
+cd ../processes/
+ln -s ../platform/e-puck e-puck
+
+cd ../platform/e-puck/
+ln -s ../../../extern/platform/e-puck/library library
 
 # create new git hook links
-ln -s .git-hooks/pre-commit .git/hooks/pre-commit
-ln -s .git-hooks/post-merge .git/hooks/post-merge
+cd ../../../.git/hooks/
+ln -s ../../.git-hooks/pre-commit pre-commit
+ln -s ../../.git-hooks/post-merge post-merge
