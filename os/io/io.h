@@ -58,6 +58,16 @@ extern "C" {
 #endif
 
 #include "../definitions.h"
+
+#include "io_clock.h"
+    
+#ifdef EPUCK_USED
+#include "e-puck/camera.h"
+#include "e-puck/i2c.h"
+#include "e-puck/motors.h"
+#include "e-puck/remoteControl.h"
+#include "e-puck/uart.h"
+#endif
     
 inline void Sys_Init_IOManagement(void);   //initialises the system timer and sets a scheduling algorithm
 inline void Sys_Start_IOManagement(void);

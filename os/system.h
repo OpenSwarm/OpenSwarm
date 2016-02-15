@@ -85,6 +85,9 @@
 #define SYS_CAMERA_USED		 /*!< Define this preprocessor symbol to use the camera */
 #endif
 
+#include "io/io.h"
+#include "events/events.h"
+#include "processes/process_Management.h"
 
 void Sys_Init_Kernel(void);   //initialises the hardware
 void Sys_Start_Kernel(void);    //starts all needed functions

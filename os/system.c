@@ -88,7 +88,7 @@ void Sys_Init_Kernel(){
     Sys_Init_RemoteControl();
 #endif
 #ifdef SYS_CAMERA_USED
-    Sys_Init_Camera();
+   // Sys_Init_Camera();
 #endif
 #endif
 }

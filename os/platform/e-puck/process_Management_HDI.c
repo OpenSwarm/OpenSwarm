@@ -213,22 +213,26 @@ void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsi
 
     Sys_Start_AtomicSection();
     
-    __asm__("MOV W0, [W1++]\n\t"   );//push frame pointer to the stack
-    __asm__("MOV W1, W0\n\t"   );//set the framepointer to the TOS
-    __asm__("ULNK\n\t"   );//remove waste from Sys_Change_Stack
 
-    __asm__("NOTEMPTY: MOV [W14++],[W1++]\n\t"//copy all values for the underlying function into the stack
-                      "CP W14,W15\n\t"
-                      "BRA LT, NOTEMPTY\n\t"   );
-
-    __asm__("MOV W0, W14\n\t"   );//set new stackpointers
-    __asm__("MOV W1, W15\n\t"   );
-    __asm__("MOV W2, SPLIM\n"   );
-    __asm__("PUSH W14\n\t"   );//save framepointer
-    __asm__("MOV W15, W14\n\t"   );//set framepointer to local stack
-    __asm__("PUSH W0\n\t"   );//push all local variables into the stack
-    __asm__("PUSH W1\n\t"   );
-    __asm__("PUSH W2\n\t"   );
+    __asm__ __volatile__ (
+            "MOV %0, [%1++]\n\t" //push frame pointer to the stack
+            "MOV %1, %0\n\t" //set the framepointer to the TOS
+            "ULNK\n\t" //remove waste from Sys_Change_Stack
+            "NOTEMPTY: MOV [W14++],[%1++]\n\t"//copy all values for the underlying function into the stack
+            "CP W14,W15\n\t"
+            "BRA LT, NOTEMPTY\n\t"
+            "MOV %0, W14\n\t" //set new stackpointers
+            "MOV %1, W15\n\t"
+            "MOV %2, SPLIM\n"
+            "PUSH W14\n\t" //save framepointer
+            "MOV W15, W14\n\t" //set framepointer to local stack
+            "PUSH %0\n\t" //push all local variables into the stack
+            "PUSH %1\n\t"
+            "PUSH %2\n\t" 
+        : 
+        : "r" (fp), "r" (sp), "r" (lm) 
+        : 
+    );
     
     Sys_End_AtomicSection();
     //__asm__("RETURN\n"   );

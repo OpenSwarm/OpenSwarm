@@ -22,10 +22,6 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-
-#include "os/definitions.h"
-
-
 #include <stdint.h>        /* Includes uint16_t definition                    */
 #include <stdlib.h>
 #include <stdbool.h>       /* Includes true/false definition                  */
@@ -33,14 +29,7 @@
 
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
 
-/*
-#include "system_Events.h"
 
-#include "system_IO_motors.h"
-#include "system_IO_uart.h"
-#include "system_IO_remoteControl.h"
-#include "system_IO_clock.h"
-*/
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -51,14 +40,20 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
-/*
-void bluetooth_reader(uint8 data);
-bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data);
+//void bluetooth_reader(uint8 data);
+//bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data);
 
 void loggingThread();
+void thread1();
+void thread2();
+void thread3();
+void thread4();
+void thread5();
+void thread6();
+void thread7();
 bool wait250times(void *data);
-bool object_clustering(uint16 pid, uint16 eventID, sys_event_data *data);
-*/
+//bool object_clustering(uint16 pid, uint16 eventID, sys_event_data *data);
+
 
 int16_t main(void)
 {
@@ -68,13 +63,22 @@ int16_t main(void)
     Sys_Init_Kernel();
     
     //Sys_SetReadingFunction_UART1(bluetooth_reader);
-    //Sys_Start_Process(loggingThread);
+    if(     !Sys_Start_Process(thread1) ||
+            !Sys_Start_Process(thread2) ||
+            !Sys_Start_Process(thread3) ||
+            !Sys_Start_Process(thread4) ||
+            !Sys_Start_Process(thread5) ||
+            !Sys_Start_Process(thread6) ||
+            !Sys_Start_Process(thread7)
+      ){
+        
+        FRONT_LED = 1;
+    }
     //Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
     //Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
-    
+
     Sys_Start_Kernel();
 
-    /*
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -85,16 +89,15 @@ int16_t main(void)
     LED7 = 0;
     BODY_LED = 0;
     FRONT_LED = 0;
-    */
+    
     //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
     //Sys_Clear_EventData(&data);
-    
-    unsigned int i = 0;
-    
-    while(1){//DO Nothing (do yonly things for testing)
+      
+    int i = 0;  
+    while(true){//DO Nothing (do yonly things for testing)
         if(i == 0xFFFE){
             i = 0;
-            //LED7 = ~LED7; 
+            LED0 = ~LED0; 
         }
         i++;
     }
@@ -193,16 +196,94 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
     
     return true;
 }
-
+*/
 void loggingThread(){
-    static char message[24];
+    //static char message[24];
     while(true){
-        uint16 length = 0;
-        length = sprintf(message, "\%u:(\%3u,\%3u)\r\n", Sys_Get_SystemTime(), Sys_Get_LeftWheelSpeed(), Sys_Get_RightWheelSpeed());
-        Sys_Writeto_UART1(message, length);//send via Bluetooth
+        //uint16 length = 0;
+        //length = sprintf(message, "\%u:(\%3u,\%3u)\r\n", Sys_Get_SystemTime(), Sys_Get_LeftWheelSpeed(), Sys_Get_RightWheelSpeed());
+        //Sys_Writeto_UART1(message, length);//send via Bluetooth
     
-        sys_event_data *data = Sys_Wait_For_Condition(SYS_EVENT_1ms_CLOCK, &wait250times);
-        Sys_Clear_EventData(&data);
+        uint i = 0;
+    
+        while(true){//DO Nothing (do yonly things for testing)
+            if(i == 0xFFFE){
+                i = 0;
+                LED4 = ~LED4; 
+            }
+            i++;
+        }
+    } 
+}
+
+void thread1(){
+    uint i = 0;    
+    while(true){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED1 = ~LED1; 
+        }
+        i++;
+    } 
+}
+void thread2(){
+    uint i = 0;    
+    while(true){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED2 = ~LED2; 
+        }
+        i++;
+    } 
+}
+void thread3(){
+    uint i = 0;    
+    while(true){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED3 = ~LED3; 
+        }
+        i++;
+    } 
+}
+void thread4(){
+    uint i = 0;    
+    while(true){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED4 = ~LED4; 
+        }
+        i++;
+    } 
+}
+void thread5(){
+    uint i = 0;    
+    while(true){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED5 = ~LED5; 
+        }
+        i++;
+    } 
+}
+void thread6(){
+    uint i = 0;    
+    while(true){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED6 = ~LED6; 
+        }
+        i++;
+    } 
+}
+void thread7(){
+    uint i = 0;    
+    while(true){//DO Nothing (do yonly things for testing)
+        if(i == 0xFFFE){
+            i = 0;
+            LED7 = ~LED7; 
+        }
+        i++;
     } 
 }
 
@@ -214,4 +295,4 @@ bool wait250times(void *data){
     counter = 0;
     return true;
 }
- * */
+
