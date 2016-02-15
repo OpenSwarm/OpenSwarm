@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="62">
+  <projectmakefile>Makefile</projectmakefile>
+  <defaultConf>0</defaultConf>
+  <confs>
+    <conf name="XC16_dsPIC30F6014A" type="2">
+      <platformToolSN>:=MPLABComm-USB-Microchip:=&lt;vid>04D8:=&lt;pid>900A:=&lt;rev>0002:=&lt;man>Microchip Technology Inc.:=&lt;prod>PICkit 3:=&lt;sn>BUR112827363:=&lt;drv>x:=&lt;xpt>h:=end</platformToolSN>
+<<<<<<< HEAD
+      <languageToolchainDir>/opt/microchip/xc16/v1.25/bin</languageToolchainDir>
+=======
+      <languageToolchainDir>/opt/microchip/xc16/v1.24/bin</languageToolchainDir>
+>>>>>>> 70407892af3ae914b163731d5db248555f030994
+      <mdbdebugger version="1">
+        <placeholder1>place holder 1</placeholder1>
+        <placeholder2>place holder 2</placeholder2>
+      </mdbdebugger>
+      <runprofile version="6">
+        <args></args>
+        <rundir></rundir>
+        <buildfirst>true</buildfirst>
+        <console-type>0</console-type>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

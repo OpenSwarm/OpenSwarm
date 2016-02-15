@@ -22,13 +22,13 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-
 #include <stdint.h>        /* Includes uint16_t definition                    */
 #include <stdlib.h>
 #include <stdbool.h>       /* Includes true/false definition                  */
 #include <stdio.h>
 
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
+
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -40,6 +40,9 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
+//void bluetooth_reader(uint8 data);
+//bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data);
+
 void loggingThread();
 void thread1();
 void thread2();
@@ -49,6 +52,8 @@ void thread5();
 void thread6();
 void thread7();
 bool wait250times(void *data);
+//bool object_clustering(uint16 pid, uint16 eventID, sys_event_data *data);
+
 
 int16_t main(void)
 {
@@ -71,7 +76,7 @@ int16_t main(void)
     }
     //Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
     //Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
-    
+
     Sys_Start_Kernel();
 
     LED0 = 0;
@@ -92,7 +97,11 @@ int16_t main(void)
     while(true){//DO Nothing (do yonly things for testing)
         if(i == 0xFFFE){
             i = 0;
+<<<<<<< HEAD
             LED0 = ~LED0; 
+=======
+            LED7 = ~LED7; 
+>>>>>>> 70407892af3ae914b163731d5db248555f030994
         }
         i++;
     }
