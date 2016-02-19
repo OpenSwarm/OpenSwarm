@@ -1,0 +1,267 @@
+\documentclass[10pt,english,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage[landscape]{geometry}
+\usepackage{color,graphicx,overpic}
+
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{amsfonts}
+\usepackage{array,booktabs}
+\usepackage{textcomp}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{environ}
+
+\usetikzlibrary{calc}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\geometry{top=-0.5cm,left=1cm,right=1cm,bottom=1cm}
+
+\pagestyle{empty} % Turn off header and footer
+
+% \renewcommand\rmdefault{phv} % Arial
+% \renewcommand\sfdefault{phv} % Arial
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%x
+  {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+  {-1explus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {1ex plus .2ex}%
+  {\normalfont\small\bfseries}}
+\makeatother
+
+\setcounter{secnumdepth}{0} % Don't print section numbers
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+\definecolor{TableHead}{rgb}{0.353, 0.329, 0.667}
+\definecolor{TableRow}{rgb}{0.816, 0.812, 0.902}
+
+\NewEnviron{keys}[1]{
+  % \begin{center}
+  \smallskip
+  \begin{tikzpicture}
+      \rowcolors{1}{}{TableRow}
+      \centering
+      \node (tbl) [inner sep=0pt] {
+        \begin{tabular}{p{4.2cm}p{3.25cm}}
+          \rowcolor{TableHead}
+          \multicolumn{2}{l}{\normalsize\textbf{\color{white}{#1}}}\parbox{0pt}{\rule{0pt}{0.3ex+\baselineskip}}\\
+          \BODY
+          \arrayrulecolor{TableHead}\specialrule{.17em}{0em}{.2em}
+        \end{tabular}};
+      \begin{pgfonlayer}{background}
+        \draw[rounded corners=2pt,top color=TableHead,bottom color=TableHead, draw=white]
+        ($(tbl.north west)-(0,-0.05)$) rectangle ($(tbl.north east)-(0.0,0.15)$);
+        \draw[rounded corners=2pt,top color=TableHead,bottom color=TableHead, draw=white]
+        ($(tbl.south west)-(0.0,-0.11)$) rectangle ($(tbl.south east)-(-0.0,-0.02)$);
+      \end{pgfonlayer}
+    \end{tikzpicture}
+  % \end{center}
+}
+
+\begin{document}
+
+\raggedright\
+
+\begin{center}
+  \Large{OpenSwarm - Cheat Sheet}
+\end{center}
+
+\footnotesize
+\begin{multicols}{3}
+
+  \centering\section{Basic}
+
+  \begin{keys}{Glossary}
+    Control (Ctrl) key  & \texttt{C} \\
+    Alt (Meta) key      & \texttt{M} \\
+    Shift key           & \texttt{S} \\
+    Command (Super) key & \texttt{CMD} \\
+    Function (Fn) key   & \texttt{fn} \\
+    Home/end            & \texttt{fn-left / fn-right} \\
+  \end{keys}
+
+  \begin{keys}{Basic}
+    Execute command by name          & \texttt{M-x} \\
+    Cancel command                   & \texttt{C-g} \\
+    Exit Emacs                       & \texttt{C-x C-c} \\
+    Help: describe a key combination & \texttt{C-h k} \\
+    Help: describe a function        & \texttt{C-h f} \\
+  \end{keys}
+
+  \begin{keys}{Navigation}
+    Previous/next character      & \texttt{C-b / C-f} \\
+    Previous/next line           & \texttt{C-p / C-n} \\
+    Previous/next word           & \texttt{M-left / M-right} \\
+    Previous/next current symbol & \texttt{M-a / M-e} \\
+    Previous/next s-expression   & \texttt{C-M-b / C-M-f} \\
+    Previous/next defun          & \texttt{C-M-a / C-M-e} \\
+    Previous/next page           & \texttt{C-v / M-v} \\
+    Beginning/end of line        & \texttt{C-a / C-e} \\
+    Beginning/end of file        & \texttt{M-S-, / M-S-.} \\
+  \end{keys}
+
+  \begin{keys}{Mark}
+    Select region while navigating & Hold Shift \\
+    Select next s-expression       & \texttt{M-S-Space} \\
+  \end{keys}
+
+  \begin{keys}{Files}
+    Find (open) file                  & \texttt{C-x C-f} \\
+    Save file                         & \texttt{C-x C-s} \\
+    Don't suggest names in minibuffer & \texttt{C-f} \\
+    Find recent file                  & \texttt{M-m} \\
+    Find file in project              & \texttt{M-i} \\
+  \end{keys}
+
+  \begin{keys}{Search}
+    Search forward, next match         & \texttt{C-s} \\
+    Search backward, prev match        & \texttt{C-r} \\
+    Occur (show all matches)           & \texttt{M-o} \\
+    Grep                               & \texttt{M-x rgrep} \\
+    Interactive grep in project (Helm) & \texttt{M-h} \\
+    Helm-grep: preview match at point  & \texttt{C-z} \\
+  \end{keys}
+
+  \begin{keys}{Replace}
+    Interactive replace        & \texttt{M-\%} \\
+    Replace current occurrence & \texttt{y} \\
+    Skip current occurrence    & \texttt{n} \\
+    Replace all occurrences    & \texttt{!} \\
+  \end{keys}
+
+  \columnbreak\
+
+  \begin{keys}{Buffers}
+    Previous/next buffer & \texttt{C-, / C-.} \\
+    Jump to buffer       & \texttt{C-x b / M-m} \\
+    List buffers         & \texttt{C-x C-l} \\
+    Kill buffer          & \texttt{C-x k} \\
+  \end{keys}
+
+  \begin{keys}{Editing}
+    Kill current symbol         & \texttt{C-d} \\
+    Kill line                   & \texttt{C-k} \\
+    Cut to clipboard            & \texttt{C-w / CMD-x} \\
+    Copy to clipboard           & \texttt{M-w / CMD-c} \\
+    Paste from clipboard        & \texttt{C-y / CMD-v} \\
+    Cycle through clipboard     & \texttt{M-y} \\
+    Undo                        & \texttt{C-z / CMD-z} \\
+    Redo                        & \texttt{M-z / CMD-y} \\
+    Indent line                 & \texttt{TAB} \\
+    Complete filename in buffer & \texttt{M-/} \\
+    Comment or uncomment region & \texttt{M-;} \\
+  \end{keys}
+
+  \begin{keys}{Windows}
+    Leave one window            & \texttt{C-x 1} \\
+    Split window horizontally   & \texttt{C-x 2} \\
+    Split window vertically     & \texttt{C-x 3} \\
+    Jump cursor to other window & \texttt{C-x o} \\
+  \end{keys}
+
+  \begin{keys}{Miscellaneous}
+    Ediff                                & \texttt{M-x ediff} \\
+    Ediff two opened buffers             & \texttt{C-c d} \\
+    Multiple cursors: mark all like this & \texttt{C-x m} \\
+  \end{keys}
+
+  \centering\section{Lisp}
+
+  \begin{keys}{SLIME}
+    Connect                           & \texttt{M-x slime-connect} \\
+    Switch to next connection         & \texttt{M-x slime-selector n} \\
+    Jump to REPL buffer               & \texttt{C-c C-z} \\
+    Jump to function definition       & \texttt{M-.} \\
+    Jump back from definition         & \texttt{M-,} \\
+    Evaluate last s-expression        & \texttt{C-x C-e} \\
+    Compile current defun             & \texttt{C-c C-c} \\
+    Compile current pattern           & \texttt{C-c C-k} \\
+    REPL:\ previous/next history item & \texttt{M-p / M-n} \\
+  \end{keys}
+
+  \begin{keys}{Paredit}
+    Wrap s-expression                    & \texttt{M-(} \\
+    Splice s-expression                  & \texttt{M-s} \\
+    Splice s-expression killing backward & \texttt{M-up} \\
+    Raise s-expression                   & \texttt{M-r} \\
+    Kill s-expression                    & \texttt{C-M-k} \\
+    Kill balanced to the end of line     & \texttt{C-k} \\
+    Split s-expression                   & \texttt{M-S-s} \\
+    Barf/slurp forward                   & \texttt{C-left / C-right} \\
+  \end{keys}
+
+  \columnbreak\
+
+  \centering\section{Version control}
+
+  \begin{keys}{Magit status}
+    Magit status                      & \texttt{C-x g} \\
+    Move up/down                      & \texttt{p / n} \\
+    Change current section visibility & \texttt{1 / 2 / 4} \\
+    Change all sections visibility    & \texttt{M-1 / M-2 / M-4} \\
+    Collapse or expand section        & \texttt{TAB} \\
+    Stage file or chunk               & \texttt{s} \\
+    Unstage file or chunk             & \texttt{u} \\
+    Discard uncommited file or chunk  & \texttt{k} \\
+    Commit staged                     & \texttt{c c} \\
+    Commit mode: confirm commit       & \texttt{C-c C-c} \\
+    Commit mode: cancel commit        & \texttt{C-c C-a} \\
+    Pull into current branch          & \texttt{F F} \\
+    Push current branch               & \texttt{P P} \\
+    Merge into current branch         & \texttt{m m} \\
+    Show process buffer               & \texttt{\$} \\
+    Quit                              & \texttt{q} \\
+  \end{keys}
+
+  \begin{keys}{Magit branches}
+    Checkout branch              & \texttt{b b} \\
+    Create branch                & \texttt{b B} \\
+    List branches                & \texttt{y} \\
+    Branch list: checkout branch & \texttt{Enter} \\
+  \end{keys}
+
+  \begin{keys}{Magit log}
+    Show log of current branch     & \texttt{l l} \\
+    Show log of all local branches & \texttt{l L} \\
+    Show commit at point           & \texttt{Enter} \\
+  \end{keys}
+
+  \begin{keys}{Magit stash}
+    Stash working tree changes & \texttt{z z} \\
+    Apply stash at point       & \texttt{A} \\
+    Inspect stash at point     & \texttt{Enter} \\
+    Delete stash at point      & \texttt{k} \\
+  \end{keys}
+
+  \begin{keys}{Revisions and blame}
+    Annotate current file            & \texttt{M-x vc-annotate} \\
+    Annotate: hide metadata          & \texttt{v} \\
+    Annotate: previous/next revision & \texttt{p / n} \\
+    Annotate: quit                   & \texttt{q} \\
+    Time machine for current file    & \texttt{C-F8} \\
+    Time-machine: prev/next revision & \texttt{p / n} \\
+    Time-machine: quit               & \texttt{q} \\
+  \end{keys}
+
+\end{multicols}
+
+\end{document}

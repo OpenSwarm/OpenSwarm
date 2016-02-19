@@ -1,0 +1,488 @@
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage{fancyhdr}           % For header and footer
+\usepackage{multicol}           % Allows multicols in tables
+\usepackage{tabularx}           % Intelligent column widths
+\usepackage{tabulary}           % Used in header and footer
+\usepackage{hhline}             % Border under tables
+\usepackage{graphicx}           % For images
+\usepackage{xcolor}             % For hex colours
+%\usepackage[utf8x]{inputenc}    % For unicode character support
+\usepackage[T1]{fontenc}        % Without this we get weird character replacements
+\usepackage{colortbl}           % For coloured tables
+\usepackage{setspace}           % For line height
+\usepackage{lastpage}           % Needed for total page number
+\usepackage{seqsplit}           % Splits long words.
+%\usepackage{opensans}          % Can't make this work so far. Shame. Would be lovely.
+\usepackage[normalem]{ulem}     % For underlining links
+% Most of the following are not required for the majority
+% of cheat sheets but are needed for some symbol support.
+\usepackage{amsmath}            % Symbols
+\usepackage{MnSymbol}           % Symbols
+\usepackage{wasysym}            % Symbols
+\usepackage[english,german]{babel}              % Languages
+\usepackage[draft]{hyperref}
+\usepackage{xspace}%to have an optional space after a \OS
+
+
+\newcommand{\OS}{\href{http://www.OpenSwarm.org}{OpenSwarm}\xspace}
+\newcommand{\me}{\href{http://trenkwalder.tech}{Stefan M. Trenkwalder}\xspace}
+\newcommand{\version}{v0.15.9.15\xspace}
+\newcommand{\license}{\href{http://openswarm.org/license/}{adapted FreeBSD License}\xspace}
+
+% Document Info
+\author{Stefan M. Trenkwalder}
+\pdfinfo{
+  /Title (OpenSwarm - Cheat Sheet)
+  /Creator (OpenSwarm)
+  /Author (Stefan M. Trenkwalder - http://trenkwalder.tech)
+  /Subject (OpenSwarm Cheat Sheet)
+}
+
+% Lengths and widths
+\addtolength{\textwidth}{6cm}
+\addtolength{\textheight}{-1cm}
+\addtolength{\hoffset}{-3cm}
+\addtolength{\voffset}{-2cm}
+\setlength{\tabcolsep}{0.2cm} % Space between columns
+\setlength{\headsep}{-12pt} % Reduce space between header and content
+\setlength{\headheight}{85pt} % If less, LaTeX automatically increases it
+\renewcommand{\footrulewidth}{0pt} % Remove footer line
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\renewcommand{\seqinsert}{\ifmmode\allowbreak\else\-\fi} % Hyphens in seqsplit
+% This two commands together give roughly
+% the right line height in the tables
+\renewcommand{\arraystretch}{1.3}
+\onehalfspacing
+
+% Commands
+\newcommand{\SetRowColor}[1]{\noalign{\gdef\RowColorName{#1}}\rowcolor{\RowColorName}} % Shortcut for row colour
+\newcommand{\mymulticolumn}[3]{\multicolumn{#1}{>{\columncolor{\RowColorName}}#2}{#3}} % For coloured multi-cols
+\newcolumntype{x}[1]{>{\raggedright}p{#1}} % New column types for ragged-right paragraph columns
+\newcommand{\tn}{\tabularnewline} % Required as custom column type in use
+
+% Font and Colours
+\definecolor{HeadBackground}{HTML}{333333}
+\definecolor{FootBackground}{HTML}{666666}
+\definecolor{TextColor}{HTML}{333333}
+\definecolor{DarkBackground}{HTML}{0348A3}
+\definecolor{LightBackground}{HTML}{D4DFEF}
+\renewcommand{\familydefault}{\sfdefault}
+\color{TextColor}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhead{} % Set header to blank
+\fancyfoot{} % Set footer to blank
+
+\fancyhead[L]{
+\noindent
+\begin{multicols}{2}
+\begin{tabulary}{5.8cm}{C}
+    \SetRowColor{DarkBackground}
+    \vspace{-7pt}
+    {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\noindent
+       \hspace*{-6pt}\includegraphics[width=2cm]{../img/openswarm_logo.png}
+    }
+\end{tabulary}
+\columnbreak
+\begin{tabulary}{11cm}{L}
+    \vspace{-2pt}\large{\bf{\textcolor{DarkBackground}{\textrm{\OS Cheat Sheet}}}} \\
+    \normalsize{by \textcolor{DarkBackground}{\me} via \textcolor{DarkBackground}{\uline{\url{http://openswarm.org}}}}
+\end{tabulary}
+\end{multicols}}
+
+\fancyfoot[L]{ \footnotesize
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{LL}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{2}{p{5.377cm}}{\bf\textcolor{white}{\OS}} \\
+  {An event-driven and pre-emptive operating system for miniature robots}  \\
+  \vspace{-2pt}\url{http://openswarm.org}\\
+  \end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Cheat Sheet}}  \\
+   \vspace{-2pt} 19th February, 2016.\\
+   Page {\thepage} of \pageref{LastPage}.
+\end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Author}}  \\
+  \SetRowColor{white}
+  \vspace{-5pt}
+  %\includegraphics[width=48px,height=48px]{dave.jpeg}
+  \me\\
+  \url{http://trenkwalder.tech}
+\end{tabulary}
+\end{multicols}}
+
+
+
+
+\begin{document}
+\raggedright
+\raggedcolumns
+
+% Set font size to small. Switch to any value
+% from this page to resize cheat sheet text:
+% www.emerson.emory.edu/services/latex/latex_169.html
+\footnotesize % Small font.
+
+\begin{multicols*}{2}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Legende}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{{\bf{STRG + x \textgreater{} y}} Bedeutet das die STRG-Taste und die Taste für den jeweilig ersten Buchstaben drücken, gefolgt vom zweiten Buchstaben nach der spitzen Klammer} \tn 
+% Row Count 4 (+ 4)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{{\bf{Fettgeschriebenes}} sind T{\"a}tigkeiten, welche ausgeführt werden müssen bevor der Shortcut arbeitet.} \tn 
+% Row Count 7 (+ 3)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{{\emph{Schr{\"a}ggestellter Text}} bezeichnet Tastatureingaben, die vom User abh{\"a}ngig sind.} \tn 
+% Row Count 9 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Bemerkungen}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Wenn hinter einem Shortcut erw{\"a}hnt wird, dass dieser nur auf englischen Tastaturen funktioniert, so liegt dies daran, das Sublime die Anschl{\"a}ge direkt von der Tastatur nimmt und nicht vom System. Wird ein Shortcut für das eigene Tastaturlayout ben{\"o}tigt muss man sich diese Shortcuts selbst definieren. Wie dies geht, steht in der (engl.) Dokumentation. Auf der deutschen Sublime Seite \{\{link="http://sublime.pixel-anarchy.de"\}\}sublime.pixel-anarchy.de\{\{/link\}\} ist dieser Punkt noch nicht vorhanden, wird aber bald als Tutorial dort zu finden sein.% Row Count 12 (+ 12)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{4.48 cm} x{3.52 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Grundfunktionen}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Akt. Auswahl kopieren & STRG + c \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+Akt. Zwischenablage einfügen & STRG + v \tn 
+% Row Count 3 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+Zwischenablage mit richtigem Einzug einfügen & STRG + SHIFT + v \tn 
+% Row Count 6 (+ 3)
+% Row 3
+\SetRowColor{white}
+Undo/Redo & STRG + Z / STRG + B \tn 
+% Row Count 8 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+Auswahl "Autocomplete Vorschl{\"a}ge" best{\"a}tigen & STRG + SPACE \tn 
+% Row Count 11 (+ 3)
+% Row 5
+\SetRowColor{white}
+Akt. Zeile einrücken & STRG + {]} (nur engl. Tastaturen) \tn 
+% Row Count 13 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+Einrückung der akt. Zeile entfernen & STRG + {[} (nur engl. Tastaturen) \tn 
+% Row Count 15 (+ 2)
+% Row 7
+\SetRowColor{white}
+Akt. Zeile mit übergeordneter vertauschen & STRG + \{\{fa-arrow-up\}\} \tn 
+% Row Count 17 (+ 2)
+% Row 8
+\SetRowColor{LightBackground}
+Akt. Zeile mit daruntereliegender vertauschen & STRG + \{\{fa-arrow-down\}\} \tn 
+% Row Count 20 (+ 3)
+% Row 9
+\SetRowColor{white}
+N{\"a}chsten Buchstaben l{\"o}schen & entf \tn 
+% Row Count 22 (+ 2)
+% Row 10
+\SetRowColor{LightBackground}
+vorhergehenden Buchstaben l{\"o}schen & Backspace \tn 
+% Row Count 24 (+ 2)
+% Row 11
+\SetRowColor{white}
+N{\"a}chstes Wort l{\"o}schen & STRG + entf \tn 
+% Row Count 26 (+ 2)
+% Row 12
+\SetRowColor{LightBackground}
+Vorhergehendes Wort l{\"o}schen & STRG + Backspace \tn 
+% Row Count 28 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{3.68 cm} x{4.32 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{GUI und Layout}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Schriftgr{\"o}{\ss}e erh{\"o}hen & STRG + "+" \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+Schriftgr{\"o}{\ss}e verringern & STRG + "-" \tn 
+% Row Count 4 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+Zu Panel wechseln & STRG + {\bf{Panel Nummer}} \tn 
+% Row Count 6 (+ 2)
+% Row 3
+\SetRowColor{white}
+Datei auf anderes Panel setzen & STRG + SHIFT + {\bf{Panel Nummer}} \tn 
+% Row Count 8 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+Vollbild & F11 \tn 
+% Row Count 9 (+ 1)
+% Row 5
+\SetRowColor{white}
+Ablenkungsfreier Modus & SHIFT + F11 \tn 
+% Row Count 11 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+Konsole \seqsplit{anzeigen/verbergen} & STRG + ` (nur auf engl. Tastaturen) \tn 
+% Row Count 13 (+ 2)
+% Row 7
+\SetRowColor{white}
+Sidebar \seqsplit{anzeigen/verbrergen} & STRG + k \textgreater{} b \tn 
+% Row Count 15 (+ 2)
+% Row 8
+\SetRowColor{LightBackground}
+1/2/3/4-Spalten Layout & ALT + SHIFT + 1 ... 4 \tn 
+% Row Count 17 (+ 2)
+% Row 9
+\SetRowColor{white}
+2/3-Zeilen Layout & ALT + SHIFT + 8/9 \tn 
+% Row Count 18 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+x2 Grid Layout & ALT + SHIFT + 5 \tn 
+% Row Count 19 (+ 1)
+% Row 11
+\SetRowColor{white}
+Neues Fenster & STRG + SHIFT + n \tn 
+% Row Count 20 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{2.56 cm} x{5.44 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Code einklappen}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Sektion einklappen & STRG + SHIFT+ {[} (nur engl. Tastaturen) \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+Sektion ausklappen & STRG + SHIFT + {]} (nur engl. Tastaturen) \tn 
+% Row Count 4 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+Alles einklappen & STRG + k \textgreater{} 1 \tn 
+% Row Count 6 (+ 2)
+% Row 3
+\SetRowColor{white}
+Alles ausklappen & STRG + k \textgreater{} j \tn 
+% Row Count 8 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+\seqsplit{Einklapplevel} & STRG + 2 ... 9 \tn 
+% Row Count 10 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{3.92 cm} x{4.08 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Navigation}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Neue Datei & STRG + n \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+Datei {\"o}ffnen & STRG + o \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+Aktuellen Reiter schliessen & STRG + w \tn 
+% Row Count 4 (+ 2)
+% Row 3
+\SetRowColor{white}
+Öffne "Goto Anything" Panel & STRG + p \tn 
+% Row Count 6 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+Reiter wechseln & STRG +  {\emph{Reiternummer}} \tn 
+% Row Count 8 (+ 2)
+% Row 5
+\SetRowColor{white}
+Gehe zu Zeile in aktuellem Reiter & STRG + G \tn 
+% Row Count 10 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+Gehe zu Zeile in anderem Dokument & STRG + p \textgreater{} {\emph{Dateiname}} {\bf{:}} {\emph{Zeile}} \tn 
+% Row Count 12 (+ 2)
+% Row 7
+\SetRowColor{white}
+Zum n{\"a}chsten Reiter wechseln & STRG + Bild \{\{fa-arrow-down\}\} \tn 
+% Row Count 14 (+ 2)
+% Row 8
+\SetRowColor{LightBackground}
+Zum vorhergeehenden Reiter wechseln & STRG + Bild \{\{fa-arrow-up\}\} \tn 
+% Row Count 16 (+ 2)
+% Row 9
+\SetRowColor{white}
+Springen zwischen den Reitern & STRG + Tabulator \tn 
+% Row Count 18 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{4 cm} x{4 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Auswahlen}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Multiauswahlen & STRG + {\bf{Linksklick}} \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+W{\"a}hl die akt. Zeile aus & STRG + l \tn 
+% Row Count 4 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+W{\"a}hlt das Wort an der akt. Coursorposition aus. & STRG + d \tn 
+% Row Count 7 (+ 3)
+% Row 3
+\SetRowColor{white}
+Mehrfaches drücken von STRG + d & Fügt jeweils die n{\"a}chste Wiederholung des akt. Wortes ein \tn 
+% Row Count 10 (+ 3)
+% Row 4
+\SetRowColor{LightBackground}
+N{\"a}chste Wiederholung nicht ausw{\"a}hlen & STRG + u \tn 
+% Row Count 12 (+ 2)
+% Row 5
+\SetRowColor{white}
+W{\"a}hlt alles zwischen Klammern aus & STRG + SHIFT + m \tn 
+% Row Count 14 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+Akt. Auswahl mit \textless{}p\textgreater{} Tag umhüllen & STRG + SHIFT + w \tn 
+% Row Count 16 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{3.76 cm} x{4.24 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Suchen und Ersetzen}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Suchpanel {\"o}ffnen & STRG + f \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+Suche in allen Dateien {\"o}ffnen & STRG + SHIFT + f \tn 
+% Row Count 3 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+N{\"a}chstes Ergebnis ausw{\"a}hlen & F3 \tn 
+% Row Count 5 (+ 2)
+% Row 3
+\SetRowColor{white}
+Vorhergehendes Ergebnis ausw{\"a}hlen & SHIFT + F3 \tn 
+% Row Count 7 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+Suchen und Ersetzen Panel {\"o}ffnen & STRG + h \tn 
+% Row Count 9 (+ 2)
+% Row 5
+\SetRowColor{white}
+Ausgew{\"a}hltes ersetzen & ALT + F3 \tn 
+% Row Count 11 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+Inkrementielle Suche & STRG + i \tn 
+% Row Count 13 (+ 2)
+% Row 7
+\SetRowColor{white}
+Auswahl nutzen um Feld zu finden & STRG + e (nur engl. Tastaturen) \tn 
+% Row Count 15 (+ 2)
+% Row 8
+\SetRowColor{LightBackground}
+Auswahl nutzen um Feld zu ersetzen & STRG + SHIFT + e (nur engl. Tastaturen) \tn 
+% Row Count 17 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{4 cm} x{4 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Editing}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Zeile ausschneiden & {\bf{Cursor an den Anfang der Zeile setzten}} STRG + x \tn 
+% Row Count 3 (+ 3)
+% Row 1
+\SetRowColor{white}
+Akt. Zeile ausschneiden & STRG + SHIFT + k \tn 
+% Row Count 5 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+In akt. Zeile alles vor dem Cursor ausschneiden & STRG + k \textgreater{} BACKSPACE \tn 
+% Row Count 8 (+ 3)
+% Row 3
+\SetRowColor{white}
+In akt. Zeile alles nach dem Cursor ausschneiden & STRG + k \textgreater{} k \tn 
+% Row Count 11 (+ 3)
+% Row 4
+\SetRowColor{LightBackground}
+Blockkommentar & {\bf{Inhalt ausw{\"a}hlen und}} STRG + / (nur engl. Tastaturen) \tn 
+% Row Count 14 (+ 3)
+% Row 5
+\SetRowColor{white}
+Kommentar & {\bf{Cursor an den Anfang der Zeile setzten und}} STRG + / (nur engl. Tastaturen) \tn 
+% Row Count 18 (+ 4)
+% Row 6
+\SetRowColor{LightBackground}
+Zeile duplizieren & STRG + SHIFT + d \tn 
+% Row Count 19 (+ 1)
+% Row 7
+\SetRowColor{white}
+Nachfolgende Zeile an akt. Zeile anh{\"a}ngen & STRG + j \tn 
+% Row Count 22 (+ 3)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{US Keyboard Layout}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{p{8.4cm}}{\vspace{1px}\centerline{%\includegraphics[width=5.1cm]{/web/www.cheatography.com/public/uploads/the-exilant_1455809934_teclatUKok.png}
+}} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+
+% That's all folks
+\end{multicols*}
+
+\end{document}

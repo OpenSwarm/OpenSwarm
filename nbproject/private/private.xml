@@ -4,11 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/process_Management_HDI.c</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/motors_HDI.c</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/motors.c</file>
             <file>file:/home/strenkwalder/code/os/main.c</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/process_Management.c</file>
-            <file>file:/home/strenkwalder/code/os/os/system.c</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/traps.c</file>
+            <file>file:/home/strenkwalder/code/os/os/definitions.h</file>
         </group>
     </open-files>
 </project-private>

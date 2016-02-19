@@ -251,6 +251,8 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
         return;//How stupid
     }
 
+    Sys_Start_AtomicSection();
+    
     Sys_Save_Running_Process_HDI();//save all registers
 
     Sys_Change_Stack_HDI(new_process->pcb.framePointer, new_process->pcb.stackPointer, new_process->pcb.stackPointerLimit);//change stack to the new stack
@@ -264,6 +266,8 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
         new_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_RUNNING;
         sys_running_process = new_process;
 
+        
+        Sys_End_AtomicSection();
         __asm__("ULNK\n");
         __asm__("RETFIE\n");//go to the new process
     }
@@ -271,7 +275,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
     new_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_RUNNING;
     sys_running_process = new_process;
 
-    Sys_Start_AtomicSection();
+    
 
     __asm__("ULNK\n");//remove the last function waste & restore all registers
     __asm__("POP W3\n");

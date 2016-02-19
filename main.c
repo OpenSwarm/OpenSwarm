@@ -49,6 +49,7 @@ void thread5();
 void thread6();
 void thread7();
 bool wait250times(void *data);
+bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data);
 
 int16_t main(void)
 {
@@ -58,7 +59,7 @@ int16_t main(void)
     Sys_Init_Kernel();
     
     //Sys_SetReadingFunction_UART1(bluetooth_reader);
-    if(     !Sys_Start_Process(thread1) ||
+    if(   !Sys_Start_Process(thread1) ||
             !Sys_Start_Process(thread2) ||
             !Sys_Start_Process(thread3) ||
             !Sys_Start_Process(thread4) ||
@@ -66,11 +67,11 @@ int16_t main(void)
             !Sys_Start_Process(thread6) ||
             !Sys_Start_Process(thread7)
       ){
-        
         FRONT_LED = 1;
     }
+   
     //Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
-    //Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
     Sys_Start_Kernel();
 
@@ -88,12 +89,32 @@ int16_t main(void)
     //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
     //Sys_Clear_EventData(&data);
       
+    
+    Sys_Writeto_UART1("R\r\n", 3);//send via Bluetooth
+    
     int i = 0;  
+    sint speed = 0;
+    sint inc = 1;
     while(true){//DO Nothing (do yonly things for testing)
+        
         if(i == 0xFFFE){
             i = 0;
+         
+            if(speed >= MAX_WHEEL_SPEED_MM_S){
+                inc = -8;
+            }
+        
+            if(speed <= -MAX_WHEEL_SPEED_MM_S){
+                inc = 8;
+            }
+            
+            speed += inc;
+            
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, speed);
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, -speed);
             LED0 = ~LED0; 
         }
+        
         i++;
     }
 }
@@ -144,7 +165,7 @@ void bluetooth_reader(uint8 data){
    // Sys_Writeto_UART1(&data,1);
     ;
 }
-
+*/
 #define ROBOT_SPEED_L   (MAX_WHEEL_SPEED_MM_S * 89)/100
 #define ROBOT_SPEED_R   (MAX_WHEEL_SPEED_MM_S * 53)/100
 
@@ -154,20 +175,19 @@ void bluetooth_reader(uint8 data){
 #define NOTHING_SPEED_L (MAX_WHEEL_SPEED_MM_S * 55)/100
 #define NOTHING_SPEED_R (MAX_WHEEL_SPEED_MM_S * 99)/100
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
-    
-    LED4 = ~LED4;
-    
-    if(!run_clustering){
+    BODY_LED = ~BODY_LED;   
+    /*if(!run_clustering){
         return true;
-    }
+    }*/
     
     sys_colour rx_colour = *((sys_colour *)data->value);
    
     static char message[24];
-        uint16 length = 0;
-        length = sprintf(message, "%i (%i,%i,%i)\r\n", rx_colour, NOTHING_SPEED_L, NOTHING_SPEED_R, WHITE);
-        Sys_Writeto_UART1(message, length);//send via Bluetooth
+    uint16 length = 0;
+    length = sprintf(message, "colour:%i <%i,%i,%i>\r\n", rx_colour, RED, GREEN, BLUE);
+    Sys_Writeto_UART1(message, length);//send via Bluetooth
     
+    /*
     switch(rx_colour){//detection of
     case GREEN://other robot
         Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, ROBOT_SPEED_L);
@@ -188,10 +208,10 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
         LED1 = ~LED1;
         break;//keep on
     }
-    
+    */
     return true;
 }
-*/
+
 void loggingThread(){
     //static char message[24];
     while(true){
@@ -213,7 +233,7 @@ void loggingThread(){
 
 void thread1(){
     uint i = 0;    
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){//DO Nothing (do only things for testing)
         if(i == 0xFFFE){
             i = 0;
             LED1 = ~LED1; 
@@ -223,7 +243,7 @@ void thread1(){
 }
 void thread2(){
     uint i = 0;    
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){//DO Nothing (do only things for testing)
         if(i == 0xFFFE){
             i = 0;
             LED2 = ~LED2; 
@@ -233,7 +253,7 @@ void thread2(){
 }
 void thread3(){
     uint i = 0;    
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){//DO Nothing (do only things for testing)
         if(i == 0xFFFE){
             i = 0;
             LED3 = ~LED3; 
@@ -243,7 +263,7 @@ void thread3(){
 }
 void thread4(){
     uint i = 0;    
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){//DO Nothing (do only things for testing)
         if(i == 0xFFFE){
             i = 0;
             LED4 = ~LED4; 
@@ -253,7 +273,7 @@ void thread4(){
 }
 void thread5(){
     uint i = 0;    
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){//DO Nothing (do only things for testing)
         if(i == 0xFFFE){
             i = 0;
             LED5 = ~LED5; 
@@ -263,7 +283,7 @@ void thread5(){
 }
 void thread6(){
     uint i = 0;    
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){//DO Nothing (do only things for testing)
         if(i == 0xFFFE){
             i = 0;
             LED6 = ~LED6; 
@@ -273,7 +293,7 @@ void thread6(){
 }
 void thread7(){
     uint i = 0;    
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){//DO Nothing (do only things for testing)
         if(i == 0xFFFE){
             i = 0;
             LED7 = ~LED7; 

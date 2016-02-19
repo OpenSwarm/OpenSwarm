@@ -107,7 +107,7 @@ extern "C" {
 
 
 /*! process default stack size */
-#define DEFAULT_PROCESS_STACK_SIZE 200
+#define DEFAULT_PROCESS_STACK_SIZE 256
 
 //############# PROCESS MANAGEMENT ###############################
 void Sys_Switch_Process(uint pid); //loads all values into the registers to start the other programm

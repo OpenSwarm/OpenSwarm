@@ -14,8 +14,6 @@
 #include "io_HDI.h"
 #include <stdlib.h>
 
-#include "DSPIC30F6014A_HDI.h"
-
 #include "../../definitions.h"
 #include "../../interrupts.h"
 #include "../../memory.h"

@@ -65,7 +65,7 @@ void Sys_Init_Motors(){
     if(occured_error || !Sys_Register_Event(SYS_EVENT_IO_MOTOR_RIGHT)){
         occured_error = true;
     }
-    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_LEFT, 0, &Sys_LeftMotor_EventHandler, 0)){
+    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_LEFT, 0, Sys_LeftMotor_EventHandler, 0)){
         occured_error = true;
     }
     if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0, Sys_RightMotor_EventHandler, 0)){
@@ -155,7 +155,7 @@ void Sys_LeftMotor_Controller(){
  */
 void Sys_RightMotor_Controller(){
 
-   static sint8 phase = 0;		 // phase can be 0 to 3
+   static uint8 phase = 0;		 // phase can be 0 to 3
    static sint16 next_phase = 0;
    static uint8 power_saving = 0;
 
@@ -206,7 +206,9 @@ void Sys_RightMotor_Controller(){
  */
 bool Sys_LeftMotor_EventHandler(uint pid, uint eventID, sys_event_data *data/*mm/s*/){
     sint16 *speed = (sint16 *) data->value;
+    
     Sys_Set_LeftWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);
+    
     return true;
 }
 
@@ -220,7 +222,7 @@ bool Sys_LeftMotor_EventHandler(uint pid, uint eventID, sys_event_data *data/*mm
  */
 bool Sys_RightMotor_EventHandler(uint pid, uint eventID, sys_event_data *data /*mm/s*/){
     sint16 *speed = (sint16 *) data->value;
-
+    
     Sys_Set_RightWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);
 
     return true;
