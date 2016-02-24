@@ -39,7 +39,7 @@
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
-
+void bluetooth_reader(uint8 data);
 void loggingThread();
 void thread1();
 void thread2();
@@ -58,7 +58,8 @@ int16_t main(void)
     /* Configure the oscillator for the device */
     Sys_Init_Kernel();
     
-    //Sys_SetReadingFunction_UART1(bluetooth_reader);
+    Sys_SetReadingFunction_UART1(bluetooth_reader);
+    
     if(   !Sys_Start_Process(thread1) ||
             !Sys_Start_Process(thread2) ||
             !Sys_Start_Process(thread3) ||
@@ -161,11 +162,11 @@ bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data){
     return true;
 }
 
+*/
 void bluetooth_reader(uint8 data){    
    // Sys_Writeto_UART1(&data,1);
     ;
 }
-*/
 #define ROBOT_SPEED_L   (MAX_WHEEL_SPEED_MM_S * 89)/100
 #define ROBOT_SPEED_R   (MAX_WHEEL_SPEED_MM_S * 53)/100
 
