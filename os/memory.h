@@ -18,6 +18,8 @@ extern "C" {
 #endif
 
 #include "definitions.h"
+    
+uint Sys_MemoryUsed(void);
 
 void *Sys_Malloc(uint length);
 void Sys_Free(void *);

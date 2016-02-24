@@ -217,11 +217,10 @@ inline void Sys_Clear_EventData(sys_event_data **data){
 
     while(element != 0){
            sys_event_data *temp = element;
+           element = element->next;
 
            Sys_Free(temp->value);
            Sys_Free(temp);
-
-           element = element->next;
        }
 }
 
@@ -234,6 +233,7 @@ inline void Sys_Clear_EventData(sys_event_data **data){
  */
 inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
     sys_process_event_handler *event_h = element->pcb.event_register;
+    element->pcb.event_register = 0;
 
     Sys_Unsubscribe_Process(element->pcb.process_ID);
 
@@ -244,7 +244,6 @@ inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
         Sys_Clear_EventData(&temp->buffered_data);
         Sys_Free(temp);
     }
-    element->pcb.event_register = 0;
 }
 
 /**

@@ -15,6 +15,12 @@
 #include "interrupts.h"
 #include <stdlib.h>
 
+static uint sys_bytes_used = 0;
+
+typedef struct sys_memory_metadata_s{
+    size_t size;
+} sys_memory_metadata;
+
 /**
  *
  * This Function allocates memory of the size \b length. This allocation is performed as atomic action.
@@ -24,14 +30,20 @@
  */
 void *Sys_Malloc(uint length){
     void *out = 0;
-
+    size_t total_length;
+    
     Sys_Start_AtomicSection();
-
+    
+    total_length = length + sizeof(sys_memory_metadata);
     out = malloc(length);
-
+    sys_memory_metadata *header = (sys_memory_metadata *) out;
+    
+    header->size = length;
+    //sys_bytes_used += total_length;
+    
     Sys_End_AtomicSection();
 
-    return out;
+    return out;// + sizeof(sys_memory_metadata);
 }
 
 /**
@@ -44,6 +56,9 @@ void Sys_Free(void *data){
 
     Sys_Start_AtomicSection();
 
+    sys_memory_metadata *header = (sys_memory_metadata *) (data - sizeof(sys_memory_metadata));
+    //sys_bytes_used -= header->size + sizeof(sys_memory_metadata);//theoretically his should be the length
+        
     free(data);
 
     Sys_End_AtomicSection();
@@ -72,4 +87,14 @@ void Sys_Memcpy(void *source_i, void *destination_o, uint length){
 
     Sys_End_AtomicSection();
 
+}
+
+/**
+ *
+ * Function to returns the used memory
+ *
+ * @return 	uint Amount of bytes used
+ */
+uint Sys_MemoryUsed(){
+    return sys_bytes_used;
 }

@@ -65,6 +65,7 @@ void e_i2cp_disable(void)
  */
 char e_i2cp_read(char device_add, char reg)
 {
+    int not_endless = 0;
 	char error=0;
 	char value;
 	while(!error)
@@ -82,6 +83,11 @@ char e_i2cp_read(char device_add, char reg)
 		if(error)
 			break;
 		e_i2c_reset();
+        
+        if(not_endless++ > 20){
+            return 0;
+        }
+       
 	}
 	
    	return value;
@@ -127,6 +133,7 @@ char e_i2cp_read_string(char device_add, unsigned char read_buffer[], char start
  */
 char e_i2cp_write (char device_add, char reg, char value)
 {
+    int not_endless = 0;
 	char error=0;
 
 	while(!error)
@@ -140,6 +147,10 @@ char e_i2cp_write (char device_add, char reg, char value)
 		if(error)
 			break;
 		e_i2c_reset();
+        
+        if(not_endless++ > 20){
+            return 0;
+        }
 	}
 	return error;
 }

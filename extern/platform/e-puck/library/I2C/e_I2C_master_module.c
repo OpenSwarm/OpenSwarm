@@ -36,6 +36,9 @@ EPFL Ecole polytechnique federale de Lausanne http://www.epfl.ch
 
 #include "e_I2C_master_module.h"
 
+//10000
+#define I2C_wait 10000
+
 char e_i2c_mode;
 int  e_interrupts[3];
 
@@ -61,7 +64,7 @@ char e_i2c_init(void)
 	IEC0bits.SI2CIE=0;			// diseble slave I2C interrupt
 	
 
-	for(i=10000;i;i--);
+	for(i=I2C_wait;i;i--);
 	return 1;
 }
 
@@ -85,12 +88,12 @@ char e_i2c_reset(void)
 	IFS0bits.SI2CIF=0;			// 
 	IEC0bits.SI2CIE=0;			//
         I2CSTAT = 0;
-	for(i=10000;i;i--);
+	for(i=I2C_wait;i;i--);
 
 	e_i2c_init();				// intit I2C
 	e_i2c_enable();				//enable interrupt	
 
-	for(i=10000;i;i--);
+	for(i=I2C_wait;i;i--);
 
 	return 1;
 }
@@ -136,7 +139,7 @@ char e_i2c_start(void)
 	if(I2CSTATbits.P)
 	{	
 		I2CCONbits.SEN=1;
-		for(i=10000;i;i--)
+		for(i=I2C_wait;i;i--)
 			if(!e_i2c_mode)
 				return 1;
 		return 0;
@@ -154,7 +157,7 @@ char e_i2c_restart(void)
 	if(I2CSTATbits.S)
 	{	
 		I2CCONbits.RSEN=1;
-		for(i=10000;i;i--)
+		for(i=I2C_wait;i;i--)
 			if(!e_i2c_mode)
 				return 1;
 		return 0;
@@ -172,7 +175,7 @@ char e_i2c_stop(void)
 
 		I2CCONbits.PEN=1;
 
-	for(i=10000;i;i--)
+	for(i=I2C_wait;i;i--)
 		if(!e_i2c_mode)
 			return 1;
 	return 0;
@@ -194,7 +197,7 @@ char e_i2c_ack(void)
 	I2CCONbits.ACKDT=0;
 	I2CCONbits.ACKEN=1;
 
-	for(i=10000;i;i--)
+	for(i=I2C_wait;i;i--)
 			if(!e_i2c_mode)
 				return 1;
 	return 0;
@@ -216,7 +219,7 @@ char e_i2c_nack(void)
 	I2CCONbits.ACKDT=1;
 	I2CCONbits.ACKEN=1;
 
-	for(i=10000;i;i--)
+	for(i=I2C_wait;i;i--)
 		if(!e_i2c_mode)
 			return 1;
 	return 0;
@@ -233,7 +236,7 @@ char e_i2c_read(char *buf)
 //	int	test=0;
 	e_i2c_mode=READ;
 	
-	for(i=10000;i;i--)
+	for(i=I2C_wait;i;i--)
 		if(!(I2CCONbits.SEN || I2CCONbits.PEN || I2CCONbits.RCEN || I2CCONbits.ACKEN || I2CSTATbits.TRSTAT))
 		{
 			read_ok=1;
@@ -246,7 +249,7 @@ char e_i2c_read(char *buf)
 	I2CCONbits.RCEN=1;
 	
 	// keep polling for I2C interrupt
-	for(i=100000;i;i--)
+	for(i=I2C_wait;i;i--)
 		if(!e_i2c_mode)		// once I2C interrupt is tripped, read buffer and return 1
 		{
 //			test=I2CSTAT;	// used for debug purposes
@@ -268,7 +271,7 @@ char e_i2c_write(char byte)
 	I2CTRN=byte;
 
 	// poll for I2C interrupt
-	for(i=10000;i;i--)
+	for(i=I2C_wait;i;i--)
 		if(!e_i2c_mode)	// return 1(transmisison OK) if interrupt was tripped)
 			return 1;
 	return 0;

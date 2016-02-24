@@ -173,6 +173,7 @@ goZombieMode:
  */
 inline void Sys_Kill_Zombies(){
     sys_pcb_list_element *zombie = sys_zombies;
+    sys_zombies = 0;
 
     while(zombie != 0){
         sys_pcb_list_element *deleteme = zombie;
