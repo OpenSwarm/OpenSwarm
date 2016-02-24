@@ -59,17 +59,18 @@ int16_t main(void)
     /* Configure the oscillator for the device */
     Sys_Init_Kernel();
     
-    //Sys_SetReadingFunction_UART1(bluetooth_reader);
-//    if(   !Sys_Start_Process(thread1) ||
-//            !Sys_Start_Process(thread2) ||
-//            !Sys_Start_Process(thread3) ||
-//            !Sys_Start_Process(thread4) ||
-//            !Sys_Start_Process(thread5) ||
-//            !Sys_Start_Process(thread6) ||
-            Sys_Start_Process(thread7);
-//      ){
-//        FRONT_LED = 1;
-//    }
+    Sys_SetReadingFunction_UART1(bluetooth_reader);
+    
+    if(   !Sys_Start_Process(thread1) ||
+            !Sys_Start_Process(thread2) ||
+            !Sys_Start_Process(thread3) ||
+            !Sys_Start_Process(thread4) ||
+            !Sys_Start_Process(thread5) ||
+            !Sys_Start_Process(thread6) ||
+            !Sys_Start_Process(thread7)
+      ){
+        FRONT_LED = 1;
+    }
    
     //Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
@@ -89,7 +90,9 @@ int16_t main(void)
     
     //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
     //Sys_Clear_EventData(&data);
+      
     
+    Sys_Writeto_UART1("R\r\n", 3);//send via Bluetooth
     
     int i = 0;  
     sint speed = 0;
@@ -167,11 +170,12 @@ bool remotecontrol_reader(uint16 pid, uint16 eventID, sys_event_data *data){
     return true;
 }
 
+*/
 void bluetooth_reader(uint8 data){    
    // Sys_Writeto_UART1(&data,1);
     ;
 }
-*/
+
 #define ROBOT_SPEED_L   (MAX_WHEEL_SPEED_MM_S * 89)/100
 #define ROBOT_SPEED_R   (MAX_WHEEL_SPEED_MM_S * 53)/100
 
@@ -186,7 +190,7 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
         return true;
     }*/
     
-    sys_colour rx_colour = (sys_colour) *((sys_colour *)data->value);
+    sys_colour rx_colour = *((sys_colour *)data->value);
    
     static char message[24];
     uint16 length = 0;

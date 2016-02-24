@@ -52,6 +52,10 @@ extern "C" {
 #define SYS_EVENT_IO_REMOECONTROL   0x05    /*!< ID of the event that is sent after receiving a remote control signal*/
 #define SYS_EVENT_IO_TO_BLUETOOTH   0x06    /*!< ID of the event that sends data via Bluetooth*/
 #define SYS_EVENT_1ms_CLOCK         0x07    /*!< ID of the event that signals 1ms timer ticks*/
+#define SYS_EVENT_IO_SELECTOR_CHANGE    0x08    /*!< ID of the event that signals the change of the selector*/
+//#define SYS_EVENT_1ms_CLOCK         0x09    /*!< ID of the event that signals 1ms timer ticks*/
+//#define SYS_EVENT_1ms_CLOCK         0x0A    /*!< ID of the event that signals 1ms timer ticks*/
+//#define SYS_EVENT_1ms_CLOCK         0x0B    /*!< ID of the event that signals 1ms timer ticks*/
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE) /*!< the value to indicate all event handler*/
 

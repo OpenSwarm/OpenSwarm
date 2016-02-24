@@ -46,3 +46,8 @@ debug/*
 *.properties
 *.bash
 *.*~
+
+# Latex
+*.aux
+*.log
+*.synctex.gz

@@ -40,6 +40,7 @@
           <itemPath>os/platform/e-puck/remoteControl.h</itemPath>
           <itemPath>os/platform/e-puck/motors.h</itemPath>
           <itemPath>os/io/io_clock.h</itemPath>
+          <itemPath>os/io/e-puck/selector.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -113,6 +114,7 @@
           <itemPath>os/platform/e-puck/remoteControl.c</itemPath>
           <itemPath>os/platform/e-puck/uart.c</itemPath>
           <itemPath>os/io/io_clock.c</itemPath>
+          <itemPath>os/io/e-puck/selector.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -158,7 +160,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.24</languageToolchainVersion>
+        <languageToolchainVersion>1.25</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>
