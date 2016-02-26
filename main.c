@@ -52,6 +52,7 @@ void thread4();
 void thread5();
 void thread6();
 void thread7();
+void log_me();
 bool wait100times(void *data);
 bool wait250times(void *data);
 bool wait1000times(void *data);
@@ -80,7 +81,7 @@ int16_t main(void)
     }
    
     //Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, logging, wait1000times);//once per second
-    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait1000times);//once per second
+    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait250times);//once per second
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
     Sys_Start_Kernel();
@@ -100,12 +101,14 @@ int16_t main(void)
     //Sys_Clear_EventData(&data);
       
     
-    Sys_Writeto_UART1("Restarted\r\n", 11);//send via Bluetooth
+    Sys_Writeto_UART1("OS Started\r\n", 12);//send via Bluetooth
     
     int i = 0;  
     sint speed = 0;
     sint inc = 1;
+    uint32 time = Sys_Get_SystemClock();
     while(true){//DO Nothing (do yonly things for testing)
+        
         
         if(i == 0xFFFE){
             i = 0;
@@ -130,6 +133,11 @@ int16_t main(void)
 //    length = sprintf(message, "p: %u\r\n", Sys_Get_Number_Processes());
 //    Sys_Writeto_UART1(message, length);//send via Bluetooth
 //    
+        }
+        
+        if(Sys_Get_SystemClock() >= time+200){
+            time = Sys_Get_SystemClock();
+            log_me();
         }
         
         i++;
@@ -267,6 +275,23 @@ bool logging(uint16 PID, uint16 EventID, sys_event_data *data){// every 1000ms
     fps = 0;
     
     return true;
+}
+
+void log_me(){
+    static char message[24];
+    
+    uint length = 0;
+    length = sprintf(message, "%u;%u;%u;%u;%u\r\n", Sys_Get_SystemTime(),// 
+                                                    Sys_Get_Number_Processes(),// 
+                                                    Sys_Get_InterruptCounter(),//
+                                                    Sys_Get_EventCounter(), //
+                                                    fps);
+    
+    Sys_Writeto_UART1(message, length);//send via Bluetooth
+    
+    Sys_Reset_InterruptCounter();
+    Sys_Reset_EventCounter();
+    fps = 0;
 }
 
 void loggingThread(){
