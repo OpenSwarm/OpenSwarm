@@ -30,6 +30,7 @@
 
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
 #include "os/memory.h"
+#include "os/interrupts.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -41,6 +42,8 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
+static uint fps = 0;
+
 void loggingThread();
 void thread1();
 void thread2();
@@ -49,8 +52,12 @@ void thread4();
 void thread5();
 void thread6();
 void thread7();
+bool wait100times(void *data);
 bool wait250times(void *data);
+bool wait1000times(void *data);
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data);
+bool logging(uint16 PID, uint16 EventID, sys_event_data *data);
+bool toggleLED(uint16 PID, uint16 EventID, sys_event_data *data);
 
 int16_t main(void)
 {
@@ -59,7 +66,7 @@ int16_t main(void)
     /* Configure the oscillator for the device */
     Sys_Init_Kernel();
     
-    Sys_SetReadingFunction_UART1(bluetooth_reader);
+//    Sys_SetReadingFunction_UART1(bluetooth_reader);
     
     if(   !Sys_Start_Process(thread1) ||
             !Sys_Start_Process(thread2) ||
@@ -72,7 +79,8 @@ int16_t main(void)
         FRONT_LED = 1;
     }
    
-    //Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, 0, remotecontrol_reader, 0);
+    //Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, logging, wait1000times);//once per second
+    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait1000times);//once per second
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
     Sys_Start_Kernel();
@@ -92,7 +100,7 @@ int16_t main(void)
     //Sys_Clear_EventData(&data);
       
     
-    Sys_Writeto_UART1("R\r\n", 3);//send via Bluetooth
+    Sys_Writeto_UART1("Restarted\r\n", 11);//send via Bluetooth
     
     int i = 0;  
     sint speed = 0;
@@ -117,11 +125,11 @@ int16_t main(void)
             LED0 = ~LED0; 
             
               
-    static char message[24];
-    uint16 length = 0;
-    length = sprintf(message, "m: %u\r\n", Sys_MemoryUsed());
-    Sys_Writeto_UART1(message, length);//send via Bluetooth
-    
+//    static char message[24];
+//    uint16 length = 0;
+//    length = sprintf(message, "p: %u\r\n", Sys_Get_Number_Processes());
+//    Sys_Writeto_UART1(message, length);//send via Bluetooth
+//    
         }
         
         i++;
@@ -185,15 +193,17 @@ void bluetooth_reader(uint8 data){
 #define NOTHING_SPEED_L (MAX_WHEEL_SPEED_MM_S * 55)/100
 #define NOTHING_SPEED_R (MAX_WHEEL_SPEED_MM_S * 99)/100
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
-    BODY_LED = ~BODY_LED;   
+    BODY_LED = ~BODY_LED;  
+    fps++; 
     /*if(!run_clustering){
         return true;
     }*/
     
+    
     sys_colour rx_colour = *((sys_colour *)data->value);
    
-    static char message[24];
-    uint16 length = 0;
+//    static char message[24];
+//    uint16 length = 0;
     
     if(rx_colour & 0x01){
         LED3 = 1;
@@ -237,6 +247,25 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
         break;//keep on
     }
     */
+    return true;
+}
+
+bool logging(uint16 PID, uint16 EventID, sys_event_data *data){// every 1000ms
+    static char message[24];
+    
+    uint length = 0;
+    length = sprintf(message, "%u;%u;%u;%u;%u\r\n", Sys_Get_SystemTime(),// 
+                                                    Sys_Get_Number_Processes(),// 
+                                                    Sys_Get_InterruptCounter(),//
+                                                    Sys_Get_EventCounter(), //
+                                                    fps);
+    
+    Sys_Writeto_UART1(message, length);//send via Bluetooth
+    
+    Sys_Reset_InterruptCounter();
+    Sys_Reset_EventCounter();
+    fps = 0;
+    
     return true;
 }
 
@@ -330,6 +359,23 @@ void thread7(){
     } 
 }
 
+bool wait100times(void *data){
+    static uint8 counter = 0;
+    if(counter++ < 100){
+        return false;
+    }
+    counter = 0;
+    return true;
+}
+
+bool wait1000times(void *data){
+    static uint counter = 0;
+    if(counter++ < 1000){
+        return false;
+    }
+    counter = 0;
+    return true;
+}
 bool wait250times(void *data){
     static uint8 counter = 0;
     if(counter++ < 250){
@@ -339,3 +385,7 @@ bool wait250times(void *data){
     return true;
 }
 
+bool toggleLED(uint16 PID, uint16 EventID, sys_event_data *data){
+    LED6 = ~LED6;
+    return true;
+}

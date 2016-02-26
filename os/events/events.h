@@ -125,6 +125,10 @@ extern "C" {
     void Sys_Unsubscribe_Process(uint pid);
 
     bool Sys_IsEventRegistered(uint eventID);
+    
+    inline void Sys_Inc_EventCounter(void);
+    inline void Sys_Reset_EventCounter(void);
+    uint Sys_Get_EventCounter(void);
 
 
 #ifdef	__cplusplus

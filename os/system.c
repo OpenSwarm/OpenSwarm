@@ -51,6 +51,9 @@
 #ifdef SYS_CAMERA_USED
 #include "io/e-puck/camera.h"
 #endif
+#ifdef SYS_SELECTOR_USED
+#include "io/e-puck/selector.h"
+#endif
 #endif
 
 /**
@@ -90,6 +93,9 @@ void Sys_Init_Kernel(){
 #ifdef SYS_CAMERA_USED
     Sys_Init_Camera();
 #endif
+#ifdef SYS_SELECTOR_USED
+    Sys_Init_Selector();
+#endif
 #endif
 }
 
@@ -116,6 +122,8 @@ void Sys_Start_Kernel(void){
 #endif
 #ifdef SYS_CAMERA_USED
     Sys_Start_Camera();
+#endif
+#ifdef SYS_SELECTOR_USED
 #endif
 #endif
 }

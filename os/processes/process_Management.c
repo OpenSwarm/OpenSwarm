@@ -60,7 +60,7 @@ inline void Sys_Init_Process_Management(){
  *  This function counts the number of process
  *
  */
-inline unsigned short Sys_Get_Number_Processes(){
+unsigned short Sys_Get_Number_Processes(){
     unsigned short n = 0;
     sys_process_control_block_list_element *element = sys_ready_processes;
 

@@ -13,6 +13,8 @@
 #ifndef SYSTEM_INTERRUPTS_H
 #define	SYSTEM_INTERRUPTS_H
 
+#include "definitions.h"
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -37,6 +39,10 @@ extern "C" {
 
 inline void Sys_Start_AtomicSection(void);
 inline void Sys_End_AtomicSection(void);
+
+inline void Sys_Inc_InterruptCounter(void);
+inline void Sys_Reset_InterruptCounter(void);
+uint Sys_Get_InterruptCounter(void);
 
 
 #ifdef	__cplusplus

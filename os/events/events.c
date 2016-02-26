@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include "../interrupts.h"
+
 /**
  * @brief A single linked list element containing the ID of a process that is subscribed to a specific event
  */
@@ -49,6 +51,8 @@ sys_registered_event *registered_events = 0;/*!< pointer to the List of register
 
 sys_registered_event *Sys_Find_Event(uint eventID);
 
+static uint event_counter = 0; /*!< amount of occurred events since the last reset */
+
 /**
  *
  * This function sends an event to all subscribers.
@@ -59,11 +63,14 @@ sys_registered_event *Sys_Find_Event(uint eventID);
  * @return true if it was successful.
  */
 bool Sys_Send_Event(uint eventID, void *data, uint data_size){
-    Sys_Stop_SystemTimer();//doesn't consume execution time
+    Sys_Start_AtomicSection();//doesn't consume execution time
+    Sys_Stop_SystemTimer();
+    Sys_Inc_EventCounter();
 
    sys_registered_event *event = Sys_Find_Event(eventID);
    if(event == 0){
         Sys_Continue_SystemTimer();
+        Sys_End_AtomicSection();
        return false;
    }
 
@@ -74,6 +81,7 @@ bool Sys_Send_Event(uint eventID, void *data, uint data_size){
    }
 
     Sys_Continue_SystemTimer();
+    Sys_End_AtomicSection();
     return true;
 }
 
@@ -371,4 +379,32 @@ void Sys_Unsubscribe_Process(uint pid){
             next_subscriber = next_subscriber->next;
         }
     }
+}
+
+/**
+ *
+ * This function increases the event counter, which counts the number of sent events since the last reset.
+ *
+ */
+inline void Sys_Inc_EventCounter(void){
+    event_counter++;    
+}
+
+/**
+ *
+ * This function resets the event counter, which counts the number of sent events since the last reset.
+ *
+ */
+inline void Sys_Reset_EventCounter(void){
+    event_counter = 0;
+}
+
+/**
+ *
+ * This function returns the event counter, which counts the number of sent events since the last reset.
+ *
+ * @return uint the number of sent events since the last reset
+ */
+uint Sys_Get_EventCounter(void){
+    return event_counter;
 }

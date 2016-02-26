@@ -68,6 +68,7 @@ inline void Sys_Start_RemoteControl_HDI(void){
  */
 void __attribute__((__interrupt__, auto_psv))  _INT0Interrupt(void){
     //When a message arrives deactivate interrupt -> is activated at the end of the message
+    Sys_Inc_InterruptCounter();
     IEC0bits.INT0IE = 0;
         IFS0bits.INT0IF = 0;
     message_arriving = true;

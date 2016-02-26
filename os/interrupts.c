@@ -28,11 +28,15 @@
 */
 static uint8 sys_IRQ_Priority = SYS_IRQP_SYSTEM_TIMER;
 
-/*! \var static sint16 nesting
+/*! \var static sint nesting
     \brief stores how often Sys_Start_AtomicSection() was executed.
 */
 static sint nesting = 0;
 
+/*! \var static uint irq_counter
+    \brief counts the amount of occurred interrupts.
+*/
+static uint irq_counter = 0;
 /**
  *
  * This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt.
@@ -63,3 +67,30 @@ inline void Sys_End_AtomicSection(){
     }
 }
 
+/**
+ *
+ * This Function increases the interrupt counter, which counts the amount of occurred interrupts.
+ *
+ */
+inline void Sys_Inc_InterruptCounter(void){
+    irq_counter++;
+}
+
+/**
+ *
+ * This Function sets the interrupt counter, which counts the amount of occurred interrupts, to 0. 
+ *
+ */
+inline void Sys_Reset_InterruptCounter(void){
+    irq_counter = 0;
+}
+
+/**
+ *
+ * This Function gives you the number of called interrupt since it was last reset.
+ *
+ * @return uint returns the number of called interrupts
+ */
+uint Sys_Get_InterruptCounter(void){
+    return irq_counter;
+}

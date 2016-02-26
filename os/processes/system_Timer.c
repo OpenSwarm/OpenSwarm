@@ -71,7 +71,8 @@ inline void Sys_Reset_SystemTimer(){
  *
  */
 inline void Sys_todo_SystemTimer(){
-
+    Sys_Inc_InterruptCounter();
+    
     Sys_Stop_SystemTimer_HDI();
 
     Sys_Kill_Zombies();

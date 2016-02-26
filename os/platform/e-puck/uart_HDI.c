@@ -212,6 +212,7 @@ void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
  */
 inline void Sys_Read_UART1_ISR(){
     uint8 data;
+    Sys_Inc_InterruptCounter();
     
     if(U1STAbits.OERR == 1){//Buffer full?
         U1STAbits.OERR = 0;//I will empty it now
@@ -231,6 +232,8 @@ inline void Sys_Read_UART1_ISR(){
  * 
  */
 inline void Sys_Write_UART1_ISR(){
+    Sys_Inc_InterruptCounter();
+    
     if(sys_UART1_TX_data == 0){//nothing to send
         byte_counter_uart1 = 0;
         return;
@@ -271,6 +274,8 @@ inline void Sys_Write_UART1_ISR(){
 inline void Sys_Read_UART2_ISR(){
     uint8 data;
 
+    Sys_Inc_InterruptCounter();
+    
     if(U2STAbits.OERR == 1){//Buffer full?
         U2STAbits.OERR = 0;//I will empty it now
     }
@@ -289,6 +294,8 @@ inline void Sys_Read_UART2_ISR(){
  * 
  */
 inline void Sys_Write_UART2_ISR(){
+    Sys_Inc_InterruptCounter();
+    
     while(U2STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
 
         if(sys_UART2_TX_data == 0){//it was the last msg

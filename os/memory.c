@@ -30,15 +30,15 @@ typedef struct sys_memory_metadata_s{
  */
 void *Sys_Malloc(uint length){
     void *out = 0;
-    size_t total_length;
+//    size_t total_length;
     
     Sys_Start_AtomicSection();
     
-    total_length = length + sizeof(sys_memory_metadata);
+//    total_length = length + sizeof(sys_memory_metadata);
     out = malloc(length);
-    sys_memory_metadata *header = (sys_memory_metadata *) out;
+//    sys_memory_metadata *header = (sys_memory_metadata *) out;
     
-    header->size = length;
+//    header->size = length;
     //sys_bytes_used += total_length;
     
     Sys_End_AtomicSection();
@@ -56,7 +56,7 @@ void Sys_Free(void *data){
 
     Sys_Start_AtomicSection();
 
-    sys_memory_metadata *header = (sys_memory_metadata *) (data - sizeof(sys_memory_metadata));
+//    sys_memory_metadata *header = (sys_memory_metadata *) (data - sizeof(sys_memory_metadata));
     //sys_bytes_used -= header->size + sizeof(sys_memory_metadata);//theoretically his should be the length
         
     free(data);

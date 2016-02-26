@@ -15,6 +15,7 @@
 
 #include "../../definitions.h"
 #include "../../events/events.h"
+#include "../../io/io.h"
 
 #define SYS_IO_SELECTOR_LOWPASS 25  /*!< The number of cycles that the selector must be steady (to encounter the bouncing) */
 
