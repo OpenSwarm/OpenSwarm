@@ -34,6 +34,41 @@ sys_uart_txdata *sys_UART2_TX_data = 0;  /*!< Linked list of messages that need 
 uint byte_counter_uart1 = 0;  /*!< Bytes that were written */
 uint byte_counter_uart2 = 0;  /*!< Bytes that were written */
 
+
+#ifdef DEBUG_MEMORY
+static uint o_uart_txdata_counter = 0;
+static uint o_uart_data_counter = 0;
+
+uint getUART_tx_Counter(){
+    return o_uart_txdata_counter;
+}
+
+void resetUART_tx_Counter(){
+    o_uart_txdata_counter = 0;
+}
+
+void incUART_tx_Counter(){
+    o_uart_txdata_counter++;
+}
+void decUART_tx_Counter(){
+    o_uart_txdata_counter--;
+}
+
+uint getUART_data_Counter(){
+    return o_uart_data_counter;
+}
+
+void resetUART_data_Counter(){
+    o_uart_data_counter = 0;
+}
+void incUART_data_Counter(uint num){
+    o_uart_data_counter+=num;
+}
+void decUART_data_Counter(uint num){
+    o_uart_data_counter-=num;
+}
+#endif
+
 /**
  *
  * This function initialises UART1.
@@ -242,8 +277,10 @@ inline void Sys_Write_UART1_ISR(){
     while(U1STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
 
         if(byte_counter_uart1 < sys_UART1_TX_data->length){
+        Sys_Start_AtomicSection();
             U1TXREG = sys_UART1_TX_data->data[byte_counter_uart1];//add new byte
             byte_counter_uart1++;
+        Sys_End_AtomicSection();
             continue;
         }
 
@@ -255,6 +292,11 @@ inline void Sys_Write_UART1_ISR(){
         sys_UART1_TX_data = sys_UART1_TX_data->next;
         element->next = 0;
 
+#ifdef DEBUG_MEMORY
+        o_uart_data_counter -= element->length;
+        o_uart_txdata_counter--;
+#endif
+        
         Sys_Free(element->data);
         Sys_Free(element);
 
@@ -304,8 +346,10 @@ inline void Sys_Write_UART2_ISR(){
         }
 
         if(byte_counter_uart2 < sys_UART2_TX_data->length){
+        Sys_Start_AtomicSection();
             U1TXREG = sys_UART2_TX_data->data[byte_counter_uart2];//add new byte
             byte_counter_uart2++;
+        Sys_End_AtomicSection();
             continue;
         }
 
@@ -317,6 +361,10 @@ inline void Sys_Write_UART2_ISR(){
         sys_UART2_TX_data = sys_UART2_TX_data->next;
         element->next = 0;
 
+#ifdef DEBUG_MEMORY
+        o_uart_data_counter -= element->length;
+        o_uart_txdata_counter--;
+#endif
         Sys_Free(element->data);
         Sys_Free(element);
 

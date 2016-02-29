@@ -23,6 +23,7 @@
 #include "../definitions.h"
 
 
+
 /********************************************************
  *  Private Members
  ********************************************************/
@@ -376,12 +377,18 @@ bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction fu
  */
 void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
 
-    sys_pcb_list_element *element = Sys_Find_Process(pid);
+    sys_pcb_list_element *element;
+    
+    
+    Sys_Start_AtomicSection();
+    element = Sys_Find_Process(pid);
     if(element == 0){//no process with pid
+        Sys_End_AtomicSection();
         return;
     }
 
     bool add_event = true;
+    
     sys_occurred_event **o_event = &sys_occurred_events;
     while(*o_event != 0){//check if the event (eventID) already occurred
         if((*o_event)->eventID == eventID){//it already occurred
@@ -392,17 +399,17 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
     }
     
     if(add_event){//if it hasn't occurred 
-    Sys_Start_AtomicSection();
         //add eventID to the list of occurred events
         (*o_event) = Sys_Malloc(sizeof(sys_occurred_event));
        if((*o_event) == 0){
            Sys_End_AtomicSection();
            return; //no memory left
        }
-
+#ifdef DEBUG_MEMORY
+        incOEventCounter();
+#endif
        (*o_event)->eventID = eventID;
        (*o_event)->next = 0;
-    Sys_End_AtomicSection();
     }
 
     //NOW add the data
@@ -420,17 +427,27 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
         if( is_condition_met ){
             sys_event_data *e_data = (sys_event_data*) Sys_Malloc(sizeof(sys_event_data));
             if(e_data == 0){//if malloc fails .. exit
+                Sys_End_AtomicSection();
                 return;
             }
+#ifdef DEBUG_MEMORY
+            incEventCounter();
+#endif
 
             //create the struct that holds the data
             if(length != 0){//if there is data
                 e_data->value = Sys_Malloc(length);
                 if(e_data->value == 0){//if malloc fails .. exit
                     Sys_Free(e_data);
+#ifdef DEBUG_MEMORY
+                    decEventCounter();
+#endif
+                    Sys_End_AtomicSection();
                     return;
                 }
-
+#ifdef DEBUG_MEMORY
+                incEventDataCounter(length);
+#endif
                 Sys_Memcpy(data, e_data->value, length);
             }else{
                 e_data->value = 0;
@@ -452,6 +469,8 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
             event = event->next;
         }
     }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -504,6 +523,9 @@ inline void Sys_Execute_All_EventHandler(){
         
         occured_event->next = 0;
         Sys_Free(occured_event);
+#ifdef DEBUG_MEMORY
+        decOEventCounter();
+#endif
     }
 }
 
