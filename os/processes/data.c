@@ -7,7 +7,7 @@
  * \date 08 July 2014
  *
  * \brief  It defines functions to manage process lists and related structs
- * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
+ * \copyright   adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #include "process_Management.h" 
@@ -39,6 +39,7 @@ sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events 
 int o_event_counter = 0;
 int event_counter = 0;
 int event_data_counter = 0;
+int malloc_free_counter = 0;
 
 int getOEventCounter(){
     return o_event_counter;
@@ -81,6 +82,13 @@ void incEventDataCounter(uint num){
 }
 void decEventDataCounter(uint num){
     event_data_counter-=num;
+}
+
+void incMallocFreeCounter(){
+    malloc_free_counter++;
+}
+void decMallocFreeCounter(){
+    malloc_free_counter--;
 }
 #endif
 /********************************************************
@@ -427,7 +435,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
         
         if(element->next->pcb.process_ID > process->pcb.process_ID){
             
-	    process->next = element->next;
+        process->next = element->next;
             if(process->next != 0){
                 process->next->previous = process;
             }

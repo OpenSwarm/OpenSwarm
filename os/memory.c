@@ -7,7 +7,7 @@
  * \date{05 September 2015}
  * 
  * \brief It defines functions to allocate, free, and copy memory
- * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
+ * \copyright   adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #include "memory.h"
@@ -25,8 +25,8 @@ typedef struct sys_memory_metadata_s{
  *
  * This Function allocates memory of the size \b length. This allocation is performed as atomic action.
  *
- * @param 	length  value how many bytes should be allocated
- * @return 	pointer to the allocated memory
+ * @param   length  value how many bytes should be allocated
+ * @return  pointer to the allocated memory
  */
 void *Sys_Malloc(uint length){
     void *out = 0;
@@ -37,6 +37,11 @@ void *Sys_Malloc(uint length){
 //    total_length = length + sizeof(sys_memory_metadata);
     out = malloc(length);
 //    sys_memory_metadata *header = (sys_memory_metadata *) out;
+#ifdef DEBUG_MEMORY
+    if( out )
+        incMallocFreeCounter();
+#endif
+        
     
 //    header->size = length;
     //sys_bytes_used += total_length;
@@ -50,7 +55,7 @@ void *Sys_Malloc(uint length){
  *
  * This Function frees dynamic allocated memory. This freeing is performed as atomic action.
  *
- * @param 	data   pointer to memory that should be freed.
+ * @param   data   pointer to memory that should be freed.
  */
 void Sys_Free(void *data){
 
@@ -60,6 +65,9 @@ void Sys_Free(void *data){
     //sys_bytes_used -= header->size + sizeof(sys_memory_metadata);//theoretically his should be the length
         
     free(data);
+#ifdef DEBUG_MEMORY
+    decMallocFreeCounter();
+#endif
 
     Sys_End_AtomicSection();
 
@@ -69,9 +77,9 @@ void Sys_Free(void *data){
  *
  * Function to copies memory of the size \b length from \b source_i to \b destination_o. This copying is performed as atomic action.
  *
- * @param[in] 	source_i        pointer to the source
- * @param[out] 	destination_o   pointer to the destination
- * @param[in] 	length          size of the memory that has to be copied
+ * @param[in]   source_i        pointer to the source
+ * @param[out]  destination_o   pointer to the destination
+ * @param[in]   length          size of the memory that has to be copied
  */
 void Sys_Memcpy(void *source_i, void *destination_o, uint length){
 
@@ -93,7 +101,7 @@ void Sys_Memcpy(void *source_i, void *destination_o, uint length){
  *
  * Function to returns the used memory
  *
- * @return 	uint Amount of bytes used
+ * @return  uint Amount of bytes used
  */
 uint Sys_MemoryUsed(){
     return sys_bytes_used;
