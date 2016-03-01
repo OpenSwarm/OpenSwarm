@@ -32,6 +32,8 @@
 #include "os/memory.h"
 #include "os/interrupts.h"
 
+#include "os/processes/data.h"
+
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -69,19 +71,24 @@ int16_t main(void)
     
 //    Sys_SetReadingFunction_UART1(bluetooth_reader);
     
-    if(   !Sys_Start_Process(thread1) ||
-            !Sys_Start_Process(thread2) ||
-            !Sys_Start_Process(thread3) ||
-            !Sys_Start_Process(thread4) ||
-            !Sys_Start_Process(thread5) ||
-            !Sys_Start_Process(thread6) ||
-            !Sys_Start_Process(thread7)
+    if(   !Sys_Start_Process(thread1) // ||
+//            !Sys_Start_Process(thread2) ||
+//            !Sys_Start_Process(thread3) ||
+//            !Sys_Start_Process(thread4) ||
+//            !Sys_Start_Process(thread5) ||
+//            !Sys_Start_Process(thread6) ||
+//            !Sys_Start_Process(thread7)
       ){
         FRONT_LED = 1;
     }
    
     //Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, logging, wait1000times);//once per second
-    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait250times);//once per second
+<<<<<<< HEAD
+    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait1000times);//once per second
+=======
+//    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait250times);//once per second
+    
+>>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
     Sys_Start_Kernel();
@@ -281,16 +288,19 @@ void log_me(){
     static char message[24];
     
     uint length = 0;
-    length = sprintf(message, "%u;%u;%u;%u;%u\r\n", Sys_Get_SystemTime(),// 
-                                                    Sys_Get_Number_Processes(),// 
-                                                    Sys_Get_InterruptCounter(),//
-                                                    Sys_Get_EventCounter(), //
+    length = sprintf(message, "%u;%i;%i;%i;%i\r\n", Sys_Get_SystemTime(),// 
+                                                    getOEventCounter(),// 
+                                                    getEventCounter(),//
+                                                    getEventDataCounter(), //
                                                     fps);
     
     Sys_Writeto_UART1(message, length);//send via Bluetooth
     
     Sys_Reset_InterruptCounter();
     Sys_Reset_EventCounter();
+//    resetOEventCounter();
+//    resetEventCounter();
+//    resetEventDataCounter();
     fps = 0;
 }
 

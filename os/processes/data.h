@@ -23,6 +23,20 @@
 extern "C" {
 #endif
     
+#ifdef DEBUG_MEMORY
+int getOEventCounter();
+void resetOEventCounter();
+void incOEventCounter();
+void decOEventCounter();
+int getEventCounter();
+void resetEventCounter();
+void incEventCounter();
+void decEventCounter();
+int getEventDataCounter();
+void resetEventDataCounter();
+void incEventDataCounter(uint num);
+void decEventDataCounter(uint num);
+#endif
 /********************************************************
  *  Struct Declarations
  ********************************************************/

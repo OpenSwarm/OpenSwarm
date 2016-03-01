@@ -23,6 +23,7 @@
 #include "../definitions.h"
 
 
+
 /********************************************************
  *  Private Members
  ********************************************************/
@@ -103,9 +104,11 @@ void Sys_Kill_Process(uint pid){
     if(pid == 0){
         return; //DO NOT KILL THE SYSTEM
     }
-
+    
+    Sys_Start_AtomicSection();
     if(pid == sys_running_process->pcb.process_ID){//Do not kill the running program
         Sys_Set_Running_Process_to_Zombie();//kill asynchronously
+        Sys_End_AtomicSection();
         return;
     }
 
@@ -113,6 +116,7 @@ void Sys_Kill_Process(uint pid){
     if(element != 0){
             element->pcb.sheduler_info.state = SYS_PROCESS_STATE_ZOMBIE;
             Sys_Delete_Process(element);
+            Sys_End_AtomicSection();
             return;
     }
 
@@ -120,8 +124,11 @@ void Sys_Kill_Process(uint pid){
     if(element != 0){
             element->pcb.sheduler_info.state = SYS_PROCESS_STATE_ZOMBIE;
             Sys_Delete_Process(element);
+            Sys_End_AtomicSection();
             return;
     }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -137,7 +144,8 @@ void Sys_Set_Running_Process_to_Zombie(){
 
     sys_pcb_list_element *process = 0;
     sys_pcb_list_element *previous_process = 0;
-    
+
+    Sys_Start_AtomicSection();
     sys_running_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_ZOMBIE;
 
     Sys_Unsubscribe_Process(sys_running_process->pcb.process_ID);//unsubscribe this process from all events and clear the event-list
@@ -163,6 +171,7 @@ goZombieMode:
     process = Sys_Remove_Process_from_List(sys_running_process->pcb.process_ID, &sys_ready_processes);
     Sys_Insert_Process_to_List(process, &sys_zombies);
 
+    Sys_End_AtomicSection();
     Sys_Force_TimerInterrupt();//this schedules the next  after the prvious process
 }
 
@@ -172,8 +181,12 @@ goZombieMode:
  *
  */
 inline void Sys_Kill_Zombies(){
-    sys_pcb_list_element *zombie = sys_zombies;
-    sys_zombies = 0;
+    sys_pcb_list_element *zombie;
+    
+    Sys_Start_AtomicSection();
+        zombie = sys_zombies;
+        sys_zombies = 0;
+    Sys_End_AtomicSection();
 
     while(zombie != 0){
         sys_pcb_list_element *deleteme = zombie;
@@ -191,16 +204,23 @@ inline void Sys_Kill_Zombies(){
  * @param[in] pid process id
  */
 void Sys_Switch_Process(uint pid){
-    sys_pcb_list_element *element = sys_ready_processes;
+    
+    sys_pcb_list_element *element;
+    
+    Sys_Start_AtomicSection();
+    element = sys_ready_processes;
 
     while(element != 0){//search for the right process
         if(element->pcb.process_ID == pid){//if this is the correct one > write values
+            Sys_End_AtomicSection();
             Sys_Switch_Process_HDI(element);
             return;
         }
 
         element = element->next;
     }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -262,6 +282,7 @@ void Sys_Block_Process(uint pid, uint eventID, pConditionFunction condition){
 
     if(sys_running_process->pcb.process_ID == pid){//if this is the running process
         // CALL Scheduler
+        Sys_End_AtomicSection();
         Sys_Force_TimerInterrupt();
     }
     
@@ -282,10 +303,10 @@ bool Sys_Continue_Pocess(uint pid, uint eventID, sys_event_data *data){
     Sys_Start_AtomicSection();
     sys_pcb_list_element *element = Sys_Remove_Process_from_List(pid, &sys_blocked_processes);
     Sys_Insert_Process_to_List(element, &sys_ready_processes);
-    Sys_End_AtomicSection();
-
+    
     Sys_Remove_Event_from_EventRegister(eventID, Sys_Continue_Pocess, &(element->pcb.event_register));
-
+    
+    
     bool exists_another = false;//exists another subscribed event handler of the eventID
     sys_process_event_handler * event = element->pcb.event_register;
     while(event != 0){
@@ -299,7 +320,7 @@ bool Sys_Continue_Pocess(uint pid, uint eventID, sys_event_data *data){
     if(exists_another == false){
         Sys_Unsubscribe_from_Event(eventID, pid);
     }
-    
+    Sys_End_AtomicSection();
     return true;
 }
 
@@ -327,14 +348,18 @@ bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction fu
         return true;
     }
 
+    
+    Sys_Start_AtomicSection();
     sys_pcb_list_element *element = Sys_Find_Process(pid);
 
     if(element == 0){//cant find process (pid))
+        Sys_End_AtomicSection();
         return false;
     }
 
     sys_process_event_handler *new_event = (sys_process_event_handler *) Sys_Malloc(sizeof(sys_process_event_handler));
     if(new_event == 0){//no memory
+        Sys_End_AtomicSection();
         return false;
     }
 
@@ -362,6 +387,7 @@ bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction fu
         element->pcb.event_register = new_event;
     }
 
+    Sys_End_AtomicSection();
     return true;
 }
 
@@ -376,12 +402,24 @@ bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction fu
  */
 void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
 
-    sys_pcb_list_element *element = Sys_Find_Process(pid);
+    sys_pcb_list_element *element;
+    
+<<<<<<< HEAD
+    Sys_Start_AtomicSection();
+    element = Sys_Find_Process(pid);
+    
+=======
+    
+    Sys_Start_AtomicSection();
+    element = Sys_Find_Process(pid);
+>>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
     if(element == 0){//no process with pid
+        Sys_End_AtomicSection();
         return;
     }
 
     bool add_event = true;
+    
     sys_occurred_event **o_event = &sys_occurred_events;
     while(*o_event != 0){//check if the event (eventID) already occurred
         if((*o_event)->eventID == eventID){//it already occurred
@@ -391,18 +429,22 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
         o_event = &((*o_event)->next);
     }
     
+<<<<<<< HEAD
+    if(add_event){//if it hasn't occurred
+=======
     if(add_event){//if it hasn't occurred 
-    Sys_Start_AtomicSection();
+>>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
         //add eventID to the list of occurred events
         (*o_event) = Sys_Malloc(sizeof(sys_occurred_event));
        if((*o_event) == 0){
            Sys_End_AtomicSection();
            return; //no memory left
        }
-
+#ifdef DEBUG_MEMORY
+        incOEventCounter();
+#endif
        (*o_event)->eventID = eventID;
        (*o_event)->next = 0;
-    Sys_End_AtomicSection();
     }
 
     //NOW add the data
@@ -420,17 +462,30 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
         if( is_condition_met ){
             sys_event_data *e_data = (sys_event_data*) Sys_Malloc(sizeof(sys_event_data));
             if(e_data == 0){//if malloc fails .. exit
+                Sys_End_AtomicSection();
                 return;
             }
+#ifdef DEBUG_MEMORY
+            incEventCounter();
+#endif
 
             //create the struct that holds the data
             if(length != 0){//if there is data
                 e_data->value = Sys_Malloc(length);
                 if(e_data->value == 0){//if malloc fails .. exit
                     Sys_Free(e_data);
+<<<<<<< HEAD
+=======
+#ifdef DEBUG_MEMORY
+                    decEventCounter();
+#endif
+>>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
+                    Sys_End_AtomicSection();
                     return;
                 }
-
+#ifdef DEBUG_MEMORY
+                incEventDataCounter(length);
+#endif
                 Sys_Memcpy(data, e_data->value, length);
             }else{
                 e_data->value = 0;
@@ -452,6 +507,11 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
             event = event->next;
         }
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -464,24 +524,26 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
 //handler has to clean up the data!!!
 //TODO: if handler == 0 remove it from list
 inline void Sys_Execute_Events_in_ProcessList(uint eventID, sys_pcb_list_element *elements){
-    sys_pcb_list_element *list = elements;
-    while(list != 0){//assuming there are less processes then events
-        sys_process_event_handler *event = list->pcb.event_register;
-        while(event != 0){
-            if(event->eventID == eventID){
-                if(event->handler != 0){
-                    event->handler(list->pcb.process_ID,eventID,event->buffered_data);
-                }
-                Sys_Clear_EventData(&(event->buffered_data));
+    Sys_Start_AtomicSection();
+        sys_pcb_list_element *list = elements;
+        while(list != 0){//assuming there are less processes then events
+            sys_process_event_handler *event = list->pcb.event_register;
+            while(event != 0){
+                if(event->eventID == eventID){
+                    if(event->handler != 0){
+                        event->handler(list->pcb.process_ID,eventID,event->buffered_data);
+                    }
+                    Sys_Clear_EventData(&(event->buffered_data));
                 //TODO: buffered data is a linked list -> if more elements stored -> mem leak
-                event->buffered_data = 0;
+                    event->buffered_data = 0;
+                }
+
+                event = event->next;
             }
 
-            event = event->next;
+            list = list->next;
         }
-
-        list = list->next;
-    }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -490,8 +552,12 @@ inline void Sys_Execute_Events_in_ProcessList(uint eventID, sys_pcb_list_element
  *
  */
 inline void Sys_Execute_All_EventHandler(){
-    sys_occurred_event *o_event = sys_occurred_events;
-    sys_occurred_events = 0;
+    sys_occurred_event *o_event;
+    
+    Sys_Start_AtomicSection();
+        o_event = sys_occurred_events;
+        sys_occurred_events = 0;
+    Sys_End_AtomicSection();    
 
     while(o_event != 0){//assuming there are less processes then events
         
@@ -504,6 +570,9 @@ inline void Sys_Execute_All_EventHandler(){
         
         occured_event->next = 0;
         Sys_Free(occured_event);
+#ifdef DEBUG_MEMORY
+        decOEventCounter();
+#endif
     }
 }
 
@@ -528,12 +597,16 @@ void Sys_Interprocess_EventHandling(){
  * @param[in] eventID   Identifier of the event that has to be removed
  */
 void Sys_Remove_All_Event_Subscriptions(uint eventID){
-    sys_pcb_list_element *process = sys_ready_processes;
+    sys_pcb_list_element *process;
+    
+    Sys_Start_AtomicSection();
+    process = sys_ready_processes;
 
     while(process != 0){//go through all processes
         Sys_Remove_Event_from_EventRegister(eventID, ALL_FUNCTIONS, &(process->pcb.event_register) );
         process = process->next;
     }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -546,11 +619,14 @@ void Sys_Remove_All_Event_Subscriptions(uint eventID){
  */
 void Sys_Remove_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction func){
 
-    sys_pcb_list_element *element = Sys_Find_Process(pid);
-
+    sys_pcb_list_element *element;
+    Sys_Start_AtomicSection();
+    element = Sys_Find_Process(pid);
+    
     if(element != 0){
         Sys_Remove_Event_from_EventRegister(eventID, func, &(element->pcb.event_register) );
     }
+    Sys_End_AtomicSection();
 }
 
 //////////'######################## TODO: multiple event handler for 1 process & event

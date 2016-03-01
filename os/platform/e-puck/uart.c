@@ -99,12 +99,23 @@ void Sys_Writeto_UART1(void *data, uint length){
         return;
     }
 
+#ifdef DEBUG_MEMORY
+    incUART_tx_Counter();
+#endif
+
     element->data = Sys_Malloc(length);
     if(element->data == 0){//not enough memory
         Sys_Free(element);
+#ifdef DEBUG_MEMORY
+        decUART_tx_Counter();
+#endif
         return;
     }
     Sys_Memcpy(data,element->data,length);
+    
+#ifdef DEBUG_MEMORY
+    incUART_data_Counter(length);
+#endif
     
     element->length = length;
     element->next = 0;
@@ -137,14 +148,23 @@ void Sys_Writeto_UART2(void *data, uint length){
     if(element == 0){//not enough memory
         return;
     }
+#ifdef DEBUG_MEMORY
+    incUART_tx_Counter();
+#endif
 
     element->data = Sys_Malloc(length);
     if(element->data == 0){//not enough memory
         Sys_Free(element);
+#ifdef DEBUG_MEMORY
+        decUART_tx_Counter();
+#endif
         return;
     }
     Sys_Memcpy((uint8 *) data,element->data,length);
-
+    
+#ifdef DEBUG_MEMORY
+    incUART_data_Counter(length);
+#endif
     element->length = length;
     element->next = 0;
 
