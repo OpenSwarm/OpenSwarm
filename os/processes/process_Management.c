@@ -23,7 +23,6 @@
 #include "../definitions.h"
 
 
-
 /********************************************************
  *  Private Members
  ********************************************************/
@@ -305,8 +304,7 @@ bool Sys_Continue_Pocess(uint pid, uint eventID, sys_event_data *data){
     Sys_Insert_Process_to_List(element, &sys_ready_processes);
     
     Sys_Remove_Event_from_EventRegister(eventID, Sys_Continue_Pocess, &(element->pcb.event_register));
-    
-    
+
     bool exists_another = false;//exists another subscribed event handler of the eventID
     sys_process_event_handler * event = element->pcb.event_register;
     while(event != 0){
@@ -348,7 +346,6 @@ bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction fu
         return true;
     }
 
-    
     Sys_Start_AtomicSection();
     sys_pcb_list_element *element = Sys_Find_Process(pid);
 
@@ -404,15 +401,9 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
 
     sys_pcb_list_element *element;
     
-<<<<<<< HEAD
-    Sys_Start_AtomicSection();
-    element = Sys_Find_Process(pid);
-    
-=======
     
     Sys_Start_AtomicSection();
     element = Sys_Find_Process(pid);
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
     if(element == 0){//no process with pid
         Sys_End_AtomicSection();
         return;
@@ -429,11 +420,7 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
         o_event = &((*o_event)->next);
     }
     
-<<<<<<< HEAD
-    if(add_event){//if it hasn't occurred
-=======
     if(add_event){//if it hasn't occurred 
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
         //add eventID to the list of occurred events
         (*o_event) = Sys_Malloc(sizeof(sys_occurred_event));
        if((*o_event) == 0){
@@ -474,12 +461,9 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
                 e_data->value = Sys_Malloc(length);
                 if(e_data->value == 0){//if malloc fails .. exit
                     Sys_Free(e_data);
-<<<<<<< HEAD
-=======
 #ifdef DEBUG_MEMORY
                     decEventCounter();
 #endif
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
                     Sys_End_AtomicSection();
                     return;
                 }
@@ -507,10 +491,7 @@ void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
             event = event->next;
         }
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
+   
     Sys_End_AtomicSection();
 }
 

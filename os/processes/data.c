@@ -228,11 +228,7 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint event
     if(list == 0 || *list == 0){//list is empty
         return 0;
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
     Sys_Start_AtomicSection();
     sys_process_event_handler *top = *list;
     if(top->eventID == eventID && ( func == ALL_FUNCTIONS || top->handler == func)){
@@ -276,16 +272,11 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint event
  * @return void
  */
 inline void Sys_Clear_EventData(sys_event_data **data){
-<<<<<<< HEAD
-    Sys_Start_AtomicSection();
-    sys_event_data *element = *data;
-=======
     
     sys_event_data *element;
     
     Sys_Start_AtomicSection();
     element = *data;
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
     *data = 0;
 
     while(element != 0){
@@ -297,12 +288,9 @@ inline void Sys_Clear_EventData(sys_event_data **data){
             event_data_counter -= temp->size;
 #endif
            Sys_Free(temp);
-<<<<<<< HEAD
-=======
 #ifdef DEBUG_MEMORY
             event_counter--;
 #endif
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
     }
     Sys_End_AtomicSection();
 }
@@ -315,14 +303,9 @@ inline void Sys_Clear_EventData(sys_event_data **data){
  * @return void
  */
 inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
-<<<<<<< HEAD
-    Sys_Start_AtomicSection();
-    sys_process_event_handler *event_h = element->pcb.event_register;
-=======
     sys_process_event_handler *event_h;
     Sys_Start_AtomicSection();
     event_h = element->pcb.event_register;
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
     element->pcb.event_register = 0;
 
     Sys_Unsubscribe_Process(element->pcb.process_ID);
@@ -409,7 +392,6 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     process->previous = 0;
     process->next = 0;
 
-    Sys_Start_AtomicSection();
     if( *list == 0){//is it the first element
         *list = process;
         Sys_End_AtomicSection();
@@ -423,11 +405,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     
     if( (*list)->pcb.process_ID >= process->pcb.process_ID){// if first pid is bigger
         //put it on top
-<<<<<<< HEAD
-
-=======
         
->>>>>>> 3c8a143a76658becce359b6e04bcee63ca5b8fce
         process->next = *list;
         process->previous = 0;
         (*list)->previous = process;
@@ -448,8 +426,8 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
         }
         
         if(element->next->pcb.process_ID > process->pcb.process_ID){
-
-            process->next = element->next;
+            
+	    process->next = element->next;
             if(process->next != 0){
                 process->next->previous = process;
             }
