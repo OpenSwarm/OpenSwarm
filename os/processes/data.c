@@ -36,51 +36,51 @@ sys_pcb_list_element *sys_zombies = 0;/*!< pointer to the zombie process */
 sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events */
 
 #ifdef DEBUG_MEMORY
-int o_event_counter = 0;
-int event_counter = 0;
-int event_data_counter = 0;
+int dbug_occurredEvent_cntr = 0;
+int dbug_eventStruct_cntr = 0;
+int dbug_eventData_cntr = 0;
 
 int getOEventCounter(){
-    return o_event_counter;
+    return dbug_occurredEvent_cntr;
 }
 void resetOEventCounter(){
-    o_event_counter = 0;
+    dbug_occurredEvent_cntr = 0;
 }
 
 void incOEventCounter(){
-    o_event_counter++;
+    dbug_occurredEvent_cntr++;
 }
 void decOEventCounter(){
-    o_event_counter--;
+    dbug_occurredEvent_cntr--;
 }
 
 int getEventCounter(){
-    return event_counter;
+    return dbug_eventStruct_cntr;
 }
 void resetEventCounter(){
-    event_counter = 0;
+    dbug_eventStruct_cntr = 0;
 }
 
 void incEventCounter(){
-    event_counter++;
+    dbug_eventStruct_cntr++;
 }
 void decEventCounter(){
-    event_counter--;
+    dbug_eventStruct_cntr--;
 }
 
 int getEventDataCounter(){
-    return event_data_counter;
+    return dbug_eventData_cntr;
 }
 
 void resetEventDataCounter(){
-    event_data_counter = 0;
+    dbug_eventData_cntr = 0;
 }
 
 void incEventDataCounter(uint num){
-    event_data_counter+=num;
+    dbug_eventData_cntr+=num;
 }
 void decEventDataCounter(uint num){
-    event_data_counter-=num;
+    dbug_eventData_cntr-=num;
 }
 #endif
 /********************************************************
@@ -285,11 +285,11 @@ inline void Sys_Clear_EventData(sys_event_data **data){
 
            Sys_Free(temp->value);
 #ifdef DEBUG_MEMORY
-            event_data_counter -= temp->size;
+            dbug_eventData_cntr -= temp->size;
 #endif
            Sys_Free(temp);
 #ifdef DEBUG_MEMORY
-            event_counter--;
+            dbug_eventStruct_cntr--;
 #endif
     }
     Sys_End_AtomicSection();
