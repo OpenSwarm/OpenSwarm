@@ -7,7 +7,7 @@
  * \date 08 July 2014
  *
  * \brief  It defines functions to manage process lists and related structs
- * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
+ * \copyright   adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #include "process_Management.h" 
@@ -39,7 +39,7 @@ sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events 
 int dbug_occurredEvent_cntr = 0;
 int dbug_eventStruct_cntr = 0;
 int dbug_eventData_cntr = 0;
-int malloc_free_counter = 0;
+int dbug_malloc_free_counter = 0;
 
 int getOEventCounter(){
     return dbug_occurredEvent_cntr;
@@ -84,11 +84,18 @@ void decEventDataCounter(uint num){
     dbug_eventData_cntr-=num;
 }
 
+int getMallocFreeCounter(){
+    return dbug_malloc_free_counter;
+}
+
+void resetMallocFreeCounter(){
+    dbug_malloc_free_counter = 0;
+}
 void incMallocFreeCounter(){
-    malloc_free_counter++;
+    dbug_malloc_free_counter++;
 }
 void decMallocFreeCounter(){
-    malloc_free_counter--;
+    dbug_malloc_free_counter--;
 }
 #endif
 /********************************************************
@@ -207,9 +214,10 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
     element = list;
 
     while(element != 0){
-        if(element->eventID == eventID)
+        if(element->eventID == eventID){
             Sys_End_AtomicSection();
             return element;
+        }
 
         element = element->next;
     }
@@ -435,7 +443,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
         
         if(element->next->pcb.process_ID > process->pcb.process_ID){
             
-	    process->next = element->next;
+        process->next = element->next;
             if(process->next != 0){
                 process->next->previous = process;
             }

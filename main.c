@@ -55,6 +55,7 @@ void thread5();
 void thread6();
 void thread7();
 void log_me();
+void log_me_2();
 bool wait100times(void *data);
 bool wait250times(void *data);
 bool wait1000times(void *data);
@@ -139,7 +140,7 @@ int16_t main(void)
         
         if(Sys_Get_SystemClock() >= time+200){
             time = Sys_Get_SystemClock();
-            log_me();
+            log_me_2();
         }
         
         i++;
@@ -280,6 +281,7 @@ bool logging(uint16 PID, uint16 EventID, sys_event_data *data){// every 1000ms
 }
 
 void log_me(){
+#ifdef DEBUG_MEMORY
     static char message[24];
     
     uint length = 0;
@@ -297,6 +299,27 @@ void log_me(){
 //    resetEventCounter();
 //    resetEventDataCounter();
     fps = 0;
+#endif
+}
+
+void log_me_2(){
+#ifdef DEBUG_MEMORY
+    static char message[24];
+    
+    uint length = 0;
+    length = sprintf(message, "%u;%i\r\n", Sys_Get_SystemTime(),// 
+                                           getMallocFreeCounter()// 
+                                           );
+    
+    Sys_Writeto_UART1(message, length);//send via Bluetooth
+    
+    Sys_Reset_InterruptCounter();
+    Sys_Reset_EventCounter();
+//    resetOEventCounter();
+//    resetEventCounter();
+//    resetEventDataCounter();
+    fps = 0;
+#endif
 }
 
 void loggingThread(){

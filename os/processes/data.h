@@ -36,6 +36,8 @@ int getEventDataCounter();
 void resetEventDataCounter();
 void incEventDataCounter(uint num);
 void decEventDataCounter(uint num);
+int getMallocFreeCounter();
+void resetMallocFreeCounter();
 void incMallocFreeCounter();
 void decMallocFreeCounter();
 #endif

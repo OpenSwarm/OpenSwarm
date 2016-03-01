@@ -4,21 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os/main.c</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/process_Management.c</file>
-            <file>file:/home/strenkwalder/code/os/main.c</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/io_HDI.c</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/data.h</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/traps.c</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/data.c</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/process_Management_HDI.c</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/scheduler.c</file>
-            <file>file:/home/strenkwalder/code/os/os/io/io_clock.h</file>
-            <file>file:/home/strenkwalder/code/os/os/io/io.h</file>
-            <file>file:/home/strenkwalder/code/os/os/io/io_clock.c</file>
-            <file>file:/home/strenkwalder/code/os/os/io/io.c</file>
-            <file>file:/home/strenkwalder/code/os/os/definitions.h</file>
-            <file>file:/home/strenkwalder/code/os/os/events/events.c</file>
+            <file>file:/home/yuri/PhD/MPLABXProjects/OpenSwarm/main.c</file>
+            <file>file:/home/yuri/PhD/MPLABXProjects/OpenSwarm/os/memory.c</file>
+            <file>file:/home/yuri/PhD/MPLABXProjects/OpenSwarm/os/definitions.h</file>
+            <file>file:/home/yuri/PhD/MPLABXProjects/OpenSwarm/os/platform/e-puck/traps.c</file>
         </group>
     </open-files>
 </project-private>

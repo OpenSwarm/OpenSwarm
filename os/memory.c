@@ -13,6 +13,7 @@
 #include "memory.h"
 
 #include "interrupts.h"
+#include "processes/data.h"
 #include <stdlib.h>
 
 static uint sys_bytes_used = 0;
@@ -38,8 +39,9 @@ void *Sys_Malloc(uint length){
     out = malloc(length);
 //    sys_memory_metadata *header = (sys_memory_metadata *) out;
 #ifdef DEBUG_MEMORY
-    if( out )
+    if( out ){
         incMallocFreeCounter();
+    }
 #endif
         
     
