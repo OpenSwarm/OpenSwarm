@@ -212,18 +212,21 @@ void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
  */
 inline void Sys_Read_UART1_ISR(){
     uint8 data;
-    Sys_Inc_InterruptCounter();
     
-    if(U1STAbits.OERR == 1){//Buffer full?
-        U1STAbits.OERR = 0;//I will empty it now
-    }
+    Sys_Start_AtomicSection();
+        Sys_Inc_InterruptCounter();
     
-    while(U1STAbits.URXDA == 1){//available data
-        data = U1RXREG & 0x00FF;
-        if(read_uart_1 != 0){
-            read_uart_1(data);
+        if(U1STAbits.OERR == 1){//Buffer full?
+            U1STAbits.OERR = 0;//I will empty it now
         }
-    }
+    
+        while(U1STAbits.URXDA == 1){//available data
+            data = U1RXREG & 0x00FF;
+            if(read_uart_1 != 0){
+                read_uart_1(data);
+            }
+        }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -232,38 +235,39 @@ inline void Sys_Read_UART1_ISR(){
  * 
  */
 inline void Sys_Write_UART1_ISR(){
-    Sys_Inc_InterruptCounter();
     
-    if(sys_UART1_TX_data == 0){//nothing to send
-        byte_counter_uart1 = 0;
-        return;
-    }
-
-    while(U1STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
-
-        if(byte_counter_uart1 < sys_UART1_TX_data->length){
-            U1TXREG = sys_UART1_TX_data->data[byte_counter_uart1];//add new byte
-            byte_counter_uart1++;
-            continue;
-        }
-
-        Sys_Start_AtomicSection();
-
-        byte_counter_uart1 = 0;
-        sys_uart_txdata *element = sys_UART1_TX_data;
-
-        sys_UART1_TX_data = sys_UART1_TX_data->next;
-        element->next = 0;
-
-        Sys_Free(element->data);
-        Sys_Free(element);
-
-        Sys_End_AtomicSection();
-
-        if(sys_UART1_TX_data == 0){//it was the last msg
+    Sys_Start_AtomicSection();
+        Sys_Inc_InterruptCounter();
+    
+        if(sys_UART1_TX_data == 0){//nothing to send
+            byte_counter_uart1 = 0;
+            Sys_End_AtomicSection();
             return;
         }
-    }
+
+        while(U1STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
+
+            if(byte_counter_uart1 < sys_UART1_TX_data->length){
+                U1TXREG = sys_UART1_TX_data->data[byte_counter_uart1];//add new byte
+                byte_counter_uart1++;
+                continue;
+            }
+
+            byte_counter_uart1 = 0;
+            sys_uart_txdata *element = sys_UART1_TX_data;
+
+            sys_UART1_TX_data = sys_UART1_TX_data->next;
+            element->next = 0;
+
+            Sys_Free(element->data);
+            Sys_Free(element);
+
+            if(sys_UART1_TX_data == 0){//it was the last msg
+                Sys_End_AtomicSection();
+                return;
+            }
+        }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -274,18 +278,20 @@ inline void Sys_Write_UART1_ISR(){
 inline void Sys_Read_UART2_ISR(){
     uint8 data;
 
-    Sys_Inc_InterruptCounter();
+    Sys_Start_AtomicSection();
+        Sys_Inc_InterruptCounter();
     
-    if(U2STAbits.OERR == 1){//Buffer full?
-        U2STAbits.OERR = 0;//I will empty it now
-    }
-
-    while(U2STAbits.URXDA == 1){//available data
-        data = U2RXREG & 0x00FF;
-        if(read_uart_2 != 0){
-            read_uart_2(data);
+        if(U2STAbits.OERR == 1){//Buffer full?
+            U2STAbits.OERR = 0;//I will empty it now
         }
-    }
+
+        while(U2STAbits.URXDA == 1){//available data
+            data = U2RXREG & 0x00FF;
+            if(read_uart_2 != 0){
+                read_uart_2(data);
+            }
+        }
+    Sys_End_AtomicSection();
 
 }
 /**
@@ -296,30 +302,29 @@ inline void Sys_Read_UART2_ISR(){
 inline void Sys_Write_UART2_ISR(){
     Sys_Inc_InterruptCounter();
     
-    while(U2STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
+    Sys_Start_AtomicSection();
+        while(U2STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
 
-        if(sys_UART2_TX_data == 0){//it was the last msg
+            if(sys_UART2_TX_data == 0){//it was the last msg
+                byte_counter_uart2 = 0;
+                Sys_End_AtomicSection();
+                return;
+            }
+
+            if(byte_counter_uart2 < sys_UART2_TX_data->length){
+                U1TXREG = sys_UART2_TX_data->data[byte_counter_uart2];//add new byte
+                byte_counter_uart2++;
+                continue;
+            }
+
             byte_counter_uart2 = 0;
-            return;
+            sys_uart_txdata *element = sys_UART2_TX_data;
+
+            sys_UART2_TX_data = sys_UART2_TX_data->next;
+            element->next = 0;
+
+            Sys_Free(element->data);
+            Sys_Free(element);
         }
-
-        if(byte_counter_uart2 < sys_UART2_TX_data->length){
-            U1TXREG = sys_UART2_TX_data->data[byte_counter_uart2];//add new byte
-            byte_counter_uart2++;
-            continue;
-        }
-
-        Sys_Start_AtomicSection();
-
-        byte_counter_uart2 = 0;
-        sys_uart_txdata *element = sys_UART2_TX_data;
-
-        sys_UART2_TX_data = sys_UART2_TX_data->next;
-        element->next = 0;
-
-        Sys_Free(element->data);
-        Sys_Free(element);
-
-        Sys_End_AtomicSection();
-    }
+    Sys_End_AtomicSection();
 }

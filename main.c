@@ -139,7 +139,6 @@ int16_t main(void)
         
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){
-            time = Sys_Get_SystemClock();
             time += 1000;
             log_me();
             LED2 = ~LED2;

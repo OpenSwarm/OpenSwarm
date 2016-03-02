@@ -65,20 +65,21 @@ static uint event_counter = 0; /*!< amount of occurred events since the last res
 bool Sys_Send_Event(uint eventID, void *data, uint data_size){
     Sys_Start_AtomicSection();//doesn't consume execution time
     Sys_Stop_SystemTimer();
-    Sys_Inc_EventCounter();
+    
+        Sys_Inc_EventCounter();
 
-   sys_registered_event *event = Sys_Find_Event(eventID);
-   if(event == 0){
-        Sys_Continue_SystemTimer();
-        Sys_End_AtomicSection();
-       return false;
-   }
+        sys_registered_event *event = Sys_Find_Event(eventID);
+        if(event == 0){
+            Sys_Continue_SystemTimer();
+            Sys_End_AtomicSection();
+            return false;
+        }
 
-   sys_subscribed_process *process = event->subscribers;
-   while(process != 0){
-       Sys_Add_Event_to_Process(process->pid, eventID, data, data_size);
-       process = process->next;
-   }
+        sys_subscribed_process *process = event->subscribers;
+        while(process != 0){
+            Sys_Add_Event_to_Process(process->pid, eventID, data, data_size);
+            process = process->next;
+        }
 
     Sys_Continue_SystemTimer();
     Sys_End_AtomicSection();

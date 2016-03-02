@@ -376,82 +376,86 @@ bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction fu
  */
 void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length){
 
-    sys_pcb_list_element *element = Sys_Find_Process(pid);
-    if(element == 0){//no process with pid
-        return;
-    }
-
-    bool add_event = true;
-    sys_occurred_event **o_event = &sys_occurred_events;
-    while(*o_event != 0){//check if the event (eventID) already occurred
-        if((*o_event)->eventID == eventID){//it already occurred
-            add_event = false;
-            break;
-        }
-        o_event = &((*o_event)->next);
-    }
+    sys_pcb_list_element *element;
     
-    if(add_event){//if it hasn't occurred 
     Sys_Start_AtomicSection();
-        //add eventID to the list of occurred events
-        (*o_event) = Sys_Malloc(sizeof(sys_occurred_event));
-       if((*o_event) == 0){
-           Sys_End_AtomicSection();
-           return; //no memory left
-       }
-
-       (*o_event)->eventID = eventID;
-       (*o_event)->next = 0;
-    Sys_End_AtomicSection();
-    }
-
-    //NOW add the data
-    sys_process_event_handler *event = element->pcb.event_register;
-    while( (event = Sys_Next_EventHandler(event, eventID)) != 0 ){
-        
-        //check if the condition was met to add the event data
-        bool is_condition_met = false;
-        if(event->condition != 0){
-            is_condition_met = event->condition(data);
-        }else{//no condition is always met
-            is_condition_met = true;
+        element = Sys_Find_Process(pid);
+        if(element == 0){//no process with pid
+            Sys_End_AtomicSection();
+            return;
         }
 
-        if( is_condition_met ){
-            sys_event_data *e_data = (sys_event_data*) Sys_Malloc(sizeof(sys_event_data));
-            if(e_data == 0){//if malloc fails .. exit
-                return;
+        bool add_event = true; 
+        sys_occurred_event **o_event = &sys_occurred_events;
+        while(*o_event != 0){//check if the event (eventID) already occurred
+            if((*o_event)->eventID == eventID){//it already occurred
+                add_event = false;
+                break;
+            }
+            o_event = &((*o_event)->next);
+        }
+    
+        if(add_event){//if it hasn't occurred 
+            //add eventID to the list of occurred events
+            (*o_event) = Sys_Malloc(sizeof(sys_occurred_event));
+            if((*o_event) == 0){
+                Sys_End_AtomicSection();
+                return; //no memory left
             }
 
-            //create the struct that holds the data
-            if(length != 0){//if there is data
-                e_data->value = Sys_Malloc(length);
-                if(e_data->value == 0){//if malloc fails .. exit
-                    Sys_Free(e_data);
+            (*o_event)->eventID = eventID;
+            (*o_event)->next = 0;
+        }
+
+        //NOW add the data
+        sys_process_event_handler *event = element->pcb.event_register;
+        while( (event = Sys_Next_EventHandler(event, eventID)) != 0 ){
+            //check if the condition was met to add the event data
+            bool is_condition_met = false;
+            if(event->condition != 0){
+                is_condition_met = event->condition(data);
+            }else{//no condition is always met
+                is_condition_met = true;
+            }
+
+            if( is_condition_met ){
+                sys_event_data *e_data = (sys_event_data*) Sys_Malloc(sizeof(sys_event_data));
+                if(e_data == 0){//if malloc fails .. exit
+                    Sys_End_AtomicSection();
                     return;
                 }
 
-                Sys_Memcpy(data, e_data->value, length);
-            }else{
-                e_data->value = 0;
-            }
-            e_data->size = length;
-            e_data->next = 0;
+                //create the struct that holds the data
+                if(length != 0){//if there is data
+                    e_data->value = Sys_Malloc(length);
+                    if(e_data->value == 0){//if malloc fails .. exit
+                        Sys_Free(e_data);
+                        Sys_End_AtomicSection();
+                        return;
+                    }
 
-            //add the struct to the end of the buffered_data
-            if(event->buffered_data == 0){
-                event->buffered_data = e_data;
-            }else{
-                sys_event_data *set_data = event->buffered_data;
-                while(set_data->next != 0){
-                    set_data = set_data->next;
+                    Sys_Memcpy(data, e_data->value, length);
+                }else{
+                    e_data->value = 0;
                 }
-                set_data->next = e_data;
-            }
+                e_data->size = length;
+                e_data->next = 0;
 
-            event = event->next;
+                //add the struct to the end of the buffered_data
+                if(event->buffered_data == 0){
+                    event->buffered_data = e_data;
+                }else{
+                    sys_event_data *set_data = event->buffered_data;
+                    while(set_data->next != 0){
+                        set_data = set_data->next;
+                    }
+                    set_data->next = e_data;
+                }
+
+                event = event->next;
+            }
         }
-    }
+    Sys_End_AtomicSection();
 }
 
 /**

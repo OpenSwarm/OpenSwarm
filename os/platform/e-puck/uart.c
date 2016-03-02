@@ -70,7 +70,9 @@ inline void Sys_Start_UART2(void){
  * @param[in] func  pointer to the function that should process the received byte(s).
  */
 void Sys_SetReadingFunction_UART1(pUART_reader func){
-    read_uart_1 = func;
+    Sys_Start_AtomicSection();
+        read_uart_1 = func;
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -80,7 +82,9 @@ void Sys_SetReadingFunction_UART1(pUART_reader func){
  * @param[in] func  pointer to the function that should process the received byte(s).
  */
 void Sys_SetReadingFunction_UART2(pUART_reader func){
-    read_uart_2 = func;
+    Sys_Start_AtomicSection();
+        read_uart_2 = func;
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -94,14 +98,19 @@ void Sys_SetReadingFunction_UART2(pUART_reader func){
  */
 void Sys_Writeto_UART1(void *data, uint length){
 
-    sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
+    sys_uart_txdata *element;
+    
+    Sys_Start_AtomicSection();
+    element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
+        Sys_End_AtomicSection();
         return;
     }
 
     element->data = Sys_Malloc(length);
     if(element->data == 0){//not enough memory
         Sys_Free(element);
+        Sys_End_AtomicSection();
         return;
     }
     Sys_Memcpy(data,element->data,length);
@@ -111,6 +120,7 @@ void Sys_Writeto_UART1(void *data, uint length){
 
     if(sys_UART1_TX_data == 0){//root
         sys_UART1_TX_data = element;
+        Sys_End_AtomicSection();
         Sys_Write_UART1_ISR();
         return;
     }
@@ -120,6 +130,7 @@ void Sys_Writeto_UART1(void *data, uint length){
         list = list->next;
     }
     list->next = element;
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -133,14 +144,19 @@ void Sys_Writeto_UART1(void *data, uint length){
  */
 void Sys_Writeto_UART2(void *data, uint length){
 
-    sys_uart_txdata *element = Sys_Malloc(sizeof(sys_uart_txdata));
+    sys_uart_txdata *element;
+    
+    Sys_End_AtomicSection();
+    element = Sys_Malloc(sizeof(sys_uart_txdata));
     if(element == 0){//not enough memory
+        Sys_End_AtomicSection();
         return;
     }
 
     element->data = Sys_Malloc(length);
     if(element->data == 0){//not enough memory
         Sys_Free(element);
+        Sys_End_AtomicSection();
         return;
     }
     Sys_Memcpy((uint8 *) data,element->data,length);
@@ -150,6 +166,7 @@ void Sys_Writeto_UART2(void *data, uint length){
 
     if(sys_UART2_TX_data == 0){//root
         sys_UART2_TX_data = element;
+        Sys_End_AtomicSection();
         Sys_Write_UART2_ISR();
         return;
     }
@@ -159,4 +176,6 @@ void Sys_Writeto_UART2(void *data, uint length){
         list = list->next;
     }
     list->next = element;
+    
+    Sys_End_AtomicSection();
 }

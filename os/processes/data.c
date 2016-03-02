@@ -104,23 +104,29 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_elemen
  * @return void
  */
 inline sys_pcb_list_element *Sys_Find_Process(uint pid){
-    sys_pcb_list_element *element = sys_ready_processes;
+    sys_pcb_list_element *element;
+    
+    Sys_Start_AtomicSection();
+        element = sys_ready_processes;
 
-    while(element != 0){
+        while(element != 0){
             if(element->pcb.process_ID == pid){
+                Sys_End_AtomicSection();
                 return element;
             }
             element = element->next;
-    }
+        }
 
-    element = sys_blocked_processes;
-    while(element != 0){
+        element = sys_blocked_processes;
+        while(element != 0){
             if(element->pcb.process_ID == pid){
+                Sys_End_AtomicSection();
                 return element;
             }
             element = element->next;
-    }
-
+        }
+        
+    Sys_End_AtomicSection();
     return 0;
 }
 
