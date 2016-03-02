@@ -51,14 +51,15 @@ sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events 
  */
 sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_element **list){
 
+    sys_pcb_list_element *out;
+    
     if( (*list) == 0){//empty list
         return 0;
     }
-
-    sys_pcb_list_element *out;
+    
+    Sys_Start_AtomicSection();
     if((*list)->pcb.process_ID == pID){//is this the PCB with pid
         // remove from list
-        Sys_Start_AtomicSection();
 
         out = *list;
 
@@ -78,7 +79,6 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_elemen
     while(element != 0){//as long as there is an element
         if(element->pcb.process_ID == pID){
             //if found -> remove
-            Sys_Start_AtomicSection();
 
             element->previous->next = element->next;
             element->next->previous = element->previous;
@@ -93,6 +93,7 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_elemen
         element = element->next;
     }
 
+    Sys_End_AtomicSection();
     return 0;
 }
 
@@ -147,15 +148,21 @@ inline sys_pcb_list_element *Sys_Find_Process(uint pid){
  */
 inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handler *list, uint eventID){
 
-    sys_process_event_handler *element = list;
+    sys_process_event_handler *element;
+    
+    Sys_Start_AtomicSection();
+    element = list;
 
     while(element != 0){
-        if(element->eventID == eventID)
+        if(element->eventID == eventID){
+            Sys_End_AtomicSection();
             return element;
+        }
 
         element = element->next;
     }
 
+    Sys_End_AtomicSection();
     return 0;
 }
 
@@ -175,11 +182,14 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
 //Assumption eventID+func is unique in process eventregister. Note: -1 means all functions
 inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint eventID, pEventHandlerFunction func, sys_process_event_handler **list){
 
+    sys_process_event_handler *top;
+    
     if(list == 0 || *list == 0){//list is empty
         return 0;
     }
 
-    sys_process_event_handler *top = *list;
+    Sys_Start_AtomicSection();
+    top = *list;
     if(top->eventID == eventID && ( func == ALL_FUNCTIONS || top->handler == func)){
        sys_process_event_handler *new_top = top->next;
        *list = top->next;
@@ -187,6 +197,7 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint event
        Sys_Clear_EventData(&top->buffered_data);
        Sys_Free(top);
 
+       Sys_End_AtomicSection();
        return new_top;
     }
 
@@ -207,6 +218,7 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint event
         element = element->next;
     }while(element == 0);
 
+    Sys_End_AtomicSection();
     return top;
 }
 
@@ -218,16 +230,20 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint event
  * @return void
  */
 inline void Sys_Clear_EventData(sys_event_data **data){
-    sys_event_data *element = *data;
-    *data = 0;
+    sys_event_data *element;
+    
+    Sys_Start_AtomicSection();
+        element = *data;
+        *data = 0;
 
-    while(element != 0){
-           sys_event_data *temp = element;
-           element = element->next;
+        while(element != 0){
+            sys_event_data *temp = element;
+            element = element->next;
 
-           Sys_Free(temp->value);
-           Sys_Free(temp);
-       }
+            Sys_Free(temp->value);
+            Sys_Free(temp);
+        }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -238,18 +254,22 @@ inline void Sys_Clear_EventData(sys_event_data **data){
  * @return void
  */
 inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
-    sys_process_event_handler *event_h = element->pcb.event_register;
-    element->pcb.event_register = 0;
+    sys_process_event_handler *event_h;
+    
+    Sys_Start_AtomicSection();
+        event_h = element->pcb.event_register;
+        element->pcb.event_register = 0;
 
-    Sys_Unsubscribe_Process(element->pcb.process_ID);
+        Sys_Unsubscribe_Process(element->pcb.process_ID);
 
-    while(event_h != 0){
-        sys_process_event_handler *temp = event_h;
-        event_h = event_h->next;
+        while(event_h != 0){
+            sys_process_event_handler *temp = event_h;
+            event_h = event_h->next;
 
-        Sys_Clear_EventData(&temp->buffered_data);
-        Sys_Free(temp);
-    }
+            Sys_Clear_EventData(&temp->buffered_data);
+            Sys_Free(temp);
+        }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -317,21 +337,23 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
         return;
     }
 
+    Sys_Start_AtomicSection();
     process->previous = 0;
     process->next = 0;
 
     if( *list == 0){//is it the first element
         *list = process;
+        Sys_End_AtomicSection();
         return;
     }
 
     if((*list)->pcb.process_ID == process->pcb.process_ID){
+        Sys_End_AtomicSection();
         return;//already exists
     }
     
     if( (*list)->pcb.process_ID >= process->pcb.process_ID){// if first pid is bigger
         //put it on top
-        Sys_Start_AtomicSection();
 
         process->next = *list;
         process->previous = 0;
@@ -348,11 +370,11 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     while(element->next != 0){//as long as there are elements 
         
         if(element->next->pcb.process_ID == process->pcb.process_ID){
+            Sys_End_AtomicSection();
             return;//already exists
         }
         
         if(element->next->pcb.process_ID > process->pcb.process_ID){
-            Sys_Start_AtomicSection();
 
             process->next = element->next;
             if(process->next != 0){
@@ -370,7 +392,6 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     }
 
     //put it at the end
-    Sys_Start_AtomicSection();
 
     process->next = 0;
     element->next = process;

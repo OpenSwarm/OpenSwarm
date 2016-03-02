@@ -59,25 +59,55 @@ inline void Sys_Init_Process_Management(){
  *
  *  This function counts the number of process
  *
+ * @return uint returns the number of processes
  */
-unsigned short Sys_Get_Number_Processes(){
-    unsigned short n = 0;
-    sys_process_control_block_list_element *element = sys_ready_processes;
+uint Sys_Get_Number_Processes(){
+
+    return Sys_Get_Number_ReadyProcesses() + Sys_Get_Number_BlockedProcesses();
+}
+
+/**
+ *
+ *  This function counts the number of ready process
+ *
+ * @return uint returns the number of ready processes
+ */
+uint Sys_Get_Number_ReadyProcesses(){
+    uint n = 0;
+    sys_process_control_block_list_element *element;
+    
+    Sys_Start_AtomicSection();
+    element = sys_ready_processes;
 
     while(element != 0){
         n++;
         element = element->next;
     }
+    
+    Sys_End_AtomicSection();
+    return n;
+}
 
+/**
+ *
+ *  This function counts the number of blocked process
+ *
+ * @return uint returns the number of blocked processes
+ */
+uint Sys_Get_Number_BlockedProcesses(){
+    uint n = 0;
+    sys_process_control_block_list_element *element;
+    
+    Sys_Start_AtomicSection();
     element = sys_blocked_processes;
 
     while(element != 0){
         n++;
         element = element->next;
     }
-
+    
+    Sys_End_AtomicSection();
     return n;
-
 }
 
 /**
@@ -104,7 +134,9 @@ void Sys_Kill_Process(uint pid){
         return; //DO NOT KILL THE SYSTEM
     }
 
+    Sys_Start_AtomicSection();
     if(pid == sys_running_process->pcb.process_ID){//Do not kill the running program
+        Sys_End_AtomicSection();
         Sys_Set_Running_Process_to_Zombie();//kill asynchronously
         return;
     }
@@ -113,6 +145,7 @@ void Sys_Kill_Process(uint pid){
     if(element != 0){
             element->pcb.sheduler_info.state = SYS_PROCESS_STATE_ZOMBIE;
             Sys_Delete_Process(element);
+            Sys_End_AtomicSection();
             return;
     }
 
@@ -120,8 +153,11 @@ void Sys_Kill_Process(uint pid){
     if(element != 0){
             element->pcb.sheduler_info.state = SYS_PROCESS_STATE_ZOMBIE;
             Sys_Delete_Process(element);
+            Sys_End_AtomicSection();
             return;
     }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -131,7 +167,9 @@ void Sys_Kill_Process(uint pid){
  */
 void Sys_Set_Running_Process_to_Zombie(){
 
+    Sys_Start_AtomicSection();
     if(sys_running_process->pcb.process_ID == 0){//system is never a zombie
+        Sys_End_AtomicSection();
         return;
     }
 
@@ -163,6 +201,7 @@ goZombieMode:
     process = Sys_Remove_Process_from_List(sys_running_process->pcb.process_ID, &sys_ready_processes);
     Sys_Insert_Process_to_List(process, &sys_zombies);
 
+    Sys_End_AtomicSection();
     Sys_Force_TimerInterrupt();//this schedules the next  after the prvious process
 }
 
