@@ -81,7 +81,8 @@ int16_t main(void)
     }
    
     //Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, logging, wait1000times);//once per second
-    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait250times);//once per second
+//    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait1000times);//once per second
+    
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
     Sys_Start_Kernel();
@@ -107,6 +108,7 @@ int16_t main(void)
     sint speed = 0;
     sint inc = 1;
     uint32 time = Sys_Get_SystemClock();
+    time += (uint32) 1000;
     while(true){//DO Nothing (do yonly things for testing)
         
         
@@ -135,9 +137,12 @@ int16_t main(void)
 //    
         }
         
-        if(Sys_Get_SystemClock() >= time+200){
+        uint32 time_now = Sys_Get_SystemClock();
+        if(time_now >= time){
             time = Sys_Get_SystemClock();
+            time += 1000;
             log_me();
+            LED2 = ~LED2;
         }
         
         i++;
@@ -258,30 +263,11 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
     return true;
 }
 
-bool logging(uint16 PID, uint16 EventID, sys_event_data *data){// every 1000ms
-    static char message[24];
-    
-    uint length = 0;
-    length = sprintf(message, "%u;%u;%u;%u;%u\r\n", Sys_Get_SystemTime(),// 
-                                                    Sys_Get_Number_Processes(),// 
-                                                    Sys_Get_InterruptCounter(),//
-                                                    Sys_Get_EventCounter(), //
-                                                    fps);
-    
-    Sys_Writeto_UART1(message, length);//send via Bluetooth
-    
-    Sys_Reset_InterruptCounter();
-    Sys_Reset_EventCounter();
-    fps = 0;
-    
-    return true;
-}
-
 void log_me(){
-    static char message[24];
+    static char message[30];
     
     uint length = 0;
-    length = sprintf(message, "%u;%u;%u;%u;%u\r\n", Sys_Get_SystemTime(),// 
+    length = sprintf(message, "%07ld;%2u;%4u;%4u;%2u\r\n", Sys_Get_SystemTime(),// 
                                                     Sys_Get_Number_Processes(),// 
                                                     Sys_Get_InterruptCounter(),//
                                                     Sys_Get_EventCounter(), //
@@ -292,25 +278,6 @@ void log_me(){
     Sys_Reset_InterruptCounter();
     Sys_Reset_EventCounter();
     fps = 0;
-}
-
-void loggingThread(){
-    //static char message[24];
-    while(true){
-        //uint16 length = 0;
-        //length = sprintf(message, "\%u:(\%3u,\%3u)\r\n", Sys_Get_SystemTime(), Sys_Get_LeftWheelSpeed(), Sys_Get_RightWheelSpeed());
-        //Sys_Writeto_UART1(message, length);//send via Bluetooth
-    
-        uint i = 0;
-    
-        while(true){//DO Nothing (do yonly things for testing)
-            if(i == 0xFFFE){
-                i = 0;
-                //LED4 = ~LED4; 
-            }
-            i++;
-        }
-    } 
 }
 
 void thread1(){
@@ -393,17 +360,18 @@ bool wait100times(void *data){
     return true;
 }
 
-bool wait1000times(void *data){
-    static uint counter = 0;
-    if(counter++ < 1000){
+bool wait250times(void *data){
+    static uint8 counter = 0;
+    if(counter++ < 250){
         return false;
     }
     counter = 0;
     return true;
 }
-bool wait250times(void *data){
-    static uint8 counter = 0;
-    if(counter++ < 250){
+
+bool wait1000times(void *data){
+    static uint counter = 0;
+    if(counter++ < 1000){
         return false;
     }
     counter = 0;

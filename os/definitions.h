@@ -76,10 +76,10 @@ typedef enum sys_colour {   BLACK   = 0b00000000,
 
 typedef unsigned char  uint8; 	/*!< Defines an unsigned  8bit integer*/
 typedef unsigned short uint16; 	/*!< Defines an unsigned 16bit integer*/
-typedef unsigned int   uint32; 	/*!< Defines an unsigned 32bit integer*/
+typedef unsigned long   uint32; 	/*!< Defines an unsigned 32bit integer*/
 typedef signed char  sint8;	/*!< Defines a    signed  8bit integer*/
 typedef signed short sint16;	/*!< Defines a    signed 16bit integer*/
-typedef signed int   sint32;	/*!< Defines a    signed 32bit integer*/
+typedef signed long   sint32;	/*!< Defines a    signed 32bit integer*/
 
 #ifdef EPUCK_USED
 typedef signed short sint;/*!< e-puck specific valued for the default signed integer*/
