@@ -44,6 +44,8 @@
 void Sys_Init_Process_Management_HDI(){
 
     sys_pcb_list_element *element;
+    
+    Sys_Start_AtomicSection();
     while(sys_ready_processes != 0){//for each elements in the list
         element = sys_ready_processes;
         sys_ready_processes = sys_ready_processes->next;
@@ -61,6 +63,7 @@ void Sys_Init_Process_Management_HDI(){
 
     sys_ready_processes = (sys_pcb_list_element *) Sys_Malloc(sizeof(sys_pcb_list_element));//create the root element
     if(sys_ready_processes == 0){
+        Sys_End_AtomicSection();
         return;//should never happen
     }
     
@@ -83,6 +86,8 @@ void Sys_Init_Process_Management_HDI(){
     sys_ready_processes->pcb.process_ID = 0;
     sys_ready_processes->pcb.event_register = 0;
     sys_running_process = sys_ready_processes;//it is the running process
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -94,14 +99,17 @@ void Sys_Init_Process_Management_HDI(){
 bool Sys_Start_Process_HDI(pFunction function){
   sys_process_control_block_list_element *element;
 
+  Sys_Start_AtomicSection();
   element = (sys_process_control_block_list_element *) Sys_Malloc(sizeof(sys_process_control_block_list_element));//create the root element
 
   if(element == NULL){
+      Sys_End_AtomicSection();
       return false;
   }
 
   if(!Sys_Set_Defaults_PCB(&element->pcb,0)){
       Sys_Free(element);//set default values
+      Sys_End_AtomicSection();
       return false;
   }
   element->pcb.sheduler_info.priority = SYS_PROCESS_PRIORITY_NORMAL; //this element is the system process
@@ -137,6 +145,8 @@ bool Sys_Start_Process_HDI(pFunction function){
           );
 
   Sys_Insert_Process_to_List(element, &sys_ready_processes);
+  
+  Sys_End_AtomicSection();
   return true;
 
 }

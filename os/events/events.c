@@ -107,13 +107,17 @@ inline bool Sys_Send_IntEvent(uint eventID, uint data){
  * @return 	was it successful.
  */
 bool Sys_Register_Event(uint eventID){
-    sys_registered_event* events = registered_events;
-    sys_registered_event* next_event = registered_events;
+    sys_registered_event* events;
+    sys_registered_event* next_event;
     sys_registered_event* new_event = 0;
     
-
+    Sys_Start_AtomicSection();
+    events = registered_events;
+    next_event = registered_events;
+    
     while(next_event != 0){
         if(events->eventID == eventID){ //is Event (EID) already registered?
+            Sys_End_AtomicSection();
             return false;
         }
 
@@ -123,6 +127,7 @@ bool Sys_Register_Event(uint eventID){
 
     new_event = (sys_registered_event*) Sys_Malloc(sizeof(struct sys_registered_event_s));
     if(new_event == 0){
+        Sys_End_AtomicSection();
         return false;
     }
     new_event->eventID = eventID;
@@ -131,10 +136,12 @@ bool Sys_Register_Event(uint eventID){
 
     if(registered_events == 0){
         registered_events = new_event;
+        Sys_End_AtomicSection();
         return true;
     }
 
     events->next = new_event;
+    Sys_End_AtomicSection();
     return true;
 }
 

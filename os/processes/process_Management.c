@@ -230,16 +230,21 @@ inline void Sys_Kill_Zombies(){
  * @param[in] pid process id
  */
 void Sys_Switch_Process(uint pid){
-    sys_pcb_list_element *element = sys_ready_processes;
+    sys_pcb_list_element *element;
+    
+    Sys_End_AtomicSection();
+    element = sys_ready_processes;
 
     while(element != 0){//search for the right process
         if(element->pcb.process_ID == pid){//if this is the correct one > write values
             Sys_Switch_Process_HDI(element);
+            Sys_End_AtomicSection();
             return;
         }
 
         element = element->next;
     }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -288,7 +293,13 @@ inline void Sys_End_CriticalSection(void){
  */
 void Sys_Block_Process(uint pid, uint eventID, pConditionFunction condition){
 
-    if(sys_ready_processes == 0 || sys_ready_processes->next == 0) return; //no proccess to block
+    if(sys_ready_processes == 0){
+        return;
+    }
+    
+    if(sys_ready_processes->next == 0){ 
+        return; //no proccess to block
+    }
 
     Sys_Start_AtomicSection();
     sys_pcb_list_element *element = Sys_Remove_Process_from_List(pid, &sys_ready_processes);
@@ -301,6 +312,7 @@ void Sys_Block_Process(uint pid, uint eventID, pConditionFunction condition){
 
     if(sys_running_process->pcb.process_ID == pid){//if this is the running process
         // CALL Scheduler
+        Sys_End_AtomicSection();
         Sys_Force_TimerInterrupt();
     }
     
@@ -321,8 +333,7 @@ bool Sys_Continue_Pocess(uint pid, uint eventID, sys_event_data *data){
     Sys_Start_AtomicSection();
     sys_pcb_list_element *element = Sys_Remove_Process_from_List(pid, &sys_blocked_processes);
     Sys_Insert_Process_to_List(element, &sys_ready_processes);
-    Sys_End_AtomicSection();
-
+    
     Sys_Remove_Event_from_EventRegister(eventID, Sys_Continue_Pocess, &(element->pcb.event_register));
 
     bool exists_another = false;//exists another subscribed event handler of the eventID
@@ -339,6 +350,7 @@ bool Sys_Continue_Pocess(uint pid, uint eventID, sys_event_data *data){
         Sys_Unsubscribe_from_Event(eventID, pid);
     }
     
+    Sys_End_AtomicSection();
     return true;
 }
 
@@ -533,9 +545,12 @@ inline void Sys_Execute_Events_in_ProcessList(uint eventID, sys_pcb_list_element
  *
  */
 inline void Sys_Execute_All_EventHandler(){
-    sys_occurred_event *o_event = sys_occurred_events;
+    sys_occurred_event *o_event;
+    
+    Sys_Start_AtomicSection();
+    o_event = sys_occurred_events;
     sys_occurred_events = 0;
-
+    
     while(o_event != 0){//assuming there are less processes then events
         
         Sys_Execute_Events_in_ProcessList(o_event->eventID, sys_ready_processes);
@@ -548,6 +563,8 @@ inline void Sys_Execute_All_EventHandler(){
         occured_event->next = 0;
         Sys_Free(occured_event);
     }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -571,12 +588,16 @@ void Sys_Interprocess_EventHandling(){
  * @param[in] eventID   Identifier of the event that has to be removed
  */
 void Sys_Remove_All_Event_Subscriptions(uint eventID){
-    sys_pcb_list_element *process = sys_ready_processes;
+    sys_pcb_list_element *process;
+    
+    Sys_Start_AtomicSection();
+    process = sys_ready_processes;
 
     while(process != 0){//go through all processes
         Sys_Remove_Event_from_EventRegister(eventID, ALL_FUNCTIONS, &(process->pcb.event_register) );
         process = process->next;
     }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -616,6 +637,7 @@ sys_event_data *Sys_Wait_For_Condition(uint eventID, pConditionFunction function
     
     //This is only executed if process continued
     //now get return value (tansmited event data)
+    Sys_Start_AtomicSection();
     sys_process_event_handler *event = sys_running_process->pcb.event_register;
     sys_process_event_handler *prev_event = event;
     while(event != 0){
@@ -630,12 +652,14 @@ sys_event_data *Sys_Wait_For_Condition(uint eventID, pConditionFunction function
             event->next = 0;
             Sys_Free(event);//deletes event handler but leaves the data (return value)
 
+            Sys_End_AtomicSection();
             return data;
         }
         prev_event = event;
         event = event->next;
     }
 
+    Sys_End_AtomicSection();
     return 0;
 }
 
