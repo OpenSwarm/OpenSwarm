@@ -2,4 +2,4 @@ e-puck:
 The files contained in the folder platform are the official e-puck library by GCtronic (svn://svn.gna.org/svn/e-puck/trunk)
 
 kilobot:
-The files contained in the folder platform are the official kilolib/kilobotics library (https://github.com/acornejo/kilolib.git)
+The files contained in the folder platform are the official kilobot/kilobotics.com library (https://github.com/acornejo/kilolib.git)

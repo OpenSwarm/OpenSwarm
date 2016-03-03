@@ -53,7 +53,7 @@ void thread5();
 void thread6();
 void thread7();
 void log_me();
-bool wait100times(void *data);
+bool wait10times(void *data);
 bool wait250times(void *data);
 bool wait1000times(void *data);
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data);
@@ -81,7 +81,7 @@ int16_t main(void)
     }
    
     //Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, logging, wait1000times);//once per second
-//    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait1000times);//once per second
+    //Sys_Subscribe_to_Event(SYS_EVENT_100ms_CLOCK, 0, toggleLED, wait10times);//once per second
     
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
@@ -350,9 +350,9 @@ void thread7(){
     } 
 }
 
-bool wait100times(void *data){
+bool wait10times(void *data){
     static uint8 counter = 0;
-    if(counter++ < 100){
+    if(counter++ < 10){
         return false;
     }
     counter = 0;

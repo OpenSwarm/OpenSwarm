@@ -53,9 +53,11 @@ void Sys_SystemClock_Counter(){
         counter++;
         return;
     }
-    Sys_Send_Event(SYS_EVENT_1ms_CLOCK, &sys_clock, sizeof(sys_clock));
+    
     counter = 0;
     sys_clock++;
+    
+    Sys_Send_Event(SYS_EVENT_1ms_CLOCK, &sys_clock, sizeof(sys_clock));
 }
 
 /**

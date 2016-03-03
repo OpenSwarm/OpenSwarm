@@ -3,6 +3,10 @@ os/events/e-puck
 os/io/e-puck
 os/processes/e-puck
 os/platform/e-puck/library
+os/events/kilobot
+os/io/kilobot
+os/processes/kilobot
+os/platform/kilobot/library
 
 # Object files
 *.o
