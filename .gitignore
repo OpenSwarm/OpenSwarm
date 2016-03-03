@@ -46,6 +46,7 @@ debug/*
 *.properties
 *.bash
 *.*~
+*~
 
 # Latex
 *.aux
