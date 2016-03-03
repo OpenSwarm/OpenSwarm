@@ -54,6 +54,9 @@
 #ifdef SYS_SELECTOR_USED
 #include "io/e-puck/selector.h"
 #endif
+#ifdef SYS_ADC_USED
+#include "io/e-puck/adc.h"
+#endif
 #endif
 
 /**
@@ -96,6 +99,9 @@ void Sys_Init_Kernel(){
 #ifdef SYS_SELECTOR_USED
     Sys_Init_Selector();
 #endif
+#ifdef SYS_SELECTOR_USED
+    Sys_Init_ADC();
+#endif
 #endif
 }
 
@@ -124,6 +130,9 @@ void Sys_Start_Kernel(void){
     Sys_Start_Camera();
 #endif
 #ifdef SYS_SELECTOR_USED
+#endif
+#ifdef SYS_ADC_USED
+    Sys_Start_ADC();
 #endif
 #endif
 }

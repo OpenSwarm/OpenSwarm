@@ -53,7 +53,7 @@ void thread5();
 void thread6();
 void thread7();
 void log_me();
-bool wait100times(void *data);
+bool wait10times(void *data);
 bool wait250times(void *data);
 bool wait1000times(void *data);
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data);
@@ -81,7 +81,7 @@ int16_t main(void)
     }
    
     //Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, logging, wait1000times);//once per second
-//    Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, toggleLED, wait1000times);//once per second
+    //Sys_Subscribe_to_Event(SYS_EVENT_100ms_CLOCK, 0, toggleLED, wait10times);//once per second
     
     Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
     
@@ -125,9 +125,9 @@ int16_t main(void)
             
             speed += inc;
             
-            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, speed);
-            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, -speed);
-            LED0 = ~LED0; 
+            //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, speed);
+            //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, -speed);
+            //LED0 = ~LED0; 
             
               
 //    static char message[24];
@@ -140,8 +140,8 @@ int16_t main(void)
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){
             time += 1000;
-            log_me();
-            LED2 = ~LED2;
+            //log_me();
+            LED0 = ~LED0;
         }
         
         i++;
@@ -217,23 +217,23 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
 //    static char message[24];
 //    uint16 length = 0;
     
-    if(rx_colour & 0x01){
-        LED3 = 1;
-    }else{
-        LED3 = 0;
-    }
-    
-    if(rx_colour & 0x02){
-        LED4 = 1;
-    }else{
-        LED4 = 0;
-    }
-    
-    if(rx_colour & 0x04){
-        LED5 = 1;
-    }else{
-        LED5 = 0;
-    }
+//    if(rx_colour & 0x01){
+//        LED3 = 1;
+//    }else{
+//        LED3 = 0;
+//    }
+//    
+//    if(rx_colour & 0x02){
+//        LED4 = 1;
+//    }else{
+//        LED4 = 0;
+//    }
+//    
+//    if(rx_colour & 0x04){
+//        LED5 = 1;
+//    }else{
+//        LED5 = 0;
+//    }
     //length = sprintf(message, "colour:%i <%i,%i,%i>\r\n", rx_colour, RED, GREEN, BLUE);
     //Sys_Writeto_UART1(message, length);//send via Bluetooth
     
@@ -350,9 +350,9 @@ void thread7(){
     } 
 }
 
-bool wait100times(void *data){
+bool wait10times(void *data){
     static uint8 counter = 0;
-    if(counter++ < 100){
+    if(counter++ < 10){
         return false;
     }
     counter = 0;

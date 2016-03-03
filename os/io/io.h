@@ -68,6 +68,7 @@ extern "C" {
 #include "e-puck/remoteControl.h"
 #include "e-puck/uart.h"
 #include "e-puck/selector.h"
+#include "e-puck/adc.h"
 #endif
     
 inline void Sys_Init_IOManagement(void);   //initialises the system timer and sets a scheduling algorithm
