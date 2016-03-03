@@ -22,8 +22,4 @@ rm -f os/platform/kilobot/library
 ln -s os/platform/e-puck os/events/e-puck
 ln -s os/platform/e-puck os/io/e-puck
 ln -s os/platform/e-puck os/processes/e-puck
-ln -s os/platform/kilobot os/events/kilobot
-ln -s os/platform/kilobot os/io/kilobot
-ln -s os/platform/kilobot os/processes/kilobot
 ln -s extern/platform/e-puck/library os/platform/e-puck/library
-ln -s extern/platform/kilobot/kilolib os/platform/kilobot/library
