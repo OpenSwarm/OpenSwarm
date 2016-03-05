@@ -53,6 +53,15 @@ extern "C" {
 #define SYS_EVENT_IO_TO_BLUETOOTH   0x06    /*!< ID of the event that sends data via Bluetooth*/
 #define SYS_EVENT_1ms_CLOCK         0x07    /*!< ID of the event that signals 1ms timer ticks*/
 #define SYS_EVENT_IO_SELECTOR_CHANGE    0x08    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_ALL       0x09    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_0         0x0A    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_1         0x0B    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_2         0x0C    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_3         0x0D    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_4         0x0E    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_5         0x0F    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_6         0x10    /*!< ID of the event that signals the change of the selector*/
+#define SYS_EVENT_IO_PROX_7         0x11    /*!< ID of the event that signals the change of the selector*/
 //#define SYS_EVENT_1ms_CLOCK         0x09    /*!< ID of the event that signals 1ms timer ticks*/
 //#define SYS_EVENT_1ms_CLOCK         0x0A    /*!< ID of the event that signals 1ms timer ticks*/
 //#define SYS_EVENT_1ms_CLOCK         0x0B    /*!< ID of the event that signals 1ms timer ticks*/

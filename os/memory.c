@@ -29,21 +29,22 @@ typedef struct sys_memory_metadata_s{
  * @return 	pointer to the allocated memory
  */
 void *Sys_Malloc(uint length){
-    void *out = 0;
-//    size_t total_length;
+    uint8 *out = 0;
+    size_t total_length;
     
     Sys_Start_AtomicSection();
     
-//    total_length = length + sizeof(sys_memory_metadata);
-    out = malloc(length);
-//    sys_memory_metadata *header = (sys_memory_metadata *) out;
+    total_length = length + sizeof(sys_memory_metadata);
+    out = malloc(total_length);
+    sys_memory_metadata *header = (sys_memory_metadata *) out;
     
-//    header->size = length;
-    //sys_bytes_used += total_length;
+    header->size = length;
+    
+    sys_bytes_used += total_length;
     
     Sys_End_AtomicSection();
 
-    return out;// + sizeof(sys_memory_metadata);
+    return (void*) (out + sizeof(sys_memory_metadata));
 }
 
 /**
@@ -56,10 +57,10 @@ void Sys_Free(void *data){
 
     Sys_Start_AtomicSection();
 
-//    sys_memory_metadata *header = (sys_memory_metadata *) (data - sizeof(sys_memory_metadata));
-    //sys_bytes_used -= header->size + sizeof(sys_memory_metadata);//theoretically his should be the length
+    sys_memory_metadata *header = (sys_memory_metadata *) (((uint8*) data) - sizeof(sys_memory_metadata));
+    sys_bytes_used -= (header->size + sizeof(sys_memory_metadata));//theoretically his should be the length
         
-    free(data);
+    free(header);
 
     Sys_End_AtomicSection();
 
@@ -74,11 +75,13 @@ void Sys_Free(void *data){
  * @param[in] 	length          size of the memory that has to be copied
  */
 void Sys_Memcpy(void *source_i, void *destination_o, uint length){
-
-    uint8 *source = source_i;
-    uint8 *destination = destination_o;
+    uint8 *source;
+    uint8 *destination;
     
     Sys_Start_AtomicSection();
+    source = source_i;
+    destination = destination_o;
+    
 
     uint i = 0;
     for(i = 0; i < length; i++){

@@ -57,6 +57,9 @@
 #ifdef SYS_ADC_USED
 #include "io/e-puck/adc.h"
 #endif
+#ifdef SYS_PROXIMITY_USED
+#include "io/e-puck/proximity.h"
+#endif
 #endif
 
 /**
@@ -71,6 +74,8 @@ void Sys_Init_Kernel(){
 #ifdef EPUCK_USED
     e_init_port(); //Set all pins and ports
 #endif
+    
+    
 
     //Init Scheduling
     Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
@@ -101,6 +106,9 @@ void Sys_Init_Kernel(){
 #endif
 #ifdef SYS_SELECTOR_USED
     Sys_Init_ADC();
+#endif
+#ifdef SYS_PROXIMITY_USED
+    Sys_Init_Proximity();
 #endif
 #endif
 }
@@ -133,6 +141,8 @@ void Sys_Start_Kernel(void){
 #endif
 #ifdef SYS_ADC_USED
     Sys_Start_ADC();
+#endif
+#ifdef SYS_PROXIMITY_USED
 #endif
 #endif
 }

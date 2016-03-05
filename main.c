@@ -32,6 +32,8 @@
 #include "os/memory.h"
 #include "os/interrupts.h"
 
+#include "os/io/e-puck/proximity.h"
+
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -62,29 +64,10 @@ bool toggleLED(uint16 PID, uint16 EventID, sys_event_data *data);
 
 int16_t main(void)
 {
-
-    //Sys_Init_MCU_HDI();
-    /* Configure the oscillator for the device */
     Sys_Init_Kernel();
     
-//    Sys_SetReadingFunction_UART1(bluetooth_reader);
-    
-    if(   !Sys_Start_Process(thread1) ||
-            !Sys_Start_Process(thread2) ||
-            !Sys_Start_Process(thread3) ||
-            !Sys_Start_Process(thread4) ||
-            !Sys_Start_Process(thread5) ||
-            !Sys_Start_Process(thread6) ||
-            !Sys_Start_Process(thread7)
-      ){
-        FRONT_LED = 1;
-    }
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);    
    
-    //Sys_Subscribe_to_Event(SYS_EVENT_1ms_CLOCK, 0, logging, wait1000times);//once per second
-    //Sys_Subscribe_to_Event(SYS_EVENT_100ms_CLOCK, 0, toggleLED, wait10times);//once per second
-    
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);
-    
     Sys_Start_Kernel();
 
     LED0 = 0;
@@ -98,53 +81,25 @@ int16_t main(void)
     BODY_LED = 0;
     FRONT_LED = 0;
     
-    //sys_event_data * data = Sys_Wait_For_Event(SYS_EVENT_TERMINATION);
-    //Sys_Clear_EventData(&data);
       
     
     Sys_Writeto_UART1("OS Started\r\n", 12);//send via Bluetooth
     
-    int i = 0;  
-    sint speed = 0;
-    sint inc = 1;
+    uint i = 0;
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
-    while(true){//DO Nothing (do yonly things for testing)
+    while(true){
         
-        
-        if(i == 0xFFFE){
-            i = 0;
-         
-            if(speed >= MAX_WHEEL_SPEED_MM_S){
-                inc = -8;
-            }
-        
-            if(speed <= -MAX_WHEEL_SPEED_MM_S){
-                inc = 8;
-            }
-            
-            speed += inc;
-            
-            //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, speed);
-            //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, -speed);
-            //LED0 = ~LED0; 
-            
-              
-//    static char message[24];
-//    uint16 length = 0;
-//    length = sprintf(message, "p: %u\r\n", Sys_Get_Number_Processes());
-//    Sys_Writeto_UART1(message, length);//send via Bluetooth
-//    
+        if(i++ == 1){
+            LED4 = ~LED4;
         }
         
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){
-            time += 1000;
-            //log_me();
+            time += 200;
+            log_me();
             LED0 = ~LED0;
         }
-        
-        i++;
     }
 }
 
@@ -263,17 +218,23 @@ bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
 }
 
 void log_me(){
-    static char message[30];
+    static char message[32];
     
     uint length = 0;
-    length = sprintf(message, "%07ld;%2u;%4u;%4u;%2u\r\n", Sys_Get_SystemTime(),// 
-                                                    Sys_Get_Number_Processes(),// 
-                                                    Sys_Get_InterruptCounter(),//
-                                                    Sys_Get_EventCounter(), //
-                                                    fps);
+    length = sprintf(message, "%5u>%05u;%05u;%05u;%05u;", Sys_MemoryUsed(),//
+                                                    Sys_Get_Prox(0),// 
+                                                    Sys_Get_Prox(1),// 
+                                                    Sys_Get_Prox(2),//
+                                                    Sys_Get_Prox(3));
     
     Sys_Writeto_UART1(message, length);//send via Bluetooth
     
+    length = sprintf(message, "%05u;%05u;%05u;%05u\r\n", Sys_Get_Prox(4),// 
+                                                    Sys_Get_Prox(5),// 
+                                                    Sys_Get_Prox(6),//
+                                                    Sys_Get_Prox(7));
+    
+    Sys_Writeto_UART1(message, length);//send via Bluetooth
     Sys_Reset_InterruptCounter();
     Sys_Reset_EventCounter();
     fps = 0;

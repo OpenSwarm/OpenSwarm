@@ -22,7 +22,7 @@ extern "C" {
 #define AccX    channel5
 #define AccY    channel6
 #define AccZ    channel7
-#define Prox0   channel8
+#define Prx0   channel8
 #define Prx1   channel9
 #define Prx2   channelA
 #define Prx3   channelB
@@ -57,13 +57,15 @@ typedef enum {
     
 typedef void (*ADC_pre_processor)(uint);
 
-void Sys_Init_ADC(void);
-void Sys_Start_ADC(void);
+inline void Sys_Init_ADC(void);
+inline void Sys_Start_ADC(void);
+inline void Sys_Stop_ADC(void);
+inline void Sys_Reset_ADC(void);
 
 void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func);
 
 void Sys_Reset_ADCProcessors(void);
-void Sys_Stop_ADC(void);
+
 
 #ifdef	__cplusplus
 }

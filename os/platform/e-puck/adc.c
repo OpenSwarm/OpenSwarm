@@ -6,7 +6,7 @@
 
 static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};
 
-void Sys_Init_ADC(void){
+inline void Sys_Init_ADC(void){
     
     IEC0bits.ADIE = 0;
     IFS0bits.ADIF = 0; //ADC interrupt flag
@@ -31,9 +31,9 @@ void Sys_Init_ADC(void){
     ADCON2bits.BUFM     = 0;    // Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.ALTS     = 0;    // Always use MUX A input multiplexer settings
     
-    ADCON3bits.SAMC     = 25; //: Auto-Sample Time bits
+    ADCON3bits.SAMC     = 31; //: Auto-Sample Time bits
     ADCON3bits.ADRC     = 1;    //internal clock
-    ADCON3bits.ADCS     = 49; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1))
+    ADCON3bits.ADCS     = 63; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1))
     
     ADCHSbits.CH0NA     = 0;    //Select VREF- for CH0- input
             
@@ -79,7 +79,7 @@ void Sys_Init_ADC(void){
 
 }
 
-void Sys_Start_ADC(void){
+inline void Sys_Start_ADC(void){
     IFS0bits.ADIF       = 0; //ADC interrupt flag
     IEC0bits.ADIE       = 1; //enable IRQ
     ADCON1bits.ADON     = 1;
@@ -92,69 +92,15 @@ void __attribute__((interrupt, auto_psv)) _ADCInterrupt(void){
     adcbuf = &ADCBUF0;
     int i;
     
-    for( i = 0; i < ADC_CHANNELS; i++){
-        if(adc_preprocessors[i] != 0){
-            adc_preprocessors[i](adcbuf[i]);
+    Sys_Start_AtomicSection();
+    Sys_Inc_InterruptCounter();
+    
+    for( i = 0; i < ADC_CHANNELS-2; i++){
+        if(adc_preprocessors[i+2] != 0){//+2 because I do not collect the debug ADC
+            adc_preprocessors[i+2](adcbuf[i]);
         }
     }
-    
-    if(ADCBUF8 > 0x000F){
-        LED1 = 1;  
-        LED2 = 0;
-        LED3 = 0;
-        LED4 = 0;
-        LED5 = 0;
-        LED6 = 0;
-        LED7 = 0;
-    }if(ADCBUF8 > 0x03F){
-        LED1 = 1;  
-        LED2 = 1;
-        LED3 = 0;
-        LED4 = 0;
-        LED5 = 0;
-        LED6 = 0;
-        LED7 = 0;
-    }if(ADCBUF8 > 0x00FF){
-        LED1 = 1;  
-        LED2 = 1;
-        LED3 = 1;
-        LED4 = 0;
-        LED5 = 0;
-        LED6 = 0;
-        LED7 = 0;
-    }if(ADCBUF8 > 0x01FF){
-        LED1 = 1;  
-        LED2 = 1;
-        LED3 = 1;
-        LED4 = 1;
-        LED5 = 0;
-        LED6 = 0;
-        LED7 = 0;
-    }if(ADCBUF8 > 0x03FF){
-        LED1 = 1;  
-        LED2 = 1;
-        LED3 = 1;
-        LED4 = 1;
-        LED5 = 1;
-        LED6 = 0;
-        LED7 = 0;
-    }if(ADCBUF8 > 0x07FF){
-        LED1 = 1;  
-        LED2 = 1;
-        LED3 = 1;
-        LED4 = 1;
-        LED5 = 1;
-        LED6 = 1;
-        LED7 = 0;
-    }if(ADCBUF8 > 0x0FFF){
-        LED1 = 1;  
-        LED2 = 1;
-        LED3 = 1;
-        LED4 = 1;
-        LED5 = 1;
-        LED6 = 1;
-        LED7 = 1;
-    }
+    Sys_End_AtomicSection();
     IFS0bits.ADIF = 0;  //After conversion ADIF is set to 1 and must be cleared
 }
 
@@ -171,16 +117,19 @@ void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func){
 
 
 
-void Sys_Reset_ADCProcessors(void){
+void Sys_Reset_ADCProcessors(){
     int i;
     for(i = 0; i < ADC_CHANNELS; i++){
         adc_preprocessors[i] = 0;
     }
 }
 
-void Sys_Stop_ADC(void){
-    int i;
-    for(i = 0; i < ADC_CHANNELS; i++){
-        adc_preprocessors[i] = 0;
-    }
+inline void Sys_Stop_ADC(){
+    IFS0bits.ADIF       = 0; //ADC interrupt flag
+    IEC0bits.ADIE       = 0; //enable IRQ
+    ADCON1bits.ADON     = 0;
+}
+
+inline void Sys_Reset_ADC(){
+    Sys_Reset_ADCProcessors();
 }
