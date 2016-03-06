@@ -73,6 +73,7 @@ void Sys_Init_Kernel(){
 
 #ifdef EPUCK_USED
     e_init_port(); //Set all pins and ports
+    INTCON1bits.NSTDIS = 0;
 #endif
     
     

@@ -61,13 +61,17 @@ bool wait1000times(void *data);
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data);
 bool logging(uint16 PID, uint16 EventID, sys_event_data *data);
 bool toggleLED(uint16 PID, uint16 EventID, sys_event_data *data);
+bool selector2LEDs(uint16 PID, uint16 EventID, sys_event_data *data);
+bool prox2motors(uint16 PID, uint16 EventID, sys_event_data *data);
 
 int16_t main(void)
 {
     Sys_Init_Kernel();
     
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);    
-   
+   // Sys_Subscribe_to_Event(SYS_EVENT_IO_CAMERA, 0, object_clustering, 0);   
+   //Sys_Subscribe_to_Event(SYS_EVENT_IO_SELECTOR_CHANGE, 0, selector2LEDs, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, 0, prox2motors, 0);
+    
     Sys_Start_Kernel();
 
     LED0 = 0;
@@ -81,24 +85,71 @@ int16_t main(void)
     BODY_LED = 0;
     FRONT_LED = 0;
     
-      
+//     if( // !Sys_Start_Process(thread1) ||
+//         //   !Sys_Start_Process(thread2) ||
+//         //   !Sys_Start_Process(thread3) ||
+//         //   !Sys_Start_Process(thread4) ||
+//         //   !Sys_Start_Process(thread5) ||
+//         //   !Sys_Start_Process(thread6) ||
+//            !Sys_Start_Process(thread7)
+//      ){
+//        FRONT_LED = 1;
+//    } 
     
-    Sys_Writeto_UART1("OS Started\r\n", 12);//send via Bluetooth
+    //Sys_Writeto_UART1("OS Started\r\n", 12);//send via Bluetooth
     
     uint i = 0;
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
     while(true){
         
-        if(i++ == 1){
-            LED4 = ~LED4;
+        if(SR & 0x00E0){
+            SRbits.IPL = 0;
+        }
+        if(SR & 0x0020){
+            //LED3 = 1;
+        }else{
+            //LED3 = 0;
+        }
+        
+        if(SR & 0x0040){
+            //LED4 = 1;
+        }else{
+            //LED4 = 0;
+        }
+        
+        if(SR & 0x0080){
+            //LED5 = 1;
+        }else{
+            //LED5 = 0;
+        }
+            
+        if(CORCON & 0x08){
+            //LED6 = 1;
+            CORCONbits.IPL3 = 0;
+        }else{
+            //LED6 = 0;
+        }
+        if(SR & 0x00E0){
+            //LED7 = 1;
+            //SRbits.IPL = 0;
+        }else{
+            //LED7 = 0;
+        }
+        
+        if(Sys_Get_IRQNestingLevel() != 0){
+            //LED2 = 1;
+        }
+        
+        if(i++ == 1){            
+            //LED1 = ~LED1;
         }
         
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){
             time += 200;
             log_me();
-            LED0 = ~LED0;
+            //LED0 = ~LED0;
         }
     }
 }
@@ -160,14 +211,14 @@ void bluetooth_reader(uint8 data){
 #define NOTHING_SPEED_L (MAX_WHEEL_SPEED_MM_S * 55)/100
 #define NOTHING_SPEED_R (MAX_WHEEL_SPEED_MM_S * 99)/100
 bool object_clustering(uint16 PID, uint16 EventID, sys_event_data *data){
-    BODY_LED = ~BODY_LED;  
+    
     fps++; 
     /*if(!run_clustering){
         return true;
     }*/
     
     
-    sys_colour rx_colour = *((sys_colour *)data->value);
+//    sys_colour rx_colour = *((sys_colour *)data->value);
    
 //    static char message[24];
 //    uint16 length = 0;
@@ -229,10 +280,11 @@ void log_me(){
     
     Sys_Writeto_UART1(message, length);//send via Bluetooth
     
-    length = sprintf(message, "%05u;%05u;%05u;%05u\r\n", Sys_Get_Prox(4),// 
+    length = sprintf(message, "%05u;%05u;%05u;%05u|%2d\r\n", Sys_Get_Prox(4),// 
                                                     Sys_Get_Prox(5),// 
                                                     Sys_Get_Prox(6),//
-                                                    Sys_Get_Prox(7));
+                                                    Sys_Get_Prox(7),
+                                                    Sys_Get_IRQNestingLevel());
     
     Sys_Writeto_UART1(message, length);//send via Bluetooth
     Sys_Reset_InterruptCounter();
@@ -340,5 +392,77 @@ bool wait1000times(void *data){
 
 bool toggleLED(uint16 PID, uint16 EventID, sys_event_data *data){
     LED6 = ~LED6;
+    return true;
+}
+
+
+void Sys_ClearLEDs(){
+    LED0 = 0;
+    LED1 = 0;
+    LED2 = 0;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
+    BODY_LED = 0;
+    FRONT_LED = 0;    
+}
+void Sys_SetLED(uint index){
+    switch(index){
+        case 0:
+            LED0 = 1;
+            break;
+        case 1:
+            LED1 = 1;
+            break;
+        case 2:
+            LED2 = 1;
+            break;
+        case 3:
+            LED3 = 1;
+            break;
+        case 4:
+            LED4 = 1;
+            break;
+        case 5:
+            LED5 = 1;
+            break;
+        case 6:
+            LED6 = 1;
+            break;
+        case 7:
+            LED7 = 1;
+            break;
+        case 8:
+            BODY_LED = 1;
+            break;
+        case 9:
+            FRONT_LED = 1;
+            break;
+        default:
+            break;
+    }    
+}
+
+bool selector2LEDs(uint16 PID, uint16 EventID, sys_event_data *data){
+    
+    uint8 value = *((uint8*) data->value);
+    
+    Sys_ClearLEDs();
+    Sys_SetLED(value & 0x07);
+    
+    return true;
+}
+
+bool prox2motors(uint16 PID, uint16 EventID, sys_event_data *data){
+    
+    uint16 value = *((uint16*) data->value);
+    
+    value = MAX_WHEEL_SPEED_MM_S/(value/10+1);
+    
+    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT,  value);
+    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT,-value);
+    
     return true;
 }

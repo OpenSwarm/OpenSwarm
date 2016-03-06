@@ -1,6 +1,7 @@
 #include "adc.h"
 
 #include "../../definitions.h"
+#include "../../interrupts.h"
 
 #define ADC_CHANNELS 16
 

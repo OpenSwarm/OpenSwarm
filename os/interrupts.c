@@ -69,6 +69,15 @@ inline void Sys_End_AtomicSection(){
 
 /**
  *
+ * This Function ends an atomic section. This means the code afterwards can be interrupted by a interrupt.
+ *
+ */
+sint Sys_Get_IRQNestingLevel(){
+    return nesting;
+}
+
+/**
+ *
  * This Function increases the interrupt counter, which counts the amount of occurred interrupts.
  *
  */

@@ -16,6 +16,7 @@ void Sys_Init_Proximity(void);
 void Sys_Start_Proximity(void);
     
 uint Sys_Get_Prox(uint index);
+uint Sys_Get_MaxProx(uint index);
 
 #ifdef	__cplusplus
 }
