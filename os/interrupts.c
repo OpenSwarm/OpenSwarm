@@ -45,7 +45,7 @@ static uint irq_counter = 0;
  */
 inline void Sys_Start_AtomicSection(){
     if(nesting == 0){
-        sys_IRQ_Priority = SRbits.IPL;
+        sys_IRQ_Priority = (SR & 0x00E0) >> 5;
         SRbits.IPL = SYS_IRQP_MAX;
     }
     nesting++;
