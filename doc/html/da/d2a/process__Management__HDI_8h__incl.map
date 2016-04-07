@@ -1,7 +1,0 @@
-<map id="platform/e&#45;puck/process_Management_HDI.h" name="platform/e&#45;puck/process_Management_HDI.h">
-<area shape="rect" id="node2" href="$d2/dbd/data_8h.html" title="It declares functions to manage process lists and related structs. " alt="" coords="477,95,613,136"/>
-<area shape="rect" id="node4" href="$d6/dc2/definitions_8h.html" title="It declares general preprocessor variables and types. " alt="" coords="261,259,396,285"/>
-<area shape="rect" id="node10" href="$db/dd2/events_8h.html" title="declares functions to create, (un)subscribe, (un)register, and delete events and related handler..." alt="" coords="466,184,623,211"/>
-<area shape="rect" id="node11" href="$d2/dd8/scheduler_8h.html" title="It declares functions to specify a scheduling algorithm. " alt="" coords="352,184,441,211"/>
-<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="declares e&#45;puck specific types and preprocessor variables " alt="" coords="426,333,634,375"/>
-</map>

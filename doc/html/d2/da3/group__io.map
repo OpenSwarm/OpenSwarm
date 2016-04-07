@@ -1,7 +1,0 @@
-<map id="I/O Management" name="I/O Management">
-<area shape="rect" id="node1" href="$db/d36/group__remotecontrol.html" title="Functions to receive data from a remote control. " alt="" coords="172,5,287,32"/>
-<area shape="rect" id="node2" href="$dc/d90/group__camera.html" title="The camera module is used to retrieve raw camera data, process the incoming frames, and emits the result as events. " alt="" coords="172,56,287,83"/>
-<area shape="rect" id="node3" href="$db/def/group__uart.html" title="Functions to control the message flow of the UART interface. " alt="" coords="186,107,273,133"/>
-<area shape="rect" id="node4" href="$d3/df5/group__i2c.html" title="Functions to read from and write on the I2C interface. " alt="" coords="181,157,278,184"/>
-<area shape="rect" id="node6" href="$dd/daa/group__motors.html" title="Functions to control the two stepper motors of the e&#45;puck. " alt="" coords="179,208,280,235"/>
-</map>

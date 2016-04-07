@@ -1,7 +1,0 @@
-<map id="processes/scheduler.c" name="processes/scheduler.c">
-<area shape="rect" id="node2" href="$d2/dd8/scheduler_8h.html" title="It declares functions to specify a scheduling algorithm. " alt="" coords="282,155,371,181"/>
-<area shape="rect" id="node10" href="$dd/de5/process__Management_8h.html" title="It declares functions to manage processes (e.g. task creation, switching, termination) ..." alt="" coords="127,80,289,107"/>
-<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="It declares general preprocessor variables and types. " alt="" coords="192,229,296,256"/>
-<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="declares e&#45;puck specific types and preprocessor variables " alt="" coords="525,304,733,345"/>
-<area shape="rect" id="node11" href="$db/dd2/events_8h.html" title="declares functions to create, (un)subscribe, (un)register, and delete events and related handler..." alt="" coords="79,155,206,181"/>
-</map>

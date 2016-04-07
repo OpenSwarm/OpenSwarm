@@ -1,6 +1,0 @@
-<map id="memory.c" name="memory.c">
-<area shape="rect" id="node2" href="$dc/d18/memory_8h.html" title="It declares functions to allocate, free, and copy memory. " alt="" coords="204,80,284,107"/>
-<area shape="rect" id="node10" href="$d6/ded/interrupts_8h.html" title="It declares interrupt priority levels and functions to create atomic sections. " alt="" coords="309,80,395,107"/>
-<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="It declares general preprocessor variables and types. " alt="" coords="198,155,290,181"/>
-<area shape="rect" id="node8" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="declares e&#45;puck specific types and preprocessor variables " alt="" coords="525,229,733,271"/>
-</map>

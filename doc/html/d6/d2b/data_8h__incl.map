@@ -1,6 +1,0 @@
-<map id="processes/data.h" name="processes/data.h">
-<area shape="rect" id="node3" href="$d6/dc2/definitions_8h.html" title="It declares general preprocessor variables and types. " alt="" coords="177,155,311,181"/>
-<area shape="rect" id="node9" href="$db/dd2/events_8h.html" title="declares functions to create, (un)subscribe, (un)register, and delete events and related handler..." alt="" coords="49,80,207,107"/>
-<area shape="rect" id="node10" href="$d2/dd8/scheduler_8h.html" title="It declares functions to specify a scheduling algorithm. " alt="" coords="282,80,371,107"/>
-<area shape="rect" id="node7" href="$d9/d1f/DSPIC30F6014A__HDI_8h.html" title="declares e&#45;puck specific types and preprocessor variables " alt="" coords="525,229,733,271"/>
-</map>
