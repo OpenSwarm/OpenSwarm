@@ -14,9 +14,6 @@ mklink /D e-puck "..\platform\e-puck"
 cd "..\platform\e-puck"
 mklink /D library "..\..\..\extern\platform\e-puck\library"
 
-cd "..\..\..\.git\hooks"
-mklink post-merge "..\..\.git-hooks\post-merge"
-mklink pre-commit "..\..\.git-hooks\pre-commit"
 
-cd "..\..\"
+cd "..\..\..\"
 pause

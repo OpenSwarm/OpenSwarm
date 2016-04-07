@@ -213,6 +213,7 @@ void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
 inline void Sys_Read_UART1_ISR(){
     uint8 data;
     
+    Sys_Inc_InterruptCounter();
     Sys_Start_AtomicSection();
         Sys_Inc_InterruptCounter();
     
@@ -235,7 +236,6 @@ inline void Sys_Read_UART1_ISR(){
  * 
  */
 inline void Sys_Write_UART1_ISR(){
-    
     Sys_Start_AtomicSection();
         Sys_Inc_InterruptCounter();
     
@@ -259,7 +259,7 @@ inline void Sys_Write_UART1_ISR(){
             sys_UART1_TX_data = sys_UART1_TX_data->next;
             element->next = 0;
 
-            Sys_Free(element->data);
+            //Sys_Free(element->data);
             Sys_Free(element);
 
             if(sys_UART1_TX_data == 0){//it was the last msg
@@ -278,6 +278,7 @@ inline void Sys_Write_UART1_ISR(){
 inline void Sys_Read_UART2_ISR(){
     uint8 data;
 
+    Sys_Inc_InterruptCounter();
     Sys_Start_AtomicSection();
         Sys_Inc_InterruptCounter();
     

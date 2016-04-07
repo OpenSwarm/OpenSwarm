@@ -89,7 +89,11 @@ int16_t main(void)
     
     uint32 time = 1000;
     while(true){//DO Nothing (do only things for testing)
-        
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         uint32 time_now = Sys_Get_SystemClock();//get the current time
         if(time_now >= time){//if one second passed
             time += 1000;//calculate next second
@@ -124,6 +128,11 @@ void log_me(){
 void thread1(){
     uint i = 0;    
     while(true){//DO Nothing (do only things for testing)
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         if(i == 0xFFFE){
             i = 0;
             LED1 = ~LED1; 
@@ -134,6 +143,11 @@ void thread1(){
 void thread2(){
     uint i = 0;    
     while(true){//DO Nothing (do only things for testing)
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         if(i == 0xFFFE){
             i = 0;
             LED2 = ~LED2; 
@@ -144,6 +158,11 @@ void thread2(){
 void thread3(){
     uint i = 0;    
     while(true){//DO Nothing (do only things for testing)
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         if(i == 0xFFFE){
             i = 0;
             LED3 = ~LED3; 
@@ -154,6 +173,11 @@ void thread3(){
 void thread4(){
     uint i = 0;    
     while(true){//DO Nothing (do only things for testing)
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         if(i == 0xFFFE){
             i = 0;
             LED4 = ~LED4; 
@@ -164,6 +188,11 @@ void thread4(){
 void thread5(){
     uint i = 0;    
     while(true){//DO Nothing (do only things for testing)
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         if(i == 0xFFFE){
             i = 0;
             LED5 = ~LED5; 
@@ -174,6 +203,11 @@ void thread5(){
 void thread6(){
     uint i = 0;    
     while(true){//DO Nothing (do only things for testing)
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         if(i == 0xFFFE){
             i = 0;
             LED6 = ~LED6; 
@@ -182,18 +216,14 @@ void thread6(){
     } 
 }
 
-/**
- * This is a nice alternative to the other toggle_frontLED function
- * This function turns on the front_LED, if the selector was set to an even number
- *
- * @para[in] PID        identifier of the process to which this function was subscribed
- * @para[in] eventID    identifier of the event to which this function was subscribed
- * @para[in] data       the data which was sent with the event
- * @return   bool       was this function successful?
- */
 void thread7(){
     uint i = 0;    
     while(true){//DO Nothing (do only things for testing)
+	        
+	if(SR & 0x00E0){//This is to prevent a bug of occurring. DO NOT REMOVE
+            SRbits.IPL = 0;
+        }
+
         if(i == 0xFFFE){
             i = 0;
             LED7 = ~LED7; 

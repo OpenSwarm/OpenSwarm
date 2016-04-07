@@ -322,7 +322,7 @@ void Sys_Unsubscribe_Handler_from_Event(uint eventID, pEventHandlerFunction func
  */
 sys_registered_event *Sys_Find_Event(uint eventID){
     sys_registered_event* event = registered_events;
-
+            
     while(event != 0){
         if(event->eventID == eventID){
             return event;
@@ -343,7 +343,7 @@ sys_registered_event *Sys_Find_Event(uint eventID){
  */
 bool Sys_IsEventRegistered(uint eventID){
     sys_registered_event* event = registered_events;
-
+    
     while(event != 0){
         if(event->eventID == eventID){
             return true;
@@ -362,7 +362,7 @@ bool Sys_IsEventRegistered(uint eventID){
  */
 void Sys_Unsubscribe_Process(uint pid){
     sys_registered_event* event = registered_events;
-
+    
     while(event != 0){//look into every event
         sys_subscribed_process* subscriber = event->subscribers;
         if(event->subscribers->pid == pid){
