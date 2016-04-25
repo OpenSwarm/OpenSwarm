@@ -75,6 +75,8 @@ void calculateProxPointer();
 void initProxPointer();
 void calculateMotorSpeed(motor_speeds *);
 
+void log_me();
+
 int16_t main(void)
 {
     Sys_Init_Kernel();
@@ -192,7 +194,7 @@ void log_me(){
     static char message[32];
     
     uint length = 0;
-    length = sprintf(message, "(%05d;%05d;%05ld) > (%03d,%03d)\r\n", proximity_pointer.x, proximity_pointer.y,proximity_pointer.length, motors.left, motors.right);
+    length = sprintf(message, "(%05d;%05d;%05ld) > (%03d,%03d)\n\r", proximity_pointer.x, proximity_pointer.y,proximity_pointer.length, motors.left, motors.right);
     
     Sys_Writeto_UART1(message, length);//send via Bluetooth
  
@@ -256,8 +258,15 @@ bool prox2motors(uint16 PID, uint16 EventID, sys_event_data *data){
 
 void getProximityValues(){
     int i;
+    int new_value;
     for(i = 0; i < PROXIMITIES; i++){
-        proximity_values[i] = Sys_Get_Prox(i);
+        if(Sys_Get_Prox(i) < 0xFFFF){
+            new_value = 100 - Sys_Get_Prox(i) ;
+        }else{
+            new_value = 0;
+        }
+        
+        proximity_values[i] = new_value/4 + proximity_values[i]/4 + proximity_values[i]/2;
     }
 }
 
@@ -268,8 +277,8 @@ void calculateProxPointer(){
     
     for(i = 0; i < PROXIMITIES; i++){
         if(proximity_values[i] < 0xFFFF){
-            prox_x += ((100 - proximity_values[i]) * prox_transform_x[i])/100;
-            prox_y += ((100 - proximity_values[i]) * prox_transform_y[i])/100;
+            prox_x += ((proximity_values[i]) * prox_transform_x[i])/100;
+            prox_y += ((proximity_values[i]) * prox_transform_y[i])/100;
         }
     }
     
@@ -278,11 +287,16 @@ void calculateProxPointer(){
     proximity_pointer.length = sqrt((long) prox_x*prox_x + (long) prox_y*prox_y);
 }
 
-#define MAX_SPEED 256
+#define MAX_SPEED 128
 
 void calculateMotorSpeed(motor_speeds *speeds){
     sint sinMax = sinVectorTimes(&proximity_pointer, MAX_SPEED);
     sint cosMax = cosVectorTimes(&proximity_pointer, MAX_SPEED);
+    
+    speeds->left  = -cosMax;
+    speeds->right = -cosMax;
+    
+    return; 
     
     if(proximity_pointer.x > 0){//is the target in front 
         if(proximity_pointer.x >= 200){//if too close -> only turn
