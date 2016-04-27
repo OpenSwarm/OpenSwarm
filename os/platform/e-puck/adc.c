@@ -7,6 +7,8 @@
 
 static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};
 
+uint16 sys_random_number = 0;
+
 inline void Sys_Init_ADC(void){
     
     IEC0bits.ADIE = 0;
@@ -100,7 +102,10 @@ void __attribute__((interrupt, auto_psv)) _ADCInterrupt(void){
         if(adc_preprocessors[i+2] != 0){//+2 because I do not collect the debug ADC
             adc_preprocessors[i+2](adcbuf[i]);
         }
+        
+        sys_random_number = (sys_random_number << 1) | (adcbuf[i] & 0x0001); //use the last bit (adc noise) to generate the random number
     }
+    
     Sys_End_AtomicSection();
     IFS0bits.ADIF = 0;  //After conversion ADIF is set to 1 and must be cleared
 }
@@ -133,4 +138,12 @@ inline void Sys_Stop_ADC(){
 
 inline void Sys_Reset_ADC(){
     Sys_Reset_ADCProcessors();
+}
+
+uint8 Sys_Rand8(){
+    return (uint8) sys_random_number & 0x00FF;
+}
+
+uint16 Sys_Rand16(){
+    return sys_random_number;
 }

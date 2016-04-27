@@ -66,6 +66,9 @@ void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func);
 
 void Sys_Reset_ADCProcessors(void);
 
+uint8 Sys_Rand8();
+uint16 Sys_Rand16();
+
 
 #ifdef	__cplusplus
 }

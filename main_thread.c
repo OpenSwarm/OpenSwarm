@@ -75,7 +75,6 @@ void getProximityValues();
 void calculateProxPointer();
 void initProxPointer();
 void calculateMotorSpeed(motor_speeds *);
-bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data);
 
 void log_me();
 
@@ -86,15 +85,6 @@ void log_me();
 int16_t main(void)
 {
     Sys_Init_Kernel(); 
-    
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, 0, prox_sensors, 0);
     
     Sys_Start_Kernel();
 
@@ -138,7 +128,18 @@ int16_t main(void)
                 default_speed.left = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
                 default_speed.right = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
                 random_change = 0;
-            }            
+            }
+            
+            getProximityValues();//get the values
+            calculateProxPointer();//calculate the overall vector
+            calculateMotorSpeed(&robot_speed);//calculate the motor speed
+            
+            log_me();
+            
+            //apply motor speed
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT,  robot_speed.left);
+            Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, robot_speed.right);
+            
             LED0 = ~LED0;
         }
     }
@@ -312,64 +313,4 @@ void initProxPointer(){
     proximity_pointer.y = 0;
     proximity_pointer.length = 0;
     
-}
-
-/**
- * This is a nice alternative to the other toggle_frontLED function
- * This function turns on the front_LED, if the selector was set to an even number
- *
- * @para[in] PID        identifier of the process to which this function was subscribed
- * @para[in] eventID    identifier of the event to which this function was subscribed
- * @para[in] data       the data which was sent with the event
- * @return   bool       was this function successful?
- */
-bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data){
-    
-    static uint8 sensor_flags = 0;//each bit is for a new sensor value
-        
-    switch(eventID){
-        case SYS_EVENT_IO_PROX_0:
-            proximity_values[0] = 100-Sys_Get_Prox(0);
-            sensor_flags |= 0x01;
-            break;
-        case SYS_EVENT_IO_PROX_1:
-            proximity_values[1] = 100-Sys_Get_Prox(1);
-            sensor_flags |= 0x02;
-            break;
-        case SYS_EVENT_IO_PROX_2:
-            proximity_values[2] = 100-Sys_Get_Prox(2);
-            sensor_flags |= 0x04;
-            break;
-        case SYS_EVENT_IO_PROX_3:
-            proximity_values[3] = 100-Sys_Get_Prox(3);
-            sensor_flags |= 0x08;
-            break;
-        case SYS_EVENT_IO_PROX_4:
-            proximity_values[4] = 100-Sys_Get_Prox(4);
-            sensor_flags |= 0x10;
-            break;
-        case SYS_EVENT_IO_PROX_5:
-            proximity_values[5] = 100-Sys_Get_Prox(5);
-            sensor_flags |= 0x20;
-            break;
-        case SYS_EVENT_IO_PROX_6:
-            proximity_values[6] = 100-Sys_Get_Prox(6);
-            sensor_flags |= 0x40;
-            break;
-        case SYS_EVENT_IO_PROX_7:
-            proximity_values[7] = 100-Sys_Get_Prox(7);
-            sensor_flags |= 0x80;
-            break;
-    }
-    
-    if(sensor_flags == 0xFF){//is it even=true or odd=false
-        //calculateProxPointer();//calculate the overall vector
-        //calculateMotorSpeed(&robot_speed);//calculate the motor speed
-        
-        //apply motor speed
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT,  robot_speed.left);
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, robot_speed.right);
-    }
-    
-    return true;
 }
