@@ -524,12 +524,14 @@ inline void Sys_Execute_Events_in_ProcessList(uint eventID, sys_pcb_list_element
         sys_process_event_handler *event = list->pcb.event_register;
         while(event != 0){
             if(event->eventID == eventID){
-                if(event->handler != 0){
-                    event->handler(list->pcb.process_ID,eventID,event->buffered_data);
-                }
-                Sys_Clear_EventData(&(event->buffered_data));
-                //TODO: buffered data is a linked list -> if more elements stored -> mem leak
+                sys_event_data *data = event->buffered_data;
                 event->buffered_data = 0;
+                
+                if(event->handler != 0){
+                    event->handler(list->pcb.process_ID,eventID,data);
+                }
+                Sys_Clear_EventData(&data);
+                //TODO: buffered data is a linked list -> if more elements stored -> mem leak
             }
 
             event = event->next;

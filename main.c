@@ -74,10 +74,11 @@ int sign(int);
 void getProximityValues();
 void calculateProxPointer();
 void initProxPointer();
-void calculateMotorSpeed(motor_speeds *);
+void calculateMotorSpeed();
 bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data);
 
 void log_me();
+void thread();
 
 #define MAX_SPEED 128
 #define REFRESH_RATE 100 //ms
@@ -95,6 +96,8 @@ int16_t main(void)
     Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, 0, prox_sensors, 0);
     Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, 0, prox_sensors, 0);
     Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, 0, prox_sensors, 0);
+    
+    Sys_Start_Process(thread);
     
     Sys_Start_Kernel();
 
@@ -140,6 +143,18 @@ int16_t main(void)
                 random_change = 0;
             }            
             LED0 = ~LED0;
+        }
+    }
+}
+
+void thread(){
+    uint32 time = Sys_Get_SystemClock();
+    while(true){
+        uint32 time_now = Sys_Get_SystemClock();
+        if(time_now >= time){//wait the refresh_rate time
+            time += REFRESH_RATE;
+            
+            LED1 = ~LED1;
         }
     }
 }
@@ -218,28 +233,28 @@ void calculateProxPointer(){
  * 
  * @param[out] motor_speeds* the struct to put in the motor speeds. 
  */
-void calculateMotorSpeed(motor_speeds *speeds){
+void calculateMotorSpeed(){
     sint sinMax = sinVectorTimes(&proximity_pointer, MAX_SPEED);
     sint cosMax = cosVectorTimes(&proximity_pointer, MAX_SPEED);
   
     //calculates the forward speed + rotation
     if(proximity_pointer.x > 0){//is the target in front 
         if(proximity_pointer.x >= 200){//if too close -> only turn
-            speeds->left  =  -sinMax;
-            speeds->right =   sinMax;
+            robot_speed.left  =  -sinMax;
+            robot_speed.right =   sinMax;
         }else{//get slower when getting closer
-            speeds->left  = (-cosMax*(200-proximity_pointer.x))/200 - sinMax;
-            speeds->right = (-cosMax*(200-proximity_pointer.x))/200 + sinMax;
+            robot_speed.left  = (-cosMax*(200-proximity_pointer.x))/200 - sinMax;
+            robot_speed.right = (-cosMax*(200-proximity_pointer.x))/200 + sinMax;
         }
     }else{//go always max speed because the object is behind you
-       speeds->left  = -cosMax - sinMax;
-       speeds->right = -cosMax + sinMax;
+       robot_speed.left  = -cosMax - sinMax;
+       robot_speed.right = -cosMax + sinMax;
     }
     
     switch(Sys_Get_Selector()){
         case 0://stop doing anything
-            speeds->left = 0;
-            speeds->right = 0;
+            robot_speed.left = 0;
+            robot_speed.right = 0;
             return;
         case 0x01://object avoidance
         case 0x02:
@@ -249,8 +264,8 @@ void calculateMotorSpeed(motor_speeds *speeds){
         case 0x06:
         case 0x07:
             if(proximity_pointer.length < 25){//if you don't see anything -> do random behaviour
-                speeds->left =  default_speed.left;
-                speeds->right = default_speed.right;
+                robot_speed.left  =  default_speed.left;
+                robot_speed.right = default_speed.right;
             }
             return;
         case 0x08://chasing
@@ -262,11 +277,11 @@ void calculateMotorSpeed(motor_speeds *speeds){
         case 0x0E:
         case 0x0F:
             if(proximity_pointer.length < 25){//if you don't see anything -> stop
-                speeds->left =  0;
-                speeds->right = 0;
+                robot_speed.left =  0;
+                robot_speed.right = 0;
             }else{
-                speeds->left =  -speeds->left;
-                speeds->right = -speeds->right;
+                robot_speed.left =  -robot_speed.left;
+                robot_speed.right = -robot_speed.right;
             }           
             return;
     }
@@ -363,12 +378,12 @@ bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data){
     }
     
     if(sensor_flags == 0xFF){//is it even=true or odd=false
-        //calculateProxPointer();//calculate the overall vector
-        //calculateMotorSpeed(&robot_speed);//calculate the motor speed
+        calculateProxPointer();//calculate the overall vector
+        calculateMotorSpeed();//calculate the motor speed
         
         //apply motor speed
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT,  robot_speed.left);
-        //Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, robot_speed.right);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT,  robot_speed.left);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, robot_speed.right);
     }
     
     return true;
