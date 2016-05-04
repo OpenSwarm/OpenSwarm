@@ -120,7 +120,9 @@ void Sys_Yield(void);//create a new process with function as template
 
 void Sys_Init_Process_Management(void);// initialises the process management and creates a system process
 
-unsigned short Sys_Get_Number_Processes(void);//returns the number of processes
+uint Sys_Get_Number_Processes(void);//returns the number of processes
+uint Sys_Get_Number_ReadyProcesses(void);//returns the number of ready processes
+uint Sys_Get_Number_BlockedProcesses(void);//returns the number of blocked processes
 inline void Sys_Start_CriticalSection(void); //no scheduling possible within a critical section
 inline void Sys_End_CriticalSection(void);
 

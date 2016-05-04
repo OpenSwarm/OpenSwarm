@@ -65,20 +65,21 @@ static uint event_counter = 0; /*!< amount of occurred events since the last res
 bool Sys_Send_Event(uint eventID, void *data, uint data_size){
     Sys_Start_AtomicSection();//doesn't consume execution time
     Sys_Stop_SystemTimer();
-    Sys_Inc_EventCounter();
+    
+        Sys_Inc_EventCounter();
 
-   sys_registered_event *event = Sys_Find_Event(eventID);
-   if(event == 0){
-        Sys_Continue_SystemTimer();
-        Sys_End_AtomicSection();
-       return false;
-   }
+        sys_registered_event *event = Sys_Find_Event(eventID);
+        if(event == 0){
+            Sys_Continue_SystemTimer();
+            Sys_End_AtomicSection();
+            return false;
+        }
 
-   sys_subscribed_process *process = event->subscribers;
-   while(process != 0){
-       Sys_Add_Event_to_Process(process->pid, eventID, data, data_size);
-       process = process->next;
-   }
+        sys_subscribed_process *process = event->subscribers;
+        while(process != 0){
+            Sys_Add_Event_to_Process(process->pid, eventID, data, data_size);
+            process = process->next;
+        }
 
     Sys_Continue_SystemTimer();
     Sys_End_AtomicSection();
@@ -106,13 +107,17 @@ inline bool Sys_Send_IntEvent(uint eventID, uint data){
  * @return 	was it successful.
  */
 bool Sys_Register_Event(uint eventID){
-    sys_registered_event* events = registered_events;
-    sys_registered_event* next_event = registered_events;
+    sys_registered_event* events;
+    sys_registered_event* next_event;
     sys_registered_event* new_event = 0;
     
-
+    Sys_Start_AtomicSection();
+    events = registered_events;
+    next_event = registered_events;
+    
     while(next_event != 0){
         if(events->eventID == eventID){ //is Event (EID) already registered?
+            Sys_End_AtomicSection();
             return false;
         }
 
@@ -122,6 +127,7 @@ bool Sys_Register_Event(uint eventID){
 
     new_event = (sys_registered_event*) Sys_Malloc(sizeof(struct sys_registered_event_s));
     if(new_event == 0){
+        Sys_End_AtomicSection();
         return false;
     }
     new_event->eventID = eventID;
@@ -130,10 +136,12 @@ bool Sys_Register_Event(uint eventID){
 
     if(registered_events == 0){
         registered_events = new_event;
+        Sys_End_AtomicSection();
         return true;
     }
 
     events->next = new_event;
+    Sys_End_AtomicSection();
     return true;
 }
 
@@ -314,7 +322,7 @@ void Sys_Unsubscribe_Handler_from_Event(uint eventID, pEventHandlerFunction func
  */
 sys_registered_event *Sys_Find_Event(uint eventID){
     sys_registered_event* event = registered_events;
-
+            
     while(event != 0){
         if(event->eventID == eventID){
             return event;
@@ -335,7 +343,7 @@ sys_registered_event *Sys_Find_Event(uint eventID){
  */
 bool Sys_IsEventRegistered(uint eventID){
     sys_registered_event* event = registered_events;
-
+    
     while(event != 0){
         if(event->eventID == eventID){
             return true;
@@ -354,7 +362,7 @@ bool Sys_IsEventRegistered(uint eventID){
  */
 void Sys_Unsubscribe_Process(uint pid){
     sys_registered_event* event = registered_events;
-
+    
     while(event != 0){//look into every event
         sys_subscribed_process* subscriber = event->subscribers;
         if(event->subscribers->pid == pid){

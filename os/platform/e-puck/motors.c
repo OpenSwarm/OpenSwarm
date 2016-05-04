@@ -23,6 +23,7 @@
 #include <stdlib.h>
 
 #define MAX_WHEEL_SPEED 128 	/*!< Maximum wheel speed in steps*/
+#define MIN_WHEEL_SPEED 4   	/*!< Minimum wheel speed in steps*/
 #define POWER_SAVE_WAIT 15      /*!< amount of steps needed to move the motor one step further */
 
 /**
@@ -113,7 +114,7 @@ void Sys_LeftMotor_Controller(){
    static sint16 next_phase = 0;
    static uint8 power_saving = 0;
    
-   if(left_motor.speed == 0){//if stop -> reset speed to that no current is used
+   if(left_motor.speed <= MIN_WHEEL_SPEED && left_motor.speed >= -MIN_WHEEL_SPEED){//if stop -> reset speed to that no current is used
        Sys_LeftMotor_Reset();
        return;
    }
@@ -159,7 +160,7 @@ void Sys_RightMotor_Controller(){
    static sint16 next_phase = 0;
    static uint8 power_saving = 0;
 
-   if(right_motor.speed == 0){
+   if(right_motor.speed <= MIN_WHEEL_SPEED && right_motor.speed >= -MIN_WHEEL_SPEED){
         Sys_RightMotor_Reset();
        return;
    }

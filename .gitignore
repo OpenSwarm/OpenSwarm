@@ -51,3 +51,6 @@ debug/*
 *.aux
 *.log
 *.synctex.gz
+
+#git merge
+*.orig

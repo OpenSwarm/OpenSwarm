@@ -7,7 +7,7 @@
  * \date 08 July 2014
  *
  * \brief  It defines functions to manage process lists and related structs
- * \copyright   adapted FreeBSD License (see http://openswarm.org/license)
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #include "process_Management.h" 
@@ -35,69 +35,6 @@ sys_pcb_list_element *sys_blocked_processes = 0;/*!< pointer to the blocked proc
 sys_pcb_list_element *sys_zombies = 0;/*!< pointer to the zombie process */
 sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events */
 
-#ifdef DEBUG_MEMORY
-int dbug_occurredEvent_cntr = 0;
-int dbug_eventStruct_cntr = 0;
-int dbug_eventData_cntr = 0;
-int dbug_malloc_free_counter = 0;
-
-int getOEventCounter(){
-    return dbug_occurredEvent_cntr;
-}
-void resetOEventCounter(){
-    dbug_occurredEvent_cntr = 0;
-}
-
-void incOEventCounter(){
-    dbug_occurredEvent_cntr++;
-}
-void decOEventCounter(){
-    dbug_occurredEvent_cntr--;
-}
-
-int getEventCounter(){
-    return dbug_eventStruct_cntr;
-}
-void resetEventCounter(){
-    dbug_eventStruct_cntr = 0;
-}
-
-void incEventCounter(){
-    dbug_eventStruct_cntr++;
-}
-void decEventCounter(){
-    dbug_eventStruct_cntr--;
-}
-
-int getEventDataCounter(){
-    return dbug_eventData_cntr;
-}
-
-void resetEventDataCounter(){
-    dbug_eventData_cntr = 0;
-}
-
-void incEventDataCounter(uint num){
-    dbug_eventData_cntr+=num;
-}
-void decEventDataCounter(uint num){
-    dbug_eventData_cntr-=num;
-}
-
-int getMallocFreeCounter(){
-    return dbug_malloc_free_counter;
-}
-
-void resetMallocFreeCounter(){
-    dbug_malloc_free_counter = 0;
-}
-void incMallocFreeCounter(){
-    dbug_malloc_free_counter++;
-}
-void decMallocFreeCounter(){
-    dbug_malloc_free_counter--;
-}
-#endif
 /********************************************************
  ********************************************************
  *****   Code
@@ -114,12 +51,13 @@ void decMallocFreeCounter(){
  */
 sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_element **list){
 
+    sys_pcb_list_element *out;
+    
     if( (*list) == 0){//empty list
         return 0;
     }
-
+    
     Sys_Start_AtomicSection();
-    sys_pcb_list_element *out;
     if((*list)->pcb.process_ID == pID){//is this the PCB with pid
         // remove from list
 
@@ -167,26 +105,28 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_elemen
  * @return void
  */
 inline sys_pcb_list_element *Sys_Find_Process(uint pid){
+    sys_pcb_list_element *element;
+    
     Sys_Start_AtomicSection();
-    sys_pcb_list_element *element = sys_ready_processes;
+        element = sys_ready_processes;
 
-    while(element != 0){
+        while(element != 0){
             if(element->pcb.process_ID == pid){
                 Sys_End_AtomicSection();
                 return element;
             }
             element = element->next;
-    }
+        }
 
-    element = sys_blocked_processes;
-    while(element != 0){
+        element = sys_blocked_processes;
+        while(element != 0){
             if(element->pcb.process_ID == pid){
                 Sys_End_AtomicSection();
                 return element;
             }
             element = element->next;
-    }
-
+        }
+        
     Sys_End_AtomicSection();
     return 0;
 }
@@ -221,6 +161,7 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
 
         element = element->next;
     }
+
     Sys_End_AtomicSection();
     return 0;
 }
@@ -241,19 +182,21 @@ inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handle
 //Assumption eventID+func is unique in process eventregister. Note: -1 means all functions
 inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint eventID, pEventHandlerFunction func, sys_process_event_handler **list){
 
+    sys_process_event_handler *top;
+    
     if(list == 0 || *list == 0){//list is empty
         return 0;
     }
 
     Sys_Start_AtomicSection();
-    sys_process_event_handler *top = *list;
+    top = *list;
     if(top->eventID == eventID && ( func == ALL_FUNCTIONS || top->handler == func)){
        sys_process_event_handler *new_top = top->next;
        *list = top->next;
 
-       Sys_Clear_EventData(&(top->buffered_data));
+       Sys_Clear_EventData(&top->buffered_data);
        Sys_Free(top);
-       
+
        Sys_End_AtomicSection();
        return new_top;
     }
@@ -265,11 +208,10 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint event
         if(element->eventID == eventID && ( func == ALL_FUNCTIONS || top->handler == func)){
             previous_element->next = element->next;
 
-            Sys_Clear_EventData(&(element->buffered_data));
+            Sys_Clear_EventData(&element->buffered_data);
             Sys_Free(element);
 
             element = previous_element->next;
-            Sys_End_AtomicSection();
             continue;
         }
         previous_element = element;
@@ -288,26 +230,19 @@ inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint event
  * @return void
  */
 inline void Sys_Clear_EventData(sys_event_data **data){
-    
     sys_event_data *element;
     
     Sys_Start_AtomicSection();
-    element = *data;
-    *data = 0;
+        element = *data;
+        *data = 0;
 
-    while(element != 0){
-           sys_event_data *temp = element;
-           element = element->next;
+        while(element != 0){
+            sys_event_data *temp = element;
+            element = element->next;
 
-           Sys_Free(temp->value);
-#ifdef DEBUG_MEMORY
-            dbug_eventData_cntr -= temp->size;
-#endif
-           Sys_Free(temp);
-#ifdef DEBUG_MEMORY
-            dbug_eventStruct_cntr--;
-#endif
-    }
+            Sys_Free(temp->value);
+            Sys_Free(temp);
+        }
     Sys_End_AtomicSection();
 }
 
@@ -320,19 +255,20 @@ inline void Sys_Clear_EventData(sys_event_data **data){
  */
 inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
     sys_process_event_handler *event_h;
+    
     Sys_Start_AtomicSection();
-    event_h = element->pcb.event_register;
-    element->pcb.event_register = 0;
+        event_h = element->pcb.event_register;
+        element->pcb.event_register = 0;
 
-    Sys_Unsubscribe_Process(element->pcb.process_ID);
+        Sys_Unsubscribe_Process(element->pcb.process_ID);
 
-    while(event_h != 0){
-        sys_process_event_handler *temp = event_h;
-        event_h = event_h->next;
+        while(event_h != 0){
+            sys_process_event_handler *temp = event_h;
+            event_h = event_h->next;
 
-        Sys_Clear_EventData(&(temp->buffered_data));
-        Sys_Free(temp);
-    }
+            Sys_Clear_EventData(&temp->buffered_data);
+            Sys_Free(temp);
+        }
     Sys_End_AtomicSection();
 }
 
@@ -365,7 +301,6 @@ void Sys_Delete_Process(sys_pcb_list_element *element){
  */
 inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint stacksize){
     static uint new_id = 1;
-    Sys_Start_AtomicSection();
     element->process_ID = new_id++;
 
     if(stacksize == 0){//if there is no stack size -> set default value
@@ -377,7 +312,6 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint stacksize){
     element->process_stack = (uint *) Sys_Malloc(stacksize); //create stack for process
 
     if(element->process_stack == NULL){
-        Sys_End_AtomicSection();
         return false;
     }
 
@@ -386,7 +320,6 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint stacksize){
     element->stackPointerLimit = element->stackPointer + stacksize;
     element->event_register = 0;
 
-    Sys_End_AtomicSection();
     return true;
 }
 
@@ -421,7 +354,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     
     if( (*list)->pcb.process_ID >= process->pcb.process_ID){// if first pid is bigger
         //put it on top
-        
+
         process->next = *list;
         process->previous = 0;
         (*list)->previous = process;
@@ -442,13 +375,14 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
         }
         
         if(element->next->pcb.process_ID > process->pcb.process_ID){
-            
-        process->next = element->next;
+
+            process->next = element->next;
             if(process->next != 0){
                 process->next->previous = process;
             }
             process->previous = element;
             element->next = process;
+
 
             Sys_End_AtomicSection();
             return;
@@ -458,6 +392,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     }
 
     //put it at the end
+
     process->next = 0;
     element->next = process;
     process->previous = element;

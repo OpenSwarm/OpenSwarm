@@ -45,7 +45,7 @@ static uint irq_counter = 0;
  */
 inline void Sys_Start_AtomicSection(){
     if(nesting == 0){
-        sys_IRQ_Priority = SRbits.IPL;
+        sys_IRQ_Priority = (SR & 0x00E0) >> 5;
         SRbits.IPL = SYS_IRQP_MAX;
     }
     nesting++;
@@ -65,6 +65,15 @@ inline void Sys_End_AtomicSection(){
         }
         nesting = 0;
     }
+}
+
+/**
+ *
+ * This Function ends an atomic section. This means the code afterwards can be interrupted by a interrupt.
+ *
+ */
+sint Sys_Get_IRQNestingLevel(){
+    return nesting;
 }
 
 /**

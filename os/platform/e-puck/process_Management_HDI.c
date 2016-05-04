@@ -22,11 +22,6 @@
 #include "../../definitions.h"
 
 
-#include <p30F6014A.h>
-#include "library/motor_led/e_epuck_ports.h"
-
-
-
 /********************************************************
  ********************************************************
  *****   Code
@@ -44,6 +39,8 @@
 void Sys_Init_Process_Management_HDI(){
 
     sys_pcb_list_element *element;
+    
+    Sys_Start_AtomicSection();
     while(sys_ready_processes != 0){//for each elements in the list
         element = sys_ready_processes;
         sys_ready_processes = sys_ready_processes->next;
@@ -61,6 +58,7 @@ void Sys_Init_Process_Management_HDI(){
 
     sys_ready_processes = (sys_pcb_list_element *) Sys_Malloc(sizeof(sys_pcb_list_element));//create the root element
     if(sys_ready_processes == 0){
+        Sys_End_AtomicSection();
         return;//should never happen
     }
     
@@ -83,6 +81,8 @@ void Sys_Init_Process_Management_HDI(){
     sys_ready_processes->pcb.process_ID = 0;
     sys_ready_processes->pcb.event_register = 0;
     sys_running_process = sys_ready_processes;//it is the running process
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -94,14 +94,17 @@ void Sys_Init_Process_Management_HDI(){
 bool Sys_Start_Process_HDI(pFunction function){
   sys_process_control_block_list_element *element;
 
+  Sys_Start_AtomicSection();
   element = (sys_process_control_block_list_element *) Sys_Malloc(sizeof(sys_process_control_block_list_element));//create the root element
 
   if(element == NULL){
+      Sys_End_AtomicSection();
       return false;
   }
 
   if(!Sys_Set_Defaults_PCB(&element->pcb,0)){
       Sys_Free(element);//set default values
+      Sys_End_AtomicSection();
       return false;
   }
   element->pcb.sheduler_info.priority = SYS_PROCESS_PRIORITY_NORMAL; //this element is the system process
@@ -137,23 +140,26 @@ bool Sys_Start_Process_HDI(pFunction function){
           );
 
   Sys_Insert_Process_to_List(element, &sys_ready_processes);
+  
+  Sys_End_AtomicSection();
   return true;
 
 }
 
 /**
  *
- * This function stores all registers and information of the running process into the corresponding struct
+ * This function switches from sys_running_process to new_process
  *
+ * @param[in] new_process pointer to the process which should be executed
  */
-inline void Sys_Save_Running_Process_HDI(){
+void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
 
-    if(sys_running_process == 0){//if there is no running process (ERROR)
-            return;//don't know what to do
+    if(new_process == sys_running_process || sys_running_process == 0){//Do I want to switch to the same process??
+        return;//How stupid
     }
 
     Sys_Start_AtomicSection();
-
+    
     //PUSH everything on the stack
     __asm__(
             "PUSH SR\n"
@@ -190,73 +196,28 @@ inline void Sys_Save_Running_Process_HDI(){
             "PUSH W3\n"
             );
 
-            __asm__(
-                "MOV W14, %0\n\t"
-                "MOV W15, %1\n\t"
-                :"=rm" (sys_running_process->pcb.framePointer), "=rm" (sys_running_process->pcb.stackPointer)
-                :
-                :
-                );
-
-    Sys_End_AtomicSection();
-}
-
-/**
- *
- *  This function changes stackpointers to the new stack
- *
- * @param[in] fp FramePointer address
- * @param[in] sp StackPointer address
- * @param[in] lm StackPointer Limit
- */
-void Sys_Change_Stack_HDI(unsigned short fp/*W0*/, unsigned short sp/*W1*/, unsigned short lm/*W2*/){
-
-    Sys_Start_AtomicSection();
+    __asm__(//save the current stack & frame pointer
+            "MOV W14, %0\n\t"
+            "MOV W15, %1\n\t"
+        :"=rm" (sys_running_process->pcb.framePointer), "=rm" (sys_running_process->pcb.stackPointer)
+        :
+        :
+        );
     
-
     __asm__ __volatile__ (
             "MOV %0, [%1++]\n\t" //push frame pointer to the stack
             "MOV %1, %0\n\t" //set the framepointer to the TOS
-            "ULNK\n\t" //remove waste from Sys_Change_Stack
-            "NOTEMPTY: MOV [W14++],[%1++]\n\t"//copy all values for the underlying function into the stack
+            //"ULNK\n\t" //remove waste from Sys_Change_Stack
+            "NOTEMPTY: MOV [W14++],[%1++]\n\t"//copy all values for the current frame into the stack
             "CP W14,W15\n\t"
             "BRA LT, NOTEMPTY\n\t"
             "MOV %0, W14\n\t" //set new stackpointers
             "MOV %1, W15\n\t"
             "MOV %2, SPLIM\n"
-            "PUSH W14\n\t" //save framepointer
-            "MOV W15, W14\n\t" //set framepointer to local stack
-            "PUSH %0\n\t" //push all local variables into the stack
-            "PUSH %1\n\t"
-            "PUSH %2\n\t" 
         : 
-        : "r" (fp), "r" (sp), "r" (lm) 
+        : "r" (new_process->pcb.framePointer), "r" (new_process->pcb.stackPointer), "r" (new_process->pcb.stackPointerLimit) 
         : 
     );
-    
-    Sys_End_AtomicSection();
-    //__asm__("RETURN\n"   );
-
-}
-
-/**
- *
- * This function switches from sys_running_process to new_process
- *
- * @param[in] new_process pointer to the process which should be executed
- */
-void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
-
-    if(new_process == sys_running_process){//Do I want to switch to the same process??
-        return;//How stupid
-    }
-
-    Sys_Start_AtomicSection();
-    
-    Sys_Save_Running_Process_HDI();//save all registers
-
-    Sys_Change_Stack_HDI(new_process->pcb.framePointer, new_process->pcb.stackPointer, new_process->pcb.stackPointerLimit);//change stack to the new stack
-
 
     sys_running_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_WAITING;
 
@@ -314,7 +275,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
 
     Sys_End_AtomicSection();
     
-    __asm__("ULNK\n");//remove all waste from Sys_Save_Running_Process_HDI
-    __asm__("ULNK\n");//remove all waste from Sys_Switch_Process_HDI
-    __asm__("RETURN\n");//jump directly to process
+    //__asm__("ULNK\n");//remove all waste from Sys_Save_Running_Process_HDI
+    //__asm__("ULNK\n");//remove all waste from Sys_Switch_Process_HDI
+    //__asm__("RETURN\n");//jump directly to process
 }

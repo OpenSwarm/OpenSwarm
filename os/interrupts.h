@@ -43,6 +43,7 @@ inline void Sys_End_AtomicSection(void);
 inline void Sys_Inc_InterruptCounter(void);
 inline void Sys_Reset_InterruptCounter(void);
 uint Sys_Get_InterruptCounter(void);
+sint Sys_Get_IRQNestingLevel(void);
 
 
 #ifdef	__cplusplus

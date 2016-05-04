@@ -86,25 +86,34 @@
 \end{center}
 
 \footnotesize
-\begin{multicols}{3}
+\begin{multicols}{2}
 
-  \centering\section{Basic}
+%//  \centering\section{Basic}
 
-  \begin{keys}{Glossary}
-    Control (Ctrl) key  & \texttt{C} \\
-    Alt (Meta) key      & \texttt{M} \\
-    Shift key           & \texttt{S} \\
+  \begin{keys}{Basic}
+    Initialise OpenSwarm  & \texttt{Sys\_Init\_Kernel()} \\
+    Start OpenSwarm	      & \texttt{Sys\_Start\_Kernel()} \\
+%    Run the system thread & \texttt{Sys\_Run\_SystemThread()} \\
     Command (Super) key & \texttt{CMD} \\
     Function (Fn) key   & \texttt{fn} \\
     Home/end            & \texttt{fn-left / fn-right} \\
   \end{keys}
 
-  \begin{keys}{Basic}
-    Execute command by name          & \texttt{M-x} \\
-    Cancel command                   & \texttt{C-g} \\
-    Exit Emacs                       & \texttt{C-x C-c} \\
-    Help: describe a key combination & \texttt{C-h k} \\
-    Help: describe a function        & \texttt{C-h f} \\
+  \begin{keys}{Events}
+    Execute command by name          & \texttt{SYS\_EVENT\_IO\_MOTOR\_LEFT} \\
+    Cancel command                   & \texttt{SYS\_EVENT\_IO\_MOTOR\_RIGHT} \\
+    Exit Emacs                       & \texttt{SYS\_EVENT\_IO\_CAMERA} \\
+    Help: describe a key combination & \texttt{SYS\_EVENT\_IO\_REMOECONTROL} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_TO\_BLUETOOTH} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_SELECTOR\_CHANGE} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_0} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_1} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_2} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_3} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_4} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_5} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_6} \\
+    Help: describe a function        & \texttt{SYS\_EVENT\_IO\_PROX\_7} \\
   \end{keys}
 
   \begin{keys}{Navigation}
