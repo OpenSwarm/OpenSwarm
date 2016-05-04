@@ -7,11 +7,11 @@
  * \date 08 July 2014
  * 
  * \brief  It declares functions to manage process lists and related structs
- * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
+ * \copyright   adapted FreeBSD License (see http://openswarm.org/license)
  */
 
 #ifndef SYSTEM_PROCESS_DATA_H
-#define	SYSTEM_PROCESS_DATA_H
+#define SYSTEM_PROCESS_DATA_H
 
 #include <stdbool.h>
 #include "../../os/definitions.h"
@@ -19,10 +19,28 @@
 
 #include "scheduler.h"
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 extern "C" {
 #endif
     
+#ifdef DEBUG_MEMORY
+int getOEventCounter();
+void resetOEventCounter();
+void incOEventCounter();
+void decOEventCounter();
+int getEventCounter();
+void resetEventCounter();
+void incEventCounter();
+void decEventCounter();
+int getEventDataCounter();
+void resetEventDataCounter();
+void incEventDataCounter(uint num);
+void decEventDataCounter(uint num);
+int getMallocFreeCounter();
+void resetMallocFreeCounter();
+void incMallocFreeCounter();
+void decMallocFreeCounter();
+#endif
 /********************************************************
  *  Struct Declarations
  ********************************************************/
@@ -112,9 +130,9 @@ inline void Sys_Clear_EventData(sys_event_data **data);
 inline sys_process_event_handler *Sys_Find_EventHandler(sys_process_event_handler *process, uint16 eventID);
 inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eventID, pEventHandlerFunction func, sys_process_event_handler **list);
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 }
 #endif
 
-#endif	/* SYSTEM_PROCESS_MANAGEMENT_H */
+#endif  /* SYSTEM_PROCESS_MANAGEMENT_H */
 

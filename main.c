@@ -33,10 +33,8 @@
 #include "os/memory.h"
 #include "os/interrupts.h"
 
-#include "os/io/e-puck/proximity.h"
-
 /******************************************************************************/
-/* Variable Declaration                                                */
+/* Global Variable Declaration                                                */
 /******************************************************************************/
 
 typedef struct vector_s{

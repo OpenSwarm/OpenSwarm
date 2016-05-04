@@ -239,10 +239,17 @@ inline void Sys_Write_UART1_ISR(){
     Sys_Start_AtomicSection();
         Sys_Inc_InterruptCounter();
     
-        if(sys_UART1_TX_data == 0){//nothing to send
-            byte_counter_uart1 = 0;
-            Sys_End_AtomicSection();
-            return;
+    if(sys_UART1_TX_data == 0){//nothing to send
+        byte_counter_uart1 = 0;
+        return;
+    }
+
+    while(U1STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
+
+        if(byte_counter_uart1 < sys_UART1_TX_data->length){
+            U1TXREG = sys_UART1_TX_data->data[byte_counter_uart1];//add new byte
+            byte_counter_uart1++;
+            continue;
         }
 
         while(U1STAbits.UTXBF == 0){//as long as the transmission buffer isn't full?
