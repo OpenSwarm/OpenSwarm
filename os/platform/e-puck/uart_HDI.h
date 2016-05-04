@@ -69,19 +69,6 @@ inline void Sys_Write_UART1_ISR();
 inline void Sys_Read_UART2_ISR();
 inline void Sys_Write_UART2_ISR();
 
-
-#ifdef DEBUG_MEMORY
-uint getUART_tx_Counter();
-void resetUART_tx_Counter();
-void incUART_tx_Counter();
-void decUART_tx_Counter();
-
-uint getUART_data_Counter();
-void resetUART_data_Counter();
-void incUART_data_Counter(uint num);
-void decUART_data_Counter(uint num);
-#endif
-
 #ifdef	__cplusplus
 }
 #endif

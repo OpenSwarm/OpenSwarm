@@ -18,8 +18,7 @@ extern "C" {
 
 #define EPUCK_USED /*!< defines that the currently used platform is the e-puck*/
 //#define KILOBOT_USED
-  
-#define DEBUG_MEMORY  
+    
     
 #ifdef EPUCK_USED 
     #if defined(__XC16__)
