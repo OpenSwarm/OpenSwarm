@@ -26,9 +26,9 @@ extern "C" {
 #include "../../definitions.h"
     
 
-#define RC_WAIT_FOR_QUARTERBIT 4  /*!< Cycles that are needed to wait a quarter of a single bit duration */
-#define RC_WAIT_FOR_HALFBIT    8  /*!< Cycles that are needed to wait a half of a single bit duration */
-#define RC_WAIT_FOR_BIT        18 /*!< Cycles that are needed to wait a single bit duration  */
+#define RC_WAIT_FOR_QUARTERBIT 2//4  /*!< Cycles that are needed to wait a quarter of a single bit duration */
+#define RC_WAIT_FOR_HALFBIT    4//8  /*!< Cycles that are needed to wait a half of a single bit duration */
+#define RC_WAIT_FOR_BIT        9//18 /*!< Cycles that are needed to wait a single bit duration  */
 #define RC_WAIT_INITIALLY      RC_WAIT_FOR_BIT+RC_WAIT_FOR_QUARTERBIT /*!< Cycles that are needed to wait at the beginning of a message */
 #define RC_NOT_STARTED -1         /*!< The initial state of the state machine to decode a remote control message */
     

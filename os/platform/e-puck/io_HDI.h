@@ -21,8 +21,12 @@ extern "C" {
 
 #include "../../../os/definitions.h"
 
-#define STEPS_PER_SECOND 10000
-#define STEPS_PER_MILISECOND 10
+#define TIMER_STEP (MILLISEC/5)
+    
+#define STEPS_PER_MILISECOND 5
+#define STEPS_PER_SECOND (STEPS_PER_MILISECOND*1000)
+    
+    
     
 /**
  * @brief Linked list element containing I/O Handler function pointers 

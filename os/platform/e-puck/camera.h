@@ -70,6 +70,9 @@ extern "C" {
     sys_rgb_pixel *getFinishedFrame();
     bool isNewFrameAvailable();
 
+    void processimage();
+    
+    int seeFlash();
 #ifdef	__cplusplus
 }
 #endif

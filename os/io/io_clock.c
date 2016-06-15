@@ -47,14 +47,14 @@ inline void Sys_Init_SystemTime(){
  */
 void Sys_SystemClock_Counter(){
     
-    static uint counter = 0;
+    static uint counter = 1;
     
     if( counter < STEPS_PER_MILISECOND){
         counter++;
         return;
     }
     
-    counter = 0;
+    counter = 1;
     sys_clock++;
     
     Sys_Send_Event(SYS_EVENT_1ms_CLOCK, &sys_clock, sizeof(sys_clock));
