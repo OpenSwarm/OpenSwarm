@@ -89,9 +89,9 @@ bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data);
 #define MAX_SPEED 128
 #define CONTROL_STEP_TIME 25 //ms
 #define EPS 1
-#define TAU 16000
-#define LED_THRES (TAU/100)*5
-#define REF_THRES (TAU/100)*10
+#define TAU 2000
+#define LED_THRES 100
+#define REF_THRES 400
 
 int16_t main(void)
 {
@@ -131,11 +131,6 @@ int16_t main(void)
 
             phase = time_now - phaseStart;
             
-            if (phase >= TAU) {
-                ledsOn();
-                phase = 0;
-                phaseStart = time_now;
-            }
             if (phase > LED_THRES) {
                 ledsOff();
             }
@@ -147,6 +142,12 @@ int16_t main(void)
                 else BODY_LED = 0;
             }
 
+            if (phase >= TAU) {
+                ledsOn();
+                phase = 0;
+                phaseStart = time_now;
+                BODY_LED = 0;
+            }
             
 
             Sys_Set_LeftWheelSpeed(robot_speed.left);

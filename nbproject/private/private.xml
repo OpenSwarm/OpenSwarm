@@ -4,17 +4,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/io/e-puck/selector.c</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/io/io.c</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/platform/e-puck/io_HDI.h</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/io/io_clock.c</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/platform/e-puck/camera.c</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/main.c</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/system.h</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/platform/e-puck/camera.h</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/io/e-puck/selector.h</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/platform/e-puck/io_HDI.c</file>
-            <file>file:/C:/Users/ferna/Documents/GitHub/os/os/io/io.h</file>
+            <file>file:/C:/Users/stefa/Desktop/os/main.c</file>
+            <file>file:/C:/Users/stefa/Desktop/os/os/platform/e-puck/camera.c</file>
+            <file>file:/C:/Users/stefa/Desktop/os/os/platform/e-puck/camera_processing.c</file>
         </group>
     </open-files>
 </project-private>
