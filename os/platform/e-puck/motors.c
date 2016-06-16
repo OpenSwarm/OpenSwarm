@@ -122,7 +122,7 @@ void Sys_LeftMotor_Controller(){
    if(left_motor.speed < 0){//orientation
        if(--next_phase <= 0){
             phase--;
-            next_phase = (5*MAX_WHEEL_SPEED)/abs(left_motor.speed);
+            next_phase = (MAX_WHEEL_SPEED)/abs(left_motor.speed);
             power_saving = 0;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){
@@ -134,7 +134,7 @@ void Sys_LeftMotor_Controller(){
    }else{
        if(--next_phase <= 0){
            phase++;
-           next_phase = (5*MAX_WHEEL_SPEED)/left_motor.speed;
+           next_phase = (MAX_WHEEL_SPEED)/left_motor.speed;
             power_saving = 0;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){
@@ -168,7 +168,7 @@ void Sys_RightMotor_Controller(){
    if(right_motor.speed < 0){
        if(--next_phase <= 0){
             phase--;
-            next_phase = (5*MAX_WHEEL_SPEED)/abs(right_motor.speed);
+            next_phase = (MAX_WHEEL_SPEED)/abs(right_motor.speed);
             power_saving = 0;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){
@@ -180,7 +180,7 @@ void Sys_RightMotor_Controller(){
    }else{
        if(--next_phase <= 0){
            phase++;
-           next_phase = (5*MAX_WHEEL_SPEED)/right_motor.speed;
+           next_phase = (MAX_WHEEL_SPEED)/right_motor.speed;
             power_saving = 0;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){

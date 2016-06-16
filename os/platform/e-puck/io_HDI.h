@@ -21,9 +21,9 @@ extern "C" {
 
 #include "../../../os/definitions.h"
 
-#define TIMER_STEP (MILLISEC/5)
+#define TIMER_STEP MILLISEC
     
-#define STEPS_PER_MILISECOND 5
+#define STEPS_PER_MILISECOND 1
 #define STEPS_PER_SECOND (STEPS_PER_MILISECOND*1000)
     
     
