@@ -4,9 +4,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/stefa/Desktop/os/main.c</file>
-            <file>file:/C:/Users/stefa/Desktop/os/os/platform/e-puck/camera.c</file>
-            <file>file:/C:/Users/stefa/Desktop/os/os/platform/e-puck/camera_processing.c</file>
+            <file>file:/home/fernando/Documents/PhD/E-Puck/os/main.c</file>
+            <file>file:/home/fernando/Documents/PhD/E-Puck/os/os/system.h</file>
         </group>
     </open-files>
 </project-private>
