@@ -89,7 +89,8 @@ bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data);
 #define MAX_SPEED 128
 #define CONTROL_STEP_TIME 25 //ms
 #define EPS 1
-#define TAU 1842
+#define TAU 2000
+//1842
 #define LED_THRES 100
 #define REF_THRES 400
 
@@ -134,20 +135,20 @@ int16_t main(void)
             if (phase > LED_THRES) {
                 ledsOff();
             }
-     /*      if (phase > REF_THRES) {
+           if (phase > REF_THRES) {
                 if (seeFlash()) {
                     phase += (phase*EPS)/10;
-                    //BODY_LED = 1;
-                    BODY_LED = ~BODY_LED;
+                    BODY_LED = 1;
+//                    BODY_LED = ~BODY_LED;
                 }
                 else BODY_LED = 0;
             }
-*/
+
             if (phase >= TAU) {
                 ledsOn();
                 phase = 0;
                 phaseStart = time_now;
-                //BODY_LED = 0;
+                BODY_LED = 0;
             }
             
 
@@ -156,19 +157,6 @@ int16_t main(void)
             
         }
     }
-}
-
-void log_me(){
-    static char message[32];
-    
-    uint length = 0;
-    length = sprintf(message, "%03d;%03d;%03d,%03d,%03d\n\r", Sys_Rand8(),Sys_Rand8(),Sys_Get_Prox(3),Sys_Get_Prox(5),Sys_Get_Prox(7));
-    
-    Sys_Writeto_UART1(message, length);//send via Bluetooth
- 
-    Sys_Reset_InterruptCounter();
-    Sys_Reset_EventCounter();
-    fps = 0;
 }
 
 void ledsOff(){

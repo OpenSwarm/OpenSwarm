@@ -193,5 +193,7 @@ void Sys_Camera_PreProcessor(void){
 }
 
 int seeFlash() {
-    return flashDetected;
+    int out = flashDetected;
+    flashDetected = false;
+    return out;
 }
