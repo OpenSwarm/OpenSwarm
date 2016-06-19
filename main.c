@@ -88,6 +88,7 @@ bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data);
 
 #define MAX_SPEED 128
 #define CONTROL_STEP_TIME 25 //ms
+#define INIT_TIME 1000
 #define EPS 1
 #define TAU 2000
 //1842
@@ -118,7 +119,8 @@ int16_t main(void)
     initProxPointer();
    
     uint32 time = Sys_Get_SystemClock();
-    time += (uint32) CONTROL_STEP_TIME;
+    calculateMotorSpeed(&robot_speed);//calculate the motor speed
+    time += (uint32) INIT_TIME;
     
     while(true){
             
@@ -242,21 +244,57 @@ void calculateMotorSpeed(motor_speeds *speeds){
             max = 0;
             break;
         case 0x01:
+            vel = 5;
+            LED0 = 1;
+            break;
         case 0x02:
+            vel = 7;
+            LED1 = 1;
+            break;
         case 0x03:
+            vel = 10;
+            LED0 = 1;
+            LED1 = 1;
+            break;
         case 0x04:
+            vel = 14;
+            LED2 = 1;
+            break;
         case 0x05:
+            vel = 21;
+            LED2 = 1;
+            LED0 = 1;
+            break;
         case 0x06:
+            vel = 30;
+            LED2 = 1;
+            LED1 = 1;
+            break;
         case 0x07:
+            vel = 43;
+            LED2 = 1;
+            LED1 = 1;
+            LED0 = 1;
+            break;
         case 0x08:
+            vel = 62;
+            LED3 = 1;
+            break;
         case 0x09:
+            vel = 89;
+            LED3 = 1;
+            LED0 = 1;
+            break;
         case 0x0A:
+            vel = 128;
+            LED3 = 1;
+            LED1 = 1;
+            break;
         case 0x0B:
         case 0x0C:
         case 0x0D:
         case 0x0E:
         case 0x0F:
-            vel = 128;
             break;
     }
     
