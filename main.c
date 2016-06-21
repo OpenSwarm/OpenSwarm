@@ -88,12 +88,11 @@ bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data);
 
 #define MAX_SPEED 128
 #define CONTROL_STEP_TIME 25 //ms
-#define INIT_TIME 1000
 #define EPS 1
-#define TAU 2000
+#define TAU 5000
 //1842
-#define LED_THRES 100
-#define REF_THRES 400
+#define LED_THRES 250
+#define REF_THRES 500
 
 int16_t main(void)
 {
@@ -101,8 +100,10 @@ int16_t main(void)
     Sys_Start_Kernel();
     
     uint16 phase = 0;
-    uint32 phaseStart = 0;
+    uint32 phaseStart = rand() %TAU;
     char message[32];
+    int run = 0;
+    int lightLevel = 0;
     
     uint length = 0;
     LED0 = 0;
@@ -119,13 +120,19 @@ int16_t main(void)
     initProxPointer();
    
     uint32 time = Sys_Get_SystemClock();
-    calculateMotorSpeed(&robot_speed);//calculate the motor speed
-    time += (uint32) INIT_TIME;
+    calculateMotorSpeed(&robot_speed);//calculate the motor speed    
     
     while(true){
             
         uint32 time_now = Sys_Get_SystemClock();
-        if(time_now >= time){//wait the refresh_rate time
+        
+        if (run == 0 && lightSwitch()) { 
+            run = 1;
+            time = time_now;
+            phaseStart -= time_now;
+        }
+        
+        if(run == 1 && time_now >= time){//wait the refresh_rate time
             time += CONTROL_STEP_TIME;
             
             getProximityValues();//get the values
