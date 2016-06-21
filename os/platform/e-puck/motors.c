@@ -24,7 +24,7 @@
 
 #define MAX_WHEEL_SPEED 128 	/*!< Maximum wheel speed in steps*/
 #define MIN_WHEEL_SPEED 4   	/*!< Minimum wheel speed in steps*/
-#define POWER_SAVE_WAIT 7//15      /*!< amount of steps needed to move the motor one step further */
+#define POWER_SAVE_WAIT 1//15      /*!< amount of steps needed to move the motor one step further */
 
 /**
  * @brief This struct contains the speed for a motor.
@@ -183,11 +183,10 @@ void Sys_RightMotor_Controller(){
            next_phase = (MAX_WHEEL_SPEED)/right_motor.speed;
             power_saving = 0;
        } else {
-           if(power_saving >= POWER_SAVE_WAIT){
+           if(++power_saving >= POWER_SAVE_WAIT){
             Sys_RightMotor_Reset();
             return;
            }
-           power_saving++;
        }
    }
 
