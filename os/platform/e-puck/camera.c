@@ -46,6 +46,7 @@
 
 static pCameraPreProcessor pre_processor = 0; /*!< callback function to processes the raw camera image*/
 int flashDetected = false;
+int lightsOn = true;
 
 //static sys_rgb_pixel *frame_a = 0;/*!< pointer to a received frame */
 //static sys_rgb_pixel *frame_b = 0;/*!< pointer to a second received frame */
@@ -154,40 +155,43 @@ void Sys_Camera_PreProcessor(void){
  
     unsigned char rgb565[2], rgb888[3];
     int r,c;
-    int WeightOfRed   = 0;
+    int WeightOfRed = 0, countDark = 0;
     
     for(r=9;r<10;r++){
         for(c=0;c<CAM_W_SIZE;c++){
-    Sys_Start_AtomicSection();
+            Sys_Start_AtomicSection();
             getRGB565at(buffer, rgb565, r, c);
             convertRGB565ToRGB888( rgb565, rgb888  );
-    Sys_End_AtomicSection();
+            Sys_End_AtomicSection();
     
-           //     char colour = 'd';
-           // if(rgb888[0] - (rgb888[1] + rgb888[2])*2 > 0){
-           //     colour = 'r';
-           // }
-            char colour = nearestNeighborRGB( rgb888, 0b11110001 ); //flag: WRGbymcD
-            
-            switch(colour){
-                case 'r':
-                    WeightOfRed++; 
-                    break;
-                case 'w':
-                case 'g':
-                case 'b':
-                case 'y':
-                case 'c':
-                case 'm':
-                case 'd':
-                default:
-                    break;
+            if (lightsOn == false) {
+                char colour = nearestNeighborRGB( rgb888, 0b11110001 ); //flag: WRGbymcD
+
+                switch(colour){
+                    case 'r':
+                        WeightOfRed++; 
+                        break;
+                    case 'w':
+                    case 'g':
+                    case 'b':
+                    case 'y':
+                    case 'c':
+                    case 'm':
+                    case 'd':
+                    default:
+                        break;
+                }
+            }
+            else {
+                if (rgb888[0] < 30 && rgb888[1] < 30 && rgb888[2] < 30 ) countDark++;
             }
         }
     }
     
-    if( WeightOfRed >= 2) flashDetected = true;
+    if (WeightOfRed >= 2) flashDetected = true;
     else flashDetected = false;
+    
+    if (countDark > CAM_W_SIZE/2) lightsOn = false;
     
     e_poxxxx_launch_capture((char *) buffer);
 }
@@ -196,4 +200,8 @@ int seeFlash() {
     int out = flashDetected;
     flashDetected = false;
     return out;
+}
+
+int lightSwitch() {
+    return !lightsOn;
 }
