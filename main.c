@@ -100,6 +100,12 @@ int16_t main(void)
     Sys_Init_Kernel();     
     Sys_Start_Kernel();
     
+    Sys_Set_LeftWheelSpeed(128);
+    Sys_Set_RightWheelSpeed(128);
+    while(true){
+        ;
+    }
+    
     uint16 phase = 0;
     uint32 phaseStart = 0;
     char message[32];
