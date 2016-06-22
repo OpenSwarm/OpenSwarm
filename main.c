@@ -170,8 +170,10 @@ int16_t main(void)
                 ledsOff();
             }
             
+
             Sys_Set_LeftWheelSpeed(robot_speed.left);
             Sys_Set_RightWheelSpeed(robot_speed.right);
+            
         }
     }
 }
