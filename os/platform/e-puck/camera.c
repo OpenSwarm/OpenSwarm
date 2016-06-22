@@ -155,7 +155,7 @@ void Sys_Camera_PreProcessor(void){
  
     unsigned char rgb565[2], rgb888[3];
     int r,c;
-    int WeightOfRed = 0, countDark = 0;
+    int WeightOfRed = 0, countDark = 0, countLight = 0;
     
     for(r=9;r<10;r++){
         for(c=0;c<CAM_W_SIZE;c++){
@@ -182,9 +182,7 @@ void Sys_Camera_PreProcessor(void){
                         break;
                 }
             }
-            else {
-                if (rgb888[0] < 30 && rgb888[1] < 30 && rgb888[2] < 30 ) countDark++;
-            }
+            if (rgb888[0] < 30 && rgb888[1] < 30 && rgb888[2] < 30 ) countDark++;
         }
     }
     
@@ -192,6 +190,7 @@ void Sys_Camera_PreProcessor(void){
     else flashDetected = false;
     
     if (countDark > CAM_W_SIZE/2) lightsOn = false;
+    else lightsOn = true;
     
     e_poxxxx_launch_capture((char *) buffer);
 }

@@ -61,7 +61,7 @@ vector proximity_pointer;//compost vector containing all the x & y components of
 motor_speeds default_speed;//default behaviour when nothing is seen
 motor_speeds robot_speed;//actual robot speed that should be applied to the motors
 
-#define proxThres 70
+#define proxThres 120
 #define proxCountThres 5
 #define rotMax 25
 
@@ -98,9 +98,11 @@ int16_t main(void)
 {
     Sys_Init_Kernel();     
     Sys_Start_Kernel();
-    
+    uint16 i=0;
     uint16 phase = 0;
-    uint32 phaseStart = rand() %TAU;
+    for (i=0;i<0xfffe;i++){}
+    
+    uint32 phaseStart = Sys_Rand16() %TAU;
     char message[32];
     int run = 0;
     int lightLevel = 0;
@@ -129,7 +131,8 @@ int16_t main(void)
         if (run == 0 && lightSwitch()) { 
             run = 1;
             time = time_now;
-            phaseStart -= time_now;
+            phaseStart = time_now - phaseStart;
+            ledsOff();
         }
         
         if(run == 1 && time_now >= time){//wait the refresh_rate time
@@ -157,13 +160,18 @@ int16_t main(void)
                 ledsOn();
                 phase = 0;
                 phaseStart = time_now;
-                BODY_LED = 0;
+                BODY_LED = 0;                
+            }            
+         
+            if(!lightSwitch()) {
+                run = 0;
+                robot_speed.left = 0;
+                robot_speed.right = 0;
+                ledsOff();
             }
             
-
             Sys_Set_LeftWheelSpeed(robot_speed.left);
             Sys_Set_RightWheelSpeed(robot_speed.right);
-            
         }
     }
 }
