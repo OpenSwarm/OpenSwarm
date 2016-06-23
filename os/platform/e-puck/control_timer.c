@@ -10,7 +10,7 @@
 #define PRESCALER 1
 
 int run_behaviour = 0;
-uint16 phase = 0;
+int16 phase = 0;
 
 inline void Sys_todo_ControlTimer();
 
@@ -112,34 +112,77 @@ inline void Sys_Enable_ControlTimerInterrupt(void){
 
 #define CONTROLLER_TIME 25 //ms
 
+#define FRAME_RATE 8
+#define DELAY_CORRECTION (1000/(2*FRAME_RATE)) //ms
+
 inline void Sys_Force_ControlTimerInterrupt(void){
     IFS0bits.T1IF = 1; //enable Timer1 interrupt -> T1IE = 1
 }
 
 inline void Sys_todo_ControlTimer(){    
-    if(run_behaviour){            
-        phase += CONTROLLER_TIME;
+    if(run_behaviour){      
+        phase += CONTROLLER_TIME;  
+        
+        int old_phase = phase; //(phase - DELAY_CORRECTION) % TAU;
+        bool flash_seen = seeFlash();
+        
+        if(flash_seen){
+            old_phase = (phase - DELAY_CORRECTION) % TAU;
+            
+            if(old_phase > REF_THRES){
+                old_phase += (old_phase*EPS)/10;
+                BODY_LED = 1;
+            }
+            
+            
+            if (old_phase >= TAU) {
+                ledsOn();
+                old_phase = 0;
+                BODY_LED = 0;                
+            }
+            
+            phase = (old_phase + DELAY_CORRECTION);
+            
+            if (phase >= TAU) {
+                ledsOn();
+                phase = phase % TAU;
+                BODY_LED = 0;                
+            }
+            
+        }
         
         if (phase > LED_THRES) {
             ledsOff();
-        }
-        
-        if (phase > REF_THRES) {
-            if (seeFlash()) {
-                phase += (phase*EPS)/10;
-                BODY_LED = 1;
-//              BODY_LED = ~BODY_LED;
-            }
-            else {
-                BODY_LED = 0;
-            }
         }
 
         if (phase >= TAU) {
             ledsOn();
             phase = 0;
             BODY_LED = 0;                
-        }     
+        }
+    }
+}
+
+void calculateBehaviour(int phase){
+    
+    if (phase > LED_THRES) {
+       ledsOff();
+    }
+        
+    if (phase > REF_THRES) {
+        if (flash_seen = seeFlash()) {
+            phase += (phase*EPS)/10;
+            BODY_LED = 1;
+//              BODY_LED = ~BODY_LED;
+        } else {
+           BODY_LED = 0;
+        }
+    }
+
+    if (phase >= TAU) {
+        ledsOn();
+        phase = 0;
+        BODY_LED = 0;                
     }
 }
 
