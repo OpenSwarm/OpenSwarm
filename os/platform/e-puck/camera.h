@@ -70,6 +70,10 @@ extern "C" {
     sys_rgb_pixel *getFinishedFrame();
     bool isNewFrameAvailable();
 
+    
+    int seeFlash();
+    int lightSwitch();
+    
 #ifdef	__cplusplus
 }
 #endif
