@@ -73,6 +73,7 @@ extern "C" {
     void processimage();
     
     int seeFlash();
+    int lightSwitch();
 #ifdef	__cplusplus
 }
 #endif

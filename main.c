@@ -35,6 +35,7 @@
 
 #include "os/io/e-puck/proximity.h"
 #include "os/io/e-puck/control_timer.h"
+#include "os/io/e-puck/camera.h"
 
 /******************************************************************************/
 /* Variable Declaration                                                */
@@ -83,6 +84,7 @@ void calculateMotorSpeed(motor_speeds *);
 
 void ledsOn();
 void ledsOff();
+void displaySelector();
 
 bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data);
 
@@ -118,14 +120,20 @@ int16_t main(void)
             
         uint32 time_now = Sys_Get_SystemClock();
         
-        if (run == 0 ) { 
-            init_behaviour();
-            start_behaviour();
+        if (run == 0) { 
+            if(lightSwitch()){
+                init_behaviour();
+                start_behaviour();
             
-            run = 1;
-            time = time_now;
+                run = 1;
+                time = time_now;
 //            phaseStart = time_now - phaseStart;
-            ledsOff();
+                ledsOff();
+            }else{
+                displaySelector();
+            }
+            
+            
         }
         
         if(run == 1 && time_now >= time){//wait the refresh_rate time
@@ -211,50 +219,33 @@ void calculateMotorSpeed(motor_speeds *speeds){
             break;
         case 0x01:
             vel = 5;
-            LED0 = 1;
             break;
         case 0x02:
             vel = 7;
-            LED1 = 1;
             break;
         case 0x03:
             vel = 10;
-            LED0 = 1;
-            LED1 = 1;
             break;
         case 0x04:
             vel = 14;
-            LED2 = 1;
             break;
         case 0x05:
             vel = 21;
-            LED2 = 1;
-            LED0 = 1;
             break;
         case 0x06:
             vel = 30;
-            LED2 = 1;
-            LED1 = 1;
             break;
         case 0x07:
             vel = 43;
-            LED2 = 1;
-            LED1 = 1;
-            LED0 = 1;
             break;
         case 0x08:
             vel = 62;
-            LED3 = 1;
             break;
         case 0x09:
             vel = 89;
-            LED3 = 1;
-            LED0 = 1;
             break;
         case 0x0A:
             vel = 128;
-            LED3 = 1;
-            LED1 = 1;
             break;
         case 0x0B:
         case 0x0C:
@@ -342,4 +333,56 @@ void initProxPointer(){
 bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data){ 
     FRONT_LED = ~FRONT_LED; 
     return true; 
+}
+
+void displaySelector(){
+    uint val = Sys_Get_Selector();
+    
+    if((val & 0x01) != 0){
+        LED0 = 1;
+    }else{
+        LED0 = 0;
+    }
+    
+    if((val & 0x02) != 0){
+        LED1 = 1;
+    }else{
+        LED1 = 0;
+    }
+    
+    if((val & 0x04) != 0){
+        LED2 = 1;
+    }else{
+        LED2 = 0;
+    }
+    
+    if((val & 0x08) != 0){
+        LED3 = 1;
+    }else{
+        LED3 = 0;
+    }
+    
+    if((val & 0x10) != 0){
+        LED4 = 1;
+    }else{
+        LED4 = 0;
+    }
+    
+    if((val & 0x20) != 0){
+        LED5 = 1;
+    }else{
+        LED5 = 0;
+    }
+    
+    if((val & 0x40) != 0){
+        LED6 = 1;
+    }else{
+        LED6 = 0;
+    }
+    
+    if((val & 0x80) != 0){
+        LED7 = 1;
+    }else{
+        LED7 = 0;
+    }
 }

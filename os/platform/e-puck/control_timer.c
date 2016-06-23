@@ -144,7 +144,7 @@ inline void Sys_todo_ControlTimer(){
 }
 
 inline void init_behaviour(){
-    phase = 0;Sys_Rand16() % TAU;;
+    phase = Sys_Rand16() % TAU;;
 }
 
 inline void start_behaviour(){

@@ -55,6 +55,7 @@
             <itemPath>os/platform/e-puck/remoteControl_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/motors_HDI.h</itemPath>
+            <itemPath>os/platform/e-puck/control_timer.h</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="f1" displayName="processes" projectFiles="true">
@@ -119,6 +120,7 @@
           <itemPath>os/io/e-puck/selector.c</itemPath>
           <itemPath>os/platform/e-puck/adc.c</itemPath>
           <itemPath>os/io/e-puck/proximity.c</itemPath>
+          <itemPath>os/platform/e-puck/control_timer.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -164,7 +166,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.26</languageToolchainVersion>
+        <languageToolchainVersion>1.25</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>

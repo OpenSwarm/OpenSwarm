@@ -4,13 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/fernando/Documents/PhD/E-Puck/os/os/platform/e-puck/camera_processing.c</file>
-            <file>file:/home/fernando/Documents/PhD/E-Puck/os/os/platform/e-puck/camera.c</file>
-            <file>file:/home/fernando/Documents/PhD/E-Puck/os/main.c</file>
-            <file>file:/home/fernando/Documents/PhD/E-Puck/os/os/io/io_clock.c</file>
-            <file>file:/home/fernando/Documents/PhD/E-Puck/os/os/platform/e-puck/adc.c</file>
-            <file>file:/home/fernando/Documents/PhD/E-Puck/os/os/platform/e-puck/adc.h</file>
-            <file>file:/home/fernando/Documents/PhD/E-Puck/os/os/system.h</file>
+            <file>file:/C:/Users/stefa/Desktop/fernando/os/os/platform/e-puck/camera.h</file>
+            <file>file:/C:/Users/stefa/Desktop/fernando/os/main.c</file>
+            <file>file:/C:/Users/stefa/Desktop/fernando/os/os/platform/e-puck/camera.c</file>
+            <file>file:/C:/Users/stefa/Desktop/fernando/os/os/platform/e-puck/control_timer.c</file>
         </group>
     </open-files>
 </project-private>

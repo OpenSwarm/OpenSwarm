@@ -155,7 +155,7 @@ void Sys_Camera_PreProcessor(void){
  
     unsigned char rgb565[2], rgb888[3];
     int r,c;
-    int WeightOfRed = 0, countDark = 0, countLight = 0;
+    int WeightOfRed = 0, countDark = 0;//, countLight = 0;
     
     for(r=9;r<10;r++){
         for(c=0;c<CAM_W_SIZE;c++){
