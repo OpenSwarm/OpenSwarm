@@ -34,6 +34,7 @@
 #include "os/interrupts.h"
 
 #include "os/io/e-puck/proximity.h"
+#include "os/io/e-puck/control_timer.h"
 
 /******************************************************************************/
 /* Variable Declaration                                                */
@@ -61,7 +62,7 @@ vector proximity_pointer;//compost vector containing all the x & y components of
 motor_speeds default_speed;//default behaviour when nothing is seen
 motor_speeds robot_speed;//actual robot speed that should be applied to the motors
 
-#define proxThres 120
+#define proxThres 70
 #define proxCountThres 5
 #define rotMax 25
 
@@ -69,7 +70,7 @@ motor_speeds robot_speed;//actual robot speed that should be applied to the moto
 /* Main Program                                                               */
 /******************************************************************************/
 
-static uint fps = 0;
+//static uint fps = 0;
 
 int sinVectorTimes(vector *, int);
 int cosVectorTimes(vector *, int);
@@ -80,7 +81,6 @@ void calculateProxPointer();
 void initProxPointer();
 void calculateMotorSpeed(motor_speeds *);
 
-void log_me();
 void ledsOn();
 void ledsOff();
 
@@ -88,26 +88,16 @@ bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data);
 
 #define MAX_SPEED 128
 #define CONTROL_STEP_TIME 25 //ms
-#define EPS 1
-#define TAU 5000
-//1842
-#define LED_THRES 250
-#define REF_THRES 500
 
 int16_t main(void)
 {
     Sys_Init_Kernel();     
     Sys_Start_Kernel();
     uint16 i=0;
-    uint16 phase = 0;
     for (i=0;i<0xfffe;i++){}
     
-    uint32 phaseStart = Sys_Rand16() %TAU;
-    char message[32];
     int run = 0;
-    int lightLevel = 0;
     
-    uint length = 0;
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -128,10 +118,13 @@ int16_t main(void)
             
         uint32 time_now = Sys_Get_SystemClock();
         
-        if (run == 0 && lightSwitch()) { 
+        if (run == 0 ) { 
+            init_behaviour();
+            start_behaviour();
+            
             run = 1;
             time = time_now;
-            phaseStart = time_now - phaseStart;
+//            phaseStart = time_now - phaseStart;
             ledsOff();
         }
         
@@ -140,64 +133,19 @@ int16_t main(void)
             
             getProximityValues();//get the values
             calculateProxPointer();//calculate the overall vector
-            calculateMotorSpeed(&robot_speed);//calculate the motor speed
-
-            phase = time_now - phaseStart;
-            
-            if (phase > LED_THRES) {
-                ledsOff();
-            }
-           if (phase > REF_THRES) {
-                if (seeFlash()) {
-                    phase += (phase*EPS)/10;
-                    BODY_LED = 1;
-//                    BODY_LED = ~BODY_LED;
-                }
-                else BODY_LED = 0;
-            }
-
-            if (phase >= TAU) {
-                ledsOn();
-                phase = 0;
-                phaseStart = time_now;
-                BODY_LED = 0;                
-            }            
+            calculateMotorSpeed(&robot_speed);//calculate the motor speed       
          
-            if(!lightSwitch()) {
+          /*  if(!lightSwitch()) {
                 run = 0;
                 robot_speed.left = 0;
                 robot_speed.right = 0;
                 ledsOff();
             }
-            
-
+            */
             Sys_Set_LeftWheelSpeed(robot_speed.left);
             Sys_Set_RightWheelSpeed(robot_speed.right);
-            
         }
     }
-}
-
-void ledsOff(){
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
-    LED3 = 0;
-    LED4 = 0;
-    LED5 = 0;
-    LED6 = 0;
-    LED7 = 0;
-}
-
-void ledsOn(){
-    LED0 = 1;
-    LED1 = 1;
-    LED2 = 1;
-    LED3 = 1;
-    LED4 = 1;
-    LED5 = 1;
-    LED6 = 1;
-    LED7 = 1;
 }
 
 /**
@@ -232,7 +180,7 @@ void calculateProxPointer(){
     
     for(i = 5; i < 11; i++){
         j = i % 8;
-        if(proximity_values[j] < 0xFFFF){//add all proximity sensors that measured an object
+        if(proximity_values[j] > 70){
             prox_x += ((long) proximity_values[j] * (long) prox_transform_x[j])/100;//calculate the X component
             prox_y += ((long) proximity_values[j] * (long) prox_transform_y[j])/100;//calculate the Y component
         }
@@ -251,6 +199,7 @@ void calculateProxPointer(){
 void calculateMotorSpeed(motor_speeds *speeds){
     static int rotTime = 0;
     static int proxCount = 0;
+    static int idle = 0;
     int vel = 0;
     int max = MAX_SPEED;
     int rotDir;
@@ -316,7 +265,7 @@ void calculateMotorSpeed(motor_speeds *speeds){
     }
     
     if(rotTime > 0 || proxCount > 0){
-         if (proximity_pointer.x*proximity_pointer.x > proxThres*proxThres || proximity_pointer.y*proximity_pointer.y > proxThres*proxThres) proxCount++;
+         if ((proximity_pointer.x*proximity_pointer.x > proxThres*proxThres || proximity_pointer.y*proximity_pointer.y > proxThres*proxThres)&& idle == 0) proxCount++;
          else proxCount = 0;
     }
 
@@ -328,6 +277,7 @@ void calculateMotorSpeed(motor_speeds *speeds){
         speeds->right = max*rotDir;
         rotTime += 1 +rand() % rotMax;
         proxCount = 0;
+        idle = 1;
      }
 
     
@@ -340,11 +290,13 @@ void calculateMotorSpeed(motor_speeds *speeds){
         rotTime = 1;
      }
      // Continue straight if no obstacle
-     else
-         if(rotTime ==0) {
+     else {
+        if(rotTime ==0) {
          speeds->right = speeds->left = vel;
-     }
-     else rotTime -= 1;   
+         idle = 0;
+        }
+        else rotTime -= 1;   
+    }
 }
 
 /**

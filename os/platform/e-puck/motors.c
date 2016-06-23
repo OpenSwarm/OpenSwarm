@@ -183,7 +183,7 @@ void Sys_RightMotor_Controller(){
            next_phase = (MAX_WHEEL_SPEED)/right_motor.speed;
             power_saving = 0;
        } else {
-           if(power_saving >= POWER_SAVE_WAIT){
+           if(++power_saving >= POWER_SAVE_WAIT){
             Sys_RightMotor_Reset();
             return;
            }

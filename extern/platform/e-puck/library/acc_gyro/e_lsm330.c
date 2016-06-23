@@ -74,7 +74,7 @@ char readRegMulti(char device_add, unsigned char *read_buffer, char start_addres
         error &= e_i2c_write(device_add + 1); // To change data direction ([bit 0]=1)
 
         for (i = 0; i < numBytes; i++) {
-            error &= e_i2c_read(&read_buffer[i]); // read the next byte
+            error &= e_i2c_read((char*) &read_buffer[i]); // read the next byte
             if (i == (numBytes - 1)) { // the last byte to be read, must send nack
                 error &= e_i2c_nack();
             } else {
@@ -157,7 +157,7 @@ int getXAxisAcc() {
     signed char arr[2];
     e_i2cp_enable();
     // 2's complement
-    readRegMulti(ACC_ADDR, arr, 0x28, 2);
+    readRegMulti(ACC_ADDR, (unsigned char*) arr, 0x28, 2);
     //arr[0] = readReg(ACC_ADDR, 0x28); // X acc axis low byte
     //arr[1] = readReg(ACC_ADDR, 0x29); // X acc axis high byte
     e_i2cp_disable();
@@ -168,7 +168,7 @@ int getYAxisAcc() {
     signed char arr[2];
     e_i2cp_enable();
     // 2's complement
-    readRegMulti(ACC_ADDR, arr, 0x2A, 2);
+    readRegMulti(ACC_ADDR, (unsigned char*) arr, 0x2A, 2);
     //arr[0] = readReg(ACC_ADDR, 0x2A); // Y acc axis low byte
     //arr[1] = readReg(ACC_ADDR, 0x2B); // Y acc axis high byte
     e_i2cp_disable();
@@ -179,7 +179,7 @@ int getZAxisAcc() {
     signed char arr[2];
     e_i2cp_enable();
     // 2's complement
-    readRegMulti(ACC_ADDR, arr, 0x2C, 2);
+    readRegMulti(ACC_ADDR, (unsigned char*) arr, 0x2C, 2);
     //arr[0] = readReg(ACC_ADDR, 0x2C); // Z acc axis low byte
     //arr[1] = readReg(ACC_ADDR, 0x2D); // Z acc axis high byte
     e_i2cp_disable();
@@ -214,7 +214,7 @@ int getXAxisGyro() {
     signed char arr[2];
     e_i2cp_enable();
     // 2's complement
-    readRegMulti(GYRO_ADDR, arr, 0x28, 2);
+    readRegMulti(GYRO_ADDR, (unsigned char*) arr, 0x28, 2);
     //arr[0] = readReg(GYRO_ADDR, 0x28);
     //arr[1] = readReg(GYRO_ADDR, 0x29);
     e_i2cp_disable();
@@ -225,7 +225,7 @@ int getYAxisGyro() {
     signed char arr[2];
     e_i2cp_enable();
     // 2's complement
-    readRegMulti(GYRO_ADDR, arr, 0x2A, 2);
+    readRegMulti(GYRO_ADDR, (unsigned char*) arr, 0x2A, 2);
     //arr[0] = readReg(GYRO_ADDR, 0x2A);
     //arr[1] = readReg(GYRO_ADDR, 0x2B);
     e_i2cp_disable();
@@ -236,7 +236,7 @@ int getZAxisGyro() {
     signed char arr[2];
     e_i2cp_enable();
     // 2's complement
-    readRegMulti(GYRO_ADDR, arr, 0x2C, 2);
+    readRegMulti(GYRO_ADDR, (unsigned char*) arr, 0x2C, 2);
     //arr[0] = readReg(GYRO_ADDR, 0x2C);
     //arr[1] = readReg(GYRO_ADDR, 0x2D);
     e_i2cp_disable();
@@ -252,7 +252,7 @@ signed char getTemperature(void) {
 void calibrateGyroscope(int numSamples) {
     unsigned char gyroData[6];
     signed int gyroSum[3] = {0, 0, 0};
-    char buffer[50];
+//    char buffer[50];
     int i = 0;
 
     for(i=0; i<numSamples; i++) {
