@@ -10,7 +10,7 @@
 #define PRESCALER 1
 
 int run_behaviour = 0;
-int16 phase = 0;
+int phase = 0;
 
 inline void Sys_todo_ControlTimer();
 
@@ -160,29 +160,6 @@ inline void Sys_todo_ControlTimer(){
             phase = 0;
             BODY_LED = 0;                
         }
-    }
-}
-
-void calculateBehaviour(int phase){
-    
-    if (phase > LED_THRES) {
-       ledsOff();
-    }
-        
-    if (phase > REF_THRES) {
-        if (flash_seen = seeFlash()) {
-            phase += (phase*EPS)/10;
-            BODY_LED = 1;
-//              BODY_LED = ~BODY_LED;
-        } else {
-           BODY_LED = 0;
-        }
-    }
-
-    if (phase >= TAU) {
-        ledsOn();
-        phase = 0;
-        BODY_LED = 0;                
     }
 }
 
