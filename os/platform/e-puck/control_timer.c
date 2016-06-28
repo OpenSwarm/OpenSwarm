@@ -105,10 +105,10 @@ inline void Sys_Enable_ControlTimerInterrupt(void){
  *
  */
 #define EPS 1
-#define TAU 2000
+#define TAU 5000
 
-#define LED_THRES 250
-#define REF_THRES 500
+#define LED_THRES 375
+#define REF_THRES 750
 
 #define CONTROLLER_TIME 25 //ms
 
@@ -131,14 +131,14 @@ inline void Sys_todo_ControlTimer(){
             
             if(old_phase > REF_THRES){
                 old_phase += (old_phase*EPS)/10;
-                BODY_LED = 1;
+                //BODY_LED = 1;
             }
             
             
             if (old_phase >= TAU) {
                 ledsOn();
                 old_phase = 0;
-                BODY_LED = 0;                
+                //BODY_LED = 0;                
             }
             
             phase = (old_phase + DELAY_CORRECTION);
@@ -146,7 +146,7 @@ inline void Sys_todo_ControlTimer(){
             if (phase >= TAU) {
                 ledsOn();
                 phase = phase % TAU;
-                BODY_LED = 0;                
+                //BODY_LED = 0;                
             }
             
         }
@@ -158,7 +158,7 @@ inline void Sys_todo_ControlTimer(){
         if (phase >= TAU) {
             ledsOn();
             phase = 0;
-            BODY_LED = 0;                
+            //BODY_LED = 0;                
         }
     }
 }
