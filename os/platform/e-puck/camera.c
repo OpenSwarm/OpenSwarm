@@ -177,12 +177,15 @@ void Sys_Camera_PreProcessor(void){
                     case 'y':
                     case 'c':
                     case 'm':
+                        break;
                     case 'd':
+            //            countDark++;
+                        break;
                     default:
                         break;
                 }
             }
-            if (rgb888[0] < 30 && rgb888[1] < 30 && rgb888[2] < 30 ) countDark++;
+            if (rgb888[0] < 25 && rgb888[1] < 25 && rgb888[2] < 25 ) countDark++;
         }
     }
     
