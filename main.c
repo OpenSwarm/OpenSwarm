@@ -131,9 +131,7 @@ int16_t main(void)
                 ledsOff();
             }else{
                 displaySelector();
-            }
-            
-            
+            }            
         }
         
         if(run == 1 && time_now >= time){//wait the refresh_rate time
@@ -260,27 +258,38 @@ void calculateMotorSpeed(motor_speeds *speeds){
          else proxCount = 0;
     }
 
+    
+    int proxCThres = 0xFFFF;
+    if(vel != 0){
+        proxCThres = ((proxCountThres * 128)/vel);
+    }
     // If contact with obstacles for several consecutive cycles do random reorient (it's probably a wall)
-    if(proxCount > proxCountThres){
-        if(proximity_pointer.y > 0) rotDir = 1;
-        else rotDir = -1;
-        speeds->left = -max*rotDir;
-        speeds->right = max*rotDir;
-        rotTime += 1 +rand() % rotMax;
+    if(proximity_pointer.y > 0){
+        rotDir = 1;
+    } else {
+        rotDir = -1;
+    }
+        
+    if(proxCount > proxCThres){   
+        speeds->left = - max*rotDir;
+        speeds->right =  max*rotDir;
+        rotTime += 1 + rand() % rotMax;
         proxCount = 0;
         idle = 1;
      }
 
     
      // If obstacle ahead turn to avoid it
-     if(proximity_pointer.x > proxThres){          
-        if(proximity_pointer.y > 0) rotDir = 1;
-        else rotDir = -1;
-        speeds->left = -max*rotDir;
-        speeds->right = max*rotDir;
-        rotTime = 1;
-     }
-     // Continue straight if no obstacle
+     if(proximity_pointer.x > proxThres){        
+         if(proxCount == 0){
+            speeds->left = -max*rotDir;
+            speeds->right = max*rotDir; 
+         } else {
+            speeds->left =   speeds->left/2 - max*rotDir/2;
+            speeds->right = speeds->right/2 + max*rotDir/2;
+         }
+         rotTime = 1;
+     } // Continue straight if no obstacle
      else {
         if(rotTime ==0) {
          speeds->right = speeds->left = vel;
