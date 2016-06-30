@@ -137,8 +137,7 @@ inline void Sys_todo_ControlTimer(){
             
             if (old_phase >= TAU) {
                 ledsOn();
-                old_phase = 0;
-                //BODY_LED = 0;                
+                old_phase = 0;                
             }
             
             phase = (old_phase + DELAY_CORRECTION);
@@ -160,6 +159,12 @@ inline void Sys_todo_ControlTimer(){
             phase = 0;
             //BODY_LED = 0;                
         }
+//        
+//        if(flash_seen){
+//            BODY_LED = 1;
+//        }else{
+//            BODY_LED = 0;
+//        }
     }
 }
 
