@@ -23,15 +23,7 @@
 #include "interrupts.h"
 #include "definitions.h"
 
-/*! \var static uint8 sys_IRQ_Priority
-    \brief stores the previous interrupt level.
-*/
-static uint8 sys_IRQ_Priority = SYS_IRQP_SYSTEM_TIMER;
-
-/*! \var static sint nesting
-    \brief stores how often Sys_Start_AtomicSection() was executed.
-*/
-static sint nesting = 0;
+#include "processes/data.h"
 
 /*! \var static uint irq_counter
     \brief counts the amount of occurred interrupts.
@@ -44,11 +36,11 @@ static uint irq_counter = 0;
  * @post	Sys_End_AtomicSection() must be called to execute any interrupt that happened or will happen.
  */
 inline void Sys_Start_AtomicSection(){
-    if(nesting == 0){
-        sys_IRQ_Priority = (SR & 0x00E0) >> 5;
+    if(Sys_GetCurrentIRQPNesting() == 0){
+        Sys_SetCurrentIRQPriority((SR & 0x00E0) >> 5);
         SRbits.IPL = SYS_IRQP_MAX;
     }
-    nesting++;
+    Sys_IncCurrentIRQPNesting();
 }
 
 
@@ -58,12 +50,12 @@ inline void Sys_Start_AtomicSection(){
  * @pre	Sys_Start_AtomicSection() must have been called.
  */
 inline void Sys_End_AtomicSection(){
-    nesting--;
-    if(nesting <= 0){
-        if(nesting == 0){
-            SRbits.IPL = sys_IRQ_Priority;
+    Sys_DecCurrentIRQPNesting();
+    if(Sys_GetCurrentIRQPNesting() <= 0){
+        if(Sys_GetCurrentIRQPNesting() == 0){
+            SR = SR | (Sys_GetCurrentIRQPriority() & 0x0007) << 5;
         }
-        nesting = 0;
+        Sys_SetCurrentIRQPNesting(0);
     }
 }
 
@@ -73,7 +65,7 @@ inline void Sys_End_AtomicSection(){
  *
  */
 sint Sys_Get_IRQNestingLevel(){
-    return nesting;
+    return Sys_GetCurrentIRQPNesting();
 }
 
 /**

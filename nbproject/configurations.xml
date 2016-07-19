@@ -43,6 +43,7 @@
           <itemPath>os/io/e-puck/selector.h</itemPath>
           <itemPath>os/platform/e-puck/adc.h</itemPath>
           <itemPath>os/io/e-puck/proximity.h</itemPath>
+          <itemPath>os/platform/e-puck/clock_timer_HDI.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -119,6 +120,7 @@
           <itemPath>os/io/e-puck/selector.c</itemPath>
           <itemPath>os/platform/e-puck/adc.c</itemPath>
           <itemPath>os/io/e-puck/proximity.c</itemPath>
+          <itemPath>os/platform/e-puck/clock_timer_HDI.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -131,8 +133,6 @@
             <itemPath>os/platform/e-puck/process_Management_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/remoteControl_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.c</itemPath>
-            <itemPath>os/platform/e-puck/control_timer.c</itemPath>
-            <itemPath>os/platform/e-puck/control_timer.h</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="f2" displayName="processes" projectFiles="true">

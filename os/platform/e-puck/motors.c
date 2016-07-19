@@ -24,7 +24,7 @@
 
 #define MAX_WHEEL_SPEED 128 	/*!< Maximum wheel speed in steps*/
 #define MIN_WHEEL_SPEED 4   	/*!< Minimum wheel speed in steps*/
-#define POWER_SAVE_WAIT 15      /*!< amount of steps needed to move the motor one step further */
+#define POWER_SAVE_WAIT 10      /*!< amount of steps needed to move the motor one step further */
 
 /**
  * @brief This struct contains the speed for a motor.

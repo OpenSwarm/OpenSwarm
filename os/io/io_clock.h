@@ -19,8 +19,15 @@ extern "C" {
 
 #include "../definitions.h"
     
-inline void Sys_Init_Clock(void);
+inline void Sys_Init_SystemClock(void);
+inline void Sys_Start_SystemClock(void);
+inline void Sys_Pause_SystemClock(void);
+inline void Sys_Continue_SystemClock(void);
+
 inline void Sys_Init_SystemTime(void);
+inline void Sys_Start_SystemTime(void);
+inline void Sys_Pause_SystemTime(void);
+inline void Sys_Continue_SystemTim(void);
 
 inline uint32 Sys_Get_SystemTime(void);
 inline uint32 Sys_Get_SystemClock(void);

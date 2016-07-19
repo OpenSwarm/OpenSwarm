@@ -161,9 +161,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
     Sys_Start_AtomicSection();
     
     //PUSH everything on the stack
-    __asm__(
-            "PUSH SR\n"
-            "PUSH W0\n"
+    __asm__("PUSH W0\n"
             "PUSH W1\n"
             "PUSH W2\n"
             "PUSH W3\n"
@@ -189,7 +187,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "PUSH DOENDL\n"
             "PUSH CORCON\n"
             "POP.S\n"
-            "PUSH SR\n"
+//            "PUSH SR\n"
             "PUSH W0\n"
             "PUSH W1\n"
             "PUSH W2\n"
@@ -243,7 +241,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
     __asm__("POP W2\n");
     __asm__("POP W1\n");
     __asm__("POP W0\n");
-    __asm__("POP SR\n");
+//    __asm__("POP SR\n");
     __asm__("PUSH.S\n");
     __asm__("POP CORCON\n"
             "POP DOENDL\n"
@@ -270,7 +268,6 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "POP W2\n"
             "POP W1\n"
             "POP W0\n"
-            "POP SR\n"
             );
 
     Sys_End_AtomicSection();

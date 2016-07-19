@@ -302,6 +302,8 @@ void Sys_Delete_Process(sys_pcb_list_element *element){
 inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint stacksize){
     static uint new_id = 1;
     element->process_ID = new_id++;
+    element->interruptPriority = DEFAULT_IRQPRIORITY;
+    element->interruptPriorityNesting = 0;
 
     if(stacksize == 0){//if there is no stack size -> set default value
         stacksize = DEFAULT_PROCESS_STACK_SIZE;
@@ -399,4 +401,53 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
 
     Sys_End_AtomicSection();
     return;
+}
+
+inline uint Sys_GetCurrentIRQPNesting(void){
+    if( sys_running_process == 0){
+        return 0;
+    } 
+    
+    return sys_running_process->pcb.interruptPriorityNesting;
+}
+
+inline uint Sys_GetCurrentIRQPriority(void){
+    if( sys_running_process == 0){
+        return 0;
+    } 
+    
+    return sys_running_process->pcb.interruptPriority;
+}
+
+inline void Sys_SetCurrentIRQPNesting(uint n){
+    if( sys_running_process == 0){
+        return;
+    } 
+    
+    sys_running_process->pcb.interruptPriorityNesting = n;
+}
+
+inline void Sys_SetCurrentIRQPriority(uint irqp){
+    if( sys_running_process == 0){
+        return;
+    } 
+    
+    sys_running_process->pcb.interruptPriority = irqp; 
+}
+
+
+inline void Sys_IncCurrentIRQPNesting(void){
+    if( sys_running_process == 0){
+        return;
+    } 
+    
+    sys_running_process->pcb.interruptPriorityNesting++;
+}
+
+inline void Sys_DecCurrentIRQPNesting(void){
+    if( sys_running_process == 0){
+        return;
+    } 
+    
+    sys_running_process->pcb.interruptPriorityNesting--;
 }

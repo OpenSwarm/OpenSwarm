@@ -60,7 +60,6 @@
 #ifdef SYS_PROXIMITY_USED
 #include "io/e-puck/proximity.h"
 #endif
-#include "io/e-puck/control_timer.h"
 #endif
 
 /**
@@ -88,7 +87,7 @@ void Sys_Init_Kernel(){
 
     //init I/O Devices
     Sys_Init_IOManagement();
-    Sys_Init_Clock();
+    Sys_Init_SystemClock();
     
 #ifdef EPUCK_USED
 #ifdef SYS_MOTOR_USED
@@ -112,7 +111,6 @@ void Sys_Init_Kernel(){
 #ifdef SYS_PROXIMITY_USED
     Sys_Init_Proximity();
 #endif
-    Sys_Init_ControlTimer();
 #endif
 }
 
@@ -147,7 +145,6 @@ void Sys_Start_Kernel(void){
 #endif
 #ifdef SYS_PROXIMITY_USED
 #endif
-    Sys_Start_ControlTimer();
 #endif
 }
 

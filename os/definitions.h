@@ -43,28 +43,29 @@ extern "C" {
     #define UART1_TX_DIR _TRISF3
     #define UART2_RX_DIR _TRISF4
     #define UART2_TX_DIR _TRISF5
+   
+    #define DEFAULT_IRQPRIORITY 0 /*!< Default interrupt priority*/
+
+    #define SYS_EVENT_IO_MOTOR_LEFT     0x02    /*!< ID of the event that controls the left motor speed/direction*/
+    #define SYS_EVENT_IO_MOTOR_RIGHT    0x03    /*!< ID of the event that controls the right motor speed/direction*/
+    #define SYS_EVENT_IO_CAMERA         0x04    /*!< ID of the event that is emmited by the camera*/
+    #define SYS_EVENT_IO_REMOECONTROL   0x05    /*!< ID of the event that is sent after receiving a remote control signal*/
+    #define SYS_EVENT_IO_TO_BLUETOOTH   0x06    /*!< ID of the event that sends data via Bluetooth*/
+    #define SYS_EVENT_IO_SELECTOR_CHANGE    0x08    /*!< ID of the event that signals the change of the selector*/
+    #define SYS_EVENT_IO_PROX_ALL       0x09    /*!< ID of the event that signals all Proximity Sensors*/
+    #define SYS_EVENT_IO_PROX_0         0x0A    /*!< ID of the event that signals the Proximity Sensor 0*/
+    #define SYS_EVENT_IO_PROX_1         0x0B    /*!< ID of the event that signals the Proximity Sensor 1*/
+    #define SYS_EVENT_IO_PROX_2         0x0C    /*!< ID of the event that signals the Proximity Sensor 2*/
+    #define SYS_EVENT_IO_PROX_3         0x0D    /*!< ID of the event that signals the Proximity Sensor 3*/
+    #define SYS_EVENT_IO_PROX_4         0x0E    /*!< ID of the event that signals the Proximity Sensor 4*/
+    #define SYS_EVENT_IO_PROX_5         0x0F    /*!< ID of the event that signals the Proximity Sensor 5*/
+    #define SYS_EVENT_IO_PROX_6         0x10    /*!< ID of the event that signals the Proximity Sensor 6*/
+    #define SYS_EVENT_IO_PROX_7         0x11    /*!< ID of the event that signals the Proximity Sensor 7*/
+
 #endif
         
 #define SYS_EVENT_TERMINATION       0x01    /*!< ID of the event that signal a general termination event*/
-#define SYS_EVENT_IO_MOTOR_LEFT     0x02    /*!< ID of the event that controls the left motor speed/direction*/
-#define SYS_EVENT_IO_MOTOR_RIGHT    0x03    /*!< ID of the event that controls the right motor speed/direction*/
-#define SYS_EVENT_IO_CAMERA         0x04    /*!< ID of the event that is emmited by the camera*/
-#define SYS_EVENT_IO_REMOECONTROL   0x05    /*!< ID of the event that is sent after receiving a remote control signal*/
-#define SYS_EVENT_IO_TO_BLUETOOTH   0x06    /*!< ID of the event that sends data via Bluetooth*/
-#define SYS_EVENT_1ms_CLOCK         0x07    /*!< ID of the event that signals 1ms timer ticks*/
-#define SYS_EVENT_IO_SELECTOR_CHANGE    0x08    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_ALL       0x09    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_0         0x0A    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_1         0x0B    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_2         0x0C    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_3         0x0D    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_4         0x0E    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_5         0x0F    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_6         0x10    /*!< ID of the event that signals the change of the selector*/
-#define SYS_EVENT_IO_PROX_7         0x11    /*!< ID of the event that signals the change of the selector*/
-//#define SYS_EVENT_1ms_CLOCK         0x09    /*!< ID of the event that signals 1ms timer ticks*/
-//#define SYS_EVENT_1ms_CLOCK         0x0A    /*!< ID of the event that signals 1ms timer ticks*/
-//#define SYS_EVENT_1ms_CLOCK         0x0B    /*!< ID of the event that signals 1ms timer ticks*/
+#define SYS_EVENT_10ms_CLOCK        0x07    /*!< ID of the event that signals 1ms timer ticks*/
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE) /*!< the value to indicate all event handler*/
 
@@ -74,13 +75,13 @@ extern "C" {
  * This enum defines system-wide colours. (it is based on one bit for red, blue, and green). In total, 8 colours are defined with the first three bits.
  */
 typedef enum sys_colour {   BLACK   = 0b00000000, 
-                    RED     = 0b00000100,
-                    YELLOW  = 0b00000110,
-                    GREEN   = 0b00000010,
-                    CYAN    = 0b00000011,
-                    BLUE    = 0b00000001,
-                    MAGENTA = 0b00000101,
-                    WHITE   = 0b00000111
+                            RED     = 0b00000100,
+                            YELLOW  = 0b00000110,
+                            GREEN   = 0b00000010,
+                            CYAN    = 0b00000011,
+                            BLUE    = 0b00000001,
+                            MAGENTA = 0b00000101,
+                            WHITE   = 0b00000111
 } sys_colour;
 
 typedef unsigned char  uint8; 	/*!< Defines an unsigned  8bit integer*/
@@ -91,15 +92,17 @@ typedef signed short sint16;	/*!< Defines a    signed 16bit integer*/
 typedef signed long   sint32;	/*!< Defines a    signed 32bit integer*/
 
 #ifdef EPUCK_USED
-typedef signed short sint;/*!< e-puck specific valued for the default signed integer*/
-typedef unsigned short uint;/*!< e-puck specific valued for the default unsigned integer*/
+    typedef signed short sint;/*!< e-puck specific valued for the default signed integer*/
+    typedef unsigned short uint;/*!< e-puck specific valued for the default unsigned integer*/
 #endif
 
 typedef void (*pFunction)(void);	/*!< Defines a pointer to a function with no return value and argument*/
 typedef void (*pByteFunction)(uint8);	/*!< Defines a pointer to a function with no return value and one argument*/
 
-typedef void (*pUART_reader) (uint8 data); /*!< Defines a pointer to a function with no return value and one argument*/
-
+#ifdef EPUCK_USED
+    typedef void (*pUART_reader) (uint8 data); /*!< Defines a pointer to a function with no return value and one argument*/
+#endif
+    
 #ifdef	__cplusplus
 }
 #endif

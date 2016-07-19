@@ -33,11 +33,8 @@
 #include "os/memory.h"
 #include "os/interrupts.h"
 
-#include "os/io/e-puck/proximity.h"
-#include "os/io/e-puck/control_timer.h"
-
 /******************************************************************************/
-/* Variable Declaration                                                */
+/* Global Variable Declaration                                                */
 /******************************************************************************/
 
 typedef struct vector_s{
@@ -62,15 +59,11 @@ vector proximity_pointer;//compost vector containing all the x & y components of
 motor_speeds default_speed;//default behaviour when nothing is seen
 motor_speeds robot_speed;//actual robot speed that should be applied to the motors
 
-#define proxThres 70
-#define proxCountThres 5
-#define rotMax 25
-
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
 
-//static uint fps = 0;
+static uint fps = 0;
 
 int sinVectorTimes(vector *, int);
 int cosVectorTimes(vector *, int);
@@ -79,25 +72,33 @@ int sign(int);
 void getProximityValues();
 void calculateProxPointer();
 void initProxPointer();
-void calculateMotorSpeed(motor_speeds *);
+void calculateMotorSpeed();
+bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data);
 
-void ledsOn();
-void ledsOff();
-
-bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data);
+void log_me();
+void thread();
 
 #define MAX_SPEED 128
-#define CONTROL_STEP_TIME 25 //ms
+#define REFRESH_RATE 100 //ms
+#define CHANGE_BEHAVIOUR 5000 //ms
 
 int16_t main(void)
 {
-    Sys_Init_Kernel();     
+    Sys_Init_Kernel(); 
+    
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, 0, prox_sensors, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, 0, prox_sensors, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, 0, prox_sensors, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, 0, prox_sensors, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, 0, prox_sensors, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, 0, prox_sensors, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, 0, prox_sensors, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, 0, prox_sensors, 0);
+    
+    Sys_Start_Process(thread);
+    
     Sys_Start_Kernel();
-    uint16 i=0;
-    for (i=0;i<0xfffe;i++){}
-    
-    int run = 0;
-    
+
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -108,44 +109,78 @@ int16_t main(void)
     LED7 = 0;
     BODY_LED = 0;
     FRONT_LED = 0;
-   // Sys_Get_Selector(void);
+    
     initProxPointer();
    
     uint32 time = Sys_Get_SystemClock();
-    calculateMotorSpeed(&robot_speed);//calculate the motor speed    
+    time += (uint32) 1000;
+    
+    default_speed.left = MAX_SPEED;
+    default_speed.right = MAX_SPEED;
+    uint random_change = 0;
     
     while(true){
-            
-        uint32 time_now = Sys_Get_SystemClock();
         
-        if (run == 0 ) { 
-            init_behaviour();
-            start_behaviour();
+        if(SR & 0x00E0){
+            SRbits.IPL = 0;
+        }
             
-            run = 1;
-            time = time_now;
-//            phaseStart = time_now - phaseStart;
-            ledsOff();
+        if(CORCON & 0x08){
+            //LED6 = 1;
+            CORCONbits.IPL3 = 0;
         }
         
-        if(run == 1 && time_now >= time){//wait the refresh_rate time
-            time += CONTROL_STEP_TIME;
+        uint32 time_now = Sys_Get_SystemClock();
+        if(time_now >= time){//wait the refresh_rate time
+            random_change++;
+            time += REFRESH_RATE;
             
-            getProximityValues();//get the values
-            calculateProxPointer();//calculate the overall vector
-            calculateMotorSpeed(&robot_speed);//calculate the motor speed       
-         
-          /*  if(!lightSwitch()) {
-                run = 0;
-                robot_speed.left = 0;
-                robot_speed.right = 0;
-                ledsOff();
-            }
-            */
-            Sys_Set_LeftWheelSpeed(robot_speed.left);
-            Sys_Set_RightWheelSpeed(robot_speed.right);
+            if(random_change >= CHANGE_BEHAVIOUR/REFRESH_RATE){//change the direction after the Change_behaviour time
+                default_speed.left = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
+                default_speed.right = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
+                random_change = 0;
+            }            
+            LED0 = ~LED0;
         }
     }
+}
+
+void thread(){
+    uint32 time = Sys_Get_SystemClock();
+    while(true){
+        uint32 time_now = Sys_Get_SystemClock();
+        if(time_now >= time){//wait the refresh_rate time
+            time += REFRESH_RATE;
+            
+            LED1 = ~LED1;
+        }
+    }
+}
+
+void log_me(){
+    static char message[32];
+    
+    uint length = 0;
+    length = sprintf(message, "%03d;%03d;%03d,%03d,%03d\n\r", Sys_Rand8(),Sys_Rand8(),Sys_Get_Prox(3),Sys_Get_Prox(5),Sys_Get_Prox(7));
+    
+    Sys_Writeto_UART1(message, length);//send via Bluetooth
+ 
+    Sys_Reset_InterruptCounter();
+    Sys_Reset_EventCounter();
+    fps = 0;
+}
+
+void Sys_ClearLEDs(){
+    LED0 = 0;
+    LED1 = 0;
+    LED2 = 0;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
+    BODY_LED = 0;
+    FRONT_LED = 0;    
 }
 
 /**
@@ -176,18 +211,18 @@ void getProximityValues(){
 void calculateProxPointer(){
     int prox_x = 0;
     int prox_y = 0;
-    int i,j;
+    int i;
     
-    for(i = 5; i < 11; i++){
-        j = i % 8;
-        if(proximity_values[j] > 70){
-            prox_x += ((long) proximity_values[j] * (long) prox_transform_x[j])/100;//calculate the X component
-            prox_y += ((long) proximity_values[j] * (long) prox_transform_y[j])/100;//calculate the Y component
+    for(i = 0; i < PROXIMITIES; i++){
+        if(proximity_values[i] < 0xFFFF){//add all proximity sensors that measured an object
+            prox_x += ((long) proximity_values[i] * (long) prox_transform_x[i])/100;//calculate the X component
+            prox_y += ((long) proximity_values[i] * (long) prox_transform_y[i])/100;//calculate the Y component
         }
     }
     
     proximity_pointer.x = prox_x;
     proximity_pointer.y = prox_y;
+    proximity_pointer.length = sqrt((long) prox_x*prox_x + (long) prox_y*prox_y);
 }
 
 /**
@@ -196,106 +231,57 @@ void calculateProxPointer(){
  * 
  * @param[out] motor_speeds* the struct to put in the motor speeds. 
  */
-void calculateMotorSpeed(motor_speeds *speeds){
-    static int rotTime = 0;
-    static int proxCount = 0;
-    static int idle = 0;
-    int vel = 0;
-    int max = MAX_SPEED;
-    int rotDir;
-     
+void calculateMotorSpeed(){
+    sint sinMax = sinVectorTimes(&proximity_pointer, MAX_SPEED);
+    sint cosMax = cosVectorTimes(&proximity_pointer, MAX_SPEED);
+  
+    //calculates the forward speed + rotation
+    if(proximity_pointer.x > 0){//is the target in front 
+        if(proximity_pointer.x >= 200){//if too close -> only turn
+            robot_speed.left  =  -sinMax;
+            robot_speed.right =   sinMax;
+        }else{//get slower when getting closer
+            robot_speed.left  = (-cosMax*(200-proximity_pointer.x))/200 - sinMax;
+            robot_speed.right = (-cosMax*(200-proximity_pointer.x))/200 + sinMax;
+        }
+    }else{//go always max speed because the object is behind you
+       robot_speed.left  = -cosMax - sinMax;
+       robot_speed.right = -cosMax + sinMax;
+    }
+    
     switch(Sys_Get_Selector()){
         case 0://stop doing anything
-            vel = 0;
-            max = 0;
-            break;
-        case 0x01:
-            vel = 5;
-            LED0 = 1;
-            break;
+            robot_speed.left = 0;
+            robot_speed.right = 0;
+            return;
+        case 0x01://object avoidance
         case 0x02:
-            vel = 7;
-            LED1 = 1;
-            break;
         case 0x03:
-            vel = 10;
-            LED0 = 1;
-            LED1 = 1;
-            break;
         case 0x04:
-            vel = 14;
-            LED2 = 1;
-            break;
         case 0x05:
-            vel = 21;
-            LED2 = 1;
-            LED0 = 1;
-            break;
         case 0x06:
-            vel = 30;
-            LED2 = 1;
-            LED1 = 1;
-            break;
         case 0x07:
-            vel = 43;
-            LED2 = 1;
-            LED1 = 1;
-            LED0 = 1;
-            break;
-        case 0x08:
-            vel = 62;
-            LED3 = 1;
-            break;
+            if(proximity_pointer.length < 25){//if you don't see anything -> do random behaviour
+                robot_speed.left  =  default_speed.left;
+                robot_speed.right = default_speed.right;
+            }
+            return;
+        case 0x08://chasing
         case 0x09:
-            vel = 89;
-            LED3 = 1;
-            LED0 = 1;
-            break;
         case 0x0A:
-            vel = 128;
-            LED3 = 1;
-            LED1 = 1;
-            break;
         case 0x0B:
         case 0x0C:
         case 0x0D:
         case 0x0E:
         case 0x0F:
-            break;
-    }
-    
-    if(rotTime > 0 || proxCount > 0){
-         if ((proximity_pointer.x*proximity_pointer.x > proxThres*proxThres || proximity_pointer.y*proximity_pointer.y > proxThres*proxThres)&& idle == 0) proxCount++;
-         else proxCount = 0;
-    }
-
-    // If contact with obstacles for several consecutive cycles do random reorient (it's probably a wall)
-    if(proxCount > proxCountThres){
-        if(proximity_pointer.y > 0) rotDir = 1;
-        else rotDir = -1;
-        speeds->left = -max*rotDir;
-        speeds->right = max*rotDir;
-        rotTime += 1 +rand() % rotMax;
-        proxCount = 0;
-        idle = 1;
-     }
-
-    
-     // If obstacle ahead turn to avoid it
-     if(proximity_pointer.x > proxThres){          
-        if(proximity_pointer.y > 0) rotDir = 1;
-        else rotDir = -1;
-        speeds->left = -max*rotDir;
-        speeds->right = max*rotDir;
-        rotTime = 1;
-     }
-     // Continue straight if no obstacle
-     else {
-        if(rotTime ==0) {
-         speeds->right = speeds->left = vel;
-         idle = 0;
-        }
-        else rotTime -= 1;   
+            if(proximity_pointer.length < 25){//if you don't see anything -> stop
+                robot_speed.left =  0;
+                robot_speed.right = 0;
+            }else{
+                robot_speed.left =  -robot_speed.left;
+                robot_speed.right = -robot_speed.right;
+            }           
+            return;
     }
 }
 
@@ -336,10 +322,67 @@ int cosVectorTimes(vector *v, int x){
  */
 void initProxPointer(){
     proximity_pointer.x = 0;
-    proximity_pointer.y = 0;    
+    proximity_pointer.y = 0;
+    proximity_pointer.length = 0;
+    
 }
 
-bool toggle_frontLED(uint16 PID, uint16 eventID, sys_event_data *data){ 
-    FRONT_LED = ~FRONT_LED; 
-    return true; 
+/**
+ * This is a nice alternative to the other toggle_frontLED function
+ * This function turns on the front_LED, if the selector was set to an even number
+ *
+ * @para[in] PID        identifier of the process to which this function was subscribed
+ * @para[in] eventID    identifier of the event to which this function was subscribed
+ * @para[in] data       the data which was sent with the event
+ * @return   bool       was this function successful?
+ */
+bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data){
+    
+    static uint8 sensor_flags = 0;//each bit is for a new sensor value
+        
+    switch(eventID){
+        case SYS_EVENT_IO_PROX_0:
+            proximity_values[0] = 100-Sys_Get_Prox(0);
+            sensor_flags |= 0x01;
+            break;
+        case SYS_EVENT_IO_PROX_1:
+            proximity_values[1] = 100-Sys_Get_Prox(1);
+            sensor_flags |= 0x02;
+            break;
+        case SYS_EVENT_IO_PROX_2:
+            proximity_values[2] = 100-Sys_Get_Prox(2);
+            sensor_flags |= 0x04;
+            break;
+        case SYS_EVENT_IO_PROX_3:
+            proximity_values[3] = 100-Sys_Get_Prox(3);
+            sensor_flags |= 0x08;
+            break;
+        case SYS_EVENT_IO_PROX_4:
+            proximity_values[4] = 100-Sys_Get_Prox(4);
+            sensor_flags |= 0x10;
+            break;
+        case SYS_EVENT_IO_PROX_5:
+            proximity_values[5] = 100-Sys_Get_Prox(5);
+            sensor_flags |= 0x20;
+            break;
+        case SYS_EVENT_IO_PROX_6:
+            proximity_values[6] = 100-Sys_Get_Prox(6);
+            sensor_flags |= 0x40;
+            break;
+        case SYS_EVENT_IO_PROX_7:
+            proximity_values[7] = 100-Sys_Get_Prox(7);
+            sensor_flags |= 0x80;
+            break;
+    }
+    
+    if(sensor_flags == 0xFF){//is it even=true or odd=false
+        calculateProxPointer();//calculate the overall vector
+        calculateMotorSpeed();//calculate the motor speed
+        
+        //apply motor speed
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT,  robot_speed.left);
+        Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, robot_speed.right);
+    }
+    
+    return true;
 }
