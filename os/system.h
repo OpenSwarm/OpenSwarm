@@ -79,7 +79,7 @@
 #include "definitions.h"
 
 #ifdef EPUCK_USED
-//#define SYS_TIME_USED	 	/*!< Define this preprocessor symbol to use SystemClock */
+#define SYS_CLOCK_USED	 	/*!< Define this preprocessor symbol to use SystemClock */
 //#define SYS_MOTOR_USED	 	/*!< Define this preprocessor symbol to use motors */
 //#define SYS_UART1_USED		 /*!< Define this preprocessor symbol to use UART1 */
 //#define SYS_REMOTECONTROL_USED	 /*!< Define this preprocessor symbol to receive remote control signals */

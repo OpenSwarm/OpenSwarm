@@ -89,7 +89,7 @@ void Sys_Init_Kernel(){
     Sys_Init_IOManagement();
     
 #ifdef EPUCK_USED
-#ifdef SYS_TIME_USED
+#ifdef SYS_CLOCK_USED
     Sys_Init_SystemClock();
 #endif
 #ifdef SYS_MOTOR_USED
@@ -129,7 +129,7 @@ void Sys_Start_Kernel(void){
     Sys_Start_IOManagement();
     
 #ifdef EPUCK_USED
-#ifdef SYS_TIME_USED
+#ifdef SYS_CLOCK_USED
     Sys_Start_SystemClock();
 #endif
 #ifdef SYS_MOTOR_USED

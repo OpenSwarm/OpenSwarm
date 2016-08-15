@@ -105,7 +105,7 @@ inline void Sys_Continue_SystemTim(void){
  */
 void Sys_SystemClock_Counter(){
     
-    sys_clock++;
+    sys_clock += 10;
     
     Sys_Send_Event(SYS_EVENT_10ms_CLOCK, &sys_clock, sizeof(sys_clock));
 }

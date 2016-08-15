@@ -456,9 +456,9 @@
         <property key="voltagevalue" value="5.0"/>
       </PICkit3PlatformTool>
       <Simulator>
-        <property key="codecoverage.enabled" value="Enabled/Reset on POR"/>
-        <property key="codecoverage.enableoutputtofile" value="true"/>
-        <property key="codecoverage.outputfile" value="codeCoverage.log"/>
+        <property key="codecoverage.enabled" value="Disable"/>
+        <property key="codecoverage.enableoutputtofile" value="false"/>
+        <property key="codecoverage.outputfile" value="coverage.log"/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>
         <property key="oscillator.frequency" value="1"/>
@@ -481,11 +481,11 @@
         <property key="reset.scl" value="false"/>
         <property key="reset.type" value="MCLR"/>
         <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
-        <property key="tracecontrol.select" value="1"/>
+        <property key="tracecontrol.select" value="0"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
         <property key="tracecontrol.timestamp" value="0"/>
         <property key="tracecontrol.tracebufmax" value="546000"/>
-        <property key="tracecontrol.tracefile" value="trace.log"/>
+        <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
         <property key="tracecontrol.traceresetonrun" value="false"/>
         <property key="uart10io.output" value="window"/>
         <property key="uart10io.outputfile" value=""/>

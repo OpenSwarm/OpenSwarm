@@ -38,8 +38,8 @@ typedef struct sys_process_control_block_s{
     uint framePointer;                        /*!< Frame Pointer Register*/
     uint stackPointerLimit;                   /*!< Stack Pointer Limit Register*/
     
-    uint interruptPriority;                   /*!< Stack Pointer Limit Register*/
-    uint interruptPriorityNesting;                   /*!< Stack Pointer Limit Register*/
+    int interruptPriority;                   /*!< Stack Pointer Limit Register*/
+    int interruptPriorityNesting;                   /*!< Stack Pointer Limit Register*/
 
     sys_scheduler_info sheduler_info;           /*!< scheduler-specific datastructure */
     sys_event_data *event;
@@ -84,13 +84,13 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
  *      Basic Event Management for Processes
  ********************************************************/
 
-inline uint Sys_GetCurrentIRQPNesting(void);
-inline uint Sys_GetCurrentIRQPriority(void);
-inline void Sys_SetCurrentIRQPNesting(uint n);
-inline void Sys_SetCurrentIRQPriority(uint irqp);
+int Sys_GetCurrentIRQPNesting(void);
+int Sys_GetCurrentIRQPriority(void);
+void Sys_SetCurrentIRQPNesting(int n);
+void Sys_SetCurrentIRQPriority(int irqp);
 
-inline void Sys_IncCurrentIRQPNesting(void);
-inline void Sys_DecCurrentIRQPNesting(void);
+void Sys_IncCurrentIRQPNesting(void);
+void Sys_DecCurrentIRQPNesting(void);
 
 #ifdef	__cplusplus
 }

@@ -37,7 +37,7 @@ static uint irq_counter = 0;
  */
 inline void Sys_Start_AtomicSection(){
     if(Sys_GetCurrentIRQPNesting() == 0){
-        Sys_SetCurrentIRQPriority((SR & 0x00E0) >> 5);
+        Sys_SetCurrentIRQPriority((uint)((SR & 0x00E0) >> 5));
         SRbits.IPL = SYS_IRQP_MAX;
     }
     Sys_IncCurrentIRQPNesting();
@@ -53,7 +53,7 @@ inline void Sys_End_AtomicSection(){
     Sys_DecCurrentIRQPNesting();
     if(Sys_GetCurrentIRQPNesting() <= 0){
         if(Sys_GetCurrentIRQPNesting() == 0){
-            SR = SR | (Sys_GetCurrentIRQPriority() & 0x0007) << 5;
+            SR = SR & ( ((Sys_GetCurrentIRQPriority() << 5) & 0x00E0) | 0xFF1F);
         }
         Sys_SetCurrentIRQPNesting(0);
     }
