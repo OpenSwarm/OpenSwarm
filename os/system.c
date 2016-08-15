@@ -36,9 +36,11 @@
 
 
 #include "io/io.h"
-#include "io/io_clock.h"
     
 #ifdef EPUCK_USED
+#ifdef SYS_TIME_USED
+#include "io/io_clock.h"
+#endif
 #ifdef SYS_MOTOR_USED
 #include "io/e-puck/motors.h"
 #endif
@@ -76,8 +78,6 @@ void Sys_Init_Kernel(){
     INTCON1bits.NSTDIS = 0;
 #endif
     
-    
-
     //Init Scheduling
     Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
     Sys_Init_Process_Management();
@@ -87,9 +87,11 @@ void Sys_Init_Kernel(){
 
     //init I/O Devices
     Sys_Init_IOManagement();
-    Sys_Init_SystemClock();
     
 #ifdef EPUCK_USED
+#ifdef SYS_TIME_USED
+    Sys_Init_SystemClock();
+#endif
 #ifdef SYS_MOTOR_USED
     Sys_Init_Motors();
 #endif
@@ -127,6 +129,9 @@ void Sys_Start_Kernel(void){
     Sys_Start_IOManagement();
     
 #ifdef EPUCK_USED
+#ifdef SYS_TIME_USED
+    Sys_Start_SystemClock();
+#endif
 #ifdef SYS_MOTOR_USED
 #endif
 #ifdef SYS_UART1_USED

@@ -79,13 +79,14 @@
 #include "definitions.h"
 
 #ifdef EPUCK_USED
-#define SYS_MOTOR_USED	 	/*!< Define this preprocessor symbol to use motors */
-#define SYS_UART1_USED		 /*!< Define this preprocessor symbol to use UART1 */
-#define SYS_REMOTECONTROL_USED	 /*!< Define this preprocessor symbol to receive remote control signals */
+//#define SYS_TIME_USED	 	/*!< Define this preprocessor symbol to use SystemClock */
+//#define SYS_MOTOR_USED	 	/*!< Define this preprocessor symbol to use motors */
+//#define SYS_UART1_USED		 /*!< Define this preprocessor symbol to use UART1 */
+//#define SYS_REMOTECONTROL_USED	 /*!< Define this preprocessor symbol to receive remote control signals */
 //#define SYS_CAMERA_USED		 /*!< Define this preprocessor symbol to use the camera */
-#define SYS_SELECTOR_USED		 /*!< Define this preprocessor symbol to use the selector */
-#define SYS_ADC_USED		 /*!< Define this preprocessor symbol to use the ADCs */
-#define SYS_PROXIMITY_USED		 /*!< Define this preprocessor symbol to use the proximity sensors */
+//#define SYS_SELECTOR_USED		 /*!< Define this preprocessor symbol to use the selector */
+//#define SYS_ADC_USED		 /*!< Define this preprocessor symbol to use the ADCs */
+//#define SYS_PROXIMITY_USED		 /*!< Define this preprocessor symbol to use the proximity sensors */
 #endif
 
 #include "io/io.h"

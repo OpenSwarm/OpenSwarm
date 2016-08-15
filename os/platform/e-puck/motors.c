@@ -36,8 +36,8 @@ typedef struct sys_motors_s{
 void Sys_LeftMotor_Controller(void);
 void Sys_RightMotor_Controller(void);
 
-bool Sys_LeftMotor_EventHandler(uint, uint, sys_event_data *);
-bool Sys_RightMotor_EventHandler(uint, uint, sys_event_data *);
+bool Sys_LeftMotor_EventHandler(uint, sys_event_data *, void *);
+bool Sys_RightMotor_EventHandler(uint, sys_event_data *, void *);
 
 static sys_motors left_motor;/*!< wheel speed for the left motor*/
 static sys_motors right_motor;/*!< wheel speed for the right motor*/
@@ -66,10 +66,10 @@ void Sys_Init_Motors(){
     if(occured_error || !Sys_Register_Event(SYS_EVENT_IO_MOTOR_RIGHT)){
         occured_error = true;
     }
-    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_LEFT, 0, Sys_LeftMotor_EventHandler, 0)){
+    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_LEFT, Sys_LeftMotor_EventHandler, 0, 0)){
         occured_error = true;
     }
-    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0, Sys_RightMotor_EventHandler, 0)){
+    if(occured_error || !Sys_Subscribe_to_Event(SYS_EVENT_IO_MOTOR_RIGHT, Sys_RightMotor_EventHandler, 0, 0)){
         occured_error = true;
     }
 
@@ -79,8 +79,8 @@ void Sys_Init_Motors(){
         Sys_Unregister_IOHandler(Sys_RightMotor_Controller);
         Sys_Unregister_Event(SYS_EVENT_IO_MOTOR_LEFT);
         Sys_Unregister_Event(SYS_EVENT_IO_MOTOR_RIGHT);
-        Sys_Unsubscribe_from_Event(SYS_EVENT_IO_MOTOR_LEFT, 0);
-        Sys_Unsubscribe_from_Event(SYS_EVENT_IO_MOTOR_RIGHT, 0);
+        Sys_Unsubscribe_Handler(SYS_EVENT_IO_MOTOR_LEFT, 0, 0);
+        Sys_Unsubscribe_Handler(SYS_EVENT_IO_MOTOR_RIGHT, 0, 0);
         return;
     }
 }
@@ -201,11 +201,11 @@ void Sys_RightMotor_Controller(){
  *
  * This function sets the left motor speed that is received by the  event SYS_EVENT_IO_MOTOR_LEFT.
  *
- * @param[in] pid the process id to which the event handler is registered
  * @param[in] eventID the event id which identifies the event that is handled
  * @param[in] data the event data that contain the motor speed.
+ * @param[in] user_data pointer to data subscribed with the handler
  */
-bool Sys_LeftMotor_EventHandler(uint pid, uint eventID, sys_event_data *data/*mm/s*/){
+bool Sys_LeftMotor_EventHandler(uint eventID, sys_event_data *data/*mm/s*/, void *user_data){
     sint16 *speed = (sint16 *) data->value;
     
     Sys_Set_LeftWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);
@@ -221,7 +221,7 @@ bool Sys_LeftMotor_EventHandler(uint pid, uint eventID, sys_event_data *data/*mm
  * @param[in] eventID the event id which identifies the event that is handled
  * @param[in] data the event data that contain the motor speed.
  */
-bool Sys_RightMotor_EventHandler(uint pid, uint eventID, sys_event_data *data /*mm/s*/){
+bool Sys_RightMotor_EventHandler(uint eventID, sys_event_data *data /*mm/s*/, void *user_data){
     sint16 *speed = (sint16 *) data->value;
     
     Sys_Set_RightWheelSpeed( (MAX_WHEEL_SPEED * speed[0])/MAX_WHEEL_SPEED_MM_S);

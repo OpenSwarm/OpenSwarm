@@ -23,7 +23,6 @@ inline void Sys_Init_Clock(void){
     // TCS          = sets clock source to external (1) or internal (0)
     T1CON = 0; //default
     T1CONbits.TCKPS = 1; //Prescaler 8
-    
 }
 
 inline void Sys_Start_Clock(void){

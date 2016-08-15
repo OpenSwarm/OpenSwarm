@@ -73,54 +73,56 @@ void getProximityValues();
 void calculateProxPointer();
 void initProxPointer();
 void calculateMotorSpeed();
-bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data);
+bool prox_sensors(uint16 eventID, sys_event_data *data, void *user_data);
 
 void log_me();
 void thread();
 
 #define MAX_SPEED 128
-#define REFRESH_RATE 100 //ms
+#define REFRESH_RATE 1000 //ms
 #define CHANGE_BEHAVIOUR 5000 //ms
 
 int16_t main(void)
-{
+{    
     Sys_Init_Kernel(); 
     
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, 0, prox_sensors, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, 0, prox_sensors, 0);
+    /*
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, prox_sensors, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, prox_sensors, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, prox_sensors, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, prox_sensors, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, prox_sensors, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, prox_sensors, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, prox_sensors, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, prox_sensors, 0, 0);
+    */
     
     Sys_Start_Process(thread);
     
     Sys_Start_Kernel();
-
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
-    LED3 = 0;
-    LED4 = 0;
-    LED5 = 0;
-    LED6 = 0;
-    LED7 = 0;
-    BODY_LED = 0;
-    FRONT_LED = 0;
     
-    initProxPointer();
-   
+    
+    Sys_Init_SystemClock();
+    Sys_Start_SystemClock();
+    
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
+    /*
+    initProxPointer();
+   
     
     default_speed.left = MAX_SPEED;
     default_speed.right = MAX_SPEED;
     uint random_change = 0;
-    
+    */
+    uint counter = 0;
     while(true){
         
+        if(counter++ == 0xEFFF){
+            LED0 = ~LED0;
+            counter = 0;
+        }
+    /*    
         if(SR & 0x00E0){
             SRbits.IPL = 0;
         }
@@ -129,25 +131,35 @@ int16_t main(void)
             //LED6 = 1;
             CORCONbits.IPL3 = 0;
         }
-        
+    */    
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
-            random_change++;
+            //random_change++;
             time += REFRESH_RATE;
             
+            /*
             if(random_change >= CHANGE_BEHAVIOUR/REFRESH_RATE){//change the direction after the Change_behaviour time
                 default_speed.left = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
                 default_speed.right = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
                 random_change = 0;
-            }            
-            LED0 = ~LED0;
+            }
+            */            
+            LED2 = ~LED2;
         }
     }
 }
 
 void thread(){
     uint32 time = Sys_Get_SystemClock();
+    uint counter = 0;
+    
     while(true){
+        
+        if(counter++ == 0xEFFF){
+            LED1 = ~LED1;
+            counter = 0;
+        }
+    
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             time += REFRESH_RATE;
@@ -336,7 +348,7 @@ void initProxPointer(){
  * @para[in] data       the data which was sent with the event
  * @return   bool       was this function successful?
  */
-bool prox_sensors(uint16 PID, uint16 eventID, sys_event_data *data){
+bool prox_sensors(uint16 eventID, sys_event_data *data, void *user_data){
     
     static uint8 sensor_flags = 0;//each bit is for a new sensor value
         

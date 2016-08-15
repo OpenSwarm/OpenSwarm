@@ -62,7 +62,7 @@ void Sys_Init_Process_Management_HDI(){
         return;//should never happen
     }
     
-    Sys_Set_Defaults_Info(&sys_ready_processes->pcb.sheduler_info);
+    Sys_Set_Defaults_Info(&(sys_ready_processes->pcb.sheduler_info));
 
     sys_ready_processes->pcb.process_stack = 0; //create stack for process
 
@@ -79,7 +79,7 @@ void Sys_Init_Process_Management_HDI(){
     sys_ready_processes->previous = 0;//it is the first element
     sys_ready_processes->next = 0;//it is the only element
     sys_ready_processes->pcb.process_ID = 0;
-    sys_ready_processes->pcb.event_register = 0;
+    sys_ready_processes->pcb.event = 0;
     sys_running_process = sys_ready_processes;//it is the running process
     
     Sys_End_AtomicSection();
@@ -102,7 +102,7 @@ bool Sys_Start_Process_HDI(pFunction function){
       return false;
   }
 
-  if(!Sys_Set_Defaults_PCB(&element->pcb,0)){
+  if(!Sys_Set_Defaults_PCB(&(element->pcb),0)){
       Sys_Free(element);//set default values
       Sys_End_AtomicSection();
       return false;
@@ -111,6 +111,7 @@ bool Sys_Start_Process_HDI(pFunction function){
   element->pcb.sheduler_info.state = SYS_PROCESS_STATE_BABY;
   element->previous = 0;
   element->next = 0;//it is the only element
+  
 
   //TODO: add "void Sys_Set_Running_Process_to_Zombie()" to the bottom of the stack -> last thing a process executes is its termination!!!!
   __asm__(//loads temporarly the new stack and loads the jump address into the stack
