@@ -43,7 +43,6 @@
           <itemPath>os/io/e-puck/selector.h</itemPath>
           <itemPath>os/platform/e-puck/adc.h</itemPath>
           <itemPath>os/io/e-puck/proximity.h</itemPath>
-          <itemPath>os/platform/e-puck/clock_timer_HDI.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -56,6 +55,7 @@
             <itemPath>os/platform/e-puck/remoteControl_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/motors_HDI.h</itemPath>
+            <itemPath>os/platform/e-puck/clock_timer_HDI.h</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="f1" displayName="processes" projectFiles="true">
@@ -166,7 +166,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.25</languageToolchainVersion>
+        <languageToolchainVersion>1.26</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>
@@ -456,8 +456,8 @@
         <property key="voltagevalue" value="5.0"/>
       </PICkit3PlatformTool>
       <Simulator>
-        <property key="codecoverage.enabled" value="Disable"/>
-        <property key="codecoverage.enableoutputtofile" value="false"/>
+        <property key="codecoverage.enabled" value="Enabled/Reset on POR"/>
+        <property key="codecoverage.enableoutputtofile" value="true"/>
         <property key="codecoverage.outputfile" value="coverage.log"/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>
@@ -481,7 +481,7 @@
         <property key="reset.scl" value="false"/>
         <property key="reset.type" value="MCLR"/>
         <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
-        <property key="tracecontrol.select" value="0"/>
+        <property key="tracecontrol.select" value="1"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
         <property key="tracecontrol.timestamp" value="0"/>
         <property key="tracecontrol.tracebufmax" value="546000"/>

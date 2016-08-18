@@ -279,22 +279,44 @@ void Sys_Init_Camera(){
 
 /**
  *
- * This function starts the capturing using e-puck library from Subversion at svn://svn.gna.org/svn/e-puck/trunk
+ * This function deactivates the camera module and unregisters IOHandler and Event.
+ * 
+ */
+void Sys_Deactivate_Camera(void){
+
+    Sys_Stop_Camera();
+    
+    Sys_Unregister_IOHandler(Sys_Camera_PreProcessor);
+    Sys_Unregister_Event(SYS_EVENT_IO_CAMERA);
+}
+
+/**
  *
- * @todo rewrite the camera to computational less intensive functions
+ * This function starts the capturing using e-puck library from Subversion at svn://svn.gna.org/svn/e-puck/trunk
  * 
  */
 void Sys_Start_Camera(){
-/*
-    IFS0bits.T1IF = 0;
+
     IFS1bits.T4IF = 0;
     IFS1bits.T5IF = 0;
 
-    IEC0bits.T1IE = 1;// enable pixel interrupt
-    IEC1bits.T4IE = 1;// enable line interrupt
     IEC1bits.T5IE = 1;// enable frame interrupt
-*/
+
     e_poxxxx_launch_capture( &buffer[0]); //take first image
+}
+
+/**
+ *
+ * This function stops the capturing
+ *
+ */
+void Sys_Stop_Camera(void){
+     
+    IFS1bits.T4IF = 0;
+    IFS1bits.T5IF = 0;
+
+    IEC1bits.T4IE = 0;// enable line interrupt
+    IEC1bits.T5IE = 0;// enable frame interrupt
 }
 
 /**

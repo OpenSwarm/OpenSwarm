@@ -82,7 +82,7 @@ inline void Sys_todo_SystemTimer(){
         sys_process_scheduler();
     }
 
-    Sys_Execute_BufferedEvent();
+    Sys_Execute_BufferedEvents();
 
     Sys_Reset_SystemTimer_HDI(); //to guarantee the same execution time
     Sys_Continue_SystemTimer_HDI();

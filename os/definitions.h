@@ -46,11 +46,11 @@ extern "C" {
    
     #define DEFAULT_IRQPRIORITY 0 /*!< Default interrupt priority*/
 
-    #define SYS_EVENT_IO_MOTOR_LEFT     0x02    /*!< ID of the event that controls the left motor speed/direction*/
-    #define SYS_EVENT_IO_MOTOR_RIGHT    0x03    /*!< ID of the event that controls the right motor speed/direction*/
-    #define SYS_EVENT_IO_CAMERA         0x04    /*!< ID of the event that is emmited by the camera*/
-    #define SYS_EVENT_IO_REMOECONTROL   0x05    /*!< ID of the event that is sent after receiving a remote control signal*/
-    #define SYS_EVENT_IO_TO_BLUETOOTH   0x06    /*!< ID of the event that sends data via Bluetooth*/
+    #define SYS_EVENT_IO_MOTOR_LEFT     0x03    /*!< ID of the event that controls the left motor speed/direction*/
+    #define SYS_EVENT_IO_MOTOR_RIGHT    0x04    /*!< ID of the event that controls the right motor speed/direction*/
+    #define SYS_EVENT_IO_CAMERA         0x05    /*!< ID of the event that is emmited by the camera*/
+    #define SYS_EVENT_IO_REMOECONTROL   0x06    /*!< ID of the event that is sent after receiving a remote control signal*/
+    #define SYS_EVENT_IO_TO_BLUETOOTH   0x07    /*!< ID of the event that sends data via Bluetooth*/
     #define SYS_EVENT_IO_SELECTOR_CHANGE    0x08    /*!< ID of the event that signals the change of the selector*/
     #define SYS_EVENT_IO_PROX_ALL       0x09    /*!< ID of the event that signals all Proximity Sensors*/
     #define SYS_EVENT_IO_PROX_0         0x0A    /*!< ID of the event that signals the Proximity Sensor 0*/
@@ -65,7 +65,7 @@ extern "C" {
 #endif
         
 #define SYS_EVENT_TERMINATION       0x01    /*!< ID of the event that signal a general termination event*/
-#define SYS_EVENT_10ms_CLOCK        0x07    /*!< ID of the event that signals 1ms timer ticks*/
+#define SYS_EVENT_10ms_CLOCK        0x02    /*!< ID of the event that signals 1ms timer ticks*/
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE) /*!< the value to indicate all event handler*/
 

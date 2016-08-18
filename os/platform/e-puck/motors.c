@@ -75,14 +75,23 @@ void Sys_Init_Motors(){
 
 
     if(occured_error){
+        Sys_Deactivate_Motors();
+        return;
+    }
+}
+
+/**
+ *
+ * This function deactivates the motor module including both left and right motor.
+ *
+ */
+void Sys_Deactivate_Motors(void){
         Sys_Unregister_IOHandler(Sys_LeftMotor_Controller);
         Sys_Unregister_IOHandler(Sys_RightMotor_Controller);
         Sys_Unregister_Event(SYS_EVENT_IO_MOTOR_LEFT);
         Sys_Unregister_Event(SYS_EVENT_IO_MOTOR_RIGHT);
         Sys_Unsubscribe_Handler(SYS_EVENT_IO_MOTOR_LEFT, 0, 0);
         Sys_Unsubscribe_Handler(SYS_EVENT_IO_MOTOR_RIGHT, 0, 0);
-        return;
-    }
 }
 
 /**

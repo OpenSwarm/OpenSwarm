@@ -63,8 +63,6 @@ motor_speeds robot_speed;//actual robot speed that should be applied to the moto
 /* Main Program                                                               */
 /******************************************************************************/
 
-static uint fps = 0;
-
 int sinVectorTimes(vector *, int);
 int cosVectorTimes(vector *, int);
 int sign(int);
@@ -88,62 +86,23 @@ int16_t main(void)
 {    
     Sys_Init_Kernel(); 
     
-    
     Sys_Subscribe_to_Event(SYS_EVENT_10ms_CLOCK, led_toggler, 0, 0);
-    /*
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, prox_sensors, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, prox_sensors, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, prox_sensors, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, prox_sensors, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, prox_sensors, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, prox_sensors, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, prox_sensors, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, prox_sensors, 0, 0);
-    */
     
     Sys_Start_Process(thread);
     
     Sys_Start_Kernel();
     
-    
-    Sys_Init_SystemClock();
-    Sys_Start_SystemClock();
-    
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
-    /*
-    initProxPointer();
-   
     
-    default_speed.left = MAX_SPEED;
-    default_speed.right = MAX_SPEED;
-    uint random_change = 0;
-    */
-    uint counter = 0;
     while(true){
-    /*    
-        if(SR & 0x00E0){
-            SRbits.IPL = 0;
-        }
-            
-        if(CORCON & 0x08){
-            //LED6 = 1;
-            CORCONbits.IPL3 = 0;
-        }
-    */    
+       
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             //random_change++;
             time += REFRESH_RATE;
             
-            /*
-            if(random_change >= CHANGE_BEHAVIOUR/REFRESH_RATE){//change the direction after the Change_behaviour time
-                default_speed.left = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
-                default_speed.right = MAX_SPEED/2 + (MAX_SPEED * (Sys_Rand8() % 50)) / 100;
-                random_change = 0;
-            }
-            */            
-            LED2 = ~LED2;
+            LED0 = ~LED0;
         }
     }
 }
@@ -154,24 +113,27 @@ bool led_toggler(uint16 eventID, sys_event_data *data, void *udata){
     uint32 time_now = *((uint32 *) data->value);
     if( counter < time_now){
         counter = time_now + 1000;
-        
-    }
-    
-    LED7 = ~LED7;
+        LED7 = ~LED7;
+    } 
     
     return true;
 }
 
+bool oneSecCondition(uint16 eventID, sys_event_data *data, void *user_data){
+    static int counter = 0;
+    
+    if(++counter >= 100){
+        counter = 0;
+        return true;
+    }
+    
+    return false;
+}
+
 void thread(){
     uint32 time = Sys_Get_SystemClock();
-    uint counter = 0;
     
     while(true){
-        
-        if(counter++ == 0xEFFF){
-            LED1 = ~LED1;
-            counter = 0;
-        }
     
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time

@@ -1,5 +1,6 @@
 #include "clock_timer_HDI.h"
 
+#include "../../system.h"
 
 #define CONTROLTIME 10
 #define PRESCALER 8
@@ -35,10 +36,19 @@ inline void Sys_Start_Clock(void){
  *
  */
 inline void Sys_Pause_Clock(){
-    IFS0bits.T1IF = 0; //unsets the Timer2 interrupt flag
-    IEC0bits.T1IE = 0; //disable Timer2 interrupt -> T1IE = 0
+    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T1IE = 0; //disable Timer1 interrupt -> T1IE = 0
 
     T1CONbits.TON = 0; //stops counting
+}
+
+/**
+ *
+ * This Function pauses/stops the Timer1 Interrupt
+ *
+ */
+inline void Sys_Stop_Clock(){
+    Sys_Pause_Clock();
 }
 
 /**
@@ -47,8 +57,8 @@ inline void Sys_Pause_Clock(){
  *
  */
 inline void Sys_Continue_Clock(){
-    IFS0bits.T1IF = 0; //unsets the Timer2 interrupt flag
-    IEC0bits.T1IE = 1; //enable Timer2 interrupt -> T1IE = 1
+    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T1IE = 1; //enable Timer1 interrupt -> T1IE = 1
 
     T1CONbits.TON = 1; //starts counting
 }
@@ -58,6 +68,15 @@ inline void Sys_Continue_Clock(){
  *
  */
 void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
+    
+#ifndef SYS_CLOCK_USED
+    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T1IE = 0; //disable Timer1 interrupt -> T1IE = 0
+    
+    T1CONbits.TON = 0; //stops counting
+    return;
+#endif
+    
     if(Sys_ClockTick != 0){
         Sys_ClockTick();
     }
@@ -71,6 +90,14 @@ void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
  *
  */
 void __attribute__((interrupt,no_auto_psv)) _AltT1Interrupt(void){
+#ifndef SYS_CLOCK_USED
+    IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
+    IEC0bits.T1IE = 0; //disable Timer1 interrupt -> T1IE = 0
+    
+    T1CONbits.TON = 0; //stops counting
+    return;
+#endif
+    
     if(Sys_ClockTick != 0){
         Sys_ClockTick();
     }    

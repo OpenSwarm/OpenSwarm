@@ -33,16 +33,44 @@
  */
 inline void Sys_Init_RemoteControl(void){
     Sys_Init_RemoteControl_HDI();
+    
+    
+    if(!Sys_Register_IOHandler(Sys_Receive_RemoteControl_Msg)){// no error handling used
+        return;
+    }
+    
+    Sys_Register_Event(SYS_EVENT_IO_REMOECONTROL);
 }
 
 /**
  *
- * This function start the handler of the remote control to receive signals from the remote control.
+ * This function starts the handler of the remote control to receive signals from the remote control.
  *
  */
 inline void Sys_Start_RemoteControl(void){
     Sys_Start_RemoteControl_HDI();
 }
+
+/**
+ *
+ * This function stops the handler of the remote control to receive signals from the remote control.
+ *
+ */
+inline void Sys_Stop_RemoteControl(void){
+    Sys_Stop_RemoteControl_HDI();
+}
+
+/**
+ *
+ * This function deactivates the handler of the remote control to receive signals from the remote control.
+ *
+ */
+inline void Sys_Deactivate_RemoteControl(void){
+    Sys_Deactivate_RemoteControl_HDI();
+    Sys_Unregister_Event(SYS_EVENT_IO_REMOECONTROL);
+    Sys_Unregister_IOHandler(Sys_Receive_RemoteControl_Msg);
+}
+
 //https://en.wikipedia.org/wiki/RC-5
 /**
  *

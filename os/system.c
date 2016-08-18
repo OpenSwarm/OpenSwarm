@@ -38,7 +38,7 @@
 #include "io/io.h"
     
 #ifdef EPUCK_USED
-#ifdef SYS_TIME_USED
+#ifdef SYS_CLOCK_USED
 #include "io/io_clock.h"
 #endif
 #ifdef SYS_MOTOR_USED
@@ -91,27 +91,43 @@ void Sys_Init_Kernel(){
 #ifdef EPUCK_USED
 #ifdef SYS_CLOCK_USED
     Sys_Init_SystemClock();
+#else
+    Sys_Deactivate_SystemClock();
 #endif
 #ifdef SYS_MOTOR_USED
     Sys_Init_Motors();
+#else
+    Sys_Deactivate_Motors();
 #endif
 #ifdef SYS_UART1_USED
     Sys_Init_UART1();
+#else
+    Sys_Deactivate_UART1();
 #endif
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Init_RemoteControl();
+#else
+    Sys_Deactivate_RemoteControl();
 #endif
 #ifdef SYS_CAMERA_USED
     Sys_Init_Camera();
+#else
+    Sys_Deactivate_Camera();
 #endif
 #ifdef SYS_SELECTOR_USED
     Sys_Init_Selector();
+#else
+    Sys_Deactivate_Selector();
 #endif
-#ifdef SYS_SELECTOR_USED
+#ifdef SYS_ADC_USED
     Sys_Init_ADC();
+#else
+    Sys_Deactivate_ADC();
 #endif
 #ifdef SYS_PROXIMITY_USED
     Sys_Init_Proximity();
+#else
+    Sys_Deactivate_Proximity();
 #endif
 #endif
 }
@@ -131,24 +147,38 @@ void Sys_Start_Kernel(void){
 #ifdef EPUCK_USED
 #ifdef SYS_CLOCK_USED
     Sys_Start_SystemClock();
+#else
+    Sys_Stop_SystemClock();
 #endif
+    
 #ifdef SYS_MOTOR_USED
+#else
 #endif
 #ifdef SYS_UART1_USED
     Sys_Start_UART1();
+#else
+    Sys_Stop_UART1();
 #endif
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Start_RemoteControl();
+#else
+    Sys_Stop_RemoteControl();
 #endif
 #ifdef SYS_CAMERA_USED
     Sys_Start_Camera();
+#else
+    Sys_Stop_Camera();
 #endif
 #ifdef SYS_SELECTOR_USED
 #endif
 #ifdef SYS_ADC_USED
     Sys_Start_ADC();
+#else
+    Sys_Stop_ADC();
 #endif
 #ifdef SYS_PROXIMITY_USED
+#else
+    Sys_Stop_Proximity();
 #endif
 #endif
 }

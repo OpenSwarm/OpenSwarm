@@ -58,11 +58,16 @@ extern uint byte_counter_uart2;
 extern pUART_reader read_uart_1;
 extern pUART_reader read_uart_2;
 
-void Sys_Init_UART1_HDI(void);
-void Sys_Init_UART2_HDI(void);
+inline void Sys_Init_UART1_HDI(void);
+inline void Sys_Init_UART2_HDI(void);
+inline void Sys_Deactivate_UART1_HDI(void);
+inline void Sys_Deactivate_UART2_HDI(void);
 
-void Sys_Start_UART1_HDI(void);
-void Sys_Start_UART2_HDI(void);
+inline void Sys_Start_UART1_HDI(void);
+inline void Sys_Start_UART2_HDI(void);
+
+inline void Sys_Stop_UART1_HDI(void);
+inline void Sys_Stop_UART2_HDI(void);
 
 inline void Sys_Read_UART1_ISR();
 inline void Sys_Write_UART1_ISR();

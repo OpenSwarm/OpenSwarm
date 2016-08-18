@@ -127,7 +127,7 @@ extern "C" {
     sys_event_data* Sys_Copy_EventData(sys_event_data* data);
     inline void Sys_Clear_EventData(sys_event_data* data);
     
-    void Sys_Execute_BufferedEvent(void);
+    void Sys_Execute_BufferedEvents(void);
     
     inline void Sys_Inc_EventCounter(void);
     inline void Sys_Reset_EventCounter(void);

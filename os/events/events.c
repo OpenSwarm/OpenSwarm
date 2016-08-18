@@ -276,7 +276,7 @@ bool Sys_Send_Event(uint eventID, void *data, uint data_size){
             
             Sys_Memcpy(data, evData->value, data_size);
             
-            bool condition_met = false;
+            bool condition_met = true;
             if(hdl->condition != 0){
                 condition_met = hdl->condition(eventID, evData, hdl->userData);
             }
@@ -350,7 +350,7 @@ bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
         
         sys_event_handler* hdl = event->handlers;
         while(hdl != 0){
-            bool condition_met = false;
+            bool condition_met = true;
             if(hdl->condition != 0){
                 condition_met = hdl->condition(eventID, &data, hdl->userData);
             }
@@ -374,7 +374,7 @@ bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
  * This function executes all buffered events.
  *
  */
-void Sys_Execute_BufferedEvent(void){
+void Sys_Execute_BufferedEvents(void){
     Sys_Start_AtomicSection();
        
         sys_event *event = registered_events;
@@ -458,7 +458,7 @@ void Sys_Clear_Event(sys_event *event){
             Sys_Clear_EventHandler(temp);
         }
     
-        free(event);
+        Sys_Free(event);
     }
     Sys_End_AtomicSection();
 }
@@ -477,7 +477,7 @@ void Sys_Clear_EventHandler(sys_event_handler *hdlr){
         hdlr->bufferd_data = 0;
         Sys_Clear_BufferedList( &(hdlr->bufferd_data) );
     
-        free(hdlr);
+        Sys_Free(hdlr);
     }
     
     Sys_End_AtomicSection();
@@ -520,8 +520,8 @@ void Sys_Clear_BufferedData(sys_event_data* data){
     
     if(data != 0 ){   
         data->next = 0;
-        free(data->value);
-        free(data);
+        Sys_Free(data->value);
+        Sys_Free(data);
     }
     
     Sys_End_AtomicSection();

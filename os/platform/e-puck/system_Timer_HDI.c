@@ -48,8 +48,6 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     // TCS          = sets clock source to external (1) or internal (0)
     T2CON = 0; //timer is turned off but set
     T2CONbits.TCKPS = 3; //Prescaler 256
-    
-    LED5 = 1;
 }
 
 
@@ -59,7 +57,6 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
  *
  */
 void Sys_Start_SystemTimer_HDI(){
-    LED6 = 1;
 
     IPC1bits.T2IP = SYS_IRQP_SYSTEM_TIMER; //set Timer2 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled
 

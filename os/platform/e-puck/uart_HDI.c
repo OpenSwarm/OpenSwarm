@@ -39,7 +39,7 @@ uint byte_counter_uart2 = 0;  /*!< Bytes that were written */
  * This function initialises UART1.
  * 
  */
-void Sys_Init_UART1_HDI(void){
+inline void Sys_Init_UART1_HDI(void){
     UART1_RX_DIR = INPUT_PIN;
     UART1_TX_DIR = OUTPUT_PIN;
 
@@ -76,7 +76,7 @@ void Sys_Init_UART1_HDI(void){
  * This function initialises UART2.
  * 
  */
-void Sys_Init_UART2_HDI(void){
+inline void Sys_Init_UART2_HDI(void){
     UART2_RX_DIR = INPUT_PIN;
     UART2_TX_DIR = OUTPUT_PIN;
 
@@ -103,7 +103,7 @@ void Sys_Init_UART2_HDI(void){
  * @note When executed this function, bytes can be received or transmitted at any time.
  * 
  */
-void Sys_Start_UART1_HDI(void){
+inline void Sys_Start_UART1_HDI(void){
     U1STAbits.UTXISEL = 0;//U1TXIF is set if byte was successfully transfered to the internal transmit buffer
     U1STAbits.UTXEN = 1;//Transmission is enabled
 
@@ -119,7 +119,7 @@ void Sys_Start_UART1_HDI(void){
  * @note When executed this function, bytes can be received or transmitted at any time.
  * 
  */
-void Sys_Start_UART2_HDI(void){
+inline void Sys_Start_UART2_HDI(void){
     U2STAbits.UTXISEL = 0;//U1TXIF is set if byte was successfully transfered to the internal transmit buffer
     U2STAbits.UTXEN = 1;//Transmission is enabled
 
@@ -134,6 +134,10 @@ void Sys_Start_UART2_HDI(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _U1RXInterrupt(void){
+#ifndef SYS_UART1_USED
+    Sys_Stop_UART1_HDI();
+    return;
+#endif
     Sys_Read_UART1_ISR();
     IFS0bits.U1RXIF = 0;
 }
@@ -144,6 +148,10 @@ void __attribute__((interrupt,auto_psv)) _U1RXInterrupt(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _AltU1RXInterrupt(void){
+#ifndef SYS_UART1_USED
+    Sys_Stop_UART1_HDI();
+    return;
+#endif
     Sys_Read_UART1_ISR();
     IFS0bits.U1RXIF = 0;
 }
@@ -154,6 +162,10 @@ void __attribute__((interrupt,auto_psv)) _AltU1RXInterrupt(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _U1TXInterrupt(void){
+#ifndef SYS_UART1_USED
+    Sys_Stop_UART1_HDI();
+    return;
+#endif
     Sys_Write_UART1_ISR();
     IFS0bits.U1TXIF = 0;
 }
@@ -163,6 +175,10 @@ void __attribute__((interrupt,auto_psv)) _U1TXInterrupt(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _AltU1TXInterrupt(void){
+#ifndef SYS_UART1_USED
+    Sys_Stop_UART1_HDI();
+    return;
+#endif
     Sys_Write_UART1_ISR();
     IFS0bits.U1TXIF = 0;
 }
@@ -173,6 +189,10 @@ void __attribute__((interrupt,auto_psv)) _AltU1TXInterrupt(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void){
+#ifndef SYS_UART2_USED
+    Sys_Stop_UART2_HDI();
+    return;
+#endif
     Sys_Read_UART2_ISR();
     IFS1bits.U2RXIF = 0;
 }
@@ -182,6 +202,10 @@ void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _AltU2RXInterrupt(void){
+#ifndef SYS_UART2_USED
+    Sys_Stop_UART2_HDI();
+    return;
+#endif
     Sys_Read_UART2_ISR();
     IFS1bits.U2RXIF = 0;
 }
@@ -192,6 +216,10 @@ void __attribute__((interrupt,auto_psv)) _AltU2RXInterrupt(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _U2TXInterrupt(void){
+#ifndef SYS_UART2_USED
+    Sys_Stop_UART2_HDI();
+    return;
+#endif
     Sys_Write_UART2_ISR();
     IFS1bits.U2TXIF = 0;
 }
@@ -201,6 +229,10 @@ void __attribute__((interrupt,auto_psv)) _U2TXInterrupt(void){
  * 
  */
 void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
+#ifndef SYS_UART2_USED
+    Sys_Stop_UART2_HDI();
+    return;
+#endif
     Sys_Write_UART2_ISR();
     IFS1bits.U2TXIF = 0;
 }
@@ -295,6 +327,7 @@ inline void Sys_Read_UART2_ISR(){
     Sys_End_AtomicSection();
 
 }
+
 /**
  *
  * This function is executed at occurrence of the UART1 writing interrupt.
@@ -328,4 +361,58 @@ inline void Sys_Write_UART2_ISR(){
             Sys_Free(element);
         }
     Sys_End_AtomicSection();
+}
+
+/**
+ *
+ * This function stops the receiving of packages via UART1.
+ * 
+ */
+inline void Sys_Stop_UART1_HDI(void){
+    IFS0bits.U1RXIF = 0;
+    IEC0bits.U1RXIE = 0;//Transmission is enabled
+    IFS0bits.U1TXIF = 0;
+    IEC0bits.U1TXIE = 0;//Transmission is enabled
+}
+
+/**
+ *
+ * This function stops the receiving of packages via UART2.
+ * 
+ */
+inline void Sys_Stop_UART2_HDI(void){
+    IFS1bits.U2RXIF = 0;
+    IEC1bits.U2RXIE = 0;//Transmission is enabled
+    IFS1bits.U2TXIF = 0;
+    IEC1bits.U2TXIE = 0;//Transmission is enabled
+}
+
+/**
+ *
+ * This function deactivates the UART1.
+ * 
+ */
+inline void Sys_Deactivate_UART1_HDI(void){
+    IFS0bits.U1RXIF = 0;
+    IEC0bits.U1RXIE = 0;//Transmission is enabled
+    IFS0bits.U1TXIF = 0;
+    IEC0bits.U1TXIE = 0;//Transmission is enabled
+
+    U1MODEbits.UARTEN = 0; //enable UART
+    U1STAbits.UTXEN = 0;
+}
+
+/**
+ *
+ * This function deactivates the UART2.
+ * 
+ */
+inline void Sys_Deactivate_UART2_HDI(void){
+    IFS1bits.U2RXIF = 0;
+    IEC1bits.U2RXIE = 0;//Transmission is enabled
+    IFS1bits.U2TXIF = 0;
+    IEC1bits.U2TXIE = 0;//Transmission is enabled
+    
+    U2MODEbits.UARTEN = 0; //enable UART
+    U2STAbits.UTXEN = 0;
 }
