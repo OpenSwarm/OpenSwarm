@@ -22,7 +22,7 @@ inline void Sys_Init_Clock(void){
     // TSYNC        = enables the timer to be synchronised with external source (rising edge)
     // TCS          = sets clock source to external (1) or internal (0)
     T1CON = 0; //default
-    T1CONbits.TCKPS = 1; //Prescaler 8
+    T1CONbits.TCKPS = 0x01; //Prescaler 8
     
 }
 
@@ -62,7 +62,7 @@ void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
     if(Sys_ClockTick != 0){
         Sys_ClockTick();
     }
-    
+    LED7 = ~LED7;
     IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
 }
 
@@ -75,6 +75,7 @@ void __attribute__((interrupt,no_auto_psv)) _AltT1Interrupt(void){
     if(Sys_ClockTick != 0){
         Sys_ClockTick();
     }    
+    LED7 = ~LED7;
     IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
 }
 

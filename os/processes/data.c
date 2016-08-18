@@ -403,7 +403,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     return;
 }
 
-inline uint Sys_GetCurrentIRQPNesting(void){
+sint Sys_GetCurrentIRQPNesting(void){
     if( sys_running_process == 0){
         return 0;
     } 
@@ -411,15 +411,15 @@ inline uint Sys_GetCurrentIRQPNesting(void){
     return sys_running_process->pcb.interruptPriorityNesting;
 }
 
-inline uint Sys_GetCurrentIRQPriority(void){
+sint Sys_GetCurrentIRQPriority(void){
     if( sys_running_process == 0){
-        return 0;
+        return -1;
     } 
     
     return sys_running_process->pcb.interruptPriority;
 }
 
-inline void Sys_SetCurrentIRQPNesting(uint n){
+void Sys_SetCurrentIRQPNesting(sint n){
     if( sys_running_process == 0){
         return;
     } 
@@ -427,7 +427,7 @@ inline void Sys_SetCurrentIRQPNesting(uint n){
     sys_running_process->pcb.interruptPriorityNesting = n;
 }
 
-inline void Sys_SetCurrentIRQPriority(uint irqp){
+void Sys_SetCurrentIRQPriority(sint irqp){
     if( sys_running_process == 0){
         return;
     } 
@@ -436,7 +436,7 @@ inline void Sys_SetCurrentIRQPriority(uint irqp){
 }
 
 
-inline void Sys_IncCurrentIRQPNesting(void){
+void Sys_IncCurrentIRQPNesting(void){
     if( sys_running_process == 0){
         return;
     } 
@@ -444,7 +444,7 @@ inline void Sys_IncCurrentIRQPNesting(void){
     sys_running_process->pcb.interruptPriorityNesting++;
 }
 
-inline void Sys_DecCurrentIRQPNesting(void){
+void Sys_DecCurrentIRQPNesting(void){
     if( sys_running_process == 0){
         return;
     } 

@@ -51,9 +51,11 @@ inline void Sys_Start_AtomicSection(){
  */
 inline void Sys_End_AtomicSection(){
     Sys_DecCurrentIRQPNesting();
-    if(Sys_GetCurrentIRQPNesting() <= 0){
-        if(Sys_GetCurrentIRQPNesting() == 0){
-            SR = SR | (Sys_GetCurrentIRQPriority() & 0x0007) << 5;
+    sint irqn = Sys_GetCurrentIRQPNesting();
+    
+    if(irqn <= 0){
+        if(irqn == 0){
+            SR = (SR | ((Sys_GetCurrentIRQPriority() << 5) & 0x00E0));
         }
         Sys_SetCurrentIRQPNesting(0);
     }

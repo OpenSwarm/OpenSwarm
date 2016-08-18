@@ -62,8 +62,8 @@ typedef struct sys_process_control_block_s{
     uint framePointer;                        /*!< Frame Pointer Register*/
     uint stackPointerLimit;                   /*!< Stack Pointer Limit Register*/
     
-    uint interruptPriority;                   /*!< Stack Pointer Limit Register*/
-    uint interruptPriorityNesting;                   /*!< Stack Pointer Limit Register*/
+    sint interruptPriority;                   /*!< process-specific Interrupt Priority*/
+    sint interruptPriorityNesting;            /*!< process-specific interrupt nesting level (= How often was #Sys_Start_AtomicSection - #Sys_Stop_AtomicSection called)*/
 
     sys_scheduler_info sheduler_info;           /*!< scheduler-specific datastructure */
     sys_process_event_handler *event_register;  /*!< Lists of all events the process is subscribed to */
@@ -115,13 +115,13 @@ inline void Sys_Clear_EventData(sys_event_data **data);
 inline sys_process_event_handler *Sys_Find_EventHandler(sys_process_event_handler *process, uint16 eventID);
 inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint16 eventID, pEventHandlerFunction func, sys_process_event_handler **list);
 
-inline uint Sys_GetCurrentIRQPNesting(void);
-inline uint Sys_GetCurrentIRQPriority(void);
-inline void Sys_SetCurrentIRQPNesting(uint n);
-inline void Sys_SetCurrentIRQPriority(uint irqp);
+sint Sys_GetCurrentIRQPNesting(void);
+sint Sys_GetCurrentIRQPriority(void);
+void Sys_SetCurrentIRQPNesting(sint n);
+void Sys_SetCurrentIRQPriority(sint irqp);
 
-inline void Sys_IncCurrentIRQPNesting(void);
-inline void Sys_DecCurrentIRQPNesting(void);
+void Sys_IncCurrentIRQPNesting(void);
+void Sys_DecCurrentIRQPNesting(void);
 
 #ifdef	__cplusplus
 }

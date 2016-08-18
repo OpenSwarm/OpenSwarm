@@ -87,7 +87,6 @@ void Sys_Init_Kernel(){
 
     //init I/O Devices
     Sys_Init_IOManagement();
-    Sys_Init_SystemClock();
     
 #ifdef EPUCK_USED
 #ifdef SYS_MOTOR_USED
@@ -110,6 +109,9 @@ void Sys_Init_Kernel(){
 #endif
 #ifdef SYS_PROXIMITY_USED
     Sys_Init_Proximity();
+#endif
+#ifdef SYS_CLOCK_USED
+    Sys_Init_SystemClock();
 #endif
 #endif
 }
@@ -144,6 +146,9 @@ void Sys_Start_Kernel(void){
     Sys_Start_ADC();
 #endif
 #ifdef SYS_PROXIMITY_USED
+#endif
+#ifdef SYS_CLOCK_USED
+    Sys_Start_SystemClock();
 #endif
 #endif
 }
