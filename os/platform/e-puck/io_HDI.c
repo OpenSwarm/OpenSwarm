@@ -44,7 +44,7 @@ inline void Sys_Init_IOTimer_HDI(){
     // TSYNC        = enables the timer to be synchronised with external source (rising edge)
     // TCS          = sets clock source to external (1) or internal (0)
     T3CON = 0; //timer is turned off but set
-    T3CONbits.TCKPS = 0; //Prescaler 8
+    T3CONbits.TCKPS = 0; //Prescaler 1
 }
 
 /**

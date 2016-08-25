@@ -11,7 +11,7 @@ inline void Sys_todo_Clock();
 
 inline void Sys_Init_Clock(void){
     
-    TMR1 = 0; //sets countervalue to 0
+    TMR1 = CONTROLTIME*MILLISEC/16; //sets countervalue to 50%
     PR1 = CONTROLTIME*MILLISEC/8;
 
     // T1CON

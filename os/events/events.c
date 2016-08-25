@@ -241,6 +241,19 @@ void Sys_Unsubscribe_Handler(uint eventID, pEventHandlerFunction handler, void *
  * @return true if it was successful.
  */
 bool Sys_Send_Event(uint eventID, void *data, uint data_size){
+    return Sys_Send_CriticalEvent(eventID, data, data_size);
+}
+
+/**
+ *
+ * This function sends an event to all subscribers and buffers the data before executing them with Sys_Execute_BufferedEvents.
+ *
+ * @param[in] 	eventID    ID of the event
+ * @param[in] 	data       pointer to the data that want to be sent as an event
+ * @param[in] 	data_size  size of the data in bytes
+ * @return true if it was successful.
+ */
+bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
     Sys_Start_AtomicSection();//doesn't consume execution time
     Sys_Stop_SystemTimer();
     

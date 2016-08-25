@@ -4,8 +4,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os-event/os/system.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/io/e-puck/proximity.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/library/camera/fast_2_timer/e_po6030k_registers.c</file>
             <file>file:/home/strenkwalder/code/os-event/main.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/interrupts.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/definitions.h</file>
+            <file>file:/home/strenkwalder/code/os-event/os/processes/data.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/system.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/traps.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/events/events.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/system.h</file>
+            <file>file:/home/strenkwalder/code/os-event/os/events/events.h</file>
+            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/adc.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/processes/system_Timer.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/memory.c</file>
+            <file>file:/home/strenkwalder/code/os-event/os/interrupts.h</file>
+            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/adc.h</file>
         </group>
     </open-files>
 </project-private>

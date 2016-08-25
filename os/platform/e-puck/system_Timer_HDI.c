@@ -36,7 +36,7 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     sys_process_scheduler = scheduler;
     
     TMR2 = 0; //sets countervalue to 0
-    PR2 = 10*MILLISEC/256; // 16MIPS for 50ms
+    PR2 = 20*MILLISEC/256; // 16MIPS for 50ms
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
@@ -48,6 +48,8 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
     // TCS          = sets clock source to external (1) or internal (0)
     T2CON = 0; //timer is turned off but set
     T2CONbits.TCKPS = 3; //Prescaler 256
+    
+    IPC1bits.T2IP = SYS_IRQP_SYSTEM_TIMER; //set Timer2 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled
 }
 
 
@@ -57,11 +59,7 @@ void Sys_Init_SystemTimer_HDI(pFunction scheduler){
  *
  */
 void Sys_Start_SystemTimer_HDI(){
-
-    IPC1bits.T2IP = SYS_IRQP_SYSTEM_TIMER; //set Timer2 interrupt priority level to 5 \in [0,7] where 7 is the highest priority and 0 is disabled
-
     Sys_Continue_SystemTimer_HDI();
-    T2CONbits.TON = 1;//enable timer -> TON = 1
 }
 
 /**

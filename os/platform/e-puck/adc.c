@@ -31,6 +31,8 @@ uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets 
  */
 inline void Sys_Init_ADC(void){
     
+    Sys_Reset_ADCProcessors();
+    
     IEC0bits.ADIE = 0;
     IFS0bits.ADIF = 0; //ADC interrupt flag
     
@@ -54,9 +56,9 @@ inline void Sys_Init_ADC(void){
     ADCON2bits.BUFM     = 0;    // Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.ALTS     = 0;    // Always use MUX A input multiplexer settings
     
-    ADCON3bits.SAMC     = 31; //: Auto-Sample Time bits
+    ADCON3bits.SAMC     = 1; //: Auto-Sample Time bits - bits between sampling and conversion//31
     ADCON3bits.ADRC     = 1;    //internal clock
-    ADCON3bits.ADCS     = 63; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1))
+    ADCON3bits.ADCS     = 0; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
     
     ADCHSbits.CH0NA     = 0;    //Select VREF- for CH0- input
             
@@ -95,10 +97,10 @@ inline void Sys_Init_ADC(void){
     ADCSSLbits.CSSL14 = 1;// Proximity 6
     ADCSSLbits.CSSL15 = 1;// Proximity 7
     
-    PULSE_IR0 = 1;
-    PULSE_IR1 = 1;
-    PULSE_IR2 = 1;
-    PULSE_IR3 = 1;
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 0;
 
 }
 

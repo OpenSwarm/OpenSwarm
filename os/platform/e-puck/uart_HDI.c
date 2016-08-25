@@ -16,6 +16,7 @@
 
 
 #include "uart_HDI.h"
+#include "../../system.h"
 
 #include <p30F6014A.h>
 #include <stdlib.h>

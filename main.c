@@ -75,54 +75,116 @@ bool prox_sensors(uint16 eventID, sys_event_data *data, void *user_data);
 bool led_toggler(uint16 eventID, sys_event_data *data, void *user_data);
 bool oneSecCondition(uint16 eventID, sys_event_data *data, void *user_data);
 
+
+bool remote_controlHandler(uint16 eventID, sys_event_data *data, void *user_data);
+bool selectorHandler(uint16 eventID, sys_event_data *data, void *udata);
+bool proximityHandler(uint16 eventID, sys_event_data *data, void *udata);
+
 void log_me();
 void thread();
+void bluetooth_reader(uint8 data);
 
 #define MAX_SPEED 128
-#define REFRESH_RATE 1000 //ms
-#define CHANGE_BEHAVIOUR 5000 //ms
+#define REFRESH_RATE 500 //ms
 
 int16_t main(void)
 {    
     Sys_Init_Kernel(); 
+     
+    LED0 = 1;
+    LED1 = 0;
+    LED2 = 0;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
     
-    Sys_Subscribe_to_Event(SYS_EVENT_10ms_CLOCK, led_toggler, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_10ms_CLOCK, led_toggler, oneSecCondition, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, remote_controlHandler, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_SELECTOR_CHANGE, selectorHandler, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, proximityHandler, 0, 0 );
     
-    Sys_Start_Process(thread);
+    //Sys_Start_Process(thread);
+    Sys_SetReadingFunction_UART1(bluetooth_reader);
+//  void Sys_Writeto_UART1(void *data, uint length);
     
     Sys_Start_Kernel();
     
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
     
+    char string[50] = {0};
+    
     while(true){
        
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             //random_change++;
-            time += REFRESH_RATE;
+            LED4 = ~LED4;
+            string[0] = 0;
+            int len = sprintf(string, "%4u;%4u;%4u;%4u;%4u;%4u;%4u;%4u\r\n", \
+                    Sys_Get_Raw(0),\
+                    Sys_Get_Raw(1),\
+                    Sys_Get_Raw(2),\
+                    Sys_Get_Raw(3),\
+                    Sys_Get_Raw(4),\
+                    Sys_Get_Raw(5),\
+                    Sys_Get_Raw(6),\
+                    Sys_Get_Raw(7));
             
-            LED0 = ~LED0;
+            Sys_Writeto_UART1(string, len);
+            time += REFRESH_RATE;
         }
     }
 }
 
+void bluetooth_reader(uint8 data){
+    Sys_Writeto_UART1(&data, 1);
+}
+
 bool led_toggler(uint16 eventID, sys_event_data *data, void *udata){
-    static uint32 counter = 0;
+    //LED6 = ~LED6;
     
-    uint32 time_now = *((uint32 *) data->value);
-    if( counter < time_now){
-        counter = time_now + 1000;
-        LED7 = ~LED7;
-    } 
+    return true;
+}
+
+bool remote_controlHandler(uint16 eventID, sys_event_data *data, void *udata){
+    //LED4 = ~LED4;
+    return true;
+}
+
+
+bool selectorHandler(uint16 eventID, sys_event_data *data, void *udata){
+    //LED3 = ~LED3;
+    return true;
+}
+
+uint isClose(uint value){
+    if(value < 50){
+        return 1;
+    }
+  
+    return 0;
+}
+
+bool proximityHandler(uint16 eventID, sys_event_data *data, void *udata){
     
+        
     return true;
 }
 
 bool oneSecCondition(uint16 eventID, sys_event_data *data, void *user_data){
     static int counter = 0;
     
-    if(++counter >= 100){
+    if(++counter >= 50){
         counter = 0;
         return true;
     }
@@ -137,9 +199,9 @@ void thread(){
     
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
-            time += REFRESH_RATE;
+            time += REFRESH_RATE*2;
             
-            LED3 = ~LED3;
+            //LED2 = ~LED2;
         }
     }
 }

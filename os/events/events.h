@@ -114,8 +114,9 @@ extern "C" {
     typedef bool (*pConditionFunction)(uint eventID, sys_event_data *data, void* user_data);
 
 
-    bool Sys_Send_Event(uint eventID, void *data, uint data_size);
     inline bool Sys_Send_IntEvent(uint eventID, uint data);
+    bool Sys_Send_Event(uint eventID, void *data, uint data_size);
+    bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size);
     bool Sys_Send_CriticalEvent(uint eventID, void *data, uint data_size);
     
     bool Sys_Register_Event(uint eventID);

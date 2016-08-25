@@ -41,6 +41,7 @@ void Sys_Prox6_preprocessor(uint);
 void Sys_Prox7_preprocessor(uint);
 
 uint sys_distances[8] = {0}; /*!< last transformed sensor reading (stored in mm)*/
+uint sys_raw[8] = {0}; /*!< last transformed sensor reading (stored in mm)*/
 
 /**
  *
@@ -61,6 +62,15 @@ void Sys_Init_Proximity(void){
     Sys_Register_Event(SYS_EVENT_IO_PROX_7);
 
     Sys_Subscribe_ADCChannelProcessor(Prx0, Sys_Prox0_preprocessor);
+    /*   
+    Sys_Subscribe_ADCChannelProcessor(Prx1, Sys_Prox0_preprocessor);
+    Sys_Subscribe_ADCChannelProcessor(Prx2, Sys_Prox0_preprocessor);
+    Sys_Subscribe_ADCChannelProcessor(Prx3, Sys_Prox0_preprocessor);
+    Sys_Subscribe_ADCChannelProcessor(Prx4, Sys_Prox7_preprocessor);
+    Sys_Subscribe_ADCChannelProcessor(Prx5, Sys_Prox7_preprocessor);
+    Sys_Subscribe_ADCChannelProcessor(Prx6, Sys_Prox7_preprocessor);
+    Sys_Subscribe_ADCChannelProcessor(Prx7, Sys_Prox7_preprocessor);
+    */
     Sys_Subscribe_ADCChannelProcessor(Prx1, Sys_Prox1_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx2, Sys_Prox2_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx3, Sys_Prox3_preprocessor);
@@ -68,7 +78,6 @@ void Sys_Init_Proximity(void){
     Sys_Subscribe_ADCChannelProcessor(Prx5, Sys_Prox5_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx6, Sys_Prox6_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx7, Sys_Prox7_preprocessor);    
-       
 }
 
 /**
@@ -115,6 +124,9 @@ void Sys_Deactivate_Proximity(void){
  * 
  */
 uint Sys_Prox_trasform(uint i, uint value){
+    if(i > 8)
+        return 0;
+    
     if(sys_calibration_value[i] < value){//if this value is the maximum value that has been received
         sys_calibration_value[i] = value;
     }
@@ -149,12 +161,13 @@ uint Sys_Prox_trasform(uint i, uint value){
 void Sys_Prox0_preprocessor(uint value){
     static int lowpass = 0;
         
+    sys_raw[0] = value;
     uint dist = Sys_Prox_trasform(0, value);
     
     sys_distances[0] = dist;
     if(dist < 0xFFFF || lowpass == 25){
         lowpass = 0;
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_0, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_0, &dist, 2);
     }else{
         lowpass++;
     }
@@ -170,11 +183,12 @@ void Sys_Prox0_preprocessor(uint value){
 void Sys_Prox1_preprocessor(uint value){
     static int lowpass = 0;
     
+    sys_raw[1] = value;    
     uint dist = Sys_Prox_trasform(1, value);
     
     sys_distances[1] = dist;
     if(dist < 0xFFFF || lowpass == 25){
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_1, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_1, &dist, 2);
         lowpass = 0;
     }else{
         lowpass++;
@@ -190,11 +204,12 @@ void Sys_Prox1_preprocessor(uint value){
  */
 void Sys_Prox2_preprocessor(uint value){
     static int lowpass = 0;
+    sys_raw[2] = value;
     uint dist = Sys_Prox_trasform(2, value);
     
     sys_distances[2] = dist;
     if(dist < 0xFFFF || lowpass == 25){
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_2, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_2, &dist, 2);
         lowpass = 0;
     }else{
         lowpass++;
@@ -210,12 +225,12 @@ void Sys_Prox2_preprocessor(uint value){
  */
 void Sys_Prox3_preprocessor(uint value){
     static int lowpass = 0;
-    
+    sys_raw[3] = value;
     uint dist = Sys_Prox_trasform(3, value);
     
     sys_distances[3] = dist;
     if(dist < 0xFFFF || lowpass == 25){
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_3, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_3, &dist, 2);
         lowpass = 0;
     }else{
         lowpass++;
@@ -231,12 +246,12 @@ void Sys_Prox3_preprocessor(uint value){
  */
 void Sys_Prox4_preprocessor(uint value){
     static int lowpass = 0;
-    
+    sys_raw[4] = value;
     uint dist = Sys_Prox_trasform(4, value);
     
     sys_distances[4] = dist;
     if(dist < 0xFFFF || lowpass == 25){
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_4, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_4, &dist, 2);
         lowpass = 0;
     }else{
         lowpass++;
@@ -252,12 +267,12 @@ void Sys_Prox4_preprocessor(uint value){
  */
 void Sys_Prox5_preprocessor(uint value){
     static int lowpass = 0;
-    
+    sys_raw[5] = value;
     uint dist = Sys_Prox_trasform(5, value);
     
     sys_distances[5] = dist;
     if(dist < 0xFFFF || lowpass == 25){
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_5, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_5, &dist, 2);
         lowpass = 0;
     }else{
         lowpass++;
@@ -274,12 +289,12 @@ void Sys_Prox5_preprocessor(uint value){
  */
 void Sys_Prox6_preprocessor(uint value){
     static int lowpass = 0;
-    
+    sys_raw[6] = value;
     uint dist = Sys_Prox_trasform(6, value);
     
     sys_distances[6] = dist;
     if(dist < 0xFFFF || lowpass == 25){
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_6, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_6, &dist, 2);
         lowpass = 0;
     }else{
         lowpass++;
@@ -296,12 +311,12 @@ void Sys_Prox6_preprocessor(uint value){
  */
 void Sys_Prox7_preprocessor(uint value){
     static int lowpass = 0;
-    
+    sys_raw[7] = value;
     uint dist = Sys_Prox_trasform(7, value);
     
     sys_distances[7] = dist;
     if(dist < 0xFFFF || lowpass == 25){
-        Sys_Send_IntEvent(SYS_EVENT_IO_PROX_7, dist);
+        Sys_Send_Event(SYS_EVENT_IO_PROX_7, &dist, 2);
         lowpass = 0;
     }else{
         lowpass++;
@@ -329,4 +344,16 @@ uint Sys_Get_Prox(uint index){
  */
 uint Sys_Get_MaxProx(uint index){
     return sys_calibration_value[index];
+}
+
+
+/**
+ *
+ * This function returns the latest calculated distance value for a particular sensor.
+ * 
+ * @param[in]   index the index which sensor value is requested (Sensor 0 => index=0)
+ * @return      returns the latest calculated distance value for sensor index
+ */
+uint Sys_Get_Raw(uint index){
+    return sys_raw[index];
 }

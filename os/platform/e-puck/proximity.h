@@ -56,6 +56,8 @@ void Sys_Deactivate_Proximity(void);
 uint Sys_Get_Prox(uint index);
 uint Sys_Get_MaxProx(uint index);
 
+uint Sys_Get_Raw(uint index);
+
 #ifdef	__cplusplus
 }
 #endif

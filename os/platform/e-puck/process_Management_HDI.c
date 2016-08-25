@@ -203,6 +203,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
         :
         );
     
+    /*
     __asm__ __volatile__ (
             "MOV %0, [%1++]\n\t" //push frame pointer to the stack
             "MOV %1, %0\n\t" //set the framepointer to the TOS
@@ -210,6 +211,27 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "NOTEMPTY: MOV [W14++],[%1++]\n\t"//copy all values for the current frame into the stack
             "CP W14,W15\n\t"
             "BRA LT, NOTEMPTY\n\t"
+            "MOV %0, W14\n\t" //set new stackpointers
+            "MOV %1, W15\n\t"
+            "MOV %2, SPLIM\n"
+        : 
+        : "r" (new_process->pcb.framePointer), "r" (new_process->pcb.stackPointer), "r" (new_process->pcb.stackPointerLimit) 
+        : 
+    );*/
+    
+    __asm__ __volatile__ (
+            "MOV %0, [%1++]\n\t" //push frame pointer to the stack
+            "MOV %1, %0\n\t" //set the framepointer to the TOS
+  "NOTEMPTY: MOV [W14++],[%1++]\n\t"//copy all values for the current frame into the stack
+            "CP W14,W15\n\t"
+            "BRA LT, NOTEMPTY\n\t"
+            "NOP\n\t"
+            "PUSH W10\n\t"
+            "MOV SPLIM, W10\n"
+            "CP W10,%2\n\t"
+            "BRA GEU, SPLAST\n\t"
+            "MOV %2, SPLIM\n\t"
+    "SPLAST: POP W10\n\t"
             "MOV %0, W14\n\t" //set new stackpointers
             "MOV %1, W15\n\t"
             "MOV %2, SPLIM\n"

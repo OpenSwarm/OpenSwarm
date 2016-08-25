@@ -123,13 +123,11 @@
         </logicalFolder>
         <logicalFolder name="f1" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
-            <itemPath>os/platform/e-puck/system_Timer_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/camera_processing.c</itemPath>
             <itemPath>os/platform/e-puck/traps.c</itemPath>
             <itemPath>os/platform/e-puck/i2c_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/io_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/motors_HDI.c</itemPath>
-            <itemPath>os/platform/e-puck/process_Management_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/remoteControl_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/clock_timer_HDI.c</itemPath>
@@ -140,6 +138,8 @@
           <itemPath>os/processes/process_Management.c</itemPath>
           <itemPath>os/processes/scheduler.c</itemPath>
           <itemPath>os/processes/system_Timer.c</itemPath>
+          <itemPath>os/platform/e-puck/process_Management_HDI.c</itemPath>
+          <itemPath>os/platform/e-puck/system_Timer_HDI.c</itemPath>
         </logicalFolder>
         <itemPath>os/interrupts.c</itemPath>
         <itemPath>os/memory.c</itemPath>
@@ -486,7 +486,7 @@
         <property key="tracecontrol.timestamp" value="0"/>
         <property key="tracecontrol.tracebufmax" value="546000"/>
         <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
-        <property key="tracecontrol.traceresetonrun" value="false"/>
+        <property key="tracecontrol.traceresetonrun" value="true"/>
         <property key="uart10io.output" value="window"/>
         <property key="uart10io.outputfile" value=""/>
         <property key="uart10io.uartioenabled" value="false"/>
@@ -523,32 +523,31 @@
                   value="report"/>
         <property key="warningmessagebreakoptions.W0003_CORE_SW_RESET" value="report"/>
         <property key="warningmessagebreakoptions.W0004_CORE_WDT_RESET" value="report"/>
-        <property key="warningmessagebreakoptions.W0005_CORE_IOPUW_RESET"
-                  value="report"/>
+        <property key="warningmessagebreakoptions.W0005_CORE_IOPUW_RESET" value="break"/>
         <property key="warningmessagebreakoptions.W0006_CORE_CODE_GUARD_PFC_RESET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0007_CORE_DO_LOOP_STACK_UNDERFLOW"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0008_CORE_DO_LOOP_STACK_OVERFLOW"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0009_CORE_NESTED_DO_LOOP_RANGE"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0010_CORE_SIM32_ODD_WORDACCESS"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0011_CORE_SIM32_UNIMPLEMENTED_RAMACCESS"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0012_CORE_STACK_OVERFLOW_RESET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0013_CORE_STACK_UNDERFLOW_RESET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0014_CORE_INVALID_OPCODE"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0015_CORE_INVALID_ALT_WREG_SET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0016_BSLIM_INSUFFICIENT_BOOT_SEGMENT"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0017_BSLIM_LIMITS_EXCEEDS_PROG_MEMORY"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0051_INSTRUCTION_DIV_NOT_ENOUGH_REPEAT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0052_INSTRUCTION_DIV_TOO_MANY_REPEAT"
@@ -595,7 +594,7 @@
         <property key="warningmessagebreakoptions.W0215_ADC_POSITIVE_INPUT_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0216_ADC_NEGATIVE_INPUT_DIGITAL"
-                  value="report"/>
+                  value="ignore"/>
         <property key="warningmessagebreakoptions.W0217_ADC_NEGATIVE_INPUT_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0218_ADC_REFERENCE_HIGH_DIGITAL"
@@ -603,7 +602,7 @@
         <property key="warningmessagebreakoptions.W0219_ADC_REFERENCE_HIGH_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0220_ADC_REFERENCE_LOW_DIGITAL"
-                  value="report"/>
+                  value="ignore"/>
         <property key="warningmessagebreakoptions.W0221_ADC_REFERENCE_LOW_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0222_ADC_OVERFLOW" value="report"/>
