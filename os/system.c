@@ -32,7 +32,7 @@
 #include "processes/scheduler.h"    /* the implementation of the scheduler */
 #include "processes/process_Management.h"
 
-#include "platform/e-puck/library/motor_led/e_init_port.h"
+#include "../extern/platform/e-puck/library/motor_led/e_init_port.h"
 
 
 #include "io/io.h"
@@ -42,25 +42,25 @@
 #include "io/io_clock.h"
 #endif
 #ifdef SYS_MOTOR_USED
-#include "io/e-puck/motors.h"
+#include "platform/e-puck/motors.h"
 #endif
 #ifdef SYS_UART1_USED
-#include "io/e-puck/uart.h"
+#include "platform/e-puck/uart.h"
 #endif
 #ifdef SYS_REMOTECONTROL_USED
-#include "io/e-puck/remoteControl.h"
+#include "platform/e-puck/remoteControl.h"
 #endif
 #ifdef SYS_CAMERA_USED
-#include "io/e-puck/camera.h"
+#include "platform/e-puck/camera.h"
 #endif
 #ifdef SYS_SELECTOR_USED
-#include "io/e-puck/selector.h"
+#include "platform/e-puck/selector.h"
 #endif
 #ifdef SYS_ADC_USED
-#include "io/e-puck/adc.h"
+#include "platform/e-puck/adc.h"
 #endif
 #ifdef SYS_PROXIMITY_USED
-#include "io/e-puck/proximity.h"
+#include "platform/e-puck/proximity.h"
 #endif
 #endif
 

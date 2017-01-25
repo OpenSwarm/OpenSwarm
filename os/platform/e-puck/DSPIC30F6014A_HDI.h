@@ -53,7 +53,7 @@
 #ifndef HDI_DSPIC30F6014A_H
 #define	HDI_DSPIC30F6014A_H
 
-#include "library/motor_led/e_epuck_ports.h"
+#include "../../../extern/platform/e-puck/library/motor_led/e_epuck_ports.h"
 
 #ifdef	__cplusplus
 extern "C" {

@@ -100,6 +100,8 @@ int16_t main(void)
     LED6 = 0;
     LED7 = 0;
     
+    Sys_Start_Process(thread);
+    
     Sys_Subscribe_to_Event(SYS_EVENT_10ms_CLOCK, led_toggler, oneSecCondition, 0);
     Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, remote_controlHandler, 0, 0);
     Sys_Subscribe_to_Event(SYS_EVENT_IO_SELECTOR_CHANGE, selectorHandler, 0, 0);
@@ -121,27 +123,13 @@ int16_t main(void)
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
     
-    char string[50] = {0};
-    
     while(true){
        
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             //random_change++;
-            LED4 = ~LED4;
-            string[0] = 0;
-            int len = sprintf(string, "%4u;%4u;%4u;%4u;%4u;%4u;%4u;%4u\r\n", \
-                    Sys_Get_Raw(0),\
-                    Sys_Get_Raw(1),\
-                    Sys_Get_Raw(2),\
-                    Sys_Get_Raw(3),\
-                    Sys_Get_Raw(4),\
-                    Sys_Get_Raw(5),\
-                    Sys_Get_Raw(6),\
-                    Sys_Get_Raw(7));
-            
-            Sys_Writeto_UART1(string, len);
-            time += REFRESH_RATE;
+            LED0 = ~LED0;
+            time += (uint32) 1000;
         }
     }
 }
@@ -163,7 +151,10 @@ bool remote_controlHandler(uint16 eventID, sys_event_data *data, void *udata){
 
 
 bool selectorHandler(uint16 eventID, sys_event_data *data, void *udata){
-    //LED3 = ~LED3;
+    LED3 = ~LED3;
+    int selector = *((int *) data->value);
+    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, selector*5);
+    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, selector*(-5));
     return true;
 }
 
@@ -197,12 +188,14 @@ void thread(){
     
     while(true){
     
+        LED1 = 1;
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             time += REFRESH_RATE*2;
             
-            //LED2 = ~LED2;
+            LED2 = ~LED2;
         }
     }
+        LED4 = 1;
 }
 

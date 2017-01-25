@@ -8,21 +8,21 @@
         <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
             <logicalFolder name="f4" displayName="acc_gyro" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/acc_gyro/e_lsm330.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/acc_gyro/e_lsm330.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="camera" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po3030k.h</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po6030k.h</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po8030d.h</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_poxxxx.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po3030k.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po6030k.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po8030d.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_poxxxx.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="I2C" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_master_module.h</itemPath>
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_protocol.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_master_module.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_protocol.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="motor_led" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/motor_led/e_init_port.h</itemPath>
               <itemPath>extern/platform/e-puck/library/motor_led/e_epuck_ports.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/motor_led/e_init_port.h</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -40,9 +40,9 @@
           <itemPath>os/platform/e-puck/remoteControl.h</itemPath>
           <itemPath>os/platform/e-puck/motors.h</itemPath>
           <itemPath>os/io/io_clock.h</itemPath>
-          <itemPath>os/io/e-puck/selector.h</itemPath>
           <itemPath>os/platform/e-puck/adc.h</itemPath>
-          <itemPath>os/io/e-puck/proximity.h</itemPath>
+          <itemPath>os/platform/e-puck/proximity.h</itemPath>
+          <itemPath>os/platform/e-puck/selector.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -81,25 +81,25 @@
         <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
             <logicalFolder name="f4" displayName="acc_gyro" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/acc_gyro/e_lsm330.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/acc_gyro/e_lsm330.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="camera" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_calc_po3030k.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_calc_po6030k.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_calc_po8030d.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_common.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_interrupt.s</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po3030k_registers.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po6030k_registers.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po8030d_registers.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_timers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po3030k.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po6030k.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po8030d.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_common.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_interrupt.s</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po3030k_registers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po6030k_registers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po8030d_registers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_timers.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="I2C" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_protocol.c</itemPath>
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_master_module.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_master_module.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_protocol.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="motor_led" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/motor_led/e_init_port.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/motor_led/e_init_port.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -110,16 +110,16 @@
         </logicalFolder>
         <logicalFolder name="f4" displayName="io" projectFiles="true">
           <itemPath>os/io/io.c</itemPath>
+          <itemPath>os/io/io_clock.c</itemPath>
+          <itemPath>os/platform/e-puck/adc.c</itemPath>
           <itemPath>os/platform/e-puck/camera.c</itemPath>
           <itemPath>os/platform/e-puck/i2c.c</itemPath>
           <itemPath>os/platform/e-puck/i2c_data.c</itemPath>
           <itemPath>os/platform/e-puck/motors.c</itemPath>
+          <itemPath>os/platform/e-puck/proximity.c</itemPath>
           <itemPath>os/platform/e-puck/remoteControl.c</itemPath>
+          <itemPath>os/platform/e-puck/selector.c</itemPath>
           <itemPath>os/platform/e-puck/uart.c</itemPath>
-          <itemPath>os/io/io_clock.c</itemPath>
-          <itemPath>os/io/e-puck/selector.c</itemPath>
-          <itemPath>os/platform/e-puck/adc.c</itemPath>
-          <itemPath>os/io/e-puck/proximity.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">

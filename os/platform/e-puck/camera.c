@@ -29,8 +29,9 @@
 
 #ifdef EPUCK_USED 
 #include "camera_processing.h"
-#include "library/camera/fast_2_timer/e_poxxxx.h"
-#include "library/camera/fast_2_timer/e_po6030k.h"
+//#include "../../../extern/platform/e-puck/library/"
+#include "../../../extern/platform/e-puck/library/camera/fast_2_timer/e_poxxxx.h"
+#include "../../../extern/platform/e-puck/library/camera/fast_2_timer/e_po6030k.h"
 #endif
 
 #define FRAME_WIDTH     10      /*!< Width of the subframe of the image */

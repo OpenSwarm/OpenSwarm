@@ -16,7 +16,7 @@
 #include "../events/events.h"
 
 #ifdef EPUCK_USED
-    #include "e-puck/clock_timer_HDI.h"
+    #include "../platform/e-puck/clock_timer_HDI.h"
 #endif
 
 static uint32 sys_clock = 0; /*!< counter which is system clock */

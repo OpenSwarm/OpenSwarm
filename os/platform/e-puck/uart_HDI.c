@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "library/motor_led/e_epuck_ports.h"
+#include "../../../extern/platform/e-puck/library/motor_led/e_epuck_ports.h"
 #include "../../interrupts.h"
 #include "../../memory.h"
 

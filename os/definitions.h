@@ -31,7 +31,7 @@ extern "C" {
 
     #include <p30F6014A.h>   
 
-    #include "platform/e-puck/library/motor_led/e_epuck_ports.h"
+    #include "../extern/platform/e-puck/library/motor_led/e_epuck_ports.h"
     #include "platform/e-puck/DSPIC30F6014A_HDI.h"
 
     #define UART1_RX _RF2
