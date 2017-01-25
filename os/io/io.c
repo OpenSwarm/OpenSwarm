@@ -16,7 +16,7 @@
 #include "../definitions.h"
 
 #ifdef EPUCK_USED 
-#include "e-puck/io_HDI.h"
+#include "../platform/e-puck/io_HDI.h"
 #endif
 
 #include "../interrupts.h"

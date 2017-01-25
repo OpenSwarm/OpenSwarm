@@ -15,6 +15,7 @@
 
 #include "../platform/e-puck/DSPIC30F6014A_HDI.h"
 #include "../../os/interrupts.h"
+#include "../../os/events/events.h"
 
 inline void Sys_todo_SystemTimer(); //this is only an inline functions to process the same in T1 interrupt and ALT-T1 interrupt
 
@@ -81,7 +82,7 @@ inline void Sys_todo_SystemTimer(){
         sys_process_scheduler();
     }
 
-    Sys_Execute_All_EventHandler();
+    Sys_Execute_BufferedEvents();
 
     Sys_Reset_SystemTimer_HDI(); //to guarantee the same execution time
     Sys_Continue_SystemTimer_HDI();

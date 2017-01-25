@@ -43,17 +43,11 @@ inline void Sys_Init_RemoteControl_HDI(void){
     IPC0bits.INT0IP = SYS_IRQP_REMOTECONTROL;
     INTCON2bits.INT0EP = 1;     //use falling edge
     IFS0bits.INT0IF = 0;        //clear to IRQ flag
-    
-    if(!Sys_Register_IOHandler(Sys_Receive_RemoteControl_Msg)){// no error handling used
-        return;
-    }
-    
-    Sys_Register_Event(SYS_EVENT_IO_REMOECONTROL);
 }
 
 /**
  *
- * This function start the handler of the remote control to receive signals from the remote control.
+ * This function starts the handler of the remote control to receive signals from the remote control.
  *
  */
 inline void Sys_Start_RemoteControl_HDI(void){
@@ -63,15 +57,41 @@ inline void Sys_Start_RemoteControl_HDI(void){
 
 /**
  *
+ * This function stops the handler of the remote control to receive signals from the remote control.
+ *
+ */
+inline void Sys_Stop_RemoteControl_HDI(void){
+    IFS0bits.INT0IF = 0;        ///clear to IRQ flag
+    IEC0bits.INT0IE = 0;        //enable external INT0  
+}
+
+/**
+ *
+ * This function deactivates the handler of the remote control to receive signals from the remote control.
+ *
+ */
+inline void Sys_Deactivate_RemoteControl_HDI(void){
+    Sys_Stop_RemoteControl_HDI();
+}
+/**
+ *
  * This function is executed at the arrival of a new remote control message.
  *
  */
 void __attribute__((__interrupt__, auto_psv))  _INT0Interrupt(void){
+    
+#ifndef SYS_REMOTECONTROL_USED
+    Sys_Stop_RemoteControl();
+    
+    message_arriving = false;
+    return;
+#endif
     //When a message arrives deactivate interrupt -> is activated at the end of the message
     Sys_Inc_InterruptCounter();
     IEC0bits.INT0IE = 0;
-        IFS0bits.INT0IF = 0;
+    IFS0bits.INT0IF = 0;
     message_arriving = true;
-        waiting_cycles = RC_WAIT_INITIALLY;
+    waiting_cycles = RC_WAIT_INITIALLY;
+    
     return;
 }

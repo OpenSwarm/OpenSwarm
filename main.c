@@ -41,61 +41,35 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
-void thread();
+int sinVectorTimes(vector *, int);
+int cosVectorTimes(vector *, int);
+int sign(int);
 
-#define REFRESH_RATE 1000 //ms
+void getProximityValues();
+void calculateProxPointer();
+void initProxPointer();
+void calculateMotorSpeed();
+bool prox_sensors(uint16 eventID, sys_event_data *data, void *user_data);
+bool led_toggler(uint16 eventID, sys_event_data *data, void *user_data);
+bool oneSecCondition(uint16 eventID, sys_event_data *data, void *user_data);
+
+
+bool remote_controlHandler(uint16 eventID, sys_event_data *data, void *user_data);
+bool selectorHandler(uint16 eventID, sys_event_data *data, void *udata);
+bool proximityHandler(uint16 eventID, sys_event_data *data, void *udata);
+
+void log_me();
+void thread();
+void bluetooth_reader(uint8 data);
+
+#define MAX_SPEED 128
+#define REFRESH_RATE 500 //ms
 
 int16_t main(void)
-{
+{    
     Sys_Init_Kernel(); 
-    
-    Sys_Start_Process(thread);
-    
-    Sys_Start_Kernel();
-
-    uint32 time = Sys_Get_SystemClock();
-    time += (uint32) 1000;
- 
-    uint counter = 0;
-    
-    while(true){
-  
-        if(++counter == 0xFFFF){
-            LED3 = ~LED3;
-        }
-        
-        uint32 time_now = Sys_Get_SystemClock();
-        if(time_now >= time){//wait the refresh_rate time
-            time += REFRESH_RATE;
-            
-            LED0 = ~LED0;
-        }
-    }
-}
-
-void thread(){
-    uint32 time = Sys_Get_SystemClock();
-    
-    uint counter = 0;
-    
-    while(true){
-  
-        if(++counter == 0xFFFF){
-            LED5 = ~LED5;
-        }
-        
-        uint32 time_now = Sys_Get_SystemClock();
-        if(time_now >= time){//wait the refresh_rate time
-            time += REFRESH_RATE;
-            
-            LED1 = ~LED1;
-        }
-    }
-}
-
-
-void Sys_ClearLEDs(){
-    LED0 = 0;
+     
+    LED0 = 1;
     LED1 = 0;
     LED2 = 0;
     LED3 = 0;
@@ -103,6 +77,105 @@ void Sys_ClearLEDs(){
     LED5 = 0;
     LED6 = 0;
     LED7 = 0;
-    BODY_LED = 0;
-    FRONT_LED = 0;    
+    
+    Sys_Start_Process(thread);
+    
+    Sys_Subscribe_to_Event(SYS_EVENT_10ms_CLOCK, led_toggler, oneSecCondition, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, remote_controlHandler, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_SELECTOR_CHANGE, selectorHandler, 0, 0);
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, proximityHandler, 0, 0 );
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, proximityHandler, 0, 0 );
+    
+    //Sys_Start_Process(thread);
+    Sys_SetReadingFunction_UART1(bluetooth_reader);
+//  void Sys_Writeto_UART1(void *data, uint length);
+    
+    Sys_Start_Kernel();
+    
+    uint32 time = Sys_Get_SystemClock();
+    time += (uint32) 1000;
+ 
+    uint counter = 0;
+    
+    while(true){
+       
+        uint32 time_now = Sys_Get_SystemClock();
+        if(time_now >= time){//wait the refresh_rate time
+            //random_change++;
+            LED0 = ~LED0;
+            time += (uint32) 1000;
+        }
+    }
 }
+
+void bluetooth_reader(uint8 data){
+    Sys_Writeto_UART1(&data, 1);
+}
+
+bool led_toggler(uint16 eventID, sys_event_data *data, void *udata){
+    //LED6 = ~LED6;
+    
+    return true;
+}
+
+bool remote_controlHandler(uint16 eventID, sys_event_data *data, void *udata){
+    //LED4 = ~LED4;
+    return true;
+}
+
+
+bool selectorHandler(uint16 eventID, sys_event_data *data, void *udata){
+    LED3 = ~LED3;
+    int selector = *((int *) data->value);
+    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, selector*5);
+    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, selector*(-5));
+    return true;
+}
+
+uint isClose(uint value){
+    if(value < 50){
+        return 1;
+    }
+  
+    return 0;
+}
+
+bool proximityHandler(uint16 eventID, sys_event_data *data, void *udata){
+    
+        
+    return true;
+}
+
+bool oneSecCondition(uint16 eventID, sys_event_data *data, void *user_data){
+    static int counter = 0;
+    
+    if(++counter >= 50){
+        counter = 0;
+        return true;
+    }
+    
+    return false;
+}
+
+void thread(){
+    uint32 time = Sys_Get_SystemClock();
+    
+    while(true){
+    
+        LED1 = 1;
+        uint32 time_now = Sys_Get_SystemClock();
+        if(time_now >= time){//wait the refresh_rate time
+            time += REFRESH_RATE*2;
+            
+            LED2 = ~LED2;
+        }
+    }
+        LED4 = 1;
+}
+

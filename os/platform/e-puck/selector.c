@@ -53,6 +53,25 @@ void Sys_Start_Selector(void){
 
 /**
  *
+ * This function is empty and could be used to stop the selector handling (not required).
+ *
+ */
+void Sys_Stop_Selector(void){
+    
+}
+
+/**
+ *
+ * This function initialises all the input ports of the microcontroller, initialises the selector handling, and registers the event SYS_EVENT_IO_SELECTOR_CHANGE.
+ *
+ */
+void Sys_Deactivate_Selector(void){
+    Sys_Unregister_IOHandler(Sys_Selector_PreProcessor);
+    Sys_Unregister_Event(SYS_EVENT_IO_SELECTOR_CHANGE);
+}
+
+/**
+ *
  * This function returns the current selector value.
  *
  * @return uint8 retuns the current selector value.

@@ -8,21 +8,21 @@
         <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
             <logicalFolder name="f4" displayName="acc_gyro" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/acc_gyro/e_lsm330.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/acc_gyro/e_lsm330.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="camera" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po3030k.h</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po6030k.h</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po8030d.h</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_poxxxx.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po3030k.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po6030k.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po8030d.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_poxxxx.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="I2C" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_master_module.h</itemPath>
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_protocol.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_master_module.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_protocol.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="motor_led" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/motor_led/e_init_port.h</itemPath>
               <itemPath>extern/platform/e-puck/library/motor_led/e_epuck_ports.h</itemPath>
+              <itemPath>extern/platform/e-puck/library/motor_led/e_init_port.h</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -40,10 +40,9 @@
           <itemPath>os/platform/e-puck/remoteControl.h</itemPath>
           <itemPath>os/platform/e-puck/motors.h</itemPath>
           <itemPath>os/io/io_clock.h</itemPath>
-          <itemPath>os/io/e-puck/selector.h</itemPath>
           <itemPath>os/platform/e-puck/adc.h</itemPath>
-          <itemPath>os/io/e-puck/proximity.h</itemPath>
-          <itemPath>os/platform/e-puck/clock_timer_HDI.h</itemPath>
+          <itemPath>os/platform/e-puck/proximity.h</itemPath>
+          <itemPath>os/platform/e-puck/selector.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
@@ -56,6 +55,7 @@
             <itemPath>os/platform/e-puck/remoteControl_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/motors_HDI.h</itemPath>
+            <itemPath>os/platform/e-puck/clock_timer_HDI.h</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="f1" displayName="processes" projectFiles="true">
@@ -81,25 +81,25 @@
         <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
             <logicalFolder name="f4" displayName="acc_gyro" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/acc_gyro/e_lsm330.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/acc_gyro/e_lsm330.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="camera" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_calc_po3030k.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_calc_po6030k.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_calc_po8030d.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_common.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_interrupt.s</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po3030k_registers.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po6030k_registers.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_po8030d_registers.c</itemPath>
-              <itemPath>os/platform/e-puck/library/camera/fast_2_timer/e_timers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po3030k.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po6030k.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po8030d.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_common.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_interrupt.s</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po3030k_registers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po6030k_registers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po8030d_registers.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_timers.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="I2C" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_protocol.c</itemPath>
-              <itemPath>os/platform/e-puck/library/I2C/e_I2C_master_module.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_master_module.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_protocol.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="motor_led" projectFiles="true">
-              <itemPath>os/platform/e-puck/library/motor_led/e_init_port.c</itemPath>
+              <itemPath>extern/platform/e-puck/library/motor_led/e_init_port.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -110,26 +110,24 @@
         </logicalFolder>
         <logicalFolder name="f4" displayName="io" projectFiles="true">
           <itemPath>os/io/io.c</itemPath>
+          <itemPath>os/io/io_clock.c</itemPath>
+          <itemPath>os/platform/e-puck/adc.c</itemPath>
           <itemPath>os/platform/e-puck/camera.c</itemPath>
           <itemPath>os/platform/e-puck/i2c.c</itemPath>
           <itemPath>os/platform/e-puck/i2c_data.c</itemPath>
           <itemPath>os/platform/e-puck/motors.c</itemPath>
+          <itemPath>os/platform/e-puck/proximity.c</itemPath>
           <itemPath>os/platform/e-puck/remoteControl.c</itemPath>
+          <itemPath>os/platform/e-puck/selector.c</itemPath>
           <itemPath>os/platform/e-puck/uart.c</itemPath>
-          <itemPath>os/io/io_clock.c</itemPath>
-          <itemPath>os/io/e-puck/selector.c</itemPath>
-          <itemPath>os/platform/e-puck/adc.c</itemPath>
-          <itemPath>os/io/e-puck/proximity.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
-            <itemPath>os/platform/e-puck/system_Timer_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/camera_processing.c</itemPath>
             <itemPath>os/platform/e-puck/traps.c</itemPath>
             <itemPath>os/platform/e-puck/i2c_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/io_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/motors_HDI.c</itemPath>
-            <itemPath>os/platform/e-puck/process_Management_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/remoteControl_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/clock_timer_HDI.c</itemPath>
@@ -140,6 +138,8 @@
           <itemPath>os/processes/process_Management.c</itemPath>
           <itemPath>os/processes/scheduler.c</itemPath>
           <itemPath>os/processes/system_Timer.c</itemPath>
+          <itemPath>os/platform/e-puck/process_Management_HDI.c</itemPath>
+          <itemPath>os/platform/e-puck/system_Timer_HDI.c</itemPath>
         </logicalFolder>
         <itemPath>os/interrupts.c</itemPath>
         <itemPath>os/memory.c</itemPath>
@@ -166,7 +166,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.25</languageToolchainVersion>
+        <languageToolchainVersion>1.26</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>
@@ -456,9 +456,9 @@
         <property key="voltagevalue" value="5.0"/>
       </PICkit3PlatformTool>
       <Simulator>
-        <property key="codecoverage.enabled" value="Disable"/>
-        <property key="codecoverage.enableoutputtofile" value="false"/>
-        <property key="codecoverage.outputfile" value=""/>
+        <property key="codecoverage.enabled" value="Enabled/Reset on POR"/>
+        <property key="codecoverage.enableoutputtofile" value="true"/>
+        <property key="codecoverage.outputfile" value="coverage.log"/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>
         <property key="oscillator.frequency" value="1"/>
@@ -481,12 +481,12 @@
         <property key="reset.scl" value="false"/>
         <property key="reset.type" value="MCLR"/>
         <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
-        <property key="tracecontrol.select" value="0"/>
+        <property key="tracecontrol.select" value="1"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
         <property key="tracecontrol.timestamp" value="0"/>
         <property key="tracecontrol.tracebufmax" value="546000"/>
         <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
-        <property key="tracecontrol.traceresetonrun" value="false"/>
+        <property key="tracecontrol.traceresetonrun" value="true"/>
         <property key="uart10io.output" value="window"/>
         <property key="uart10io.outputfile" value=""/>
         <property key="uart10io.uartioenabled" value="false"/>
@@ -523,32 +523,31 @@
                   value="report"/>
         <property key="warningmessagebreakoptions.W0003_CORE_SW_RESET" value="report"/>
         <property key="warningmessagebreakoptions.W0004_CORE_WDT_RESET" value="report"/>
-        <property key="warningmessagebreakoptions.W0005_CORE_IOPUW_RESET"
-                  value="report"/>
+        <property key="warningmessagebreakoptions.W0005_CORE_IOPUW_RESET" value="break"/>
         <property key="warningmessagebreakoptions.W0006_CORE_CODE_GUARD_PFC_RESET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0007_CORE_DO_LOOP_STACK_UNDERFLOW"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0008_CORE_DO_LOOP_STACK_OVERFLOW"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0009_CORE_NESTED_DO_LOOP_RANGE"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0010_CORE_SIM32_ODD_WORDACCESS"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0011_CORE_SIM32_UNIMPLEMENTED_RAMACCESS"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0012_CORE_STACK_OVERFLOW_RESET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0013_CORE_STACK_UNDERFLOW_RESET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0014_CORE_INVALID_OPCODE"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0015_CORE_INVALID_ALT_WREG_SET"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0016_BSLIM_INSUFFICIENT_BOOT_SEGMENT"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0017_BSLIM_LIMITS_EXCEEDS_PROG_MEMORY"
-                  value="report"/>
+                  value="break"/>
         <property key="warningmessagebreakoptions.W0051_INSTRUCTION_DIV_NOT_ENOUGH_REPEAT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0052_INSTRUCTION_DIV_TOO_MANY_REPEAT"
@@ -595,7 +594,7 @@
         <property key="warningmessagebreakoptions.W0215_ADC_POSITIVE_INPUT_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0216_ADC_NEGATIVE_INPUT_DIGITAL"
-                  value="report"/>
+                  value="ignore"/>
         <property key="warningmessagebreakoptions.W0217_ADC_NEGATIVE_INPUT_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0218_ADC_REFERENCE_HIGH_DIGITAL"
@@ -603,7 +602,7 @@
         <property key="warningmessagebreakoptions.W0219_ADC_REFERENCE_HIGH_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0220_ADC_REFERENCE_LOW_DIGITAL"
-                  value="report"/>
+                  value="ignore"/>
         <property key="warningmessagebreakoptions.W0221_ADC_REFERENCE_LOW_OUTPUT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0222_ADC_OVERFLOW" value="report"/>

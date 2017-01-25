@@ -65,6 +65,41 @@ inline void Sys_Start_UART2(void){
 
 /**
  *
+ * This function stops UART1.
+ *  
+ */
+inline void Sys_Stop_UART1(void){
+    Sys_Stop_UART1_HDI();
+}
+
+/**
+ *
+ * This function stops UART2.
+ *  
+ */
+inline void Sys_Stop_UART2(void){
+    Sys_Stop_UART2_HDI();
+}
+
+/**
+ *
+ * This function deactivates UART1.
+ *  
+ */
+inline void Sys_Deactivate_UART1(void){
+    Sys_Deactivate_UART1_HDI();
+}
+
+/**
+ *
+ * This function deactivates UART2.
+ *  
+ */
+inline void Sys_Deactivate_UART2(void){
+    Sys_Deactivate_UART2_HDI();
+}
+/**
+ *
  * defines a function that processes received bytes (UART1). This defined callback function is only executed once by arrival of one byte.
  * 
  * @param[in] func  pointer to the function that should process the received byte(s).

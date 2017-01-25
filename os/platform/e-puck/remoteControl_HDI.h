@@ -43,6 +43,8 @@ extern sint8 receiving_bit;
     
 inline void Sys_Init_RemoteControl_HDI(void);
 inline void Sys_Start_RemoteControl_HDI(void);
+inline void Sys_Stop_RemoteControl_HDI(void);
+inline void Sys_Deactivate_RemoteControl_HDI(void);
 
 #ifdef  __cplusplus
 }

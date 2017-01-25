@@ -45,6 +45,7 @@ extern "C" {
 #define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/ 	/*!< Maximum wheel speed in mm/s*/
     
 void Sys_Init_Motors(void);
+void Sys_Deactivate_Motors(void);
 
 void Sys_Set_LeftWheelSpeed(sint16 speed);
 void Sys_Set_RightWheelSpeed(sint16 speed);

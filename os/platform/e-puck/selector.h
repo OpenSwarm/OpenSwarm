@@ -41,6 +41,8 @@ extern "C" {
     
     void Sys_Init_Selector(void);
     void Sys_Start_Selector(void);
+    void Sys_Stop_Selector(void);
+    void Sys_Deactivate_Selector(void);
     
     uint8 Sys_Get_Selector(void);
 

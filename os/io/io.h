@@ -62,14 +62,14 @@ extern "C" {
 #include "io_clock.h"
     
 #ifdef EPUCK_USED
-#include "e-puck/camera.h"
-#include "e-puck/i2c.h"
-#include "e-puck/motors.h"
-#include "e-puck/remoteControl.h"
-#include "e-puck/uart.h"
-#include "e-puck/selector.h"
-#include "e-puck/adc.h"
-#include "e-puck/proximity.h"
+#include "../platform/e-puck/camera.h"
+#include "../platform/e-puck/i2c.h"
+#include "../platform/e-puck/motors.h"
+#include "../platform/e-puck/remoteControl.h"
+#include "../platform/e-puck/uart.h"
+#include "../platform/e-puck/selector.h"
+#include "../platform/e-puck/adc.h"
+#include "../platform/e-puck/proximity.h"
 #endif
     
 inline void Sys_Init_IOManagement(void);   //initialises the system timer and sets a scheduling algorithm

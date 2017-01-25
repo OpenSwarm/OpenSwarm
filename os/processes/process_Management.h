@@ -127,12 +127,12 @@ inline void Sys_Start_CriticalSection(void); //no scheduling possible within a c
 inline void Sys_End_CriticalSection(void);
 
 //############# PROCESS EVENT MANAGEMENT ###############################
-bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction func, pConditionFunction cond);//enables a process to recieve events via event handler
-void Sys_Remove_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction func);//process won't be able to recieve events (unique: pid + eventID + func)
-void Sys_Remove_All_Event_Subscriptions(uint eventID);//no process can recieve the events eventID
-void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length);//copies the event-data to the PCB
-void Sys_Execute_All_EventHandler();//a function to process all event-data that were sent and stored. 
-inline void Sys_Clear_EventData(sys_event_data **data);//frees the memory of the data-struct
+//bool Sys_Add_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction func, pConditionFunction cond);//enables a process to recieve events via event handler
+//void Sys_Remove_Event_Subscription(uint pid, uint eventID, pEventHandlerFunction func);//process won't be able to recieve events (unique: pid + eventID + func)
+//void Sys_Remove_All_Event_Subscriptions(uint eventID);//no process can recieve the events eventID
+//void Sys_Add_Event_to_Process(uint pid, uint eventID, void *data, uint length);//copies the event-data to the PCB
+//void Sys_Execute_All_EventHandler();//a function to process all event-data that were sent and stored. 
+//inline void Sys_Clear_EventData(sys_event_data **data);//frees the memory of the data-struct
 
 //############# PROCESS Synchronisation ###############################
 inline sys_event_data *Sys_Wait_For_Event(uint eventID); // blocks until eventID occurs (returns pointer to event data)

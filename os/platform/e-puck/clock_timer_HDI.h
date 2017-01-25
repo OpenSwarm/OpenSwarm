@@ -16,6 +16,7 @@ extern "C" {
     
 inline void Sys_Init_Clock(void);
 inline void Sys_Start_Clock(void);
+inline void Sys_Stop_Clock(void);
 inline void Sys_Pause_Clock(void);
 inline void Sys_Continue_Clock(void);
 inline void Sys_Disable_ClockInterrupt(void);

@@ -104,37 +104,31 @@ extern "C" {
      * 
      * This function points to an event handler function, which processes incoming events and its data. 
      */
-    typedef bool (*pEventHandlerFunction)(uint /*EventID*/, sys_event_data */*EventData*/, void */*User_data*/);
+    typedef bool (*pEventHandlerFunction)(uint /*PID*/, uint /*EventID*/, sys_event_data */*EventData*/);
     
     /**
      * @brief Condition function pointer type 
      * 
      * This function points to a condition function, which defines if an event handler should be executed or not. 
      */
-    typedef bool (*pConditionFunction)(uint eventID, sys_event_data *data, void* user_data);
+    typedef bool (*pConditionFunction)(void *);
 
 
-    inline bool Sys_Send_IntEvent(uint eventID, uint data);
     bool Sys_Send_Event(uint eventID, void *data, uint data_size);
-    bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size);
-    bool Sys_Send_CriticalEvent(uint eventID, void *data, uint data_size);
-    
+    inline bool Sys_Send_IntEvent(uint eventID, uint data);
+
     bool Sys_Register_Event(uint eventID);
     void Sys_Unregister_Event(uint eventID);
     
-    bool Sys_Subscribe_to_Event(uint eventID, pEventHandlerFunction handler, pConditionFunction condition, void *user_data);
-    void Sys_Unsubscribe_Handler(uint eventID, pEventHandlerFunction handler, void *user_data);
-    
-    sys_event_data* Sys_Copy_EventData(sys_event_data* data);
-    inline void Sys_Clear_EventData(sys_event_data* data);
-    
-    void Sys_Execute_BufferedEvents(void);
+    bool Sys_Subscribe_to_Event(uint eventID, uint pid, pEventHandlerFunction handler, pConditionFunction condition);
+    void Sys_Unsubscribe_from_Event(uint eventID, uint pid);
+    void Sys_Unsubscribe_Process(uint pid);
+
+    bool Sys_IsEventRegistered(uint eventID);
     
     inline void Sys_Inc_EventCounter(void);
     inline void Sys_Reset_EventCounter(void);
     uint Sys_Get_EventCounter(void);
-    
-    
 
 
 #ifdef	__cplusplus
