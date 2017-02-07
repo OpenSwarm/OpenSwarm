@@ -4,21 +4,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os-event/os/processes/process_Management.h</file>
-            <file>file:/home/strenkwalder/code/os-event/extern/platform/e-puck/library/acc_gyro/e_lsm330.c</file>
-            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/selector.c</file>
-            <file>file:/home/strenkwalder/code/os-event/nbproject/Makefile-impl.mk</file>
-            <file>file:/home/strenkwalder/code/os-event/main.c</file>
-            <file>file:/home/strenkwalder/code/os-event/os/definitions.h</file>
-            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/camera.c</file>
-            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/DSPIC30F6014A_HDI.h</file>
-            <file>file:/home/strenkwalder/code/os-event/os/system.c</file>
-            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/clock_timer_HDI.c</file>
-            <file>file:/home/strenkwalder/code/os-event/os/events/events.c</file>
-            <file>file:/home/strenkwalder/code/os-event/extern/platform/e-puck/library/motor_led/e_init_port.c</file>
-            <file>file:/home/strenkwalder/code/os-event/os/events/events.h</file>
-            <file>file:/home/strenkwalder/code/os-event/os/interrupts.h</file>
-            <file>file:/home/strenkwalder/code/os-event/os/platform/e-puck/control_timer.c</file>
+            <file>file:/home/strenkwalder/code/os/main.c</file>
+            <file>file:/home/strenkwalder/code/os/os/processes/data.h</file>
         </group>
     </open-files>
 </project-private>

@@ -84,15 +84,11 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
  *      Basic Event Management for Processes
  ********************************************************/
 
-int Sys_GetCurrentIRQPNesting(void);
-int Sys_GetCurrentIRQPriority(void);
-void Sys_SetCurrentIRQPNesting(int n);
-void Sys_SetCurrentIRQPriority(int irqp);
-
 sint Sys_GetCurrentIRQPNesting(void);
 sint Sys_GetCurrentIRQPriority(void);
 void Sys_SetCurrentIRQPNesting(sint n);
 void Sys_SetCurrentIRQPriority(sint irqp);
+
 void Sys_IncCurrentIRQPNesting(void);
 void Sys_DecCurrentIRQPNesting(void);
 

@@ -41,8 +41,6 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
-int sinVectorTimes(vector *, int);
-int cosVectorTimes(vector *, int);
 int sign(int);
 
 void getProximityValues();
@@ -101,7 +99,7 @@ int16_t main(void)
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
  
-    uint counter = 0;
+//    uint counter = 0;
     
     while(true){
        
