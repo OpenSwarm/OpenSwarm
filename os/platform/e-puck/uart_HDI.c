@@ -283,6 +283,7 @@ inline void Sys_Write_UART1_ISR(){
             if(byte_counter_uart1 < sys_UART1_TX_data->length){
                 U1TXREG = sys_UART1_TX_data->data[byte_counter_uart1];//add new byte
                 byte_counter_uart1++;
+                
                 continue;
             }
 

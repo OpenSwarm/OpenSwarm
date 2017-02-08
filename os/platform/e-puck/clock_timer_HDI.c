@@ -81,7 +81,6 @@ void __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void){
     if(Sys_ClockTick != 0){
         Sys_ClockTick();
     }
-    LED7 = ~LED7;
     IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
 }
 
@@ -102,7 +101,7 @@ void __attribute__((interrupt,no_auto_psv)) _AltT1Interrupt(void){
     if(Sys_ClockTick != 0){
         Sys_ClockTick();
     }    
-    LED7 = ~LED7;
+    
     IFS0bits.T1IF = 0; //unsets the Timer1 interrupt flag
 }
 

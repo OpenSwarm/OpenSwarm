@@ -32,6 +32,7 @@
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
 #include "os/memory.h"
 #include "os/interrupts.h"
+#include "os/platform/e-puck/adc.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -40,59 +41,53 @@
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
-
-int sign(int);
-
-void getProximityValues();
-void calculateProxPointer();
-void initProxPointer();
-void calculateMotorSpeed();
-bool prox_sensors(uint16 eventID, sys_event_data *data, void *user_data);
-bool led_toggler(uint16 eventID, sys_event_data *data, void *user_data);
-bool oneSecCondition(uint16 eventID, sys_event_data *data, void *user_data);
-
-
-bool remote_controlHandler(uint16 eventID, sys_event_data *data, void *user_data);
-bool selectorHandler(uint16 eventID, sys_event_data *data, void *udata);
-bool proximityHandler(uint16 eventID, sys_event_data *data, void *udata);
-
-void log_me();
-void thread();
 void bluetooth_reader(uint8 data);
 
-#define MAX_SPEED 128
-#define REFRESH_RATE 500 //ms
+
+uint8 prox_readings[36] = {'@', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                          0x00,  ':', 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
+                          0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
+                          0x0F, 0xFF, '\r', '\n'};
+//uint prox_median[9] = {4095,4095,4095,4095,4095,4095,4095,4095,'!'};
+
+uint8 prox_flag = 0xFF;
+inline void prox_reader(int index,uint data);
+void prox0_reader(uint data);
+void prox1_reader(uint data);
+void prox2_reader(uint data);
+void prox3_reader(uint data);
+void prox4_reader(uint data);
+void prox5_reader(uint data);
+void prox6_reader(uint data);
+void prox7_reader(uint data);
 
 int16_t main(void)
 {    
     Sys_Init_Kernel(); 
      
     LED0 = 1;
-    LED1 = 0;
-    LED2 = 0;
-    LED3 = 0;
-    LED4 = 0;
-    LED5 = 0;
-    LED6 = 0;
-    LED7 = 0;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    LED6 = 1;
+    LED7 = 1;
+    BODY_LED = 1;
+    FRONT_LED = 1;
     
-    Sys_Start_Process(thread);
     
-    Sys_Subscribe_to_Event(SYS_EVENT_10ms_CLOCK, led_toggler, oneSecCondition, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_REMOECONTROL, remote_controlHandler, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_SELECTOR_CHANGE, selectorHandler, 0, 0);
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_0, proximityHandler, 0, 0 );
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_1, proximityHandler, 0, 0 );
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_2, proximityHandler, 0, 0 );
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_3, proximityHandler, 0, 0 );
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_4, proximityHandler, 0, 0 );
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_5, proximityHandler, 0, 0 );
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_6, proximityHandler, 0, 0 );
-    Sys_Subscribe_to_Event(SYS_EVENT_IO_PROX_7, proximityHandler, 0, 0 );
-    
-    //Sys_Start_Process(thread);
     Sys_SetReadingFunction_UART1(bluetooth_reader);
-//  void Sys_Writeto_UART1(void *data, uint length);
+    
+    Sys_Subscribe_ADCChannelProcessor(Prx0, prox0_reader);
+    Sys_Subscribe_ADCChannelProcessor(Prx1, prox1_reader);
+    Sys_Subscribe_ADCChannelProcessor(Prx2, prox2_reader);
+    Sys_Subscribe_ADCChannelProcessor(Prx3, prox3_reader);
+    Sys_Subscribe_ADCChannelProcessor(Prx4, prox4_reader);
+    Sys_Subscribe_ADCChannelProcessor(Prx5, prox5_reader);
+    Sys_Subscribe_ADCChannelProcessor(Prx6, prox6_reader);
+    Sys_Subscribe_ADCChannelProcessor(Prx7, prox7_reader); 
     
     Sys_Start_Kernel();
     
@@ -106,74 +101,67 @@ int16_t main(void)
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             //random_change++;
-            LED0 = ~LED0;
             time += (uint32) 1000;
         }
     }
 }
 
-void bluetooth_reader(uint8 data){
-    Sys_Writeto_UART1(&data, 1);
-}
 
-bool led_toggler(uint16 eventID, sys_event_data *data, void *udata){
-    //LED6 = ~LED6;
+uint prox_median[8] = {4095,4095,4095,4095,4095,4095,4095,4095};
+uint prox_values[8] = {0};
+inline void prox_reader(int index,uint data){
+    prox_values[index] = data;
     
-    return true;
-}
-
-bool remote_controlHandler(uint16 eventID, sys_event_data *data, void *udata){
-    //LED4 = ~LED4;
-    return true;
-}
-
-
-bool selectorHandler(uint16 eventID, sys_event_data *data, void *udata){
-    LED3 = ~LED3;
-    int selector = *((int *) data->value);
-    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_LEFT, selector*5);
-    Sys_Send_IntEvent(SYS_EVENT_IO_MOTOR_RIGHT, selector*(-5));
-    return true;
-}
-
-uint isClose(uint value){
-    if(value < 50){
-        return 1;
+    prox_flag = prox_flag & ~(1 << index);
+    
+    if(prox_median[index] < data){
+        prox_median[index] = prox_median[index]-1;
+    }else{
+        prox_median[index] = prox_median[index]+1;
     }
-  
-    return 0;
-}
-
-bool proximityHandler(uint16 eventID, sys_event_data *data, void *udata){
     
+    if(prox_flag == 0){//All readings collected
+        prox_flag = 0xFF;        
         
-    return true;
-}
-
-bool oneSecCondition(uint16 eventID, sys_event_data *data, void *user_data){
-    static int counter = 0;
-    
-    if(++counter >= 50){
-        counter = 0;
-        return true;
+        Sys_Writeto_UART1("@", 1);// 2*2*8+3*2 elements of 2 bytes
+        Sys_Writeto_UART1(prox_values, 16);// 2*2*8+3*2 elements of 2 bytes
+        Sys_Writeto_UART1(":", 1);// 2*2*8+3*2 elements of 2 bytes
+        Sys_Writeto_UART1(prox_median, 16);// 2*2*8+3*2 elements of 2 bytes
+        Sys_Writeto_UART1("\r\n",2);// 2*2*8+3*2 elements of 2 bytes
     }
     
-    return false;
 }
 
-void thread(){
-    uint32 time = Sys_Get_SystemClock();
-    
-    while(true){
-    
-        LED1 = 1;
-        uint32 time_now = Sys_Get_SystemClock();
-        if(time_now >= time){//wait the refresh_rate time
-            time += REFRESH_RATE*2;
-            
-            LED2 = ~LED2;
-        }
-    }
-        LED4 = 1;
+void bluetooth_reader(uint8 data){
 }
 
+void prox0_reader(uint data){
+    prox_reader(0, data);
+}
+void prox1_reader(uint data){
+    prox_reader(1, data);
+}
+
+void prox2_reader(uint data){
+    prox_reader(2, data);
+}
+
+void prox3_reader(uint data){
+    prox_reader(3, data);
+}
+
+void prox4_reader(uint data){
+    prox_reader(4, data);
+}
+
+void prox5_reader(uint data){
+    prox_reader(5, data);
+}
+
+void prox6_reader(uint data){
+    prox_reader(6, data);
+}
+
+void prox7_reader(uint data){
+    prox_reader(7, data);
+}
