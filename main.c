@@ -44,11 +44,11 @@
 void bluetooth_reader(uint8 data);
 
 
-uint8 prox_readings[36] = {'@', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-                          0x00,  ':', 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
-                          0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
-                          0x0F, 0xFF, '\r', '\n'};
+//uint8 prox_readings[36] = {'@', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//                          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+//                          0x00,  ':', 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
+//                          0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
+//                          0x0F, 0xFF, '\r', '\n'};
 //uint prox_median[9] = {4095,4095,4095,4095,4095,4095,4095,4095,'!'};
 
 uint8 prox_flag = 0xFF;
@@ -61,6 +61,11 @@ void prox4_reader(uint data);
 void prox5_reader(uint data);
 void prox6_reader(uint data);
 void prox7_reader(uint data);
+
+void clearLEDs();
+void setLEDs();
+void clearIRs();
+void setIRs();
 
 int16_t main(void)
 {    
@@ -98,41 +103,152 @@ int16_t main(void)
     
     while(true){
        
+        
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             //random_change++;
-            time += (uint32) 1000;
+            
+        switch(Sys_Get_Selector()){
+            case 0:
+                Sys_Set_LeftWheelSpeed(0);
+                Sys_Set_RightWheelSpeed(0);
+                clearLEDs();
+                clearIRs();
+                break;
+            case 1:
+            case 2:
+                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
+                clearLEDs();
+                clearIRs();
+                break;
+            case 3:
+                Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(+MAX_WHEEL_SPEED_MM_S);
+                clearLEDs();
+                clearIRs();
+                break;
+            case 4:
+                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
+                setLEDs();
+                clearIRs();
+                break;
+            case 5:
+            case 6:
+                Sys_Set_LeftWheelSpeed(0);
+                Sys_Set_RightWheelSpeed(0);
+                setLEDs();
+                clearIRs();
+                break;
+            case 7:
+            case 8:
+                Sys_Set_LeftWheelSpeed(0);
+                Sys_Set_RightWheelSpeed(0);
+                clearLEDs();
+                setIRs();
+                break;
+            case 10:
+                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
+                clearLEDs();
+                setIRs();
+                break;
+            case 11:
+                Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(+MAX_WHEEL_SPEED_MM_S);
+                clearLEDs();
+                setIRs();
+                break;
+            case 12:
+            case 13:
+                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
+                setLEDs();
+                setIRs();
+                break;
+            case 14:
+            case 15:
+                Sys_Set_LeftWheelSpeed(0);
+                Sys_Set_RightWheelSpeed(0);
+                setLEDs();
+                setIRs();
+                break;
+            default:
+                break;
+        }
+            
+            time += (uint32) 100;
         }
     }
 }
 
+void clearLEDs(){
+    LED0 = 0;
+    LED1 = 0;
+    LED2 = 0;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
+    BODY_LED = 0;
+    FRONT_LED = 0;
+}
 
-uint prox_median[8] = {4095,4095,4095,4095,4095,4095,4095,4095};
+void setLEDs(){
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    LED6 = 1;
+    LED7 = 1;
+    BODY_LED = 1;
+    FRONT_LED = 1;
+}
+
+void clearIRs(){  
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 0;
+}
+void setIRs(){  
+    PULSE_IR0 = 1;
+    PULSE_IR1 = 1;
+    PULSE_IR2 = 1;
+    PULSE_IR3 = 1;
+}
+
+//uint prox_median[8] = {4095,4095,4095,4095,4095,4095,4095,4095};
 uint prox_values[8] = {0};
 inline void prox_reader(int index,uint data){
     prox_values[index] = data;
     
     prox_flag = prox_flag & ~(1 << index);
     
-    if(prox_median[index] < data){
-        prox_median[index] = prox_median[index]-1;
-    }else{
-        prox_median[index] = prox_median[index]+1;
-    }
-    
     if(prox_flag == 0){//All readings collected
         prox_flag = 0xFF;        
         
-        Sys_Writeto_UART1("@", 1);// 2*2*8+3*2 elements of 2 bytes
+        uint xor = 0;
+        
+        int i = 0;
+        for(i=0; i < 8; i++){
+            xor ^= prox_values[i];
+        }
+        
+        Sys_Writeto_UART1("P", 1);// 2*2*8+3*2 elements of 2 bytes
         Sys_Writeto_UART1(prox_values, 16);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(":", 1);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(prox_median, 16);// 2*2*8+3*2 elements of 2 bytes
+        Sys_Writeto_UART1(&xor, 2);// 2*2*8+3*2 elements of 2 bytes
         Sys_Writeto_UART1("\r\n",2);// 2*2*8+3*2 elements of 2 bytes
     }
     
 }
 
 void bluetooth_reader(uint8 data){
+    ;
 }
 
 void prox0_reader(uint data){

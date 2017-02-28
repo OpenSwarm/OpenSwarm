@@ -85,7 +85,7 @@ left=10mm,right=10mm,top=10mm,bottom=15mm}
 
 \title{OpenSwarm Cheat Sheet}
 \author{Stefan M. Trenkwalder, University of Sheffield}
-\date{2016}
+\date{2017}
 
 
 \newcommand{\uintt}{\href{http://openswarm.org/os-doc/d6/dc2/definitions\_8h.html\#a1445ebbbf93d62972255ec5e89a5ab01}{\texttt{uint}}\xspace}
@@ -161,8 +161,8 @@ Events can be used by executing the following functions. Note that an event has,
     Description				&	Function Name\\
     Register an event & \href{http://openswarm.org/os-doc/de/deb/events_8c.html#a5d9657772509ddb7ac6f6e1aa5730308}{\texttt{Sys\_Register\_Event}}(\uintt eventID) \\
     Unregister an event  	& 	\href{http://openswarm.org/os-doc/db/dd2/events_8h.html#a41c81e9472691694352ac8316dc0ddbf}{\texttt{Sys\_Unregister\_Event}}(\uintt eventID) \\
-    Subscribe a handler  	& 	\href{http://openswarm.org/os-doc/db/dd2/events_8h.html#a41c81e9472691694352ac8316dc0ddbf}{\texttt{Sys\_Subscribe\_to\_Event}}(\uintt eventID, \uintt pid, \pEventHandlerFunction h, \pConditionFunction c) \\
-    Unsubscribe an event 	& 	\href{http://openswarm.org/os-doc/db/dd2/events_8h.html#a41c81e9472691694352ac8316dc0ddbf}{\texttt{Sys\_Unsubscribe\_to\_Event}}(\uintt eventID, \uintt pid) \\
+    Subscribe a handler  	& 	\href{http://openswarm.org/os-doc/db/dd2/events_8h.html#a41c81e9472691694352ac8316dc0ddbf}{\texttt{Sys\_Subscribe\_to\_Event}}(\uintt eventID, \pEventHandlerFunction h, \pConditionFunction c, void *user\_data) \\
+    Unsubscribe an event 	& 	\href{http://openswarm.org/os-doc/db/dd2/events_8h.html#a41c81e9472691694352ac8316dc0ddbf}{\texttt{Sys\_Unsubscribe\_Handler}}(\uintt eventID, \pEventHandlerFunction handler, void *user\_data) \\
     Send an event 	& 	\href{http://openswarm.org/os-doc/de/deb/events_8c.html#a67230a5307e77a8112e56436f372926f}{\texttt{Sys\_Send\_Event}}(\uintt eventID,  void *data, \uintt data\_size) \\
     Send an integer event 	& 	\href{http://openswarm.org/os-doc/de/deb/events_8c.html#a67230a5307e77a8112e56436f372926f}{\texttt{Sys\_Send\_IntEvent}}(\uintt eventID,\uintt data)
 \end{tabular}\\

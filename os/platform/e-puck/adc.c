@@ -96,11 +96,6 @@ inline void Sys_Init_ADC(void){
     ADCSSLbits.CSSL13 = 1;// Proximity 5
     ADCSSLbits.CSSL14 = 1;// Proximity 6
     ADCSSLbits.CSSL15 = 1;// Proximity 7
-    
-    PULSE_IR0 = 0;
-    PULSE_IR1 = 0;
-    PULSE_IR2 = 0;
-    PULSE_IR3 = 0;
 
 }
 
