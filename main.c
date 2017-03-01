@@ -71,16 +71,16 @@ int16_t main(void)
 {    
     Sys_Init_Kernel(); 
      
-    LED0 = 1;
-    LED1 = 1;
-    LED2 = 1;
-    LED3 = 1;
-    LED4 = 1;
-    LED5 = 1;
-    LED6 = 1;
-    LED7 = 1;
-    BODY_LED = 1;
-    FRONT_LED = 1;
+    LED0 = 0;
+    LED1 = 0;
+    LED2 = 0;
+    LED3 = 0;
+    LED4 = 0;
+    LED5 = 0;
+    LED6 = 0;
+    LED7 = 0;
+    BODY_LED = 0;
+    FRONT_LED = 0;
     
     
     Sys_SetReadingFunction_UART1(bluetooth_reader);
@@ -124,7 +124,7 @@ int16_t main(void)
                 break;
             case 3:
                 Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(+MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(MAX_WHEEL_SPEED_MM_S);
                 clearLEDs();
                 clearIRs();
                 break;
@@ -156,7 +156,7 @@ int16_t main(void)
                 break;
             case 11:
                 Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(+MAX_WHEEL_SPEED_MM_S);
+                Sys_Set_RightWheelSpeed(MAX_WHEEL_SPEED_MM_S);
                 clearLEDs();
                 setIRs();
                 break;
@@ -228,6 +228,7 @@ inline void prox_reader(int index,uint data){
     prox_values[index] = data;
     
     prox_flag = prox_flag & ~(1 << index);
+    uint max = 0xFFFF;
     
     if(prox_flag == 0){//All readings collected
         prox_flag = 0xFF;        
@@ -242,7 +243,7 @@ inline void prox_reader(int index,uint data){
         Sys_Writeto_UART1("P", 1);// 2*2*8+3*2 elements of 2 bytes
         Sys_Writeto_UART1(prox_values, 16);// 2*2*8+3*2 elements of 2 bytes
         Sys_Writeto_UART1(&xor, 2);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1("\r\n",2);// 2*2*8+3*2 elements of 2 bytes
+        Sys_Writeto_UART1(&max,2);// 2*2*8+3*2 elements of 2 bytes
     }
     
 }
