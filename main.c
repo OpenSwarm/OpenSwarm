@@ -67,6 +67,8 @@ void setLEDs();
 void clearIRs();
 void setIRs();
 
+bool doNotSend = false;
+
 int16_t main(void)
 {    
     Sys_Init_Kernel(); 
@@ -107,15 +109,21 @@ int16_t main(void)
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             //random_change++;
-            
+        doNotSend = false;    
         switch(Sys_Get_Selector()){
             case 0:
                 Sys_Set_LeftWheelSpeed(0);
                 Sys_Set_RightWheelSpeed(0);
                 clearLEDs();
                 clearIRs();
+                doNotSend = true;
                 break;
             case 1:
+                Sys_Set_LeftWheelSpeed(0);
+                Sys_Set_RightWheelSpeed(0);
+                clearLEDs();
+                clearIRs();
+                break;
             case 2:
                 Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
                 Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
@@ -230,20 +238,39 @@ inline void prox_reader(int index,uint data){
     prox_flag = prox_flag & ~(1 << index);
     uint max = 0xFFFF;
     
+    if(doNotSend){
+        return;
+    }
+    
     if(prox_flag == 0){//All readings collected
-        prox_flag = 0xFF;        
         
-        uint xor = 0;
+        unsigned char msg[22];   
         
+        uint xor_v = 0;
+        char *p_xor_v = (char*) &xor_v;
+        
+        msg[0] = 'P';
         int i = 0;
-        for(i=0; i < 8; i++){
-            xor ^= prox_values[i];
+        for(i=0; i < 16; i++){
+            if(i < 8){
+                xor_v ^= prox_values[i];
+            }
+            
+            char* values = (char *) prox_values;
+            
+            msg[i+1] = values[i];
         }
         
-        Sys_Writeto_UART1("P", 1);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(prox_values, 16);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(&xor, 2);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(&max,2);// 2*2*8+3*2 elements of 2 bytes
+        msg[17] =  p_xor_v[0];
+        msg[18] =  p_xor_v[1];
+                
+        msg[19] = '<';
+        msg[20] = ':';
+        msg[21] = '>';
+        
+        Sys_Writeto_UART1(msg, 22);// 2*2*8+3*2 elements of 2 bytes
+        
+        prox_flag = 0xFF;     
     }
     
 }
