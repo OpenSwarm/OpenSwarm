@@ -14,21 +14,17 @@
 #include "adc.h"
 #include "../../definitions.h"
 #include "../../events/events.h"
+#include "../../interrupts.h"
 
-#define PROX_CALIBRATION_N 11 /*!< The number of elements in the liniarisiation array*/
+#define PROX_CALIBRATION_N 6 /*!< The number of elements in the liniarisiation array*/
 
 uint sys_calibration_value[8] = {0}; /*!< struct to store calibration values for each sensor (maximum value)*/
-uint sys_transformation[PROX_CALIBRATION_N][2] = {   {0,  3788}, 
-                                    {10,  3548},
-                                    {20,  857 },
-                                    {30,  474 },
-                                    {40,  296 },
-                                    {50,  205 },
-                                    {60,  153 },
-                                    {70,  113 },
-                                    {80,  84  },
-                                    {90,  65  },
-                                    {100, 53  }};/*!< linearisation array (mm, sensor value)*/
+uint sys_transformation[PROX_CALIBRATION_N][2] = {   {0,  4095},
+                                    {3,  3762}, 
+                                    {10,  1055},
+                                    {20,  407 },
+                                    {50,  100 },
+                                    {100, 20  }};/*!< linearisation array (mm, sensor value)*/
 
 uint Sys_Prox_trasform(uint, uint);
 void Sys_Prox0_preprocessor(uint);
@@ -43,6 +39,9 @@ void Sys_Prox7_preprocessor(uint);
 uint sys_distances[8] = {0}; /*!< last transformed sensor reading (stored in mm)*/
 uint sys_raw[8] = {0}; /*!< last transformed sensor reading (stored in mm)*/
 
+enum {PROX0, PROX1, PROX2, PROX3} fetch_state;
+
+
 /**
  *
  * This function initialises the Proximity module. It registers all events SYS_EVENT_IO_PROX_[0-7] and subscribes preprocessors to each channel.
@@ -51,6 +50,14 @@ uint sys_raw[8] = {0}; /*!< last transformed sensor reading (stored in mm)*/
 void Sys_Init_Proximity(void){
 
     Sys_Init_ADC();//make sure ADCs are initialised
+    
+    PULSE_IR0 = 1;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 0;
+  
+    fetch_state = PROX0;
+
 
     Sys_Register_Event(SYS_EVENT_IO_PROX_0);
     Sys_Register_Event(SYS_EVENT_IO_PROX_1);
@@ -77,12 +84,7 @@ void Sys_Init_Proximity(void){
     Sys_Subscribe_ADCChannelProcessor(Prx4, Sys_Prox4_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx5, Sys_Prox5_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx6, Sys_Prox6_preprocessor);
-    Sys_Subscribe_ADCChannelProcessor(Prx7, Sys_Prox7_preprocessor); 
-    
-    PULSE_IR0 = 0;
-    PULSE_IR1 = 0;
-    PULSE_IR2 = 0;
-    PULSE_IR3 = 0;   
+    Sys_Subscribe_ADCChannelProcessor(Prx7, Sys_Prox7_preprocessor);    
 }
 
 /**
@@ -134,21 +136,22 @@ uint Sys_Prox_trasform(uint i, uint value){
     
     if(sys_calibration_value[i] < value){//if this value is the maximum value that has been received
         sys_calibration_value[i] = value;
+    	return 0xFFFF;
     }
     
     uint cal = sys_calibration_value[i] - value;//calibrate the 0-distance
     
     if(cal == 0){
-        return 0;//object touches robot
+    	return 0xFFFF;
     }
     
     int j;
-    for(j = 0; j < PROX_CALIBRATION_N; j++){//check which tuple is closest 
+    for(j = 1; j < PROX_CALIBRATION_N; j++){//check which tuple is closest 
         if( sys_transformation[j][1] > cal){
             continue;
         }
         //if you found it -> linearise towards the smaller stored point
-        return sys_transformation[j][0] - ((10 * (cal - sys_transformation[j][1])) / (sys_transformation[j-1][1]-sys_transformation[j][1]));
+        return sys_transformation[j][0] - (((sys_transformation[j][0] - sys_transformation[j-1][0]) * (cal - sys_transformation[j][1])) / (sys_transformation[j-1][1] - sys_transformation[j][1]));
     }
     
     //if the sensor value is too small -> out of range
@@ -165,17 +168,33 @@ uint Sys_Prox_trasform(uint i, uint value){
  */
 void Sys_Prox0_preprocessor(uint value){
     static int lowpass = 0;
-        
+    
+Sys_Start_AtomicSection();    
+    if(fetch_state != PROX0){
+        return;
+    }
+    
+    fetch_state = PROX1;
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 1;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 0;
+    
     sys_raw[0] = value;
+Sys_End_AtomicSection();
+    
     uint dist = Sys_Prox_trasform(0, value);
     
+Sys_Start_AtomicSection();
     sys_distances[0] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         lowpass = 0;
         Sys_Send_Event(SYS_EVENT_IO_PROX_0, &dist, 2);
     }else{
         lowpass++;
     }
+    
 }
 
 /**
@@ -188,10 +207,24 @@ void Sys_Prox0_preprocessor(uint value){
 void Sys_Prox1_preprocessor(uint value){
     static int lowpass = 0;
     
+Sys_Start_AtomicSection();       
+    if(fetch_state != PROX1){
+        return;
+    }
+    
+    fetch_state = PROX2;
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 1;
+    PULSE_IR3 = 0;
+    
     sys_raw[1] = value;    
+Sys_End_AtomicSection();
     uint dist = Sys_Prox_trasform(1, value);
     
+Sys_Start_AtomicSection();   
     sys_distances[1] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         Sys_Send_Event(SYS_EVENT_IO_PROX_1, &dist, 2);
         lowpass = 0;
@@ -209,10 +242,25 @@ void Sys_Prox1_preprocessor(uint value){
  */
 void Sys_Prox2_preprocessor(uint value){
     static int lowpass = 0;
+    
+Sys_Start_AtomicSection();       
+    if(fetch_state != PROX2){
+        return;
+    }
+    
+    fetch_state = PROX3;
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 1;
+    
     sys_raw[2] = value;
+Sys_End_AtomicSection();
     uint dist = Sys_Prox_trasform(2, value);
     
+Sys_Start_AtomicSection();   
     sys_distances[2] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         Sys_Send_Event(SYS_EVENT_IO_PROX_2, &dist, 2);
         lowpass = 0;
@@ -230,10 +278,26 @@ void Sys_Prox2_preprocessor(uint value){
  */
 void Sys_Prox3_preprocessor(uint value){
     static int lowpass = 0;
+    
+Sys_Start_AtomicSection();       
+    if(fetch_state != PROX3){
+        return;
+    }
+    
+    fetch_state = PROX0;
+    PULSE_IR0 = 1;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 0;
+    
+    
     sys_raw[3] = value;
+Sys_End_AtomicSection();
     uint dist = Sys_Prox_trasform(3, value);
     
+Sys_Start_AtomicSection();   
     sys_distances[3] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         Sys_Send_Event(SYS_EVENT_IO_PROX_3, &dist, 2);
         lowpass = 0;
@@ -251,10 +315,25 @@ void Sys_Prox3_preprocessor(uint value){
  */
 void Sys_Prox4_preprocessor(uint value){
     static int lowpass = 0;
+    
+Sys_Start_AtomicSection();   
+    if(fetch_state != PROX0){
+        return;
+    }
+    
+    fetch_state = PROX1;
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 1;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 0;
+    
     sys_raw[4] = value;
+Sys_End_AtomicSection();
     uint dist = Sys_Prox_trasform(4, value);
     
+Sys_Start_AtomicSection();   
     sys_distances[4] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         Sys_Send_Event(SYS_EVENT_IO_PROX_4, &dist, 2);
         lowpass = 0;
@@ -272,10 +351,25 @@ void Sys_Prox4_preprocessor(uint value){
  */
 void Sys_Prox5_preprocessor(uint value){
     static int lowpass = 0;
+    
+Sys_Start_AtomicSection();   
+    if(fetch_state != PROX1){
+        return;
+    }
+    
+    fetch_state = PROX2;
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 1;
+    PULSE_IR3 = 0;
+    
     sys_raw[5] = value;
+Sys_End_AtomicSection();
     uint dist = Sys_Prox_trasform(5, value);
     
+Sys_Start_AtomicSection();   
     sys_distances[5] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         Sys_Send_Event(SYS_EVENT_IO_PROX_5, &dist, 2);
         lowpass = 0;
@@ -294,10 +388,25 @@ void Sys_Prox5_preprocessor(uint value){
  */
 void Sys_Prox6_preprocessor(uint value){
     static int lowpass = 0;
+    
+Sys_Start_AtomicSection();   
+    if(fetch_state != PROX2){
+        return;
+    }
+    
+    fetch_state = PROX3;
+    PULSE_IR0 = 0;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 1;
+    
     sys_raw[6] = value;
+Sys_End_AtomicSection();
     uint dist = Sys_Prox_trasform(6, value);
     
+Sys_Start_AtomicSection();   
     sys_distances[6] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         Sys_Send_Event(SYS_EVENT_IO_PROX_6, &dist, 2);
         lowpass = 0;
@@ -316,10 +425,25 @@ void Sys_Prox6_preprocessor(uint value){
  */
 void Sys_Prox7_preprocessor(uint value){
     static int lowpass = 0;
+    
+Sys_Start_AtomicSection();   
+    if(fetch_state != PROX3){
+        return;
+    }
+    
+    fetch_state = PROX0;
+    PULSE_IR0 = 1;
+    PULSE_IR1 = 0;
+    PULSE_IR2 = 0;
+    PULSE_IR3 = 0;
+    
     sys_raw[7] = value;
+Sys_End_AtomicSection();
     uint dist = Sys_Prox_trasform(7, value);
     
+Sys_Start_AtomicSection();   
     sys_distances[7] = dist;
+Sys_End_AtomicSection();
     if(dist < 0xFFFF || lowpass == 25){
         Sys_Send_Event(SYS_EVENT_IO_PROX_7, &dist, 2);
         lowpass = 0;

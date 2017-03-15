@@ -27,50 +27,35 @@
 #include <stdlib.h>
 #include <stdbool.h>       /* Includes true/false definition                  */
 #include <stdio.h>
-#include <math.h>
 
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
 #include "os/memory.h"
 #include "os/interrupts.h"
-#include "os/platform/e-puck/adc.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
 
+//static bool run_clustering = false;
+
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
-void bluetooth_reader(uint8 data);
 
-
-//uint8 prox_readings[36] = {'@', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//                          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-//                          0x00,  ':', 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
-//                          0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
-//                          0x0F, 0xFF, '\r', '\n'};
-//uint prox_median[9] = {4095,4095,4095,4095,4095,4095,4095,4095,'!'};
-
-uint8 prox_flag = 0xFF;
-inline void prox_reader(int index,uint data);
-void prox0_reader(uint data);
-void prox1_reader(uint data);
-void prox2_reader(uint data);
-void prox3_reader(uint data);
-void prox4_reader(uint data);
-void prox5_reader(uint data);
-void prox6_reader(uint data);
-void prox7_reader(uint data);
-
-void clearLEDs();
-void setLEDs();
-void clearIRs();
-void setIRs();
+void thread1();
+void thread2();
+void thread3();
+void thread4();
+void thread5();
+void thread6();
+void thread7();
+void log_me();
+bool toggle_frontLED(uint16 EventID, sys_event_data *data, void *user_data);
+bool toggle_frontLED(uint16 EventID, sys_event_data *data, void *user_data);
 
 int16_t main(void)
-{    
-    Sys_Init_Kernel(); 
-     
+{
+    //turn all LEDs off
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -82,203 +67,180 @@ int16_t main(void)
     BODY_LED = 0;
     FRONT_LED = 0;
     
+    Sys_Init_Kernel(); //initialise OpenSwarm
     
-    Sys_SetReadingFunction_UART1(bluetooth_reader);
-    
-    Sys_Subscribe_ADCChannelProcessor(Prx0, prox0_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx1, prox1_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx2, prox2_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx3, prox3_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx4, prox4_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx5, prox5_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx6, prox6_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx7, prox7_reader); 
-    
-    Sys_Start_Kernel();
-    
-    uint32 time = Sys_Get_SystemClock();
-    time += (uint32) 1000;
- 
-//    uint counter = 0;
-    
-    while(true){
+    if(   !Sys_Start_Process(thread1) ||
+          !Sys_Start_Process(thread2) ||
+          !Sys_Start_Process(thread3) ||
+          !Sys_Start_Process(thread4) ||
+          !Sys_Start_Process(thread5) ||
+          !Sys_Start_Process(thread6) ||
+          !Sys_Start_Process(thread7)
+      ){//start 7 extra threads. If an error occurred -> turn on the FRONT_LED
+        FRONT_LED = 1;
+    }
        
-        
-        uint32 time_now = Sys_Get_SystemClock();
-        if(time_now >= time){//wait the refresh_rate time
-            //random_change++;
-            
-        switch(Sys_Get_Selector()){
-            case 0:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                clearLEDs();
-                clearIRs();
-                break;
-            case 1:
-            case 2:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                clearIRs();
-                break;
-            case 3:
-                Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                clearIRs();
-                break;
-            case 4:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                setLEDs();
-                clearIRs();
-                break;
-            case 5:
-            case 6:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                setLEDs();
-                clearIRs();
-                break;
-            case 7:
-            case 8:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                clearLEDs();
-                setIRs();
-                break;
-            case 10:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                setIRs();
-                break;
-            case 11:
-                Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                setIRs();
-                break;
-            case 12:
-            case 13:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                setLEDs();
-                setIRs();
-                break;
-            case 14:
-            case 15:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                setLEDs();
-                setIRs();
-                break;
-            default:
-                break;
-        }
-            
-            time += (uint32) 100;
+    //execute toggle_frontLED every time when the selector was changed
+    Sys_Subscribe_to_Event(SYS_EVENT_IO_SELECTOR_CHANGE, toggle_frontLED, 0, 0);
+    
+    Sys_Start_Kernel();//start OpenSwarm -> From now on all threads are running concurrently
+      
+    //Sys_Writeto_UART1("OS Started\r\n", 12);//send via Bluetooth
+    
+    uint32 time = 1000;
+    while(true){//DO Nothing (do only things for testing)
+
+        uint32 time_now = Sys_Get_SystemClock();//get the current time
+        if(time_now >= time){//if one second passed
+            time += 1000;//calculate next second
+            LED0 = ~LED0;//toggle LED0
         }
     }
 }
 
-void clearLEDs(){
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
-    LED3 = 0;
-    LED4 = 0;
-    LED5 = 0;
-    LED6 = 0;
-    LED7 = 0;
-    BODY_LED = 0;
-    FRONT_LED = 0;
-}
-
-void setLEDs(){
-    LED0 = 1;
-    LED1 = 1;
-    LED2 = 1;
-    LED3 = 1;
-    LED4 = 1;
-    LED5 = 1;
-    LED6 = 1;
-    LED7 = 1;
-    BODY_LED = 1;
-    FRONT_LED = 1;
-}
-
-void clearIRs(){  
-    PULSE_IR0 = 0;
-    PULSE_IR1 = 0;
-    PULSE_IR2 = 0;
-    PULSE_IR3 = 0;
-}
-void setIRs(){  
-    PULSE_IR0 = 1;
-    PULSE_IR1 = 1;
-    PULSE_IR2 = 1;
-    PULSE_IR3 = 1;
-}
-
-//uint prox_median[8] = {4095,4095,4095,4095,4095,4095,4095,4095};
-uint prox_values[8] = {0};
-inline void prox_reader(int index,uint data){
-    prox_values[index] = data;
+/**
+ * Here is an example how you can send data via Bluetooth to your PC
+ * 
+ */
+void log_me(){
+    static char message[30];//your string
     
-    prox_flag = prox_flag & ~(1 << index);
-    uint max = 0xFFFF;
+    uint length = 0;//length of the string
+    length = sprintf(message, "%07ld;%2u;%4u;%4u\r\n", Sys_Get_SystemTime(),// 
+                                                    Sys_Get_Number_Processes(),// 
+                                                    Sys_Get_InterruptCounter(),//
+                                                    Sys_Get_EventCounter());//convert numbers into a string
     
-    if(prox_flag == 0){//All readings collected
-        prox_flag = 0xFF;        
-        
-        uint xor = 0;
-        
-        int i = 0;
-        for(i=0; i < 8; i++){
-            xor ^= prox_values[i];
+    Sys_Writeto_UART1(message, length);//send via Bluetooth
+    
+    Sys_Reset_InterruptCounter();
+    Sys_Reset_EventCounter();
+}
+
+/**
+ * These functions represent 7 threads. Each thread toggles a different LED after the 65534th increment of i
+ * 
+ */
+void thread1(){
+    int i = 0;
+    while(true){//DO Nothing (do only things for testing)
+        //NOT GOOD CODE 
+        //BUSY WAITING
+        if(i == 0xFFFE){
+            i = 0;
+            LED1 = ~LED1; 
         }
-        
-        Sys_Writeto_UART1("P", 1);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(prox_values, 16);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(&xor, 2);// 2*2*8+3*2 elements of 2 bytes
-        Sys_Writeto_UART1(&max,2);// 2*2*8+3*2 elements of 2 bytes
+        i++;
+    } 
+}
+void thread2(){
+    int i = 0;
+    while(true){//DO Nothing (do only things for testing)
+        //NOT GOOD CODE 
+        //BUSY WAITING
+        if(i == 0xFFFE){
+            i = 0;
+            LED2 = ~LED2; 
+        }
+        i++;
+    } 
+}
+void thread3(){
+    int i = 0; 
+    while(true){//DO Nothing (do only things for testing)
+        //NOT GOOD CODE 
+        //BUSY WAITING
+        if(i == 0xFFFE){
+            i = 0;
+            LED3 = ~LED3; 
+        }
+        i++;
+    } 
+}
+void thread4(){
+    int i = 0;    
+    while(true){//DO Nothing (do only things for testing)
+        //NOT GOOD CODE 
+        //BUSY WAITING
+        if(i == 0xFFFE){
+            i = 0;
+            LED4 = ~LED4; 
+        }
+        i++;
+    } 
+}
+void thread5(){
+    uint32 time = 1000;
+    while(true){//DO Nothing (do only things for testing)
+        //NOT GOOD CODE 
+        //BUSY WAITING
+        uint32 time_now = Sys_Get_SystemClock();//get the current time
+        if(time_now >= time){//if one second passed
+            time += 1000;//calculate next second
+            LED5 = ~LED5; 
+        }
+    } 
+}
+void thread6(){
+    uint32 time = 1000; 
+    while(true){//DO Nothing (do only things for testing)
+        //NOT GOOD CODE 
+        //BUSY WAITING
+        uint32 time_now = Sys_Get_SystemClock();//get the current time
+        if(time_now >= time){//if one second passed
+            time += 1000;//calculate next second
+            LED6 = ~LED6; 
+        }
+    } 
+}
+
+void thread7(){
+    uint32 time = 1000; 
+    while(true){//DO Nothing (do only things for testing)
+        //NOT GOOD CODE 
+        //BUSY WAITING
+        uint32 time_now = Sys_Get_SystemClock();//get the current time
+        if(time_now >= time){//if one second passed
+            time += 1000;//calculate next second
+            LED7 = ~LED7; 
+        }
+    } 
+}
+
+/**
+ *
+ * This function toggles the front LED whenever an event occurred to which this function has been subscribed 
+ *
+ * @para[in] PID        identifier of the process to which this function was subscribed
+ * @para[in] eventID    identifier of the event to which this function was subscribed
+ * @para[in] data       the data which was sent with the event
+ * @return   bool       was this function successful?
+ */
+bool toggle_frontLED(uint16 eventID, sys_event_data *data, void *user_data){
+    FRONT_LED = ~FRONT_LED;
+    return true;
+}
+
+/**
+ * This is a nice alternative to the other toggle_frontLED function
+ * This function turns on the front_LED, if the selector was set to an even number
+ *
+ * @para[in] PID        identifier of the process to which this function was subscribed
+ * @para[in] eventID    identifier of the event to which this function was subscribed
+ * @para[in] data       the data which was sent with the event
+ * @return   bool       was this function successful?
+ */
+bool toggle_frontLED2(uint16 eventID, sys_event_data *data, void *user_data){
+    uint8 selector_value;
+    if(data->size <= sizeof(uint8)){//does the data fit into an uint32 value
+        selector_value =  *((uint8*) data->value);//store the value
     }
     
-}
-
-void bluetooth_reader(uint8 data){
-    ;
-}
-
-void prox0_reader(uint data){
-    prox_reader(0, data);
-}
-void prox1_reader(uint data){
-    prox_reader(1, data);
-}
-
-void prox2_reader(uint data){
-    prox_reader(2, data);
-}
-
-void prox3_reader(uint data){
-    prox_reader(3, data);
-}
-
-void prox4_reader(uint data){
-    prox_reader(4, data);
-}
-
-void prox5_reader(uint data){
-    prox_reader(5, data);
-}
-
-void prox6_reader(uint data){
-    prox_reader(6, data);
-}
-
-void prox7_reader(uint data){
-    prox_reader(7, data);
+    if(selector_value % 2 == 0){//is it even=true or odd=false
+       FRONT_LED = 1;
+    }else{
+        FRONT_LED = 0;
+    }
+    
+    return true;
 }
