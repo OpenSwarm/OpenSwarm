@@ -151,7 +151,11 @@ uint Sys_Prox_trasform(uint i, uint value){
             continue;
         }
         //if you found it -> linearise towards the smaller stored point
-        return sys_transformation[j][0] - (((sys_transformation[j][0] - sys_transformation[j-1][0]) * (cal - sys_transformation[j][1])) / (sys_transformation[j-1][1] - sys_transformation[j][1]));
+        uint32 interpolation = (sys_transformation[j][0] - sys_transformation[j-1][0]);
+        interpolation = interpolation*(cal - sys_transformation[j][1]);
+        interpolation = interpolation/(sys_transformation[j-1][1] - sys_transformation[j][1]);
+        
+        return sys_transformation[j][0] - (uint) interpolation;
     }
     
     //if the sensor value is too small -> out of range
