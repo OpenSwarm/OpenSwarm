@@ -21,6 +21,9 @@
 #define ADC_CHANNELS 16 /*!< Maximum amount of ADC-channels*/
 
 static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};  /*!< Defines the a ADC-preProcessor for each channel*/
+static PRX_finisher prx_finisher = 0;
+static MIC_finisher mic_finisher = 0;
+static ACC_finisher acc_finisher = 0;
 
 uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets defined by the ADC noise*/
 
@@ -56,9 +59,9 @@ inline void Sys_Init_ADC(void){
     ADCON2bits.BUFM     = 0;    // Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.ALTS     = 0;    // Always use MUX A input multiplexer settings
     
-    ADCON3bits.SAMC     = 1; //: Auto-Sample Time bits - bits between sampling and conversion//31
+    ADCON3bits.SAMC     = 31; //: Auto-Sample Time bits - bits between sampling and conversion//31
     ADCON3bits.ADRC     = 1;    //internal clock
-    ADCON3bits.ADCS     = 0; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
+    ADCON3bits.ADCS     = 63; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
     
     ADCHSbits.CH0NA     = 0;    //Select VREF- for CH0- input
             
@@ -136,9 +139,21 @@ void __attribute__((interrupt, auto_psv)) _ADCInterrupt(void){
         if(adc_preprocessors[i+2] != 0){//+2 because I do not collect the debug ADC
             adc_preprocessors[i+2](adcbuf[i]);
         }
-        
         sys_random_number = (sys_random_number << 1) | (adcbuf[i] & 0x0001); //use the last bit (adc noise) to generate the random number
     }
+        
+    if(prx_finisher != 0){
+        prx_finisher();
+    }
+        
+    if(mic_finisher != 0){
+        mic_finisher();
+    }
+        
+    if(acc_finisher != 0){
+        acc_finisher();
+    }
+        
     
     Sys_End_AtomicSection();
     IFS0bits.ADIF = 0;  //After conversion ADIF is set to 1 and must be cleared
@@ -234,4 +249,16 @@ uint8 Sys_Rand8(){
  */
 uint16 Sys_Rand16(){
     return sys_random_number;
+}
+
+
+
+void Sys_Subscribe_ProxFinisher(PRX_finisher func){
+    prx_finisher = func;
+}
+void Sys_Subscribe_MicFinisher(MIC_finisher func){
+    mic_finisher = func;
+}
+void Sys_Subscribe_AccFinisher(ACC_finisher func){
+    acc_finisher = func;
 }

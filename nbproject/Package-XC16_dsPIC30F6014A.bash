@@ -10,9 +10,9 @@ CND_CONF=XC16_dsPIC30F6014A
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/os__copy_.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=os__copy_.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=os(copy)/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/os.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=os.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=os/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/os(copy)/bin
+makeDirectory ${TMPDIR}/os/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/os(copy).tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/os.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/os(copy).tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/os.tar *
 checkReturnCode
 
 # Cleanup

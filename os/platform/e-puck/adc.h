@@ -100,6 +100,9 @@ typedef enum {
 } channel; /*!< Defines the channels for the adc*/
     
 typedef void (*ADC_pre_processor)(uint); /*!< Defines the structure of an ADC-preProcessor*/
+typedef void (*PRX_finisher)(void); /*!< Defines the structure of an ADC-preProcessor*/
+typedef void (*MIC_finisher)(void); /*!< Defines the structure of an ADC-preProcessor*/
+typedef void (*ACC_finisher)(void); /*!< Defines the structure of an ADC-preProcessor*/
 
 inline void Sys_Init_ADC(void);
 inline void Sys_Start_ADC(void);
@@ -108,6 +111,10 @@ inline void Sys_Reset_ADC(void);
 inline void Sys_Deactivate_ADC(void);
 
 void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func);
+
+void Sys_Subscribe_ProxFinisher(PRX_finisher func);
+void Sys_Subscribe_MicFinisher(MIC_finisher func);
+void Sys_Subscribe_AccFinisher(ACC_finisher func);
 
 void Sys_Reset_ADCProcessors(void);
 void Sys_Reset_ADCProcessor(channel c);
