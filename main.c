@@ -67,6 +67,8 @@ void setLEDs();
 void clearIRs();
 void setIRs();
 
+bool donotsend = false;
+
 int16_t main(void)
 {    
     Sys_Init_Kernel(); 
@@ -107,15 +109,21 @@ int16_t main(void)
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
             //random_change++;
-            
+        
+        donotsend = false;
         switch(Sys_Get_Selector()){
             case 0:
                 Sys_Set_LeftWheelSpeed(0);
                 Sys_Set_RightWheelSpeed(0);
                 clearLEDs();
                 clearIRs();
-                break;
+                donotsend = true;
             case 1:
+                Sys_Set_LeftWheelSpeed(0);
+                Sys_Set_RightWheelSpeed(0);
+                clearLEDs();
+                clearIRs();
+                break;
             case 2:
                 Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
                 Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
@@ -228,7 +236,11 @@ inline void prox_reader(int index,uint data){
     prox_values[index] = data;
     
     prox_flag = prox_flag & ~(1 << index);
-    uint max = 0xFFFF;
+    uint max = 0;//0xFFFF;
+    
+    if(donotsend){
+        return;
+    }
     
     if(prox_flag == 0){//All readings collected
         prox_flag = 0xFF;        
