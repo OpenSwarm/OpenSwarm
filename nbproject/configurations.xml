@@ -28,6 +28,9 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f1" displayName="os" projectFiles="true">
+        <logicalFolder name="f5" displayName="Communication" projectFiles="true">
+          <itemPath>os/communication/communication.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="f3" displayName="events" projectFiles="true">
           <itemPath>os/events/events.h</itemPath>
         </logicalFolder>
@@ -105,6 +108,9 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f1" displayName="os" projectFiles="true">
+        <logicalFolder name="f5" displayName="Communication" projectFiles="true">
+          <itemPath>os/communication/communication.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="f3" displayName="events" projectFiles="true">
           <itemPath>os/events/events.c</itemPath>
         </logicalFolder>
