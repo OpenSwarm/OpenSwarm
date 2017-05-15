@@ -25,6 +25,8 @@ void *Sys_Malloc(uint length);
 void Sys_Free(void *);
 void Sys_Memcpy(void *source, void *destination, uint length);
 
+void Sys_Memset(void *point, uint lenght, uint8 value);
+
 
 #ifdef	__cplusplus
 }

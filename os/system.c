@@ -62,6 +62,9 @@
 #ifdef SYS_PROXIMITY_USED
 #include "platform/e-puck/proximity.h"
 #endif
+#ifdef SYS_COMMUNICATION_USED
+#include "communication/communication.h"
+#endif
 #endif
 
 /**
@@ -132,6 +135,9 @@ void Sys_Init_Kernel(){
 #ifdef SYS_CLOCK_USED
     Sys_Init_SystemClock();
 #endif
+#ifdef SYS_COMMUNICATION_USED
+    Sys_Init_Communication();
+#endif
 #endif
 }
 
@@ -144,7 +150,6 @@ void Sys_Init_Kernel(){
 void Sys_Start_Kernel(void){
 
     Sys_Start_SystemTimer();
-
     Sys_Start_IOManagement();
     
 #ifdef EPUCK_USED
@@ -186,6 +191,10 @@ void Sys_Start_Kernel(void){
 #ifdef SYS_CLOCK_USED
     Sys_Start_SystemClock();
 #endif
+#ifdef SYS_COMMUNICATION_USED
+    Sys_Start_Communication();
 #endif
+#endif
+    
 }
 

@@ -34,6 +34,10 @@
 #include "os/interrupts.h"
 #include "os/platform/e-puck/adc.h"
 
+#include "os/platform/e-puck/selector.h"
+
+#include "os/communication/communication.h"
+
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -67,12 +71,16 @@ void setLEDs();
 void clearIRs();
 void setIRs();
 
-bool doNotSend = false;
-
 int16_t main(void)
 {    
     Sys_Init_Kernel(); 
-     
+    
+    Sys_SetReadingFunction_UART1(bluetooth_reader);
+    
+    Sys_Start_Kernel();
+    
+    
+    
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -83,20 +91,6 @@ int16_t main(void)
     LED7 = 0;
     BODY_LED = 0;
     FRONT_LED = 0;
-    
-    
-    Sys_SetReadingFunction_UART1(bluetooth_reader);
-    
-    Sys_Subscribe_ADCChannelProcessor(Prx0, prox0_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx1, prox1_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx2, prox2_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx3, prox3_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx4, prox4_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx5, prox5_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx6, prox6_reader);
-    Sys_Subscribe_ADCChannelProcessor(Prx7, prox7_reader); 
-    
-    Sys_Start_Kernel();
     
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
@@ -104,209 +98,54 @@ int16_t main(void)
 //    uint counter = 0;
     
     while(true){
-       
+        
+    //setIRs();
+        Sys_Message *msg;
+        while( (msg = getNewMessage())){ //!= 0 
+            //char back[] ={'r',0,0,0,0,0};
+            //Sys_Memcpy(&(msg->data), &back[1], 4);
+            //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
+            //Sys_Writeto_UART1(back, 6);
+        }
         
         uint32 time_now = Sys_Get_SystemClock();
         if(time_now >= time){//wait the refresh_rate time
-            //random_change++;
         
-        donotsend = false;
-        switch(Sys_Get_Selector()){
-            case 0:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                clearLEDs();
-                clearIRs();
-                doNotSend = true;
-                break;
-            case 1:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                clearLEDs();
-                clearIRs();
-                break;
-            case 2:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                clearIRs();
-                break;
-            case 3:
-                Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                clearIRs();
-                break;
-            case 4:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                setLEDs();
-                clearIRs();
-                break;
-            case 5:
-            case 6:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                setLEDs();
-                clearIRs();
-                break;
-            case 7:
-            case 8:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                clearLEDs();
-                setIRs();
-                break;
-            case 10:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                setIRs();
-                break;
-            case 11:
-                Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                clearLEDs();
-                setIRs();
-                break;
-            case 12:
-            case 13:
-                Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED_MM_S);
-                Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED_MM_S);
-                setLEDs();
-                setIRs();
-                break;
-            case 14:
-            case 15:
-                Sys_Set_LeftWheelSpeed(0);
-                Sys_Set_RightWheelSpeed(0);
-                setLEDs();
-                setIRs();
-                break;
-            default:
-                break;
-        }
-            
             time += (uint32) 100;
         }
     }
 }
 
-void clearLEDs(){
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
-    LED3 = 0;
-    LED4 = 0;
-    LED5 = 0;
-    LED6 = 0;
-    LED7 = 0;
-    BODY_LED = 0;
-    FRONT_LED = 0;
-}
+uint8 rx_BT_Buffer[6];
 
-void setLEDs(){
-    LED0 = 1;
-    LED1 = 1;
-    LED2 = 1;
-    LED3 = 1;
-    LED4 = 1;
-    LED5 = 1;
-    LED6 = 1;
-    LED7 = 1;
-    BODY_LED = 1;
-    FRONT_LED = 1;
-}
-
-void clearIRs(){  
-    PULSE_IR0 = 0;
-    PULSE_IR1 = 0;
-    PULSE_IR2 = 0;
-    PULSE_IR3 = 0;
-}
-void setIRs(){  
-    PULSE_IR0 = 1;
-    PULSE_IR1 = 1;
-    PULSE_IR2 = 1;
-    PULSE_IR3 = 1;
-}
-
-//uint prox_median[8] = {4095,4095,4095,4095,4095,4095,4095,4095};
-uint prox_values[8] = {0};
-inline void prox_reader(int index,uint data){
-    prox_values[index] = data;
+void bluetooth_reader(uint8 data){
+    static int counter = 0;
     
-    prox_flag = prox_flag & ~(1 << index);
-    uint max = 0;//0xFFFF;
-    
-    if(doNotSend){
+    if(counter == 0 && data != 's'){
         return;
     }
     
-    if(prox_flag == 0){//All readings collected
-        
-        unsigned char msg[22];   
-        
-        uint xor_v = 0;
-        char *p_xor_v = (char*) &xor_v;
-        
-        msg[0] = 'P';
-        int i = 0;
-        for(i=0; i < 16; i++){
-            if(i < 8){
-                xor_v ^= prox_values[i];
-            }
-            
-            char* values = (char *) prox_values;
-            
-            msg[i+1] = values[i];
-        }
-        
-        msg[17] =  p_xor_v[0];
-        msg[18] =  p_xor_v[1];
-                
-        msg[19] = '<';
-        msg[20] = ':';
-        msg[21] = '>';
-        
-        Sys_Writeto_UART1(msg, 22);// 2*2*8+3*2 elements of 2 bytes
-        
-        prox_flag = 0xFF;     
+    rx_BT_Buffer[counter] = data;
+    counter++;
+    
+    if(counter < 6){
+        return;
     }
     
-}
-
-void bluetooth_reader(uint8 data){
-    ;
-}
-
-void prox0_reader(uint data){
-    prox_reader(0, data);
-}
-void prox1_reader(uint data){
-    prox_reader(1, data);
-}
-
-void prox2_reader(uint data){
-    prox_reader(2, data);
-}
-
-void prox3_reader(uint data){
-    prox_reader(3, data);
-}
-
-void prox4_reader(uint data){
-    prox_reader(4, data);
-}
-
-void prox5_reader(uint data){
-    prox_reader(5, data);
-}
-
-void prox6_reader(uint data){
-    prox_reader(6, data);
-}
-
-void prox7_reader(uint data){
-    prox_reader(7, data);
+    counter = 0;
+    
+    if(rx_BT_Buffer[0] == 's'){
+        if( (rx_BT_Buffer[1] ^ rx_BT_Buffer[2] ^  rx_BT_Buffer[3] ^  rx_BT_Buffer[4]) ==  rx_BT_Buffer[5]){
+            Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
+            
+            //char ack[] ={'a',0,0,0,0,0};
+            //Sys_Memcpy(&rx_BT_Buffer[1], &ack[1],5);
+            //Sys_Writeto_UART1(ack, 6);
+            return;
+        }
+    }
+    
+    char nack[] ={'e',0,0,0,0,0};
+    Sys_Memcpy(&rx_BT_Buffer[0], &nack[1], 5);
+    Sys_Writeto_UART1(nack, 6);
 }

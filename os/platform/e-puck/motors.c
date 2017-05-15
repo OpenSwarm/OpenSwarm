@@ -20,12 +20,17 @@
 #include "../../events/events.h"
 
 #include "../../definitions.h"
+#include "../../interrupts.h"
+
 #include <stdlib.h>
 
 #define MAX_WHEEL_SPEED 128 	/*!< Maximum wheel speed in steps*/
 #define MIN_WHEEL_SPEED 4   	/*!< Minimum wheel speed in steps*/
 #define POWER_SAVE_WAIT 10      /*!< amount of steps needed to move the motor one step further */
-
+static int steps_left = 0;
+static int steps_right = 0;
+bool doSteps_right = false;
+bool doSteps_left = false;
 /**
  * @brief This struct contains the speed for a motor.
  */
@@ -123,6 +128,8 @@ void Sys_LeftMotor_Controller(){
    static sint16 next_phase = 0;
    static uint8 power_saving = 0;
    
+
+   
    if(left_motor.speed <= MIN_WHEEL_SPEED && left_motor.speed >= -MIN_WHEEL_SPEED){//if stop -> reset speed to that no current is used
        Sys_LeftMotor_Reset();
        return;
@@ -133,6 +140,7 @@ void Sys_LeftMotor_Controller(){
             phase--;
             next_phase = (10*MAX_WHEEL_SPEED)/abs(left_motor.speed);
             power_saving = 0;
+            steps_left--;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){
             Sys_LeftMotor_Reset();
@@ -141,10 +149,11 @@ void Sys_LeftMotor_Controller(){
            power_saving++;//
        }
    }else{
-       if(--next_phase <= 0){
+       if(--next_phase <= 0){       
            phase++;
            next_phase = (10*MAX_WHEEL_SPEED)/left_motor.speed;
             power_saving = 0;
+            steps_left--;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){
             Sys_LeftMotor_Reset();
@@ -154,6 +163,12 @@ void Sys_LeftMotor_Controller(){
        } 
    }
 
+    if(steps_left == 0){
+        doSteps_left = false;
+        Sys_Set_LeftWheelSpeed(0);
+        return;
+    }
+    
    phase %= 4;
     Sys_LeftMotor_SetPhase_HDI(phase);
 }
@@ -168,17 +183,20 @@ void Sys_RightMotor_Controller(){
    static uint8 phase = 0;		 // phase can be 0 to 3
    static sint16 next_phase = 0;
    static uint8 power_saving = 0;
+   
 
    if(right_motor.speed <= MIN_WHEEL_SPEED && right_motor.speed >= -MIN_WHEEL_SPEED){
         Sys_RightMotor_Reset();
        return;
    }
 
+       
    if(right_motor.speed < 0){
        if(--next_phase <= 0){
             phase--;
             next_phase = (10*MAX_WHEEL_SPEED)/abs(right_motor.speed);
             power_saving = 0;
+            steps_right--;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){
             Sys_RightMotor_Reset();
@@ -191,6 +209,7 @@ void Sys_RightMotor_Controller(){
            phase++;
            next_phase = (10*MAX_WHEEL_SPEED)/right_motor.speed;
             power_saving = 0;
+            steps_right--;
        } else {
            if(power_saving >= POWER_SAVE_WAIT){
             Sys_RightMotor_Reset();
@@ -200,6 +219,13 @@ void Sys_RightMotor_Controller(){
        }
    }
 
+   
+    if(steps_right == 0){
+        doSteps_right = false;
+        Sys_Set_RightWheelSpeed(0);
+        return;
+    }
+    
    phase %= 4;
   // set the phase on the port pins
 
@@ -246,14 +272,18 @@ bool Sys_RightMotor_EventHandler(uint eventID, sys_event_data *data /*mm/s*/, vo
  * @param speed of the left wheel
  */
 void Sys_Set_LeftWheelSpeed(sint16 speed){
+    Sys_Start_AtomicSection();
     if(speed > MAX_WHEEL_SPEED){
         left_motor.speed = MAX_WHEEL_SPEED;
+        Sys_End_AtomicSection();
         return;
     }else if(speed < -MAX_WHEEL_SPEED){
         left_motor.speed = -MAX_WHEEL_SPEED;
+        Sys_End_AtomicSection();
         return;
     }
     left_motor.speed = speed;
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -263,14 +293,18 @@ void Sys_Set_LeftWheelSpeed(sint16 speed){
  * @param speed of the right wheel
  */
 void Sys_Set_RightWheelSpeed(sint16 speed){
+    Sys_Start_AtomicSection();
     if(speed > MAX_WHEEL_SPEED){
         right_motor.speed = MAX_WHEEL_SPEED;
+        Sys_End_AtomicSection();
         return;
     }else if(speed < -MAX_WHEEL_SPEED){
         right_motor.speed = -MAX_WHEEL_SPEED;
+        Sys_End_AtomicSection();
         return;
     }
     right_motor.speed = speed;
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -289,4 +323,59 @@ sint16 Sys_Get_LeftWheelSpeed(void){
  */
 sint16 Sys_Get_RightWheelSpeed(void){
     return left_motor.speed;
+}
+int Sys_Get_StepsLeft(void)
+{
+    return steps_left;
+}
+
+void Sys_Set_StepsLeft(int set_steps)
+{  
+    Sys_Start_AtomicSection();
+    if(set_steps == 0){
+        doSteps_left = false;
+        steps_left = 0;
+        Sys_End_AtomicSection(); 
+        return;
+    }
+     
+    doSteps_left = true;
+    
+    if(set_steps > 0){
+        Sys_Set_LeftWheelSpeed(MAX_WHEEL_SPEED);
+        steps_left = set_steps;    
+    }else{
+        Sys_Set_LeftWheelSpeed(-MAX_WHEEL_SPEED);
+        steps_left = -set_steps;    
+    }
+    Sys_End_AtomicSection(); 
+}
+
+int Sys_Get_StepsRight(void)
+{
+    return steps_right;
+}
+
+void Sys_Set_StepsRight(int set_steps)
+{
+    
+    Sys_Start_AtomicSection();
+    if(set_steps == 0){
+        doSteps_right = false;
+        steps_right = 0;
+        Sys_End_AtomicSection(); 
+        return;
+    }
+    
+    doSteps_right = true;
+    
+    if(set_steps > 0){
+        Sys_Set_RightWheelSpeed(MAX_WHEEL_SPEED);
+        steps_right = set_steps;
+    }else{
+        Sys_Set_RightWheelSpeed(-MAX_WHEEL_SPEED);
+        steps_right = -set_steps;
+    }
+    
+    Sys_End_AtomicSection(); 
 }

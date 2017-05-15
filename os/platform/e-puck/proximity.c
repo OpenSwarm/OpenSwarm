@@ -78,11 +78,6 @@ void Sys_Init_Proximity(void){
     Sys_Subscribe_ADCChannelProcessor(Prx5, Sys_Prox5_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx6, Sys_Prox6_preprocessor);
     Sys_Subscribe_ADCChannelProcessor(Prx7, Sys_Prox7_preprocessor); 
-    
-    PULSE_IR0 = 0;
-    PULSE_IR1 = 0;
-    PULSE_IR2 = 0;
-    PULSE_IR3 = 0;   
 }
 
 /**

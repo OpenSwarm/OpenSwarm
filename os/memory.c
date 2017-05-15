@@ -12,6 +12,7 @@
 
 #include "memory.h"
 
+#include "definitions.h"
 #include "interrupts.h"
 #include <stdlib.h>
 
@@ -113,4 +114,21 @@ void Sys_Memcpy(void *source_i, void *destination_o, uint length){
  */
 uint Sys_MemoryUsed(){
     return sys_bytes_used;
+}
+
+/**
+ *
+ * Function to set the memory
+ *
+ * @param[in] 	point        pointer to the source
+ * @param[in] 	length       size of the memory that should be set to value
+ * @param[in] 	value        value of the memory
+ */
+void Sys_Memset(void *point, uint length, uint8 value){
+    uint8 *ptr = (uint8*) point;
+    int i=0;
+    
+    for(i=0; i < length; i++){
+        ptr[i] = value;
+    }
 }

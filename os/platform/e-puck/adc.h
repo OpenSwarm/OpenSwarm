@@ -98,7 +98,16 @@ typedef enum {
     DBGchannels = 0b0000000000000011,
     ALLchannels = 0xFFFF,
 } channel; /*!< Defines the channels for the adc*/
-    
+   
+
+typedef enum {
+    ProxDone   = 0b1000,
+    MicDone    = 0b0100,
+    AccDone    = 0b0010,
+    DbgDone    = 0b0001,
+    AllDone    = 0b1111,
+} sensorGroup; /*!< Defines the groups of sensor channels*/
+
 typedef void (*ADC_pre_processor)(uint); /*!< Defines the structure of an ADC-preProcessor*/
 
 inline void Sys_Init_ADC(void);
@@ -108,6 +117,7 @@ inline void Sys_Reset_ADC(void);
 inline void Sys_Deactivate_ADC(void);
 
 void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func);
+void Sys_Subscribe_ADCFinish(sensorGroup flag, pFunction func);
 
 void Sys_Reset_ADCProcessors(void);
 void Sys_Reset_ADCProcessor(channel c);

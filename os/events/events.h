@@ -96,7 +96,7 @@ extern "C" {
         uint size;/*!< size of the transferred data (bytes) */
 
         struct sys_event_data_s *next;/*!< pointer to the next element in the List */
-    }sys_event_data;
+    } sys_event_data;
     
      
     /**

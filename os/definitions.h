@@ -62,10 +62,15 @@ extern "C" {
     #define SYS_EVENT_IO_PROX_6         0x10    /*!< ID of the event that signals the Proximity Sensor 6*/
     #define SYS_EVENT_IO_PROX_7         0x11    /*!< ID of the event that signals the Proximity Sensor 7*/
 
+    
+    #define SYS_LOCAL_ADDRESS           0b101101/*!< Address used while communicating*/
+    
 #endif
         
 #define SYS_EVENT_TERMINATION       0x01    /*!< ID of the event that signal a general termination event*/
 #define SYS_EVENT_10ms_CLOCK        0x02    /*!< ID of the event that signals 1ms timer ticks*/
+#define SYS_EVENT_COM_RX_MSG        0x12    /*!< ID of the event that signals the Proximity Sensor 7*/
+#define SYS_EVENT_COM_TX_MSG        0x13    /*!< ID of the event that signals the Proximity Sensor 7*/
 
 #define ALL_FUNCTIONS ((pEventHandlerFunction) 0xFFFFFFFE) /*!< the value to indicate all event handler*/
 

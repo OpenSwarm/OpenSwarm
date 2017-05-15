@@ -444,6 +444,7 @@ sys_event_data* Sys_Copy_EventData(sys_event_data* data){
             
     Sys_Memcpy(data->value, evData->value, data->size);
     
+    Sys_End_AtomicSection();
     return evData;
 }
 

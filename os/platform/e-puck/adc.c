@@ -14,6 +14,8 @@
 
 #include "adc.h"
 
+#include "../../communication/communication.h"
+
 #include "../../definitions.h"
 #include "../../interrupts.h"
 #include "../../system.h"
@@ -21,6 +23,7 @@
 #define ADC_CHANNELS 16 /*!< Maximum amount of ADC-channels*/
 
 static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};  /*!< Defines the a ADC-preProcessor for each channel*/
+static pFunction adcFinishFunctions[4] = {0};  /*!< Defines functions that are called when a group was successfully read*/
 
 uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets defined by the ADC noise*/
 
@@ -30,8 +33,6 @@ uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets 
  * 
  */
 inline void Sys_Init_ADC(void){
-    
-    Sys_Reset_ADCProcessors();
     
     IEC0bits.ADIE = 0;
     IFS0bits.ADIF = 0; //ADC interrupt flag
@@ -56,9 +57,9 @@ inline void Sys_Init_ADC(void){
     ADCON2bits.BUFM     = 0;    // Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.ALTS     = 0;    // Always use MUX A input multiplexer settings
     
-    ADCON3bits.SAMC     = 1; //: Auto-Sample Time bits - bits between sampling and conversion//31
+    ADCON3bits.SAMC     = 31;//1 //: Auto-Sample Time bits - bits between sampling and conversion//31
     ADCON3bits.ADRC     = 1;    //internal clock
-    ADCON3bits.ADCS     = 0; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
+    ADCON3bits.ADCS     = 63;//0 //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
     
     ADCHSbits.CH0NA     = 0;    //Select VREF- for CH0- input
             
@@ -140,6 +141,12 @@ void __attribute__((interrupt, auto_psv)) _ADCInterrupt(void){
         sys_random_number = (sys_random_number << 1) | (adcbuf[i] & 0x0001); //use the last bit (adc noise) to generate the random number
     }
     
+    for(i = 0; i < 4; i++){
+        if(adcFinishFunctions[i] != 0){//+2 because I do not collect the debug ADC
+            adcFinishFunctions[i]();
+        }
+    }
+    
     Sys_End_AtomicSection();
     IFS0bits.ADIF = 0;  //After conversion ADIF is set to 1 and must be cleared
 }
@@ -154,6 +161,9 @@ void __attribute__((interrupt, auto_psv)) _ADCInterrupt(void){
  */
 void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func){
     int i;
+    
+    Sys_Start_AtomicSection();
+    
     for(i = 0; i < ADC_CHANNELS; i++){
         if(c & 0x0001){//is the last bit a 1 ?
             adc_preprocessors[i] = func;
@@ -161,6 +171,8 @@ void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func){
         
         c = c >> 1;
     }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -170,9 +182,12 @@ void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func){
  */
 void Sys_Reset_ADCProcessors(){
     int i;
+    
+    Sys_Start_AtomicSection();
     for(i = 0; i < ADC_CHANNELS; i++){
         adc_preprocessors[i] = 0;
     }
+    Sys_End_AtomicSection();
 }
 
 /**
@@ -234,4 +249,29 @@ uint8 Sys_Rand8(){
  */
 uint16 Sys_Rand16(){
     return sys_random_number;
+}
+
+/**
+ *
+ * This stores functions that indicated that a group of sensor reading was successfully handled.
+ * 
+ * @param[in] func pointer to "void function(void)"
+ * @param[in] flag Flag that indicates which group of sensors has been processed
+ * 
+ */
+void Sys_Subscribe_ADCFinish(sensorGroup flag, pFunction func){
+    Sys_Start_AtomicSection();
+    if( flag & ProxDone){//!= 0
+        adcFinishFunctions[0] = func;
+    }
+    if(flag & MicDone){//!= 0
+        adcFinishFunctions[1] = func;
+    }
+    if(flag & AccDone){//!= 0
+        adcFinishFunctions[2] = func;
+    }
+    if(flag & DbgDone){//!= 0
+        adcFinishFunctions[3] = func;
+    }
+    Sys_End_AtomicSection();
 }
