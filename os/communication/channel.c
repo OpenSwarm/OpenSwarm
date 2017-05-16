@@ -1,4 +1,4 @@
-#include "communicationInit.h"
+#include "channel.h"
 
 #include "../platform/e-puck/adc.h"
 #include "../platform/e-puck/leds.h"
@@ -16,7 +16,7 @@ static uint init_interation = 0;
 
 #define THRESHOLD_L 5
 
-void Sys_Start_ComInit(){
+void Sys_Start_ChannelCalibration(){
     
     clearLEDs();
     clearIRs();

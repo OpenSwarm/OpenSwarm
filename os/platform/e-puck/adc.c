@@ -97,6 +97,8 @@ inline void Sys_Init_ADC(void){
     ADCSSLbits.CSSL13 = 1;// Proximity 5
     ADCSSLbits.CSSL14 = 1;// Proximity 6
     ADCSSLbits.CSSL15 = 1;// Proximity 7
+    
+    IPC2bits.ADIP = SYS_IRQP_ADC;
 
 }
 

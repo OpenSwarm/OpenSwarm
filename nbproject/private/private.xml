@@ -8,9 +8,13 @@
             <file>file:/home/strenkwalder/code/os/main.c</file>
             <file>file:/home/strenkwalder/code/os/os/memory.c</file>
             <file>file:/home/strenkwalder/code/os/os/communication/communication.c</file>
-            <file>file:/home/strenkwalder/code/os/os/communication/communicationInit.c</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/physical.h</file>
+            <file>file:/home/strenkwalder/code/os/os/system.h</file>
             <file>file:/home/strenkwalder/code/os/os/platform/e-puck/io_HDI.c</file>
-            <file>file:/home/strenkwalder/code/os/os/communication/communicationInit.h</file>
+            <file>file:/home/strenkwalder/code/os/os/definitions.h</file>
+            <file>file:/home/strenkwalder/code/os/os/interrupts.h</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/physical.c</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/adc.c</file>
         </group>
     </open-files>
 </project-private>

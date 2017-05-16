@@ -32,11 +32,12 @@
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
 #include "os/memory.h"
 #include "os/interrupts.h"
-#include "os/platform/e-puck/adc.h"
 
+#include "os/platform/e-puck/adc.h"
 #include "os/platform/e-puck/selector.h"
 
 #include "os/communication/communication.h"
+#include "os/communication/physical.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -106,6 +107,7 @@ int16_t main(void)
             //Sys_Memcpy(&(msg->data), &back[1], 4);
             //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
             //Sys_Writeto_UART1(back, 6);
+            
         }
         
         uint32 time_now = Sys_Get_SystemClock();
@@ -136,7 +138,9 @@ void bluetooth_reader(uint8 data){
     
     if(rx_BT_Buffer[0] == 's'){
         if( (rx_BT_Buffer[1] ^ rx_BT_Buffer[2] ^  rx_BT_Buffer[3] ^  rx_BT_Buffer[4]) ==  rx_BT_Buffer[5]){
-            Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
+            //Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
+            
+            Sys_SendTestPattern();
             
             //char ack[] ={'a',0,0,0,0,0};
             //Sys_Memcpy(&rx_BT_Buffer[1], &ack[1],5);

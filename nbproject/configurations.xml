@@ -31,7 +31,8 @@
         <logicalFolder name="f5" displayName="Communication" projectFiles="true">
           <itemPath>os/communication/communication.h</itemPath>
           <itemPath>os/communication/coder.h</itemPath>
-          <itemPath>os/communication/communicationInit.h</itemPath>
+          <itemPath>os/communication/physical.h</itemPath>
+          <itemPath>os/communication/channel.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f3" displayName="events" projectFiles="true">
           <itemPath>os/events/events.h</itemPath>
@@ -114,7 +115,8 @@
         <logicalFolder name="f5" displayName="Communication" projectFiles="true">
           <itemPath>os/communication/communication.c</itemPath>
           <itemPath>os/communication/coder.c</itemPath>
-          <itemPath>os/communication/communicationInit.c</itemPath>
+          <itemPath>os/communication/physical.c</itemPath>
+          <itemPath>os/communication/channel.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f3" displayName="events" projectFiles="true">
           <itemPath>os/events/events.c</itemPath>

@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-    void Sys_Start_ComInit();
+    void Sys_Start_ChannelCalibration();
     uint Sys_ComThreshold();
 
 

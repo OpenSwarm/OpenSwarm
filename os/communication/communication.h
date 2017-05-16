@@ -6,12 +6,6 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-    
-typedef struct Sys_RawMsg_list_s{
-    uint position;
-    uint message[5];
-    struct Sys_RawMsg_list_s *next;
-}Sys_RawMessageList;
 
 typedef struct message_s{
     uint8           id;
