@@ -44,7 +44,7 @@ extern "C" {
 
 #define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/ 	/*!< Maximum wheel speed in mm/s*/
 
-#define WHOLETURN 1280
+#define WHOLETURN 1290
     
 void Sys_Init_Motors(void);
 void Sys_Deactivate_Motors(void);

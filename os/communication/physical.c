@@ -32,8 +32,6 @@ Sys_RawMessageList **sys_InMsg_ListEnd = &sys_InMsg_List;
 Sys_RawMessageList *sys_OutMsg_List = 0;
 Sys_RawMessageList **sys_OutMsg_List_End = &sys_OutMsg_List;
 
-#define THRESHOLD 5
-
 void ComSensor0(uint);
 void ComSensor1(uint);
 void ComSensor2(uint);
@@ -95,7 +93,7 @@ void Sys_Stop_PhysicalLayer(){
 void ComSensor0(uint s){
     sensorReadings[0] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED0 = 1;
     }else{
         LED0 = 0;
@@ -106,7 +104,7 @@ void ComSensor0(uint s){
 void ComSensor1(uint s){
     sensorReadings[1] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED1 = 1;
     }else{
         LED1 = 0;
@@ -117,7 +115,7 @@ void ComSensor1(uint s){
 void ComSensor2(uint s){
     sensorReadings[2] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED2 = 1;
     }else{
         LED2 = 0;
@@ -128,7 +126,7 @@ void ComSensor2(uint s){
 void ComSensor3(uint s){
     sensorReadings[3] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED3 = 1;
     }else{
         LED3 = 0;
@@ -139,7 +137,7 @@ void ComSensor3(uint s){
 void ComSensor4(uint s){
     sensorReadings[4] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED5 = 1;
     }else{
         LED5 = 0;
@@ -150,7 +148,7 @@ void ComSensor4(uint s){
 void ComSensor5(uint s){
     sensorReadings[5] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED6 = 1;
     }else{
         LED6 = 0;
@@ -161,7 +159,7 @@ void ComSensor5(uint s){
 void ComSensor6(uint s){
     sensorReadings[6] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED7 = 1;
     }else{
         LED7 = 0;
@@ -172,7 +170,7 @@ void ComSensor6(uint s){
 void ComSensor7(uint s){
     sensorReadings[7] = s;
 #ifdef SHOW_SENSOR_LED
-    if( s < Sys_ComThreshold()){
+    if( s <= Sys_ComThreshold()){
         LED0 = 1;
     }else{
         LED0 = 0;
@@ -192,11 +190,13 @@ void ReadFromSensors(void){
     uint new_bit = 0;
     
     uint min_value = 0xFFFF;
+    uint min_sensor = -1;
     
     uint i = 0;
     for(i = 0; i < 8; i++){
         if( min_value > sensorReadings[i]){
             min_value = sensorReadings[i];
+            min_sensor = i;
         }
     }
     
@@ -204,7 +204,7 @@ void ReadFromSensors(void){
         case sending:
             return;
         case waiting:
-            if(min_value > Sys_ComThreshold() - THRESHOLD){//bit = 0
+            if(min_value > Sys_ComThreshold(min_sensor)){//bit = 0
                 return;
             }
             if( (current_Msg ) == 0 ){
@@ -221,7 +221,7 @@ void ReadFromSensors(void){
             break;
     }
     
-    if( min_value > (Sys_ComThreshold() - THRESHOLD)){// bit_value > ADC_PER_BIT*(Sys_ComThreshold() - THRESHOLD)){
+    if( min_value > Sys_ComThreshold(min_sensor)){// bit_value > ADC_PER_BIT*(Sys_ComThreshold() - THRESHOLD)){
         new_bit = 0;
     }else{
         new_bit = 1;
@@ -251,14 +251,15 @@ void ReadFromSensors2(void){
     uint new_bit = 0;
     
     uint min_value = 0xFFFF;
-    uint i = 0;
+    uint min_sensor = -1;
     
+    uint i = 0;
     for(i = 0; i < 8; i++){
         if( min_value > sensorReadings[i]){
             min_value = sensorReadings[i];
+            min_sensor = i;
         }
-    }
-    
+    }    
     
     switch(rxState){
         case sending:
@@ -267,7 +268,7 @@ void ReadFromSensors2(void){
             //readings[0] = min_value;
             //synch_pos = 1;
             
-            if(min_value > Sys_ComThreshold() - THRESHOLD){//bit = 0
+            if(min_value > Sys_ComThreshold(min_sensor)){//bit = 0
                 return;
             }
             
@@ -389,7 +390,7 @@ void ReadFromSensors2(void){
         bit_value += readings[i];
     }
     */
-    if( min_value > (Sys_ComThreshold() - THRESHOLD)){// bit_value > ADC_PER_BIT*(Sys_ComThreshold() - THRESHOLD)){
+    if( min_value > Sys_ComThreshold(min_sensor)){// bit_value > ADC_PER_BIT*(Sys_ComThreshold() - THRESHOLD)){
         new_bit = 0;
     }else{
         new_bit = 1;
@@ -590,16 +591,18 @@ void ReadFromSensors_old(void){
     static Sys_RawMessageList  *current_Msg = 0; 
      
     uint min_value = 0xFFFF; 
-    uint i = 0; 
-     
-    for(i = 0; i < 8; i++){ 
-        if( min_value > sensorReadings[i]){ 
-            min_value = sensorReadings[i]; 
-        } 
-    } 
+    uint min_sensor = -1;
+    
+    uint i = 0;
+    for(i = 0; i < 8; i++){
+        if( min_value > sensorReadings[i]){
+            min_value = sensorReadings[i];
+            min_sensor = i;
+        }
+    }
      
     uint new_bit = 0; 
-    if(min_value < Sys_ComThreshold() - THRESHOLD){ 
+    if(min_value <= Sys_ComThreshold(min_sensor)){ 
         new_bit = 1; 
     } 
      
@@ -686,16 +689,18 @@ void ReadFromSensors_2bits(void){
     static uint measurement_counter = 0;
      
     uint min_value = 0xFFFF; 
-    uint i = 0; 
-     
-    for(i = 0; i < 8; i++){ 
-        if( min_value > sensorReadings[i]){ 
-            min_value = sensorReadings[i]; 
-        } 
-    } 
+    uint min_sensor = -1;
+    
+    uint i = 0;
+    for(i = 0; i < 8; i++){
+        if( min_value > sensorReadings[i]){
+            min_value = sensorReadings[i];
+            min_sensor = i;
+        }
+    }
      
     uint new_bit = 0; 
-    if(min_value < Sys_ComThreshold() - THRESHOLD){ 
+    if(min_value <= Sys_ComThreshold(min_sensor)){ 
         new_bit = 1; 
     } 
      
