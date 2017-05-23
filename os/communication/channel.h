@@ -15,7 +15,7 @@ extern "C" {
 #endif
 
     void Sys_Start_ChannelCalibration();
-    uint Sys_ComThreshold();
+    uint Sys_ComThreshold(uint sensor);
 
 
 #ifdef	__cplusplus
