@@ -7,7 +7,7 @@
 #include "../interrupts.h"
 #include "../memory.h"
 
-#define DEBUG_COM
+//#define DEBUG_COM
 //#define SHOW_SENSOR_LED
 //#define BODY_INDICATOR
 
@@ -679,7 +679,7 @@ void WriteToSensors_old(void){
     } 
 }
 
-#define ADCs_PER_BIT 2
+#define ADCs_PER_BIT 9
 
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_Msg = 0; 

@@ -87,7 +87,7 @@ Sys_Message *getNewMessage(){
     raw_msg->next       = 0;
     raw_msg->position   = 0;
     
-    Sys_Writeto_UART1(raw_msg->message, 10);
+//    Sys_Writeto_UART1(raw_msg->message, 10);
     
     
     Sys_Memset(&out, sizeof(Sys_Message), 0);

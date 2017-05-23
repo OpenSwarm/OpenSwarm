@@ -14,7 +14,7 @@ void InitSensors(void);
 static uint min_value = 0xFFFF;
 static uint init_interation = 0;
 
-#define THRESHOLD_L 5
+#define THRESHOLD_L 20
 
 void Sys_Start_ChannelCalibration(){
     

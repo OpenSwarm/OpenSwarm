@@ -180,7 +180,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.31</languageToolchainVersion>
+        <languageToolchainVersion>1.25</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>
@@ -195,8 +195,6 @@
           <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile>dist/XC16_dsPIC30F6014A/production/os.production.hex</alternateLoadableFile>
         </loading>
-        <subordinates>
-        </subordinates>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>

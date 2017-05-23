@@ -103,17 +103,11 @@ int16_t main(void)
     //setIRs();
         Sys_Message *msg;
         while( (msg = getNewMessage())){ //!= 0 
-            //char back[] ={'r',0,0,0,0,0};
-            //Sys_Memcpy(&(msg->data), &back[1], 4);
-            //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
-            //Sys_Writeto_UART1(back, 6);
+            char back[] ={'r',0,0,0,0,0};
+            Sys_Memcpy(&(msg->data), &back[1], 4);
+            back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
+            Sys_Writeto_UART1(back, 6);
             
-        }
-        
-        uint32 time_now = Sys_Get_SystemClock();
-        if(time_now >= time){//wait the refresh_rate time
-        
-            time += (uint32) 100;
         }
     }
 }
@@ -138,13 +132,13 @@ void bluetooth_reader(uint8 data){
     
     if(rx_BT_Buffer[0] == 's'){
         if( (rx_BT_Buffer[1] ^ rx_BT_Buffer[2] ^  rx_BT_Buffer[3] ^  rx_BT_Buffer[4]) ==  rx_BT_Buffer[5]){
-            //Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
+            Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
             
-            Sys_SendTestPattern();
+            //Sys_SendTestPattern();
             
-            //char ack[] ={'a',0,0,0,0,0};
-            //Sys_Memcpy(&rx_BT_Buffer[1], &ack[1],5);
-            //Sys_Writeto_UART1(ack, 6);
+            char ack[] ={'a',0,0,0,0,0};
+            Sys_Memcpy(&rx_BT_Buffer[1], &ack[1],5);
+            Sys_Writeto_UART1(ack, 6);
             return;
         }
     }

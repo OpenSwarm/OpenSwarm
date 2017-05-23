@@ -4,14 +4,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os/os/communication/communication.h</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/channel.c</file>
             <file>file:/home/strenkwalder/code/os/main.c</file>
-            <file>file:/home/strenkwalder/code/os/os/memory.c</file>
-            <file>file:/home/strenkwalder/code/os/os/communication/communication.c</file>
-            <file>file:/home/strenkwalder/code/os/os/communication/physical.h</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/io_HDI.c</file>
-            <file>file:/home/strenkwalder/code/os/os/communication/physical.c</file>
             <file>file:/home/strenkwalder/code/os/os/platform/e-puck/adc.c</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/physical.c</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/communication.c</file>
         </group>
     </open-files>
 </project-private>
