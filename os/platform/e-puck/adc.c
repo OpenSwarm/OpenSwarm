@@ -57,7 +57,7 @@ inline void Sys_Init_ADC(void){
     ADCON2bits.BUFM     = 0;    // Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.ALTS     = 0;    // Always use MUX A input multiplexer settings
     
-    ADCON3bits.SAMC     = 1;//1 //1-31: Auto-Sample Time bits - bits between sampling and conversion // 31
+    ADCON3bits.SAMC     = 31;//1 //1-31: Auto-Sample Time bits - bits between sampling and conversion // 31
     ADCON3bits.ADRC     = 0;    //1: internal clock
                                 //0: Clock Derived From System Clock
     ADCON3bits.ADCS     = 63;//0 //0-63: A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63

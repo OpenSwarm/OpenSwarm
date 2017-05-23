@@ -7,7 +7,7 @@
 #include "../interrupts.h"
 #include "../memory.h"
 
-#define DEBUG_COM
+//#define DEBUG_COM
 //#define SHOW_SENSOR_LED
 //#define BODY_INDICATOR
 
@@ -32,7 +32,7 @@ Sys_RawMessageList **sys_InMsg_ListEnd = &sys_InMsg_List;
 Sys_RawMessageList *sys_OutMsg_List = 0;
 Sys_RawMessageList **sys_OutMsg_List_End = &sys_OutMsg_List;
 
-#define THRESHOLD 5
+#define THRESHOLD 0
 
 void ComSensor0(uint);
 void ComSensor1(uint);
@@ -180,7 +180,7 @@ void ComSensor7(uint s){
 #endif
 }
 
-#define ADC_PER_BIT 1
+#define ADC_PER_BIT 2
 
 void CombineSensors(void){
     ReadFromSensors_2bits();
@@ -730,6 +730,12 @@ void ReadFromSensors_2bits(void){
     current_Msg->position++;    
      
     if(current_Msg->position >= 75){ 
+                 
+#ifdef DEBUG_COM
+        Sys_Writeto_UART1("R", 1);
+        Sys_Writeto_UART1(current_Msg->message, 10);
+        Sys_Writeto_UART1("%", 1);
+#endif
         Sys_Start_AtomicSection(); 
             *sys_InMsg_ListEnd = current_Msg; 
             sys_InMsg_ListEnd = &(current_Msg->next); 
@@ -761,6 +767,11 @@ void WriteToSensors_2bits(void){
             } 
         Sys_End_AtomicSection(); 
          
+#ifdef DEBUG_COM
+        Sys_Writeto_UART1("W", 1);
+        Sys_Writeto_UART1(current_Msg->message, 10);
+        Sys_Writeto_UART1("M", 1);
+#endif
         current_Msg->next = 0; 
         current_Msg->position = 0; 
     } 
