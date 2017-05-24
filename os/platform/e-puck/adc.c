@@ -32,6 +32,7 @@ uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets 
  * This Function initialises all ADC-channels. All channels are sampled (except Debug-pins)---i.e. Microphone (3x), Accelerometer (3-axis), Proximity-sensors (8x).
  * 
  */
+
 inline void Sys_Init_ADC(void){
     
     IEC0bits.ADIE = 0;
@@ -47,7 +48,7 @@ inline void Sys_Init_ADC(void){
     
     ADCON1bits.ADSIDL   = 0;    // Continue module operation in Idle mode
     ADCON1bits.FORM     = 0b00; // get integer (1 is fractional)
-    ADCON1bits.SSRC     = 0b111;// Internal counter ends sampling and starts conversion (auto convert)
+    ADCON1bits.SSRC     = 0b111;// counter ends sampling and starts conversion (auto convert)
     ADCON1bits.ASAM     = 1;    // Sampling begins immediately after last conversion completes. SAMP bit is auto set
     ADCON1bits.SAMP     = 0;    // A/D sample/hold amplifiers are holding
     
@@ -57,10 +58,10 @@ inline void Sys_Init_ADC(void){
     ADCON2bits.BUFM     = 0;    // Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.ALTS     = 0;    // Always use MUX A input multiplexer settings
     
-    ADCON3bits.SAMC     = 31;//1 //1-31: Auto-Sample Time bits - bits between sampling and conversion // 31
+    ADCON3bits.SAMC     = ADC_ACQUISITION_TIME;//1 //1-31: Auto-Sample Time bits - bits between sampling and conversion (Acquisition time) // 31
     ADCON3bits.ADRC     = 0;    //1: internal clock
                                 //0: Clock Derived From System Clock
-    ADCON3bits.ADCS     = 63;//0 //0-63: A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
+    ADCON3bits.ADCS     = ADC_SCALER_TIME-1;//0 //0-63: A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
     
     ADCHSbits.CH0NA     = 0;    //Select VREF- for CH0- input
             
@@ -99,7 +100,7 @@ inline void Sys_Init_ADC(void){
     ADCSSLbits.CSSL14 = 1;// Proximity 6
     ADCSSLbits.CSSL15 = 1;// Proximity 7
     
-    IPC2bits.ADIP = 7;
+    IPC2bits.ADIP = 6;
 
 }
 

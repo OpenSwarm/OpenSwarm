@@ -31,34 +31,34 @@ char _poxxxx_line_conf[330];
 /*! \brief The VSYNC interrupt.
  * This interrupt is called every time the Vertical sync signal is asserted
  * This mean that the picture is comming from the camera ( we will have the first line soon )
+
  */
-void __attribute__((interrupt, auto_psv))
-_T5Interrupt(void) {
-	IFS1bits.T5IF = 0;		//clear timer5 interrupt status flag (zero means no pending interrupt requests)
-	/* let's enable Hsync */
-	T4CONbits.TON = 1;		//start timer4
+//void __attribute__((interrupt, auto_psv))
+//_T5Interrupt(void) {
+//	IFS1bits.T5IF = 0;		//clear timer5 interrupt status flag (zero means no pending interrupt requests)
+//	/* let's enable Hsync */
+//	T4CONbits.TON = 1;		//start timer4
 	/* single shot */
-	T5CONbits.TON = 0;		//stop timer5
-}
+//	T5CONbits.TON = 0;		//stop timer5
+//}
 
-
-static void init_timer5(void) {
+//static void init_timer5(void) {
 	/* external pin, 1:1 prescaler */
-	T5CON = 0x2;			//Asynchronous Counter Mode: external clock (timer increments on every rising edge of clock input) => VSYNC signal
-	TMR5 = 0;			//timer5 counter reset
-	PR5 = 1;			//timer5 period register (when TMRx and PRx matches, an interrupt occurs) => when one VSYNC is received then one interrupt is generated
-	IFS1bits.T5IF = 0;		//clear timer5 interrupt status flag (zero means no pending interrupt requests)	
-	IEC1bits.T5IE = 1; 		//enable timer5 interrupt
-	T5CONbits.TON = 1;		//start timer5
-}
+//	T5CON = 0x2;			//Asynchronous Counter Mode: external clock (timer increments on every rising edge of clock input) => VSYNC signal
+//	TMR5 = 0;			//timer5 counter reset
+//	PR5 = 1;			//timer5 period register (when TMRx and PRx matches, an interrupt occurs) => when one VSYNC is received then one interrupt is generated
+//	IFS1bits.T5IF = 0;		//clear timer5 interrupt status flag (zero means no pending interrupt requests)	
+//	IEC1bits.T5IE = 1; 		//enable timer5 interrupt
+//	T5CONbits.TON = 1;		//start timer5
+//}
 
 static void init_timer4(void) {
-	T4CON = 0x2;			//Asynchronous Counter Mode: external clock (timer increments on every rising edge of clock input) => HSYNC signal or PIC clock? Logically should be HSYNC signal
-	TMR4 = blank_row_betw;
-	PR4 = blank_row_betw + 1;	//the first data are ready next cycle
-	IFS1bits.T4IF = 0;		//clear timer4 interrupt status flag (zero means no pending interrupt requests)
-	T4CONbits.TON = 0;		//stop timer4
-	IEC1bits.T4IE = 1;		//enable timer4 interrupt
+//	T4CON = 0x2;			//Asynchronous Counter Mode: external clock (timer increments on every rising edge of clock input) => HSYNC signal or PIC clock? Logically should be HSYNC signal
+//	TMR4 = blank_row_betw;
+//	PR4 = blank_row_betw + 1;	//the first data are ready next cycle
+//	IFS1bits.T4IF = 0;		//clear timer4 interrupt status flag (zero means no pending interrupt requests)
+//	T4CONbits.TON = 0;		//stop timer4
+//	IEC1bits.T4IE = 1;		//enable timer4 interrupt
 }
 
 
@@ -68,12 +68,12 @@ static void init_timer4(void) {
  * \sa e_poxxxx_config_cam and e_poxxxx_is_img_ready
  */
 void e_poxxxx_launch_capture(char * buf) {
-	_poxxxx_current_row = 0;
-	_poxxxx_buffer = buf;
-	_poxxxx_img_ready = 0;
-	init_timer4();
+//	_poxxxx_current_row = 0;
+//	_poxxxx_buffer = buf;
+//	_poxxxx_img_ready = 0;
+//	init_timer4();
 	/* Timer5 must ALWAY be initialized as the last one */
-	init_timer5();
+//	init_timer5();
 	
 }
 

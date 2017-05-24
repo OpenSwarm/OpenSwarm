@@ -75,6 +75,10 @@ extern "C" {
 #define Prx6   channelE /*!< Defines the channel for proximity6-pin*/
 #define Prx7   channelF /*!< Defines the channel for proximity7-pin*/
     
+#define  ADC_ACQUISITION_TIME 31
+#define  ADC_CONVERSION_TIME 14
+#define  ADC_SCALER_TIME 64
+    
 typedef enum {
     channel0 = 0b0000000000000001,
     channel1 = 0b0000000000000010,

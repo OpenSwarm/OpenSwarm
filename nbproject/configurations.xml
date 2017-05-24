@@ -33,6 +33,7 @@
           <itemPath>os/communication/coder.h</itemPath>
           <itemPath>os/communication/physical.h</itemPath>
           <itemPath>os/communication/channel.h</itemPath>
+          <itemPath>os/platform/e-puck/physical_HDI.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f3" displayName="events" projectFiles="true">
           <itemPath>os/events/events.h</itemPath>
@@ -145,6 +146,7 @@
             <itemPath>os/platform/e-puck/remoteControl_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/clock_timer_HDI.c</itemPath>
+            <itemPath>os/platform/e-puck/physical_HDI.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="f2" displayName="processes" projectFiles="true">
@@ -195,6 +197,8 @@
           <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile>dist/XC16_dsPIC30F6014A/production/os.production.hex</alternateLoadableFile>
         </loading>
+        <subordinates>
+        </subordinates>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>

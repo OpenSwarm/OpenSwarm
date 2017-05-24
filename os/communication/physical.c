@@ -4,6 +4,7 @@
 
 #include "../platform/e-puck/adc.h"
 #include "../platform/e-puck/leds.h"
+#include "../platform/e-puck/physical_HDI.h"
 #include "../interrupts.h"
 #include "../memory.h"
 
@@ -56,6 +57,8 @@ void apply_1_ToChannel(void);
 void clearChannel(void);
 
 void Sys_Init_PhysicalLayer(){
+    Sys_Init_PhysicalSendingChannel();
+    Sys_Register_SendingFunction(WriteToSensors_2bits);
     
     sys_InMsg_List = 0;
     sys_InMsg_ListEnd = &sys_InMsg_List;
@@ -70,6 +73,9 @@ void Sys_Start_PhysicalLayer(){
     
     clearIRs();
     Sys_Start_ChannelCalibration();
+    clearLEDs();
+    
+    Sys_Start_PhysicalSendingChannel();
     
     Sys_Start_AtomicSection();
     Sys_Subscribe_ADCChannelProcessor(Prx0, ComSensor0);
@@ -80,10 +86,9 @@ void Sys_Start_PhysicalLayer(){
     Sys_Subscribe_ADCChannelProcessor(Prx5, ComSensor5);
     Sys_Subscribe_ADCChannelProcessor(Prx6, ComSensor6);
     Sys_Subscribe_ADCChannelProcessor(Prx7, ComSensor7); 
-    Sys_Subscribe_ADCFinish(ProxDone,CombineSensors);   
+    Sys_Subscribe_ADCFinish(ProxDone,ReadFromSensors_2bits);   
     Sys_End_AtomicSection(); 
     
-    clearLEDs();
 }
 
 void Sys_Stop_PhysicalLayer(){
@@ -182,7 +187,7 @@ void ComSensor7(uint s){
 
 void CombineSensors(void){
     ReadFromSensors_2bits();
-    WriteToSensors_2bits();
+    //WriteToSensors_2bits();
 }
 
 void ReadFromSensors(void){
@@ -682,7 +687,7 @@ void WriteToSensors_old(void){
     } 
 }
 
-#define ADCs_PER_BIT 9
+#define ADCs_PER_BIT 3
 
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_Msg = 0; 
@@ -770,6 +775,9 @@ void WriteToSensors_2bits(void){
         current_Msg->position = 0; 
     } 
          
+    BODY_LED = ~BODY_LED;
+    LED4 = 1;
+    
     rxState = sending; 
      
     uint seg        = current_Msg->position / 15; 
