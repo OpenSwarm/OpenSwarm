@@ -52,14 +52,14 @@ char _poxxxx_line_conf[330];
 //	T5CONbits.TON = 1;		//start timer5
 //}
 
-static void init_timer4(void) {
+//static void init_timer4(void) {
 //	T4CON = 0x2;			//Asynchronous Counter Mode: external clock (timer increments on every rising edge of clock input) => HSYNC signal or PIC clock? Logically should be HSYNC signal
 //	TMR4 = blank_row_betw;
 //	PR4 = blank_row_betw + 1;	//the first data are ready next cycle
 //	IFS1bits.T4IF = 0;		//clear timer4 interrupt status flag (zero means no pending interrupt requests)
 //	T4CONbits.TON = 0;		//stop timer4
 //	IEC1bits.T4IE = 1;		//enable timer4 interrupt
-}
+//}
 
 
 

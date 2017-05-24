@@ -16,8 +16,8 @@ inline void Sys_Init_PhysicalSendingChannel(void){
 
     T5CONbits.TON = 0; //stops counting 
     
-    PR5 = (ADC_SCALER_TIME)/(2*PRESCALER) * (ADC_ACQUISITION_TIME+ADC_CONVERSION_TIME);
     TMR5 = 0;
+    PR5 = 14*(ADC_SCALER_TIME * ADCs_PER_BIT)/(2 * PRESCALER) * (ADC_ACQUISITION_TIME+ADC_CONVERSION_TIME);
 
     // T5CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]
@@ -67,6 +67,9 @@ inline void Sys_Force_PhysicalSendingChannelInterrupt(void){
 }
 
 void __attribute__((interrupt,no_auto_psv)) _T5Interrupt(void){
+    
+ //   LED4 = LED0;
+ //   LED0 = ~LED4;
     
     if(Sys_PhysicalChannelSender != 0){
         Sys_PhysicalChannelSender();

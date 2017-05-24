@@ -8,7 +8,7 @@
 #include "../interrupts.h"
 #include "../memory.h"
 
-//#define DEBUG_COM
+#define DEBUG_COM
 //#define SHOW_SENSOR_LED
 //#define BODY_INDICATOR
 
@@ -687,7 +687,7 @@ void WriteToSensors_old(void){
     } 
 }
 
-#define ADCs_PER_BIT 3
+
 
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_Msg = 0; 
@@ -714,13 +714,22 @@ void ReadFromSensors_2bits(void){
             return; 
         case waiting: 
             if(new_bit == 0){ 
+                measurement_counter = 0;
                 return; 
             } 
-             
+            
+            measurement_counter++;
+            if(measurement_counter < ADCs_PER_BIT){
+                return;
+            } 
+            
             current_Msg = (Sys_RawMessageList  *) Sys_Malloc(sizeof(Sys_RawMessageList)); 
             Sys_Memset(current_Msg,sizeof(Sys_RawMessageList),0);  
-            rxState = receiving; 
-            measurement_counter = 1;
+            
+             
+            current_Msg->position = 0; 
+            measurement_counter = 0;
+            rxState = receiving;    
             return;
         case receiving: 
         default: 
@@ -731,7 +740,8 @@ void ReadFromSensors_2bits(void){
     measurement_counter++;
     if(measurement_counter < ADCs_PER_BIT){
         return;
-    }
+    } 
+    
     
     
     uint seg        = current_Msg->position / 15; 
@@ -750,9 +760,10 @@ void ReadFromSensors_2bits(void){
     }
     measurement_counter = 0;
 } 
+
 void WriteToSensors_2bits(void){ 
     static Sys_RawMessageList  *current_Msg = 0; 
-    static uint measurement_counter = 0;
+//    static uint measurement_counter = 0;
      
     if(rxState == receiving){ 
         return; 
@@ -771,13 +782,12 @@ void WriteToSensors_2bits(void){
             } 
         Sys_End_AtomicSection(); 
          
+        apply_1_ToChannel();
         current_Msg->next = 0; 
         current_Msg->position = 0; 
-    } 
-         
-    BODY_LED = ~BODY_LED;
-    LED4 = 1;
-    
+        return;
+    }
+        
     rxState = sending; 
      
     uint seg        = current_Msg->position / 15; 
@@ -789,10 +799,10 @@ void WriteToSensors_2bits(void){
         apply_0_ToChannel();
     } 
         
-    measurement_counter++;
-    if((measurement_counter % ADCs_PER_BIT) == 0){
+//    measurement_counter++;
+//    if((measurement_counter % ADCs_PER_BIT) == 0){
         current_Msg->position++;   
-    }
+//    }
      
     if(current_Msg->position >= 75){ 
         Sys_Free(current_Msg); 

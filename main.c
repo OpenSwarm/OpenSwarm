@@ -99,14 +99,14 @@ int16_t main(void)
 //    uint counter = 0;
     
     while(true){
-        
+        SRbits.IPL = 0;
     //setIRs();
         Sys_Message *msg;
         while( (msg = getNewMessage())){ //!= 0 
-            char back[] ={'r',0,0,0,0,0};
-            Sys_Memcpy(&(msg->data), &back[1], 4);
-            back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
-            Sys_Writeto_UART1(back, 6);
+            //char back[] ={'r',0,0,0,0,0};
+            //Sys_Memcpy(&(msg->data), &back[1], 4);
+            //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
+            //Sys_Writeto_UART1(back, 6);
             
         }
     }
@@ -136,9 +136,9 @@ void bluetooth_reader(uint8 data){
             
             //Sys_SendTestPattern();
             
-            char ack[] ={'a',0,0,0,0,0};
-            Sys_Memcpy(&rx_BT_Buffer[1], &ack[1],5);
-            Sys_Writeto_UART1(ack, 6);
+            //char ack[] ={'a',0,0,0,0,0};
+            //Sys_Memcpy(&rx_BT_Buffer[1], &ack[1],5);
+            //Sys_Writeto_UART1(ack, 6);
             return;
         }
     }
