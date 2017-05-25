@@ -190,331 +190,6 @@ void CombineSensors(void){
     //WriteToSensors_2bits();
 }
 
-void ReadFromSensors(void){
-    static Sys_RawMessageList  *current_Msg = 0;
-    uint new_bit = 0;
-    
-    uint min_value = 0xFFFF;
-    uint min_sensor = -1;
-    
-    uint i = 0;
-    for(i = 0; i < 8; i++){
-        if( min_value > sensorReadings[i]){
-            min_value = sensorReadings[i];
-            min_sensor = i;
-        }
-    }
-    
-    switch(rxState){
-        case sending:
-            return;
-        case waiting:
-            if(min_value > Sys_ComThreshold(min_sensor)){//bit = 0
-                return;
-            }
-            if( (current_Msg ) == 0 ){
-               current_Msg = (Sys_RawMessageList  *) Sys_Malloc(sizeof(Sys_RawMessageList));
-            }
-            
-            Sys_Memset(current_Msg,sizeof(Sys_RawMessageList),0); 
-            
-            rxState = receiving;
-            break;
-        case receiving:
-            break;
-        default:
-            break;
-    }
-    
-    if( min_value > Sys_ComThreshold(min_sensor)){// bit_value > ADC_PER_BIT*(Sys_ComThreshold() - THRESHOLD)){
-        new_bit = 0;
-    }else{
-        new_bit = 1;
-    }
-    
-    uint seg        = current_Msg->position / 15;
-    uint bit_pos    = current_Msg->position % 15;
-    
-    current_Msg->message[seg] |= new_bit << bit_pos;
-    current_Msg->position++;   
-    
-    if(current_Msg->position >= 75){
-        Sys_Start_AtomicSection();
-            *sys_InMsg_ListEnd = current_Msg;
-            sys_InMsg_ListEnd = &(current_Msg->next);
-        Sys_End_AtomicSection();
-        
-        current_Msg = 0;
-        rxState = waiting;
-    }
-}
-
-void ReadFromSensors2(void){
-    static Sys_RawMessageList  *current_Msg = 0;
-//    static uint readings[ADC_PER_BIT*2+1] = {0};
-//    static uint synch_pos = 0;
-    uint new_bit = 0;
-    
-    uint min_value = 0xFFFF;
-    uint min_sensor = -1;
-    
-    uint i = 0;
-    for(i = 0; i < 8; i++){
-        if( min_value > sensorReadings[i]){
-            min_value = sensorReadings[i];
-            min_sensor = i;
-        }
-    }    
-    
-    switch(rxState){
-        case sending:
-            return;
-        case waiting:
-            //readings[0] = min_value;
-            //synch_pos = 1;
-            
-            if(min_value > Sys_ComThreshold(min_sensor)){//bit = 0
-                return;
-            }
-            
-            current_Msg = (Sys_RawMessageList  *) Sys_Malloc(sizeof(Sys_RawMessageList));
-            Sys_Memset(current_Msg,sizeof(Sys_RawMessageList),0); 
-            rxState = receiving;
-            break;
-        
-//        case synching:
-            /*
-            rxState = synching;
-            readings[synch_pos] = min_value;
-            synch_pos++;
-            
-            if(synch_pos < ADC_PER_BIT*2+1){
-                return;
-            }
-            
-            int left = 0;
-            int thres = 3*(Sys_ComThreshold() - THRESHOLD);
-            bool fault = false;
-
-            uint  value_r_1 = readings[1] + readings[2];
-            uint  value_l_1 = readings[0] + value_r_1;
-            value_r_1 += readings[3];
-
-            uint  value_r_0 = readings[5] + readings[6];
-            uint  value_l_0 = readings[4] + value_r_0;
-            value_r_0 += readings[7];
-
-            if(value_l_1 < value_r_1){
-                if(value_l_1 < thres){
-                    left++;
-                }else{
-                    fault = true;
-                }
-            }else if(value_l_1 > value_r_1){
-                if(value_r_1 < thres){
-                    left--;
-                }else{
-                    fault = true;
-                }
-            }
-
-            if(value_l_0 < value_r_0){
-                if(value_r_0 > thres){
-                    left--;
-                }else{
-                    fault = true;
-                }
-            }else if(value_l_0 > value_r_0){
-                if(value_l_0 > thres){
-                    left++;
-                }else{
-                    fault = true;
-                }
-            }
-
-            if(fault){
-                uint j = 1;
-                uint new_zero = 1;
-                uint thes_1 = (Sys_ComThreshold() - THRESHOLD);
-
-                for(j = 1; j < ADC_PER_BIT*2+1; j++ ){
-                    if(readings[j] < thes_1){
-                        new_zero = j;
-                        break;
-                    }
-                }
-
-                for(j = new_zero; j < ADC_PER_BIT*2+1; j++ ){
-                    readings[j-new_zero] = readings[j];
-                }
-                synch_pos = ADC_PER_BIT*2+1 - new_zero;
-
-                if(synch_pos == 0){
-                    rxState = waiting;
-                }
-
-                return;
-            }
-
-            if(left == 0){
-                if(readings[7] > (Sys_ComThreshold() - THRESHOLD)){//bit == 0
-                    left--;
-                }else{
-                    left++;
-                }
-            }
-
-            if(left > 0){//is it left
-                readings[0] = readings[7];
-                synch_pos = 1;
-            }else{
-                synch_pos = 0;
-            }
-            */
-            return;
-        case receiving:
-            //readings[synch_pos] = min_value;
-            //synch_pos++;
-        default:
-            break;
-    }
-    
-    /*
-    readings[synch_pos] = min_value;
-    synch_pos++;
-    
-    if(synch_pos < ADC_PER_BIT){
-        return;
-    }else{
-        synch_pos=0;
-    }
-    
-    synch_pos = 0;
-    uint bit_value = 0;
-    for(i = 0; i < ADC_PER_BIT; i++){
-        bit_value += readings[i];
-    }
-    */
-    if( min_value > Sys_ComThreshold(min_sensor)){// bit_value > ADC_PER_BIT*(Sys_ComThreshold() - THRESHOLD)){
-        new_bit = 0;
-    }else{
-        new_bit = 1;
-    }
-    
-    uint seg        = current_Msg->position / 15;
-    uint bit_pos    = current_Msg->position % 15;
-    current_Msg->message[seg] |= new_bit << bit_pos;
-    current_Msg->position++;   
-    
-    if(current_Msg->position >= 75){
-        Sys_Start_AtomicSection();
-            *sys_InMsg_ListEnd = current_Msg;
-            sys_InMsg_ListEnd = &(current_Msg->next);
-        Sys_End_AtomicSection();
-        
-        current_Msg = 0;
-        rxState = waiting;
-    }
-}
-
-void WriteToSensors(void){
-    static Sys_RawMessageList  *current_Msg = 0;
-    
-    if(rxState == receiving){
-        clearChannel();
-        return;
-    }
-    
-    if(current_Msg == 0){
-        if(sys_OutMsg_List == 0){
-            clearChannel();
-            return;
-        }
-        
-        Sys_Start_AtomicSection();
-            current_Msg = sys_OutMsg_List;
-            sys_OutMsg_List = sys_OutMsg_List->next;
-            if(sys_OutMsg_List == 0){
-                sys_OutMsg_List_End = &sys_OutMsg_List;
-            }
-        Sys_End_AtomicSection();
-        
-        current_Msg->next = 0;
-        current_Msg->position = 0;
-    }
-    
-    rxState = sending;
-    
-    uint seg        = current_Msg->position / 15;
-    uint bit_pos    = current_Msg->position % 15;
-    
-    if(current_Msg->message[seg] & (1 << bit_pos)){ // == 1
-        apply_1_ToChannel();
-    }else{
-        apply_0_ToChannel();
-    }
-    
-    current_Msg->position++; 
-    
-    if(current_Msg->position >= 75){
-        Sys_Free(current_Msg);
-        current_Msg = 0;
-        rxState = waiting;
-    }
-}
-
-void WriteToSensors2(void){
-    static Sys_RawMessageList  *current_Msg = 0;
-    static uint bit_counter = 0;
-    
-    if(rxState == receiving){
-        clearChannel();
-        return;
-    }
-    
-    if(current_Msg == 0){
-        if(sys_OutMsg_List == 0){
-            clearChannel();
-            return;
-        }
-        
-        Sys_Start_AtomicSection();
-            current_Msg = sys_OutMsg_List;
-            sys_OutMsg_List = sys_OutMsg_List->next;
-            if(sys_OutMsg_List == 0){
-                sys_OutMsg_List_End = &sys_OutMsg_List;
-            }
-        Sys_End_AtomicSection();
-        
-        current_Msg->next = 0;
-        current_Msg->position = 0;
-    }
-        
-    rxState = sending;
-    
-    uint seg        = current_Msg->position / 15;
-    uint bit_pos    = current_Msg->position % 15;
-    
-    if(current_Msg->message[seg] & (1 << bit_pos)){ // == 1
-        apply_1_ToChannel();
-    }else{
-        apply_0_ToChannel();
-    }
-        
-    if(bit_counter < ADC_PER_BIT-1){
-        bit_counter++;
-    }else{
-        current_Msg->position++;  
-        bit_counter = 0;
-    }
-    
-    if(current_Msg->position > 75){
-        Sys_Free(current_Msg);
-        current_Msg = 0;
-        rxState = waiting;
-    }
-}
-
 void Sys_AddOutMessage(Sys_RawMessageList *element){
     if(element == 0){
         return;
@@ -592,102 +267,6 @@ void clearChannel(void){
 #endif
     
 }
-void ReadFromSensors_old(void){ 
-    static Sys_RawMessageList  *current_Msg = 0; 
-     
-    uint min_value = 0xFFFF; 
-    uint min_sensor = -1;
-    
-    uint i = 0;
-    for(i = 0; i < 8; i++){
-        if( min_value > sensorReadings[i]){
-            min_value = sensorReadings[i];
-            min_sensor = i;
-        }
-    }
-     
-    uint new_bit = 0; 
-    if(min_value <= Sys_ComThreshold(min_sensor)){ 
-        new_bit = 1; 
-    } 
-     
-    switch(rxState){ 
-        case sending: 
-            return; 
-        case waiting: 
-            if(new_bit == 0){ 
-                return; 
-            } 
-             
-            current_Msg = (Sys_RawMessageList  *) Sys_Malloc(sizeof(Sys_RawMessageList)); 
-            Sys_Memset(current_Msg,sizeof(Sys_RawMessageList),0);  
-            rxState = receiving; 
-        case receiving: 
-        default: 
-            break; 
-    } 
-     
-    uint seg        = current_Msg->position / 15; 
-    uint bit_pos    = current_Msg->position % 15; 
-    current_Msg->message[seg] |= new_bit << bit_pos; 
-    current_Msg->position++;    
-     
-    if(current_Msg->position >= 75){ 
-        Sys_Start_AtomicSection(); 
-            *sys_InMsg_ListEnd = current_Msg; 
-            sys_InMsg_ListEnd = &(current_Msg->next); 
-        Sys_End_AtomicSection(); 
-         
-        current_Msg = 0; 
-        rxState = waiting; 
-    } 
-} 
-void WriteToSensors_old(void){ 
-    static Sys_RawMessageList  *current_Msg = 0; 
-     
-    if(rxState == receiving){ 
-        return; 
-    } 
-     
-    if(current_Msg == 0){ 
-        if(sys_OutMsg_List == 0){ 
-            return; 
-        } 
-         
-        Sys_Start_AtomicSection(); 
-            current_Msg = sys_OutMsg_List; 
-            sys_OutMsg_List = sys_OutMsg_List->next; 
-            if(sys_OutMsg_List == 0){ 
-                sys_OutMsg_List_End = &sys_OutMsg_List; 
-            } 
-        Sys_End_AtomicSection(); 
-         
-        current_Msg->next = 0; 
-        current_Msg->position = 0; 
-    } 
-         
-    rxState = sending; 
-     
-    uint seg        = current_Msg->position / 15; 
-    uint bit_pos    = current_Msg->position % 15; 
-     
-    if(current_Msg->message[seg] & (1 << bit_pos)){ // == 1 
-        apply_1_ToChannel();
-    }else{ 
-        apply_0_ToChannel();
-    } 
-         
-    current_Msg->position++;   
-     
-    if(current_Msg->position >= 75){ 
-        Sys_Free(current_Msg); 
-        current_Msg = 0; 
-        rxState = waiting; 
-        clearChannel();
-    } 
-}
-
-
 
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_Msg = 0; 
@@ -717,7 +296,7 @@ void ReadFromSensors_2bits(void){
                 measurement_counter = 0;
                 return; 
             } 
-            
+                        
             measurement_counter++;
             if(measurement_counter < ADCs_PER_BIT){
                 return;
@@ -771,11 +350,13 @@ void WriteToSensors_2bits(void){
 //    static uint measurement_counter = 0;
      
     if(rxState == receiving){ 
+        clearChannel();
         return; 
     } 
      
     if(current_Msg == 0){ 
         if(sys_OutMsg_List == 0){ 
+            clearChannel();
             return; 
         } 
          
@@ -791,13 +372,15 @@ void WriteToSensors_2bits(void){
 #ifdef DEBUG_COM
         Sys_Writeto_UART1(current_Msg->message, 10);
 #endif
+        
+        rxState = sending; 
+        
         apply_1_ToChannel();
         current_Msg->next = 0; 
         current_Msg->position = 0; 
         return;
     }
         
-    rxState = sending; 
      
     uint seg        = current_Msg->position / 15; 
     uint bit_pos    = current_Msg->position % 15; 
@@ -810,13 +393,15 @@ void WriteToSensors_2bits(void){
         
 //    measurement_counter++;
 //    if((measurement_counter % ADCs_PER_BIT) == 0){
-        current_Msg->position++;   
+    current_Msg->position++;   
 //    }
      
     if(current_Msg->position >= 75){ 
         Sys_Free(current_Msg); 
         current_Msg = 0; 
+        
         rxState = waiting; 
+        
         clearChannel();
     } 
 }

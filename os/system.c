@@ -156,7 +156,7 @@ void Sys_Start_Kernel(void){
 #ifdef SYS_CLOCK_USED
     Sys_Start_SystemClock();
 #else
-    Sys_Stop_SystemClock();
+//    Sys_Stop_SystemClock();
 #endif
     
 #ifdef SYS_MOTOR_USED
