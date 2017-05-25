@@ -750,6 +750,11 @@ void ReadFromSensors_2bits(void){
     current_Msg->position++;    
      
     if(current_Msg->position >= 75){ 
+            
+#ifdef DEBUG_COM
+        Sys_Writeto_UART1(current_Msg->message, 10);
+#endif
+        
         Sys_Start_AtomicSection(); 
             *sys_InMsg_ListEnd = current_Msg; 
             sys_InMsg_ListEnd = &(current_Msg->next); 
@@ -782,6 +787,10 @@ void WriteToSensors_2bits(void){
             } 
         Sys_End_AtomicSection(); 
          
+            
+#ifdef DEBUG_COM
+        Sys_Writeto_UART1(current_Msg->message, 10);
+#endif
         apply_1_ToChannel();
         current_Msg->next = 0; 
         current_Msg->position = 0; 

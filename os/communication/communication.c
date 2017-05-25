@@ -57,7 +57,7 @@ void Sys_Send_Data(uint8 address, void *data, uint length){
         Sys_RawMessageList *element = Sys_convert_WordToPackage(address, dvalue, 1);
         element->next = 0;
         
-        Sys_Writeto_UART1(element->message, 10);
+        //Sys_Writeto_UART1(element->message, 10);
         Sys_AddOutMessage(element);
     }
     
@@ -70,7 +70,7 @@ void Sys_Send_Data(uint8 address, void *data, uint length){
         
         //(element->message, 10);
         
-        Sys_Writeto_UART1(element->message, 10);
+        //Sys_Writeto_UART1(element->message, 10);
         Sys_AddOutMessage(element); 
     }
 }
@@ -89,7 +89,6 @@ Sys_Message *getNewMessage(){
     raw_msg->next       = 0;
     raw_msg->position   = 0;
         
-    Sys_Writeto_UART1(raw_msg->message, 10);
     Sys_Memset(&out, sizeof(Sys_Message), 0);
       
     uint16 data = decodeBCH(raw_msg->message[0], &error);//first 11 bits
