@@ -112,40 +112,95 @@ int16_t main(void)
     }
 }
 
-uint8 rx_BT_Buffer[6];
+uint8 rx_BT_Buffer[21];
+
+typedef enum {
+    waiting,
+    starting_big,
+    reading_small,
+    reading_big,
+    finishing
+} bluetooth_state;
+
 
 void bluetooth_reader(uint8 data){
     static int counter = 0;
+    static unsigned int num_bytes = 0;
+    static unsigned char xor_val = 0;
+    static bluetooth_state state = waiting;
     
-    if(counter == 0 && data != 's'){
-        return;
-    }
-    
-    rx_BT_Buffer[counter] = data;
-    counter++;
-    
-    if(counter < 6){
-        return;
-    }
-    
-    counter = 0;
-    
-    if(rx_BT_Buffer[0] == 's'){
-        if( (rx_BT_Buffer[1] ^ rx_BT_Buffer[2] ^  rx_BT_Buffer[3] ^  rx_BT_Buffer[4]) ==  rx_BT_Buffer[5]){
-            Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
-            
-            //Sys_SendTestPattern();
-            
-            //char ack[] ={'a',0,0,0,0,0};
-            //Sys_Memcpy(&rx_BT_Buffer[1], &ack[1],5);
-            //Sys_Writeto_UART1(ack, 6);
+    switch(state){
+        case waiting:
+            num_bytes = 0;
+            counter = 0;
+            xor_val = 0;
+            switch(data){
+                case 't':
+                    state = starting_big;
+                    break;
+                case 's':
+                    state = reading_small;
+                    break;
+                default:
+                    break;
+            }            
             return;
-        }
-    }
+            
+        case starting_big:
+            if(data <= 20 ){
+                num_bytes = data;
+                state = reading_big;
+                counter = 0;
+                return;
+            }
+            
+            state = waiting;
+            
+            return;
+        case reading_small:
+            rx_BT_Buffer[counter] = data;
+            counter++;
+            xor_val ^= data;
     
-    char nack[] ={'e',0,0,0,0,0};
-    Sys_Memcpy(&rx_BT_Buffer[0], &nack[1], 5);
-    Sys_Writeto_UART1(nack, 6);
+            if(counter < 5){
+                return;
+            }
+    
+            counter = 0;
+    
+            if( xor_val ==  rx_BT_Buffer[4]){
+                Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
+                xor_val = 0;
+                state = waiting;
+                return;
+            }
+            
+            state = waiting;
+            break;
+        case reading_big:
+            rx_BT_Buffer[counter] = data;
+            
+            if(counter < (num_bytes)){
+                xor_val ^= data;
+                counter++;
+                return;
+            }
+            
+        case finishing:
+            counter = 0;
+                        
+            if(data == xor_val){
+                Sys_Send_Data(0b101010, &rx_BT_Buffer[0], num_bytes);
+                xor_val = 0;
+                num_bytes = 0;
+                state = waiting;
+                return;
+            }
+            
+            state = waiting;
+        default:
+            break;
+    }
 }
 
 /*
