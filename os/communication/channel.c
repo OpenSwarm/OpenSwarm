@@ -64,8 +64,8 @@ void Sys_Start_ChannelCalibration(){
     }
     
     Sys_Start_AtomicSection();
-        Sys_Set_StepsRight(WHOLETURN);
-        Sys_Set_StepsLeft(-WHOLETURN); 
+        Sys_Set_StepsRight(-WHOLETURN);
+        Sys_Set_StepsLeft(WHOLETURN); 
         setLEDs(); 
         current_situation = leds_moving;
         init_interation = 0;

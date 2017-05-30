@@ -147,3 +147,61 @@ void bluetooth_reader(uint8 data){
     Sys_Memcpy(&rx_BT_Buffer[0], &nack[1], 5);
     Sys_Writeto_UART1(nack, 6);
 }
+
+/*
+ 
+uint8 rx_BT_Buffer[21];
+
+typedef enum {
+    waiting,
+    starting,
+    reading,
+            finishing
+} bluetooth_state;
+
+void bluetooth_reader(uint8 data){
+    static int counter = 0;
+    static unsigned int num_bytes = 0;
+    static bluetooth_state state = waiting;
+    
+    switch(state){
+        case waiting:
+            if(data == 's'){
+                state = starting;
+            }
+            
+            return;
+        case starting:
+            num_bytes = data;
+            state = reading;
+            counter = 0;
+            
+            return;
+        case reading:
+            rx_BT_Buffer[counter] = data;
+            
+            if(counter < num_bytes){
+                counter++;
+                return;
+            }
+            
+        case finishing:
+            counter = 0;
+            
+            int i = 0;
+            unsigned char xor_char = 0;
+            for(i = 0; i < num_bytes; i++){
+                xor_char ^= rx_BT_Buffer[i];
+            }
+            
+            if(data == xor_char){
+                Sys_Send_Data(0b101010, &rx_BT_Buffer[1], num_bytes);
+                return;
+            }
+        default:
+            break;
+    }
+    
+    Sys_Writeto_UART1("error", 5);
+}
+ */

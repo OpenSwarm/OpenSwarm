@@ -30,6 +30,7 @@ void Sys_Init_Communication(){
     Sys_Init_PhysicalLayer();
     
     sys_com_device.address = SYS_LOCAL_ADDRESS;
+    sys_com_device.msg_id = 0;
     //Sys_SetInitStateEnvironm(sys_com_Init_state = lightsOffNoTurning);    
     
     Sys_Register_Event(SYS_EVENT_COM_RX_MSG);

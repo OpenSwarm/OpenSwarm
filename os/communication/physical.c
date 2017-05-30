@@ -327,6 +327,13 @@ void ReadFromSensors_2bits(void){
     uint bit_pos    = current_Msg->position % 15; 
     current_Msg->message[seg] |= new_bit << bit_pos; 
     current_Msg->position++;    
+    
+    if( (current_Msg->position > 15) && (current_Msg->message[0] == 0) ){
+        
+        rxState = waiting; 
+        Sys_Free(current_Msg);
+        current_Msg = 0;
+    }
      
     if(current_Msg->position >= 75){ 
             
@@ -396,12 +403,13 @@ void WriteToSensors_2bits(void){
     current_Msg->position++;   
 //    }
      
-    if(current_Msg->position >= 75){ 
+    if(current_Msg->position > 75){ 
+        clearChannel();
+        
         Sys_Free(current_Msg); 
         current_Msg = 0; 
         
         rxState = waiting; 
         
-        clearChannel();
     } 
 }
