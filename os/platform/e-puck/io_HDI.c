@@ -33,7 +33,7 @@ inline void Sys_Init_IOTimer_HDI(){
     Sys_Stop_IOTimer();
 
     TMR3 = 0; //sets countervalue to 0
-    PR3 = MILLISEC/10; // 16MIPS for 0.1ms
+    PR3 = MILLISEC; // 16MIPS for 0.1ms
 
     // T1CON
     // [TON] [-] [TSIDL] [-] [-] [-] [-] [-] [-] [TGATE] [TCKPS1] [TCKPS0] [-] [TSYNC] [TCS] [-]

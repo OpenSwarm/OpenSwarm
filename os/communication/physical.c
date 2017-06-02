@@ -51,14 +51,15 @@ void ReadFromSensors_old(void);
 void WriteToSensors_old(void);
 void ReadFromSensors_2bits(void);
 void WriteToSensors_2bits(void);
+void WriteToSensors_1adc(void);
 
 void apply_0_ToChannel(void);
 void apply_1_ToChannel(void);
 void clearChannel(void);
 
 void Sys_Init_PhysicalLayer(){
-    Sys_Init_PhysicalSendingChannel();
-    Sys_Register_SendingFunction(WriteToSensors_2bits);
+   Sys_Init_PhysicalSendingChannel();
+    Sys_Register_SendingFunction(WriteToSensors_1adc);
     
     sys_InMsg_List = 0;
     sys_InMsg_ListEnd = &sys_InMsg_List;
@@ -187,7 +188,7 @@ void ComSensor7(uint s){
 
 void CombineSensors(void){
     ReadFromSensors_2bits();
-    //WriteToSensors_2bits();
+    WriteToSensors_2bits();
 }
 
 void Sys_AddOutMessage(Sys_RawMessageList *element){
@@ -284,7 +285,7 @@ void ReadFromSensors_2bits(void){
     }
      
     uint new_bit = 0; 
-    if(min_value <= Sys_ComThreshold(min_sensor)){ 
+    if(min_value < Sys_ComThreshold(min_sensor)){ 
         new_bit = 1; 
     } 
      
@@ -354,19 +355,24 @@ void ReadFromSensors_2bits(void){
 
 void WriteToSensors_2bits(void){ 
     static Sys_RawMessageList  *current_Msg = 0; 
-//    static uint measurement_counter = 0;
+    static uint measurement_counter = 0;
      
     if(rxState == receiving){ 
         clearChannel();
+        measurement_counter = 0;
+        
         return; 
     } 
      
     if(current_Msg == 0){ 
         if(sys_OutMsg_List == 0){ 
             clearChannel();
+            measurement_counter = 0;
+        
             return; 
         } 
          
+        
         Sys_Start_AtomicSection(); 
             current_Msg = sys_OutMsg_List; 
             sys_OutMsg_List = sys_OutMsg_List->next; 
@@ -380,15 +386,21 @@ void WriteToSensors_2bits(void){
         Sys_Writeto_UART1(current_Msg->message, 10);
 #endif
         
-        rxState = sending; 
-        
+        rxState = sending;
+            
         apply_1_ToChannel();
         current_Msg->next = 0; 
-        current_Msg->position = 0; 
+        current_Msg->position = 0;
+        
         return;
     }
         
+    measurement_counter++;
+    if((measurement_counter % ADCs_PER_BIT) != 0){
+        return;
+    }
      
+    measurement_counter = 0;
     uint seg        = current_Msg->position / 15; 
     uint bit_pos    = current_Msg->position % 15; 
      
@@ -398,9 +410,79 @@ void WriteToSensors_2bits(void){
         apply_0_ToChannel();
     } 
         
-//    measurement_counter++;
+//   measurement_counter++;
 //    if((measurement_counter % ADCs_PER_BIT) == 0){
-    current_Msg->position++;   
+        current_Msg->position++;   
+//    }
+     
+    if(current_Msg->position > 75){ 
+        clearChannel();
+        
+        Sys_Free(current_Msg); 
+        current_Msg = 0; 
+        
+        rxState = waiting; 
+        
+    } 
+}
+void WriteToSensors_1adc(void){ 
+    static Sys_RawMessageList  *current_Msg = 0; 
+//    static uint measurement_counter = 0;
+     
+    if(rxState == receiving){ 
+        clearChannel();
+//        measurement_counter = 0;      
+        return; 
+    } 
+     
+    if(current_Msg == 0){ 
+        if(sys_OutMsg_List == 0){ 
+            clearChannel();
+//            measurement_counter = 0;      
+            return; 
+        } 
+         
+        
+        Sys_Start_AtomicSection(); 
+            current_Msg = sys_OutMsg_List; 
+            sys_OutMsg_List = sys_OutMsg_List->next; 
+            if(sys_OutMsg_List == 0){ 
+                sys_OutMsg_List_End = &sys_OutMsg_List; 
+            } 
+        Sys_End_AtomicSection(); 
+         
+            
+#ifdef DEBUG_COM
+        Sys_Writeto_UART1(current_Msg->message, 10);
+#endif
+        
+        rxState = sending;
+            
+        apply_1_ToChannel();
+        current_Msg->next = 0; 
+        current_Msg->position = 0;
+        
+        return;
+    }
+        
+//    measurement_counter++;
+//    if((measurement_counter % ADCs_PER_BIT) != 0){
+//        return;
+//    }
+     
+//    measurement_counter = 0;
+    uint seg        = current_Msg->position / 15; 
+    uint bit_pos    = current_Msg->position % 15; 
+     
+    if(current_Msg->message[seg] & (1 << bit_pos)){ // == 1 
+        apply_1_ToChannel();
+    }else{ 
+        apply_0_ToChannel();
+    } 
+        
+//   measurement_counter++;
+//    if((measurement_counter % ADCs_PER_BIT) == 0){
+        current_Msg->position++;   
 //    }
      
     if(current_Msg->position > 75){ 

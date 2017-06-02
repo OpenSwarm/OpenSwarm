@@ -197,8 +197,6 @@
           <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile>dist/XC16_dsPIC30F6014A/production/os.production.hex</alternateLoadableFile>
         </loading>
-        <subordinates>
-        </subordinates>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>

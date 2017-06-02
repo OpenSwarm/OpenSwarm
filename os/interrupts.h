@@ -22,7 +22,6 @@ extern "C" {
 #define SYS_IRQP_MAX 7              /*!< maximum interrupt priority*/
 
 #define SYS_IRQP_SYSTEM_TIMER 2	 	/*!< interrupt priority for the system timer interrupt*/
-
 #define SYS_IRQP_IO_TIMER 3         /*!< interrupt priority for the I/O timer interrupt*/
 
 #define SYS_IRQP_UART1 4            /*!< interrupt priority for the UART1 interrupt*/

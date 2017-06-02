@@ -3,6 +3,7 @@
 #include "../platform/e-puck/adc.h"
 #include "../platform/e-puck/leds.h"
 #include "../platform/e-puck/motors.h"
+#include "../platform/e-puck/selector.h"
 
 #include "../interrupts.h"
 
@@ -103,7 +104,7 @@ void Sys_Start_ChannelCalibration(){
 
 void InitSensor(uint v){
     Sys_Start_AtomicSection();
-        uint value = v - THRESHOLD_L;
+        uint value = v;
         if( value < min_value){
             min_value = value;
         }
@@ -272,7 +273,7 @@ sensor_situation getCurrentSituation(uint sensor){
 uint Sys_ComThreshold(uint sensor){
     sensor_situation sit = getCurrentSituation(sensor);
     
-    return sensorThresholds[sit];
+    return sensorThresholds[sit]-4*THRESHOLD_L*Sys_Get_Selector();
 }
 
 /*
