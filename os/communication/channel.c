@@ -27,8 +27,11 @@ static uint min_value = 0xFFFF;
 static uint init_interation = 0;
 
 #define THRESHOLD_L 5
+static uint variable_threshold = THRESHOLD_L;
 
 void Sys_Start_ChannelCalibration(){
+    
+    variable_threshold = 4*THRESHOLD_L*Sys_Get_Selector();
     
     clearLEDs();
     clearIRs();
@@ -273,8 +276,13 @@ sensor_situation getCurrentSituation(uint sensor){
 uint Sys_ComThreshold(uint sensor){
     sensor_situation sit = getCurrentSituation(sensor);
     
-    return sensorThresholds[sit]-4*THRESHOLD_L*Sys_Get_Selector();
+    return sensorThresholds[sit]-variable_threshold;//4*THRESHOLD_L*Sys_Get_Selector();
 }
+
+void Sys_SetComThreshold(uint thres){
+    variable_threshold = thres;
+}
+
 
 /*
 void InitSensor0(uint value){

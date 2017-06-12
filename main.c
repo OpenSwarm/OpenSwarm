@@ -36,6 +36,7 @@
 #include "os/platform/e-puck/adc.h"
 #include "os/platform/e-puck/selector.h"
 
+#include "os/communication/channel.h"
 #include "os/communication/communication.h"
 #include "os/communication/physical.h"
 
@@ -72,6 +73,12 @@ void setLEDs();
 void clearIRs();
 void setIRs();
 
+
+void readbluetoothBuffer();
+void analyseBuffer(uint8 data);
+
+static int move_forward = 0;
+
 int16_t main(void)
 {    
     Sys_Init_Kernel(); 
@@ -101,6 +108,22 @@ int16_t main(void)
     while(true){
         SRbits.IPL = 0;
     //setIRs();
+        readbluetoothBuffer();
+        
+        if(move_forward != 0){
+            Sys_Set_StepsRight(move_forward);
+            Sys_Set_StepsLeft(move_forward); 
+            
+    
+            while(Sys_Get_StepsLeft() || Sys_Get_StepsRight() ){ // !=
+                SRbits.IPL = 0;
+            }
+            
+            Sys_Writeto_UART1("STOP", 4);
+            move_forward = 0;
+        }
+        
+        
         Sys_Message *msg;
         while( (msg = getNewMessage())){ //!= 0 
             //char back[] ={'r',0,0,0,0,0};
@@ -112,19 +135,26 @@ int16_t main(void)
     }
 }
 
-uint8 rx_BT_Buffer[21];
+#define MAX_BUFFER 64
+
+static uint8 rx_BT_Buffer[MAX_BUFFER];
+static uint8 start_index = 0;
+static uint8 end_index = 0;
 
 typedef enum {
     waiting,
     starting_big,
     reading_small,
     reading_big,
+    reading_moving,
+    reading_threshold,
     finishing
 } bluetooth_state;
 
 
-void bluetooth_reader(uint8 data){
+void analyseBuffer(uint8 data){
     static int counter = 0;
+    static int value = 0;
     static unsigned int num_bytes = 0;
     static unsigned char xor_val = 0;
     static bluetooth_state state = waiting;
@@ -140,6 +170,12 @@ void bluetooth_reader(uint8 data){
                     break;
                 case 's':
                     state = reading_small;
+                    break;
+                case 'h'://threshold
+                    state = reading_threshold;
+                    break;
+                case 'm'://move
+                    state = reading_moving;
                     break;
                 default:
                     break;
@@ -177,6 +213,66 @@ void bluetooth_reader(uint8 data){
             
             state = waiting;
             break;
+        case reading_threshold:
+            if(counter == 0){
+                xor_val = data;
+                value = 0;
+                value = ((uint) data) << 8;
+                counter++;
+                return;
+            }
+            
+            if(counter == 1){
+                xor_val ^= data;
+                value |= ((uint) data);
+                counter++;
+                return;
+            }
+            
+            if(counter == 2){
+                if(xor_val == data){
+                    Sys_SetComThreshold(value);
+                    Sys_Writeto_UART1("OK", 2);
+                }
+                value = 0;
+                xor_val = 0;
+                counter = 0;
+                state = waiting;
+                return;
+            }
+            
+            state = waiting;
+            break;
+        case reading_moving:
+            if(counter == 0){
+                xor_val = data;
+                value = 0;
+                value = ((uint) data) << 8;
+                counter++;
+                return;
+            }
+            
+            if(counter == 1){
+                xor_val ^= data;
+                value |= ((uint) data);
+                counter++;
+                return;
+            }
+            
+            if(counter == 2){
+                if(xor_val == data){
+                    move_forward = value;
+                    Sys_Writeto_UART1("START", 5);
+                }
+                value = 0;
+                xor_val = 0;
+                counter = 0;
+                state = waiting;
+                return;
+            }
+            
+            state = waiting;
+            break;
         case reading_big:
             rx_BT_Buffer[counter] = data;
             
@@ -203,6 +299,23 @@ void bluetooth_reader(uint8 data){
     }
 }
 
+void bluetooth_reader(uint8 data){
+    rx_BT_Buffer[end_index] = data;
+    end_index = ( (end_index+1) % MAX_BUFFER);
+}
+
+void readbluetoothBuffer(){
+    if(end_index == start_index){
+        return;
+    }
+    
+    while(start_index != end_index){
+        uint8 value = rx_BT_Buffer[start_index];
+        start_index = ( (start_index+1) % MAX_BUFFER);
+        
+        analyseBuffer(value);
+    }
+}
 /*
  
 uint8 rx_BT_Buffer[21];
