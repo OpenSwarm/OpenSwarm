@@ -168,6 +168,18 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>extern/platform/e-puck/library/ircom/e_ad_conv.c</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/e_ad_conv.h</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircom.c</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircom.h</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomMessages.c</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomMessages.h</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomReceive.c</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomReceive.h</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomSend.c</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomSend.h</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomTools.c</itemPath>
+    <itemPath>extern/platform/e-puck/library/ircom/ircomTools.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>

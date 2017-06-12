@@ -85,9 +85,9 @@
 //#define SYS_REMOTECONTROL_USED	 /*!< Define this preprocessor symbol to receive remote control signals */
 //#define SYS_CAMERA_USED		 /*!< Define this preprocessor symbol to use the camera */
 //#define SYS_SELECTOR_USED		 /*!< Define this preprocessor symbol to use the selector */
-#define SYS_ADC_USED		 /*!< Define this preprocessor symbol to use the ADCs */
+//#define SYS_ADC_USED		 /*!< Define this preprocessor symbol to use the ADCs */
 //#define SYS_PROXIMITY_USED		 /*!< Define this preprocessor symbol to use the proximity sensors */
-#define SYS_COMMUNICATION_USED		 /*!< Define this preprocessor symbol to use the proximity sensors */
+//#define SYS_COMMUNICATION_USED		 /*!< Define this preprocessor symbol to use the proximity sensors */
 #endif
 
 #include "io/io.h"
