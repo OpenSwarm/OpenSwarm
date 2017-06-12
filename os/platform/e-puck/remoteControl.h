@@ -100,7 +100,9 @@ extern "C" {
 #define RC_BUTTON_RECORD        55  /*!< Value for the record button (RC-5 coding for a Toshiba RC-3910) */
     
 inline void Sys_Init_RemoteControl(void);
+inline void Sys_Deactivate_RemoteControl(void);
 inline void Sys_Start_RemoteControl(void);
+inline void Sys_Stop_RemoteControl(void);
 
 bool Sys_RemoteC_Received_New_Data(void);
 uint8 Sys_RemoteC_Get_CheckBit(void);

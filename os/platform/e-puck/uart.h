@@ -49,6 +49,12 @@ inline void Sys_Init_UART2(void);
 inline void Sys_Start_UART1(void);
 inline void Sys_Start_UART2(void);
 
+inline void Sys_Stop_UART1(void);
+inline void Sys_Stop_UART2(void);
+
+inline void Sys_Deactivate_UART1(void);
+inline void Sys_Deactivate_UART2(void);
+
 void Sys_SetReadingFunction_UART1(pUART_reader func);
 void Sys_SetReadingFunction_UART2(pUART_reader func);
 

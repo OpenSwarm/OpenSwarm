@@ -16,7 +16,7 @@
 #include "../events/events.h"
 
 #ifdef EPUCK_USED
-    #include "e-puck/clock_timer_HDI.h"
+    #include "../platform/e-puck/clock_timer_HDI.h"
 #endif
 
 static uint32 sys_clock = 0; /*!< counter which is system clock */
@@ -37,11 +37,13 @@ inline void Sys_Init_SystemClock(){
 
 /**
  *
- * Renaming of the function Sys_Init_Clock().
- * 
+ * This function deactivates the system clock.
+ *
  */
-inline void Sys_Init_SystemTime(){
-    Sys_Init_Clock();
+inline void Sys_Deactivate_SystemClock(){
+    Sys_Unregister_Event(SYS_EVENT_10ms_CLOCK); //event that occurs every milli second
+    
+    Sys_Stop_Clock();
 }
 
 /**
@@ -55,15 +57,6 @@ inline void Sys_Start_SystemClock(){
 
 /**
  *
- * Renaming of the function Sys_Start_SystemClock().
- * 
- */
-inline void Sys_Start_SystemTime(){
-    Sys_Start_SystemClock();
-}
-
-/**
- *
  * This function pauses the system clock.
  *
  */
@@ -71,14 +64,6 @@ inline void Sys_Pause_SystemClock(void){
     Sys_Pause_Clock();
 }
 
-/**
- *
- * Renaming of the function Sys_Pause_SystemClock().
- * 
- */
-inline void Sys_Pause_SystemTime(void){
-    Sys_Pause_SystemClock();
-}
 
 /**
  *
@@ -91,15 +76,6 @@ inline void Sys_Continue_SystemClock(void){
 
 /**
  *
- * Renaming of the function Sys_Continue_SystemClock().
- * 
- */
-inline void Sys_Continue_SystemTim(void){
-    Sys_Continue_SystemClock();
-}
-
-/**
- *
  * This function calculates the system clock tick and increases the counter if a millisecond passed.
  *
  */
@@ -108,16 +84,6 @@ void Sys_SystemClock_Counter(){
     sys_clock += 10;
     
     Sys_Send_Event(SYS_EVENT_10ms_CLOCK, &sys_clock, sizeof(sys_clock));
-}
-
-/**
- *
- * Renaming of the function Sys_Get_SystemClock().
- * 
- * @return time that has passed since OpenSwarm was started (uint32)
- */
-inline uint32 Sys_Get_SystemTime(){
-    return Sys_Get_SystemClock();
 }
 
 /**

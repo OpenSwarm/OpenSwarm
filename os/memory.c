@@ -12,8 +12,11 @@
 
 #include "memory.h"
 
+#include "definitions.h"
 #include "interrupts.h"
 #include <stdlib.h>
+
+#undef EXTENDED_MEMORY
 
 static uint sys_bytes_used = 0;
 
@@ -30,9 +33,11 @@ typedef struct sys_memory_metadata_s{
  */
 void *Sys_Malloc(uint length){
     uint8 *out = 0;
-    size_t total_length;
     
     Sys_Start_AtomicSection();
+
+#ifdef EXTENDED_MEMORY 
+    size_t total_length;
     
     total_length = length + sizeof(sys_memory_metadata);
     out = malloc(total_length);
@@ -41,10 +46,16 @@ void *Sys_Malloc(uint length){
     header->size = length;
     
     sys_bytes_used += total_length;
-    
     Sys_End_AtomicSection();
 
     return (void*) (out + sizeof(sys_memory_metadata));
+#else
+    out = malloc(length);
+    
+    Sys_End_AtomicSection();
+    
+    return out;
+#endif   
 }
 
 /**
@@ -56,11 +67,14 @@ void *Sys_Malloc(uint length){
 void Sys_Free(void *data){
 
     Sys_Start_AtomicSection();
-
+#ifdef EXTENDED_MEMORY
     sys_memory_metadata *header = (sys_memory_metadata *) (((uint8*) data) - sizeof(sys_memory_metadata));
     sys_bytes_used -= (header->size + sizeof(sys_memory_metadata));//theoretically his should be the length
         
     free(header);
+#else
+    free(data);
+#endif
 
     Sys_End_AtomicSection();
 
@@ -100,4 +114,21 @@ void Sys_Memcpy(void *source_i, void *destination_o, uint length){
  */
 uint Sys_MemoryUsed(){
     return sys_bytes_used;
+}
+
+/**
+ *
+ * Function to set the memory
+ *
+ * @param[in] 	point        pointer to the source
+ * @param[in] 	length       size of the memory that should be set to value
+ * @param[in] 	value        value of the memory
+ */
+void Sys_Memset(void *point, uint length, uint8 value){
+    uint8 *ptr = (uint8*) point;
+    int i=0;
+    
+    for(i=0; i < length; i++){
+        ptr[i] = value;
+    }
 }

@@ -32,33 +32,38 @@
 #include "processes/scheduler.h"    /* the implementation of the scheduler */
 #include "processes/process_Management.h"
 
-#include "platform/e-puck/library/motor_led/e_init_port.h"
+#include "../extern/platform/e-puck/library/motor_led/e_init_port.h"
 
 
 #include "io/io.h"
-#include "io/io_clock.h"
     
 #ifdef EPUCK_USED
+#ifdef SYS_CLOCK_USED
+#include "io/io_clock.h"
+#endif
 #ifdef SYS_MOTOR_USED
-#include "io/e-puck/motors.h"
+#include "platform/e-puck/motors.h"
 #endif
 #ifdef SYS_UART1_USED
-#include "io/e-puck/uart.h"
+#include "platform/e-puck/uart.h"
 #endif
 #ifdef SYS_REMOTECONTROL_USED
-#include "io/e-puck/remoteControl.h"
+#include "platform/e-puck/remoteControl.h"
 #endif
 #ifdef SYS_CAMERA_USED
-#include "io/e-puck/camera.h"
+#include "platform/e-puck/camera.h"
 #endif
 #ifdef SYS_SELECTOR_USED
-#include "io/e-puck/selector.h"
+#include "platform/e-puck/selector.h"
 #endif
 #ifdef SYS_ADC_USED
-#include "io/e-puck/adc.h"
+#include "platform/e-puck/adc.h"
 #endif
 #ifdef SYS_PROXIMITY_USED
-#include "io/e-puck/proximity.h"
+#include "platform/e-puck/proximity.h"
+#endif
+#ifdef SYS_COMMUNICATION_USED
+#include "communication/communication.h"
 #endif
 #endif
 
@@ -76,8 +81,6 @@ void Sys_Init_Kernel(){
     INTCON1bits.NSTDIS = 0;
 #endif
     
-    
-
     //Init Scheduling
     Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
     Sys_Init_Process_Management();
@@ -89,29 +92,51 @@ void Sys_Init_Kernel(){
     Sys_Init_IOManagement();
     
 #ifdef EPUCK_USED
+#ifdef SYS_CLOCK_USED
+    Sys_Init_SystemClock();
+#else
+    Sys_Deactivate_SystemClock();
+#endif
 #ifdef SYS_MOTOR_USED
     Sys_Init_Motors();
+#else
+    Sys_Deactivate_Motors();
 #endif
 #ifdef SYS_UART1_USED
     Sys_Init_UART1();
+#else
+    Sys_Deactivate_UART1();
 #endif
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Init_RemoteControl();
+#else
+    Sys_Deactivate_RemoteControl();
 #endif
 #ifdef SYS_CAMERA_USED
     Sys_Init_Camera();
+#else
+    Sys_Deactivate_Camera();
 #endif
 #ifdef SYS_SELECTOR_USED
     Sys_Init_Selector();
+#else
+    Sys_Deactivate_Selector();
 #endif
-#ifdef SYS_SELECTOR_USED
+#ifdef SYS_ADC_USED
     Sys_Init_ADC();
+#else
+    Sys_Deactivate_ADC();
 #endif
 #ifdef SYS_PROXIMITY_USED
     Sys_Init_Proximity();
+#else
+    Sys_Deactivate_Proximity();
 #endif
 #ifdef SYS_CLOCK_USED
     Sys_Init_SystemClock();
+#endif
+#ifdef SYS_COMMUNICATION_USED
+    Sys_Init_Communication();
 #endif
 #endif
 }
@@ -125,31 +150,51 @@ void Sys_Init_Kernel(){
 void Sys_Start_Kernel(void){
 
     Sys_Start_SystemTimer();
-
     Sys_Start_IOManagement();
     
 #ifdef EPUCK_USED
+#ifdef SYS_CLOCK_USED
+    Sys_Start_SystemClock();
+#else
+//    Sys_Stop_SystemClock();
+#endif
+    
 #ifdef SYS_MOTOR_USED
+#else
 #endif
 #ifdef SYS_UART1_USED
     Sys_Start_UART1();
+#else
+    Sys_Stop_UART1();
 #endif
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Start_RemoteControl();
+#else
+    Sys_Stop_RemoteControl();
 #endif
 #ifdef SYS_CAMERA_USED
     Sys_Start_Camera();
+#else
+    Sys_Stop_Camera();
 #endif
 #ifdef SYS_SELECTOR_USED
 #endif
 #ifdef SYS_ADC_USED
     Sys_Start_ADC();
+#else
+    Sys_Stop_ADC();
 #endif
 #ifdef SYS_PROXIMITY_USED
+#else
+    Sys_Stop_Proximity();
 #endif
 #ifdef SYS_CLOCK_USED
     Sys_Start_SystemClock();
 #endif
+#ifdef SYS_COMMUNICATION_USED
+    Sys_Start_Communication();
 #endif
+#endif
+    
 }
 

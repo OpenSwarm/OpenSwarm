@@ -33,7 +33,6 @@ sys_pcb_list_element *sys_ready_processes = 0;/*!< pointer to the ready processe
 sys_pcb_list_element *sys_running_process = 0;/*!< pointer to the running process */
 sys_pcb_list_element *sys_blocked_processes = 0;/*!< pointer to the blocked process */
 sys_pcb_list_element *sys_zombies = 0;/*!< pointer to the zombie process */
-sys_occurred_event *sys_occurred_events = 0;/*!< pointer to the occurred events */
 
 /********************************************************
  ********************************************************
@@ -131,147 +130,6 @@ inline sys_pcb_list_element *Sys_Find_Process(uint pid){
     return 0;
 }
 
-/****** EVENTS: **************************************************************************************************
- *****************************************************************************************************************
- *  All functions which are needed to add/remove/delete events for an process
- *
- *****************************************************************************************************************
- *****************************************************************************************************************/
-
-/**
- *
- * This function searches (sequentially) all event handler for an event (eventID). The list contains a list of eventhandler and this function return the first occurrence of eventID. To search the list entirely, use the function on a list and after resulting an element use the same function on the next element (sublist).
- *
- * @param[in] list      list of event handler
- * @param[in] eventID   The Id of the event which can put the process (PID) back on the ready list
- * @return sys_process_event_handler *          pointer to the next event handler for the event (eventID) in list (0 if not found)
- */
-inline sys_process_event_handler *Sys_Next_EventHandler(sys_process_event_handler *list, uint eventID){
-
-    sys_process_event_handler *element;
-    
-    Sys_Start_AtomicSection();
-    element = list;
-
-    while(element != 0){
-        if(element->eventID == eventID){
-            Sys_End_AtomicSection();
-            return element;
-        }
-
-        element = element->next;
-    }
-
-    Sys_End_AtomicSection();
-    return 0;
-}
-
-/*******************************
- *  Cleaning up
- *******************************/
-
-/**
- * 
- * This function removes subscribed handler function from event-handler list
- *
- * @param[in] eventID   Identifier of the event that has to be removed
- * @param[in] func      pointer to the subscribed handler function
- * @param[in] list      list of event handlers
- * @return sys_process_event_handler *      (New) top of the list (if changed)
- */
-//Assumption eventID+func is unique in process eventregister. Note: -1 means all functions
-inline sys_process_event_handler *Sys_Remove_Event_from_EventRegister(uint eventID, pEventHandlerFunction func, sys_process_event_handler **list){
-
-    sys_process_event_handler *top;
-    
-    if(list == 0 || *list == 0){//list is empty
-        return 0;
-    }
-
-    Sys_Start_AtomicSection();
-    top = *list;
-    if(top->eventID == eventID && ( func == ALL_FUNCTIONS || top->handler == func)){
-       sys_process_event_handler *new_top = top->next;
-       *list = top->next;
-
-       Sys_Clear_EventData(&top->buffered_data);
-       Sys_Free(top);
-
-       Sys_End_AtomicSection();
-       return new_top;
-    }
-
-    sys_process_event_handler *previous_element = top;
-    sys_process_event_handler *element = top->next;
-
-    do{
-        if(element->eventID == eventID && ( func == ALL_FUNCTIONS || top->handler == func)){
-            previous_element->next = element->next;
-
-            Sys_Clear_EventData(&element->buffered_data);
-            Sys_Free(element);
-
-            element = previous_element->next;
-            continue;
-        }
-        previous_element = element;
-        element = element->next;
-    }while(element == 0);
-
-    Sys_End_AtomicSection();
-    return top;
-}
-
-/**
- * 
- * This function removes and frees a list of sys_event_data
- *
- * @param[in,out] data   pointer to the event_data (list)
- * @return void
- */
-inline void Sys_Clear_EventData(sys_event_data **data){
-    sys_event_data *element;
-    
-    Sys_Start_AtomicSection();
-        element = *data;
-        *data = 0;
-
-        while(element != 0){
-            sys_event_data *temp = element;
-            element = element->next;
-
-            Sys_Free(temp->value);
-            Sys_Free(temp);
-        }
-    Sys_End_AtomicSection();
-}
-
-/**
- * 
- * This function clears and frees all elements of a process. The process is also unsubscribed from any event, because and empty event register cannot handle any events. 
- *
- * @param[in,out] element   pointer to the pcb of the process
- * @return void
- */
-inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
-    sys_process_event_handler *event_h;
-    
-    Sys_Start_AtomicSection();
-        event_h = element->pcb.event_register;
-        element->pcb.event_register = 0;
-
-        Sys_Unsubscribe_Process(element->pcb.process_ID);
-
-        while(event_h != 0){
-            sys_process_event_handler *temp = event_h;
-            event_h = event_h->next;
-
-            Sys_Clear_EventData(&temp->buffered_data);
-            Sys_Free(temp);
-        }
-    Sys_End_AtomicSection();
-}
-
 /**
  *
  * This function deletes container elements. Warning: this function only deletes the process. All the elements which are linked with next are lost in memory, if you haven't take care of that on advance.
@@ -282,12 +140,13 @@ inline void Sys_Clear_EventRegister(sys_pcb_list_element *element){
 void Sys_Delete_Process(sys_pcb_list_element *element){
     Sys_Start_AtomicSection();
 
-    Sys_Clear_EventRegister(element);
-
-    Sys_Free(element->pcb.process_stack);
-    element->pcb.process_stack = 0;
-    Sys_Free(element);
-
+    if(element != 0){
+        Sys_Free(element->pcb.process_stack);
+        element->pcb.process_stack = 0;
+        
+        Sys_Clear_EventData(element->pcb.event);
+        Sys_Free(element);
+    }
     Sys_End_AtomicSection();
 }
 
@@ -320,7 +179,7 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint stacksize){
     element->stackPointer = (uint) element->process_stack;
     element->framePointer = element->stackPointer;
     element->stackPointerLimit = element->stackPointer + stacksize;
-    element->event_register = 0;
+    element->event = 0;
 
     return true;
 }
@@ -405,7 +264,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
 
 sint Sys_GetCurrentIRQPNesting(void){
     if( sys_running_process == 0){
-        return 0;
+        return -1;
     } 
     
     return sys_running_process->pcb.interruptPriorityNesting;

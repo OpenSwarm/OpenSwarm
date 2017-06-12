@@ -1,13 +1,37 @@
+/*!
+ * \file
+ * \ingroup adc
+ * 
+ * \author  Stefan M. Trenkwalder <s.trenkwalder@openswarm.org>
+ * 
+ * \version 1.0
+ *
+ * \date Jan 2016
+ * 
+ * \brief It defines functions to control and use the ADC-channels
+ * \copyright 	adapted FreeBSD License (see http://openswarm.org/license)
+ */
+
 #include "adc.h"
+
+#include "../../communication/communication.h"
 
 #include "../../definitions.h"
 #include "../../interrupts.h"
+#include "../../system.h"
 
-#define ADC_CHANNELS 16
+#define ADC_CHANNELS 16 /*!< Maximum amount of ADC-channels*/
 
-static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};
+static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};  /*!< Defines the a ADC-preProcessor for each channel*/
+static pFunction adcFinishFunctions[4] = {0};  /*!< Defines functions that are called when a group was successfully read*/
 
-uint16 sys_random_number = 0;
+uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets defined by the ADC noise*/
+
+/**
+ *
+ * This Function initialises all ADC-channels. All channels are sampled (except Debug-pins)---i.e. Microphone (3x), Accelerometer (3-axis), Proximity-sensors (8x).
+ * 
+ */
 
 inline void Sys_Init_ADC(void){
     
@@ -24,7 +48,7 @@ inline void Sys_Init_ADC(void){
     
     ADCON1bits.ADSIDL   = 0;    // Continue module operation in Idle mode
     ADCON1bits.FORM     = 0b00; // get integer (1 is fractional)
-    ADCON1bits.SSRC     = 0b111;// Internal counter ends sampling and starts conversion (auto convert)
+    ADCON1bits.SSRC     = 0b111;// counter ends sampling and starts conversion (auto convert)
     ADCON1bits.ASAM     = 1;    // Sampling begins immediately after last conversion completes. SAMP bit is auto set
     ADCON1bits.SAMP     = 0;    // A/D sample/hold amplifiers are holding
     
@@ -34,9 +58,10 @@ inline void Sys_Init_ADC(void){
     ADCON2bits.BUFM     = 0;    // Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.ALTS     = 0;    // Always use MUX A input multiplexer settings
     
-    ADCON3bits.SAMC     = 31; //: Auto-Sample Time bits
-    ADCON3bits.ADRC     = 1;    //internal clock
-    ADCON3bits.ADCS     = 63; //A/D Conversion Clock Select bits (TCY/2 * (ADCS+1))
+    ADCON3bits.SAMC     = ADC_ACQUISITION_TIME;//1 //1-31: Auto-Sample Time bits - bits between sampling and conversion (Acquisition time) // 31
+    ADCON3bits.ADRC     = 0;    //1: internal clock
+                                //0: Clock Derived From System Clock
+    ADCON3bits.ADCS     = ADC_SCALER_TIME-1;//0 //0-63: A/D Conversion Clock Select bits (TCY/2 * (ADCS+1)) // 63
     
     ADCHSbits.CH0NA     = 0;    //Select VREF- for CH0- input
             
@@ -75,13 +100,15 @@ inline void Sys_Init_ADC(void){
     ADCSSLbits.CSSL14 = 1;// Proximity 6
     ADCSSLbits.CSSL15 = 1;// Proximity 7
     
-    PULSE_IR0 = 1;
-    PULSE_IR1 = 1;
-    PULSE_IR2 = 1;
-    PULSE_IR3 = 1;
+    IPC2bits.ADIP = 6;
 
 }
 
+/**
+ *
+ * This Function starts the ADC sampling.
+ * 
+ */
 inline void Sys_Start_ADC(void){
     IFS0bits.ADIF       = 0; //ADC interrupt flag
     IEC0bits.ADIE       = 1; //enable IRQ
@@ -89,7 +116,19 @@ inline void Sys_Start_ADC(void){
 
 }
 
+/**
+ *
+ * The ADC interrupt routine reads the obtained ADC value and executes the preprocessors with it. It also uses the ADC noise to obtain a random value. 
+ * 
+ */
 void __attribute__((interrupt, auto_psv)) _ADCInterrupt(void){
+    
+#ifndef SYS_ADC_USED    
+    IFS0bits.ADIF       = 0; //ADC interrupt flag
+    IEC0bits.ADIE       = 0; //enable IRQ
+    ADCON1bits.ADON     = 0;
+    return;
+#endif
     
     volatile unsigned int *adcbuf;
     adcbuf = &ADCBUF0;
@@ -106,12 +145,29 @@ void __attribute__((interrupt, auto_psv)) _ADCInterrupt(void){
         sys_random_number = (sys_random_number << 1) | (adcbuf[i] & 0x0001); //use the last bit (adc noise) to generate the random number
     }
     
+    for(i = 0; i < 4; i++){
+        if(adcFinishFunctions[i] != 0){//+2 because I do not collect the debug ADC
+            adcFinishFunctions[i]();
+        }
+    }
+    
     Sys_End_AtomicSection();
     IFS0bits.ADIF = 0;  //After conversion ADIF is set to 1 and must be cleared
 }
 
+
+/**
+ *
+ * This function adds an ADC pre-processor.
+ * 
+ * @param[in] c ADC channel that requires a pre-processor
+ * @param[in] func Pointer to the pre-processor for that channel
+ */
 void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func){
     int i;
+    
+    Sys_Start_AtomicSection();
+    
     for(i = 0; i < ADC_CHANNELS; i++){
         if(c & 0x0001){//is the last bit a 1 ?
             adc_preprocessors[i] = func;
@@ -119,31 +175,107 @@ void Sys_Subscribe_ADCChannelProcessor(channel c, ADC_pre_processor func){
         
         c = c >> 1;
     }
+    
+    Sys_End_AtomicSection();
 }
 
-
-
+/**
+ *
+ * This function resets all Preprocessors to 0. (no-preprocessor)
+ * 
+ */
 void Sys_Reset_ADCProcessors(){
     int i;
+    
+    Sys_Start_AtomicSection();
     for(i = 0; i < ADC_CHANNELS; i++){
         adc_preprocessors[i] = 0;
     }
+    Sys_End_AtomicSection();
 }
 
+/**
+ *
+ * This function sets an ADC pre-processor to 0 (removing it). 
+ * 
+ * @param[in] c ADC channel that should have no pre-processor
+ */
+void Sys_Reset_ADCProcessor(channel c){
+    Sys_Subscribe_ADCChannelProcessor(c, 0);
+}
+
+/**
+ *
+ * This function stops the ADC conversion.
+ * 
+ */
 inline void Sys_Stop_ADC(){
     IFS0bits.ADIF       = 0; //ADC interrupt flag
     IEC0bits.ADIE       = 0; //enable IRQ
     ADCON1bits.ADON     = 0;
 }
 
+/**
+ *
+ * This function resets all Preprocessors to 0. (no-preprocessor)
+ * 
+ */
 inline void Sys_Reset_ADC(){
     Sys_Reset_ADCProcessors();
 }
 
+/**
+ *
+ * This function deactivates the ADC module and stops any conversion.
+ * 
+ */
+inline void Sys_Deactivate_ADC(void){
+    Sys_Stop_ADC();
+}
+
+/**
+ *
+ * This function returns a 8-bit random number.
+ * 
+ * @return uint8 a random number generated by adc noise.
+ * 
+ */
 uint8 Sys_Rand8(){
     return (uint8) sys_random_number & 0x00FF;
 }
 
+/**
+ *
+ * This function returns a 16-bit random number
+ * 
+ * @return uint16 a random number generated by adc noise.
+ * 
+ */
 uint16 Sys_Rand16(){
     return sys_random_number;
+}
+
+/**
+ *
+ * This stores functions that indicated that a group of sensor reading was successfully handled.
+ * 
+ * @param[in] func pointer to "void function(void)"
+ * @param[in] flag Flag that indicates which group of sensors has been processed
+ * 
+ */
+void Sys_Subscribe_ADCFinish(sensorGroup flag, pFunction func){
+    Sys_Start_AtomicSection();
+    if( flag & ProxDone){//!= 0
+        adcFinishFunctions[0] = func;
+    }
+    if(flag & MicDone){//!= 0
+        adcFinishFunctions[1] = func;
+    }
+    if(flag & AccDone){//!= 0
+        adcFinishFunctions[2] = func;
+    }
+    if(flag & DbgDone){//!= 0
+        adcFinishFunctions[3] = func;
+    }
+    Sys_End_AtomicSection();
 }

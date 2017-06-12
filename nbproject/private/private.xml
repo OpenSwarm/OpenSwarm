@@ -4,19 +4,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/adc.h</file>
             <file>file:/home/strenkwalder/code/os/main.c</file>
-            <file>file:/home/strenkwalder/code/os/os/system.c</file>
-            <file>file:/home/strenkwalder/code/os/os/system.h</file>
-            <file>file:/home/strenkwalder/code/os/os/io/io_clock.c</file>
-            <file>file:/home/strenkwalder/code/os/os/io/io_clock.h</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/system_Timer.c</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/system_Timer_HDI.c</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/library/motor_led/e_init_port.c</file>
-            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/control_timer.c</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/data.c</file>
-            <file>file:/home/strenkwalder/code/os/os/processes/data.h</file>
-            <file>file:/home/strenkwalder/code/os/os/interrupts.c</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/communication.c</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/channel.h</file>
             <file>file:/home/strenkwalder/code/os/os/interrupts.h</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/physical.c</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/adc.c</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/physical_HDI.c</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/physical_HDI.h</file>
+            <file>file:/home/strenkwalder/code/os/os/system.h</file>
+            <file>file:/home/strenkwalder/code/os/os/communication/channel.c</file>
+            <file>file:/home/strenkwalder/code/os/os/system.c</file>
+            <file>file:/home/strenkwalder/code/os/os/definitions.h</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/uart_HDI.c</file>
+            <file>file:/home/strenkwalder/code/os/os/platform/e-puck/camera.c</file>
         </group>
     </open-files>
 </project-private>

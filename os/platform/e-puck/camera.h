@@ -64,6 +64,8 @@ extern "C" {
 
     void Sys_Init_Camera(void);
     void Sys_Start_Camera(void);
+    void Sys_Stop_Camera(void);
+    void Sys_Deactivate_Camera(void);
 
     void Sys_Set_Preprocessing(pCameraPreProcessor func);
 

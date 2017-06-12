@@ -154,10 +154,10 @@ void e_init_port(void) {
     CAM_y6_DIR = INPUT_PIN;
     CAM_y7_DIR = INPUT_PIN;
 
-    testAccGyroPresence();
-    if (isPresentFlag) {
-        initAccAndGyro();
-    }
+    //testAccGyroPresence();
+    //if (isPresentFlag) {
+    //    initAccAndGyro();
+    //}
 }
 
 unsigned char isEpuckVersion1_3(void) {

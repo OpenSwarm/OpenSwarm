@@ -43,13 +43,20 @@ extern "C" {
 #endif
 
 #define MAX_WHEEL_SPEED_MM_S 129 /*mm/s*/ 	/*!< Maximum wheel speed in mm/s*/
+
+#define WHOLETURN 1300
     
 void Sys_Init_Motors(void);
-
+void Sys_Deactivate_Motors(void);
 void Sys_Set_LeftWheelSpeed(sint16 speed);
 void Sys_Set_RightWheelSpeed(sint16 speed);
 sint16 Sys_Get_LeftWheelSpeed(void);
 sint16 Sys_Get_RightWheelSpeed(void);
+
+void Sys_Set_StepsRight(int set_steps);
+void Sys_Set_StepsLeft(int set_steps);
+int Sys_Get_StepsLeft(void);
+int Sys_Get_StepsRight(void);
 
 
 #ifdef	__cplusplus

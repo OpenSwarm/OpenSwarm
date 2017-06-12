@@ -11,47 +11,225 @@
  */
 
 #include "events.h"
-#include "../processes/process_Management.h"
-#include "../processes/system_Timer.h"
-#include "../memory.h"
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
 
+#include "../definitions.h"
 #include "../interrupts.h"
+#include "../memory.h"
+
+#include "../processes/system_Timer.h"
+
+#include <stdlib.h>
 
 /**
- * @brief A single linked list element containing the ID of a process that is subscribed to a specific event
+ * @brief A single linked list element containing all information needed to handle an occurred event;
  */
-typedef struct sys_subscribed_process_s{
-    uint pid;/*!< process identifier */
-    struct sys_subscribed_process_s *next;/*!< pointer to the next element in the list */
-}sys_subscribed_process;
+typedef struct sys_event_handler_s{
+    pEventHandlerFunction   handler;    /*!< subscribed handler function */
+    pConditionFunction      condition;  /*!< subscribed condition function */
+    void*                   userData;   /*!< pointer to userdata which is a pointer that was stored when Sys_Subscribe_to_Event was called. It can be used */
+    sys_event_data*         bufferd_data;/*!< pointer to a list of event data that has been sent and buffered*/
+    struct sys_event_handler_s *next;   /*!< pointer to the next element in the list */
+}sys_event_handler;
 
 /**
- * @brief A single linked element containing a registered event and its subscribers
- * 
- * It is a single linked list element that contains registered events and a list of processes that are subscribed to it. 
+ * @brief A single linked list for registered events
  */
-typedef struct sys_registered_event_s{
-    uint eventID;/*!< event identifier */
-    sys_subscribed_process *subscribers;/*!< pointer to a list of subscribed processes */
-    struct sys_registered_event_s *next;/*!< pointer to the next element in the list */
-}sys_registered_event;
+typedef struct sys_event_s{
+    uint                id;         /*!< event identifier */
+    sys_event_handler * handlers;   /*!< list of subscribed handlers */
+    struct sys_event_s *next;       /*!< pointer to the next element in the list */
+}sys_event;
 
-/*
-typedef struct sys_event_s {
-    uint16 id;
-    void *value;
-    uint16 value_length;
-} sys_event;
-*/
+/**
+ * @brief A single linked list for occurred events
+ */
+typedef struct sys_occurred_event_s{
+    uint                            id;         /*!< event identifier */
+    struct sys_occurred_event_s *   next;       /*!< pointer to the next element in the list */
+}sys_occurred_event;
 
-sys_registered_event *registered_events = 0;/*!< pointer to the List of registered events*/
 
-sys_registered_event *Sys_Find_Event(uint eventID);
+/*******************************************************************************
+ *  Global Event Variables
+ ******************************************************************************/
+sys_event *             registered_events   = 0;/*!< pointer to the List of registered events*/
 
-static uint event_counter = 0; /*!< amount of occurred events since the last reset */
+/*******************************************************************************
+ *  Functions Prototypes
+ ******************************************************************************/
+void Sys_Clear_Event(sys_event *e);
+void Sys_Clear_EventHandler(sys_event_handler *h);
+void Sys_Clear_BufferedList(sys_event_data** d);
+void Sys_Clear_BufferedData(sys_event_data* d);
+sys_event *Sys_FindEvent(uint eventID);
+
+/*******************************************************************************
+ *  Functions Definitions
+ ******************************************************************************/
+
+/**
+ *
+ * This function registers an new event. The registration tells the operating system that this event can occur.
+ *
+ * @param[in] 	eventID    ID of the event
+ * @return 	was it successful.
+ */
+bool Sys_Register_Event(uint eventID){
+    sys_event** empty_element;
+    
+    Sys_Start_AtomicSection();
+    
+    empty_element = &registered_events;
+    
+    while( (*empty_element) != 0){//go through all elements in the list until you reached the end
+        if((*empty_element)->id == eventID){ //if the event has already been registered
+            Sys_End_AtomicSection();
+            return true;
+        }
+        
+        empty_element = &((*empty_element)->next);
+    }
+    
+    sys_event* new_event = (sys_event*) Sys_Malloc(sizeof(struct sys_event_s));
+    if(new_event == 0){
+        Sys_End_AtomicSection();
+        return false;
+    }
+    
+    new_event->id       = eventID;
+    new_event->handlers = 0;
+    new_event->next     = 0;
+    
+    (*empty_element) = new_event;
+    Sys_End_AtomicSection();
+    return true;
+}
+
+/**
+ *
+ * This function unregisters an event
+ *
+ * @param[in] 	eventID     ID of the event
+ */
+void Sys_Unregister_Event(uint eventID){
+    sys_event**             event_element;
+    
+    Sys_Start_AtomicSection();
+    event_element = &registered_events;
+    
+    while( (*event_element) != 0){//go through all elements in the list until you reached the end
+        if((*event_element)->id == eventID){ //if the event has already been registered
+            sys_event* event = (*event_element);
+            
+            (*event_element) = event->next;
+            event->next = 0;
+            
+            Sys_Clear_Event(event);
+            Sys_Free(event);
+            break;
+        }
+        
+        event_element = &((*event_element)->next);
+    }
+        
+    Sys_End_AtomicSection();
+    return;
+}
+
+/**
+ *
+ * This function subscribes a specific handler function to an process and a specific event
+ *
+ * @param[in] 	eventID     ID of the event
+ * @param[in] 	handler     pointer to the function that should handle the event data
+ * @param[in] 	condition   pointer to the function that decides if the handler should be executed or not
+ * @param[in] 	user_data   pointer to an arbitrary element  which get passed to the handler every time it is executed.
+ * @return 	was it successful.
+ */
+bool Sys_Subscribe_to_Event(uint eventID, pEventHandlerFunction handler, pConditionFunction condition, void *user_data){
+    sys_event* event;
+    sys_event_handler **handlers;
+    
+    if(handler == 0){
+        return true;
+    }
+    
+    Sys_Start_AtomicSection();
+    event = Sys_FindEvent(eventID);
+    
+    if(event == 0){
+        Sys_End_AtomicSection();
+        return false;
+    }
+    
+    handlers = &(event->handlers);
+    
+    while( (*handlers) != 0){//go through all elements in the list until you reached the end
+        if((*handlers)->handler == handler){ //if the handler has already been subscribed
+            (*handlers)->condition = condition;
+            (*handlers)->userData = user_data;
+            
+            Sys_End_AtomicSection();
+            return true;
+        }
+        handlers = &((*handlers)->next);
+    }
+        
+    sys_event_handler* new_handler = (sys_event_handler*) Sys_Malloc(sizeof(struct sys_event_handler_s));
+    if(new_handler == 0){
+        Sys_End_AtomicSection();
+        return false;
+    }
+    
+    new_handler->handler    = handler;
+    new_handler->condition  = condition;
+    new_handler->userData   = user_data;
+    new_handler->bufferd_data = 0;
+    new_handler->next = 0;
+    
+    (*handlers) = new_handler;
+    Sys_End_AtomicSection();
+    return true;
+}
+
+/**
+ *
+ * This function only unsubscribes a specific handler function from a specific Event
+ *
+ * @param[in] 	eventID     ID of the event
+ * @param[in] 	handler     pointer to the handler function
+ */
+void Sys_Unsubscribe_Handler(uint eventID, pEventHandlerFunction handler, void *user_data){
+    sys_event* event;
+    sys_event_handler **handlers;
+    
+    Sys_Start_AtomicSection();
+    event = Sys_FindEvent(eventID);
+   
+    if(event == 0){
+        Sys_End_AtomicSection();
+        return;
+    }
+    
+    handlers = &(event->handlers);
+    
+    while( (*handlers) != 0){//go through all elements in the list until you reached the end
+        if(((*handlers)->handler == handler || handler == 0) && ((*handlers)->userData == user_data || user_data == 0)){ //if the handler has already been subscribed            
+            sys_event_handler* hdl = (*handlers);
+            
+            (*handlers) = hdl->next;
+            hdl->next = 0;
+            
+            Sys_Clear_BufferedData(hdl->bufferd_data);
+            Sys_Free(hdl);
+            continue;
+        }
+        handlers = &((*handlers)->next);
+    }
+    
+    Sys_End_AtomicSection();
+    return;
+}
 
 /**
  *
@@ -63,22 +241,71 @@ static uint event_counter = 0; /*!< amount of occurred events since the last res
  * @return true if it was successful.
  */
 bool Sys_Send_Event(uint eventID, void *data, uint data_size){
+    return Sys_Send_CriticalEvent(eventID, data, data_size);
+}
+
+/**
+ *
+ * This function sends an event to all subscribers and buffers the data before executing them with Sys_Execute_BufferedEvents.
+ *
+ * @param[in] 	eventID    ID of the event
+ * @param[in] 	data       pointer to the data that want to be sent as an event
+ * @param[in] 	data_size  size of the data in bytes
+ * @return true if it was successful.
+ */
+bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
     Sys_Start_AtomicSection();//doesn't consume execution time
     Sys_Stop_SystemTimer();
     
         Sys_Inc_EventCounter();
 
-        sys_registered_event *event = Sys_Find_Event(eventID);
+        sys_event *event = Sys_FindEvent(eventID);
+        
         if(event == 0){
             Sys_Continue_SystemTimer();
             Sys_End_AtomicSection();
             return false;
         }
-
-        sys_subscribed_process *process = event->subscribers;
-        while(process != 0){
-            Sys_Add_Event_to_Process(process->pid, eventID, data, data_size);
-            process = process->next;
+        
+        sys_event_handler* hdl = event->handlers;
+        while(hdl != 0){
+            sys_event_data* evData = (sys_event_data*) Sys_Malloc(sizeof(struct sys_event_data_s));
+            if(evData == 0){
+                Sys_Continue_SystemTimer();
+                Sys_End_AtomicSection();
+                return false;
+            }
+                
+            evData->size = data_size;
+            evData->next = 0;
+            evData->value = Sys_Malloc(data_size);
+            if(evData->value == 0){
+                Sys_Free(evData);
+                
+                Sys_Continue_SystemTimer();
+                Sys_End_AtomicSection();
+                return false;
+            }
+            
+            Sys_Memcpy(data, evData->value, data_size);
+            
+            bool condition_met = true;
+            if(hdl->condition != 0){
+                condition_met = hdl->condition(eventID, evData, hdl->userData);
+            }
+                
+            if(condition_met){
+                sys_event_data** data_element = &(hdl->bufferd_data);
+                while( (*data_element) != 0){
+                    data_element = &((*data_element)->next);
+                }
+                (*data_element) = evData;
+            }else{
+                Sys_Free(evData->value);
+                Sys_Free(evData);
+            }
+            
+            hdl = hdl->next;
         }
 
     Sys_Continue_SystemTimer();
@@ -101,293 +328,256 @@ inline bool Sys_Send_IntEvent(uint eventID, uint data){
 
 /**
  *
- * This function registers an new event. The registration tells the operating system that this event can occur.
+ * This function sends an event to all subscribers and executed the handler immediately.
  *
  * @param[in] 	eventID    ID of the event
- * @return 	was it successful.
+ * @param[in] 	data       pointer to the data that want to be sent as an event
+ * @param[in] 	data_size  size of the data in bytes
+ * @return true if it was successful.
  */
-bool Sys_Register_Event(uint eventID){
-    sys_registered_event* events;
-    sys_registered_event* next_event;
-    sys_registered_event* new_event = 0;
+bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
+    Sys_Start_AtomicSection();//doesn't consume execution time
+    Sys_Stop_SystemTimer();
     
-    Sys_Start_AtomicSection();
-    events = registered_events;
-    next_event = registered_events;
-    
-    while(next_event != 0){
-        if(events->eventID == eventID){ //is Event (EID) already registered?
+        Sys_Inc_EventCounter();
+
+        sys_event *event = Sys_FindEvent(eventID);
+        if(event == 0){
+            Sys_Continue_SystemTimer();
             Sys_End_AtomicSection();
             return false;
         }
+        
+        sys_event_data data;
+        data.value = Sys_Malloc(data_size);
+        if(data.value == 0){
+            Sys_Continue_SystemTimer();
+            Sys_End_AtomicSection();
+            return false;
+        }
+        
+        Sys_Memcpy(data_in, data.value, data_size);
+        data.size  = data_size;
+        data.next  = 0;
+        
+        
+        sys_event_handler* hdl = event->handlers;
+        while(hdl != 0){
+            bool condition_met = true;
+            if(hdl->condition != 0){
+                condition_met = hdl->condition(eventID, &data, hdl->userData);
+            }
+                
+            if(condition_met){
+                hdl->handler(eventID, &data, hdl->userData);
+            }
+            
+            hdl = hdl->next;
+        }
+        
+        Sys_Free(data.value);
 
-        events = next_event;
-        next_event = events->next;
-    }
-
-    new_event = (sys_registered_event*) Sys_Malloc(sizeof(struct sys_registered_event_s));
-    if(new_event == 0){
-        Sys_End_AtomicSection();
-        return false;
-    }
-    new_event->eventID = eventID;
-    new_event->subscribers = 0;
-    new_event->next = 0;
-
-    if(registered_events == 0){
-        registered_events = new_event;
-        Sys_End_AtomicSection();
-        return true;
-    }
-
-    events->next = new_event;
+    Sys_Continue_SystemTimer();
     Sys_End_AtomicSection();
     return true;
 }
 
 /**
  *
- * This function subscribes a specific handler function to an process and a specific event
+ * This function executes all buffered events.
  *
- * @param[in] 	eventID     ID of the event
- * @param[in] 	pid         ID of the process
- * @param[in] 	handler     pointer to the function that should handle the event data
- * @param[in] 	condition   pointer to the function that decides if the handler should be executed or not
- * @return 	was it successful.
  */
-bool Sys_Subscribe_to_Event(uint eventID, uint pid, pEventHandlerFunction handler, pConditionFunction condition){
-    sys_registered_event* events = registered_events;
+void Sys_Execute_BufferedEvents(void){
+    Sys_Start_AtomicSection();
+       
+        sys_event *event = registered_events;
+        while(event != 0){
+            
+            sys_event_handler *handler = event->handlers;
+            while(handler != 0){
+                
+                sys_event_data** data = &(handler->bufferd_data);
+                sys_event_data* temp = 0;
+                while( (*data) != 0){
+                    handler->handler(event->id, (*data), handler->userData);
+                    
+                    temp = (*data);
+                    (*data) = (*data)->next;
+                    
+                    Sys_Clear_BufferedData(temp);
+                }                
+                handler = handler->next;
+            }            
+            event = event->next;
+        }        
+    Sys_End_AtomicSection();
+}
+
+/**
+ *
+ * This function replicates a sys_event_data struct.
+ *
+ * @param[in] 	data       pointer to the data that needs to be replicated
+ * @return a pointer to the new data
+ */
+sys_event_data* Sys_Copy_EventData(sys_event_data* data){
+    Sys_Start_AtomicSection();
     
-    while(events != 0){
-        if(events->eventID == eventID){
-            if(!Sys_Add_Event_Subscription(pid, eventID, handler, condition)){
-                return false;
-            }
-
-            sys_subscribed_process *subscribed_process = events->subscribers;
-            while(subscribed_process != 0 && subscribed_process->next != 0){
-                if(subscribed_process->pid == pid){
-                    return true;
-                }
-
-                subscribed_process = subscribed_process->next;
-            }
-
-            sys_subscribed_process *new_process = (sys_subscribed_process*) Sys_Malloc(sizeof(struct sys_subscribed_process_s));
-            if(new_process == 0){
-                return false;
-            }
-            new_process->pid = pid;
-            new_process->next = 0;
-
-            if(events->subscribers == 0){
-                events->subscribers = new_process;
-                return true;
-            }
+    //create new
+    sys_event_data* evData = (sys_event_data*) Sys_Malloc(sizeof(struct sys_event_data_s));
+    if(evData == 0){
+        Sys_End_AtomicSection();
+        return 0;
+    }
+                
+    evData->size = data->size;
+    evData->next = data->next;
+    
+    //create new value
+    evData->value = Sys_Malloc(data->size);
+    if(evData->value == 0){
+        Sys_Free(evData);
+                
+        Sys_End_AtomicSection();
+        return 0;
+    }
             
-            subscribed_process->next = new_process;
-            return true;
-        }
-
-        events = events->next;
-    }
-    return false;
+    Sys_Memcpy(data->value, evData->value, data->size);
+    
+    Sys_End_AtomicSection();
+    return evData;
 }
 
 /**
  *
- * This function unregisters an event
+ * This function frees the memory of an sys_event struct.
  *
- * @param[in] 	eventID     ID of the event
+ * @param[in] 	event      pointer to the event that needs to be deleted
  */
-void Sys_Unregister_Event(uint eventID){
-    sys_registered_event* event = registered_events;
-    sys_registered_event* next_event = registered_events;
-
-    if(registered_events == 0){
-        return;
-    }else{
-        if(event->eventID == eventID){
-            registered_events = event->next;
-
-            sys_subscribed_process* subscriber = event->subscribers;
-            while(subscriber != 0){
-               sys_subscribed_process* temp = subscriber;
-               subscriber = subscriber->next;
-
-               Sys_Free(temp);
-            }
-
-            Sys_Remove_All_Event_Subscriptions(eventID);//
-            return;
+void Sys_Clear_Event(sys_event *event){
+    sys_event_handler * handler;
+    sys_event_handler * temp;
+    
+    Sys_Start_AtomicSection();
+    if(event != 0){
+        handler = event->handlers;
+    
+        event->next = 0;
+        event->handlers = 0;
+    
+        while(handler != 0){
+            temp = handler;
+            handler = handler->next;
+        
+            Sys_Clear_EventHandler(temp);
         }
+    
+        Sys_Free(event);
     }
-
-    while(next_event != 0){
-        if(next_event->eventID == eventID){
-            sys_subscribed_process* subscriber = event->subscribers;
-            while(subscriber != 0){//REMOVE all subscribed processes
-               sys_subscribed_process* temp = subscriber;
-               subscriber = subscriber->next;
-
-               Sys_Free(temp);
-            }
-            Sys_Remove_All_Event_Subscriptions(eventID);//removes event elements from all processes
-            event = next_event->next;
-            return;
-        }
-
-        event = next_event;
-        next_event = next_event->next;
-    }
-
-    return;
+    Sys_End_AtomicSection();
 }
 
 /**
  *
- * This function unsubscribes an event
+ * This function frees the memory of an sys_event_handler struct.
  *
- * @param[in] 	eventID     ID of the event
- * @param[in] 	pid         ID of the process
+ * @param[in]   hdlr      pointer to the event handler struct that needs to be deleted
  */
-void Sys_Unsubscribe_from_Event(uint eventID, uint pid){
-    sys_registered_event* event = Sys_Find_Event(eventID);
-
-    sys_subscribed_process* subscriber = event->subscribers;
-    if(event->subscribers->pid == pid){
-        event->subscribers = event->subscribers->next;
-        Sys_Free(subscriber);
-
-        Sys_Remove_Event_Subscription(pid, eventID, 0);
-        return;
+void Sys_Clear_EventHandler(sys_event_handler *hdlr){
+    
+    Sys_Start_AtomicSection();
+    if(hdlr != 0){
+        hdlr->next = 0;
+        hdlr->bufferd_data = 0;
+        Sys_Clear_BufferedList( &(hdlr->bufferd_data) );
+    
+        Sys_Free(hdlr);
     }
-
-    sys_subscribed_process* next_subscriber = event->subscribers->next;
-    while(next_subscriber != 0){
-        if(next_subscriber->pid == pid){
-            subscriber->next = next_subscriber->next;
-            Sys_Free(next_subscriber);
-
-            Sys_Remove_Event_Subscription(pid, eventID, 0);
-            return;
-        }
-
-        subscriber = next_subscriber;
-        next_subscriber = next_subscriber->next;
-    }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
  *
- * This function only unsubscribes a specific handler function
+ * This function frees the memory of a list of sys_event_data structs.
  *
- * @param[in] 	eventID     ID of the event
- * @param[in] 	func        pointer to the handler function
- * @param[in] 	pid         ID of the process
+ * @param[in]   data      pointer to the event data struct that needs to be deleted
  */
-void Sys_Unsubscribe_Handler_from_Event(uint eventID, pEventHandlerFunction func,  uint pid){
-    sys_registered_event* event = Sys_Find_Event(eventID);
-
-    sys_subscribed_process* subscriber = event->subscribers;
-    if(event->subscribers->pid == pid){
-        event->subscribers = event->subscribers->next;
-        Sys_Free(subscriber);
-
-        Sys_Remove_Event_Subscription(pid, eventID, func);
-        return;
-    }
-
-    sys_subscribed_process* next_subscriber = event->subscribers->next;
-    while(next_subscriber != 0){
-        if(next_subscriber->pid == pid){
-            subscriber->next = next_subscriber->next;
-            Sys_Free(next_subscriber);
-
-            Sys_Remove_Event_Subscription(pid, eventID, func);
-            return;
+void Sys_Clear_BufferedList(sys_event_data** data){    
+    sys_event_data* d;
+    sys_event_data* temp;
+    
+    Sys_Start_AtomicSection();
+    if(data != 0){
+        d = (*data);
+        (*data) = 0;
+    
+        while( d != 0){
+            temp = d;
+            d = d->next;
+        
+            Sys_Clear_BufferedData(temp);
         }
-
-        subscriber = next_subscriber;
-        next_subscriber = next_subscriber->next;
     }
+    
+    Sys_End_AtomicSection();
 }
 
 /**
  *
- * This function returns the data structure of an event if the eventID was registered otherwise it's 0.
+ * This function frees the memory of an sys_event_data struct.
  *
- * @param[in] 	eventID     ID of the event
- * @return 	    pointer to the data structure of the found event ( or 0 if it wasn't found)
+ * @param[in]   data      pointer to the event data struct that needs to be deleted
  */
-sys_registered_event *Sys_Find_Event(uint eventID){
-    sys_registered_event* event = registered_events;
-            
-    while(event != 0){
-        if(event->eventID == eventID){
-            return event;
-        }
-
-        event = event->next;
+void Sys_Clear_BufferedData(sys_event_data* data){
+    Sys_Start_AtomicSection();
+    
+    if(data != 0 ){   
+        data->next = 0;
+        Sys_Free(data->value);
+        Sys_Free(data);
     }
-
-    return 0;
+    
+    Sys_End_AtomicSection();
 }
 
 /**
  *
- * returns true if the event was registered
+ * This function frees the memory of an sys_event_data struct.
  *
- * @param[in] 	eventID     ID of the event
- * @return 	   is the event registered?
+ * @param[in]   data      pointer to the event data struct that needs to be deleted
  */
-bool Sys_IsEventRegistered(uint eventID){
-    sys_registered_event* event = registered_events;
+inline void Sys_Clear_EventData(sys_event_data* data){
+    Sys_Clear_BufferedData(data);
+}
+
+/**
+ *
+ * This function returns the sys_event struct of the event with id eventID.
+ *
+ * @param[in] 	eventID    ID of the event
+ * @return sys_event struct with id eventID.
+ */
+sys_event *Sys_FindEvent(uint eventID){
+    sys_event* event = 0;
+    
+    Sys_Start_AtomicSection();
+    
+    event = registered_events;
     
     while(event != 0){
-        if(event->eventID == eventID){
-            return true;
+        if(event->id == eventID){
+            break;
         }
-
+        
         event = event->next;
     }
-
-    return false;
-}
-
-/**
- * unsubscribes all events that were subscribed to a process
- *
- * @param[in] 	pid     process identifier
- */
-void Sys_Unsubscribe_Process(uint pid){
-    sys_registered_event* event = registered_events;
     
-    while(event != 0){//look into every event
-        sys_subscribed_process* subscriber = event->subscribers;
-        if(event->subscribers->pid == pid){
-            event->subscribers = event->subscribers->next;
-            Sys_Free(subscriber);
-
-            Sys_Remove_Event_Subscription(pid, event->eventID, 0);
-            continue;
-        }
-
-        sys_subscribed_process* next_subscriber = subscriber->next;
-        while(next_subscriber != 0){
-            if(next_subscriber->pid == pid){
-                subscriber->next = next_subscriber->next;
-                Sys_Free(next_subscriber);
-
-                Sys_Remove_Event_Subscription(pid, event->eventID, 0);
-                break;
-            }
-
-            subscriber = next_subscriber;
-            next_subscriber = next_subscriber->next;
-        }
-    }
+    Sys_End_AtomicSection();
+    return event;
 }
+
+static uint event_counter = 0; /*!< amount of occurred events since the last reset */
 
 /**
  *
