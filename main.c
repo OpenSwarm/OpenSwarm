@@ -40,6 +40,9 @@
 #include "os/communication/communication.h"
 #include "os/communication/physical.h"
 
+#include "extern/platform/e-puck/library/ircom/e_ad_conv.h"
+#include "extern/platform/e-puck/library/ircom/ircom.h"
+
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -82,7 +85,8 @@ static int move_forward = 0;
 void Sys_Send_Data_IRCom(void *data, uint length){
     uint i;
     for(i=0;i<length;i++){
-        ircomSend(data[i]);
+        uint8 d = ((uint8 *) data)[i];
+        ircomSend((long int) d);
         while (ircomSendDone() == 0);
     }
 }
@@ -119,8 +123,8 @@ int16_t main(void)
     BODY_LED = 0;
     FRONT_LED = 0;
 
-    uint32 time = Sys_Get_SystemClock();
-    time += (uint32) 1000;
+//    uint32 time = Sys_Get_SystemClock();
+//    time += (uint32) 1000;
 
 //    uint counter = 0;
 
@@ -228,7 +232,7 @@ void analyseBuffer(uint8 data){
             counter = 0;
 
             if( xor_val ==  rx_BT_Buffer[4]){
-                Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
+                Sys_Send_Data_IRCom(&rx_BT_Buffer[1], 4);
                 xor_val = 0;
                 state = waiting;
                 return;
@@ -254,7 +258,7 @@ void analyseBuffer(uint8 data){
 
             if(counter == 2){
                 if(xor_val == data){
-                    Sys_SetComThreshold(value);
+                    //Sys_SetComThreshold(value);
                     Sys_Writeto_UART1("OK", 2);
                 }
                 value = 0;

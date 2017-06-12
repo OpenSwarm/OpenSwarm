@@ -22,9 +22,9 @@
 #ifndef IRCOM_SEND_C
 #define IRCOM_SEND_C
 
-#include <p30f6014a.h>
+#include <p30F6014A.h>
 #include <string.h>
-#include <e_epuck_ports.h>
+#include "../motor_led/e_epuck_ports.h"
 
 #include "ircom.h"
 #include "ircomTools.h"

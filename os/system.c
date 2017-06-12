@@ -39,7 +39,7 @@
     
 #ifdef EPUCK_USED
 #ifdef SYS_CLOCK_USED
-#include "io/io_clock.h"
+//#include "io/io_clock.h"
 #endif
 #ifdef SYS_MOTOR_USED
 #include "platform/e-puck/motors.h"
@@ -48,22 +48,22 @@
 #include "platform/e-puck/uart.h"
 #endif
 #ifdef SYS_REMOTECONTROL_USED
-#include "platform/e-puck/remoteControl.h"
+//#include "platform/e-puck/remoteControl.h"
 #endif
 #ifdef SYS_CAMERA_USED
-#include "platform/e-puck/camera.h"
+//#include "platform/e-puck/camera.h"
 #endif
 #ifdef SYS_SELECTOR_USED
-#include "platform/e-puck/selector.h"
+//#include "platform/e-puck/selector.h"
 #endif
 #ifdef SYS_ADC_USED
-#include "platform/e-puck/adc.h"
+//#include "platform/e-puck/adc.h"
 #endif
 #ifdef SYS_PROXIMITY_USED
-#include "platform/e-puck/proximity.h"
+//#include "platform/e-puck/proximity.h"
 #endif
 #ifdef SYS_COMMUNICATION_USED
-#include "communication/communication.h"
+//#include "communication/communication.h"
 #endif
 #endif
 
@@ -90,13 +90,14 @@ void Sys_Init_Kernel(){
 
     //init I/O Devices
     Sys_Init_IOManagement();
-    
+
+/*    
 #ifdef EPUCK_USED
 #ifdef SYS_CLOCK_USED
-    Sys_Init_SystemClock();
+   Sys_Init_SystemClock();
 #else
     Sys_Deactivate_SystemClock();
-#endif
+#endif*/
 #ifdef SYS_MOTOR_USED
     Sys_Init_Motors();
 #else
@@ -106,7 +107,7 @@ void Sys_Init_Kernel(){
     Sys_Init_UART1();
 #else
     Sys_Deactivate_UART1();
-#endif
+#endif/*
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Init_RemoteControl();
 #else
@@ -139,6 +140,7 @@ void Sys_Init_Kernel(){
     Sys_Init_Communication();
 #endif
 #endif
+ * */
 }
 
 /**
@@ -152,13 +154,13 @@ void Sys_Start_Kernel(void){
     Sys_Start_SystemTimer();
     Sys_Start_IOManagement();
     
-#ifdef EPUCK_USED
+#ifdef EPUCK_USED/*
 #ifdef SYS_CLOCK_USED
     Sys_Start_SystemClock();
 #else
 //    Sys_Stop_SystemClock();
 #endif
-    
+    */
 #ifdef SYS_MOTOR_USED
 #else
 #endif
@@ -166,7 +168,7 @@ void Sys_Start_Kernel(void){
     Sys_Start_UART1();
 #else
     Sys_Stop_UART1();
-#endif
+#endif/*
 #ifdef SYS_REMOTECONTROL_USED
     Sys_Start_RemoteControl();
 #else
@@ -193,7 +195,7 @@ void Sys_Start_Kernel(void){
 #endif
 #ifdef SYS_COMMUNICATION_USED
     Sys_Start_Communication();
-#endif
+#endif*/
 #endif
     
 }

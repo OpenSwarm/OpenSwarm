@@ -26,10 +26,10 @@
 #include "ircomReceive.h"
 #include "e_ad_conv.h"
 
-#include <btcom.h>
+//#include <btcom.h>
 #include <stdio.h>
-#include <e_epuck_ports.h>
-#include <p30f6014a.h>
+#include "../motor_led/e_epuck_ports.h"
+#include <p30F6014A.h>
 
 // interface for end user
 void ircomListen ()

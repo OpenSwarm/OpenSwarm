@@ -20,16 +20,16 @@
     Jean-Joël Borter, Michael Bonani, Valentin Longchamp.
 */
 
-#include <e_epuck_ports.h>
-#include <e_uart_char.h>
-#include <e_led.h>
+#include "../motor_led/e_epuck_ports.h"
+//#include "../uart/e_uart_char.h"
+//#include "../motor_led/e_led.h"
 #include "e_ad_conv.h"
 #include "ircom.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <btcom.h>
+//#include <btcom.h>
 
 
 int ad_buffer1[NB_IR_SENSORS * SAMPLING_WINDOW];

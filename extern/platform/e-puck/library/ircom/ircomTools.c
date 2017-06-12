@@ -22,8 +22,8 @@
 #define IRCOM_TOOLS_C
 
 #include <stdio.h>
-#include <e_epuck_ports.h>
-#include <btcom.h>
+#include "../motor_led/e_epuck_ports.h"
+//#include <btcom.h>
 #include "e_ad_conv.h"
 
 #include "ircom.h"
