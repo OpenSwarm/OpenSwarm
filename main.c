@@ -11,11 +11,11 @@
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
  * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
  *
  * 3. If this or parts of this source code (as code or binary) is, in any form, used for an commercial product or service (in any form), this product or service must provide a clear notice/message to any user/customer that OpenSwarm was used in this product.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -51,9 +51,9 @@ void bluetooth_reader(uint8 data);
 
 
 //uint8 prox_readings[36] = {'@', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//                          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-//                          0x00,  ':', 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
-//                          0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 
+//                          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//                          0x00,  ':', 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF,
+//                          0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF,
 //                          0x0F, 0xFF, '\r', '\n'};
 //uint prox_median[9] = {4095,4095,4095,4095,4095,4095,4095,4095,'!'};
 
@@ -79,16 +79,35 @@ void analyseBuffer(uint8 data);
 
 static int move_forward = 0;
 
+void Sys_Send_Data_IRCom(void *data, uint length){
+    uint i;
+    for(i=0;i<length;i++){
+        ircomSend(data[i]);
+        while (ircomSendDone() == 0);
+    }
+}
+
+void receiveMsg(){
+    IrcomMessage imsg;
+    ircomPopMessage(&imsg);
+    if (imsg.error == 0){
+        char c = (char) imsg.value;
+        Sys_Writeto_UART1(&c, 1);
+    }
+}
+
 int16_t main(void)
-{    
-    Sys_Init_Kernel(); 
-    
+{
+    Sys_Init_Kernel();
+
     Sys_SetReadingFunction_UART1(bluetooth_reader);
-    
+
     Sys_Start_Kernel();
-    
-    
-    
+
+    ircomStart();
+    ircomEnableContinuousListening();
+    ircomListen();
+
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
@@ -99,39 +118,43 @@ int16_t main(void)
     LED7 = 0;
     BODY_LED = 0;
     FRONT_LED = 0;
-    
+
     uint32 time = Sys_Get_SystemClock();
     time += (uint32) 1000;
- 
+
 //    uint counter = 0;
-    
+
     while(true){
         SRbits.IPL = 0;
     //setIRs();
         readbluetoothBuffer();
-        
+
         if(move_forward != 0){
             Sys_Set_StepsRight(move_forward);
-            Sys_Set_StepsLeft(move_forward); 
-            
-    
+            Sys_Set_StepsLeft(move_forward);
+
+
             while(Sys_Get_StepsLeft() || Sys_Get_StepsRight() ){ // !=
                 SRbits.IPL = 0;
             }
-            
+
             Sys_Writeto_UART1("STOP", 4);
             move_forward = 0;
         }
-        
-        
-        Sys_Message *msg;
-        while( (msg = getNewMessage())){ //!= 0 
+
+
+        // Sys_Message *msg;
+        // while( (msg = getNewMessage())){ //!= 0
             //char back[] ={'r',0,0,0,0,0};
             //Sys_Memcpy(&(msg->data), &back[1], 4);
             //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
             //Sys_Writeto_UART1(back, 6);
-            
+
+        // }
+        while(true){
+            receiveMsg();
         }
+
     }
 }
 
@@ -158,7 +181,7 @@ void analyseBuffer(uint8 data){
     static unsigned int num_bytes = 0;
     static unsigned char xor_val = 0;
     static bluetooth_state state = waiting;
-    
+
     switch(state){
         case waiting:
             num_bytes = 0;
@@ -179,9 +202,9 @@ void analyseBuffer(uint8 data){
                     break;
                 default:
                     break;
-            }            
+            }
             return;
-            
+
         case starting_big:
             if(data <= 20 ){
                 num_bytes = data;
@@ -189,28 +212,28 @@ void analyseBuffer(uint8 data){
                 counter = 0;
                 return;
             }
-            
+
             state = waiting;
-            
+
             return;
         case reading_small:
             rx_BT_Buffer[counter] = data;
             counter++;
             xor_val ^= data;
-    
+
             if(counter < 5){
                 return;
             }
-    
+
             counter = 0;
-    
+
             if( xor_val ==  rx_BT_Buffer[4]){
                 Sys_Send_Data(0b101010, &rx_BT_Buffer[1], 4);
                 xor_val = 0;
                 state = waiting;
                 return;
             }
-            
+
             state = waiting;
             break;
         case reading_threshold:
@@ -221,14 +244,14 @@ void analyseBuffer(uint8 data){
                 counter++;
                 return;
             }
-            
+
             if(counter == 1){
                 xor_val ^= data;
                 value |= ((uint) data);
                 counter++;
                 return;
             }
-            
+
             if(counter == 2){
                 if(xor_val == data){
                     Sys_SetComThreshold(value);
@@ -240,7 +263,7 @@ void analyseBuffer(uint8 data){
                 state = waiting;
                 return;
             }
-            
+
             state = waiting;
             break;
         case reading_moving:
@@ -251,14 +274,14 @@ void analyseBuffer(uint8 data){
                 counter++;
                 return;
             }
-            
+
             if(counter == 1){
                 xor_val ^= data;
                 value |= ((uint) data);
                 counter++;
                 return;
             }
-            
+
             if(counter == 2){
                 if(xor_val == data){
                     move_forward = value;
@@ -270,29 +293,30 @@ void analyseBuffer(uint8 data){
                 state = waiting;
                 return;
             }
-            
+
             state = waiting;
             break;
         case reading_big:
             rx_BT_Buffer[counter] = data;
-            
+
             if(counter < (num_bytes)){
                 xor_val ^= data;
                 counter++;
                 return;
             }
-            
+
         case finishing:
             counter = 0;
-                        
+
             if(data == xor_val){
-                Sys_Send_Data(0b101010, &rx_BT_Buffer[0], num_bytes);
+                // Sys_Send_Data(0b101010, &rx_BT_Buffer[0], num_bytes);
+                Sys_Send_Data_IRCom(rx_BT_Buffer, num_bytes);
                 xor_val = 0;
                 num_bytes = 0;
                 state = waiting;
                 return;
             }
-            
+
             state = waiting;
         default:
             break;
@@ -308,16 +332,16 @@ void readbluetoothBuffer(){
     if(end_index == start_index){
         return;
     }
-    
+
     while(start_index != end_index){
         uint8 value = rx_BT_Buffer[start_index];
         start_index = ( (start_index+1) % MAX_BUFFER);
-        
+
         analyseBuffer(value);
     }
 }
 /*
- 
+
 uint8 rx_BT_Buffer[21];
 
 typedef enum {
@@ -331,37 +355,37 @@ void bluetooth_reader(uint8 data){
     static int counter = 0;
     static unsigned int num_bytes = 0;
     static bluetooth_state state = waiting;
-    
+
     switch(state){
         case waiting:
             if(data == 's'){
                 state = starting;
             }
-            
+
             return;
         case starting:
             num_bytes = data;
             state = reading;
             counter = 0;
-            
+
             return;
         case reading:
             rx_BT_Buffer[counter] = data;
-            
+
             if(counter < num_bytes){
                 counter++;
                 return;
             }
-            
+
         case finishing:
             counter = 0;
-            
+
             int i = 0;
             unsigned char xor_char = 0;
             for(i = 0; i < num_bytes; i++){
                 xor_char ^= rx_BT_Buffer[i];
             }
-            
+
             if(data == xor_char){
                 Sys_Send_Data(0b101010, &rx_BT_Buffer[1], num_bytes);
                 return;
@@ -369,7 +393,7 @@ void bluetooth_reader(uint8 data){
         default:
             break;
     }
-    
+
     Sys_Writeto_UART1("error", 5);
 }
  */
