@@ -272,6 +272,7 @@ void clearChannel(void){
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_Msg = 0; 
     static uint measurement_counter = 0;
+    static uint threshold = 0;
      
     uint min_value = 0xFFFF; 
     uint min_sensor = -1;
@@ -285,14 +286,17 @@ void ReadFromSensors_2bits(void){
     }
      
     uint new_bit = 0; 
-    if(min_value < Sys_ComThreshold(min_sensor)){ 
-        new_bit = 1; 
-    } 
      
     switch(rxState){ 
         case sending: 
             return; 
         case waiting: 
+            uint base = Sys_GetBaseSignal(min_sensor);
+            if(min_value < min_sensor-Sys_GetThreshold()){ 
+                new_bit = 1;
+                threshold = (base+min_value)/2;
+            }
+            
             if(new_bit == 0){ 
                 measurement_counter = 0;
                 return; 
@@ -315,7 +319,11 @@ void ReadFromSensors_2bits(void){
         default: 
             break; 
     } 
-    
+
+    if(min_value < threshold){ 
+        new_bit = 1; 
+ //       threshold = (Sys_GetBaseSignal(min_sensor)+min_value)/2; //adaptation to light change
+    } 
     
     measurement_counter++;
     if(measurement_counter < ADCs_PER_BIT){

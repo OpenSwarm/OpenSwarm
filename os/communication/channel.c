@@ -284,6 +284,16 @@ void Sys_SetComThreshold(uint thres){
 }
 
 
+uint Sys_GetBaseSignal(uint sensor){
+    sensor_situation sit = getCurrentSituation(sensor);
+    
+    return sensorThresholds[sit];
+}
+    
+uint Sys_GetThreshold(){
+    return variable_threshold;
+}
+
 /*
 void InitSensor0(uint value){
     uint state = (uint) sys_init_state;
