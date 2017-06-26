@@ -290,9 +290,9 @@ void ReadFromSensors_2bits(void){
     switch(rxState){ 
         case sending: 
             return; 
-        case waiting: 
+        case waiting: {
             uint base = Sys_GetBaseSignal(min_sensor);
-            if(min_value < min_sensor-Sys_GetThreshold()){ 
+            if(min_value < base-Sys_GetThreshold()){ 
                 new_bit = 1;
                 threshold = (base+min_value)/2;
             }
@@ -314,7 +314,7 @@ void ReadFromSensors_2bits(void){
             current_Msg->position = 0; 
             measurement_counter = 0;
             rxState = receiving;    
-            return;
+        }   return;
         case receiving: 
         default: 
             break; 
