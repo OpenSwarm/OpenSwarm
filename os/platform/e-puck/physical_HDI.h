@@ -14,7 +14,7 @@ extern "C" {
 
 #include "../../definitions.h"
     
-#define ADCs_PER_BIT 2
+#define ADCs_PER_BIT 1
     
 inline void Sys_Init_PhysicalSendingChannel(void);
 inline void Sys_Start_PhysicalSendingChannel(void);

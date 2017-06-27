@@ -276,184 +276,19 @@ sensor_situation getCurrentSituation(uint sensor){
 uint Sys_ComThreshold(uint sensor){
     sensor_situation sit = getCurrentSituation(sensor);
     
-    return sensorThresholds[sit]-variable_threshold;//4*THRESHOLD_L*Sys_Get_Selector();
+    return sensorThresholds[sit]-variable_threshold; //4*THRESHOLD_L*Sys_Get_Selector();
 }
 
 void Sys_SetComThreshold(uint thres){
     variable_threshold = thres;
 }
 
-
-/*
-void InitSensor0(uint value){
-    uint state = (uint) sys_init_state;
-    if(sensorThreshold[state][0]== 0){
-        sensorThreshold[state][0] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][0])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][0] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][0]){
-            sensorThreshold[state][0]++;
-        }else if(value < sensorThreshold[state][0]){
-            sensorThreshold[state][0]--;
-        }
-    }
+uint Sys_GetBaseSignal(uint sensor){ 
+    sensor_situation sit = getCurrentSituation(sensor); 
+     
+    return sensorThresholds[sit]; 
+} 
+     
+uint Sys_GetThreshold(){ 
+    return variable_threshold; 
 }
-void InitSensor1(uint value){
-    uint state = (uint) sys_init_state;
-    
-    if(sensorThreshold[state][1]== 0){
-        sensorThreshold[state][1] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][1])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][1] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][1]){
-            sensorThreshold[state][1]++;
-        }else if(value < sensorThreshold[state][1]){
-            sensorThreshold[state][1]--;
-        }
-    }
-}
-void InitSensor2(uint value){
-    uint state = (uint) sys_init_state;
-    if(sensorThreshold[state][2]== 0){
-        sensorThreshold[state][2] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][2])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][2] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][0]){
-            sensorThreshold[state][2]++;
-        }else if(value < sensorThreshold[state][2]){
-            sensorThreshold[state][2]--;
-        }
-    }
-}
-void InitSensor3(uint value){
-    uint state = (uint) sys_init_state;
-    if(sensorThreshold[state][3]== 0){
-        sensorThreshold[state][3] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][3])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][3] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][3]){
-            sensorThreshold[state][3]++;
-        }else if(value < sensorThreshold[state][3]){
-            sensorThreshold[state][3]--;
-        }
-    }
-}
-void InitSensor4(uint value){
-    uint state = (uint) sys_init_state;
-    if(sensorThreshold[state][4]== 0){
-        sensorThreshold[state][4] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][4])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][4] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][4]){
-            sensorThreshold[state][4]++;
-        }else if(value < sensorThreshold[state][4]){
-            sensorThreshold[state][4]--;
-        }
-    }
-}
-void InitSensor5(uint value){
-    uint state = (uint) sys_init_state;
-    if(sensorThreshold[state][5]== 0){
-        sensorThreshold[state][5] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][5])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][5] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][5]){
-            sensorThreshold[state][5]++;
-        }else if(value < sensorThreshold[state][5]){
-            sensorThreshold[state][5]--;
-        }
-    }
-}
-void InitSensor6(uint value){
-    uint state = (uint) sys_init_state;
-    if(sensorThreshold[state][6]== 0){
-        sensorThreshold[state][6] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][6])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][6] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][6]){
-            sensorThreshold[state][6]++;
-        }else if(value < sensorThreshold[state][6]){
-            sensorThreshold[state][6]--;
-        }
-    }
-}
-void InitSensor7(uint value){
-    uint state = (uint) sys_init_state;
-    if(sensorThreshold[state][7]== 0){
-        sensorThreshold[state][7] = value;
-        return;
-    }
-    
-    if(init_sensor_additions < 1000){
-        uint32 calc = ((uint32) sensorThreshold[state][7])*init_sensor_additions;
-        calc += value;
-    
-        sensorThreshold[state][7] = calc/(init_sensor_additions+1);
-    }else{
-        if(value > sensorThreshold[state][7]){
-            sensorThreshold[state][7]++;
-        }else if(value < sensorThreshold[state][7]){
-            sensorThreshold[state][7]--;
-        }
-    }
-}
-
-void InitAllSensors(void){
-    init_sensor_additions++;
-    
-    if(init_sensor_additions > 1000){
-        sys_init_state++;
-        Sys_SetInitStateEnvironm(sys_init_state);
-        init_sensor_additions = 0;
-    }
-}
-*/
