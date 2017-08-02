@@ -29,6 +29,9 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "extern/platform/e-puck/library/motor_led/e_init_port.h"
+#include "os/processes/system_Timer.h"    /* functions to start the periodic timer interval */
+
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
 #include "os/memory.h"
 #include "os/interrupts.h"
@@ -80,30 +83,26 @@ void analyseBuffer(uint8 data);
 static int move_forward = 0;
 
 int16_t main(void)
-{    
-    Sys_Init_Kernel(); 
+{        
+    e_init_port(); //Set all pins and ports
+    INTCON1bits.NSTDIS = 0;
     
+    Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);
+    Sys_Init_Process_Management();
+    
+    Sys_Init_IOManagement();
+    Sys_Init_Motors();
+    Sys_Init_UART1();
+    
+    Sys_Init_ADC();
+    Sys_Init_Communication();
+
     Sys_SetReadingFunction_UART1(bluetooth_reader);
     
-    Sys_Start_Kernel();
-    
-    
-    
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
-    LED3 = 0;
-    LED4 = 0;
-    LED5 = 0;
-    LED6 = 0;
-    LED7 = 0;
-    BODY_LED = 0;
-    FRONT_LED = 0;
-    
-    uint32 time = Sys_Get_SystemClock();
-    time += (uint32) 1000;
- 
-//    uint counter = 0;
+    Sys_Start_IOManagement();
+    Sys_Start_UART1();
+    Sys_Start_ADC();   
+    Sys_Start_Communication(); 
     
     while(true){
         SRbits.IPL = 0;
@@ -126,11 +125,13 @@ int16_t main(void)
         
         Sys_Message *msg;
         while( (msg = getNewMessage())){ //!= 0 
+            SRbits.IPL = 0;
+            
+//            LED4 = ~LED4;
             //char back[] ={'r',0,0,0,0,0};
             //Sys_Memcpy(&(msg->data), &back[1], 4);
             //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
             //Sys_Writeto_UART1(back, 6);
-            
         }
     }
 }

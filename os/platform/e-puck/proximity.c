@@ -102,8 +102,6 @@ void Sys_Stop_Proximity(void){
  * 
  */
 void Sys_Deactivate_Proximity(void){
-    
-
     Sys_Unregister_Event(SYS_EVENT_IO_PROX_0);
     Sys_Unregister_Event(SYS_EVENT_IO_PROX_1);
     Sys_Unregister_Event(SYS_EVENT_IO_PROX_2);

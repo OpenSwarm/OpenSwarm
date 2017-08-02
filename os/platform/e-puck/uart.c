@@ -136,20 +136,13 @@ void Sys_Writeto_UART1(void *data, uint length){
     sys_uart_txdata *element;
     
     Sys_Start_AtomicSection();
-    element = Sys_Malloc(sizeof(sys_uart_txdata)+length);
-    element->data = ((uint8 *) element) + sizeof(sys_uart_txdata);
-    if(element == 0){//not enough memory
+    element = (sys_uart_txdata *) Sys_Malloc(sizeof(sys_uart_txdata)+length);
+    if(element == 0){
         Sys_End_AtomicSection();
         return;
     }
-
     
-//    element->data = Sys_Malloc(length);
-//    if(element->data == 0){//not enough memory
-//        Sys_Free(element);
-//        Sys_End_AtomicSection();
-//        return;
-//    }
+    element->data = ((uint8 *) element) + sizeof(sys_uart_txdata);
     Sys_Memcpy(data,element->data,length);
     
     element->length = length;

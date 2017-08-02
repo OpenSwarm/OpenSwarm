@@ -279,8 +279,18 @@ uint Sys_ComThreshold(uint sensor){
     return sensorThresholds[sit]-variable_threshold;//4*THRESHOLD_L*Sys_Get_Selector();
 }
 
+uint Sys_GetThreshold(){
+    return variable_threshold;//4*THRESHOLD_L*Sys_Get_Selector();
+}
+
 void Sys_SetComThreshold(uint thres){
     variable_threshold = thres;
+}
+
+uint Sys_ComBackground(uint sensor){
+    sensor_situation sit = getCurrentSituation(sensor);
+    
+    return sensorThresholds[sit];//4*THRESHOLD_L*Sys_Get_Selector();
 }
 
 

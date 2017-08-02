@@ -82,11 +82,11 @@ void Sys_Init_Kernel(){
 #endif
     
     //Init Scheduling
-    Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
-    Sys_Init_Process_Management();
+//    Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
+//    Sys_Init_Process_Management();
 
     //Init Events
-    Sys_Register_Event(SYS_EVENT_TERMINATION);
+//    Sys_Register_Event(SYS_EVENT_TERMINATION);
 
     //init I/O Devices
     Sys_Init_IOManagement();
@@ -185,8 +185,6 @@ void Sys_Start_Kernel(void){
     Sys_Stop_ADC();
 #endif
 #ifdef SYS_PROXIMITY_USED
-#else
-    Sys_Stop_Proximity();
 #endif
 #ifdef SYS_CLOCK_USED
     Sys_Start_SystemClock();

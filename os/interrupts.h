@@ -30,11 +30,11 @@ extern "C" {
 #define SYS_IRQP_I2C 4              /*!< interrupt priority for the I2C interrupt*/
 
 #define SYS_IRQP_REMOTECONTROL 4    /*!< interrupt priority for the remote control interrupt*/
-#define SYS_IRQP_ADC 7              /*!< interrupt priority for the ADC*/
+#define SYS_IRQP_ADC 6              /*!< interrupt priority for the ADC*/
 
-#define SYS_IRQP_CAMERA_PIXEL 5     /*!< interrupt priority for the camera pixel interrupt*/
-#define SYS_IRQP_CAMERA_LINE  6     /*!< interrupt priority for the camera line  interrupt*/
-#define SYS_IRQP_CAMERA_FRAME 7     /*!< interrupt priority for the camera frame interrupt*/
+#define SYS_IRQP_CAMERA_PIXEL 3     /*!< interrupt priority for the camera pixel interrupt*/
+#define SYS_IRQP_CAMERA_LINE  3     /*!< interrupt priority for the camera line  interrupt*/
+#define SYS_IRQP_CAMERA_FRAME 3     /*!< interrupt priority for the camera frame interrupt*/
     
 
 

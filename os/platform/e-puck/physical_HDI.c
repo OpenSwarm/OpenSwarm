@@ -31,7 +31,7 @@ inline void Sys_Init_PhysicalSendingChannel(void){
     T5CONbits.TCKPS = 0x01; //Prescaler 8
     
     
-    IPC5bits.T5IP = 7;
+    IPC5bits.T5IP = 6;
 }
 inline void Sys_Start_PhysicalSendingChannel(void){
     Sys_Continue_PhysicalSendingChannel();
