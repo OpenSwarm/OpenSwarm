@@ -126,10 +126,10 @@ int16_t main(void)
         
         Sys_Message *msg;
         while( (msg = getNewMessage())){ //!= 0 
-            //char back[] ={'r',0,0,0,0,0};
-            //Sys_Memcpy(&(msg->data), &back[1], 4);
-            //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
-            //Sys_Writeto_UART1(back, 6);
+            char back[] ={'r',0,0,0,0,0};
+            Sys_Memcpy(&(msg->data), &back[1], 4);
+            back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
+            Sys_Writeto_UART1(back, 6);
             
         }
     }

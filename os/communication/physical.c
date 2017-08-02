@@ -8,7 +8,7 @@
 #include "../interrupts.h"
 #include "../memory.h"
 
-#define DEBUG_COM
+//#define DEBUG_COM
 //#define SHOW_SENSOR_LED
 //#define BODY_INDICATOR
 
@@ -184,7 +184,7 @@ void ComSensor7(uint s){
 #endif
 }
 
-#define ADC_PER_BIT 1
+#define ADC_PER_BIT 2
 
 void CombineSensors(void){
     ReadFromSensors_2bits();
