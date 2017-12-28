@@ -28,9 +28,9 @@
 #include "definitions.h"
 
 #include "system.h"          /* variables/params used by system.c             */
-#include "processes/system_Timer.h"    /* functions to start the periodic timer interval */
-#include "processes/scheduler.h"    /* the implementation of the scheduler */
-#include "processes/process_Management.h"
+//#include "processes/system_Timer.h"    /* functions to start the periodic timer interval */
+//#include "processes/scheduler.h"    /* the implementation of the scheduler */
+//#include "processes/process_Management.h"
 
 #include "../extern/platform/e-puck/library/motor_led/e_init_port.h"
 
@@ -80,10 +80,9 @@ void Sys_Init_Kernel(){
     e_init_port(); //Set all pins and ports
     INTCON1bits.NSTDIS = 0;
 #endif
-    
     //Init Scheduling
-    Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
-    Sys_Init_Process_Management();
+//    Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
+//    Sys_Init_Process_Management();
 
     //Init Events
     Sys_Register_Event(SYS_EVENT_TERMINATION);
@@ -151,7 +150,7 @@ void Sys_Init_Kernel(){
  */
 void Sys_Start_Kernel(void){
 
-    Sys_Start_SystemTimer();
+//    Sys_Start_SystemTimer();
     Sys_Start_IOManagement();
     
 #ifdef EPUCK_USED/*

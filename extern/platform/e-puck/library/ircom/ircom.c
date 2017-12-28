@@ -129,7 +129,7 @@ void ircomSetDirectional(int sensor)
 //==================================================================================
 // the 1st interrupt is continuously called, it implements all the functions
 // of ircom using finite state machines
-void _ISRFAST _T1Interrupt(void)
+void  __attribute__((interrupt,no_auto_psv)) _T1Interrupt(void)
 {
     // clear interrupt flag
     IFS0bits.T1IF = 0;

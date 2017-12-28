@@ -10,9 +10,9 @@ CND_CONF=XC16_dsPIC30F6014A
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/OpenSwarm.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=OpenSwarm.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=openswarm/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/os.IRComLib.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=os.IRComLib.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=os.ircomlib/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/openswarm/bin
+makeDirectory ${TMPDIR}/os.ircomlib/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/openswarm.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/os.ircomlib.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/openswarm.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/os.ircomlib.tar *
 checkReturnCode
 
 # Cleanup

@@ -16,7 +16,7 @@
 #include "../interrupts.h"
 #include "../memory.h"
 
-#include "../processes/system_Timer.h"
+//#include "../processes/system_Timer.h"
 
 #include <stdlib.h>
 
@@ -77,13 +77,13 @@ sys_event *Sys_FindEvent(uint eventID);
 bool Sys_Register_Event(uint eventID){
     sys_event** empty_element;
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     
     empty_element = &registered_events;
     
     while( (*empty_element) != 0){//go through all elements in the list until you reached the end
         if((*empty_element)->id == eventID){ //if the event has already been registered
-            Sys_End_AtomicSection();
+            //Sys_End_AtomicSection();
             return true;
         }
         
@@ -92,7 +92,7 @@ bool Sys_Register_Event(uint eventID){
     
     sys_event* new_event = (sys_event*) Sys_Malloc(sizeof(struct sys_event_s));
     if(new_event == 0){
-        Sys_End_AtomicSection();
+        //Sys_End_AtomicSection();
         return false;
     }
     
@@ -101,7 +101,7 @@ bool Sys_Register_Event(uint eventID){
     new_event->next     = 0;
     
     (*empty_element) = new_event;
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
     return true;
 }
 
@@ -114,7 +114,7 @@ bool Sys_Register_Event(uint eventID){
 void Sys_Unregister_Event(uint eventID){
     sys_event**             event_element;
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     event_element = &registered_events;
     
     while( (*event_element) != 0){//go through all elements in the list until you reached the end
@@ -132,7 +132,7 @@ void Sys_Unregister_Event(uint eventID){
         event_element = &((*event_element)->next);
     }
         
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
     return;
 }
 
@@ -154,11 +154,11 @@ bool Sys_Subscribe_to_Event(uint eventID, pEventHandlerFunction handler, pCondit
         return true;
     }
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     event = Sys_FindEvent(eventID);
     
     if(event == 0){
-        Sys_End_AtomicSection();
+        //Sys_End_AtomicSection();
         return false;
     }
     
@@ -169,7 +169,7 @@ bool Sys_Subscribe_to_Event(uint eventID, pEventHandlerFunction handler, pCondit
             (*handlers)->condition = condition;
             (*handlers)->userData = user_data;
             
-            Sys_End_AtomicSection();
+            //Sys_End_AtomicSection();
             return true;
         }
         handlers = &((*handlers)->next);
@@ -177,7 +177,7 @@ bool Sys_Subscribe_to_Event(uint eventID, pEventHandlerFunction handler, pCondit
         
     sys_event_handler* new_handler = (sys_event_handler*) Sys_Malloc(sizeof(struct sys_event_handler_s));
     if(new_handler == 0){
-        Sys_End_AtomicSection();
+        //Sys_End_AtomicSection();
         return false;
     }
     
@@ -188,7 +188,7 @@ bool Sys_Subscribe_to_Event(uint eventID, pEventHandlerFunction handler, pCondit
     new_handler->next = 0;
     
     (*handlers) = new_handler;
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
     return true;
 }
 
@@ -203,11 +203,11 @@ void Sys_Unsubscribe_Handler(uint eventID, pEventHandlerFunction handler, void *
     sys_event* event;
     sys_event_handler **handlers;
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     event = Sys_FindEvent(eventID);
    
     if(event == 0){
-        Sys_End_AtomicSection();
+        //Sys_End_AtomicSection();
         return;
     }
     
@@ -227,7 +227,7 @@ void Sys_Unsubscribe_Handler(uint eventID, pEventHandlerFunction handler, void *
         handlers = &((*handlers)->next);
     }
     
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
     return;
 }
 
@@ -254,16 +254,16 @@ bool Sys_Send_Event(uint eventID, void *data, uint data_size){
  * @return true if it was successful.
  */
 bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
-    Sys_Start_AtomicSection();//doesn't consume execution time
-    Sys_Stop_SystemTimer();
+    //Sys_Start_AtomicSection();//doesn't consume execution time
+    //Sys_Stop_SystemTimer();
     
         Sys_Inc_EventCounter();
 
         sys_event *event = Sys_FindEvent(eventID);
         
         if(event == 0){
-            Sys_Continue_SystemTimer();
-            Sys_End_AtomicSection();
+            //Sys_Continue_SystemTimer();
+            //Sys_End_AtomicSection();
             return false;
         }
         
@@ -271,8 +271,8 @@ bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
         while(hdl != 0){
             sys_event_data* evData = (sys_event_data*) Sys_Malloc(sizeof(struct sys_event_data_s));
             if(evData == 0){
-                Sys_Continue_SystemTimer();
-                Sys_End_AtomicSection();
+                //Sys_Continue_SystemTimer();
+                //Sys_End_AtomicSection();
                 return false;
             }
                 
@@ -282,8 +282,8 @@ bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
             if(evData->value == 0){
                 Sys_Free(evData);
                 
-                Sys_Continue_SystemTimer();
-                Sys_End_AtomicSection();
+                //Sys_Continue_SystemTimer();
+                //Sys_End_AtomicSection();
                 return false;
             }
             
@@ -308,8 +308,8 @@ bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
             hdl = hdl->next;
         }
 
-    Sys_Continue_SystemTimer();
-    Sys_End_AtomicSection();
+    //Sys_Continue_SystemTimer();
+    //Sys_End_AtomicSection();
     return true;
 }
 
@@ -336,23 +336,23 @@ inline bool Sys_Send_IntEvent(uint eventID, uint data){
  * @return true if it was successful.
  */
 bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
-    Sys_Start_AtomicSection();//doesn't consume execution time
-    Sys_Stop_SystemTimer();
+    //Sys_Start_AtomicSection();//doesn't consume execution time
+    //Sys_Stop_SystemTimer();
     
         Sys_Inc_EventCounter();
 
         sys_event *event = Sys_FindEvent(eventID);
         if(event == 0){
-            Sys_Continue_SystemTimer();
-            Sys_End_AtomicSection();
+            //Sys_Continue_SystemTimer();
+            //Sys_End_AtomicSection();
             return false;
         }
         
         sys_event_data data;
         data.value = Sys_Malloc(data_size);
         if(data.value == 0){
-            Sys_Continue_SystemTimer();
-            Sys_End_AtomicSection();
+            //Sys_Continue_SystemTimer();
+            //Sys_End_AtomicSection();
             return false;
         }
         
@@ -377,8 +377,8 @@ bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
         
         Sys_Free(data.value);
 
-    Sys_Continue_SystemTimer();
-    Sys_End_AtomicSection();
+    //Sys_Continue_SystemTimer();
+    //Sys_End_AtomicSection();
     return true;
 }
 
@@ -388,7 +388,7 @@ bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
  *
  */
 void Sys_Execute_BufferedEvents(void){
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
        
         sys_event *event = registered_events;
         while(event != 0){
@@ -410,7 +410,7 @@ void Sys_Execute_BufferedEvents(void){
             }            
             event = event->next;
         }        
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
 }
 
 /**
@@ -421,12 +421,12 @@ void Sys_Execute_BufferedEvents(void){
  * @return a pointer to the new data
  */
 sys_event_data* Sys_Copy_EventData(sys_event_data* data){
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     
     //create new
     sys_event_data* evData = (sys_event_data*) Sys_Malloc(sizeof(struct sys_event_data_s));
     if(evData == 0){
-        Sys_End_AtomicSection();
+        //Sys_End_AtomicSection();
         return 0;
     }
                 
@@ -438,13 +438,13 @@ sys_event_data* Sys_Copy_EventData(sys_event_data* data){
     if(evData->value == 0){
         Sys_Free(evData);
                 
-        Sys_End_AtomicSection();
+        //Sys_End_AtomicSection();
         return 0;
     }
             
     Sys_Memcpy(data->value, evData->value, data->size);
     
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
     return evData;
 }
 
@@ -458,7 +458,7 @@ void Sys_Clear_Event(sys_event *event){
     sys_event_handler * handler;
     sys_event_handler * temp;
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     if(event != 0){
         handler = event->handlers;
     
@@ -474,7 +474,7 @@ void Sys_Clear_Event(sys_event *event){
     
         Sys_Free(event);
     }
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
 }
 
 /**
@@ -485,7 +485,7 @@ void Sys_Clear_Event(sys_event *event){
  */
 void Sys_Clear_EventHandler(sys_event_handler *hdlr){
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     if(hdlr != 0){
         hdlr->next = 0;
         hdlr->bufferd_data = 0;
@@ -494,7 +494,7 @@ void Sys_Clear_EventHandler(sys_event_handler *hdlr){
         Sys_Free(hdlr);
     }
     
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
 }
 
 /**
@@ -507,7 +507,7 @@ void Sys_Clear_BufferedList(sys_event_data** data){
     sys_event_data* d;
     sys_event_data* temp;
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     if(data != 0){
         d = (*data);
         (*data) = 0;
@@ -520,7 +520,7 @@ void Sys_Clear_BufferedList(sys_event_data** data){
         }
     }
     
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
 }
 
 /**
@@ -530,7 +530,7 @@ void Sys_Clear_BufferedList(sys_event_data** data){
  * @param[in]   data      pointer to the event data struct that needs to be deleted
  */
 void Sys_Clear_BufferedData(sys_event_data* data){
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     
     if(data != 0 ){   
         data->next = 0;
@@ -538,7 +538,7 @@ void Sys_Clear_BufferedData(sys_event_data* data){
         Sys_Free(data);
     }
     
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
 }
 
 /**
@@ -561,7 +561,7 @@ inline void Sys_Clear_EventData(sys_event_data* data){
 sys_event *Sys_FindEvent(uint eventID){
     sys_event* event = 0;
     
-    Sys_Start_AtomicSection();
+    //Sys_Start_AtomicSection();
     
     event = registered_events;
     
@@ -573,7 +573,7 @@ sys_event *Sys_FindEvent(uint eventID){
         event = event->next;
     }
     
-    Sys_End_AtomicSection();
+    //Sys_End_AtomicSection();
     return event;
 }
 

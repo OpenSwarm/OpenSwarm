@@ -286,7 +286,7 @@ void e_ad_proximity_interrupt()
  * @param  void
  * @return void
  */
-void __attribute__((__interrupt__)) _ADCInterrupt(void)
+void  __attribute__((interrupt,no_auto_psv)) _ADCInterrupt(void)
 {
     // clear the A/D Interrupt flag bit
     IFS0bits.ADIF = 0;

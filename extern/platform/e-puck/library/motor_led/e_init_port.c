@@ -36,20 +36,6 @@ _FWDT(WDT_OFF);
 _FBORPOR(PBOR_OFF & MCLR_EN);
 _FGS(CODE_PROT_OFF);
 
-void testAccGyroPresence() {
-    unsigned char ret;
-    e_i2cp_init();
-    e_i2c_reset();
-    e_i2cp_enable();
-    ret = e_i2cp_read(0x3C, 0x0F); // read WHO_AM_I register of accelerometer
-    e_i2cp_disable();
-    if (ret == 0x40) {
-        isPresentFlag = 1;
-    } else {
-        isPresentFlag = 0;
-    }
-}
-
 /*! \brief Initialize all ports (in/out)
  *
  * Call this method to set all the standards output

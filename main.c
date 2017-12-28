@@ -52,25 +52,6 @@
 /******************************************************************************/
 void bluetooth_reader(uint8 data);
 
-
-//uint8 prox_readings[36] = {'@', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//                          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//                          0x00,  ':', 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF,
-//                          0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF, 0x0F, 0xFF,
-//                          0x0F, 0xFF, '\r', '\n'};
-//uint prox_median[9] = {4095,4095,4095,4095,4095,4095,4095,4095,'!'};
-
-uint8 prox_flag = 0xFF;
-inline void prox_reader(int index,uint data);
-void prox0_reader(uint data);
-void prox1_reader(uint data);
-void prox2_reader(uint data);
-void prox3_reader(uint data);
-void prox4_reader(uint data);
-void prox5_reader(uint data);
-void prox6_reader(uint data);
-void prox7_reader(uint data);
-
 void clearLEDs();
 void setLEDs();
 void clearIRs();
@@ -103,6 +84,7 @@ void receiveMsg(){
 int16_t main(void)
 {
     Sys_Init_Kernel();
+    e_init_ad_scan();
 
     Sys_SetReadingFunction_UART1(bluetooth_reader);
 
@@ -155,9 +137,9 @@ int16_t main(void)
             //Sys_Writeto_UART1(back, 6);
 
         // }
-        while(true){
-            receiveMsg();
-        }
+        //while(true){
+        receiveMsg();
+        //}
 
     }
 }

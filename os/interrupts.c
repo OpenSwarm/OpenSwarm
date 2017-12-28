@@ -36,11 +36,11 @@ static uint irq_counter = 0;
  * @post	Sys_End_AtomicSection() must be called to execute any interrupt that happened or will happen.
  */
 inline void Sys_Start_AtomicSection(){
-    if(Sys_GetCurrentIRQPNesting() == 0){
+    /*if(Sys_GetCurrentIRQPNesting() == 0){
         Sys_SetCurrentIRQPriority((uint)((SR & 0x00E0) >> 5));
         SRbits.IPL = SYS_IRQP_MAX;
     }
-    Sys_IncCurrentIRQPNesting();
+    Sys_IncCurrentIRQPNesting();*/
 }
 
 
@@ -50,7 +50,7 @@ inline void Sys_Start_AtomicSection(){
  * @pre	Sys_Start_AtomicSection() must have been called.
  */
 inline void Sys_End_AtomicSection(){
-    Sys_DecCurrentIRQPNesting();
+    /*Sys_DecCurrentIRQPNesting();
     sint irqn = Sys_GetCurrentIRQPNesting();
     
     if(irqn <= 0){
@@ -58,7 +58,7 @@ inline void Sys_End_AtomicSection(){
             SR = SR & ( ((Sys_GetCurrentIRQPriority() << 5) & 0x00E0) | 0xFF1F);
         }
         Sys_SetCurrentIRQPNesting(0);
-    }
+    }*/
 }
 
 /**
@@ -67,7 +67,7 @@ inline void Sys_End_AtomicSection(){
  *
  */
 sint Sys_Get_IRQNestingLevel(){
-    return Sys_GetCurrentIRQPNesting();
+    return 0;//Sys_GetCurrentIRQPNesting();
 }
 
 /**
