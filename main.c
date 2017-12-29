@@ -65,6 +65,8 @@ static int move_forward = 0;
 
 void Sys_Send_Data_IRCom(void *data, uint length){
     uint i;
+    
+    Sys_Writeto_UART1(data, length);
     for(i=0;i<length;i++){
         uint8 d = ((uint8 *) data)[i];
         ircomSend((long int) d);

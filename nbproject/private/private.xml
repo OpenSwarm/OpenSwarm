@@ -3,20 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/ircomTools.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/ircomReceive.h</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/ircom.h</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/ircomReceive.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/ircom.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/ircomSend.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/os/io/io_clock.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/os/system.h</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/e_ad_conv.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/os/platform/e-puck/camera_processing.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/main.c</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/extern/platform/e-puck/library/ircom/ircomSend.h</file>
-            <file>file:/home/yuri/PhD/MPLABXProjects/OTHERS/OpenSwarm/os/system.c</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
