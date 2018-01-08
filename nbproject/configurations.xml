@@ -7,19 +7,6 @@
       <logicalFolder name="f4" displayName="extern" projectFiles="true">
         <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
-            <logicalFolder name="f4" displayName="acc_gyro" projectFiles="true">
-              <itemPath>extern/platform/e-puck/library/acc_gyro/e_lsm330.h</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f2" displayName="camera" projectFiles="true">
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po3030k.h</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po6030k.h</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po8030d.h</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_poxxxx.h</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f3" displayName="I2C" projectFiles="true">
-              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_master_module.h</itemPath>
-              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_protocol.h</itemPath>
-            </logicalFolder>
             <logicalFolder name="f1" displayName="motor_led" projectFiles="true">
               <itemPath>extern/platform/e-puck/library/motor_led/e_epuck_ports.h</itemPath>
               <itemPath>extern/platform/e-puck/library/motor_led/e_init_port.h</itemPath>
@@ -40,7 +27,6 @@
         </logicalFolder>
         <logicalFolder name="f4" displayName="io" projectFiles="true">
           <itemPath>os/io/io.h</itemPath>
-          <itemPath>os/platform/e-puck/camera.h</itemPath>
           <itemPath>os/platform/e-puck/i2c.h</itemPath>
           <itemPath>os/platform/e-puck/i2c_data.h</itemPath>
           <itemPath>os/platform/e-puck/uart.h</itemPath>
@@ -54,23 +40,14 @@
         </logicalFolder>
         <logicalFolder name="f2" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
-            <itemPath>os/platform/e-puck/system_Timer_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/DSPIC30F6014A_HDI.h</itemPath>
-            <itemPath>os/platform/e-puck/camera_processing.h</itemPath>
             <itemPath>os/platform/e-puck/i2c_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/io_HDI.h</itemPath>
-            <itemPath>os/platform/e-puck/process_Management_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/remoteControl_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/uart_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/motors_HDI.h</itemPath>
             <itemPath>os/platform/e-puck/clock_timer_HDI.h</itemPath>
           </logicalFolder>
-        </logicalFolder>
-        <logicalFolder name="f1" displayName="processes" projectFiles="true">
-          <itemPath>os/processes/data.h</itemPath>
-          <itemPath>os/processes/process_Management.h</itemPath>
-          <itemPath>os/processes/scheduler.h</itemPath>
-          <itemPath>os/processes/system_Timer.h</itemPath>
         </logicalFolder>
         <itemPath>os/system.h</itemPath>
         <itemPath>os/definitions.h</itemPath>
@@ -88,24 +65,6 @@
       <logicalFolder name="f4" displayName="external" projectFiles="true">
         <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
-            <logicalFolder name="f4" displayName="acc_gyro" projectFiles="true">
-              <itemPath>extern/platform/e-puck/library/acc_gyro/e_lsm330.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f2" displayName="camera" projectFiles="true">
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po3030k.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po6030k.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po8030d.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_common.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_interrupt.s</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po3030k_registers.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po6030k_registers.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_po8030d_registers.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/camera/fast_2_timer/e_timers.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f3" displayName="I2C" projectFiles="true">
-              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_master_module.c</itemPath>
-              <itemPath>extern/platform/e-puck/library/I2C/e_I2C_protocol.c</itemPath>
-            </logicalFolder>
             <logicalFolder name="f1" displayName="motor_led" projectFiles="true">
               <itemPath>extern/platform/e-puck/library/motor_led/e_init_port.c</itemPath>
             </logicalFolder>
@@ -126,7 +85,6 @@
           <itemPath>os/io/io.c</itemPath>
           <itemPath>os/io/io_clock.c</itemPath>
           <itemPath>os/platform/e-puck/adc.c</itemPath>
-          <itemPath>os/platform/e-puck/camera.c</itemPath>
           <itemPath>os/platform/e-puck/i2c.c</itemPath>
           <itemPath>os/platform/e-puck/i2c_data.c</itemPath>
           <itemPath>os/platform/e-puck/motors.c</itemPath>
@@ -138,7 +96,6 @@
         </logicalFolder>
         <logicalFolder name="f1" displayName="platform" projectFiles="true">
           <logicalFolder name="f1" displayName="e-puck" projectFiles="true">
-            <itemPath>os/platform/e-puck/camera_processing.c</itemPath>
             <itemPath>os/platform/e-puck/traps.c</itemPath>
             <itemPath>os/platform/e-puck/i2c_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/io_HDI.c</itemPath>
@@ -148,14 +105,6 @@
             <itemPath>os/platform/e-puck/clock_timer_HDI.c</itemPath>
             <itemPath>os/platform/e-puck/physical_HDI.c</itemPath>
           </logicalFolder>
-        </logicalFolder>
-        <logicalFolder name="f2" displayName="processes" projectFiles="true">
-          <itemPath>os/processes/data.c</itemPath>
-          <itemPath>os/processes/process_Management.c</itemPath>
-          <itemPath>os/processes/scheduler.c</itemPath>
-          <itemPath>os/processes/system_Timer.c</itemPath>
-          <itemPath>os/platform/e-puck/process_Management_HDI.c</itemPath>
-          <itemPath>os/platform/e-puck/system_Timer_HDI.c</itemPath>
         </logicalFolder>
         <itemPath>os/interrupts.c</itemPath>
         <itemPath>os/memory.c</itemPath>
@@ -197,6 +146,8 @@
           <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile>dist/XC16_dsPIC30F6014A/production/os.production.hex</alternateLoadableFile>
         </loading>
+        <subordinates>
+        </subordinates>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>

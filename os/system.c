@@ -28,9 +28,9 @@
 #include "definitions.h"
 
 #include "system.h"          /* variables/params used by system.c             */
-#include "processes/system_Timer.h"    /* functions to start the periodic timer interval */
-#include "processes/scheduler.h"    /* the implementation of the scheduler */
-#include "processes/process_Management.h"
+//#include "processes/system_Timer.h"    /* functions to start the periodic timer interval */
+//#include "processes/scheduler.h"    /* the implementation of the scheduler */
+//#include "processes/process_Management.h"
 
 #include "../extern/platform/e-puck/library/motor_led/e_init_port.h"
 
@@ -51,7 +51,7 @@
 #include "platform/e-puck/remoteControl.h"
 #endif
 #ifdef SYS_CAMERA_USED
-#include "platform/e-puck/camera.h"
+//#include "platform/e-puck/camera.h"
 #endif
 #ifdef SYS_SELECTOR_USED
 #include "platform/e-puck/selector.h"
@@ -60,7 +60,7 @@
 #include "platform/e-puck/adc.h"
 #endif
 #ifdef SYS_PROXIMITY_USED
-#include "platform/e-puck/proximity.h"
+//#include "platform/e-puck/proximity.h"
 #endif
 #ifdef SYS_COMMUNICATION_USED
 #include "communication/communication.h"
@@ -115,7 +115,7 @@ void Sys_Init_Kernel(){
 #ifdef SYS_CAMERA_USED
     Sys_Init_Camera();
 #else
-    Sys_Deactivate_Camera();
+//    Sys_Deactivate_Camera();
 #endif
 #ifdef SYS_SELECTOR_USED
     Sys_Init_Selector();
@@ -149,7 +149,7 @@ void Sys_Init_Kernel(){
  */
 void Sys_Start_Kernel(void){
 
-    Sys_Start_SystemTimer();
+    //Sys_Start_SystemTimer();
     Sys_Start_IOManagement();
     
 #ifdef EPUCK_USED
@@ -175,7 +175,7 @@ void Sys_Start_Kernel(void){
 #ifdef SYS_CAMERA_USED
     Sys_Start_Camera();
 #else
-    Sys_Stop_Camera();
+//    Sys_Stop_Camera();
 #endif
 #ifdef SYS_SELECTOR_USED
 #endif

@@ -28,7 +28,5 @@ EPFL Ecole polytechnique federale de Lausanne http://www.epfl.ch
 
 /* functions */
 void e_init_port(void);
-unsigned char isEpuckVersion1_1(void);
-
 #endif
 

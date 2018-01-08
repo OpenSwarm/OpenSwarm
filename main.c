@@ -30,7 +30,7 @@
 #include <math.h>
 
 #include "extern/platform/e-puck/library/motor_led/e_init_port.h"
-#include "os/processes/system_Timer.h"    /* functions to start the periodic timer interval */
+//#include "os/processes/system_Timer.h"    /* functions to start the periodic timer interval */
 
 #include "os/system.h"        /* System funct/params, like osc/peripheral config */
 #include "os/memory.h"
@@ -87,13 +87,9 @@ int16_t main(void)
     e_init_port(); //Set all pins and ports
     INTCON1bits.NSTDIS = 0;
     
-    Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);
-    Sys_Init_Process_Management();
-    
     Sys_Init_IOManagement();
     Sys_Init_Motors();
     Sys_Init_UART1();
-    
     Sys_Init_ADC();
     Sys_Init_Communication();
 

@@ -24,8 +24,6 @@ EPFL Ecole polytechnique federale de Lausanne http://www.epfl.ch
  */
 
 #include "e_epuck_ports.h"
-#include "../I2C/e_I2C_protocol.h"
-#include "../acc_gyro/e_lsm330.h"
 
 unsigned char isPresentFlag = 0;
 
@@ -35,20 +33,6 @@ _FOSC(CSW_FSCM_OFF & XT_PLL8);
 _FWDT(WDT_OFF);
 _FBORPOR(PBOR_OFF & MCLR_EN);
 _FGS(CODE_PROT_OFF);
-
-void testAccGyroPresence() {
-    unsigned char ret;
-    e_i2cp_init();
-    e_i2c_reset();
-    e_i2cp_enable();
-    ret = e_i2cp_read(0x3C, 0x0F); // read WHO_AM_I register of accelerometer
-    e_i2cp_disable();
-    if (ret == 0x40) {
-        isPresentFlag = 1;
-    } else {
-        isPresentFlag = 0;
-    }
-}
 
 /*! \brief Initialize all ports (in/out)
  *
@@ -159,8 +143,3 @@ void e_init_port(void) {
     //    initAccAndGyro();
     //}
 }
-
-unsigned char isEpuckVersion1_3(void) {
-    return isPresentFlag;
-}
-

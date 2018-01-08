@@ -255,14 +255,14 @@ bool Sys_Send_Event(uint eventID, void *data, uint data_size){
  */
 bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
     Sys_Start_AtomicSection();//doesn't consume execution time
-    Sys_Stop_SystemTimer();
+    //Sys_Stop_SystemTimer();
     
         Sys_Inc_EventCounter();
 
         sys_event *event = Sys_FindEvent(eventID);
         
         if(event == 0){
-            Sys_Continue_SystemTimer();
+            //Sys_Continue_SystemTimer();
             Sys_End_AtomicSection();
             return false;
         }
@@ -271,7 +271,7 @@ bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
         while(hdl != 0){
             sys_event_data* evData = (sys_event_data*) Sys_Malloc(sizeof(struct sys_event_data_s));
             if(evData == 0){
-                Sys_Continue_SystemTimer();
+                //Sys_Continue_SystemTimer();
                 Sys_End_AtomicSection();
                 return false;
             }
@@ -282,7 +282,7 @@ bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
             if(evData->value == 0){
                 Sys_Free(evData);
                 
-                Sys_Continue_SystemTimer();
+                //Sys_Continue_SystemTimer();
                 Sys_End_AtomicSection();
                 return false;
             }
@@ -308,7 +308,7 @@ bool Sys_Send_BufferedEvent(uint eventID, void *data, uint data_size){
             hdl = hdl->next;
         }
 
-    Sys_Continue_SystemTimer();
+    //Sys_Continue_SystemTimer();
     Sys_End_AtomicSection();
     return true;
 }
@@ -337,13 +337,13 @@ inline bool Sys_Send_IntEvent(uint eventID, uint data){
  */
 bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
     Sys_Start_AtomicSection();//doesn't consume execution time
-    Sys_Stop_SystemTimer();
+    //Sys_Stop_SystemTimer();
     
         Sys_Inc_EventCounter();
 
         sys_event *event = Sys_FindEvent(eventID);
         if(event == 0){
-            Sys_Continue_SystemTimer();
+            //Sys_Continue_SystemTimer();
             Sys_End_AtomicSection();
             return false;
         }
@@ -351,7 +351,7 @@ bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
         sys_event_data data;
         data.value = Sys_Malloc(data_size);
         if(data.value == 0){
-            Sys_Continue_SystemTimer();
+            //Sys_Continue_SystemTimer();
             Sys_End_AtomicSection();
             return false;
         }
@@ -377,7 +377,7 @@ bool Sys_Send_CriticalEvent(uint eventID, void *data_in, uint data_size){
         
         Sys_Free(data.value);
 
-    Sys_Continue_SystemTimer();
+    //Sys_Continue_SystemTimer();
     Sys_End_AtomicSection();
     return true;
 }
