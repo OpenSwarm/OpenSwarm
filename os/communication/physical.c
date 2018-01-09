@@ -268,6 +268,7 @@ void clearChannel(void){
 #endif
     
 }
+#define MAX_FULLMESSAGE 50
 
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_inMsg = 0; 
@@ -294,7 +295,7 @@ void ReadFromSensors_2bits(void){
         case waiting:
             noise_temp =  Sys_ComBackground(min_sensor);
             if( min_value < noise_temp-Sys_GetThreshold() ){ 
-                threshold_read = (min_value+noise_temp)/2;
+                threshold_read = (min_value+noise_temp-Sys_GetThreshold())/2;
             }else{ 
                 measurement_counter = 0;
                 return; 
@@ -342,6 +343,22 @@ void ReadFromSensors_2bits(void){
 #ifdef DEBUG_COM
         Sys_Writeto_UART1(current_inMsg->message, 10);
 #endif
+        
+        static uint full_counter = 0;
+        if(     current_inMsg->message[0] == 0xEF && 
+                current_inMsg->message[1] == 0xEF && 
+                current_inMsg->message[2] == 0xEF && 
+                current_inMsg->message[3] == 0xEF && 
+                current_inMsg->message[4] == 0xEF ){
+        //IS the message just 1s?
+            full_counter++;
+        }else{
+            full_counter = 0;
+        }
+        
+        if(full_counter >= MAX_FULLMESSAGE){
+            Sys_SetComBackground(min_sensor, min_value);
+        }
         
         Sys_Start_AtomicSection(); 
             *sys_InMsg_ListEnd = current_inMsg; 

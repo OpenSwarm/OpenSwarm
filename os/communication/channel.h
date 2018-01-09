@@ -21,6 +21,7 @@ extern "C" {
     uint Sys_GetThreshold();
 
     uint Sys_ComBackground(uint sensor);
+    void Sys_SetComBackground(uint sensor, uint thres);
 
 #ifdef	__cplusplus
 }

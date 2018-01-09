@@ -293,6 +293,12 @@ uint Sys_ComBackground(uint sensor){
     return sensorThresholds[sit];//4*THRESHOLD_L*Sys_Get_Selector();
 }
 
+void Sys_SetComBackground(uint sensor, uint thres){
+    sensor_situation sit = getCurrentSituation(sensor);
+    
+    sensorThresholds[sit] = thres;//4*THRESHOLD_L*Sys_Get_Selector();
+}
+
 
 /*
 void InitSensor0(uint value){

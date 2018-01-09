@@ -4,18 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os.com/os/interrupts.c</file>
-            <file>file:/home/strenkwalder/code/os.com/extern/platform/e-puck/library/camera/fast_2_timer/e_calc_po3030k.c</file>
-            <file>file:/home/strenkwalder/code/os.com/extern/platform/e-puck/library/motor_led/e_init_port.c</file>
-            <file>file:/home/strenkwalder/code/os.com/main.c</file>
-            <file>file:/home/strenkwalder/code/os.com/extern/platform/e-puck/library/acc_gyro/e_lsm330.c</file>
-            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/clock_timer_HDI.c</file>
-            <file>file:/home/strenkwalder/code/os.com/extern/platform/e-puck/library/motor_led/e_init_port.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/events/events.c</file>
-            <file>file:/home/strenkwalder/code/os.com/extern/platform/e-puck/library/motor_led/e_epuck_ports.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/DSPIC30F6014A_HDI.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/system.c</file>
-            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/system_Timer_HDI.h</file>
+            <file>file:/home/strenkwalder/code/os.com/os/communication/channel.c</file>
+            <file>file:/home/strenkwalder/code/os.com/os/communication/channel.h</file>
+            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.h</file>
+            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.c</file>
         </group>
     </open-files>
 </project-private>
