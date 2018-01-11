@@ -145,6 +145,7 @@ typedef enum {
     reading_big,
     reading_moving,
     reading_threshold,
+    requested_threshold,
     finishing
 } bluetooth_state;
 
@@ -156,6 +157,7 @@ void analyseBuffer(uint8 data){
     static unsigned char xor_val = 0;
     static bluetooth_state state = waiting;
     
+    unsigned long a_buffer = 0;
     switch(state){
         case waiting:
             num_bytes = 0;
@@ -173,6 +175,18 @@ void analyseBuffer(uint8 data){
                     break;
                 case 'm'://move
                     state = reading_moving;
+                    break;
+                case 'w':
+                    a_buffer = Sys_ComBackground(0);
+                    a_buffer |= (((uint16) Sys_GetThreshold()) << 16);
+                    Sys_Writeto_UART1(&a_buffer, 4);
+                    if(0 == Sys_ComBackground(0)){
+                        BODY_LED = 0;
+                        FRONT_LED = 1;
+                    }else{
+                        BODY_LED = 1;
+                        FRONT_LED = 0;
+                    }
                     break;
                 default:
                     break;

@@ -268,7 +268,7 @@ void clearChannel(void){
 #endif
     
 }
-#define MAX_FULLMESSAGE 50
+#define MAX_FULLMESSAGE 15
 
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_inMsg = 0; 
@@ -295,8 +295,13 @@ void ReadFromSensors_2bits(void){
         case waiting:
             noise_temp =  Sys_ComBackground(min_sensor);
             if( min_value < noise_temp-Sys_GetThreshold() ){ 
-                threshold_read = (min_value+noise_temp-Sys_GetThreshold())/2;
+                threshold_read = (min_value+noise_temp-Sys_GetThreshold())/2 + 1;
             }else{ 
+                if(min_value < noise_temp){//adapting to the light conditions
+                    Sys_SetComBackground(min_sensor, noise_temp-1);
+                }else if(min_value > noise_temp){
+                    Sys_SetComBackground(min_sensor, noise_temp+1);
+                }
                 measurement_counter = 0;
                 return; 
             } 
@@ -345,11 +350,11 @@ void ReadFromSensors_2bits(void){
 #endif
         
         static uint full_counter = 0;
-        if(     current_inMsg->message[0] == 0xEF && 
-                current_inMsg->message[1] == 0xEF && 
-                current_inMsg->message[2] == 0xEF && 
-                current_inMsg->message[3] == 0xEF && 
-                current_inMsg->message[4] == 0xEF ){
+        if(     (current_inMsg->message[0] == 0xEFFF || current_inMsg->message[0] == 0xFFFF) && 
+                (current_inMsg->message[1] == 0xEFFF || current_inMsg->message[1] == 0xFFFF) && 
+                (current_inMsg->message[2] == 0xEFFF || current_inMsg->message[2] == 0xFFFF) && 
+                (current_inMsg->message[3] == 0xEFFF || current_inMsg->message[3] == 0xFFFF) && 
+                (current_inMsg->message[4] == 0xEFFF || current_inMsg->message[4] == 0xFFFF) ){
         //IS the message just 1s?
             full_counter++;
         }else{

@@ -157,19 +157,18 @@ Sys_Message *getNewMessage(){
     return &out;
 }
 
+static uint pkg_id = 0;
 Sys_RawMessageList *Sys_convert_WordToPackage(uint8 address, uint32 dvalue, uint8 type){
     
     Sys_RawMessageList *out = 0;
-    static uint id = 0;
     
     out = (Sys_RawMessageList *) Sys_Malloc(sizeof(Sys_RawMessageList));
     out->next = 0;
     
     //uint16 buffer = 0x0001; Synch bit not in data
-    uint16 buffer = (((uint16) id+1) & 0x007F);
-    id = (id+1) & 0x7E;
-    
-    buffer |= ((uint16) (SYS_LOCAL_ADDRESS & 0x0F)) << 7;
+    pkg_id = (pkg_id+1) & 0x7E;
+    uint16 buffer = ((uint16) (SYS_LOCAL_ADDRESS & 0x0F)) << 7;
+    buffer |= (uint16) (((uint) pkg_id) & 0x007F);
     out->message[0] = encodeBCH(buffer);
     
     buffer  = ((uint16) (SYS_LOCAL_ADDRESS & 0x30)) >> 4;
