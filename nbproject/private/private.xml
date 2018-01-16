@@ -4,10 +4,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.c</file>
-            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.h</file>
             <file>file:/home/strenkwalder/code/os.com/os/communication/communication.c</file>
+            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.c</file>
             <file>file:/home/strenkwalder/code/os.com/os/communication/channel.c</file>
+            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.h</file>
+            <file>file:/home/strenkwalder/code/os.com/main.c</file>
+            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/uart.c</file>
+            <file>file:/home/strenkwalder/code/os.com/os/communication/channel.h</file>
         </group>
     </open-files>
 </project-private>

@@ -242,7 +242,7 @@ void analyseBuffer(uint8 data){
             
             if(counter == 2){
                 if(xor_val == data){
-                    Sys_SetComThreshold(value);
+                    Sys_SetThreshold(value);
                     Sys_Writeto_UART1("OK", 2);
                 }
                 value = 0;

@@ -17,11 +17,12 @@ extern "C" {
     void Sys_Start_ChannelCalibration();
     uint Sys_ComThreshold(uint sensor);
     
-    void Sys_SetComThreshold(uint thres);
+    void Sys_SetThreshold(uint thres);
     uint Sys_GetThreshold();
 
     uint Sys_ComBackground(uint sensor);
     void Sys_SetComBackground(uint sensor, uint thres);
+    void Sys_UpdateBackground(uint sensor, int diff);
 
 #ifdef	__cplusplus
 }
