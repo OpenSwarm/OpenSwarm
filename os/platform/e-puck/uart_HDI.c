@@ -27,13 +27,13 @@
 #include "../../memory.h"
 
 pUART_reader read_uart_1 = 0; /*!< pointer to the functions that processes incoming bytes from UART1*/
-pUART_reader read_uart_2 = 0; /*!< pointer to the functions that processes incoming bytes from UART2*/
+//pUART_reader read_uart_2 = 0; /*!< pointer to the functions that processes incoming bytes from UART2*/
 
 sys_uart_txdata *sys_UART1_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART1*/
-sys_uart_txdata *sys_UART2_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART2*/
+//sys_uart_txdata *sys_UART2_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART2*/
 
 uint byte_counter_uart1 = 0;  /*!< Bytes that were written */
-uint byte_counter_uart2 = 0;  /*!< Bytes that were written */
+//uint byte_counter_uart2 = 0;  /*!< Bytes that were written */
 
 /**
  *
@@ -77,6 +77,7 @@ inline void Sys_Init_UART1_HDI(void){
  * This function initialises UART2.
  * 
  */
+/*
 inline void Sys_Init_UART2_HDI(void){
     UART2_RX_DIR = INPUT_PIN;
     UART2_TX_DIR = OUTPUT_PIN;
@@ -96,7 +97,7 @@ inline void Sys_Init_UART2_HDI(void){
     U2STAbits.URXISEL = 0b00;//U1RXIF occurs after 1 or more bit were transfered into the buffer
 
 }
-
+*/
 /**
  *
  * This function starts UART2.
@@ -104,6 +105,7 @@ inline void Sys_Init_UART2_HDI(void){
  * @note When executed this function, bytes can be received or transmitted at any time.
  * 
  */
+
 inline void Sys_Start_UART1_HDI(void){
     U1STAbits.UTXISEL = 0;//U1TXIF is set if byte was successfully transfered to the internal transmit buffer
     U1STAbits.UTXEN = 1;//Transmission is enabled
@@ -120,6 +122,7 @@ inline void Sys_Start_UART1_HDI(void){
  * @note When executed this function, bytes can be received or transmitted at any time.
  * 
  */
+/*
 inline void Sys_Start_UART2_HDI(void){
     U2STAbits.UTXISEL = 0;//U1TXIF is set if byte was successfully transfered to the internal transmit buffer
     U2STAbits.UTXEN = 1;//Transmission is enabled
@@ -128,7 +131,7 @@ inline void Sys_Start_UART2_HDI(void){
 
     U2MODEbits.UARTEN = 1;
 }
-
+*/
 /**
  *
  * UART1 reading interrupt.
@@ -189,6 +192,7 @@ void __attribute__((interrupt,auto_psv)) _AltU1TXInterrupt(void){
  * UART2 reading interrupt.
  * 
  */
+/*
 void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void){
 #ifndef SYS_UART2_USED
     Sys_Stop_UART2_HDI();
@@ -197,11 +201,13 @@ void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void){
     Sys_Read_UART2_ISR();
     IFS1bits.U2RXIF = 0;
 }
+ * */
 /**
  *
  * Alternative UART2 reading interrupt.
  * 
  */
+/*
 void __attribute__((interrupt,auto_psv)) _AltU2RXInterrupt(void){
 #ifndef SYS_UART2_USED
     Sys_Stop_UART2_HDI();
@@ -210,12 +216,13 @@ void __attribute__((interrupt,auto_psv)) _AltU2RXInterrupt(void){
     Sys_Read_UART2_ISR();
     IFS1bits.U2RXIF = 0;
 }
-
+*/
 /**
  *
  * UART2 writing interrupt.
  * 
  */
+/*
 void __attribute__((interrupt,auto_psv)) _U2TXInterrupt(void){
 #ifndef SYS_UART2_USED
     Sys_Stop_UART2_HDI();
@@ -224,11 +231,13 @@ void __attribute__((interrupt,auto_psv)) _U2TXInterrupt(void){
     Sys_Write_UART2_ISR();
     IFS1bits.U2TXIF = 0;
 }
+ * */
 /**
  *
  * Alternative UART2 writing interrupt.
  * 
  */
+/*
 void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
 #ifndef SYS_UART2_USED
     Sys_Stop_UART2_HDI();
@@ -237,7 +246,7 @@ void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
     Sys_Write_UART2_ISR();
     IFS1bits.U2TXIF = 0;
 }
-
+*/
 /**
  *
  * This function is executed at occurrence of the UART1 reading interrupt.
@@ -246,9 +255,7 @@ void __attribute__((interrupt,auto_psv)) _AltU2TXInterrupt(void){
 inline void Sys_Read_UART1_ISR(){
     uint8 data;
     
-    Sys_Inc_InterruptCounter();
     Sys_Start_AtomicSection();
-        Sys_Inc_InterruptCounter();
     
         if(U1STAbits.OERR == 1){//Buffer full?
             U1STAbits.OERR = 0;//I will empty it now
@@ -270,7 +277,6 @@ inline void Sys_Read_UART1_ISR(){
  */
 inline void Sys_Write_UART1_ISR(){
     Sys_Start_AtomicSection();
-        Sys_Inc_InterruptCounter();
     
         if(sys_UART1_TX_data == 0){//nothing to send
             byte_counter_uart1 = 0;
@@ -309,6 +315,7 @@ inline void Sys_Write_UART1_ISR(){
  * This function is executed at occurrence of the UART2 reading interrupt.
  * 
  */
+/*
 inline void Sys_Read_UART2_ISR(){
     uint8 data;
 
@@ -329,12 +336,13 @@ inline void Sys_Read_UART2_ISR(){
     Sys_End_AtomicSection();
 
 }
-
+*/
 /**
  *
  * This function is executed at occurrence of the UART1 writing interrupt.
  * 
  */
+/*
 inline void Sys_Write_UART2_ISR(){
     Sys_Inc_InterruptCounter();
     
@@ -364,6 +372,7 @@ inline void Sys_Write_UART2_ISR(){
         }
     Sys_End_AtomicSection();
 }
+*/
 
 /**
  *
@@ -382,13 +391,14 @@ inline void Sys_Stop_UART1_HDI(void){
  * This function stops the receiving of packages via UART2.
  * 
  */
+/*
 inline void Sys_Stop_UART2_HDI(void){
     IFS1bits.U2RXIF = 0;
     IEC1bits.U2RXIE = 0;//Transmission is enabled
     IFS1bits.U2TXIF = 0;
     IEC1bits.U2TXIE = 0;//Transmission is enabled
 }
-
+*/
 /**
  *
  * This function deactivates the UART1.
@@ -409,6 +419,7 @@ inline void Sys_Deactivate_UART1_HDI(void){
  * This function deactivates the UART2.
  * 
  */
+/*
 inline void Sys_Deactivate_UART2_HDI(void){
     IFS1bits.U2RXIF = 0;
     IEC1bits.U2RXIE = 0;//Transmission is enabled
@@ -418,3 +429,4 @@ inline void Sys_Deactivate_UART2_HDI(void){
     U2MODEbits.UARTEN = 0; //enable UART
     U2STAbits.UTXEN = 0;
 }
+ * */

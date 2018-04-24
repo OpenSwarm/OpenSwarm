@@ -37,10 +37,11 @@ inline void Sys_Init_UART1(void){
  * This function initialises UART2.
  * 
  */
+/*
 inline void Sys_Init_UART2(void){
     Sys_Init_UART2_HDI();
 }
-
+*/
 /**
  *
  * This function starts UART1.
@@ -59,10 +60,11 @@ inline void Sys_Start_UART1(void){
  * @note When executed this function, bytes can be received or transmitted at any time.
  * 
  */
+/*
 inline void Sys_Start_UART2(void){
     Sys_Start_UART2_HDI();
 }
-
+*/
 /**
  *
  * This function stops UART1.
@@ -77,10 +79,11 @@ inline void Sys_Stop_UART1(void){
  * This function stops UART2.
  *  
  */
+/*
 inline void Sys_Stop_UART2(void){
     Sys_Stop_UART2_HDI();
 }
-
+*/
 /**
  *
  * This function deactivates UART1.
@@ -95,9 +98,11 @@ inline void Sys_Deactivate_UART1(void){
  * This function deactivates UART2.
  *  
  */
+/*
 inline void Sys_Deactivate_UART2(void){
     Sys_Deactivate_UART2_HDI();
 }
+ * */
 /**
  *
  * defines a function that processes received bytes (UART1). This defined callback function is only executed once by arrival of one byte.
@@ -116,12 +121,13 @@ void Sys_SetReadingFunction_UART1(pUART_reader func){
  * 
  * @param[in] func  pointer to the function that should process the received byte(s).
  */
+/*
 void Sys_SetReadingFunction_UART2(pUART_reader func){
     Sys_Start_AtomicSection();
         read_uart_2 = func;
     Sys_End_AtomicSection();
 }
-
+*/
 /**
  *
  * This function writes sequentially the bytes on the UART1.
@@ -172,6 +178,7 @@ void Sys_Writeto_UART1(void *data, uint length){
  * @param[in] data  pointer to the bytes that should be transmitted.
  * @param[in] length  number of bytes to send.
  */
+/*
 void Sys_Writeto_UART2(void *data, uint length){
 
     sys_uart_txdata *element;
@@ -209,3 +216,4 @@ void Sys_Writeto_UART2(void *data, uint length){
     
     Sys_End_AtomicSection();
 }
+*/

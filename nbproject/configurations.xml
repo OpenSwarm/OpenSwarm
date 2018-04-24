@@ -117,6 +117,8 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>os/rand.h</itemPath>
+    <itemPath>os/rand.c</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>

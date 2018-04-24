@@ -43,6 +43,7 @@
 #include "os/communication/communication.h"
 #include "os/communication/physical.h"
 
+#include "os/rand.h"
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -82,6 +83,11 @@ void analyseBuffer(uint8 data);
 
 static int move_forward = 0;
 
+typedef enum {
+    rotate,
+    move,
+} motionState;
+
 int16_t main(void)
 {        
     e_init_port(); //Set all pins and ports
@@ -99,6 +105,11 @@ int16_t main(void)
     Sys_Start_UART1();
     Sys_Start_ADC();   
     Sys_Start_Communication(); 
+  
+    unsigned long counter = 0; 
+    motionState mState = rotate;
+    
+    seed(Sys_Rand16());
     
     while(true){
         SRbits.IPL = 0;
@@ -128,6 +139,24 @@ int16_t main(void)
             //Sys_Memcpy(&(msg->data), &back[1], 4);
             //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
             //Sys_Writeto_UART1(back, 6);
+        }
+        
+        if(counter > 0x0007FFFE){
+            
+                int speed = rand() % 128;
+            if(mState == rotate){
+                Sys_Set_LeftWheelSpeed(speed);
+                Sys_Set_RightWheelSpeed(-speed); 
+                mState = move;
+                counter = 0x0003FFFE;
+            }else{
+                Sys_Set_LeftWheelSpeed(speed);
+                Sys_Set_RightWheelSpeed(speed); 
+                mState = rotate;
+                counter = 0;
+            }
+        }else{
+            counter++;
         }
     }
 }

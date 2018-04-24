@@ -350,19 +350,31 @@ void ReadFromSensors_2bits(void){
 #endif
         
         static uint full_counter = 0;
-        if(     (current_inMsg->message[0] == 0xEFFF || current_inMsg->message[0] == 0xFFFF) && 
-                (current_inMsg->message[1] == 0xEFFF || current_inMsg->message[1] == 0xFFFF) && 
-                (current_inMsg->message[2] == 0xEFFF || current_inMsg->message[2] == 0xFFFF) && 
-                (current_inMsg->message[3] == 0xEFFF || current_inMsg->message[3] == 0xFFFF) && 
-                (current_inMsg->message[4] == 0xEFFF || current_inMsg->message[4] == 0xFFFF) ){
-        //IS the message just 1s?
-            full_counter++;
-        }else{
-            full_counter = 0;
+        
+        Sys_Start_AtomicSection(); 
+        int m = 0;
+        for(m = 0; m < 5; m++){
+               if(current_inMsg->message[m] == 0xEFFF || current_inMsg->message[m] == 0xFFFF){
+                   full_counter++;
+               }else{
+                   full_counter = 0;
+               }
         }
+        Sys_End_AtomicSection();
         
         if(full_counter >= MAX_FULLMESSAGE){
             Sys_SetComBackground(min_sensor, min_value);
+             
+        Sys_Start_AtomicSection(); 
+            Sys_Free(current_inMsg);
+            current_inMsg = 0;
+            rxState = waiting;
+        Sys_End_AtomicSection(); 
+            
+            BODY_LED = 1;
+            
+        }else{
+            BODY_LED = 0;
         }
         
         Sys_Start_AtomicSection(); 
@@ -449,6 +461,7 @@ void WriteToSensors_2bits(void){
         
     } 
 }
+
 void WriteToSensors_1adc(void){ 
     static Sys_RawMessageList  *current_outMsg = 0; 
 //    static uint measurement_counter = 0;

@@ -50,29 +50,29 @@ typedef struct sys_uart_tx_data_s{
 }sys_uart_txdata;
 
 extern sys_uart_txdata *sys_UART1_TX_data;
-extern sys_uart_txdata *sys_UART2_TX_data;
+//extern sys_uart_txdata *sys_UART2_TX_data;
 
 extern uint byte_counter_uart1;
-extern uint byte_counter_uart2;
+//extern uint byte_counter_uart2;
 
 extern pUART_reader read_uart_1;
-extern pUART_reader read_uart_2;
+//extern pUART_reader read_uart_2;
 
 inline void Sys_Init_UART1_HDI(void);
-inline void Sys_Init_UART2_HDI(void);
+//inline void Sys_Init_UART2_HDI(void);
 inline void Sys_Deactivate_UART1_HDI(void);
-inline void Sys_Deactivate_UART2_HDI(void);
+//inline void Sys_Deactivate_UART2_HDI(void);
 
 inline void Sys_Start_UART1_HDI(void);
-inline void Sys_Start_UART2_HDI(void);
+//inline void Sys_Start_UART2_HDI(void);
 
 inline void Sys_Stop_UART1_HDI(void);
-inline void Sys_Stop_UART2_HDI(void);
+//inline void Sys_Stop_UART2_HDI(void);
 
 inline void Sys_Read_UART1_ISR();
 inline void Sys_Write_UART1_ISR();
-inline void Sys_Read_UART2_ISR();
-inline void Sys_Write_UART2_ISR();
+//inline void Sys_Read_UART2_ISR();
+//inline void Sys_Write_UART2_ISR();
 
 #ifdef	__cplusplus
 }
