@@ -26,7 +26,8 @@ sensor_situation getCurrentSituation(uint);
 static uint min_value = 0xFFFF;
 static uint init_interation = 0;
 
-#define THRESHOLD_L 5
+//5
+#define THRESHOLD_L 4 
 static uint variable_threshold = THRESHOLD_L;
 
 void Sys_Start_ChannelCalibration(){

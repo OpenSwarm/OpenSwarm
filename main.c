@@ -141,14 +141,14 @@ int16_t main(void)
             //Sys_Writeto_UART1(back, 6);
         }
         
-        if(counter > 0x0007FFFE){
+        if(counter > 0x0003FFFE){
             
                 int speed = rand() % 128;
             if(mState == rotate){
                 Sys_Set_LeftWheelSpeed(speed);
                 Sys_Set_RightWheelSpeed(-speed); 
                 mState = move;
-                counter = 0x0003FFFE;
+                counter = 0x0001FFFE;
             }else{
                 Sys_Set_LeftWheelSpeed(speed);
                 Sys_Set_RightWheelSpeed(speed); 

@@ -77,7 +77,7 @@ extern "C" {
     
 #define  ADC_ACQUISITION_TIME 31
 #define  ADC_CONVERSION_TIME 14
-#define  ADC_SCALER_TIME 16
+#define  ADC_SCALER_TIME 64//16
     
 typedef enum {
     channel0 = 0b0000000000000001,
