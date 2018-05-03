@@ -1,4 +1,5 @@
 #include "communication.h"
+#include "physical.h"
 
 #include "../events/events.h"
 #include "../platform/e-puck/adc.h"
@@ -9,9 +10,9 @@
 
 #include "coder.h"
 #include "channel.h"
-#include "physical.h"
 
 #define BODY_INDICATOR
+#define FLOODING
 
 typedef struct comm_device{
     uint8 address;
@@ -45,6 +46,13 @@ void Sys_Stop_Communication(){
     Sys_Stop_PhysicalLayer();
 }
 
+
+
+#ifdef FLOODING
+    static Sys_RawMessageList old[5];
+    static uint oldIndex = 0;
+#endif
+
 void Sys_Send_Data(uint8 address, void *data, uint length){
     uint32 dvalue = 0;
     
@@ -58,29 +66,43 @@ void Sys_Send_Data(uint8 address, void *data, uint length){
         Sys_RawMessageList *element = Sys_convert_WordToPackage(address, dvalue, 1);
         element->next = 0;
         
-        //Sys_Writeto_UART1(element->message, 10);
+#ifdef DEBUG_COM
+        Sys_Writeto_UART1(element->message, 10);
+#endif
+        Sys_Start_AtomicSection(); 
+            Sys_Memcpy(element, &old[oldIndex], sizeof(Sys_RawMessageList));
+            oldIndex++;
+        Sys_End_AtomicSection();
+        
         Sys_AddOutMessage(element);
     }
     
     if(length > 0){
         dvalue = 0;
         Sys_Memcpy(data,&dvalue,length);
-        
+              
         Sys_RawMessageList *element = Sys_convert_WordToPackage(address, dvalue, 0);
         element->next = 0;
         
-        //(element->message, 10);
+#ifdef DEBUG_COM
+        Sys_Writeto_UART1(element->message, 10);
+#endif
         
-        //Sys_Writeto_UART1(element->message, 10);
+        Sys_Start_AtomicSection(); 
+            Sys_Memcpy(element, &old[oldIndex], sizeof(Sys_RawMessageList));
+            oldIndex++;
+        Sys_End_AtomicSection();
+    
         Sys_AddOutMessage(element); 
     }
 }
-
+    
 Sys_Message *getNewMessage(){
     static Sys_Message out;
-    uint16 error_num = 0;
-    bool error = false;
-    uint16 buffer = 0;
+    
+//    uint16 error_num = 0;
+//    bool error = false;
+//    uint16 buffer = 0;
     
     Sys_RawMessageList *raw_msg = Sys_GetNextInMessage();
     if(raw_msg == 0){
@@ -89,9 +111,53 @@ Sys_Message *getNewMessage(){
     
     raw_msg->next       = 0;
     raw_msg->position   = 0;
+    
+#ifdef FLOODING
+    uint oi = 0;
+    bool found = FALSE;
+    for(oi = 0; oi < 5; oi++){
+        char *oldMsg = (char *) &old[oi];
+        char *newMsg = (char *) raw_msg;
         
+        uint c = 0;
+        bool found_c = TRUE;
+        for(c = 0; c < sizeof(Sys_RawMessageList); c++){
+            if(oldMsg[c] != newMsg[c]){
+                found_c = FALSE;
+                break;
+            }
+        }
+        
+        if(found_c){
+            found = TRUE;
+            break;
+        }
+    }
+    
+    if(found){//found a repeated msg
+        Sys_Free(raw_msg);
+        return 0;
+    }
+
+    Sys_Start_AtomicSection(); 
+        Sys_Memcpy(raw_msg, &old[oldIndex], sizeof(Sys_RawMessageList));
+        oldIndex++;
+    Sys_End_AtomicSection(); 
+
+#endif
+    
+#ifdef DEBUG_COM
+    Sys_Writeto_UART1(raw_msg->message, 10);
+#endif
+            
     Sys_Memset(&out, sizeof(Sys_Message), 0);
-      
+   
+#ifdef FLOODING
+    Sys_AddOutMessage(raw_msg);
+#else
+    Sys_Free(raw_msg);
+#endif    
+    /*
     uint16 data = decodeBCH(raw_msg->message[0], &error);//first 11 bits
     if(error){
         error_num++;
@@ -152,12 +218,13 @@ Sys_Message *getNewMessage(){
     longData |= (uint32) data;  //4:[11-1]
     out.data = longData;
     out.error = error_num;
-        
-    Sys_Free(raw_msg);
+    */
+    
     return &out;
 }
 
 static uint pkg_id = 0;
+
 Sys_RawMessageList *Sys_convert_WordToPackage(uint8 address, uint32 dvalue, uint8 type){
     
     Sys_RawMessageList *out = 0;
@@ -166,7 +233,7 @@ Sys_RawMessageList *Sys_convert_WordToPackage(uint8 address, uint32 dvalue, uint
     out->next = 0;
     
     //uint16 buffer = 0x0001; Synch bit not in data
-    pkg_id = (pkg_id+1) & 0x7E;
+    pkg_id = (pkg_id+1) & 0x7F;
     uint16 buffer = ((uint16) (SYS_LOCAL_ADDRESS & 0x0F)) << 7;
     buffer |= (uint16) (((uint) pkg_id) & 0x007F);
     out->message[0] = encodeBCH(buffer);

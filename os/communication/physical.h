@@ -7,6 +7,8 @@
 extern "C" {
 #endif
     
+#define DEBUG_COM
+    
 typedef struct Sys_RawMsg_list_s{
     uint position;
     uint message[5];

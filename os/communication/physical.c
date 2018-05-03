@@ -8,7 +8,6 @@
 #include "../interrupts.h"
 #include "../memory.h"
 
-#define DEBUG_COM
 //#define SHOW_SENSOR_LED
 //#define BODY_INDICATOR
 
@@ -344,11 +343,7 @@ void ReadFromSensors_2bits(void){
     }
        
     if(current_inMsg->position >= 75){ 
-            
-#ifdef DEBUG_COM
-        Sys_Writeto_UART1(current_inMsg->message, 10);
-#endif
-        
+
         static uint full_counter = 0;
         
         Sys_Start_AtomicSection(); 
@@ -372,18 +367,18 @@ void ReadFromSensors_2bits(void){
         Sys_End_AtomicSection(); 
             
             BODY_LED = 1;
+        }else{      
+        
+            Sys_Start_AtomicSection(); 
+                *sys_InMsg_ListEnd = current_inMsg; 
+                sys_InMsg_ListEnd = &(current_inMsg->next); 
+
+                current_inMsg = 0; 
+                rxState = waiting; 
+            Sys_End_AtomicSection(); 
             
-        }else{
             BODY_LED = 0;
         }
-        
-        Sys_Start_AtomicSection(); 
-            *sys_InMsg_ListEnd = current_inMsg; 
-            sys_InMsg_ListEnd = &(current_inMsg->next); 
-            
-            current_inMsg = 0; 
-            rxState = waiting; 
-        Sys_End_AtomicSection(); 
          
     }
     measurement_counter = 0;
@@ -416,11 +411,6 @@ void WriteToSensors_2bits(void){
                 sys_OutMsg_List_End = &sys_OutMsg_List; 
             } 
         Sys_End_AtomicSection(); 
-         
-            
-#ifdef DEBUG_COM
-        Sys_Writeto_UART1(current_outMsg->message, 10);
-#endif
         
         rxState = sending;
             
@@ -492,10 +482,6 @@ void WriteToSensors_1adc(void){
             current_outMsg->position = 0;
             rxState = sending;
         Sys_End_AtomicSection(); 
-            
-#ifdef DEBUG_COM
-        Sys_Writeto_UART1(current_outMsg->message, 10);
-#endif 
         
         apply_1_ToChannel();
       
