@@ -2,11 +2,13 @@
 
 #include "channel.h"
 
+
 #include "../platform/e-puck/adc.h"
 #include "../platform/e-puck/leds.h"
 #include "../platform/e-puck/physical_HDI.h"
 #include "../interrupts.h"
 #include "../memory.h"
+#include "../rand.h"
 
 //#define SHOW_SENSOR_LED
 //#define BODY_INDICATOR
@@ -20,11 +22,13 @@ uint minReadings = 0;
 
 typedef enum rx_state{
     waiting,
+    rx_waiting,
     receiving,
     sending
 } Sys_RX_state;
 
 Sys_RX_state rxState = waiting;
+int rxWait = 0;
 
 Sys_RawMessageList  *sys_InMsg_List = 0;
 Sys_RawMessageList **sys_InMsg_ListEnd = &sys_InMsg_List;
@@ -43,13 +47,13 @@ void ComSensor7(uint);
 void ComReceived(void);
 void ComReceived3(void);
 
-void CombineSensors(void);
+//void CombineSensors(void);
 void ReadFromSensors(void);
 void WriteToSensors(void);
 void ReadFromSensors_old(void);
 void WriteToSensors_old(void);
 void ReadFromSensors_2bits(void);
-void WriteToSensors_2bits(void);
+//void WriteToSensors_2bits(void);
 void WriteToSensors_1adc(void);
 
 void apply_0_ToChannel(void);
@@ -185,10 +189,12 @@ void ComSensor7(uint s){
 
 #define ADC_PER_BIT 1
 
+/*
 void CombineSensors(void){
     ReadFromSensors_2bits();
     WriteToSensors_2bits();
 }
+*/
 
 void Sys_AddOutMessage(Sys_RawMessageList *element){
     if(element == 0){
@@ -245,7 +251,6 @@ void Sys_SendTestPattern(void){
     Sys_AddOutMessage(element);  
 }
 
-
 void apply_0_ToChannel(void){
         clearIRs();
 #ifdef BODY_INDICATOR
@@ -267,7 +272,7 @@ void clearChannel(void){
 #endif
     
 }
-#define MAX_FULLMESSAGE 15
+#define MAX_FULLMESSAGE 5
 
 void ReadFromSensors_2bits(void){ 
     static Sys_RawMessageList  *current_inMsg = 0; 
@@ -292,6 +297,7 @@ void ReadFromSensors_2bits(void){
         case sending: 
             return; 
         case waiting:
+        case rx_waiting:
             noise_temp =  Sys_ComBackground(min_sensor);
             if( min_value < noise_temp-Sys_GetThreshold() ){ 
                 threshold_read = (min_value+noise_temp-Sys_GetThreshold())/2 + 1;
@@ -302,11 +308,18 @@ void ReadFromSensors_2bits(void){
                     Sys_SetComBackground(min_sensor, noise_temp+1);
                 }
                 measurement_counter = 0;
+                if(rxWait > 0){
+                    rxWait--;
+                }else{
+                    rxWait = 0;
+                }
                 return; 
             } 
                         
             measurement_counter++;
             if(measurement_counter < ADCs_PER_BIT){
+                rxWait = 1;    
+                rxState = rx_waiting;
                 return;
             } 
             
@@ -336,20 +349,21 @@ void ReadFromSensors_2bits(void){
     current_inMsg->message[seg] |= new_bit << bit_pos; 
     current_inMsg->position++;    
     
-    if( ((current_inMsg->position == 16) && (current_inMsg->message[0] <= 3))|| ((current_inMsg->position == 31) && (current_inMsg->message[1] == 0)) ){
+    if( ((current_inMsg->position == 16) && ((current_inMsg->message[0] <= 3) || (current_inMsg->message[0] >= 0x7FFF))) || 
+        ((current_inMsg->position == 32) && ((current_inMsg->message[1] <= 3) || (current_inMsg->message[1] >= 0x7FFF))) ){
         rxState = waiting; 
+        rxWait = rand() % 5;
         Sys_Free(current_inMsg);
         current_inMsg = 0;
     }
        
     if(current_inMsg->position >= 75){ 
-
         static uint full_counter = 0;
         
         Sys_Start_AtomicSection(); 
         int m = 0;
         for(m = 0; m < 5; m++){
-               if(current_inMsg->message[m] == 0xEFFF || current_inMsg->message[m] == 0xFFFF){
+               if(current_inMsg->message[m] == 0x7FFF || current_inMsg->message[m] == 0xFFFF){
                    full_counter++;
                }else{
                    full_counter = 0;
@@ -364,6 +378,7 @@ void ReadFromSensors_2bits(void){
             Sys_Free(current_inMsg);
             current_inMsg = 0;
             rxState = waiting;
+            rxWait = rand() % 5;
         Sys_End_AtomicSection(); 
             
             BODY_LED = 1;
@@ -374,7 +389,8 @@ void ReadFromSensors_2bits(void){
                 sys_InMsg_ListEnd = &(current_inMsg->next); 
 
                 current_inMsg = 0; 
-                rxState = waiting; 
+                rxState = waiting;
+                rxWait = rand() % 10; 
             Sys_End_AtomicSection(); 
             
             BODY_LED = 0;
@@ -383,12 +399,12 @@ void ReadFromSensors_2bits(void){
     }
     measurement_counter = 0;
 } 
-
+/*
 void WriteToSensors_2bits(void){ 
     static Sys_RawMessageList  *current_outMsg = 0; 
     static uint measurement_counter = 0;
      
-    if(rxState == receiving){ 
+    if(rxState == receiving || rxWait != 0){ 
         clearChannel();
         measurement_counter = 0;
         
@@ -451,14 +467,18 @@ void WriteToSensors_2bits(void){
         
     } 
 }
+*/
 
 void WriteToSensors_1adc(void){ 
     static Sys_RawMessageList  *current_outMsg = 0; 
 //    static uint measurement_counter = 0;
      
-    if(rxState == receiving){ 
+    if(rxState == receiving || rxWait != 0){ 
         clearChannel();
 //        measurement_counter = 0;      
+        if(current_outMsg != 0){
+            current_outMsg->position = 0;   
+        }
         return; 
     } 
      

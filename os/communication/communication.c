@@ -69,10 +69,13 @@ void Sys_Send_Data(uint8 address, void *data, uint length){
 #ifdef DEBUG_COM
         Sys_Writeto_UART1(element->message, 10);
 #endif
+
+#ifdef FLOODING
         Sys_Start_AtomicSection(); 
             Sys_Memcpy(element, &old[oldIndex], sizeof(Sys_RawMessageList));
-            oldIndex++;
+            oldIndex = (oldIndex + 1) % 5;
         Sys_End_AtomicSection();
+#endif
         
         Sys_AddOutMessage(element);
     }
@@ -88,11 +91,12 @@ void Sys_Send_Data(uint8 address, void *data, uint length){
         Sys_Writeto_UART1(element->message, 10);
 #endif
         
+#ifdef FLOODING
         Sys_Start_AtomicSection(); 
             Sys_Memcpy(element, &old[oldIndex], sizeof(Sys_RawMessageList));
-            oldIndex++;
+            oldIndex = (oldIndex + 1) % 5;
         Sys_End_AtomicSection();
-    
+#endif
         Sys_AddOutMessage(element); 
     }
 }
@@ -100,9 +104,9 @@ void Sys_Send_Data(uint8 address, void *data, uint length){
 Sys_Message *getNewMessage(){
     static Sys_Message out;
     
-//    uint16 error_num = 0;
-//    bool error = false;
-//    uint16 buffer = 0;
+    uint16 error_num = 0;
+    bool error = false;
+    uint16 buffer = 0;
     
     Sys_RawMessageList *raw_msg = Sys_GetNextInMessage();
     if(raw_msg == 0){
@@ -141,23 +145,13 @@ Sys_Message *getNewMessage(){
 
     Sys_Start_AtomicSection(); 
         Sys_Memcpy(raw_msg, &old[oldIndex], sizeof(Sys_RawMessageList));
-        oldIndex++;
+        oldIndex = (oldIndex + 1) % 5;
     Sys_End_AtomicSection(); 
 
 #endif
-    
-#ifdef DEBUG_COM
-    Sys_Writeto_UART1(raw_msg->message, 10);
-#endif
-            
+                
     Sys_Memset(&out, sizeof(Sys_Message), 0);
    
-#ifdef FLOODING
-    Sys_AddOutMessage(raw_msg);
-#else
-    Sys_Free(raw_msg);
-#endif    
-    /*
     uint16 data = decodeBCH(raw_msg->message[0], &error);//first 11 bits
     if(error){
         error_num++;
@@ -169,6 +163,9 @@ Sys_Message *getNewMessage(){
         error_num++;
     }
     
+    if(buffer == 0){
+        error_num++;
+    }
     out.id = (uint8) buffer;
     
     // Source address 0:[8-11]+1:[0-1] != 0
@@ -184,6 +181,9 @@ Sys_Message *getNewMessage(){
     }
     
     out.address_source = (uint8) buffer;
+    if(buffer == 0){
+        error_num++;
+    }
     
     // destination address 1:[2-8]
     buffer = (0x00FC & data) >> 2;
@@ -199,6 +199,9 @@ Sys_Message *getNewMessage(){
     
     buffer |= (data & 0x0001);
     out.type |= buffer;//2:[1]
+    if(buffer == 0){
+        error_num++;
+    }
     
     // Data 2:[10-1]+3:[11-1]+4:[11-1]
     uint32 longData = ( (uint32) (data & 0x07FE) ) << 21;//2:[10-1]
@@ -218,7 +221,22 @@ Sys_Message *getNewMessage(){
     longData |= (uint32) data;  //4:[11-1]
     out.data = longData;
     out.error = error_num;
-    */
+   
+    
+#ifdef DEBUG_COM
+    //if(error_num == 0){
+        Sys_Writeto_UART1(raw_msg->message, 10);
+    //}
+    
+#endif
+    
+#ifdef FLOODING
+    if(out.error == 0){
+        Sys_AddOutMessage(raw_msg);
+    }
+#else
+    Sys_Free(raw_msg);
+#endif    
     
     return &out;
 }

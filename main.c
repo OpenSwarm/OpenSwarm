@@ -145,13 +145,13 @@ int16_t main(void)
             
                 int speed = rand() % 128;
             if(mState == rotate){
-                Sys_Set_LeftWheelSpeed(speed);
-                Sys_Set_RightWheelSpeed(-speed); 
+                //Sys_Set_LeftWheelSpeed(speed);
+                //Sys_Set_RightWheelSpeed(-speed); 
                 mState = move;
                 counter = 0x0001FFFE;
             }else{
-                Sys_Set_LeftWheelSpeed(speed);
-                Sys_Set_RightWheelSpeed(speed); 
+                //Sys_Set_LeftWheelSpeed(speed);
+                //Sys_Set_RightWheelSpeed(speed); 
                 mState = rotate;
                 counter = 0;
             }
@@ -207,7 +207,7 @@ void analyseBuffer(uint8 data){
                     break;
                 case 'w':
                     a_buffer = Sys_ComBackground(0);
-                    a_buffer |= (((uint16) Sys_GetThreshold()) << 16);
+                    a_buffer |= (((uint32) Sys_GetThreshold()) << 16);
                     Sys_Writeto_UART1(&a_buffer, 4);
                     if(0 == Sys_ComBackground(0)){
                         BODY_LED = 0;

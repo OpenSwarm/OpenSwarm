@@ -27,12 +27,12 @@ static uint min_value = 0xFFFF;
 static uint init_interation = 0;
 
 //5
-#define THRESHOLD_L 4 
+#define THRESHOLD_L 5 
 static uint variable_threshold = THRESHOLD_L;
 
 void Sys_Start_ChannelCalibration(){
     
-    variable_threshold = 4*THRESHOLD_L*Sys_Get_Selector();
+    variable_threshold = THRESHOLD_L;
     
     clearLEDs();
     clearIRs();
