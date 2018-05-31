@@ -27,7 +27,7 @@ static uint min_value = 0xFFFF;
 static uint init_interation = 0;
 
 //5
-#define THRESHOLD_L 5 
+#define THRESHOLD_L 8 
 static uint variable_threshold = THRESHOLD_L;
 
 void Sys_Start_ChannelCalibration(){
