@@ -14,6 +14,7 @@ extern "C" {
 
 void clearLEDs();
 void setLEDs();
+void setLEDring();
 void clearIRs();
 void setIRs(); 
 

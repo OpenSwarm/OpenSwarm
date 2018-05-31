@@ -53,6 +53,7 @@
         <itemPath>os/definitions.h</itemPath>
         <itemPath>os/interrupts.h</itemPath>
         <itemPath>os/memory.h</itemPath>
+        <itemPath>os/rand.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -109,6 +110,7 @@
         <itemPath>os/interrupts.c</itemPath>
         <itemPath>os/memory.c</itemPath>
         <itemPath>os/system.c</itemPath>
+        <itemPath>os/rand.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
@@ -117,8 +119,6 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>os/rand.h</itemPath>
-    <itemPath>os/rand.c</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
@@ -133,7 +133,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.25</languageToolchainVersion>
+        <languageToolchainVersion>1.33</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <compileType>
@@ -148,6 +148,8 @@
           <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile>dist/XC16_dsPIC30F6014A/production/os.production.hex</alternateLoadableFile>
         </loading>
+        <subordinates>
+        </subordinates>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>

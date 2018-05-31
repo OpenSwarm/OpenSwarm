@@ -44,6 +44,8 @@
 #include "os/communication/physical.h"
 
 #include "os/rand.h"
+#include "os/platform/e-puck/leds.h"
+
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -71,12 +73,6 @@ void prox4_reader(uint data);
 void prox5_reader(uint data);
 void prox6_reader(uint data);
 void prox7_reader(uint data);
-
-void clearLEDs();
-void setLEDs();
-void clearIRs();
-void setIRs();
-
 
 void readbluetoothBuffer();
 void analyseBuffer(uint8 data);
@@ -179,6 +175,7 @@ typedef enum {
     reading_big,
     reading_moving,
     reading_threshold,
+    reading_ONOFF,
     requested_threshold,
     finishing
 } bluetooth_state;
@@ -221,6 +218,9 @@ void analyseBuffer(uint8 data){
                         BODY_LED = 1;
                         FRONT_LED = 0;
                     }
+                    break;
+                case 'O'://move
+                    state = reading_ONOFF;
                     break;
                 case 'r':
                     __asm__("RESET\n");
@@ -320,6 +320,30 @@ void analyseBuffer(uint8 data){
             }
             
             state = waiting;
+            break;
+        case reading_ONOFF:
+            if(counter == 0){
+                xor_val = 'O' ^ data;
+                value = data;
+                counter++;
+                return;
+            }
+            if(counter == 1){
+                if(xor_val == data){
+                    if(value == 'N'){
+                        setLEDring();
+                    }else{
+                        clearLEDs();
+                    }
+                    Sys_Writeto_UART1("OK", 2);
+                }                
+                value = 0;
+                xor_val = 0;
+                counter = 0;
+                state = waiting;
+                return;
+            }
+            
             break;
         case reading_big:
             rx_BT_Buffer[counter] = data;
