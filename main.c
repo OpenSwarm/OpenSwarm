@@ -143,15 +143,20 @@ int16_t main(void)
         
         if(counter > 0x0003FFFE){
             
-                int speed = rand() % 128;
+            int speed = rand() % 128;
+            
+        if(Sys_Get_Selector() == 0){
+                speed = 0;
+            }
+            
             if(mState == rotate){
-                //Sys_Set_LeftWheelSpeed(speed);
-                //Sys_Set_RightWheelSpeed(-speed); 
+                Sys_Set_LeftWheelSpeed(speed);
+                Sys_Set_RightWheelSpeed(-speed); 
                 mState = move;
                 counter = 0x0001FFFE;
             }else{
-                //Sys_Set_LeftWheelSpeed(speed);
-                //Sys_Set_RightWheelSpeed(speed); 
+                Sys_Set_LeftWheelSpeed(speed);
+                Sys_Set_RightWheelSpeed(speed); 
                 mState = rotate;
                 counter = 0;
             }
@@ -216,6 +221,9 @@ void analyseBuffer(uint8 data){
                         BODY_LED = 1;
                         FRONT_LED = 0;
                     }
+                    break;
+                case 'r':
+                    __asm__("RESET\n");
                     break;
                 default:
                     break;
