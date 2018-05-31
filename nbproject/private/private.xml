@@ -4,19 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/motors.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.c</file>
-            <file>file:/home/strenkwalder/code/os.com/main.c</file>
-            <file>file:/home/strenkwalder/code/os.com/nbproject/Makefile-XC16_dsPIC30F6014A.mk</file>
-            <file>file:/home/strenkwalder/code/os.com/os/communication/communication.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/communication/physical.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/communication/communication.c</file>
-            <file>file:/home/strenkwalder/code/os.com/os/rand.c</file>
-            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/adc.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/communication/channel.c</file>
-            <file>file:/home/strenkwalder/code/os.com/os/rand.h</file>
-            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/motors.c</file>
-            <file>file:/home/strenkwalder/code/os.com/os/platform/e-puck/adc.c</file>
+            <file>file:/home/strenklwalder/code/os.com/os/communication/channel.c</file>
+            <file>file:/home/strenklwalder/code/os.com/os/platform/e-puck/leds.h</file>
+            <file>file:/home/strenklwalder/code/os.com/main.c</file>
+            <file>file:/home/strenklwalder/code/os.com/os/platform/e-puck/leds.c</file>
         </group>
     </open-files>
 </project-private>
