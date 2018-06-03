@@ -332,8 +332,10 @@ void analyseBuffer(uint8 data){
                 if(xor_val == data){
                     if(value == 'N'){
                         setLEDring();
+                        stopRecieving(true);
                     }else{
                         clearLEDs();
+                        enableRecieving(true);
                     }
                     Sys_Writeto_UART1("OK", 2);
                 }                

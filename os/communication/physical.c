@@ -30,6 +30,8 @@ typedef enum rx_state{
 Sys_RX_state rxState = waiting;
 int rxWait = 0;
 
+bool stopReading = false;
+
 Sys_RawMessageList  *sys_InMsg_List = 0;
 Sys_RawMessageList **sys_InMsg_ListEnd = &sys_InMsg_List;
 
@@ -281,6 +283,16 @@ void ReadFromSensors_2bits(void){
      
     uint min_value = 0xFFFF; 
     uint min_sensor = -1;
+    
+    if(stopReading){
+        if(rxState == rx_waiting || rxState == receiving){
+            rxState = waiting;
+        }
+        if(rxWait > 0)
+            rxWait--;
+               
+        return;
+    }
     
     uint i = 0;
     for(i = 0; i < 8; i++){
@@ -538,4 +550,11 @@ void WriteToSensors_1adc(void){
            rxState = waiting;
         Sys_End_AtomicSection();   
     } 
+}
+
+void enableRecieving(bool e){
+    stopReading = !e;
+}
+void stopRecieving(bool e){
+    stopReading = e;
 }

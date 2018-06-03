@@ -25,5 +25,7 @@ void Sys_AddOutMessage(Sys_RawMessageList *element);
 Sys_RawMessageList *Sys_GetNextInMessage();
 
 void Sys_SendTestPattern(void);
+void enableRecieving(bool e);
+void stopRecieving(bool e);
 
 #endif	/* PHYSICAL_H */

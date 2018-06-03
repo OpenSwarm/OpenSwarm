@@ -162,10 +162,7 @@ Sys_Message *getNewMessage(){
     if(buffer == 0){// != 0
         error_num++;
     }
-    
-    if(buffer == 0){
-        error_num++;
-    }
+   
     out.id = (uint8) buffer;
     
     // Source address 0:[8-11]+1:[0-1] != 0
@@ -177,6 +174,7 @@ Sys_Message *getNewMessage(){
     
     buffer |= (data & 0x0003) << 4;//1:[11-9]
     if(buffer == 0){// != 0
+        
         error_num++;
     }
     
@@ -199,9 +197,6 @@ Sys_Message *getNewMessage(){
     
     buffer |= (data & 0x0001);
     out.type |= buffer;//2:[1]
-    if(buffer == 0){
-        error_num++;
-    }
     
     // Data 2:[10-1]+3:[11-1]+4:[11-1]
     uint32 longData = ( (uint32) (data & 0x07FE) ) << 21;//2:[10-1]
@@ -231,8 +226,10 @@ Sys_Message *getNewMessage(){
 #endif
     
 #ifdef FLOODING
-    if(out.error == 0){
+    if(error_num == 0){
         Sys_AddOutMessage(raw_msg);
+    }else{
+        Sys_Free(raw_msg);     
     }
 #else
     Sys_Free(raw_msg);
