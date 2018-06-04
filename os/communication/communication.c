@@ -12,7 +12,7 @@
 #include "channel.h"
 
 #define BODY_INDICATOR
-#define FLOODING
+//#define FLOODING
 
 typedef struct comm_device{
     uint8 address;
