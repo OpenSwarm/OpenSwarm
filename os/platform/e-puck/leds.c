@@ -15,6 +15,19 @@ void clearLEDs(){
     FRONT_LED = 0;
 }
 
+void setLEDring(){
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    LED6 = 1;
+    LED7 = 1;
+    BODY_LED = 0;
+    FRONT_LED = 0;
+}
+
 void setLEDs(){
     LED0 = 1;
     LED1 = 1;

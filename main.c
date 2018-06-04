@@ -43,6 +43,8 @@
 #include "extern/platform/e-puck/library/ircom/e_ad_conv.h"
 #include "extern/platform/e-puck/library/ircom/ircom.h"
 
+#include "os/rand.h"
+#include "os/platform/e-puck/leds.h"
 /******************************************************************************/
 /* Global Variable Declaration                                                */
 /******************************************************************************/
@@ -83,6 +85,12 @@ void receiveMsg(){
     }
 }
 
+
+typedef enum {
+    rotate,
+    move,
+} motionState;
+
 int16_t main(void)
 {
     Sys_Init_Kernel();
@@ -110,24 +118,37 @@ int16_t main(void)
 //    uint32 time = Sys_Get_SystemClock();
 //    time += (uint32) 1000;
 
-//    uint counter = 0;
+    unsigned long counter = 0; 
+    motionState mState = rotate;
+    
+    seed(98);
 
     while(true){
         SRbits.IPL = 0;
     //setIRs();
         readbluetoothBuffer();
 
-        if(move_forward != 0){
-            Sys_Set_StepsRight(move_forward);
-            Sys_Set_StepsLeft(move_forward);
-
-
-            while(Sys_Get_StepsLeft() || Sys_Get_StepsRight() ){ // !=
-                SRbits.IPL = 0;
+        if(counter > 0x0003FFFE){
+            
+            int speed = rand() % 128;
+            
+        if(Sys_Get_Selector() == 0){
+                speed = 0;
             }
-
-            Sys_Writeto_UART1("STOP", 4);
-            move_forward = 0;
+            
+            if(mState == rotate){
+                Sys_Set_LeftWheelSpeed(speed);
+                Sys_Set_RightWheelSpeed(-speed); 
+                mState = move;
+                counter = 0x0001FFFE;
+            }else{
+                Sys_Set_LeftWheelSpeed(speed);
+                Sys_Set_RightWheelSpeed(speed); 
+                mState = rotate;
+                counter = 0;
+            }
+        }else{
+            counter++;
         }
 
 
@@ -159,9 +180,10 @@ typedef enum {
     reading_big,
     reading_moving,
     reading_threshold,
+    reading_ONOFF,
+    requested_threshold,
     finishing
 } bluetooth_state;
-
 
 void analyseBuffer(uint8 data){
     static int counter = 0;
@@ -188,11 +210,16 @@ void analyseBuffer(uint8 data){
                 case 'm'://move
                     state = reading_moving;
                     break;
+                case 'O'://move
+                    state = reading_ONOFF;
+                    break;
+                case 'r':
+                    __asm__("RESET\n");
+                    break;
                 default:
                     break;
-            }
+            }            
             return;
-
         case starting_big:
             if(data <= 20 ){
                 num_bytes = data;
@@ -283,6 +310,30 @@ void analyseBuffer(uint8 data){
             }
 
             state = waiting;
+            break;
+        case reading_ONOFF:
+            if(counter == 0){
+                xor_val = 'O' ^ data;
+                value = data;
+                counter++;
+                return;
+            }
+            if(counter == 1){
+                if(xor_val == data){
+                    if(value == 'N'){
+                        setLEDring();
+                    }else{
+                        clearLEDs();
+                    }
+                    Sys_Writeto_UART1("OK", 2);
+                }                
+                value = 0;
+                xor_val = 0;
+                counter = 0;
+                state = waiting;
+                return;
+            }
+            
             break;
         case reading_big:
             rx_BT_Buffer[counter] = data;
