@@ -27,10 +27,10 @@
 #define MAX_WHEEL_SPEED 128 	/*!< Maximum wheel speed in steps*/
 #define MIN_WHEEL_SPEED 4   	/*!< Minimum wheel speed in steps*/
 #define POWER_SAVE_WAIT 10      /*!< amount of steps needed to move the motor one step further */
-static int steps_left = 0;
-static int steps_right = 0;
-bool doSteps_right = false;
-bool doSteps_left = false;
+volatile static int steps_left = 0;
+volatile static int steps_right = 0;
+volatile bool doSteps_right = false;
+volatile bool doSteps_left = false;
 /**
  * @brief This struct contains the speed for a motor.
  */
@@ -44,8 +44,8 @@ void Sys_RightMotor_Controller(void);
 bool Sys_LeftMotor_EventHandler(uint, sys_event_data *, void *);
 bool Sys_RightMotor_EventHandler(uint, sys_event_data *, void *);
 
-static sys_motors left_motor;/*!< wheel speed for the left motor*/
-static sys_motors right_motor;/*!< wheel speed for the right motor*/
+volatile static sys_motors left_motor;/*!< wheel speed for the left motor*/
+volatile static sys_motors right_motor;/*!< wheel speed for the right motor*/
 
 /**
  *

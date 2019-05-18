@@ -23,7 +23,7 @@
 #include "../../interrupts.h"
 #include "../../definitions.h"
 
-pFunction sys_process_scheduler = 0; //points to the task scheduling algorithm
+volatile pFunction sys_process_scheduler = 0; //points to the task scheduling algorithm
 
 /**
  *

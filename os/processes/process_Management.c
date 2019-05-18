@@ -74,7 +74,7 @@ uint Sys_Get_Number_Processes(){
  */
 uint Sys_Get_Number_ReadyProcesses(){
     uint n = 0;
-    sys_process_control_block_list_element *element;
+    sys_process_control_block_list_element * volatile element;
     
     Sys_Start_AtomicSection();
     element = sys_ready_processes;
@@ -96,7 +96,7 @@ uint Sys_Get_Number_ReadyProcesses(){
  */
 uint Sys_Get_Number_BlockedProcesses(){
     uint n = 0;
-    sys_process_control_block_list_element *element;
+    sys_process_control_block_list_element * volatile element;
     
     Sys_Start_AtomicSection();
     element = sys_blocked_processes;
@@ -128,7 +128,7 @@ inline bool Sys_Start_Process(pFunction function){
  */
 void Sys_Kill_Process(uint pid){
     // Check if the process is in the ready list
-    sys_pcb_list_element *element;//first is the system
+    sys_pcb_list_element * volatile element;//first is the system
 
     if(pid == 0){
         return; //DO NOT KILL THE SYSTEM
@@ -304,7 +304,7 @@ void Sys_Block_Process(uint pid, uint eventID, pConditionFunction condition){
     }
 
     Sys_Start_AtomicSection();
-    sys_pcb_list_element *element = Sys_Remove_Process_from_List(pid, &sys_ready_processes);
+    sys_pcb_list_element * volatile element = Sys_Remove_Process_from_List(pid, &sys_ready_processes);
     Sys_Insert_Process_to_List(element, &sys_blocked_processes);
 
     //Event must be registered and process must be subscribed to it

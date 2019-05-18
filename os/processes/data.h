@@ -62,10 +62,10 @@ typedef struct sys_process_control_block_list_element_s{
     
 } sys_process_control_block_list_element, sys_pcb_list_element;
 
-extern sys_pcb_list_element *sys_ready_processes;/*!< pointer to the ready processes (linked list) */
-extern sys_pcb_list_element *sys_running_process;/*!< pointer to the running process */
-extern sys_pcb_list_element *sys_blocked_processes;/*!< pointer to the blocked process */
-extern sys_pcb_list_element *sys_zombies;/*!< pointer to the zombie process */
+extern sys_pcb_list_element * volatile sys_ready_processes;/*!< pointer to the ready processes (linked list) */
+extern sys_pcb_list_element * volatile sys_running_process;/*!< pointer to the running process */
+extern sys_pcb_list_element * volatile sys_blocked_processes;/*!< pointer to the blocked process */
+extern sys_pcb_list_element * volatile sys_zombies;/*!< pointer to the zombie process */
 
 /********************************************************
  *  Function Prototypes

@@ -16,7 +16,7 @@
 #include "../../definitions.h"
 #include "../../memory.h"
 
-sys_i2c_messages *sys_i2c_msgs = 0;  /*!< Pointer to the linked list of messages */
+sys_i2c_messages * volatile sys_i2c_msgs = 0;  /*!< Pointer to the linked list of messages */
 
 /**
  *
@@ -68,7 +68,7 @@ void Sys_I2C_AppendMessages(sys_i2c_msg *item){
         return;
     }
 
-    sys_i2c_messages *element = sys_i2c_msgs;
+    sys_i2c_messages * volatile element = sys_i2c_msgs;
     while(element->next != 0){
         element = element->next;
     }

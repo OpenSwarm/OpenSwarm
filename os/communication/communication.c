@@ -18,12 +18,12 @@ typedef struct comm_device{
     uint8 msg_id;
 }Sys_CommDevice;
 
-static Sys_CommDevice sys_com_device;
+volatile static Sys_CommDevice sys_com_device;
 
 Sys_RawMessageList *Sys_convert_WordToPackage(uint8 address, uint32 dvalue, uint8 type);
 uint Sys_ListLength(Sys_RawMessageList *list);
 
-uint sys_com_Init_state = 0;
+volatile uint sys_com_Init_state = 0;
 
 void Sys_Init_Communication(){
     

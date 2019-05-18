@@ -36,7 +36,7 @@ typedef struct sys_i2c_message_s {
     struct sys_i2c_message_s *next;     /*!< pointer to the next element in the linked list*/
 } sys_i2c_message, sys_i2c_messages, sys_i2c_msg;
 
-extern sys_i2c_messages *sys_i2c_msgs;
+extern sys_i2c_messages * volatile sys_i2c_msgs;
 
 void Sys_I2C_AppendMessages(sys_i2c_msg *item);
 void Sys_I2C_RemoveOldestMessage(sys_i2c_messages **list);

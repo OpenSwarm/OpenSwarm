@@ -5,7 +5,7 @@
 
 #define PRESCALER 8
 
-pFunction Sys_PhysicalChannelSender = 0;
+volatile pFunction Sys_PhysicalChannelSender = 0;
 
 inline void Sys_Init_PhysicalSendingChannel(void){
     

@@ -45,7 +45,7 @@
 #define GREEN_THRESHOLD 0x0E4E  /*!< threshold value for received green */
 #define BLUE_THRESHOLD  0x060E  /*!< threshold value for received blue */
 
-static pCameraPreProcessor pre_processor = 0; /*!< callback function to processes the raw camera image*/
+volatile static pCameraPreProcessor pre_processor = 0; /*!< callback function to processes the raw camera image*/
 
 
 //static sys_rgb_pixel *frame_a = 0;/*!< pointer to a received frame */

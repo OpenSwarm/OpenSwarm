@@ -28,7 +28,7 @@
 /*! \var static uint irq_counter
     \brief counts the amount of occurred interrupts.
 */
-static uint irq_counter = 0;
+volatile static uint irq_counter = 0;
 /**
  *
  * This Function starts an atomic section. This means the code afterwards cannot be interrupted by any interrupt.

@@ -17,7 +17,7 @@
 #endif
 
 uint sensorReadings[8] ={0};
-uint minReadings = 0;
+volatile uint minReadings = 0;
 
 typedef enum rx_state{
     waiting,
@@ -25,13 +25,13 @@ typedef enum rx_state{
     sending
 } Sys_RX_state;
 
-Sys_RX_state rxState = waiting;
+ volatile Sys_RX_state rxState = waiting;
 
-Sys_RawMessageList  *sys_InMsg_List = 0;
-Sys_RawMessageList **sys_InMsg_ListEnd = &sys_InMsg_List;
+Sys_RawMessageList  * volatile sys_InMsg_List = 0;
+Sys_RawMessageList * volatile * volatile sys_InMsg_ListEnd = &sys_InMsg_List;
 
-Sys_RawMessageList *sys_OutMsg_List = 0;
-Sys_RawMessageList **sys_OutMsg_List_End = &sys_OutMsg_List;
+Sys_RawMessageList * volatile sys_OutMsg_List = 0;
+Sys_RawMessageList * volatile * volatile sys_OutMsg_List_End = &sys_OutMsg_List;
 
 void ComSensor0(uint);
 void ComSensor1(uint);

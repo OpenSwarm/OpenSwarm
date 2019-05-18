@@ -22,10 +22,9 @@
 
 #define ADC_CHANNELS 16 /*!< Maximum amount of ADC-channels*/
 
-static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};  /*!< Defines the a ADC-preProcessor for each channel*/
-static pFunction adcFinishFunctions[4] = {0};  /*!< Defines functions that are called when a group was successfully read*/
-
-uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets defined by the ADC noise*/
+volatile static ADC_pre_processor adc_preprocessors[ADC_CHANNELS] = {0};  /*!< Defines the a ADC-preProcessor for each channel*/
+volatile static pFunction adcFinishFunctions[4] = {0};  /*!< Defines functions that are called when a group was successfully read*/
+volatile uint16 sys_random_number = 0; /*!< Defines a value for an random number -> gets defined by the ADC noise*/
 
 /**
  *

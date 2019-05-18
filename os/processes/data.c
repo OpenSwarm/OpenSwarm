@@ -29,10 +29,10 @@
 /********************************************************
  *  Global Variables
  ********************************************************/
-sys_pcb_list_element *sys_ready_processes = 0;/*!< pointer to the ready processes (linked list) */
-sys_pcb_list_element *sys_running_process = 0;/*!< pointer to the running process */
-sys_pcb_list_element *sys_blocked_processes = 0;/*!< pointer to the blocked process */
-sys_pcb_list_element *sys_zombies = 0;/*!< pointer to the zombie process */
+sys_pcb_list_element * volatile sys_ready_processes = 0;/*!< pointer to the ready processes (linked list) */
+sys_pcb_list_element * volatile sys_running_process = 0;/*!< pointer to the running process */
+sys_pcb_list_element * volatile sys_blocked_processes = 0;/*!< pointer to the blocked process */
+sys_pcb_list_element * volatile sys_zombies = 0;/*!< pointer to the zombie process */
 
 /********************************************************
  ********************************************************
@@ -104,7 +104,7 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_elemen
  * @return void
  */
 inline sys_pcb_list_element *Sys_Find_Process(uint pid){
-    sys_pcb_list_element *element;
+    sys_pcb_list_element * volatile element;
     
     Sys_Start_AtomicSection();
         element = sys_ready_processes;

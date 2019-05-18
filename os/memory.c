@@ -18,7 +18,7 @@
 
 #undef EXTENDED_MEMORY
 
-static uint sys_bytes_used = 0;
+volatile static uint sys_bytes_used = 0;
 
 typedef struct sys_memory_metadata_s{
     size_t size;

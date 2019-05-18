@@ -5,7 +5,7 @@
 #define CONTROLTIME 10
 #define PRESCALER 8
 
-pFunction Sys_ClockTick = 0;
+volatile pFunction Sys_ClockTick = 0;
 
 inline void Sys_todo_Clock();
 

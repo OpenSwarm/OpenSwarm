@@ -14,7 +14,7 @@
 #include "scheduler.h"
 #include "process_Management.h"
 
-static unsigned short called_Scheduler = 0;
+volatile static unsigned short called_Scheduler = 0;
 
 /**
  *

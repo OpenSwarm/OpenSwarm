@@ -19,7 +19,7 @@
     #include "../platform/e-puck/clock_timer_HDI.h"
 #endif
 
-static uint32 sys_clock = 0; /*!< counter which is system clock */
+volatile static uint32 sys_clock = 0; /*!< counter which is system clock */
     
 void Sys_SystemClock_Counter(void);
 
@@ -83,7 +83,7 @@ void Sys_SystemClock_Counter(){
     
     sys_clock += 10;
     
-    Sys_Send_Event(SYS_EVENT_10ms_CLOCK, &sys_clock, sizeof(sys_clock));
+    Sys_Send_Event(SYS_EVENT_10ms_CLOCK, (void *) &sys_clock, sizeof(sys_clock));
 }
 
 /**

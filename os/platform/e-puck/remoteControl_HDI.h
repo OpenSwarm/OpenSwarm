@@ -32,14 +32,14 @@ extern "C" {
 #define RC_WAIT_INITIALLY      RC_WAIT_FOR_BIT+RC_WAIT_FOR_QUARTERBIT /*!< Cycles that are needed to wait at the beginning of a message */
 #define RC_NOT_STARTED -1         /*!< The initial state of the state machine to decode a remote control message */
     
-extern bool message_arriving; 
-extern sint8 waiting_cycles;
+extern volatile bool message_arriving; 
+extern volatile sint8 waiting_cycles;
 
-extern uint rx_buffer;
+extern volatile uint rx_buffer;
 
-extern bool isNewDataAvailable;
+extern volatile bool isNewDataAvailable;
 
-extern sint8 receiving_bit;
+extern volatile sint8 receiving_bit;
     
 inline void Sys_Init_RemoteControl_HDI(void);
 inline void Sys_Start_RemoteControl_HDI(void);

@@ -38,7 +38,7 @@
  */
 void Sys_Init_Process_Management_HDI(){
 
-    sys_pcb_list_element *element;
+    sys_pcb_list_element * volatile element;
     
     Sys_Start_AtomicSection();
     while(sys_ready_processes != 0){//for each elements in the list

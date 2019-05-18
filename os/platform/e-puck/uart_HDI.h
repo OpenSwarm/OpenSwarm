@@ -49,14 +49,14 @@ typedef struct sys_uart_tx_data_s{
     struct sys_uart_tx_data_s *next;/*!< pointer to the next element in the list */
 }sys_uart_txdata;
 
-extern sys_uart_txdata *sys_UART1_TX_data;
-extern sys_uart_txdata *sys_UART2_TX_data;
+extern sys_uart_txdata * volatile sys_UART1_TX_data;
+extern sys_uart_txdata * volatile sys_UART2_TX_data;
 
-extern uint byte_counter_uart1;
-extern uint byte_counter_uart2;
+extern volatile uint byte_counter_uart1;
+extern volatile uint byte_counter_uart2;
 
-extern pUART_reader read_uart_1;
-extern pUART_reader read_uart_2;
+extern volatile pUART_reader read_uart_1;
+extern volatile pUART_reader read_uart_2;
 
 inline void Sys_Init_UART1_HDI(void);
 inline void Sys_Init_UART2_HDI(void);

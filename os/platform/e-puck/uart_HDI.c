@@ -26,14 +26,14 @@
 #include "../../interrupts.h"
 #include "../../memory.h"
 
-pUART_reader read_uart_1 = 0; /*!< pointer to the functions that processes incoming bytes from UART1*/
-pUART_reader read_uart_2 = 0; /*!< pointer to the functions that processes incoming bytes from UART2*/
+volatile pUART_reader read_uart_1 = 0; /*!< pointer to the functions that processes incoming bytes from UART1*/
+volatile pUART_reader read_uart_2 = 0; /*!< pointer to the functions that processes incoming bytes from UART2*/
 
-sys_uart_txdata *sys_UART1_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART1*/
-sys_uart_txdata *sys_UART2_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART2*/
+sys_uart_txdata * volatile sys_UART1_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART1*/
+sys_uart_txdata * volatile sys_UART2_TX_data = 0;  /*!< Linked list of messages that need to be sent via UART2*/
 
-uint byte_counter_uart1 = 0;  /*!< Bytes that were written */
-uint byte_counter_uart2 = 0;  /*!< Bytes that were written */
+volatile uint byte_counter_uart1 = 0;  /*!< Bytes that were written */
+volatile uint byte_counter_uart2 = 0;  /*!< Bytes that were written */
 
 /**
  *

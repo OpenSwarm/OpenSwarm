@@ -7,7 +7,7 @@
 
 #include "../interrupts.h"
 
-uint sensorThreshold = 0xFFFF;
+volatile uint sensorThreshold = 0xFFFF;
 
 typedef enum {
     dark_stationary = 0,
@@ -16,18 +16,18 @@ typedef enum {
     led_stationary = 3            
 } sensor_situation;
 
-uint sensorThresholds[4] = {0xFFFF};
-sensor_situation current_situation = dark_stationary;
+volatile uint sensorThresholds[4] = {0xFFFF};
+volatile sensor_situation current_situation = dark_stationary;
 
 void InitSensor(uint);
 void InitSensorSituations(void);
 sensor_situation getCurrentSituation(uint);
 
-static uint min_value = 0xFFFF;
-static uint init_interation = 0;
+volatile static uint min_value = 0xFFFF;
+volatile static uint init_interation = 0;
 
 #define THRESHOLD_L 5
-static uint variable_threshold = THRESHOLD_L;
+volatile static uint variable_threshold = THRESHOLD_L;
 
 void Sys_Start_ChannelCalibration(){
     

@@ -24,7 +24,7 @@
 extern "C" {
 #endif
 
-extern pFunction sys_process_scheduler; //points to the task scheduling algorithm
+extern volatile pFunction sys_process_scheduler; //points to the task scheduling algorithm
 
 void Sys_Init_SystemTimer_HDI(pFunction);   //initialises the system timer and sets a scheduling algorithm
 void Sys_Start_SystemTimer_HDI(void);       //starts the system timer (to do periodic scheduling

@@ -23,14 +23,14 @@
 #include "remoteControl.h"
 #include "../../events/events.h"
 
-bool message_arriving = false; /*!< A flag that is set as soon as a messgage is recieved */
-sint8 waiting_cycles = 20;/*!< The cycles that need to be waited until the next stage (set for 100us) */
+volatile bool message_arriving = false; /*!< A flag that is set as soon as a messgage is recieved */
+volatile sint8 waiting_cycles = 20;/*!< The cycles that need to be waited until the next stage (set for 100us) */
 
-uint rx_buffer = 0;/*!< The initial state of the state machine to decode a remote control message */
+volatile uint rx_buffer = 0;/*!< The initial state of the state machine to decode a remote control message */
 
-bool isNewDataAvailable = false;/*!< a flag to indicate that a new message was received */
+volatile bool isNewDataAvailable = false;/*!< a flag to indicate that a new message was received */
 
-sint8 receiving_bit = RC_NOT_STARTED;/*!< State indicator (for the state machine) */
+volatile sint8 receiving_bit = RC_NOT_STARTED;/*!< State indicator (for the state machine) */
 
 /**
  *

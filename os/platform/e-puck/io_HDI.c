@@ -20,7 +20,7 @@
 
 #include "motors.h"
 
-sys_periodical_IOHandler *sys_iohandlers;	/*!< List of I/O handlers*/
+sys_periodical_IOHandler * volatile sys_iohandlers;	/*!< List of I/O handlers*/
 
 
 /**

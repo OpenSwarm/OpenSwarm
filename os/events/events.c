@@ -52,7 +52,7 @@ typedef struct sys_occurred_event_s{
 /*******************************************************************************
  *  Global Event Variables
  ******************************************************************************/
-sys_event *             registered_events   = 0;/*!< pointer to the List of registered events*/
+sys_event * volatile registered_events   = 0;/*!< pointer to the List of registered events*/
 
 /*******************************************************************************
  *  Functions Prototypes
@@ -75,7 +75,7 @@ sys_event *Sys_FindEvent(uint eventID);
  * @return 	was it successful.
  */
 bool Sys_Register_Event(uint eventID){
-    sys_event** empty_element;
+    sys_event* volatile * empty_element;
     
     Sys_Start_AtomicSection();
     
@@ -112,7 +112,7 @@ bool Sys_Register_Event(uint eventID){
  * @param[in] 	eventID     ID of the event
  */
 void Sys_Unregister_Event(uint eventID){
-    sys_event**             event_element;
+    sys_event* volatile * event_element;
     
     Sys_Start_AtomicSection();
     event_element = &registered_events;
@@ -577,7 +577,7 @@ sys_event *Sys_FindEvent(uint eventID){
     return event;
 }
 
-static uint event_counter = 0; /*!< amount of occurred events since the last reset */
+volatile static uint event_counter = 0; /*!< amount of occurred events since the last reset */
 
 /**
  *

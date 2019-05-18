@@ -39,7 +39,7 @@ inline void Sys_Init_IOTimer_HDI();
 inline void Sys_Start_IOTimer_HDI();
 inline void Sys_IOTimer_code_HDI();
 
-extern sys_periodical_IOHandler *sys_iohandlers;
+extern sys_periodical_IOHandler * volatile sys_iohandlers;
 
 
 inline void Sys_Stop_IOTimer_HDI(void);
