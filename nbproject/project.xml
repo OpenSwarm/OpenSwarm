@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>OpenSwarm</name>
+            <name>OpenSwarm.proc</name>
             <creation-uuid>199e6c9b-b434-4628-9ea2-37587362e485</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
