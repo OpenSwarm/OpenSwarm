@@ -29,16 +29,19 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "os/system.h"        /* System funct/params, like osc/peripheral config */
-#include "os/memory.h"
-#include "os/interrupts.h"
+//#include "os/system.h"        /* System funct/params, like osc/peripheral config */
+//#include "os/memory.h"
+//#include "os/interrupts.h"
 
-#include "os/platform/e-puck/adc.h"
-#include "os/platform/e-puck/selector.h"
+//#include "os/platform/e-puck/adc.h"
+//#include "os/platform/e-puck/selector.h"
 
-#include "os/communication/channel.h"
-#include "os/communication/communication.h"
-#include "os/communication/physical.h"
+//#include "os/communication/channel.h"
+//#include "os/communication/communication.h"
+//#include "os/communication/physical.h"
+
+#include "extern/platform/e-puck/library/motor_led/e_epuck_ports.h"
+#include "extern/platform/e-puck/library/motor_led/e_init_port.h"
 
 /******************************************************************************/
 /* Global Variable Declaration                                                */
@@ -47,7 +50,7 @@
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
-void bluetooth_reader(uint8 data);
+//void bluetooth_reader(uint8 data);
 
 
 //uint8 prox_readings[36] = {'@', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -57,16 +60,16 @@ void bluetooth_reader(uint8 data);
 //                          0x0F, 0xFF, '\r', '\n'};
 //uint prox_median[9] = {4095,4095,4095,4095,4095,4095,4095,4095,'!'};
 
-uint8 prox_flag = 0xFF;
-inline void prox_reader(int index,uint data);
-void prox0_reader(uint data);
-void prox1_reader(uint data);
-void prox2_reader(uint data);
-void prox3_reader(uint data);
-void prox4_reader(uint data);
-void prox5_reader(uint data);
-void prox6_reader(uint data);
-void prox7_reader(uint data);
+//uint8 prox_flag = 0xFF;
+//inline void prox_reader(int index,uint data);
+//void prox0_reader(uint data);
+//void prox1_reader(uint data);
+//void prox2_reader(uint data);
+//void prox3_reader(uint data);
+//void prox4_reader(uint data);
+//void prox5_reader(uint data);
+//void prox6_reader(uint data);
+//void prox7_reader(uint data);
 
 void clearLEDs();
 void setLEDs();
@@ -74,84 +77,55 @@ void clearIRs();
 void setIRs();
 
 
-void readbluetoothBuffer();
-void analyseBuffer(uint8 data);
-
-static int move_forward = 0;
+//void readbluetoothBuffer();
+//void analyseBuffer(uint8 data);
+//
+//static int move_forward = 0;
 
 int16_t main(void)
 {    
-    Sys_Init_Kernel(); 
-    
-    Sys_SetReadingFunction_UART1(bluetooth_reader);
-    
-    Sys_Start_Kernel();
-    
-    
-    
-    LED0 = 0;
-    LED1 = 0;
-    LED2 = 0;
-    LED3 = 0;
-    LED4 = 0;
-    LED5 = 0;
-    LED6 = 0;
-    LED7 = 0;
+    e_init_port();
+    LED0 = 1;
+    LED1 = 1;
+    LED2 = 1;
+    LED3 = 1;
+    LED4 = 1;
+    LED5 = 1;
+    LED6 = 1;
+    LED7 = 1;
     BODY_LED = 0;
     FRONT_LED = 0;
     
-    uint32 time = Sys_Get_SystemClock();
-    time += (uint32) 1000;
- 
-//    uint counter = 0;
-    
     while(true){
         SRbits.IPL = 0;
-    //setIRs();
-        readbluetoothBuffer();
-        
-        if(move_forward != 0){
-            Sys_Set_StepsRight(move_forward);
-            Sys_Set_StepsLeft(move_forward); 
-            
-    
-            while(Sys_Get_StepsLeft() || Sys_Get_StepsRight() ){ // !=
-                SRbits.IPL = 0;
-            }
-            
-            Sys_Writeto_UART1("STOP", 4);
-            move_forward = 0;
-        }
-        
-        
-        Sys_Message *msg;
-        while( (msg = getNewMessage())){ //!= 0 
-            //char back[] ={'r',0,0,0,0,0};
-            //Sys_Memcpy(&(msg->data), &back[1], 4);
-            //back[5] = back[1] ^ back[2] ^  back[3] ^  back[4];
-            //Sys_Writeto_UART1(back, 6);
-            
-        }
+        LED0 = 1;
+        LED1 = 1;
+        LED2 = 1;
+        LED3 = 1;
+        LED4 = 1;
+        LED5 = 1;
+        LED6 = 1;
+        LED7 = 1;
     }
 }
 
-#define MAX_BUFFER 64
+//#define MAX_BUFFER 64
 
-static uint8 rx_BT_Buffer[MAX_BUFFER];
-static uint8 start_index = 0;
-static uint8 end_index = 0;
+//static uint8 rx_BT_Buffer[MAX_BUFFER];
+//static uint8 start_index = 0;
+//static uint8 end_index = 0;
 
-typedef enum {
-    waiting,
-    starting_big,
-    reading_small,
-    reading_big,
-    reading_moving,
-    reading_threshold,
-    finishing
-} bluetooth_state;
+//typedef enum {
+//    waiting,
+//    starting_big,
+//    reading_small,
+//    reading_big,
+//    reading_moving,
+//    reading_threshold,
+//    finishing
+//} bluetooth_state;
 
-
+/*
 void analyseBuffer(uint8 data){
     static int counter = 0;
     static int value = 0;
