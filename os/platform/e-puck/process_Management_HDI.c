@@ -38,7 +38,7 @@
  */
 void Sys_Init_Process_Management_HDI(){
 
-    sys_pcb_list_element * volatile element;
+    sys_pcb_list_ptr  element;
     
     Sys_Start_AtomicSection();
     while(sys_ready_processes != 0){//for each elements in the list
@@ -92,10 +92,10 @@ void Sys_Init_Process_Management_HDI(){
  * @param[in] function This argument points to a function in memory which should be executed as an new task
  */
 bool Sys_Start_Process_HDI(pFunction function){
-  sys_process_control_block_list_element *element;
+  sys_pcb_list_ptr element;
 
   Sys_Start_AtomicSection();
-  element = (sys_process_control_block_list_element *) Sys_Malloc(sizeof(sys_process_control_block_list_element));//create the root element
+  element = (sys_pcb_list_bpointer) Sys_Malloc(sizeof(sys_process_control_block_list_element));//create the root element
 
   if(element == NULL){
       Sys_End_AtomicSection();
@@ -114,27 +114,27 @@ bool Sys_Start_Process_HDI(pFunction function){
   
 
   //TODO: add "void Sys_Set_Running_Process_to_Zombie()" to the bottom of the stack -> last thing a process executes is its termination!!!!
-  __asm__(//loads temporarly the new stack and loads the jump address into the stack
-          "PUSH W8\n"//save used registers
-          "PUSH W9\n"
-          "PUSH W10\n"
-          "MOV W14, W8\n"//save old framepointer
-          "MOV W15, W9\n"//save old stackpointer
-          "MOV SPLIM, W10\n"//save old SPLIM
-          "MOV %2, W14\n"//load new pointers
-          "MOV %3, W15\n"
-          "MOV %4, SPLIM\n"
+  asm volatile (//loads temporarly the new stack and loads the jump address into the stack
+          "PUSH W8\n\t"//save used registers
+          "PUSH W9\n\t"
+          "PUSH W10\n\t"
+          "MOV W14, W8\n\t"//save old framepointer
+          "MOV W15, W9\n\t"//save old stackpointer
+          "MOV SPLIM, W10\n\t"//save old SPLIM
+          "MOV %2, W14\n\t"//load new pointers
+          "MOV %3, W15\n\t"
+          "MOV %4, SPLIM\n\t"
           "PUSH %P5\n\t"//push the jump address into the stack
           "MOV #0x0000, w0\n\t"
           "PUSH w0\n\t"
           "MOV W14, %0\n\t"//save all pointers
           "MOV W15, %1\n\t"
-          "MOV W8, W14\n"//restore old values
-          "MOV W9, W15\n"
-          "MOV W10, SPLIM\n"
-          "POP W10\n"//restore registers
-          "POP W9\n"
-          "POP W8\n"
+          "MOV W8, W14\n\t"//restore old values
+          "MOV W9, W15\n\t"
+          "MOV W10, SPLIM\n\t"
+          "POP W10\n\t"//restore registers
+          "POP W9\n\t"
+          "POP W8\n\t"
           : "=rm" (element->pcb.framePointer), "=rm" (element->pcb.stackPointer)
           : "rm" (element->pcb.framePointer), "rm" (element->pcb.stackPointer), "rm" (element->pcb.stackPointerLimit), "r" (function)
           :
@@ -153,7 +153,7 @@ bool Sys_Start_Process_HDI(pFunction function){
  *
  * @param[in] new_process pointer to the process which should be executed
  */
-void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
+void Sys_Switch_Process_HDI(sys_pcb_list_ptr new_process){
 
     if(new_process == sys_running_process || sys_running_process == 0){//Do I want to switch to the same process??
         return;//How stupid
@@ -162,37 +162,37 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
     Sys_Start_AtomicSection();
     
     //PUSH everything on the stack
-    __asm__("PUSH W0\n"
-            "PUSH W1\n"
-            "PUSH W2\n"
-            "PUSH W3\n"
-            "PUSH W4\n"
-            "PUSH W5\n"
-            "PUSH W6\n"
-            "PUSH W7\n"
-            "PUSH W8\n"
-            "PUSH W9\n"
-            "PUSH W10\n"
-            "PUSH W11\n"
-            "PUSH W12\n"
-            "PUSH W13\n"
-            "PUSH ACCA\n"
-            "PUSH ACCB\n"
-            "PUSH TBLPAG\n"
-            "PUSH PSVPAG\n"
-            "PUSH RCOUNT\n"
-            "PUSH DCOUNT\n"
-            "PUSH DOSTARTH\n"
-            "PUSH DOSTARTL\n"
-            "PUSH DOENDH\n"
-            "PUSH DOENDL\n"
-            "PUSH CORCON\n"
-            "POP.S\n"
-//            "PUSH SR\n"
-            "PUSH W0\n"
-            "PUSH W1\n"
-            "PUSH W2\n"
-            "PUSH W3\n"
+    __asm__("PUSH W0\n\t"
+            "PUSH W1\n\t"
+            "PUSH W2\n\t"
+            "PUSH W3\n\t"
+            "PUSH W4\n\t"
+            "PUSH W5\n\t"
+            "PUSH W6\n\t"
+            "PUSH W7\n\t"
+            "PUSH W8\n\t"
+            "PUSH W9\n\t"
+            "PUSH W10\n\t"
+            "PUSH W11\n\t"
+            "PUSH W12\n\t"
+            "PUSH W13\n\t"
+            "PUSH ACCA\n\t"
+            "PUSH ACCB\n\t"
+            "PUSH TBLPAG\n\t"
+            "PUSH PSVPAG\n\t"
+            "PUSH RCOUNT\n\t"
+            "PUSH DCOUNT\n\t"
+            "PUSH DOSTARTH\n\t"
+            "PUSH DOSTARTL\n\t"
+            "PUSH DOENDH\n\t"
+            "PUSH DOENDL\n\t"
+            "PUSH CORCON\n\t"
+            "POP.S\n\t"
+//            "PUSH SR\n\t"
+            "PUSH W0\n\t"
+            "PUSH W1\n\t"
+            "PUSH W2\n\t"
+            "PUSH W3\n\t"
             );
 
     __asm__(//save the current stack & frame pointer
@@ -213,7 +213,7 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "BRA LT, NOTEMPTY\n\t"
             "MOV %0, W14\n\t" //set new stackpointers
             "MOV %1, W15\n\t"
-            "MOV %2, SPLIM\n"
+            "MOV %2, SPLIM\n\t"
         : 
         : "r" (new_process->pcb.framePointer), "r" (new_process->pcb.stackPointer), "r" (new_process->pcb.stackPointerLimit) 
         : 
@@ -227,14 +227,14 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
             "BRA LT, NOTEMPTY\n\t"
             "NOP\n\t"
             "PUSH W10\n\t"
-            "MOV SPLIM, W10\n"
+            "MOV SPLIM, W10\n\t"
             "CP W10,%2\n\t"
             "BRA GEU, SPLAST\n\t"
             "MOV %2, SPLIM\n\t"
     "SPLAST: POP W10\n\t"
             "MOV %0, W14\n\t" //set new stackpointers
             "MOV %1, W15\n\t"
-            "MOV %2, SPLIM\n"
+            "MOV %2, SPLIM\n\t"
         : 
         : "r" (new_process->pcb.framePointer), "r" (new_process->pcb.stackPointer), "r" (new_process->pcb.stackPointerLimit) 
         : 
@@ -250,8 +250,8 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
 
         
         Sys_End_AtomicSection();
-        __asm__("ULNK\n");
-        __asm__("RETFIE\n");//go to the new process
+        __asm__("ULNK\n\t");
+        __asm__("RETFIE\n\t");//go to the new process
     }
 
     new_process->pcb.sheduler_info.state = SYS_PROCESS_STATE_RUNNING;
@@ -259,43 +259,43 @@ void Sys_Switch_Process_HDI(sys_pcb_list_element *new_process){
 
     
 
-    __asm__("ULNK\n");//remove the last function waste & restore all registers
-    __asm__("POP W3\n");
-    __asm__("POP W2\n");
-    __asm__("POP W1\n");
-    __asm__("POP W0\n");
-//    __asm__("POP SR\n");
-    __asm__("PUSH.S\n");
-    __asm__("POP CORCON\n"
-            "POP DOENDL\n"
-            "POP DOENDH\n"
-            "POP DOSTARTL\n"
-            "POP DOSTARTH\n"
-            "POP DCOUNT\n"
-            "POP RCOUNT\n"
-            "POP PSVPAG\n"
-            "POP TBLPAG\n"
-            "POP ACCB\n"
-            "POP ACCA\n"
-            "POP W13\n"
-            "POP W12\n"
-            "POP W11\n"
-            "POP W10\n"
-            "POP W9\n"
-            "POP W8\n"
-            "POP W7\n"
-            "POP W6\n"
-            "POP W5\n"
-            "POP W4\n"
-            "POP W3\n"
-            "POP W2\n"
-            "POP W1\n"
-            "POP W0\n"
+    __asm__("ULNK\n\t");//remove the last function waste & restore all registers
+    __asm__("POP W3\n\t");
+    __asm__("POP W2\n\t");
+    __asm__("POP W1\n\t");
+    __asm__("POP W0\n\t");
+//    __asm__("POP SR\n\t");
+    __asm__("PUSH.S\n\t");
+    __asm__("POP CORCON\n\t"
+            "POP DOENDL\n\t"
+            "POP DOENDH\n\t"
+            "POP DOSTARTL\n\t"
+            "POP DOSTARTH\n\t"
+            "POP DCOUNT\n\t"
+            "POP RCOUNT\n\t"
+            "POP PSVPAG\n\t"
+            "POP TBLPAG\n\t"
+            "POP ACCB\n\t"
+            "POP ACCA\n\t"
+            "POP W13\n\t"
+            "POP W12\n\t"
+            "POP W11\n\t"
+            "POP W10\n\t"
+            "POP W9\n\t"
+            "POP W8\n\t"
+            "POP W7\n\t"
+            "POP W6\n\t"
+            "POP W5\n\t"
+            "POP W4\n\t"
+            "POP W3\n\t"
+            "POP W2\n\t"
+            "POP W1\n\t"
+            "POP W0\n\t"
             );
 
     Sys_End_AtomicSection();
     
-    //__asm__("ULNK\n");//remove all waste from Sys_Save_Running_Process_HDI
-    //__asm__("ULNK\n");//remove all waste from Sys_Switch_Process_HDI
-    //__asm__("RETURN\n");//jump directly to process
+    //__asm__("ULNK\n\t");//remove all waste from Sys_Save_Running_Process_HDI
+    //__asm__("ULNK\n\t");//remove all waste from Sys_Switch_Process_HDI
+    //__asm__("RETURN\n\t");//jump directly to process
 }

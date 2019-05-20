@@ -29,10 +29,10 @@
 /********************************************************
  *  Global Variables
  ********************************************************/
-sys_pcb_list_element * volatile sys_ready_processes = 0;/*!< pointer to the ready processes (linked list) */
-sys_pcb_list_element * volatile sys_running_process = 0;/*!< pointer to the running process */
-sys_pcb_list_element * volatile sys_blocked_processes = 0;/*!< pointer to the blocked process */
-sys_pcb_list_element * volatile sys_zombies = 0;/*!< pointer to the zombie process */
+sys_pcb_list_ptr sys_ready_processes = 0;/*!< pointer to the ready processes (linked list) */
+sys_pcb_list_ptr sys_running_process = 0;/*!< pointer to the running process */
+sys_pcb_list_ptr sys_blocked_processes = 0;/*!< pointer to the blocked process */
+sys_pcb_list_ptr sys_zombies = 0;/*!< pointer to the zombie process */
 
 /********************************************************
  ********************************************************
@@ -48,9 +48,9 @@ sys_pcb_list_element * volatile sys_zombies = 0;/*!< pointer to the zombie proce
  * @param[in,out] **list the process list which has to be seached
  * @return sys_pcb_list_element* the pointer to the removed element
  */
-sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_element **list){
+sys_pcb_list_ptr Sys_Remove_Process_from_List(uint pID, sys_pcb_list_ptr*list){
 
-    sys_pcb_list_element *out;
+    sys_pcb_list_ptr out;
     
     if( (*list) == 0){//empty list
         return 0;
@@ -74,7 +74,7 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_elemen
 
     //go through all elements in the list
     //todo: I could do all in one do{}
-    sys_pcb_list_element *element = (*list)->next;
+    sys_pcb_list_ptr element = (*list)->next;
     while(element != 0){//as long as there is an element
         if(element->pcb.process_ID == pID){
             //if found -> remove
@@ -103,8 +103,8 @@ sys_pcb_list_element *Sys_Remove_Process_from_List(uint pID, sys_pcb_list_elemen
  * @param[in] pid process ID
  * @return void
  */
-inline sys_pcb_list_element *Sys_Find_Process(uint pid){
-    sys_pcb_list_element * volatile element;
+inline sys_pcb_list_ptr Sys_Find_Process(uint pid){
+    sys_pcb_list_ptr element;
     
     Sys_Start_AtomicSection();
         element = sys_ready_processes;
@@ -137,7 +137,7 @@ inline sys_pcb_list_element *Sys_Find_Process(uint pid){
  * @param[in] element pointer to the element which should be deleted
  * @return void
  */
-void Sys_Delete_Process(sys_pcb_list_element *element){
+void Sys_Delete_Process(sys_pcb_list_ptr element){
     Sys_Start_AtomicSection();
 
     if(element != 0){
@@ -192,7 +192,7 @@ inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint stacksize){
  * @param[in,out] **list the process list which has to be seached
  * @return void
  */
-void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_element **list){
+void Sys_Insert_Process_to_List(sys_pcb_list_ptr process, sys_pcb_list_ptr*list){
 
     if(process == 0){//no process
         return;
@@ -227,7 +227,7 @@ void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_elem
     }
     
     //todo: put all into  one do{}
-    sys_pcb_list_element *element = *list;
+    sys_pcb_list_ptr element = *list;
     while(element->next != 0){//as long as there are elements 
         
         if(element->next->pcb.process_ID == process->pcb.process_ID){

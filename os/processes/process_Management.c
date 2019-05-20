@@ -74,7 +74,7 @@ uint Sys_Get_Number_Processes(){
  */
 uint Sys_Get_Number_ReadyProcesses(){
     uint n = 0;
-    sys_process_control_block_list_element * volatile element;
+    sys_pcb_list_ptr element;
     
     Sys_Start_AtomicSection();
     element = sys_ready_processes;
@@ -96,7 +96,7 @@ uint Sys_Get_Number_ReadyProcesses(){
  */
 uint Sys_Get_Number_BlockedProcesses(){
     uint n = 0;
-    sys_process_control_block_list_element * volatile element;
+    sys_pcb_list_ptr element;
     
     Sys_Start_AtomicSection();
     element = sys_blocked_processes;

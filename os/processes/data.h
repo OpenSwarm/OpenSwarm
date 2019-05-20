@@ -53,31 +53,34 @@ typedef struct sys_process_control_block_s{
 /*!
  It is a double linked list element containing the PCB of a process
 */
-typedef struct sys_process_control_block_list_element_s{
+typedef struct sys_pcb_list_element_s{
 
     sys_process_control_block pcb;/*!< Process Control Block of a process */
 
-    struct sys_process_control_block_list_element_s* previous;/*!< pointer to the previous PCB */
-    struct sys_process_control_block_list_element_s* next;/*!< pointer to the next PCB */
+    struct sys_pcb_list_element_s* volatile previous;/*!< pointer to the previous PCB */
+    struct sys_pcb_list_element_s* volatile next;/*!< pointer to the next PCB */
     
 } sys_process_control_block_list_element, sys_pcb_list_element;
 
-extern sys_pcb_list_element * volatile sys_ready_processes;/*!< pointer to the ready processes (linked list) */
-extern sys_pcb_list_element * volatile sys_running_process;/*!< pointer to the running process */
-extern sys_pcb_list_element * volatile sys_blocked_processes;/*!< pointer to the blocked process */
-extern sys_pcb_list_element * volatile sys_zombies;/*!< pointer to the zombie process */
+typedef sys_pcb_list_element* sys_pcb_list_bpointer,sys_pcb_list_bptr;
+typedef volatile sys_pcb_list_bpointer sys_pcb_list_ptr;
+
+extern sys_pcb_list_ptr sys_ready_processes;/*!< pointer to the ready processes (linked list) */
+extern sys_pcb_list_ptr sys_running_process;/*!< pointer to the running process */
+extern sys_pcb_list_ptr sys_blocked_processes;/*!< pointer to the blocked process */
+extern sys_pcb_list_ptr sys_zombies;/*!< pointer to the zombie process */
 
 /********************************************************
  *  Function Prototypes
  *      Basic Process Management
  ********************************************************/
-inline sys_pcb_list_element *Sys_Find_Process(uint16 pid);
-sys_pcb_list_element *Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_element **list);//removes the process (PID) struct from list and returns the pointer to the struct
+inline sys_pcb_list_ptr Sys_Find_Process(uint16 pid);
+sys_pcb_list_ptr Sys_Remove_Process_from_List(uint16 pID, sys_pcb_list_ptr *list);//removes the process (PID) struct from list and returns the pointer to the struct
 
-void Sys_Delete_Process(sys_pcb_list_element *element); //function to delete a container element
-inline bool Sys_Set_Defaults_PCB(sys_process_control_block *element, uint16 stacksize);  // function to set the default values of the sys_process_control_block struct
+void Sys_Delete_Process(sys_pcb_list_ptr element); //function to delete a container element
+inline bool Sys_Set_Defaults_PCB(sys_pcb *element, uint16 stacksize);  // function to set the default values of the sys_process_control_block struct
 
-void Sys_Insert_Process_to_List(sys_pcb_list_element *process, sys_pcb_list_element **list);//insers a process into a list of processes (sorted)
+void Sys_Insert_Process_to_List(sys_pcb_list_ptr process, sys_pcb_list_ptr *list);//insers a process into a list of processes (sorted)
 
 /********************************************************
  *  Function Prototypes

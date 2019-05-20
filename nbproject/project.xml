@@ -12,6 +12,18 @@
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <asminc-extensions/>
             <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>.</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>XC16_dsPIC30F6014A</name>
+                    <type>2</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
         </data>
     </configuration>
 </project>
