@@ -29,16 +29,16 @@
 #include <stdio.h>
 #include <math.h>
 
-//#include "os/system.h"        /* System funct/params, like osc/peripheral config */
-//#include "os/memory.h"
-//#include "os/interrupts.h"
+#include "os/system.h"        /* System funct/params, like osc/peripheral config */
+#include "os/memory.h"
+#include "os/interrupts.h"
 
-//#include "os/platform/e-puck/adc.h"
-//#include "os/platform/e-puck/selector.h"
+#include "os/platform/e-puck/adc.h"
+#include "os/platform/e-puck/selector.h"
 
-//#include "os/communication/channel.h"
-//#include "os/communication/communication.h"
-//#include "os/communication/physical.h"
+#include "os/communication/channel.h"
+#include "os/communication/communication.h"
+#include "os/communication/physical.h"
 
 #include "extern/platform/e-puck/library/motor_led/e_epuck_ports.h"
 #include "extern/platform/e-puck/library/motor_led/e_init_port.h"
@@ -46,15 +46,44 @@
 
 int16_t main(void)
 {    
+    e_init_port(); //Set all pins and ports
+    INTCON1bits.NSTDIS = 0;
+    
+    Sys_Init_SystemTimer(Sys_Scheduler_RoundRobin);//start the system timer + interrupt = HDI - hardware dependent implementaion
+    Sys_Init_Process_Management();
+//    Sys_Init_IOManagement();
+//    Sys_Init_SystemClock();
+//    Sys_Init_Motors();
+//    Sys_Init_UART1();
+//    Sys_Init_RemoteControl();
+//    Sys_Init_Camera();
+    Sys_Init_Selector();
+    Sys_Init_ADC();
+    Sys_Init_Proximity();
+    Sys_Init_SystemClock();
+    Sys_Init_Communication();  
+   
+    Sys_Start_SystemTimer();
+//    Sys_Start_IOManagement();
+//    Sys_Start_SystemClock();
+//    Sys_Start_UART1();
+//    Sys_Start_RemoteControl();
+//    Sys_Start_Camera();
+//    Sys_Start_ADC();
+//    Sys_Start_SystemClock();
+//    Sys_Start_Communication();
+    
     FRONT_LED = 0;
     FRONT_LED_DIR = OUTPUT_PIN;
     
     unsigned int value = 0;
     
     while(true){
-        value = value + 1;
-        if(value == 0xFFFF){
+        if(value == 0x000F){
             FRONT_LED = ~FRONT_LED;
+            value = 0;
+            continue;
         }
+        value = value + 1;
     }
 }
