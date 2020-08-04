@@ -1,6 +1,7 @@
+
+OpenSwarm is an embedded operating system developed during an (PhD) research project at the University of Sheffield.
+
+Currently, it has been deployed on an e-Puck (epuck.org) (i.e., dsPic30F6014a).
+
 For more information, please visit http://openswarm.org
 
-If you cloned the git repository please run run_unix.sh or run_windows.bat (depending on your operating system)
-
-Note:
-This version is still a pre-alpha release (developer preview)
